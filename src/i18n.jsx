@@ -9,7 +9,7 @@ const en = {
   navContact: 'Contact',
 
   // Hero
-  heroChip: 'Portfolio / Version 01.04 / 2026',
+  heroChip: 'Portfolio / Version 01.05 / 2026',
   heroRole: 'ROLE',
   heroRoleValue: '1st year Computer Engineering student',
   heroBasedIn: 'BASED IN',
@@ -192,8 +192,36 @@ const en = {
   // Puzzle Page
   puzzlePageBack: 'Fun',
 
+  // Blog Hub
+  blogHubBack: 'Home',
+
+  // Nav
+  navProject: 'Project',
+  navLifeFlow: 'Life Flow',
+
+  // Hero buttons
+  heroBtnBlog: 'Blog',
+  heroBtnFun: 'Fun',
+  heroBtnContact: 'Contact',
+  heroBtnProject: 'Project',
+  heroBtnLifeFlow: 'Life Flow',
+
+  // Contact Page
+  contactBack: 'Home',
+  contactBadge: 'CONTACT',
+
+  // Journey Page
+  journeyBack: 'Home',
+  journeyBadge: 'LIFE FLOW',
+
+  // Project Page
+  projectBack: 'Home',
+  projectBadge: 'PROJECT',
+  projectLabel: 'Project',
+  projectSub: "What I'm paying attention to, now",
+
   // Blog detail
-  rdBack: 'Home',
+  rdBack: 'Blog',
   rdBadge: 'BLOG',
   rdNotFoundTitle: 'Page not found',
   rdNotFoundDesc: 'This blog post does not exist yet.',
@@ -214,7 +242,7 @@ const tr = {
   navContact: 'Iletisim',
 
   // Hero
-  heroChip: 'Portfolyo / Cilt 01.04 / 2026',
+  heroChip: 'Portfolyo / Cilt 01.05 / 2026',
   heroRole: 'ROL',
   heroRoleValue: 'Gelistirici \u00b7 Yaratici \u00b7 Merakli zihin',
   heroBasedIn: 'KONUM',
@@ -396,8 +424,36 @@ const tr = {
   // Puzzle Page
   puzzlePageBack: 'Eglence',
 
+  // Blog Hub
+  blogHubBack: 'Ana Sayfa',
+
+  // Nav
+  navProject: 'Proje',
+  navLifeFlow: 'Hayat Akisi',
+
+  // Hero buttons
+  heroBtnBlog: 'Blog',
+  heroBtnFun: 'Eglence',
+  heroBtnContact: 'Iletisim',
+  heroBtnProject: 'Proje',
+  heroBtnLifeFlow: 'Hayat Akisi',
+
+  // Contact Page
+  contactBack: 'Ana Sayfa',
+  contactBadge: 'ILETISIM',
+
+  // Journey Page
+  journeyBack: 'Ana Sayfa',
+  journeyBadge: 'HAYAT AKISI',
+
+  // Project Page
+  projectBack: 'Ana Sayfa',
+  projectBadge: 'PROJE',
+  projectLabel: 'Proje',
+  projectSub: 'Su an neye odaklaniyorum',
+
   // Blog detail
-  rdBack: 'Ana Sayfa',
+  rdBack: 'Blog',
   rdBadge: 'BLOG',
   rdNotFoundTitle: 'Sayfa bulunamadi',
   rdNotFoundDesc: 'Bu blog yazisi henuz mevcut degil.',

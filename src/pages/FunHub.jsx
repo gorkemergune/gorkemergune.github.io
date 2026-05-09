@@ -40,7 +40,7 @@ export default function FunHub() {
         <p style={s.desc}>{t('funSub')}</p>
       </div>
 
-      <div style={s.grid}>
+      <div className="blog-grid" style={s.grid}>
         {cards.map((c) => {
           const Icon = c.icon;
           return (

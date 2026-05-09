@@ -13,7 +13,7 @@ export default function BlogDetail() {
   if (!post && !meta) {
     return (
       <div style={s.container}>
-        <Link to="/" className="link-hover" style={s.back}>
+        <Link to="/blog" className="link-hover" style={s.back}>
           <ArrowLeft size={16} strokeWidth={1.5} /> {t('rdBack')}
         </Link>
         <h1 style={s.title}>{t('rdNotFoundTitle')}</h1>
@@ -26,7 +26,7 @@ export default function BlogDetail() {
   if (!post && meta) {
     return (
       <div style={s.container}>
-        <Link to="/" className="link-hover" style={s.back}>
+        <Link to="/blog" className="link-hover" style={s.back}>
           <ArrowLeft size={16} strokeWidth={1.5} /> {t('rdBack')}
         </Link>
 
@@ -41,7 +41,7 @@ export default function BlogDetail() {
 
         <div style={s.bottomNote}>
           <p style={s.bottomText}>{t('rdBottomNote')}</p>
-          <Link to="/" className="link-hover" style={s.bottomLink}>
+          <Link to="/blog" className="link-hover" style={s.bottomLink}>
             <ArrowLeft size={14} strokeWidth={1.5} /> {t('rdBottomLink')}
           </Link>
         </div>
