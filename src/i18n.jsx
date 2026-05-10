@@ -9,7 +9,7 @@ const en = {
   navContact: 'Contact',
 
   // Hero
-  heroChip: 'Portfolio / Version 01.05 / 2026',
+  heroChip: 'Portfolio / Version 2.06 / 2026',
   heroRole: 'ROLE',
   heroRoleValue: '1st year Computer Engineering student',
   heroBasedIn: 'BASED IN',
@@ -127,6 +127,23 @@ const en = {
   funPuzzleDesc: 'Can you crack the sorting algorithm?',
   funHanoiTitle: 'Tower of Hanoi',
   funHanoiDesc: 'Move all disks to the last peg.',
+  funMothersDayTitle: "Mother's Day",
+  funMothersDayDesc: 'A surprise for your mom with flowers and love.',
+  funGoOutTitle: 'Shall We Go Out?',
+  funGoOutDesc: 'Send this to a friend and get them outside.',
+
+  // Mother's Day Page
+  mothersDayTitle: "Happy Mother's Day,\nMy Dear Mom",
+  mothersDaySub: 'You are the most beautiful flower in the world',
+  mothersDayMessage: 'Thank you for everything you do. You are the light of my life, the warmth of my heart. I love you more than words can say.',
+
+  // Go Out Page
+  goOutPageTitle: 'Shall We Go Out?',
+  goOutPageSub: "Come on, let's go outside!",
+  goOutYes: 'Yes!',
+  goOutNo: 'No',
+  goOutYayTitle: "Let's Go!",
+  goOutYayText: "Get ready, we're heading out! The world awaits! ☀️",
 
   // Hanoi Page
   hanoiPageBack: 'Fun',
@@ -242,7 +259,7 @@ const tr = {
   navContact: 'Iletisim',
 
   // Hero
-  heroChip: 'Portfolyo / Cilt 01.05 / 2026',
+  heroChip: 'Portfolyo / Sürüm 2.06 / 2026',
   heroRole: 'ROL',
   heroRoleValue: 'Gelistirici \u00b7 Yaratici \u00b7 Merakli zihin',
   heroBasedIn: 'KONUM',
@@ -359,6 +376,23 @@ const tr = {
   funPuzzleDesc: 'Siralama algoritmasini cozebilir misin?',
   funHanoiTitle: 'Hanoi Kulesi',
   funHanoiDesc: 'Tum diskleri son cubuga tasi.',
+  funMothersDayTitle: 'Anneler Günü',
+  funMothersDayDesc: 'Annen için çiçekli ve sevgi dolu bir sürpriz.',
+  funGoOutTitle: 'Dışarı Çıkalım mı?',
+  funGoOutDesc: 'Arkadaşına gönder ve dışarı çıkar.',
+
+  // Mother's Day Page
+  mothersDayTitle: 'Anneler Günün Kutlu Olsun,\nCanım Annem',
+  mothersDaySub: 'Dünyanın en güzel çiçeği sensin',
+  mothersDayMessage: 'Her şeyin için teşekkür ederim. Hayatımın ışığı, kalbimin sıcaklığısın. Seni kelimelerle anlatamayacağım kadar çok seviyorum.',
+
+  // Go Out Page
+  goOutPageTitle: 'Dışarı Çıkalım mı?',
+  goOutPageSub: 'Hadi dışarı çıkalım!',
+  goOutYes: 'Evet!',
+  goOutNo: 'Hayır',
+  goOutYayTitle: 'Haydi Gidelim!',
+  goOutYayText: 'Hazırlan, dışarı çıkıyoruz! Dünya bizi bekliyor! ☀️',
 
   // Hanoi Page
   hanoiPageBack: 'Eglence',

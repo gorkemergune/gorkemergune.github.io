@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom';
-import { ArrowLeft, ArrowUpRight, Heart, Cake, Gamepad2, Puzzle, Layers } from 'lucide-react';
+import { ArrowLeft, ArrowUpRight, Heart, Cake, Gamepad2, Puzzle, Layers, Flower2, Sun } from 'lucide-react';
 import { useLang } from '../i18n.jsx';
 
 const cards = [
   { key: 'sorry', path: '/fun/sorry', icon: Heart },
+  { key: 'mothersday', path: '/fun/mothersday', icon: Flower2 },
+  { key: 'goout', path: '/fun/goout', icon: Sun },
   { key: 'birthday', path: '/fun/birthday', icon: Cake },
   { key: 'hangman', path: '/fun/hangman', icon: Gamepad2 },
   { key: 'puzzle', path: '/fun/puzzle', icon: Puzzle },
@@ -15,6 +17,8 @@ export default function FunHub() {
 
   const titles = {
     sorry: t('funSorryTitle'),
+    mothersday: t('funMothersDayTitle'),
+    goout: t('funGoOutTitle'),
     birthday: t('funBirthdayTitle'),
     hangman: t('funHangmanTitle'),
     puzzle: t('funPuzzleTitle'),
@@ -22,6 +26,8 @@ export default function FunHub() {
   };
   const descs = {
     sorry: t('funSorryDesc'),
+    mothersday: t('funMothersDayDesc'),
+    goout: t('funGoOutDesc'),
     birthday: t('funBirthdayDesc'),
     hangman: t('funHangmanDesc'),
     puzzle: t('funPuzzleDesc'),

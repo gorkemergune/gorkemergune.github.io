@@ -10,6 +10,8 @@ import BirthdayPage from './pages/BirthdayPage';
 import HangmanPage from './pages/HangmanPage';
 import PuzzlePage from './pages/PuzzlePage';
 import HanoiPage from './pages/HanoiPage';
+import MothersDay from './pages/MothersDay';
+import GoOutPage from './pages/GoOutPage';
 import ContactPage from './pages/ContactPage';
 import JourneyPage from './pages/JourneyPage';
 import ProjectPage from './pages/ProjectPage';
@@ -408,6 +410,8 @@ export default function App() {
         <Route path="/blog/:slug" element={<BlogDetail />} />
         <Route path="/fun" element={<FunHub />} />
         <Route path="/fun/sorry" element={<SorryPage />} />
+        <Route path="/fun/mothersday" element={<MothersDay />} />
+        <Route path="/fun/goout" element={<GoOutPage />} />
         <Route path="/fun/birthday" element={<BirthdayPage />} />
         <Route path="/fun/hangman" element={<HangmanPage />} />
         <Route path="/fun/puzzle" element={<PuzzlePage />} />
@@ -427,7 +431,7 @@ export default function App() {
             {t('footerBuilt')}
           </span>
           <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.1em', color: '#8a8a86' }}>
-            v0.1 &middot; {time}
+            v2.06 &middot; {time}
           </span>
         </div>
       </footer>
