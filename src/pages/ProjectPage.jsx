@@ -32,15 +32,15 @@ export default function ProjectPage() {
 
 const s = {
   container: { maxWidth: 900, margin: '0 auto', padding: '60px 48px 120px', position: 'relative', zIndex: 2 },
-  back: { display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: "'JetBrains Mono', monospace", fontSize: 12, letterSpacing: '0.06em', color: '#6b6a66', marginBottom: 60, cursor: 'pointer' },
+  back: { display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: "'JetBrains Mono', monospace", fontSize: 12, letterSpacing: '0.06em', color: '#5a5a70', marginBottom: 60, cursor: 'pointer' },
   header: { marginBottom: 80 },
-  title: { fontFamily: "'Instrument Serif', serif", fontSize: 72, fontWeight: 400, lineHeight: 0.95, letterSpacing: '-0.015em', color: '#1a1a1a', marginTop: 20, marginBottom: 20 },
-  desc: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 18, lineHeight: 1.6, color: '#4a4a48', maxWidth: 560 },
+  title: { fontFamily: "'Instrument Serif', serif", fontSize: 72, fontWeight: 400, lineHeight: 0.95, letterSpacing: '-0.015em', color: '#e0e0e8', marginTop: 20, marginBottom: 20 },
+  desc: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 18, lineHeight: 1.6, color: '#8a8aa0', maxWidth: 560 },
   grid: { display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 24 },
   card: {
-    padding: 28, background: '#fafaf6', border: '1px solid #e2e0da', borderRadius: 4,
+    padding: 28, background: '#0f0f1a', border: '1px solid #1a1a2e', borderRadius: 4,
     minHeight: 160, display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
     transition: 'transform 0.4s, border-color 0.4s',
   },
-  cardValue: { fontFamily: "'Instrument Serif', serif", fontSize: 24, fontWeight: 400, lineHeight: 1.2, color: '#1a1a1a', marginTop: 20 },
+  cardValue: { fontFamily: "'Instrument Serif', serif", fontSize: 24, fontWeight: 400, lineHeight: 1.2, color: '#e0e0e8', marginTop: 20 },
 };

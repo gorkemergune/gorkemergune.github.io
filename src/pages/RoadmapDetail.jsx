@@ -35,7 +35,7 @@ export default function BlogDetail() {
           <h1 style={s.title}>{meta.title}</h1>
           <p style={s.desc}>{meta.note}</p>
           {meta.status === 'soon' && (
-            <span className="chip" style={{ marginTop: 20, background: '#1a1a1a', color: '#f4f3ef', borderColor: '#1a1a1a' }}>{t('blogSoon')}</span>
+            <span className="chip" style={{ marginTop: 20, background: '#00d4ff', color: '#0a0a0f', borderColor: '#00d4ff' }}>{t('blogSoon')}</span>
           )}
         </div>
 
@@ -74,7 +74,7 @@ export default function BlogDetail() {
                 <div style={s.topicList}>
                   {phase.topics.map((topic, j) => (
                     <div key={j} style={s.topic}>
-                      <Circle size={7} strokeWidth={2} style={{ color: '#c9c7c0', flexShrink: 0, marginTop: 6 }} />
+                      <Circle size={7} strokeWidth={2} style={{ color: '#00d4ff', flexShrink: 0, marginTop: 6 }} />
                       <span style={s.topicText}>{topic}</span>
                     </div>
                   ))}
@@ -97,21 +97,21 @@ export default function BlogDetail() {
 
 const s = {
   container: { maxWidth: 900, margin: '0 auto', padding: '60px 48px 120px', position: 'relative', zIndex: 2 },
-  back: { display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: "'JetBrains Mono', monospace", fontSize: 12, letterSpacing: '0.06em', color: '#6b6a66', marginBottom: 60, cursor: 'pointer' },
+  back: { display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: "'JetBrains Mono', monospace", fontSize: 12, letterSpacing: '0.06em', color: '#5a5a70', marginBottom: 60, cursor: 'pointer' },
   header: { marginBottom: 80 },
-  title: { fontFamily: "'Instrument Serif', serif", fontSize: 72, fontWeight: 400, lineHeight: 0.95, letterSpacing: '-0.015em', color: '#1a1a1a', marginTop: 20, marginBottom: 20 },
-  desc: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 18, lineHeight: 1.6, color: '#4a4a48', maxWidth: 560 },
+  title: { fontFamily: "'Instrument Serif', serif", fontSize: 72, fontWeight: 400, lineHeight: 0.95, letterSpacing: '-0.015em', color: '#e0e0e8', marginTop: 20, marginBottom: 20 },
+  desc: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 18, lineHeight: 1.6, color: '#8a8aa0', maxWidth: 560 },
   timeline: { display: 'flex', flexDirection: 'column', gap: 0 },
   phase: { display: 'flex', gap: 32, minHeight: 180 },
   phaseLeft: { display: 'flex', flexDirection: 'column', alignItems: 'center', width: 40, flexShrink: 0 },
-  phaseNum: { fontFamily: "'JetBrains Mono', monospace", fontSize: 12, letterSpacing: '0.1em', color: '#8a8a86', background: '#f4f3ef', padding: '6px 0', zIndex: 1 },
-  phaseLine: { flex: 1, width: 1, background: 'linear-gradient(180deg, #d6d4cd 0%, #e2e0da 100%)', marginTop: 8 },
-  phaseContent: { flex: 1, paddingBottom: 48, borderTop: '1px solid #e2e0da', paddingTop: 8 },
-  phaseTitle: { fontFamily: "'Instrument Serif', serif", fontSize: 28, fontWeight: 400, color: '#1a1a1a', marginBottom: 20, lineHeight: 1.2 },
+  phaseNum: { fontFamily: "'JetBrains Mono', monospace", fontSize: 12, letterSpacing: '0.1em', color: '#4a4a60', background: '#0a0a0f', padding: '6px 0', zIndex: 1 },
+  phaseLine: { flex: 1, width: 1, background: 'linear-gradient(180deg, #1a1a2e 0%, #0f0f1a 100%)', marginTop: 8 },
+  phaseContent: { flex: 1, paddingBottom: 48, borderTop: '1px solid #1a1a2e', paddingTop: 8 },
+  phaseTitle: { fontFamily: "'Instrument Serif', serif", fontSize: 28, fontWeight: 400, color: '#e0e0e8', marginBottom: 20, lineHeight: 1.2 },
   topicList: { display: 'flex', flexDirection: 'column', gap: 10 },
   topic: { display: 'flex', alignItems: 'flex-start', gap: 12 },
-  topicText: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 15, lineHeight: 1.6, color: '#4a4a48' },
-  bottomNote: { marginTop: 60, paddingTop: 40, borderTop: '1px solid #e2e0da' },
-  bottomText: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 14, color: '#8a8a86', fontStyle: 'italic', marginBottom: 24 },
-  bottomLink: { display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: "'JetBrains Mono', monospace", fontSize: 12, letterSpacing: '0.06em', color: '#4a4a48', cursor: 'pointer' },
+  topicText: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 15, lineHeight: 1.6, color: '#8a8aa0' },
+  bottomNote: { marginTop: 60, paddingTop: 40, borderTop: '1px solid #1a1a2e' },
+  bottomText: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 14, color: '#4a4a60', fontStyle: 'italic', marginBottom: 24 },
+  bottomLink: { display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: "'JetBrains Mono', monospace", fontSize: 12, letterSpacing: '0.06em', color: '#8a8aa0', cursor: 'pointer' },
 };

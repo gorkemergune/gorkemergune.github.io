@@ -246,6 +246,26 @@ const en = {
   rdBottomLink: 'Back to all Blog posts',
   blogSoon: 'COMING SOON',
 
+  // Hall of Armor
+  hallStatusLeft: 'ARMOR VAULT',
+  hallStatusCenter: '41.0082° N · 28.9784° E · ISTANBUL',
+  hallPlatformLabel: 'ARC REACTOR — ONLINE',
+  armorMark1Name: 'The Algorithm',
+  armorMark2Name: 'Cyber Scraping',
+  armorMark3Name: 'Core Machine',
+  armorMark4Name: 'Bio-Neural',
+  armorMark5Name: 'Team Commander',
+  armorMark1Desc: 'Foundation of computation. Every data structure, every sorting algorithm — mastered through obsessive practice.',
+  armorMark2Desc: 'Intelligent web scraping meets AI reasoning. Finds the best options so you don\'t have to.',
+  armorMark3Desc: 'Neural networks, deep learning architectures, and machine intelligence. The power core of the vault.',
+  armorMark4Desc: 'Machine learning applied to medical diagnostics. Early Parkinson\'s detection via neural pattern analysis.',
+  armorMark5Desc: 'Leadership module. Coordinating teams, managing projects, and building organizational systems.',
+  bootLine1: 'JARVIS online — all systems nominal',
+  bootLine2: 'Loading armor configurations...',
+  bootLine3: 'Scanning project database...',
+  bootLine4: 'Initializing Hall of Armor...',
+  bootLine5: 'Welcome back, Mr. Ergune.',
+
   // Blog detail content
   blogPosts: {},
 };
@@ -495,6 +515,26 @@ const tr = {
   rdBottomLink: 'Tum Blog yazilarini gor',
   blogSoon: 'YAKINDA',
 
+  // Hall of Armor
+  hallStatusLeft: 'ZIRH DEPOSU',
+  hallStatusCenter: '41.0082° K · 28.9784° D · İSTANBUL',
+  hallPlatformLabel: 'ARK REAKTÖRÜ — ÇEVRİMİÇİ',
+  armorMark1Name: 'The Algorithm',
+  armorMark2Name: 'Siber Kazıma',
+  armorMark3Name: 'Çekirdek Makine',
+  armorMark4Name: 'Bio-Nöral',
+  armorMark5Name: 'Takım Komutanı',
+  armorMark1Desc: 'Hesaplamanın temeli. Her veri yapısı, her sıralama algoritması — takıntılı pratikle ustalasıldı.',
+  armorMark2Desc: 'Akıllı web kazıma yapay zeka mantığıyla bulusur. En iyi seçenekleri senin yerine bulur.',
+  armorMark3Desc: 'Sinir ağları, derin öğrenme mimarileri ve makine zekası. Deposunun güç çekirdeği.',
+  armorMark4Desc: 'Tıbbi tanıya uygulanan makine öğrenimi. Nörolojik örüntü analizi ile erken Parkinson tespiti.',
+  armorMark5Desc: 'Liderlik modülü. Takım koordinasyonu, proje yönetimi ve organizasyonel sistem kurma.',
+  bootLine1: 'JARVIS çevrimiçi — tüm sistemler normal',
+  bootLine2: 'Zırh konfigürasyonları yükleniyor...',
+  bootLine3: 'Proje veritabanı taranıyor...',
+  bootLine4: 'Zırh Deposu başlatılıyor...',
+  bootLine5: 'Hoş geldiniz, Bay Ergüne.',
+
   // Blog detail content
   blogPosts: {},
 };
@@ -527,6 +567,9 @@ export function LangProvider({ children }) {
   );
 }
 
+const fallbackT = (key) => key;
+const fallbackCtx = { lang: 'en', setLang: () => {}, toggleLang: () => {}, t: fallbackT };
+
 export function useLang() {
-  return useContext(LangContext);
+  return useContext(LangContext) ?? fallbackCtx;
 }
