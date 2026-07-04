@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" font-family="'JetBrains Mono', Menlo, monospace">
+  <rect width="1200" height="750" fill="#0a0a0f"/>
+  <g stroke="#1a1a2e" stroke-width="1">
+    <line x1="100" y1="0" x2="100" y2="750"/>
+<line x1="200" y1="0" x2="200" y2="750"/>
+<line x1="300" y1="0" x2="300" y2="750"/>
+<line x1="400" y1="0" x2="400" y2="750"/>
+<line x1="500" y1="0" x2="500" y2="750"/>
+<line x1="600" y1="0" x2="600" y2="750"/>
+<line x1="700" y1="0" x2="700" y2="750"/>
+<line x1="800" y1="0" x2="800" y2="750"/>
+<line x1="900" y1="0" x2="900" y2="750"/>
+<line x1="1000" y1="0" x2="1000" y2="750"/>
+<line x1="1100" y1="0" x2="1100" y2="750"/>
+    <line x1="0" y1="125" x2="1200" y2="125"/>
+<line x1="0" y1="250" x2="1200" y2="250"/>
+<line x1="0" y1="375" x2="1200" y2="375"/>
+<line x1="0" y1="500" x2="1200" y2="500"/>
+<line x1="0" y1="625" x2="1200" y2="625"/>
+  </g>
+  <rect x="60" y="60" width="1080" height="630" fill="#0f0f1a" stroke="#1a1a2e"/>
+  <g stroke="#c0c0c0" stroke-width="2" fill="none">
+    <path d="M60 100 V60 H100"/><path d="M1100 60 H1140 V100"/>
+    <path d="M1140 650 V690 H1100"/><path d="M100 690 H60 V650"/>
+  </g>
+  <circle cx="600" cy="330" r="70" fill="none" stroke="#c0c0c0" stroke-opacity="0.35" stroke-width="2"/>
+  <circle cx="600" cy="330" r="46" fill="none" stroke="#c0c0c0" stroke-opacity="0.6" stroke-width="1.5"/>
+  <circle cx="600" cy="330" r="10" fill="#c0c0c0"/>
+  <text x="600" y="470" text-anchor="middle" fill="#e0e0e8" font-size="40" letter-spacing="6">MACRO TOGGLE</text>
+  <text x="600" y="510" text-anchor="middle" fill="#8a8aa0" font-size="17" letter-spacing="3">F8 KEY LOOP — TERMINAL</text>
+  <text x="600" y="640" text-anchor="middle" fill="#4a4a60" font-size="13" letter-spacing="4">PLACEHOLDER — REPLACE WITH SCREENSHOT</text>
+  <text x="90" y="95" fill="#c0c0c0" font-size="13" letter-spacing="4">STARK INDUSTRIES // VISUAL FEED</text>
+  <text x="1110" y="672" text-anchor="end" fill="#4a4a60" font-size="12" letter-spacing="3">SYSTEM ONLINE</text>
+</svg>

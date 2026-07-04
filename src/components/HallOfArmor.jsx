@@ -1,60 +1,25 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import useAudioFX from './useAudioFX';
 import { useLang } from '../i18n.jsx';
+import PROJECTS from '../data/projects';
 
-const ARMORS = [
-  {
-    mark: 'MARK I',
-    nameKey: 'armorMark1Name',
-    descKey: 'armorMark1Desc',
-    color: '#8a8a8a',
-    glow: 'rgba(138,138,138,0.5)',
-    tags: ['Python', 'C', 'Algorithms', 'DS'],
-    href: '/project',
-  },
-  {
-    mark: 'MARK II',
-    nameKey: 'armorMark2Name',
-    descKey: 'armorMark2Desc',
-    color: '#c0c0c0',
-    glow: 'rgba(192,192,192,0.5)',
-    tags: ['Python', 'Gemini API', 'Scraping'],
-    href: '/project',
-  },
-  {
-    mark: 'MARK III',
-    nameKey: 'armorMark3Name',
-    descKey: 'armorMark3Desc',
-    color: '#ff6b35',
-    glow: 'rgba(255,107,53,0.5)',
-    tags: ['PyTorch', 'ML', 'Deep Learning'],
-    href: '/project',
-  },
-  {
-    mark: 'MARK IV',
-    nameKey: 'armorMark4Name',
-    descKey: 'armorMark4Desc',
-    color: '#00ff88',
-    glow: 'rgba(0,255,136,0.5)',
-    tags: ['Python', 'ML', 'Medical', 'NN'],
-    href: '/project',
-  },
-  {
-    mark: 'MARK V',
-    nameKey: 'armorMark5Name',
-    descKey: 'armorMark5Desc',
-    color: '#00d4ff',
-    glow: 'rgba(0,212,255,0.5)',
-    tags: ['PM', 'NEXA', 'Team Lead'],
-    href: '/project',
-  },
-];
+const ARMORS = PROJECTS.map((p) => ({
+  mark: p.mark,
+  name: p.codename,
+  descEn: p.oneLiner,
+  descTr: p.oneLinerTr,
+  color: p.color,
+  glow: p.glow,
+  tags: [p.language, ...p.tags.filter((t) => t !== p.language)].slice(0, 4),
+  href: `/project/${p.slug}`,
+}));
 
 const BOOT_LINES = ['bootLine1', 'bootLine2', 'bootLine3', 'bootLine4', 'bootLine5'];
 
 export default function HallOfArmor() {
-  const { t } = useLang();
+  const { lang, t } = useLang();
+  const navigate = useNavigate();
   const { playClick, playBootSound, playHover } = useAudioFX();
   const [hoveredCapsule, setHoveredCapsule] = useState(null);
   const [bootPhase, setBootPhase] = useState(() => {
@@ -256,7 +221,7 @@ export default function HallOfArmor() {
             }}
             onMouseEnter={() => { setHoveredCapsule(i); playHover(); }}
             onMouseLeave={() => setHoveredCapsule(null)}
-            onClick={() => playClick()}
+            onClick={() => { playClick(); navigate(armor.href); }}
           >
             {/* LED strip */}
             <div className="capsule-led-bar" style={{
@@ -303,7 +268,7 @@ export default function HallOfArmor() {
 
               {/* Armor name */}
               <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 9, letterSpacing: '0.08em', color: '#c0c0d0', textAlign: 'center', lineHeight: 1.4, marginTop: 'auto' }}>
-                {t(armor.nameKey)}
+                {armor.name}
               </div>
 
               {/* HUD overlay on hover */}
@@ -329,8 +294,8 @@ export default function HallOfArmor() {
                 <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 8, color: armor.color, letterSpacing: '0.14em', marginBottom: 6 }}>
                   {armor.mark} // ONLINE
                 </div>
-                <div style={{ fontFamily: "'Instrument Sans', sans-serif", fontSize: 10, color: '#b0b0c0', lineHeight: 1.45, marginBottom: 8, flex: 1 }}>
-                  {t(armor.descKey)}
+                <div style={{ fontFamily: "'Instrument Sans', sans-serif", fontSize: 10, color: '#b0b0c0', lineHeight: 1.45, marginBottom: 8, flex: 1, overflow: 'hidden' }}>
+                  {lang === 'tr' && armor.descTr ? armor.descTr : armor.descEn}
                 </div>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 3, marginBottom: 8 }}>
                   {armor.tags.map(tag => (
@@ -415,11 +380,11 @@ const s = {
   },
   capsules: {
     display: 'flex', gap: 12, justifyContent: 'center',
-    alignItems: 'stretch',
+    alignItems: 'stretch', flexWrap: 'wrap',
   },
   capsuleItem: {
     display: 'flex', flexDirection: 'column',
-    width: 'calc(20% - 10px)', maxWidth: 200, minWidth: 120,
+    width: 'calc(16.666% - 10px)', maxWidth: 200, minWidth: 120,
     cursor: 'pointer',
     flexShrink: 0,
   },

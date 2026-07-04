@@ -16,6 +16,7 @@ import GoOutPage from './pages/GoOutPage';
 import ContactPage from './pages/ContactPage';
 import JourneyPage from './pages/JourneyPage';
 import ProjectPage from './pages/ProjectPage';
+import ProjectDetail from './pages/ProjectDetail';
 
 export default function App() {
   const [time, setTime] = useState('');
@@ -281,6 +282,7 @@ export default function App() {
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/journey" element={<JourneyPage />} />
         <Route path="/project" element={<ProjectPage />} />
+        <Route path="/project/:slug" element={<ProjectDetail />} />
       </Routes>
 
       {/* FOOTER */}

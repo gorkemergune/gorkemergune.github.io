@@ -233,9 +233,10 @@ const en = {
 
   // Project Page
   projectBack: 'Home',
-  projectBadge: 'PROJECT',
-  projectLabel: 'Project',
-  projectSub: "What I'm paying attention to, now",
+  projectDetailBack: 'Hall of Armor',
+  projectBadge: 'HALL OF ARMOR',
+  projectLabel: 'Armory',
+  projectSub: 'Twelve armors, one per project. Open a capsule to inspect its specs, architecture, and results.',
 
   // Blog detail
   rdBack: 'Blog',
@@ -250,16 +251,6 @@ const en = {
   hallStatusLeft: 'ARMOR VAULT',
   hallStatusCenter: '41.0082° N · 28.9784° E · ISTANBUL',
   hallPlatformLabel: 'ARC REACTOR — ONLINE',
-  armorMark1Name: 'The Algorithm',
-  armorMark2Name: 'Cyber Scraping',
-  armorMark3Name: 'Core Machine',
-  armorMark4Name: 'Bio-Neural',
-  armorMark5Name: 'Team Commander',
-  armorMark1Desc: 'Foundation of computation. Every data structure, every sorting algorithm — mastered through obsessive practice.',
-  armorMark2Desc: 'Intelligent web scraping meets AI reasoning. Finds the best options so you don\'t have to.',
-  armorMark3Desc: 'Neural networks, deep learning architectures, and machine intelligence. The power core of the vault.',
-  armorMark4Desc: 'Machine learning applied to medical diagnostics. Early Parkinson\'s detection via neural pattern analysis.',
-  armorMark5Desc: 'Leadership module. Coordinating teams, managing projects, and building organizational systems.',
   bootLine1: 'JARVIS online — all systems nominal',
   bootLine2: 'Loading armor configurations...',
   bootLine3: 'Scanning project database...',
@@ -502,9 +493,10 @@ const tr = {
 
   // Project Page
   projectBack: 'Ana Sayfa',
-  projectBadge: 'PROJE',
-  projectLabel: 'Proje',
-  projectSub: 'Su an neye odaklaniyorum',
+  projectDetailBack: 'Zırh Deposu',
+  projectBadge: 'ZIRH DEPOSU',
+  projectLabel: 'Cephanelik',
+  projectSub: 'On iki zırh, her biri bir proje. Detaylar, mimari ve sonuçlar için bir kapsülü aç.',
 
   // Blog detail
   rdBack: 'Blog',
@@ -519,16 +511,6 @@ const tr = {
   hallStatusLeft: 'ZIRH DEPOSU',
   hallStatusCenter: '41.0082° K · 28.9784° D · İSTANBUL',
   hallPlatformLabel: 'ARK REAKTÖRÜ — ÇEVRİMİÇİ',
-  armorMark1Name: 'The Algorithm',
-  armorMark2Name: 'Siber Kazıma',
-  armorMark3Name: 'Çekirdek Makine',
-  armorMark4Name: 'Bio-Nöral',
-  armorMark5Name: 'Takım Komutanı',
-  armorMark1Desc: 'Hesaplamanın temeli. Her veri yapısı, her sıralama algoritması — takıntılı pratikle ustalasıldı.',
-  armorMark2Desc: 'Akıllı web kazıma yapay zeka mantığıyla bulusur. En iyi seçenekleri senin yerine bulur.',
-  armorMark3Desc: 'Sinir ağları, derin öğrenme mimarileri ve makine zekası. Deposunun güç çekirdeği.',
-  armorMark4Desc: 'Tıbbi tanıya uygulanan makine öğrenimi. Nörolojik örüntü analizi ile erken Parkinson tespiti.',
-  armorMark5Desc: 'Liderlik modülü. Takım koordinasyonu, proje yönetimi ve organizasyonel sistem kurma.',
   bootLine1: 'JARVIS çevrimiçi — tüm sistemler normal',
   bootLine2: 'Zırh konfigürasyonları yükleniyor...',
   bootLine3: 'Proje veritabanı taranıyor...',
