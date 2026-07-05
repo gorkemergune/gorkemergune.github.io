@@ -19,9 +19,10 @@ const PROJECTS = [
     tags: ['C99', 'raylib'],
     github: gh('sorting-visualizer'),
     images: [
-      { src: '/projects/sorting-visualizer/view-1.png', caption: 'Live visualization — comparisons in yellow, swaps in red' },
-      { src: '/projects/sorting-visualizer/view-2.png', caption: 'Mid-sort state with confirmed positions in green' },
-      { src: '/projects/sorting-visualizer/view-3.png', caption: 'Algorithm switching and speed controls' },
+      { src: '/projects/sorting-visualizer/bubble-sort.png', caption: 'Bubble sort mid-run — comparisons in yellow, sorted tail in green' },
+      { src: '/projects/sorting-visualizer/merge-sort.png', caption: 'Merge sort with its explicit merge-state machine in action' },
+      { src: '/projects/sorting-visualizer/quick-sort.png', caption: 'Quick sort — pivot highlighted in blue, partitions forming' },
+      { src: '/projects/sorting-visualizer/completed.png', caption: 'Completed run with final comparison and swap counters' },
     ],
     overview:
       'A desktop tool that animates Bubble, Selection, Insertion, Merge, Quick, and Heap sort as they run. Built to make algorithm behavior visible instead of abstract — every comparison, swap, and confirmed position is color-coded on screen. Useful for students learning data structures and for anyone who wants an intuition for why O(n log n) beats O(n²).',
@@ -63,8 +64,9 @@ const PROJECTS = [
     tags: ['C99', 'raylib', 'Game Dev'],
     github: gh('raylib-space-shooter'),
     images: [
-      { src: '/projects/raylib-space-shooter/menu.png', caption: 'Menu screen' },
+      { src: '/projects/raylib-space-shooter/menu.png', caption: 'Menu screen with scrolling starfield' },
       { src: '/projects/raylib-space-shooter/gameplay.png', caption: 'Gameplay — three enemy types with distinct shapes and behavior' },
+      { src: '/projects/raylib-space-shooter/action.png', caption: 'Later wave — faster spawns and particle explosions' },
       { src: '/projects/raylib-space-shooter/gameover.png', caption: 'Game over screen with score, wave, and survival time' },
     ],
     overview:
@@ -106,10 +108,12 @@ const PROJECTS = [
     glow: 'rgba(255,107,53,0.5)',
     tags: ['C', 'Assembly', 'x86', 'QEMU'],
     github: gh('gorkem-os'),
-    placeholder: true,
     images: [
-      { src: '/projects/gorkem-os/boot.svg', caption: 'Placeholder — QEMU boot screen' },
-      { src: '/projects/gorkem-os/shell.svg', caption: 'Placeholder — interactive shell and Snake' },
+      { src: '/projects/gorkem-os/boot.png', caption: 'Kernel boot sequence in QEMU — subsystems initializing' },
+      { src: '/projects/gorkem-os/shell-help.png', caption: 'Interactive shell — built-in command list' },
+      { src: '/projects/gorkem-os/sysinfo.png', caption: 'sysinfo — CPU, memory, and uptime reported by the kernel' },
+      { src: '/projects/gorkem-os/memory.png', caption: 'Memory manager stats — physical frames, paging, kernel heap' },
+      { src: '/projects/gorkem-os/snake.png', caption: 'Snake running on bare metal, VGA text mode' },
     ],
     overview:
       'A hobby operating system for the x86 architecture, written in C and NASM Assembly as a learning project to understand how computers work at the lowest level — from the first boot sector instruction to a running shell. Everything is built by hand, guided by the OSDev Wiki and the Intel Software Developer Manual.',
@@ -150,9 +154,13 @@ const PROJECTS = [
     glow: 'rgba(255,209,102,0.5)',
     tags: ['Python', 'Tkinter'],
     github: gh('synonym-master'),
-    placeholder: true,
     images: [
-      { src: '/projects/synonym-master/quiz.svg', caption: 'Placeholder — quiz round with four synonym cards' },
+      { src: '/projects/synonym-master/home.png', caption: 'Home screen' },
+      { src: '/projects/synonym-master/question.png', caption: 'Quiz round — pick the synonym from four options' },
+      { src: '/projects/synonym-master/correct.png', caption: 'Correct answer feedback' },
+      { src: '/projects/synonym-master/wrong.png', caption: 'Wrong answer — the correct synonym is revealed' },
+      { src: '/projects/synonym-master/notebook.png', caption: 'Mistake notebook collecting missed words during play' },
+      { src: '/projects/synonym-master/result.png', caption: 'End-of-session summary with score' },
     ],
     overview:
       'A desktop quiz game for learning and retaining C1-level English synonyms, built while preparing for university-level English. Each session runs 30 rounds: a word appears and you pick its synonym from four options. Wrong answers are collected into a notebook so the words you actually struggle with come back for review.',
@@ -191,9 +199,10 @@ const PROJECTS = [
     glow: 'rgba(157,107,255,0.5)',
     tags: ['Python', 'pynput', 'macOS'],
     github: gh('pynput-macos-macro'),
-    placeholder: true,
     images: [
-      { src: '/projects/pynput-macos-macro/terminal.svg', caption: 'Placeholder — terminal session with the macro toggling' },
+      { src: '/projects/pynput-macos-macro/session.svg', caption: 'Terminal session — F8 toggling the macro loop on and off' },
+      { src: '/projects/pynput-macos-macro/config.svg', caption: 'Configuration block — key sequence and delay at the top of the script' },
+      { src: '/projects/pynput-macos-macro/karabiner.svg', caption: 'Karabiner-Elements rule mapping mouse side buttons to F8' },
     ],
     overview:
       'A small automation utility: press F8 and it replays a configurable key sequence (2 → 3 → 4 by default) in a loop until toggled off. Written for repetitive input tasks on macOS, where global input hooks require Accessibility permissions and mouse side buttons are invisible to Python — both of which the README documents workarounds for.',
@@ -277,8 +286,12 @@ const PROJECTS = [
     tags: ['Python', 'MediaPipe', 'OpenCV', 'CV'],
     github: gh('face-detection-pipeline'),
     images: [
-      { src: '/projects/face-detection-pipeline/detection.jpg', caption: 'Multiple faces detected in a single pass' },
-      { src: '/projects/face-detection-pipeline/small-face.jpg', caption: 'Tiny face recovered by regional candidate search' },
+      { src: '/projects/face-detection-pipeline/multi-face-detected.jpg', caption: 'Multiple faces detected and verified in a single pass' },
+      { src: '/projects/face-detection-pipeline/portrait-input.jpg', caption: 'Input image before detection' },
+      { src: '/projects/face-detection-pipeline/portrait-detected.jpg', caption: 'Same image after the two-stage pipeline — box refined by zoom-in verification' },
+      { src: '/projects/face-detection-pipeline/small-face-detected.jpg', caption: 'Tiny face recovered by the regional candidate search' },
+      { src: '/projects/face-detection-pipeline/noisy-background-detected.jpg', caption: 'Busy background — no false positives after re-verification' },
+      { src: '/projects/face-detection-pipeline/night-crowd-detected.jpg', caption: 'Low-light crowd scene handled on CPU' },
       { src: '/projects/face-detection-pipeline/benchmark.png', caption: '140k-image benchmark summary' },
     ],
     overview:
@@ -322,9 +335,11 @@ const PROJECTS = [
     tags: ['Python', 'FastAPI', 'NLP', 'Streamlit'],
     github: gh('writing-analyzer'),
     images: [
-      { src: '/projects/writing-analyzer/risk-score.jpg', caption: 'Analysis input with overall risk score and confidence' },
-      { src: '/projects/writing-analyzer/radar.jpg', caption: 'Six-axis writing profile radar with component scores' },
-      { src: '/projects/writing-analyzer/api.png', caption: 'Auto-generated OpenAPI docs for the analysis API' },
+      { src: '/projects/writing-analyzer/input.png', caption: 'Text input on the Streamlit frontend' },
+      { src: '/projects/writing-analyzer/results.png', caption: 'Analysis results — composite risk score, tier, and confidence' },
+      { src: '/projects/writing-analyzer/writing-profile.png', caption: 'Six-axis writing profile radar' },
+      { src: '/projects/writing-analyzer/components.png', caption: 'Per-component contribution scores behind the verdict' },
+      { src: '/projects/writing-analyzer/api-docs.png', caption: 'Auto-generated OpenAPI docs for the analysis API' },
     ],
     overview:
       'A writing-quality analysis platform that scores text across six independent linguistic dimensions and aggregates them into a composite Academic Risk Score from 0 to 100. It does not claim AI authorship with certainty — it surfaces evidence-based signals statistically associated with formulaic, repetitive, or low-variance prose. Both English and Turkish are supported natively, including Turkish morphological analysis, for academic integrity support and stylometric research.',
@@ -368,9 +383,13 @@ const PROJECTS = [
     tags: ['Python', 'scikit-learn', 'Plotly', 'Google API'],
     github: gh('depression-phq9-analysis'),
     images: [
+      { src: '/projects/depression-phq9-analysis/dashboard.png', caption: 'Interactive Plotly dashboard — aggregate charts (demo data)' },
       { src: '/projects/depression-phq9-analysis/stats.png', caption: 'Statistical analysis overview' },
       { src: '/projects/depression-phq9-analysis/scores.png', caption: 'PHQ-9 score distribution and severity classification' },
       { src: '/projects/depression-phq9-analysis/radar.png', caption: 'Participant profile radar chart' },
+      { src: '/projects/depression-phq9-analysis/model-comparison.png', caption: 'Six ML models compared on the demo cohort' },
+      { src: '/projects/depression-phq9-analysis/correlation-heatmap.png', caption: 'Question-level correlation heatmap' },
+      { src: '/projects/depression-phq9-analysis/score-histogram.png', caption: 'Score histogram with severity thresholds' },
     ],
     overview:
       'A depression screening and analysis system built around an extended 15-question PHQ-9 scale. It creates and distributes the questionnaire through Google Forms, fetches responses via API, performs clinical scoring with severity classification, runs six machine-learning models, applies formal statistical testing, and generates interactive dashboards plus per-participant PDF reports. Built for pilot-study research settings; strictly educational and research use.',
@@ -414,8 +433,11 @@ const PROJECTS = [
     github: gh('find-the-best'),
     images: [
       { src: '/projects/find-the-best/home.png', caption: 'Home page' },
+      { src: '/projects/find-the-best/search.jpg', caption: 'Multi-store search results with price comparison' },
       { src: '/projects/find-the-best/compare.png', caption: 'Side-by-side product comparison' },
       { src: '/projects/find-the-best/ai.png', caption: 'Gemini-powered product analysis' },
+      { src: '/projects/find-the-best/analysis.png', caption: 'Review analysis with fake-review percentage and trust score' },
+      { src: '/projects/find-the-best/cart.png', caption: 'Persistent shopping cart' },
     ],
     overview:
       'A shopping intelligence platform built for the BTK Hackathon May 2026 e-commerce track. It compares prices across Turkish and international marketplaces, flags suspicious reviews, and layers Google Gemini on top for product recommendations, buy-timing advice, and confidence scores — so a buyer sees one trustworthy answer instead of fifty tabs.',
@@ -458,10 +480,14 @@ const PROJECTS = [
     glow: 'rgba(0,255,136,0.5)',
     tags: ['Next.js', 'FastAPI', 'Gemini', 'PWA', 'Docker'],
     github: gh('build-your-target-body'),
-    placeholder: true,
     images: [
-      { src: '/projects/build-your-target-body/dashboard.svg', caption: 'Placeholder — analytics dashboard' },
-      { src: '/projects/build-your-target-body/coach.svg', caption: 'Placeholder — Gemini AI coach chat' },
+      { src: '/projects/build-your-target-body/dashboard.png', caption: 'Analytics dashboard — weight trend, goal progress, ETA' },
+      { src: '/projects/build-your-target-body/weight-tracking.png', caption: 'Daily weight log with trend chart and weekly averages' },
+      { src: '/projects/build-your-target-body/nutrition.png', caption: 'Nutrition tracking — daily macros and 30-day calorie trend' },
+      { src: '/projects/build-your-target-body/workouts.png', caption: 'Workout logging with volume analytics' },
+      { src: '/projects/build-your-target-body/goals.png', caption: 'Goal setup — four modes with progress engine' },
+      { src: '/projects/build-your-target-body/ai-coach.jpg', caption: 'Gemini AI coach answering with full user data as context' },
+      { src: '/projects/build-your-target-body/mobile.png', caption: 'Mobile view — installable PWA' },
     ],
     overview:
       'A body transformation tracker built for Turkish users with full English support. It tracks weight, body fat, eight body measurements, daily macros, and workouts; visualizes trends; and computes an estimated completion date for the user’s goal. A Gemini-powered coach answers questions with the user’s complete data as context, and the whole app installs as a PWA with offline support.',
@@ -507,8 +533,10 @@ const PROJECTS = [
     github: gh('re-mind'),
     images: [
       { src: '/projects/re-mind/tasks.jpg', caption: 'Task dashboard' },
-      { src: '/projects/re-mind/stats.png', caption: 'Focus analytics — weekly chart and 14×18 heatmap' },
+      { src: '/projects/re-mind/timer.png', caption: 'Floating widget — clock, next task, break countdown' },
       { src: '/projects/re-mind/break.png', caption: 'Fullscreen break reminder overlay' },
+      { src: '/projects/re-mind/stats.png', caption: 'Focus analytics — weekly chart and 14×18 heatmap' },
+      { src: '/projects/re-mind/settings.png', caption: 'Settings — break interval, pre-reminder offsets, sounds' },
     ],
     overview:
       'A native macOS productivity app that lives in the menu bar: it reminds you when tasks are due, nudges you to take breaks at regular intervals, and silently tracks focus time. Built with Tauri instead of Electron, so it stays light on memory and launches instantly. No account, no server, no internet — everything is stored in a local SQLite database.',

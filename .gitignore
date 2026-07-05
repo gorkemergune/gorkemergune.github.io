@@ -16,3 +16,4 @@ yarn-error.log*
 my_notes.txt
 img
 tasks.md
+node_modules.nosync/

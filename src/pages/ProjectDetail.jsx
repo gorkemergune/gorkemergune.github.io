@@ -1,5 +1,6 @@
+import { useCallback, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { ArrowLeft, ArrowUpRight, Github } from 'lucide-react';
+import { ArrowLeft, ArrowUpRight, ChevronLeft, ChevronRight, Github, X } from 'lucide-react';
 import { useLang } from '../i18n.jsx';
 import { getProject } from '../data/projects';
 
@@ -7,6 +8,7 @@ export default function ProjectDetail() {
   const { slug } = useParams();
   const { t } = useLang();
   const project = getProject(slug);
+  const [lightbox, setLightbox] = useState(-1);
 
   if (!project) {
     return (
@@ -90,7 +92,8 @@ export default function ProjectDetail() {
           <figure
             key={img.src}
             className={`pd-img-card${project.images.length % 2 === 1 && i === 0 ? ' pd-img-full' : ''}`}
-            style={s.imgCard}
+            style={{ ...s.imgCard, cursor: 'zoom-in' }}
+            onClick={() => setLightbox(i)}
           >
             <div style={{ overflow: 'hidden', borderRadius: 3 }}>
               <img src={img.src} alt={img.caption} loading="lazy" style={s.img} />
@@ -101,6 +104,16 @@ export default function ProjectDetail() {
           </figure>
         ))}
       </div>
+
+      {lightbox >= 0 && (
+        <Lightbox
+          images={project.images}
+          index={lightbox}
+          color={color}
+          onNavigate={setLightbox}
+          onClose={() => setLightbox(-1)}
+        />
+      )}
 
       {/* OVERVIEW */}
       <SectionLabel n={num()} label="Overview" color={color} />
@@ -175,6 +188,102 @@ export default function ProjectDetail() {
     </div>
   );
 }
+
+function Lightbox({ images, index, color, onNavigate, onClose }) {
+  const count = images.length;
+  const img = images[index];
+
+  const prev = useCallback(() => onNavigate((index - 1 + count) % count), [index, count, onNavigate]);
+  const next = useCallback(() => onNavigate((index + 1) % count), [index, count, onNavigate]);
+
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key === 'Escape') onClose();
+      else if (e.key === 'ArrowLeft') prev();
+      else if (e.key === 'ArrowRight') next();
+    };
+    window.addEventListener('keydown', onKey);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [prev, next, onClose]);
+
+  return (
+    <div style={lb.overlay} onClick={onClose} role="dialog" aria-modal="true" aria-label={img.caption}>
+      <div style={lb.topBar}>
+        <span style={{ ...lb.counter, color }}>
+          {String(index + 1).padStart(2, '0')} / {String(count).padStart(2, '0')}
+        </span>
+        <button className="link-hover" style={lb.iconBtn} onClick={onClose} aria-label="Close">
+          <X size={20} strokeWidth={1.5} />
+        </button>
+      </div>
+
+      {count > 1 && (
+        <button
+          className="link-hover"
+          style={{ ...lb.iconBtn, ...lb.navBtn, left: 12 }}
+          onClick={(e) => { e.stopPropagation(); prev(); }}
+          aria-label="Previous image"
+        >
+          <ChevronLeft size={26} strokeWidth={1.5} />
+        </button>
+      )}
+
+      <figure style={lb.figure} onClick={(e) => e.stopPropagation()}>
+        <img src={img.src} alt={img.caption} style={lb.img} />
+        <figcaption style={lb.caption}>
+          <span style={{ color, marginRight: 8 }}>&#9656;</span>{img.caption}
+        </figcaption>
+      </figure>
+
+      {count > 1 && (
+        <button
+          className="link-hover"
+          style={{ ...lb.iconBtn, ...lb.navBtn, right: 12 }}
+          onClick={(e) => { e.stopPropagation(); next(); }}
+          aria-label="Next image"
+        >
+          <ChevronRight size={26} strokeWidth={1.5} />
+        </button>
+      )}
+    </div>
+  );
+}
+
+const lb = {
+  overlay: {
+    position: 'fixed', inset: 0, zIndex: 200, background: 'rgba(6,6,12,0.94)',
+    backdropFilter: 'blur(6px)', display: 'flex', alignItems: 'center', justifyContent: 'center',
+    cursor: 'zoom-out',
+  },
+  topBar: {
+    position: 'absolute', top: 0, left: 0, right: 0, display: 'flex',
+    justifyContent: 'space-between', alignItems: 'center', padding: '18px 22px',
+  },
+  counter: { fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.16em' },
+  iconBtn: {
+    background: '#0f0f1a', border: '1px solid #1a1a2e', borderRadius: 4,
+    color: '#8a8aa0', padding: 8, display: 'inline-flex', alignItems: 'center',
+    justifyContent: 'center', cursor: 'pointer',
+  },
+  navBtn: { position: 'absolute', top: '50%', transform: 'translateY(-50%)', zIndex: 1 },
+  figure: {
+    margin: 0, maxWidth: 'min(1100px, calc(100vw - 96px))', maxHeight: 'calc(100vh - 120px)',
+    display: 'flex', flexDirection: 'column', cursor: 'default',
+  },
+  img: {
+    display: 'block', maxWidth: '100%', maxHeight: 'calc(100vh - 170px)',
+    objectFit: 'contain', borderRadius: 4, border: '1px solid #1a1a2e', background: '#080810',
+  },
+  caption: {
+    fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.06em',
+    color: '#8a8aa0', padding: '12px 2px 0', textAlign: 'center',
+  },
+};
 
 function SectionLabel({ n, label, color }) {
   return (
