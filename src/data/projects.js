@@ -1,6 +1,8 @@
 // Hall of Armor — project database.
 // Each entry is one armor. Slugs map to /project/<slug> and to the
 // screenshot folders under public/projects/<slug>/.
+// Fields with a Tr suffix hold the Turkish localization; the UI falls
+// back to the English field when a Tr variant is missing.
 
 const gh = (repo) => `https://github.com/gorkemergune/${repo}`;
 
@@ -11,6 +13,7 @@ const PROJECTS = [
     codename: 'The Algorithm',
     title: 'Sorting Visualizer',
     subtitle: 'Step-by-step sorting algorithm visualizer built with C and raylib',
+    subtitleTr: 'C ve raylib ile geliştirilmiş, adım adım çalışan sıralama algoritması görselleştiricisi',
     oneLiner: 'Six classic sorting algorithms animated in real time, with pause, manual stepping, and speed control.',
     oneLinerTr: 'Altı klasik sıralama algoritması gerçek zamanlı animasyonla; duraklatma, adım adım ilerleme ve hız kontrolü.',
     language: 'C',
@@ -19,13 +22,15 @@ const PROJECTS = [
     tags: ['C99', 'raylib'],
     github: gh('sorting-visualizer'),
     images: [
-      { src: '/projects/sorting-visualizer/bubble-sort.png', caption: 'Bubble sort mid-run — comparisons in yellow, sorted tail in green' },
-      { src: '/projects/sorting-visualizer/merge-sort.png', caption: 'Merge sort with its explicit merge-state machine in action' },
-      { src: '/projects/sorting-visualizer/quick-sort.png', caption: 'Quick sort — pivot highlighted in blue, partitions forming' },
-      { src: '/projects/sorting-visualizer/completed.png', caption: 'Completed run with final comparison and swap counters' },
+      { src: '/projects/sorting-visualizer/bubble-sort.png', caption: 'Bubble sort mid-run — comparisons in yellow, sorted tail in green', captionTr: 'Kabarcık sıralaması çalışırken — karşılaştırmalar sarı, sıralanan kuyruk yeşil' },
+      { src: '/projects/sorting-visualizer/merge-sort.png', caption: 'Merge sort with its explicit merge-state machine in action', captionTr: 'Birleştirme sıralaması, kendi birleştirme durum makinesiyle iş başında' },
+      { src: '/projects/sorting-visualizer/quick-sort.png', caption: 'Quick sort — pivot highlighted in blue, partitions forming', captionTr: 'Hızlı sıralama — pivot mavi ile vurgulanmış, bölümler oluşuyor' },
+      { src: '/projects/sorting-visualizer/completed.png', caption: 'Completed run with final comparison and swap counters', captionTr: 'Tamamlanan çalışma; toplam karşılaştırma ve takas sayaçları' },
     ],
     overview:
       'A desktop tool that animates Bubble, Selection, Insertion, Merge, Quick, and Heap sort as they run. Built to make algorithm behavior visible instead of abstract — every comparison, swap, and confirmed position is color-coded on screen. Useful for students learning data structures and for anyone who wants an intuition for why O(n log n) beats O(n²).',
+    overviewTr:
+      'Bubble, Selection, Insertion, Merge, Quick ve Heap sort algoritmalarını çalışırken canlandıran bir masaüstü aracı. Algoritma davranışını soyut olmaktan çıkarıp görünür kılmak için geliştirildi — her karşılaştırma, takas ve kesinleşen konum ekranda renk kodlarıyla gösterilir. Veri yapılarını öğrenen öğrenciler ve O(n log n) karmaşıklığın O(n²) karşısında neden üstün olduğunu sezgisel olarak kavramak isteyen herkes için faydalıdır.',
     highlights: [
       'Six algorithms: Bubble, Selection, Insertion, Merge, Quick, and Heap sort, switchable at runtime with number keys',
       'Auto mode with play/pause, plus manual frame-by-frame stepping when paused',
@@ -33,6 +38,14 @@ const PROJECTS = [
       'Color-coded states: comparing, swapping, sorted, and pivot (Quick sort)',
       'Live comparison and swap counters',
       'Shuffle and restart at any point',
+    ],
+    highlightsTr: [
+      'Altı algoritma: Bubble, Selection, Insertion, Merge, Quick ve Heap sort; sayı tuşlarıyla çalışma sırasında değiştirilebilir',
+      'Oynat/duraklat özellikli otomatik mod; duraklatıldığında kare kare manuel ilerleme',
+      'Çalışma sırasında ayarlanabilir animasyon hızı',
+      'Renk kodlu durumlar: karşılaştırma, takas, sıralanmış ve pivot (Quick sort)',
+      'Canlı karşılaştırma ve takas sayaçları',
+      'İstenilen anda karıştırma ve yeniden başlatma',
     ],
     stack: [
       { label: 'Languages', items: ['C (C99)'] },
@@ -43,11 +56,21 @@ const PROJECTS = [
       'The entire program is a single ~690-line C99 file. Each algorithm is implemented as an incremental state machine — bubble_step(), selection_step(), insertion_step(), and so on — that keeps its loop indices in static variables and advances exactly one comparison or swap per call. The main raylib loop invokes one step per animation tick, so sorting progress is rendered frame by frame instead of running to completion in one pass.',
       'Bar positions are interpolated through a separate display array so swaps animate smoothly, and a sorted mask keeps confirmed elements green for the rest of the run. Merge sort carries its own explicit merge-state struct since its control flow cannot live in simple loop counters.',
     ],
+    architectureTr: [
+      'Programın tamamı yaklaşık 690 satırlık tek bir C99 dosyasından oluşur. Her algoritma, artımlı bir durum makinesi olarak uygulanmıştır — bubble_step(), selection_step(), insertion_step() gibi fonksiyonlar döngü indekslerini statik değişkenlerde tutar ve her çağrıda tam olarak bir karşılaştırma ya da takas ilerletir. Ana raylib döngüsü her animasyon adımında bir step çağırır; böylece sıralama, tek seferde tamamlanmak yerine kare kare ekrana çizilir.',
+      'Çubuk konumları, takasların akıcı görünmesi için ayrı bir görüntüleme dizisi üzerinden ara değerlerle hesaplanır; sıralanmış maskesi ise kesinleşen elemanları çalışmanın sonuna dek yeşil tutar. Merge sort, kontrol akışı basit döngü sayaçlarına sığmadığı için kendi birleştirme durumu yapısını taşır.',
+    ],
     results: [
       { label: 'Algorithms', value: '6' },
       { label: 'Codebase', value: '~690 lines, single file' },
       { label: 'Dependencies', value: 'raylib only' },
       { label: 'Platforms', value: 'Linux · macOS · Windows' },
+    ],
+    resultsTr: [
+      { label: 'Algoritma', value: '6' },
+      { label: 'Kod tabanı', value: '~690 satır, tek dosya' },
+      { label: 'Bağımlılıklar', value: 'Yalnızca raylib' },
+      { label: 'Platformlar', value: 'Linux · macOS · Windows' },
     ],
   },
   {
@@ -56,6 +79,7 @@ const PROJECTS = [
     codename: 'Star Fighter',
     title: 'Raylib Space Shooter',
     subtitle: '2D wave-based space shooter written as a lesson-by-lesson C tutorial',
+    subtitleTr: 'Ders ders ilerleyen bir C eğitimi olarak yazılmış, dalga tabanlı 2D uzay oyunu',
     oneLiner: 'Wave-based 2D space shooter in C, documented as numbered lessons for people learning game development.',
     oneLinerTr: 'C ile yazılmış dalga tabanlı 2D uzay oyunu; oyun geliştirme öğrenenler için numaralı derslerle belgelenmiş.',
     language: 'C',
@@ -64,13 +88,15 @@ const PROJECTS = [
     tags: ['C99', 'raylib', 'Game Dev'],
     github: gh('raylib-space-shooter'),
     images: [
-      { src: '/projects/raylib-space-shooter/menu.png', caption: 'Menu screen with scrolling starfield' },
-      { src: '/projects/raylib-space-shooter/gameplay.png', caption: 'Gameplay — three enemy types with distinct shapes and behavior' },
-      { src: '/projects/raylib-space-shooter/action.png', caption: 'Later wave — faster spawns and particle explosions' },
-      { src: '/projects/raylib-space-shooter/gameover.png', caption: 'Game over screen with score, wave, and survival time' },
+      { src: '/projects/raylib-space-shooter/menu.png', caption: 'Menu screen with scrolling starfield', captionTr: 'Kayan yıldız alanıyla menü ekranı' },
+      { src: '/projects/raylib-space-shooter/gameplay.png', caption: 'Gameplay — three enemy types with distinct shapes and behavior', captionTr: 'Oynanış — farklı şekil ve davranışlara sahip üç düşman türü' },
+      { src: '/projects/raylib-space-shooter/action.png', caption: 'Later wave — faster spawns and particle explosions', captionTr: 'İlerleyen dalga — daha hızlı düşman doğuşu ve parçacık patlamaları' },
+      { src: '/projects/raylib-space-shooter/gameover.png', caption: 'Game over screen with score, wave, and survival time', captionTr: 'Skor, dalga ve hayatta kalma süresini gösteren oyun sonu ekranı' },
     ],
     overview:
       'A complete 2D space shooter built with raylib, structured as a hands-on tutorial: every system in the code is documented as a numbered lesson. The goal is a codebase a beginner can read top to bottom and understand how a real game loop, entity management, and difficulty scaling fit together.',
+    overviewTr:
+      'raylib ile geliştirilmiş eksiksiz bir 2D uzay oyunu; uygulamalı bir eğitim olarak yapılandırıldı: koddaki her sistem numaralı bir ders olarak belgelendi. Amaç, yeni başlayan birinin baştan sona okuyup gerçek bir oyun döngüsünün, varlık yönetiminin ve zorluk ölçeklemesinin nasıl bir araya geldiğini anlayabileceği bir kod tabanı sunmak.',
     highlights: [
       'Three enemy types with different speed, HP, and point values (square / triangle / hexagon)',
       'Difficulty scales automatically every 30 seconds — faster spawns, faster enemies',
@@ -78,6 +104,14 @@ const PROJECTS = [
       'Particle effects and a scrolling starfield, all drawn with shapes — no texture assets',
       'Menu, gameplay, and game-over states with score, wave, and survival-time tracking',
       'Every system commented as a numbered lesson for learners',
+    ],
+    highlightsTr: [
+      'Farklı hız, can ve puan değerlerine sahip üç düşman türü (kare / üçgen / altıgen)',
+      'Zorluk her 30 saniyede bir otomatik olarak artar — daha hızlı doğuş, daha hızlı düşmanlar',
+      'Beş can; her vuruştan sonra bir saniyelik dokunulmazlık süresi',
+      'Parçacık efektleri ve kayan yıldız alanı; tamamı şekillerle çizildi — hiç doku dosyası yok',
+      'Skor, dalga ve hayatta kalma süresi takibiyle menü, oynanış ve oyun sonu durumları',
+      'Öğrenenler için her sistem numaralı bir ders olarak yorum satırlarıyla açıklandı',
     ],
     stack: [
       { label: 'Languages', items: ['C (C99)'] },
@@ -88,11 +122,21 @@ const PROJECTS = [
       'A single ~840-line main.c organized around typed entities — Player, Bullet, Enemy, Star, Particle — stored in fixed-size static arrays with active flags, so there is no dynamic allocation anywhere. A GameState enum drives the menu / playing / game-over flow.',
       'UpdateGame() advances timers, enemy spawning, movement, collision checks, and the 30-second difficulty multiplier each frame; DrawGame() renders everything with raylib shape primitives. Object pools are recycled by scanning for inactive slots, which keeps the frame loop allocation-free.',
     ],
+    architectureTr: [
+      'Yaklaşık 840 satırlık tek bir main.c; Player, Bullet, Enemy, Star, Particle gibi tipli varlıklar etrafında düzenlenmiştir. Varlıklar, aktiflik bayraklarıyla sabit boyutlu statik dizilerde tutulur; kodun hiçbir yerinde dinamik bellek ayırma yoktur. Menü / oynanış / oyun sonu akışını bir GameState enum’u yönetir.',
+      'UpdateGame() her karede zamanlayıcıları, düşman doğuşunu, hareketi, çarpışma kontrollerini ve 30 saniyelik zorluk çarpanını ilerletir; DrawGame() her şeyi raylib şekil ilkelleriyle çizer. Nesne havuzları pasif yuvalar taranarak geri dönüştürülür; bu da kare döngüsünü bellek ayırmadan arındırır.',
+    ],
     results: [
       { label: 'Enemy types', value: '3' },
       { label: 'Codebase', value: '~840 lines, single file' },
       { label: 'Assets required', value: '0 — shapes only' },
       { label: 'Platforms', value: 'Linux · macOS · Windows' },
+    ],
+    resultsTr: [
+      { label: 'Düşman türü', value: '3' },
+      { label: 'Kod tabanı', value: '~840 satır, tek dosya' },
+      { label: 'Gereken varlık dosyası', value: '0 — yalnızca şekiller' },
+      { label: 'Platformlar', value: 'Linux · macOS · Windows' },
     ],
   },
   {
@@ -101,6 +145,7 @@ const PROJECTS = [
     codename: 'Bare Metal',
     title: 'GorkemOS',
     subtitle: 'A hobby x86 operating system built from scratch in C and Assembly',
+    subtitleTr: 'C ve Assembly ile sıfırdan geliştirilmiş hobi amaçlı bir x86 işletim sistemi',
     oneLiner: 'x86 operating system from scratch: bootloader, interrupts, memory management, scheduler, drivers, file system, and shell.',
     oneLinerTr: 'Sıfırdan x86 işletim sistemi: bootloader, kesmeler, bellek yönetimi, zamanlayıcı, sürücüler, dosya sistemi ve kabuk.',
     language: 'C',
@@ -109,14 +154,16 @@ const PROJECTS = [
     tags: ['C', 'Assembly', 'x86', 'QEMU'],
     github: gh('gorkem-os'),
     images: [
-      { src: '/projects/gorkem-os/boot.png', caption: 'Kernel boot sequence in QEMU — subsystems initializing' },
-      { src: '/projects/gorkem-os/shell-help.png', caption: 'Interactive shell — built-in command list' },
-      { src: '/projects/gorkem-os/sysinfo.png', caption: 'sysinfo — CPU, memory, and uptime reported by the kernel' },
-      { src: '/projects/gorkem-os/memory.png', caption: 'Memory manager stats — physical frames, paging, kernel heap' },
-      { src: '/projects/gorkem-os/snake.png', caption: 'Snake running on bare metal, VGA text mode' },
+      { src: '/projects/gorkem-os/boot.png', caption: 'Kernel boot sequence in QEMU — subsystems initializing', captionTr: 'QEMU’da çekirdek açılış dizisi — alt sistemler başlatılıyor' },
+      { src: '/projects/gorkem-os/shell-help.png', caption: 'Interactive shell — built-in command list', captionTr: 'Etkileşimli kabuk — yerleşik komut listesi' },
+      { src: '/projects/gorkem-os/sysinfo.png', caption: 'sysinfo — CPU, memory, and uptime reported by the kernel', captionTr: 'sysinfo — çekirdeğin raporladığı işlemci, bellek ve çalışma süresi' },
+      { src: '/projects/gorkem-os/memory.png', caption: 'Memory manager stats — physical frames, paging, kernel heap', captionTr: 'Bellek yöneticisi istatistikleri — fiziksel çerçeveler, sayfalama, çekirdek yığını' },
+      { src: '/projects/gorkem-os/snake.png', caption: 'Snake running on bare metal, VGA text mode', captionTr: 'Doğrudan donanım üzerinde çalışan Snake, VGA metin modu' },
     ],
     overview:
       'A hobby operating system for the x86 architecture, written in C and NASM Assembly as a learning project to understand how computers work at the lowest level — from the first boot sector instruction to a running shell. Everything is built by hand, guided by the OSDev Wiki and the Intel Software Developer Manual.',
+    overviewTr:
+      'Bilgisayarların en alt seviyede nasıl çalıştığını anlamak amacıyla C ve NASM Assembly ile yazılmış, x86 mimarisi için hobi amaçlı bir işletim sistemi — ilk önyükleme sektörü komutundan çalışan bir kabuğa kadar. Her şey OSDev Wiki ve Intel Yazılım Geliştirici Kılavuzu rehberliğinde elle inşa edildi.',
     highlights: [
       'Custom bootloader in Assembly that loads the kernel from disk',
       'Full interrupt infrastructure: GDT, IDT, PIC remapping, and ISR handlers',
@@ -126,6 +173,15 @@ const PROJECTS = [
       'GorkemFS — a custom file system — plus an interactive shell',
       'Snake, running on bare metal',
     ],
+    highlightsTr: [
+      'Çekirdeği diskten yükleyen, Assembly ile yazılmış özel bootloader',
+      'Eksiksiz kesme altyapısı: GDT, IDT, PIC yeniden eşleme ve ISR işleyicileri',
+      'Bellek yönetimi: fiziksel bellek yöneticisi, sayfalama ve çekirdek yığını',
+      'Zamanlayıcı ve Assembly ile bağlam değiştirme içeren süreç soyutlaması',
+      'Donanım sürücüleri: VGA metin modu, klavye, PIT zamanlayıcı ve ATA disk',
+      'GorkemFS — özel bir dosya sistemi — ve etkileşimli bir kabuk',
+      'Doğrudan donanım üzerinde çalışan Snake',
+    ],
     stack: [
       { label: 'Languages', items: ['C', 'x86 Assembly (NASM)'] },
       { label: 'Tools', items: ['i686-elf-gcc cross-compiler', 'NASM', 'QEMU', 'GNU Make', 'GDB'] },
@@ -134,11 +190,21 @@ const PROJECTS = [
       'The NASM bootloader loads the kernel image from disk and jumps to a small assembly entry stub that hands control to the C kernel. The kernel then installs the GDT and IDT, remaps the PIC, and wires ISR stubs to C handlers for exceptions, the timer, and the keyboard.',
       'Memory is managed in layers: a physical memory manager hands out frames, paging maps virtual addresses, and a kernel heap sits on top for dynamic allocation. Processes are scheduled by a timer-driven scheduler whose context switch is written in assembly (switch.asm). Drivers for VGA text output, keyboard input, the PIT, and ATA disk access support the upper layers: the custom GorkemFS file system and the interactive shell — which can also launch Snake.',
     ],
+    architectureTr: [
+      'NASM bootloader çekirdek imajını diskten yükler ve kontrolü C çekirdeğine devreden küçük bir Assembly giriş koduna atlar. Çekirdek ardından GDT ve IDT’yi kurar, PIC’i yeniden eşler ve istisnalar, zamanlayıcı ve klavye için ISR köprülerini C işleyicilerine bağlar.',
+      'Bellek katmanlar hâlinde yönetilir: fiziksel bellek yöneticisi çerçeve dağıtır, sayfalama sanal adresleri eşler, en üstte de dinamik ayırma için çekirdek yığını bulunur. Süreçler, bağlam değiştirmesi Assembly ile yazılmış (switch.asm) zamanlayıcı güdümlü bir görev zamanlayıcı tarafından çalıştırılır. VGA metin çıkışı, klavye girişi, PIT ve ATA disk erişimi sürücüleri üst katmanları besler: özel GorkemFS dosya sistemi ve Snake’i de başlatabilen etkileşimli kabuk.',
+    ],
     results: [
       { label: 'Boots on', value: 'x86 via QEMU' },
       { label: 'Kernel subsystems', value: 'GDT/IDT · paging · PMM · heap · scheduler' },
       { label: 'Drivers', value: 'VGA · keyboard · timer · ATA' },
       { label: 'Extras', value: 'Custom FS · shell · Snake' },
+    ],
+    resultsTr: [
+      { label: 'Çalıştığı ortam', value: 'QEMU üzerinde x86' },
+      { label: 'Çekirdek alt sistemleri', value: 'GDT/IDT · sayfalama · PMM · yığın · zamanlayıcı' },
+      { label: 'Sürücüler', value: 'VGA · klavye · zamanlayıcı · ATA' },
+      { label: 'Ekstralar', value: 'Özel dosya sistemi · kabuk · Snake' },
     ],
   },
   {
@@ -147,6 +213,7 @@ const PROJECTS = [
     codename: 'Lexicon',
     title: 'Synonym Master',
     subtitle: 'Desktop quiz game for C1-level English synonyms',
+    subtitleTr: 'C1 seviyesi İngilizce eş anlamlılar için masaüstü quiz oyunu',
     oneLiner: 'Tkinter quiz game for advanced English vocabulary — 30 rounds per session, zero external dependencies.',
     oneLinerTr: 'İleri seviye İngilizce kelimeler için Tkinter quiz oyunu — oturum başına 30 tur, sıfır harici bağımlılık.',
     language: 'Python',
@@ -155,15 +222,17 @@ const PROJECTS = [
     tags: ['Python', 'Tkinter'],
     github: gh('synonym-master'),
     images: [
-      { src: '/projects/synonym-master/home.png', caption: 'Home screen' },
-      { src: '/projects/synonym-master/question.png', caption: 'Quiz round — pick the synonym from four options' },
-      { src: '/projects/synonym-master/correct.png', caption: 'Correct answer feedback' },
-      { src: '/projects/synonym-master/wrong.png', caption: 'Wrong answer — the correct synonym is revealed' },
-      { src: '/projects/synonym-master/notebook.png', caption: 'Mistake notebook collecting missed words during play' },
-      { src: '/projects/synonym-master/result.png', caption: 'End-of-session summary with score' },
+      { src: '/projects/synonym-master/home.png', caption: 'Home screen', captionTr: 'Ana ekran' },
+      { src: '/projects/synonym-master/question.png', caption: 'Quiz round — pick the synonym from four options', captionTr: 'Quiz turu — dört seçenekten eş anlamlıyı seç' },
+      { src: '/projects/synonym-master/correct.png', caption: 'Correct answer feedback', captionTr: 'Doğru cevap geri bildirimi' },
+      { src: '/projects/synonym-master/wrong.png', caption: 'Wrong answer — the correct synonym is revealed', captionTr: 'Yanlış cevap — doğru eş anlamlı gösteriliyor' },
+      { src: '/projects/synonym-master/notebook.png', caption: 'Mistake notebook collecting missed words during play', captionTr: 'Oyun sırasında kaçırılan kelimeleri toplayan hata defteri' },
+      { src: '/projects/synonym-master/result.png', caption: 'End-of-session summary with score', captionTr: 'Skorla birlikte oturum sonu özeti' },
     ],
     overview:
       'A desktop quiz game for learning and retaining C1-level English synonyms, built while preparing for university-level English. Each session runs 30 rounds: a word appears and you pick its synonym from four options. Wrong answers are collected into a notebook so the words you actually struggle with come back for review.',
+    overviewTr:
+      'Üniversite düzeyinde İngilizceye hazırlanırken geliştirilen; C1 seviyesi İngilizce eş anlamlıları öğrenmek ve kalıcı hâle getirmek için bir masaüstü quiz oyunu. Her oturum 30 tur sürer: ekrana bir kelime gelir ve dört seçenek arasından eş anlamlısını seçersin. Yanlış cevaplar bir deftere kaydedilir; böylece gerçekten zorlandığın kelimeler tekrar karşına çıkar.',
     highlights: [
       'Roughly 80 C1-level word groups, each with multiple synonyms',
       'Bidirectional questions — both a word and any of its synonyms can be the prompt',
@@ -172,6 +241,14 @@ const PROJECTS = [
       'Dark-themed UI with instant green/red answer feedback',
       'Runs on stock Python — no pip install at all',
     ],
+    highlightsTr: [
+      'Her biri birden fazla eş anlamlı içeren yaklaşık 80 C1 seviyesi kelime grubu',
+      'Çift yönlü sorular — hem kelimenin kendisi hem de eş anlamlılarından herhangi biri soru olabilir',
+      'Oyun sırasında yanlış cevapları toplayan hata defteri',
+      'Kaçırılan her kelimeyi eş anlamlılarıyla birlikte listeleyen oyun sonu özeti',
+      'Anında yeşil/kırmızı cevap geri bildirimli koyu temalı arayüz',
+      'Standart Python ile çalışır — pip install hiç gerekmez',
+    ],
     stack: [
       { label: 'Languages', items: ['Python 3.8+'] },
       { label: 'Libraries', items: ['Tkinter (standard library)'] },
@@ -179,11 +256,20 @@ const PROJECTS = [
     architecture: [
       'A single ~650-line file. A DICTIONARY list holds word/synonym groups; generate_rounds() samples 30 questions per session, allowing any member of a group to serve as the prompt with the rest as answers. A SynonymGame class owns the Tkinter widgets, score state, and the mistake notebook, swapping frames between quiz rounds and the final summary. The word list is extended by appending plain dict entries — no data files or configuration.',
     ],
+    architectureTr: [
+      'Yaklaşık 650 satırlık tek bir dosya. DICTIONARY listesi kelime/eş anlamlı gruplarını tutar; generate_rounds() her oturum için 30 soru örnekler ve bir grubun herhangi bir üyesinin soru, kalanların cevap olmasına izin verir. SynonymGame sınıfı Tkinter bileşenlerini, skor durumunu ve hata defterini yönetir; quiz turları ile final özeti arasında çerçeveleri değiştirir. Kelime listesi düz dict kayıtları eklenerek genişletilir — veri dosyası ya da yapılandırma gerekmez.',
+    ],
     results: [
       { label: 'Word groups', value: '~80, C1 level' },
       { label: 'Rounds per session', value: '30' },
       { label: 'External dependencies', value: '0' },
       { label: 'Platforms', value: 'Anywhere Python + Tkinter runs' },
+    ],
+    resultsTr: [
+      { label: 'Kelime grubu', value: '~80, C1 seviyesi' },
+      { label: 'Oturum başına tur', value: '30' },
+      { label: 'Harici bağımlılık', value: '0' },
+      { label: 'Platformlar', value: 'Python + Tkinter çalışan her yerde' },
     ],
   },
   {
@@ -192,6 +278,7 @@ const PROJECTS = [
     codename: 'Auto-Pilot',
     title: 'macOS Toggle Macro',
     subtitle: 'F8-toggled key-sequence macro for macOS built on pynput',
+    subtitleTr: 'pynput üzerine kurulu, F8 ile açılıp kapanan macOS tuş dizisi makrosu',
     oneLiner: 'Minimal macOS key-sequence macro toggled with F8, with a documented Karabiner mouse-button remap.',
     oneLinerTr: 'F8 ile açılıp kapanan minimal macOS klavye makrosu; Karabiner ile fare tuşu eşleme rehberi dahil.',
     language: 'Python',
@@ -200,18 +287,27 @@ const PROJECTS = [
     tags: ['Python', 'pynput', 'macOS'],
     github: gh('pynput-macos-macro'),
     images: [
-      { src: '/projects/pynput-macos-macro/session.svg', caption: 'Terminal session — F8 toggling the macro loop on and off' },
-      { src: '/projects/pynput-macos-macro/config.svg', caption: 'Configuration block — key sequence and delay at the top of the script' },
-      { src: '/projects/pynput-macos-macro/karabiner.svg', caption: 'Karabiner-Elements rule mapping mouse side buttons to F8' },
+      { src: '/projects/pynput-macos-macro/session.svg', caption: 'Terminal session — F8 toggling the macro loop on and off', captionTr: 'Terminal oturumu — F8, makro döngüsünü açıp kapatıyor' },
+      { src: '/projects/pynput-macos-macro/config.svg', caption: 'Configuration block — key sequence and delay at the top of the script', captionTr: 'Yapılandırma bloğu — betiğin başında tuş dizisi ve gecikme' },
+      { src: '/projects/pynput-macos-macro/karabiner.svg', caption: 'Karabiner-Elements rule mapping mouse side buttons to F8', captionTr: 'Fare yan tuşlarını F8’e eşleyen Karabiner-Elements kuralı' },
     ],
     overview:
       'A small automation utility: press F8 and it replays a configurable key sequence (2 → 3 → 4 by default) in a loop until toggled off. Written for repetitive input tasks on macOS, where global input hooks require Accessibility permissions and mouse side buttons are invisible to Python — both of which the README documents workarounds for.',
+    overviewTr:
+      'Küçük bir otomasyon aracı: F8’e bastığında, yapılandırılabilir bir tuş dizisini (varsayılan olarak 2 → 3 → 4) kapatılana dek döngü hâlinde tekrarlar. macOS’teki tekrarlı girdi görevleri için yazıldı; bu platformda genel girdi kancaları Erişilebilirlik izni gerektirir ve fare yan tuşları Python tarafından görülmez — README her iki sorunun da çözüm yollarını belgeler.',
     highlights: [
       'Single-key toggle (F8) to start and stop the macro loop',
       'Configurable key sequence and per-key delay at the top of the script',
       'Clean thread shutdown via threading.Event — no orphaned loops',
       'Step-by-step macOS Accessibility permission setup guide',
       'Karabiner-Elements rule (JSON included) to map mouse side buttons to F8, since pynput cannot see button4/button5 on macOS',
+    ],
+    highlightsTr: [
+      'Makro döngüsünü başlatıp durdurmak için tek tuş (F8)',
+      'Betiğin başında yapılandırılabilir tuş dizisi ve tuş başına gecikme',
+      'threading.Event ile temiz iş parçacığı kapanışı — başıboş döngü kalmaz',
+      'Adım adım macOS Erişilebilirlik izni kurulum rehberi',
+      'pynput macOS’te button4/button5’i göremediği için fare yan tuşlarını F8’e eşleyen Karabiner-Elements kuralı (JSON dahil)',
     ],
     stack: [
       { label: 'Languages', items: ['Python 3'] },
@@ -221,9 +317,17 @@ const PROJECTS = [
     architecture: [
       'A 51-line script with two threads. A pynput keyboard.Listener runs on the main thread watching for the toggle key; toggling on spawns a daemon thread that replays the key sequence through keyboard.Controller with a configurable delay, and toggling off sets a threading.Event that the loop checks between every key press, so it stops immediately and never leaves a key half-pressed.',
     ],
+    architectureTr: [
+      'İki iş parçacıklı, 51 satırlık bir betik. Ana iş parçacığında pynput keyboard.Listener açma/kapama tuşunu izler; makro açıldığında, tuş dizisini keyboard.Controller üzerinden yapılandırılabilir gecikmeyle tekrarlayan bir daemon iş parçacığı başlatılır. Kapatıldığında ise döngünün her tuş basımı arasında kontrol ettiği bir threading.Event işaretlenir; böylece döngü anında durur ve hiçbir tuş yarım basılı kalmaz.',
+    ],
     results: [
       { label: 'Codebase', value: '51 lines' },
       { label: 'Dependencies', value: '1 (pynput)' },
+      { label: 'Platform', value: 'macOS' },
+    ],
+    resultsTr: [
+      { label: 'Kod tabanı', value: '51 satır' },
+      { label: 'Bağımlılık', value: '1 (pynput)' },
       { label: 'Platform', value: 'macOS' },
     ],
   },
@@ -233,6 +337,7 @@ const PROJECTS = [
     codename: 'Polyglot',
     title: 'Turkish–English NMT',
     subtitle: 'Fine-tuning MarianMT for Turkish → English machine translation',
+    subtitleTr: 'Türkçe → İngilizce makine çevirisi için MarianMT ince ayarı',
     oneLiner: 'MarianMT fine-tuned on 523K Tatoeba sentence pairs — BLEU improved from ~36 to ~43.',
     oneLinerTr: '523 bin Tatoeba cümle çifti ile ince ayarlanmış MarianMT — BLEU ~36’dan ~43’e yükseldi.',
     language: 'Python',
@@ -241,17 +346,26 @@ const PROJECTS = [
     tags: ['Python', 'PyTorch', 'Transformers', 'NLP'],
     github: gh('turkish-english-nmt'),
     images: [
-      { src: '/projects/turkish-english-nmt/training-curves.png', caption: 'Training loss and BLEU curves across 3 epochs' },
-      { src: '/projects/turkish-english-nmt/bleu.png', caption: 'Baseline vs fine-tuned BLEU comparison' },
+      { src: '/projects/turkish-english-nmt/training-curves.png', caption: 'Training loss and BLEU curves across 3 epochs', captionTr: '3 epoch boyunca eğitim kaybı ve BLEU eğrileri' },
+      { src: '/projects/turkish-english-nmt/bleu.png', caption: 'Baseline vs fine-tuned BLEU comparison', captionTr: 'Taban model ile ince ayarlı modelin BLEU karşılaştırması' },
     ],
     overview:
       'A neural machine translation project that fine-tunes Helsinki-NLP’s opus-mt-tr-en (MarianMT) on the ManyThings/Tatoeba Turkish–English parallel corpus. The repository covers the full workflow — data cleaning, tokenizer comparison, training, BLEU evaluation, and report generation — runnable both locally and end-to-end on a free Colab T4 GPU.',
+    overviewTr:
+      'Helsinki-NLP’nin opus-mt-tr-en (MarianMT) modelini ManyThings/Tatoeba Türkçe–İngilizce paralel derlemi üzerinde ince ayarlayan bir nöral makine çevirisi projesi. Depo, iş akışının tamamını kapsar — veri temizleme, tokenizer karşılaştırması, eğitim, BLEU değerlendirmesi ve rapor üretimi — hem yerelde hem de ücretsiz bir Colab T4 GPU’sunda uçtan uca çalıştırılabilir.',
     highlights: [
       'Complete numbered pipeline: cleaning/splitting → tokenization study → training → evaluation → charts',
       'Tokenization comparison script contrasting character, word, byte, and BPE approaches',
       'Fine-tuning with Hugging Face Trainer: fp16, effective batch 128, lr 5e-5, 3 epochs',
       'SacreBLEU evaluation plus an interactive translation demo with beam search',
       'Single-file colab.py that reproduces the whole experiment on a T4 GPU in ~60–90 minutes',
+    ],
+    highlightsTr: [
+      'Eksiksiz numaralı işlem hattı: temizleme/bölme → tokenizasyon çalışması → eğitim → değerlendirme → grafikler',
+      'Karakter, kelime, bayt ve BPE yaklaşımlarını karşılaştıran tokenizasyon betiği',
+      'Hugging Face Trainer ile ince ayar: fp16, efektif batch 128, öğrenme oranı 5e-5, 3 epoch',
+      'SacreBLEU değerlendirmesi ve ışın aramalı (beam search) etkileşimli çeviri demosu',
+      'Deneyin tamamını T4 GPU’da ~60–90 dakikada yeniden üreten tek dosyalık colab.py',
     ],
     stack: [
       { label: 'Languages', items: ['Python 3.13'] },
@@ -264,12 +378,23 @@ const PROJECTS = [
       'The pipeline is split into numbered scripts. 01_data_cleaning.py normalizes the raw Tatoeba dump and produces an 80/10/10 train/validation/test split; 02_tokenization.py compares character, word, byte, and BPE tokenization on the corpus; 04_training.py fine-tunes MarianMT with the Hugging Face Trainer; 05_evaluation_and_inference.py computes BLEU with SacreBLEU and provides interactive translation using 4-beam search; 06_report_generator.py renders the training-curve and comparison charts.',
       'The model is a Transformer encoder-decoder (MarianMT) with a shared SentencePiece BPE vocabulary of 62,389 tokens, trained at max sequence length 128 in fp16. colab.py packages the same flow as one script for Colab, reading data from Drive and saving the fine-tuned checkpoint back to it.',
     ],
+    architectureTr: [
+      'İşlem hattı numaralı betiklere bölünmüştür. 01_data_cleaning.py ham Tatoeba dökümünü normalleştirir ve %80/%10/%10 eğitim/doğrulama/test bölmesi üretir; 02_tokenization.py derlem üzerinde karakter, kelime, bayt ve BPE tokenizasyonunu karşılaştırır; 04_training.py MarianMT’yi Hugging Face Trainer ile ince ayarlar; 05_evaluation_and_inference.py SacreBLEU ile BLEU hesaplar ve 4 ışınlı arama kullanan etkileşimli çeviri sunar; 06_report_generator.py eğitim eğrisi ve karşılaştırma grafiklerini üretir.',
+      'Model, 62.389 tokenlık ortak bir SentencePiece BPE sözlüğüne sahip Transformer kodlayıcı-kod çözücüdür (MarianMT); en fazla 128 dizi uzunluğunda, fp16 ile eğitilmiştir. colab.py aynı akışı Colab için tek betikte paketler; veriyi Drive’dan okur ve ince ayarlı modeli yine oraya kaydeder.',
+    ],
     results: [
       { label: 'Dataset', value: '522,975 sentence pairs (418,380 train)' },
       { label: 'BLEU', value: '~36 → ~43 (+7)' },
       { label: '1-gram / 2-gram precision', value: '+7% / +8%' },
       { label: 'Model size', value: '76.6M parameters' },
       { label: 'Training time', value: '~60–90 min on a T4' },
+    ],
+    resultsTr: [
+      { label: 'Veri kümesi', value: '522.975 cümle çifti (418.380 eğitim)' },
+      { label: 'BLEU', value: '~36 → ~43 (+7)' },
+      { label: '1-gram / 2-gram kesinliği', value: '+%7 / +%8' },
+      { label: 'Model boyutu', value: '76,6 milyon parametre' },
+      { label: 'Eğitim süresi', value: 'T4 üzerinde ~60–90 dk' },
     ],
   },
   {
@@ -278,6 +403,7 @@ const PROJECTS = [
     codename: 'The Sentry',
     title: 'Face Detection Pipeline',
     subtitle: 'Two-stage detect-and-verify face detection on MediaPipe BlazeFace',
+    subtitleTr: 'MediaPipe BlazeFace üzerine kurulu iki aşamalı tespit et-doğrula yüz tespiti',
     oneLiner: 'Two-stage BlazeFace pipeline benchmarked on 140,000 images — zero failures, ~11 ms per image on CPU.',
     oneLinerTr: 'İki aşamalı BlazeFace hattı, 140.000 görselde test edildi — sıfır hata, CPU’da görsel başına ~11 ms.',
     language: 'Python',
@@ -286,16 +412,18 @@ const PROJECTS = [
     tags: ['Python', 'MediaPipe', 'OpenCV', 'CV'],
     github: gh('face-detection-pipeline'),
     images: [
-      { src: '/projects/face-detection-pipeline/multi-face-detected.jpg', caption: 'Multiple faces detected and verified in a single pass' },
-      { src: '/projects/face-detection-pipeline/portrait-input.jpg', caption: 'Input image before detection' },
-      { src: '/projects/face-detection-pipeline/portrait-detected.jpg', caption: 'Same image after the two-stage pipeline — box refined by zoom-in verification' },
-      { src: '/projects/face-detection-pipeline/small-face-detected.jpg', caption: 'Tiny face recovered by the regional candidate search' },
-      { src: '/projects/face-detection-pipeline/noisy-background-detected.jpg', caption: 'Busy background — no false positives after re-verification' },
-      { src: '/projects/face-detection-pipeline/night-crowd-detected.jpg', caption: 'Low-light crowd scene handled on CPU' },
-      { src: '/projects/face-detection-pipeline/benchmark.png', caption: '140k-image benchmark summary' },
+      { src: '/projects/face-detection-pipeline/multi-face-detected.jpg', caption: 'Multiple faces detected and verified in a single pass', captionTr: 'Tek geçişte tespit edilip doğrulanan birden fazla yüz' },
+      { src: '/projects/face-detection-pipeline/portrait-input.jpg', caption: 'Input image before detection', captionTr: 'Tespit öncesi girdi görseli' },
+      { src: '/projects/face-detection-pipeline/portrait-detected.jpg', caption: 'Same image after the two-stage pipeline — box refined by zoom-in verification', captionTr: 'Aynı görsel iki aşamalı hattan sonra — kutu, yakınlaştırmalı doğrulamayla iyileştirilmiş' },
+      { src: '/projects/face-detection-pipeline/small-face-detected.jpg', caption: 'Tiny face recovered by the regional candidate search', captionTr: 'Bölgesel aday aramasıyla yakalanan minik yüz' },
+      { src: '/projects/face-detection-pipeline/noisy-background-detected.jpg', caption: 'Busy background — no false positives after re-verification', captionTr: 'Karmaşık arka plan — yeniden doğrulama sonrası hatalı tespit yok' },
+      { src: '/projects/face-detection-pipeline/night-crowd-detected.jpg', caption: 'Low-light crowd scene handled on CPU', captionTr: 'CPU’da işlenen düşük ışıklı kalabalık sahnesi' },
+      { src: '/projects/face-detection-pipeline/benchmark.png', caption: '140k-image benchmark summary', captionTr: '140 bin görsellik performans testi özeti' },
     ],
     overview:
       'Off-the-shelf short-range face detectors miss small faces and hallucinate faces in blurred textures — and no single confidence threshold fixes both. This project wraps MediaPipe’s BlazeFace in a two-stage detect-and-verify pipeline: candidates are collected permissively, then each is zoomed into and re-detected. Real faces re-score above 0.90 when enlarged; false positives fail re-detection. Same model, same dependencies, measurably better accuracy.',
+    overviewTr:
+      'Hazır kısa menzilli yüz dedektörleri küçük yüzleri kaçırır, bulanık dokularda ise olmayan yüzler görür — ve tek bir güven eşiği iki sorunu birden çözmez. Bu proje, MediaPipe’ın BlazeFace modelini iki aşamalı bir tespit et-doğrula hattıyla sarar: adaylar önce esnek bir eşikle toplanır, ardından her biri yakınlaştırılıp yeniden tespit edilir. Gerçek yüzler büyütüldüğünde 0,90’ın üzerinde puan alır; hatalı tespitler ise yeniden doğrulamayı geçemez. Aynı model, aynı bağımlılıklar, ölçülebilir biçimde daha iyi doğruluk.',
     highlights: [
       'Two-stage detection: low-threshold candidate search, then zoom-in re-verification of every candidate',
       'Batch processing of whole folders with annotated output copies',
@@ -303,6 +431,14 @@ const PROJECTS = [
       'Human-review queue: zero-face, low-confidence, and many-face images routed to review/ with full metadata',
       'Corrupt or unreadable images are skipped with a warning — a batch never crashes',
       'CPU-only: no GPU, no cloud, and the 230 KB model ships inside the repo',
+    ],
+    highlightsTr: [
+      'İki aşamalı tespit: düşük eşikli aday araması, ardından her adayın yakınlaştırılarak yeniden doğrulanması',
+      'Klasörlerin toplu işlenmesi ve işaretlenmiş çıktı kopyaları',
+      'Görsel başına CSV kaydı ve kesinti sonrası güvenli devam özelliğiyle 140.000 görsellik Kaggle performans testi',
+      'İnsan inceleme kuyruğu: yüz bulunamayan, düşük güvenli ve çok yüzlü görseller tüm meta verileriyle review/ klasörüne yönlendirilir',
+      'Bozuk ya da okunamayan görseller uyarı verilerek atlanır — toplu işlem asla çökmez',
+      'Yalnızca CPU: GPU yok, bulut yok; 230 KB’lik model depoyla birlikte gelir',
     ],
     stack: [
       { label: 'Languages', items: ['Python 3.12+'] },
@@ -313,12 +449,23 @@ const PROJECTS = [
       'Stage 1 runs the detector at a permissive 0.30 threshold over the full image plus its top and bottom halves — halving the frame makes small faces proportionally larger to the model. Stage 2 zooms into each candidate region and re-detects at a 0.65 threshold, accepting only faces centered in the crop and refining the box to the zoomed detection. Overlapping detections are deduplicated by IoU ≥ 0.4, keeping the higher score.',
       'detect.py implements the pipeline and box drawing; main.py batch-processes the dataset/ folder; evaluate.py drives the 140k benchmark with per-image CSV logging, resumable runs, and review-queue sampling.',
     ],
+    architectureTr: [
+      '1. aşama, dedektörü esnek bir 0,30 eşiğiyle görselin tamamı ile üst ve alt yarıları üzerinde çalıştırır — kareyi ikiye bölmek, küçük yüzleri modele oranla büyütür. 2. aşama her aday bölgeye yakınlaşır ve 0,65 eşiğiyle yeniden tespit yapar; yalnızca kırpmanın ortasındaki yüzleri kabul eder ve kutuyu yakınlaştırılmış tespite göre iyileştirir. Çakışan tespitler IoU ≥ 0,4 ölçütüyle tekilleştirilir; yüksek puanlı olan tutulur.',
+      'detect.py hattı ve kutu çizimini uygular; main.py dataset/ klasörünü toplu işler; evaluate.py ise görsel başına CSV kaydı, devam ettirilebilir çalıştırmalar ve inceleme kuyruğu örneklemesiyle 140 binlik performans testini yürütür.',
+    ],
     results: [
       { label: 'Images processed', value: '140,000 — 0 failures' },
       { label: 'Speed', value: '~11 ms/image, single-threaded Apple M3 CPU' },
       { label: 'Total runtime', value: '25 m 17 s' },
       { label: 'Flagged for human review', value: '0.26%' },
       { label: 'Faces detected', value: '140,836 (1.006 avg/image)' },
+    ],
+    resultsTr: [
+      { label: 'İşlenen görsel', value: '140.000 — 0 hata' },
+      { label: 'Hız', value: 'Görsel başına ~11 ms, tek iş parçacıklı Apple M3 CPU' },
+      { label: 'Toplam süre', value: '25 dk 17 sn' },
+      { label: 'İncelemeye ayrılan', value: '%0,26' },
+      { label: 'Tespit edilen yüz', value: '140.836 (görsel başına ort. 1,006)' },
     ],
   },
   {
@@ -327,6 +474,7 @@ const PROJECTS = [
     codename: 'The Auditor',
     title: 'Writing Analyzer',
     subtitle: 'Bilingual probabilistic writing-quality analysis for English and Turkish',
+    subtitleTr: 'İngilizce ve Türkçe için iki dilli, olasılıksal yazı kalitesi analizi',
     oneLiner: 'Six-signal stylometric analyzer producing a 0–100 academic risk score, with native English and Turkish pipelines.',
     oneLinerTr: 'Altı sinyalli stilometrik analiz ile 0–100 akademik risk skoru; İngilizce ve Türkçe için yerel işlem hattı.',
     language: 'Python',
@@ -335,14 +483,16 @@ const PROJECTS = [
     tags: ['Python', 'FastAPI', 'NLP', 'Streamlit'],
     github: gh('writing-analyzer'),
     images: [
-      { src: '/projects/writing-analyzer/input.png', caption: 'Text input on the Streamlit frontend' },
-      { src: '/projects/writing-analyzer/results.png', caption: 'Analysis results — composite risk score, tier, and confidence' },
-      { src: '/projects/writing-analyzer/writing-profile.png', caption: 'Six-axis writing profile radar' },
-      { src: '/projects/writing-analyzer/components.png', caption: 'Per-component contribution scores behind the verdict' },
-      { src: '/projects/writing-analyzer/api-docs.png', caption: 'Auto-generated OpenAPI docs for the analysis API' },
+      { src: '/projects/writing-analyzer/input.png', caption: 'Text input on the Streamlit frontend', captionTr: 'Streamlit arayüzünde metin girişi' },
+      { src: '/projects/writing-analyzer/results.png', caption: 'Analysis results — composite risk score, tier, and confidence', captionTr: 'Analiz sonuçları — bileşik risk skoru, seviye ve güven değeri' },
+      { src: '/projects/writing-analyzer/writing-profile.png', caption: 'Six-axis writing profile radar', captionTr: 'Altı eksenli yazı profili radarı' },
+      { src: '/projects/writing-analyzer/components.png', caption: 'Per-component contribution scores behind the verdict', captionTr: 'Kararın arkasındaki bileşen bazlı katkı puanları' },
+      { src: '/projects/writing-analyzer/api-docs.png', caption: 'Auto-generated OpenAPI docs for the analysis API', captionTr: 'Analiz API’si için otomatik üretilen OpenAPI dokümantasyonu' },
     ],
     overview:
       'A writing-quality analysis platform that scores text across six independent linguistic dimensions and aggregates them into a composite Academic Risk Score from 0 to 100. It does not claim AI authorship with certainty — it surfaces evidence-based signals statistically associated with formulaic, repetitive, or low-variance prose. Both English and Turkish are supported natively, including Turkish morphological analysis, for academic integrity support and stylometric research.',
+    overviewTr:
+      'Metni altı bağımsız dilbilimsel boyutta puanlayan ve bunları 0–100 arası bileşik bir Akademik Risk Skoru’nda birleştiren bir yazı kalitesi analiz platformu. Yapay zekâ yazarlığını kesin olarak iddia etmez — kalıplaşmış, tekrarlı ya da düşük çeşitlilikteki metinlerle istatistiksel olarak ilişkili, kanıta dayalı sinyalleri ortaya koyar. Türkçe biçimbilimsel analiz dahil olmak üzere hem İngilizce hem Türkçe yerel olarak desteklenir; akademik dürüstlük desteği ve stilometrik araştırmalar için tasarlandı.',
     highlights: [
       'Six independent analyzers: repetition, transition-word overuse, burstiness (sentence rhythm), readability, cliché density, and lexical poverty',
       'Weighted composite scoring with four risk tiers, a confidence estimate, and per-component contribution scores for transparent verdicts',
@@ -350,6 +500,14 @@ const PROJECTS = [
       'FastAPI REST API with Pydantic v2 schemas plus a Streamlit frontend',
       'Benchmark harness comparing human-written vs LLM-generated samples per signal',
       'Unit and integration tests, Ruff-enforced style, pre-commit hooks',
+    ],
+    highlightsTr: [
+      'Altı bağımsız analizci: tekrar, geçiş kelimesi aşırı kullanımı, cümle ritmi (burstiness), okunabilirlik, klişe yoğunluğu ve kelime fakirliği',
+      'Dört risk seviyesi, güven tahmini ve şeffaf kararlar için bileşen bazlı katkı puanlarıyla ağırlıklı bileşik puanlama',
+      'Tamamen iki dilli: otomatik dil algılama, ayrı durak kelime kümeleri, Türkçe için Zeyrek biçimbilimi, İngilizce için Porter kök bulma',
+      'Pydantic v2 şemalı FastAPI REST API ve Streamlit arayüzü',
+      'İnsan yazımı ile LLM üretimi örnekleri sinyal bazında karşılaştıran test düzeneği',
+      'Birim ve entegrasyon testleri, Ruff ile stil denetimi, pre-commit kancaları',
     ],
     stack: [
       { label: 'Languages', items: ['Python 3.13'] },
@@ -361,12 +519,23 @@ const PROJECTS = [
       'Clean architecture with one class per signal: six analyzer modules operate independently on a shared tokenization, produced by a TokenizerService with a LanguageDetector choosing the English or Turkish pipeline. An AnalysisService orchestrates the analyzers and hands their outputs to an AcademicRiskScorer, which applies configurable ScoringWeights and builds per-component contribution scores. Dependencies are wired through lru_cache singletons.',
       'The scoring model is a weighted sum — repetition 0.25, burstiness 0.20, transitions 0.15, lexical poverty 0.15, cliché 0.15, readability 0.10 — mapped to four risk tiers, with confidence saturating at 300 words. The API exposes GET /health and POST /api/v1/analyze; the Streamlit frontend consumes it through a thin api_client.',
     ],
+    architectureTr: [
+      'Sinyal başına bir sınıf içeren temiz mimari: altı analiz modülü, LanguageDetector’ın İngilizce ya da Türkçe hattı seçtiği TokenizerService tarafından üretilen ortak tokenizasyon üzerinde bağımsız çalışır. AnalysisService analizcileri yönetir ve çıktılarını, yapılandırılabilir ScoringWeights uygulayan ve bileşen bazlı katkı puanları üreten AcademicRiskScorer’a iletir. Bağımlılıklar lru_cache tekilleriyle bağlanır.',
+      'Puanlama modeli ağırlıklı bir toplamdır — tekrar 0,25, ritim 0,20, geçişler 0,15, kelime fakirliği 0,15, klişe 0,15, okunabilirlik 0,10 — dört risk seviyesine eşlenir; güven değeri 300 kelimede doyuma ulaşır. API, GET /health ve POST /api/v1/analyze uç noktalarını sunar; Streamlit arayüzü bunu ince bir api_client üzerinden kullanır.',
+    ],
     results: [
       { label: 'Signals analyzed', value: '6 orthogonal dimensions' },
       { label: 'Output', value: 'Risk score 0–100, 4 tiers, per-component contributions' },
       { label: 'Languages', value: 'English + Turkish, auto-detected' },
       { label: 'Interfaces', value: 'REST API + Streamlit UI' },
       { label: 'Quality gates', value: 'Unit + integration tests, Ruff, pre-commit' },
+    ],
+    resultsTr: [
+      { label: 'Analiz edilen sinyal', value: '6 bağımsız boyut' },
+      { label: 'Çıktı', value: '0–100 risk skoru, 4 seviye, bileşen bazlı katkılar' },
+      { label: 'Diller', value: 'İngilizce + Türkçe, otomatik algılama' },
+      { label: 'Arayüzler', value: 'REST API + Streamlit arayüzü' },
+      { label: 'Kalite kontrolleri', value: 'Birim + entegrasyon testleri, Ruff, pre-commit' },
     ],
   },
   {
@@ -375,6 +544,7 @@ const PROJECTS = [
     codename: 'Vitals',
     title: 'PHQ-9 Depression Analysis',
     subtitle: 'Depression screening pipeline: Google Forms, clinical scoring, ML, and automated reports',
+    subtitleTr: 'Depresyon taraması hattı: Google Forms, klinik puanlama, makine öğrenmesi ve otomatik raporlar',
     oneLiner: 'End-to-end PHQ-9 screening system — Google Forms collection, clinical scoring, six ML models, and automated dashboards.',
     oneLinerTr: 'Uçtan uca PHQ-9 tarama sistemi — Google Forms ile veri toplama, klinik puanlama, altı ML modeli ve otomatik raporlar.',
     language: 'Python',
@@ -383,16 +553,18 @@ const PROJECTS = [
     tags: ['Python', 'scikit-learn', 'Plotly', 'Google API'],
     github: gh('depression-phq9-analysis'),
     images: [
-      { src: '/projects/depression-phq9-analysis/dashboard.png', caption: 'Interactive Plotly dashboard — aggregate charts (demo data)' },
-      { src: '/projects/depression-phq9-analysis/stats.png', caption: 'Statistical analysis overview' },
-      { src: '/projects/depression-phq9-analysis/scores.png', caption: 'PHQ-9 score distribution and severity classification' },
-      { src: '/projects/depression-phq9-analysis/radar.png', caption: 'Participant profile radar chart' },
-      { src: '/projects/depression-phq9-analysis/model-comparison.png', caption: 'Six ML models compared on the demo cohort' },
-      { src: '/projects/depression-phq9-analysis/correlation-heatmap.png', caption: 'Question-level correlation heatmap' },
-      { src: '/projects/depression-phq9-analysis/score-histogram.png', caption: 'Score histogram with severity thresholds' },
+      { src: '/projects/depression-phq9-analysis/dashboard.png', caption: 'Interactive Plotly dashboard — aggregate charts (demo data)', captionTr: 'Etkileşimli Plotly panosu — toplu grafikler (demo verisi)' },
+      { src: '/projects/depression-phq9-analysis/stats.png', caption: 'Statistical analysis overview', captionTr: 'İstatistiksel analiz özeti' },
+      { src: '/projects/depression-phq9-analysis/scores.png', caption: 'PHQ-9 score distribution and severity classification', captionTr: 'PHQ-9 skor dağılımı ve şiddet sınıflandırması' },
+      { src: '/projects/depression-phq9-analysis/radar.png', caption: 'Participant profile radar chart', captionTr: 'Katılımcı profili radar grafiği' },
+      { src: '/projects/depression-phq9-analysis/model-comparison.png', caption: 'Six ML models compared on the demo cohort', captionTr: 'Demo grubu üzerinde karşılaştırılan altı makine öğrenmesi modeli' },
+      { src: '/projects/depression-phq9-analysis/correlation-heatmap.png', caption: 'Question-level correlation heatmap', captionTr: 'Soru bazlı korelasyon ısı haritası' },
+      { src: '/projects/depression-phq9-analysis/score-histogram.png', caption: 'Score histogram with severity thresholds', captionTr: 'Şiddet eşikleriyle skor histogramı' },
     ],
     overview:
       'A depression screening and analysis system built around an extended 15-question PHQ-9 scale. It creates and distributes the questionnaire through Google Forms, fetches responses via API, performs clinical scoring with severity classification, runs six machine-learning models, applies formal statistical testing, and generates interactive dashboards plus per-participant PDF reports. Built for pilot-study research settings; strictly educational and research use.',
+    overviewTr:
+      'Genişletilmiş 15 soruluk PHQ-9 ölçeği etrafında kurulmuş bir depresyon tarama ve analiz sistemi. Anketi Google Forms üzerinden oluşturup dağıtır, yanıtları API ile çeker, şiddet sınıflandırmalı klinik puanlama yapar, altı makine öğrenmesi modeli çalıştırır, biçimsel istatistiksel testler uygular; etkileşimli panolar ve katılımcı başına PDF raporları üretir. Pilot çalışma niteliğindeki araştırma ortamları için geliştirildi; kullanım amacı kesinlikle eğitim ve araştırmadır.',
     highlights: [
       'Google Forms integration: programmatic form creation and API response fetching',
       'Clinical scoring engine: total score, severity tier, depression percentage, and a flagged critical question for self-harm ideation',
@@ -400,6 +572,14 @@ const PROJECTS = [
       'Statistical analysis: 95% confidence intervals, Shapiro-Wilk normality, Pearson & Spearman correlation, t-test / Mann-Whitney U group comparison',
       'Interactive dark-themed Plotly dashboard with 10+ visualizations, plus summary and individual PDF reports',
       'Demo mode generating 30 synthetic participants to run the full pipeline without any Google credentials',
+    ],
+    highlightsTr: [
+      'Google Forms entegrasyonu: programatik form oluşturma ve API ile yanıt çekme',
+      'Klinik puanlama motoru: toplam skor, şiddet seviyesi, depresyon yüzdesi ve kendine zarar verme düşüncesi için işaretlenen kritik soru',
+      'Altı makine öğrenmesi modeli — K-Means, Random Forest, Lojistik Regresyon, SVM, Karar Ağacı, Naive Bayes — %60 klinik / %40 ML ağırlıklı bir toplulukta (ensemble) birleştirildi',
+      'İstatistiksel analiz: %95 güven aralıkları, Shapiro-Wilk normallik testi, Pearson ve Spearman korelasyonu, t-testi / Mann-Whitney U grup karşılaştırması',
+      '10’dan fazla görselleştirme içeren koyu temalı etkileşimli Plotly panosu; özet ve bireysel PDF raporları',
+      'Google kimlik bilgisi gerektirmeden tüm hattı çalıştıran, 30 sentetik katılımcı üreten demo modu',
     ],
     stack: [
       { label: 'Languages', items: ['Python 3'] },
@@ -410,12 +590,23 @@ const PROJECTS = [
       'main.py is a CLI with four modes: --demo (synthetic pilot run), --anket-olustur (create the Google Form), --sonuclar (fetch responses and analyze), and --full-pipeline (drive everything from a Google Sheet). The source is split by concern: google_forms/ handles form creation and response fetching, analysis/ contains the clinical PHQ-9 scoring engine, the six-model ML module with stratified 5-fold cross-validation, and the statistical test suite, while reporting/ renders the Plotly dashboard, static charts, and PDF reports.',
       'Configuration lives centrally in config/settings.py — PHQ-9 constants, severity thresholds, and the 60/40 clinical/ML ensemble weighting — so the scoring rules are auditable in one place.',
     ],
+    architectureTr: [
+      'main.py dört modlu bir komut satırı aracıdır: --demo (sentetik pilot çalışma), --anket-olustur (Google Form oluşturma), --sonuclar (yanıtları çekip analiz etme) ve --full-pipeline (her şeyi bir Google Sheet üzerinden yürütme). Kaynak kod sorumluluklara göre ayrılmıştır: google_forms/ form oluşturma ve yanıt çekmeyi üstlenir; analysis/ klinik PHQ-9 puanlama motorunu, katmanlı 5 katlı çapraz doğrulamalı altı modelli ML modülünü ve istatistiksel test paketini içerir; reporting/ ise Plotly panosunu, statik grafikleri ve PDF raporlarını üretir.',
+      'Yapılandırma merkezî olarak config/settings.py içindedir — PHQ-9 sabitleri, şiddet eşikleri ve 60/40 klinik/ML topluluk ağırlığı — böylece puanlama kuralları tek bir yerden denetlenebilir.',
+    ],
     results: [
       { label: 'Scale', value: '15-question extended PHQ-9, max score 45' },
       { label: 'Severity tiers', value: '5 (Minimal → Severe)' },
       { label: 'ML models', value: '6 + weighted ensemble' },
       { label: 'Validation', value: 'Stratified 5-fold cross-validation' },
       { label: 'Outputs', value: 'HTML dashboard · summary PDF · per-participant PDFs · PNG charts' },
+    ],
+    resultsTr: [
+      { label: 'Ölçek', value: '15 soruluk genişletilmiş PHQ-9, en yüksek skor 45' },
+      { label: 'Şiddet seviyesi', value: '5 (Minimal → Şiddetli)' },
+      { label: 'ML modeli', value: '6 + ağırlıklı topluluk' },
+      { label: 'Doğrulama', value: 'Katmanlı 5 katlı çapraz doğrulama' },
+      { label: 'Çıktılar', value: 'HTML pano · özet PDF · katılımcı başına PDF · PNG grafikler' },
     ],
   },
   {
@@ -424,6 +615,7 @@ const PROJECTS = [
     codename: 'Market Recon',
     title: 'Find The Best',
     subtitle: 'Shopping intelligence platform with AI-powered product analysis',
+    subtitleTr: 'Yapay zekâ destekli ürün analizi sunan alışveriş zekâsı platformu',
     oneLiner: 'Price comparison across Turkish and international marketplaces with Gemini-powered analysis. Built for BTK Hackathon 2026.',
     oneLinerTr: 'Türk ve uluslararası pazaryerlerinde fiyat karşılaştırma, Gemini destekli analiz. BTK Hackathon 2026 için geliştirildi.',
     language: 'TypeScript',
@@ -432,15 +624,17 @@ const PROJECTS = [
     tags: ['Next.js', 'FastAPI', 'Gemini', 'PostgreSQL'],
     github: gh('find-the-best'),
     images: [
-      { src: '/projects/find-the-best/home.png', caption: 'Home page' },
-      { src: '/projects/find-the-best/search.jpg', caption: 'Multi-store search results with price comparison' },
-      { src: '/projects/find-the-best/compare.png', caption: 'Side-by-side product comparison' },
-      { src: '/projects/find-the-best/ai.png', caption: 'Gemini-powered product analysis' },
-      { src: '/projects/find-the-best/analysis.png', caption: 'Review analysis with fake-review percentage and trust score' },
-      { src: '/projects/find-the-best/cart.png', caption: 'Persistent shopping cart' },
+      { src: '/projects/find-the-best/home.png', caption: 'Home page', captionTr: 'Ana sayfa' },
+      { src: '/projects/find-the-best/search.jpg', caption: 'Multi-store search results with price comparison', captionTr: 'Fiyat karşılaştırmalı çoklu mağaza arama sonuçları' },
+      { src: '/projects/find-the-best/compare.png', caption: 'Side-by-side product comparison', captionTr: 'Yan yana ürün karşılaştırması' },
+      { src: '/projects/find-the-best/ai.png', caption: 'Gemini-powered product analysis', captionTr: 'Gemini destekli ürün analizi' },
+      { src: '/projects/find-the-best/analysis.png', caption: 'Review analysis with fake-review percentage and trust score', captionTr: 'Sahte yorum yüzdesi ve güven skoru içeren yorum analizi' },
+      { src: '/projects/find-the-best/cart.png', caption: 'Persistent shopping cart', captionTr: 'Kalıcı alışveriş sepeti' },
     ],
     overview:
       'A shopping intelligence platform built for the BTK Hackathon May 2026 e-commerce track. It compares prices across Turkish and international marketplaces, flags suspicious reviews, and layers Google Gemini on top for product recommendations, buy-timing advice, and confidence scores — so a buyer sees one trustworthy answer instead of fifty tabs.',
+    overviewTr:
+      'BTK Hackathon Mayıs 2026 e-ticaret kategorisi için geliştirilmiş bir alışveriş zekâsı platformu. Türk ve uluslararası pazaryerlerinde fiyatları karşılaştırır, şüpheli yorumları işaretler; ürün önerileri, alım zamanlaması tavsiyesi ve güven skorları için de üstüne Google Gemini’yi ekler — böylece alıcı, elli sekme yerine tek bir güvenilir cevap görür.',
     highlights: [
       'Multi-store price comparison across marketplaces like Trendyol, Hepsiburada, Amazon, and N11',
       'Gemini-powered analysis: recommendations, buy-timing advice, and confidence scores',
@@ -448,6 +642,14 @@ const PROJECTS = [
       'Side-by-side comparison of up to 4 products with specs, ratings, and trust scores',
       'Persistent shopping cart and color-coded seller trust ratings',
       'Fully bilingual with URL-based locale routing (/en, /tr)',
+    ],
+    highlightsTr: [
+      'Trendyol, Hepsiburada, Amazon ve N11 gibi pazaryerlerinde çoklu mağaza fiyat karşılaştırması',
+      'Gemini destekli analiz: öneriler, alım zamanlaması tavsiyesi ve güven skorları',
+      'Duygu analizi ve sahtelik yüzdesi uyarılarıyla sahte yorum tespiti',
+      'Özellikler, puanlar ve güven skorlarıyla 4 ürüne kadar yan yana karşılaştırma',
+      'Kalıcı alışveriş sepeti ve renk kodlu satıcı güven puanları',
+      'URL tabanlı yerel ayar yönlendirmesiyle (/en, /tr) tamamen iki dilli',
     ],
     stack: [
       { label: 'Languages', items: ['TypeScript', 'Python 3.13'] },
@@ -460,11 +662,21 @@ const PROJECTS = [
       'The frontend is a Next.js App Router application with locale-prefixed routes (/, /search, /compare, /cart) and React contexts for cart and comparison state. The backend is a FastAPI service organized into route modules, service-layer business logic (search, AI analysis, scraper management), and 21 scaffolded store-scraper modules built on httpx with tenacity retry policies.',
       'PostgreSQL stores products and categories with Alembic migrations; Redis handles caching. The Gemini integration is isolated in its own service and the platform degrades gracefully when no API key is configured. Both halves run under Docker Compose.',
     ],
+    architectureTr: [
+      'Ön yüz; yerel ayar önekli rotalara (/, /search, /compare, /cart) ve sepet ile karşılaştırma durumu için React context’lerine sahip bir Next.js App Router uygulamasıdır. Arka uç ise rota modülleri, servis katmanı iş mantığı (arama, yapay zekâ analizi, kazıyıcı yönetimi) ve httpx ile tenacity yeniden deneme politikaları üzerine kurulu 21 mağaza kazıyıcı modül iskeletinden oluşan bir FastAPI servisidir.',
+      'PostgreSQL, ürünleri ve kategorileri Alembic göçleriyle saklar; önbelleği Redis üstlenir. Gemini entegrasyonu kendi servisinde yalıtılmıştır ve API anahtarı tanımlı olmadığında platform sorunsuz şekilde çalışmayı sürdürür. Her iki taraf da Docker Compose altında çalışır.',
+    ],
     results: [
       { label: 'Context', value: 'BTK Hackathon May 2026 — e-commerce track' },
       { label: 'Store scrapers', value: '21 modules scaffolded' },
       { label: 'Comparison', value: 'Up to 4 products side by side' },
       { label: 'Locales', value: 'Turkish + English, URL-routed' },
+    ],
+    resultsTr: [
+      { label: 'Bağlam', value: 'BTK Hackathon Mayıs 2026 — e-ticaret kategorisi' },
+      { label: 'Mağaza kazıyıcısı', value: '21 modül iskeleti' },
+      { label: 'Karşılaştırma', value: 'Yan yana 4 ürüne kadar' },
+      { label: 'Yerel ayarlar', value: 'Türkçe + İngilizce, URL yönlendirmeli' },
     ],
   },
   {
@@ -473,6 +685,7 @@ const PROJECTS = [
     codename: 'Body Forge',
     title: 'Build Your Target Body',
     subtitle: 'AI-assisted body transformation tracker with goal ETA and coaching',
+    subtitleTr: 'Hedef tahmini ve koçluk sunan, yapay zekâ destekli vücut dönüşüm takipçisi',
     oneLiner: 'Full-stack fitness tracker: weight, nutrition, workouts, progress photos, goal ETA, and a Gemini AI coach — as an installable PWA.',
     oneLinerTr: 'Tam kapsamlı fitness takibi: kilo, beslenme, antrenman, ilerleme fotoğrafları, hedef tahmini ve Gemini AI koç — kurulabilir PWA.',
     language: 'TypeScript',
@@ -481,16 +694,18 @@ const PROJECTS = [
     tags: ['Next.js', 'FastAPI', 'Gemini', 'PWA', 'Docker'],
     github: gh('build-your-target-body'),
     images: [
-      { src: '/projects/build-your-target-body/dashboard.png', caption: 'Analytics dashboard — weight trend, goal progress, ETA' },
-      { src: '/projects/build-your-target-body/weight-tracking.png', caption: 'Daily weight log with trend chart and weekly averages' },
-      { src: '/projects/build-your-target-body/nutrition.png', caption: 'Nutrition tracking — daily macros and 30-day calorie trend' },
-      { src: '/projects/build-your-target-body/workouts.png', caption: 'Workout logging with volume analytics' },
-      { src: '/projects/build-your-target-body/goals.png', caption: 'Goal setup — four modes with progress engine' },
-      { src: '/projects/build-your-target-body/ai-coach.jpg', caption: 'Gemini AI coach answering with full user data as context' },
-      { src: '/projects/build-your-target-body/mobile.png', caption: 'Mobile view — installable PWA' },
+      { src: '/projects/build-your-target-body/dashboard.png', caption: 'Analytics dashboard — weight trend, goal progress, ETA', captionTr: 'Analiz panosu — kilo eğilimi, hedef ilerlemesi, tahmini bitiş' },
+      { src: '/projects/build-your-target-body/weight-tracking.png', caption: 'Daily weight log with trend chart and weekly averages', captionTr: 'Eğilim grafiği ve haftalık ortalamalarla günlük kilo kaydı' },
+      { src: '/projects/build-your-target-body/nutrition.png', caption: 'Nutrition tracking — daily macros and 30-day calorie trend', captionTr: 'Beslenme takibi — günlük makrolar ve 30 günlük kalori eğilimi' },
+      { src: '/projects/build-your-target-body/workouts.png', caption: 'Workout logging with volume analytics', captionTr: 'Hacim analiziyle antrenman kaydı' },
+      { src: '/projects/build-your-target-body/goals.png', caption: 'Goal setup — four modes with progress engine', captionTr: 'Hedef kurulumu — ilerleme motorlu dört mod' },
+      { src: '/projects/build-your-target-body/ai-coach.jpg', caption: 'Gemini AI coach answering with full user data as context', captionTr: 'Tüm kullanıcı verisini bağlam olarak kullanan Gemini yapay zekâ koçu' },
+      { src: '/projects/build-your-target-body/mobile.png', caption: 'Mobile view — installable PWA', captionTr: 'Mobil görünüm — kurulabilir PWA' },
     ],
     overview:
       'A body transformation tracker built for Turkish users with full English support. It tracks weight, body fat, eight body measurements, daily macros, and workouts; visualizes trends; and computes an estimated completion date for the user’s goal. A Gemini-powered coach answers questions with the user’s complete data as context, and the whole app installs as a PWA with offline support.',
+    overviewTr:
+      'Türk kullanıcılar için geliştirilen, tam İngilizce desteğine sahip bir vücut dönüşüm takipçisi. Kilo, vücut yağı, sekiz vücut ölçüsü, günlük makrolar ve antrenmanları takip eder; eğilimleri görselleştirir ve kullanıcının hedefi için tahmini bir tamamlanma tarihi hesaplar. Gemini destekli koç, kullanıcının tüm verisini bağlam olarak kullanarak soruları yanıtlar; uygulamanın tamamı da çevrimdışı destekli bir PWA olarak kurulabilir.',
     highlights: [
       'Four goal modes — weight loss, weight gain, recomposition, muscle gain — with a progress engine, ETA, and consistency score',
       'Daily weight and body-fat logs with trend charts and weekly averages, plus 8 body measurements with per-field trends',
@@ -498,6 +713,14 @@ const PROJECTS = [
       'Progress photo gallery with side-by-side comparison and diff stats',
       'Gemini AI coach with full user context, plus weekly/monthly AI-generated PDF reports',
       'Installable PWA with offline support; production Docker deployment with automated daily backups',
+    ],
+    highlightsTr: [
+      'Dört hedef modu — kilo verme, kilo alma, yeniden şekillenme, kas kazanımı — ilerleme motoru, tahmini bitiş tarihi ve istikrar puanıyla',
+      'Eğilim grafikleri ve haftalık ortalamalarla günlük kilo ve vücut yağı kayıtları; ayrıca alan bazlı eğilimlerle 8 vücut ölçüsü',
+      'Yemek günlüğüyle beslenme takibi (kalori, protein, karbonhidrat, yağ, su) ve hacim analiziyle antrenman kaydı',
+      'Yan yana karşılaştırma ve fark istatistikleriyle ilerleme fotoğrafı galerisi',
+      'Tam kullanıcı bağlamına sahip Gemini yapay zekâ koçu; haftalık/aylık yapay zekâ üretimi PDF raporları',
+      'Çevrimdışı destekli kurulabilir PWA; otomatik günlük yedeklemeli üretim Docker dağıtımı',
     ],
     stack: [
       { label: 'Languages', items: ['TypeScript', 'Python'] },
@@ -510,12 +733,23 @@ const PROJECTS = [
       'A three-service Docker Compose stack: a Next.js frontend (PWA with service worker and offline page), a FastAPI backend with JWT authentication and Alembic-managed PostgreSQL schema, and the database itself, plus a persisted uploads volume for progress photos. Code is baked into images at build time, with separate dev and production compose files — production runs multiple Uvicorn workers, hides API docs, and keeps the DB port internal.',
       'AI features are isolated behind the Gemini service and degrade gracefully when no API key is set. Operations are scripted: backup.sh dumps the database and archives uploads on a cron schedule, restore.sh rebuilds from any snapshot, and a /health endpoint reports DB, storage, and Gemini status.',
     ],
+    architectureTr: [
+      'Üç servisli bir Docker Compose yığını: Next.js ön yüzü (service worker ve çevrimdışı sayfalı PWA), JWT kimlik doğrulamalı ve Alembic yönetimli PostgreSQL şemasına sahip FastAPI arka ucu ve veritabanının kendisi; ayrıca ilerleme fotoğrafları için kalıcı bir yükleme birimi. Kod, derleme sırasında imajlara gömülür; geliştirme ve üretim için ayrı compose dosyaları vardır — üretimde birden fazla Uvicorn işçisi çalışır, API dokümantasyonu gizlenir ve veritabanı portu içeride tutulur.',
+      'Yapay zekâ özellikleri Gemini servisinin arkasında yalıtılmıştır ve API anahtarı yoksa uygulama sorunsuz çalışmayı sürdürür. Operasyonlar betiklerle yönetilir: backup.sh veritabanını cron takvimiyle döker ve yüklemeleri arşivler, restore.sh herhangi bir anlık görüntüden geri yükler, /health uç noktası da veritabanı, depolama ve Gemini durumunu raporlar.',
+    ],
     results: [
       { label: 'Platforms', value: 'Android · iOS · desktop (PWA)' },
       { label: 'Tracking domains', value: 'Weight · body fat · 8 measurements · nutrition · workouts · photos' },
       { label: 'Deployment', value: 'Dockerized dev + production configs, health checks' },
       { label: 'Operations', value: 'Automated daily backups with restore script' },
       { label: 'Locales', value: 'Turkish + English' },
+    ],
+    resultsTr: [
+      { label: 'Platformlar', value: 'Android · iOS · masaüstü (PWA)' },
+      { label: 'Takip alanları', value: 'Kilo · vücut yağı · 8 ölçü · beslenme · antrenman · fotoğraflar' },
+      { label: 'Dağıtım', value: 'Docker ile geliştirme + üretim yapılandırmaları, sağlık kontrolleri' },
+      { label: 'Operasyon', value: 'Geri yükleme betikli otomatik günlük yedekler' },
+      { label: 'Yerel ayarlar', value: 'Türkçe + İngilizce' },
     ],
   },
   {
@@ -524,6 +758,7 @@ const PROJECTS = [
     codename: 'Time Keeper',
     title: 'Re-Minder',
     subtitle: 'Native macOS task scheduler, break reminder, and focus tracker',
+    subtitleTr: 'Yerel (native) macOS görev zamanlayıcı, mola hatırlatıcı ve odak takipçisi',
     oneLiner: 'Menu-bar macOS app for task reminders, break nudges, and focus analytics — built with Tauri, not Electron.',
     oneLinerTr: 'Görev hatırlatıcı, mola bildirimi ve odak analizi sunan menü çubuğu macOS uygulaması — Electron değil, Tauri ile.',
     language: 'TypeScript',
@@ -532,14 +767,16 @@ const PROJECTS = [
     tags: ['Tauri', 'React', 'Rust', 'SQLite'],
     github: gh('re-mind'),
     images: [
-      { src: '/projects/re-mind/tasks.jpg', caption: 'Task dashboard' },
-      { src: '/projects/re-mind/timer.png', caption: 'Floating widget — clock, next task, break countdown' },
-      { src: '/projects/re-mind/break.png', caption: 'Fullscreen break reminder overlay' },
-      { src: '/projects/re-mind/stats.png', caption: 'Focus analytics — weekly chart and 14×18 heatmap' },
-      { src: '/projects/re-mind/settings.png', caption: 'Settings — break interval, pre-reminder offsets, sounds' },
+      { src: '/projects/re-mind/tasks.jpg', caption: 'Task dashboard', captionTr: 'Görev panosu' },
+      { src: '/projects/re-mind/timer.png', caption: 'Floating widget — clock, next task, break countdown', captionTr: 'Yüzen bileşen — saat, sıradaki görev, mola geri sayımı' },
+      { src: '/projects/re-mind/break.png', caption: 'Fullscreen break reminder overlay', captionTr: 'Tam ekran mola hatırlatma katmanı' },
+      { src: '/projects/re-mind/stats.png', caption: 'Focus analytics — weekly chart and 14×18 heatmap', captionTr: 'Odak analizi — haftalık grafik ve 14×18 ısı haritası' },
+      { src: '/projects/re-mind/settings.png', caption: 'Settings — break interval, pre-reminder offsets, sounds', captionTr: 'Ayarlar — mola aralığı, ön hatırlatma süreleri, sesler' },
     ],
     overview:
       'A native macOS productivity app that lives in the menu bar: it reminds you when tasks are due, nudges you to take breaks at regular intervals, and silently tracks focus time. Built with Tauri instead of Electron, so it stays light on memory and launches instantly. No account, no server, no internet — everything is stored in a local SQLite database.',
+    overviewTr:
+      'Menü çubuğunda yaşayan yerel bir macOS üretkenlik uygulaması: görevlerin zamanı geldiğinde hatırlatır, düzenli aralıklarla mola vermen için dürter ve odak süreni sessizce takip eder. Electron yerine Tauri ile geliştirildi; bu sayede bellekte hafif kalır ve anında açılır. Hesap yok, sunucu yok, internet yok — her şey yerel bir SQLite veritabanında saklanır.',
     highlights: [
       'Task scheduling with repeat modes (once, daily, weekdays, weekly), native notifications, in-app popups, and sound alerts',
       'Pre-reminder toasts at configurable offsets — 60, 30, 15, and 5 minutes before a task, each shown exactly once',
@@ -547,6 +784,14 @@ const PROJECTS = [
       'Focus analytics: 28-day totals, weekly bar chart, a 14-day × 18-hour heatmap, and automated insights like peak focus hour',
       'Always-on-top floating widget with clock, next task, and real-time break countdown',
       'System tray residency — closing the window keeps the app running',
+    ],
+    highlightsTr: [
+      'Tekrar modlarıyla (bir kez, her gün, hafta içi, haftalık) görev zamanlama; yerel bildirimler, uygulama içi pencereler ve sesli uyarılar',
+      'Yapılandırılabilir sürelerde ön hatırlatma bildirimleri — görevden 60, 30, 15 ve 5 dakika önce, her biri yalnızca bir kez',
+      'Yapılandırılabilir aralıklarla tam ekran mola katmanları; uyum istatistikleri için al/atla/ertele takibi',
+      'Odak analizi: 28 günlük toplamlar, haftalık çubuk grafik, 14 gün × 18 saatlik ısı haritası ve en verimli odak saati gibi otomatik içgörüler',
+      'Saat, sıradaki görev ve gerçek zamanlı mola geri sayımı gösteren, hep üstte duran yüzen bileşen',
+      'Sistem tepsisinde kalıcılık — pencereyi kapatmak uygulamayı kapatmaz',
     ],
     stack: [
       { label: 'Languages', items: ['TypeScript 5.8 (strict)', 'Rust'] },
@@ -558,12 +803,23 @@ const PROJECTS = [
       'A Tauri v2 shell hosts the React frontend, with all persistence in a local SQLite database (rusqlite) across four tables: tasks, break_stats, settings, and focus_sessions. The key reliability problem — WKWebView throttling JavaScript timers when the window is hidden — is solved by storing the next-break time as an absolute Unix timestamp in localStorage and having a Rust background thread emit a backend-tick event every 30 seconds; the frontend compares Date.now() against the stored timestamp regardless of throttling.',
       'Notification deduplication keys survive restarts so past-due tasks never re-notify. A useFocusTracker hook uses the Page Visibility API to record foreground time, flushing sessions to SQLite every 60 seconds split across hour boundaries — which is what makes the per-hour heatmap possible.',
     ],
+    architectureTr: [
+      'Tauri v2 kabuğu React ön yüzünü barındırır; tüm kalıcı veriler yerel bir SQLite veritabanında (rusqlite), dört tabloda tutulur: tasks, break_stats, settings ve focus_sessions. Temel güvenilirlik sorunu — pencere gizliyken WKWebView’in JavaScript zamanlayıcılarını kısması — bir sonraki mola zamanının mutlak Unix zaman damgası olarak localStorage’a yazılması ve bir Rust arka plan iş parçacığının her 30 saniyede bir backend-tick olayı yayınlamasıyla çözülür; ön yüz, kısıtlamadan bağımsız olarak Date.now() değerini saklanan zaman damgasıyla karşılaştırır.',
+      'Bildirim tekilleştirme anahtarları yeniden başlatmalarda korunur; böylece zamanı geçmiş görevler bir daha bildirim üretmez. useFocusTracker kancası, ön planda geçirilen süreyi Page Visibility API ile kaydeder ve oturumları saat sınırlarına bölerek her 60 saniyede bir SQLite’a yazar — saat bazlı ısı haritasını mümkün kılan da budur.',
+    ],
     results: [
       { label: 'Platform', value: 'macOS 12+ (.app in Releases)' },
       { label: 'Footprint', value: 'Native Tauri — no Electron runtime' },
       { label: 'Privacy', value: '100% local — no account, no server' },
       { label: 'Storage', value: '4 SQLite tables' },
       { label: 'Analytics', value: '28-day focus history at per-hour granularity' },
+    ],
+    resultsTr: [
+      { label: 'Platform', value: 'macOS 12+ (Releases’ta .app)' },
+      { label: 'Ayak izi', value: 'Yerel Tauri — Electron çalışma zamanı yok' },
+      { label: 'Gizlilik', value: '%100 yerel — hesap yok, sunucu yok' },
+      { label: 'Depolama', value: '4 SQLite tablosu' },
+      { label: 'Analiz', value: 'Saat bazlı ayrıntıda 28 günlük odak geçmişi' },
     ],
   },
 ];

@@ -6,7 +6,7 @@ import { getProject } from '../data/projects';
 
 export default function ProjectDetail() {
   const { slug } = useParams();
-  const { t } = useLang();
+  const { lang, t } = useLang();
   const project = getProject(slug);
   const [lightbox, setLightbox] = useState(-1);
 
@@ -18,14 +18,21 @@ export default function ProjectDetail() {
         </Link>
         <div style={{ textAlign: 'center', padding: '80px 0' }}>
           <span className="chip">404</span>
-          <h1 className="section-title" style={{ ...s.title, marginTop: 20 }}>Armor not found</h1>
-          <p style={s.desc}>This armor is not in the vault. Return to the Hall of Armor.</p>
+          <h1 className="section-title" style={{ ...s.title, marginTop: 20 }}>{t('pdNotFoundTitle')}</h1>
+          <p style={s.desc}>{t('pdNotFoundDesc')}</p>
         </div>
       </div>
     );
   }
 
   const { color, glow } = project;
+  const loc = (enVal, trVal) => (lang === 'tr' && trVal ? trVal : enVal);
+  const stackLabels = t('stackLabels') || {};
+  const images = project.images.map((img) => ({ ...img, caption: loc(img.caption, img.captionTr) }));
+  const overview = loc(project.overview, project.overviewTr);
+  const highlights = loc(project.highlights, project.highlightsTr);
+  const architecture = loc(project.architecture, project.architectureTr);
+  const results = loc(project.results, project.resultsTr);
   let section = 0;
   const num = () => String(++section).padStart(2, '0');
 
@@ -60,12 +67,12 @@ export default function ProjectDetail() {
             background: color, boxShadow: `0 0 8px ${glow}`,
           }} />
           <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 9, letterSpacing: '0.14em', color: '#4a4a60' }}>
-            SYSTEM ONLINE
+            {t('sysOnline')}
           </span>
         </div>
 
         <h1 className="section-title pd-hero-title" style={s.title}>{project.title}</h1>
-        <p style={s.desc}>{project.subtitle}</p>
+        <p style={s.desc}>{loc(project.subtitle, project.subtitleTr)}</p>
 
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 28, alignItems: 'center' }}>
           <span style={{ ...s.langBadge, borderColor: color, color, background: `${color}14` }}>
@@ -79,19 +86,19 @@ export default function ProjectDetail() {
         <div style={{ marginTop: 32 }}>
           <a className="hero-btn" href={project.github} target="_blank" rel="noreferrer">
             <Github size={16} strokeWidth={1.5} style={{ color: '#8a8aa0' }} />
-            View on GitHub
+            {t('pdViewGithub')}
             <ArrowUpRight size={14} strokeWidth={1.5} style={{ color: '#8a8aa0' }} />
           </a>
         </div>
       </header>
 
       {/* IMAGES */}
-      <SectionLabel n={num()} label="Visual Feed" color={color} />
+      <SectionLabel n={num()} label={t('pdVisualFeed')} color={color} />
       <div className="pd-img-grid reveal reveal-2" style={{ marginBottom: 88 }}>
-        {project.images.map((img, i) => (
+        {images.map((img, i) => (
           <figure
             key={img.src}
-            className={`pd-img-card${project.images.length % 2 === 1 && i === 0 ? ' pd-img-full' : ''}`}
+            className={`pd-img-card${images.length % 2 === 1 && i === 0 ? ' pd-img-full' : ''}`}
             style={{ ...s.imgCard, cursor: 'zoom-in' }}
             onClick={() => setLightbox(i)}
           >
@@ -107,7 +114,7 @@ export default function ProjectDetail() {
 
       {lightbox >= 0 && (
         <Lightbox
-          images={project.images}
+          images={images}
           index={lightbox}
           color={color}
           onNavigate={setLightbox}
@@ -116,13 +123,13 @@ export default function ProjectDetail() {
       )}
 
       {/* OVERVIEW */}
-      <SectionLabel n={num()} label="Overview" color={color} />
-      <p style={{ ...s.lead, marginBottom: 88 }}>{project.overview}</p>
+      <SectionLabel n={num()} label={t('pdOverview')} color={color} />
+      <p style={{ ...s.lead, marginBottom: 88 }}>{overview}</p>
 
       {/* HIGHLIGHTS */}
-      <SectionLabel n={num()} label="Project Highlights" color={color} />
+      <SectionLabel n={num()} label={t('pdHighlights')} color={color} />
       <div style={{ marginBottom: 88 }}>
-        {project.highlights.map((h, i) => (
+        {highlights.map((h, i) => (
           <div key={i} className="pd-highlight-row" style={s.highlightRow}>
             <span style={{ ...s.highlightNum, color }}>{String(i + 1).padStart(2, '0')}</span>
             <span style={s.highlightText}>{h}</span>
@@ -131,11 +138,11 @@ export default function ProjectDetail() {
       </div>
 
       {/* TECHNICAL STACK */}
-      <SectionLabel n={num()} label="Technical Stack" color={color} />
+      <SectionLabel n={num()} label={t('pdStack')} color={color} />
       <div style={{ ...s.panel, marginBottom: 88 }}>
         {project.stack.map((row) => (
           <div key={row.label} style={s.stackRow}>
-            <span style={s.stackLabel}>{row.label}</span>
+            <span style={s.stackLabel}>{stackLabels[row.label] ?? row.label}</span>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, justifyContent: 'flex-end' }}>
               {row.items.map((item) => (
                 <span key={item} className="chip" style={{ textTransform: 'none', letterSpacing: '0.02em' }}>{item}</span>
@@ -146,17 +153,17 @@ export default function ProjectDetail() {
       </div>
 
       {/* ARCHITECTURE */}
-      <SectionLabel n={num()} label="Architecture" color={color} />
+      <SectionLabel n={num()} label={t('pdArchitecture')} color={color} />
       <div style={{ marginBottom: 88 }}>
-        {project.architecture.map((p, i) => (
-          <p key={i} style={{ ...s.body, marginBottom: i < project.architecture.length - 1 ? 20 : 0 }}>{p}</p>
+        {architecture.map((p, i) => (
+          <p key={i} style={{ ...s.body, marginBottom: i < architecture.length - 1 ? 20 : 0 }}>{p}</p>
         ))}
       </div>
 
       {/* RESULTS */}
-      <SectionLabel n={num()} label="Results" color={color} />
+      <SectionLabel n={num()} label={t('pdResults')} color={color} />
       <div className="pd-results-grid" style={{ marginBottom: 88 }}>
-        {project.results.map((r) => (
+        {results.map((r) => (
           <div key={r.label} style={s.resultCard}>
             <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#4a4a60' }}>
               {r.label}
@@ -169,19 +176,19 @@ export default function ProjectDetail() {
       </div>
 
       {/* GITHUB */}
-      <SectionLabel n={num()} label="Source" color={color} />
+      <SectionLabel n={num()} label={t('pdSource')} color={color} />
       <div style={{ ...s.panel, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 20, padding: 32 }}>
         <div>
           <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.1em', color: '#5a5a70', marginBottom: 6 }}>
             gorkemergune/{project.slug}
           </div>
           <div style={{ fontFamily: "'Instrument Serif', serif", fontStyle: 'italic', fontSize: 18, color: '#8a8aa0' }}>
-            Full source, README, and build instructions.
+            {t('pdSourceNote')}
           </div>
         </div>
         <a className="hero-btn" href={project.github} target="_blank" rel="noreferrer">
           <Github size={16} strokeWidth={1.5} style={{ color: '#8a8aa0' }} />
-          Open Repository
+          {t('pdOpenRepo')}
           <ArrowUpRight size={14} strokeWidth={1.5} style={{ color: '#8a8aa0' }} />
         </a>
       </div>

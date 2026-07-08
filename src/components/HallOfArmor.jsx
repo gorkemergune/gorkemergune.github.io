@@ -136,7 +136,7 @@ export default function HallOfArmor() {
           <div style={{ fontFamily: "'JetBrains Mono', monospace", color: '#00d4ff', fontSize: 13, letterSpacing: '0.15em', textAlign: 'left', maxWidth: 440, width: '100%', padding: '0 24px' }}>
             {bootPhase === 0 && (
               <span style={{ animation: 'boot-blink 1s step-end infinite' }}>
-                INITIALIZING SYSTEMS...
+                {t('hallInit')}
               </span>
             )}
             {bootPhase >= 1 && BOOT_LINES.slice(0, visibleLines).map((key, i) => (
@@ -162,7 +162,7 @@ export default function HallOfArmor() {
           fontFamily: "'JetBrains Mono', monospace", fontSize: 9, letterSpacing: '0.12em',
           color: '#00d4ff', background: 'rgba(0,212,255,0.06)',
         }}>
-          SYSTEM ONLINE
+          {t('sysOnline')}
         </span>
       </div>
 
@@ -292,7 +292,7 @@ export default function HallOfArmor() {
                   pointerEvents: 'none',
                 }} />
                 <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 8, color: armor.color, letterSpacing: '0.14em', marginBottom: 6 }}>
-                  {armor.mark} // ONLINE
+                  {armor.mark} // {lang === 'tr' ? 'ÇEVRİMİÇİ' : 'ONLINE'}
                 </div>
                 <div style={{ fontFamily: "'Instrument Sans', sans-serif", fontSize: 10, color: '#b0b0c0', lineHeight: 1.45, marginBottom: 8, flex: 1, overflow: 'hidden' }}>
                   {lang === 'tr' && armor.descTr ? armor.descTr : armor.descEn}
@@ -317,7 +317,7 @@ export default function HallOfArmor() {
                   borderTop: `1px solid ${armor.color}33`,
                   textDecoration: 'none',
                 }}>
-                  DEPLOY →
+                  {t('hallDeploy')} →
                 </Link>
               </div>
             </div>

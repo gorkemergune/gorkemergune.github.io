@@ -21,11 +21,11 @@ const sadTexts = {
     "LAST CHANCE!",
   ],
   tr: [
-    "Lutfen hayir deme...",
+    "Lütfen hayır deme...",
     "Emin misin? Cidden mi?",
     "Kalbim kırılıyor...",
-    "Artik dayanamiyorum!",
-    "SON SANS!",
+    "Artık dayanamıyorum!",
+    "SON ŞANS!",
   ],
 };
 

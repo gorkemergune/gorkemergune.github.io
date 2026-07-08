@@ -40,6 +40,7 @@ export default function ProjectPage() {
 }
 
 function ArmorCard({ project, index, lang }) {
+  const { t } = useLang();
   const { color, glow } = project;
   const oneLiner = lang === 'tr' && project.oneLinerTr ? project.oneLinerTr : project.oneLiner;
 
@@ -96,7 +97,7 @@ function ArmorCard({ project, index, lang }) {
           className="armor-open"
           style={{ ...s.openBtn, borderColor: `${color}44`, color }}
         >
-          Open Project <ArrowUpRight size={12} strokeWidth={1.5} />
+          {t('projectOpen')} <ArrowUpRight size={12} strokeWidth={1.5} />
         </span>
       </div>
     </Link>
