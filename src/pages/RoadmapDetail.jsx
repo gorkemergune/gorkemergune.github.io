@@ -1,5 +1,5 @@
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, Circle } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Clock } from 'lucide-react';
 import { useLang } from '../i18n.jsx';
 
 export default function BlogDetail() {
@@ -9,6 +9,10 @@ export default function BlogDetail() {
   const blogItems = t('blogItems');
   const post = blogPosts?.[slug];
   const meta = Array.isArray(blogItems) ? blogItems.find(b => b.slug === slug) : null;
+
+  // Ordered list for prev/next navigation
+  const idx = Array.isArray(blogItems) ? blogItems.findIndex(b => b.slug === slug) : -1;
+  const next = idx >= 0 && Array.isArray(blogItems) ? blogItems[(idx + 1) % blogItems.length] : null;
 
   if (!post && !meta) {
     return (
@@ -29,16 +33,11 @@ export default function BlogDetail() {
         <Link to="/blog" className="link-hover" style={s.back}>
           <ArrowLeft size={16} strokeWidth={1.5} /> {t('rdBack')}
         </Link>
-
         <div style={s.header}>
           <span className="chip">{t('rdBadge')}</span>
           <h1 style={s.title}>{meta.title}</h1>
-          <p style={s.desc}>{meta.note}</p>
-          {meta.status === 'soon' && (
-            <span className="chip" style={{ marginTop: 20, background: '#00d4ff', color: '#0a0a0f', borderColor: '#00d4ff' }}>{t('blogSoon')}</span>
-          )}
+          <p style={s.desc}>{meta.excerpt || meta.note}</p>
         </div>
-
         <div style={s.bottomNote}>
           <p style={s.bottomText}>{t('rdBottomNote')}</p>
           <Link to="/blog" className="link-hover" style={s.bottomLink}>
@@ -51,43 +50,53 @@ export default function BlogDetail() {
 
   return (
     <div style={s.container}>
-      <Link to="/" className="link-hover" style={s.back}>
+      <style>{`
+        .article-body p { animation: reveal 0.9s cubic-bezier(0.2,0.8,0.2,1) both; }
+        .next-card { transition: border-color 0.4s, transform 0.4s, box-shadow 0.4s; }
+        .next-card:hover { border-color: #00d4ff !important; transform: translateY(-3px); box-shadow: 0 0 24px rgba(0,212,255,0.1); }
+        .next-card:hover .next-arrow { transform: translateX(4px); color: #00d4ff; }
+        .next-arrow { transition: transform 0.4s, color 0.4s; }
+      `}</style>
+
+      <Link to="/blog" className="link-hover" style={s.back}>
         <ArrowLeft size={16} strokeWidth={1.5} /> {t('rdBack')}
       </Link>
 
-      <div style={s.header}>
-        <span className="chip">{t('rdBadge')}</span>
+      <div style={s.header} className="reveal reveal-1">
+        <div style={s.metaRow}>
+          <span className="chip">{post.category}</span>
+          <span style={s.metaText}>{post.date}</span>
+          <span style={s.metaDot} />
+          <span style={s.metaText}><Clock size={11} strokeWidth={1.6} style={{ verticalAlign: -2, marginRight: 4 }} />{post.readTime}</span>
+        </div>
         <h1 style={s.title}>{post.title}</h1>
         <p style={s.desc}>{post.description}</p>
       </div>
 
-      {post.phases && (
-        <div style={s.timeline}>
-          {post.phases.map((phase, i) => (
-            <div key={i} style={s.phase}>
-              <div style={s.phaseLeft}>
-                <span style={s.phaseNum}>{String(i + 1).padStart(2, '0')}</span>
-                <div style={s.phaseLine} />
-              </div>
-              <div style={s.phaseContent}>
-                <h3 style={s.phaseTitle}>{phase.title}</h3>
-                <div style={s.topicList}>
-                  {phase.topics.map((topic, j) => (
-                    <div key={j} style={s.topic}>
-                      <Circle size={7} strokeWidth={2} style={{ color: '#00d4ff', flexShrink: 0, marginTop: 6 }} />
-                      <span style={s.topicText}>{topic}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
+      <div style={s.rule} className="reveal reveal-2" />
+
+      {Array.isArray(post.body) && (
+        <article className="article-body" style={s.article}>
+          {post.body.map((para, i) => (
+            <p key={i} style={{ ...s.para, animationDelay: `${0.1 + i * 0.08}s` }}>{para}</p>
           ))}
-        </div>
+        </article>
+      )}
+
+      <div style={s.placeholderNote}>{t('rdBottomNote')}</div>
+
+      {next && next.slug !== slug && (
+        <Link to={`/blog/${next.slug}`} className="next-card" style={s.nextCard}>
+          <div>
+            <div style={s.nextLabel}>{t('rdNextUp')}</div>
+            <div style={s.nextTitle}>{next.title}</div>
+          </div>
+          <ArrowRight className="next-arrow" size={22} strokeWidth={1.5} style={{ color: '#5a5a70', flexShrink: 0 }} />
+        </Link>
       )}
 
       <div style={s.bottomNote}>
-        <p style={s.bottomText}>{t('rdBottomNote')}</p>
-        <Link to="/" className="link-hover" style={s.bottomLink}>
+        <Link to="/blog" className="link-hover" style={s.bottomLink}>
           <ArrowLeft size={14} strokeWidth={1.5} /> {t('rdBottomLink')}
         </Link>
       </div>
@@ -96,22 +105,21 @@ export default function BlogDetail() {
 }
 
 const s = {
-  container: { maxWidth: 900, margin: '0 auto', padding: '60px 48px 120px', position: 'relative', zIndex: 2 },
-  back: { display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: "'JetBrains Mono', monospace", fontSize: 12, letterSpacing: '0.06em', color: '#5a5a70', marginBottom: 60, cursor: 'pointer' },
-  header: { marginBottom: 80 },
-  title: { fontFamily: "'Instrument Serif', serif", fontSize: 72, fontWeight: 400, lineHeight: 0.95, letterSpacing: '-0.015em', color: '#e0e0e8', marginTop: 20, marginBottom: 20 },
-  desc: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 18, lineHeight: 1.6, color: '#8a8aa0', maxWidth: 560 },
-  timeline: { display: 'flex', flexDirection: 'column', gap: 0 },
-  phase: { display: 'flex', gap: 32, minHeight: 180 },
-  phaseLeft: { display: 'flex', flexDirection: 'column', alignItems: 'center', width: 40, flexShrink: 0 },
-  phaseNum: { fontFamily: "'JetBrains Mono', monospace", fontSize: 12, letterSpacing: '0.1em', color: '#4a4a60', background: '#0a0a0f', padding: '6px 0', zIndex: 1 },
-  phaseLine: { flex: 1, width: 1, background: 'linear-gradient(180deg, #1a1a2e 0%, #0f0f1a 100%)', marginTop: 8 },
-  phaseContent: { flex: 1, paddingBottom: 48, borderTop: '1px solid #1a1a2e', paddingTop: 8 },
-  phaseTitle: { fontFamily: "'Instrument Serif', serif", fontSize: 28, fontWeight: 400, color: '#e0e0e8', marginBottom: 20, lineHeight: 1.2 },
-  topicList: { display: 'flex', flexDirection: 'column', gap: 10 },
-  topic: { display: 'flex', alignItems: 'flex-start', gap: 12 },
-  topicText: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 15, lineHeight: 1.6, color: '#8a8aa0' },
-  bottomNote: { marginTop: 60, paddingTop: 40, borderTop: '1px solid #1a1a2e' },
-  bottomText: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 14, color: '#4a4a60', fontStyle: 'italic', marginBottom: 24 },
+  container: { maxWidth: 760, margin: '0 auto', padding: '60px 48px 120px', position: 'relative', zIndex: 2 },
+  back: { display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: "'JetBrains Mono', monospace", fontSize: 12, letterSpacing: '0.06em', color: '#5a5a70', marginBottom: 56, cursor: 'pointer' },
+  header: { marginBottom: 40 },
+  metaRow: { display: 'flex', alignItems: 'center', gap: 12, marginBottom: 24, flexWrap: 'wrap' },
+  metaText: { fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.08em', color: '#5a5a70' },
+  metaDot: { width: 3, height: 3, borderRadius: '50%', background: '#3a3a50' },
+  title: { fontFamily: "'Instrument Serif', serif", fontSize: 56, fontWeight: 400, lineHeight: 1.05, letterSpacing: '-0.015em', color: '#e0e0e8', marginBottom: 22 },
+  desc: { fontFamily: "'Instrument Serif', serif", fontStyle: 'italic', fontSize: 21, lineHeight: 1.5, color: '#9a9ab0', maxWidth: 620 },
+  rule: { height: 1, background: 'linear-gradient(90deg, #00d4ff44, #1a1a2e 40%, transparent)', marginBottom: 44 },
+  article: { display: 'flex', flexDirection: 'column', gap: 26 },
+  para: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 17.5, lineHeight: 1.75, color: '#c0c0ce', letterSpacing: '0.002em' },
+  placeholderNote: { marginTop: 48, padding: '14px 18px', background: 'rgba(0,212,255,0.04)', border: '1px solid #1a1a2e', borderLeft: '2px solid #00d4ff', borderRadius: 4, fontFamily: "'Instrument Sans', sans-serif", fontStyle: 'italic', fontSize: 13.5, color: '#6a6a82' },
+  nextCard: { marginTop: 40, padding: '22px 26px', background: '#0f0f1a', border: '1px solid #1a1a2e', borderRadius: 6, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 20, textDecoration: 'none', cursor: 'pointer' },
+  nextLabel: { fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#4a4a60', marginBottom: 8 },
+  nextTitle: { fontFamily: "'Instrument Serif', serif", fontSize: 22, color: '#e0e0e8', lineHeight: 1.2 },
+  bottomNote: { marginTop: 44, paddingTop: 36, borderTop: '1px solid #1a1a2e' },
   bottomLink: { display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: "'JetBrains Mono', monospace", fontSize: 12, letterSpacing: '0.06em', color: '#8a8aa0', cursor: 'pointer' },
 };

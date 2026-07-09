@@ -384,7 +384,7 @@ const s = {
   },
   capsuleItem: {
     display: 'flex', flexDirection: 'column',
-    width: 'calc(16.666% - 10px)', maxWidth: 200, minWidth: 120,
+    width: 'calc(14.285% - 11px)', maxWidth: 200, minWidth: 120,
     cursor: 'pointer',
     flexShrink: 0,
   },

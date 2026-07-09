@@ -249,24 +249,8 @@ export default function App() {
               <HallOfArmor />
             </section>
 
-            {/* ABOUT */}
-            <section id="about" className="container" style={styles.container}>
-              <SectionHeader number="01" label={t('aboutLabel')} />
-              <div className="two-col" style={styles.twoCol}>
-                <div>
-                  <p style={styles.lead}>
-                    <em style={styles.leadAccent}>{t('aboutLead')}</em>
-                  </p>
-                </div>
-                <aside style={styles.aside}>
-                  <StatRow label={t('statCurrently')} value={t('statCurrentlyVal')} />
-                  <StatRow label={t('statPreviously')} value={t('statPreviouslyVal')} />
-                  <StatRow label={t('statTools')} value={t('statToolsVal')} />
-                  <StatRow label={t('statLanguages')} value={t('statLanguagesVal')} />
-                  <StatRow label={t('statMail')} value="gorkemergune2@gmail.com" />
-                </aside>
-              </div>
-            </section>
+            {/* IDENTITY / STORYTELLING */}
+            <HomeIntro t={t} />
           </>
         } />
         <Route path="/blog" element={<BlogHub />} />
@@ -295,7 +279,7 @@ export default function App() {
             {t('footerBuilt')}
           </span>
           <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.1em', color: '#4a4a60' }}>
-            v2.06 &middot; {time}
+            v2.10 &middot; {time}
           </span>
         </div>
       </footer>
@@ -303,29 +287,120 @@ export default function App() {
   );
 }
 
-function SectionHeader({ number, label, sub }) {
-  return (
-    <div style={{ marginBottom: 48, display: 'flex', alignItems: 'baseline', gap: 24, flexWrap: 'wrap' }}>
-      <span className="n-large" style={{ fontSize: 12 }}>&sect; {number}</span>
-      <h2 className="section-title" style={{
-        fontFamily: "'Instrument Serif', serif", fontSize: 72, fontWeight: 400,
-        lineHeight: 0.95, letterSpacing: '-0.015em', color: '#e0e0e8',
-      }}>{label}</h2>
-      {sub && (
-        <span style={{ fontFamily: "'Instrument Serif', serif", fontStyle: 'italic', fontSize: 18, color: '#5a5a70' }}>
-          &mdash; {sub}
-        </span>
-      )}
-    </div>
-  );
+function AnimatedCounter({ target, suffix, duration = 1600 }) {
+  const [value, setValue] = useState(0);
+  const ref = useRef(null);
+  const started = useRef(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting && !started.current) {
+        started.current = true;
+        const start = performance.now();
+        const tick = (now) => {
+          const p = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - p, 3);
+          setValue(Math.round(eased * target));
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      }
+    }, { threshold: 0.4 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, [target, duration]);
+
+  return <span ref={ref}>{value}{suffix}</span>;
 }
 
-function StatRow({ label, value }) {
+function HomeIntro({ t }) {
+  const roles = t('introRoles');
+  const stats = t('introStats');
+
   return (
-    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', padding: '14px 0', borderBottom: '1px solid #1a1a2e', gap: 16, flexWrap: 'wrap' }}>
-      <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#4a4a60' }}>{label}</span>
-      <span style={{ fontFamily: "'Instrument Sans', sans-serif", fontSize: 14, color: '#e0e0e8', wordBreak: 'break-word' }}>{value}</span>
-    </div>
+    <section id="identity" className="container intro-section" style={styles.container}>
+      <style>{`
+        .intro-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 72px; align-items: start; }
+        .intro-glass {
+          background: rgba(15,15,26,0.55); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+          border: 1px solid #1a1a2e; border-radius: 12px;
+        }
+        .role-pill {
+          display: inline-flex; align-items: center; gap: 7px; padding: 8px 14px;
+          border: 1px solid #1a1a2e; border-radius: 999px; background: rgba(15,15,26,0.5);
+          font-family: 'Instrument Sans', sans-serif; font-size: 13px; color: #b0b0c4;
+          transition: all 0.35s cubic-bezier(0.2,0.8,0.2,1); cursor: default;
+        }
+        .role-pill:hover { border-color: #00d4ff; color: #fff; box-shadow: 0 0 18px rgba(0,212,255,0.16); transform: translateY(-2px); }
+        .role-pill .rp-dot { width: 5px; height: 5px; border-radius: 50%; background: #00d4ff; box-shadow: 0 0 6px #00d4ff; }
+        .stat-cell { padding: 22px 20px; transition: border-color 0.4s, box-shadow 0.4s; }
+        .stat-cell:hover { border-color: #2a2a45 !important; box-shadow: inset 0 0 24px rgba(0,212,255,0.05); }
+        .intro-cta-row { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 40px; }
+        @media (max-width: 900px) {
+          .intro-grid { grid-template-columns: 1fr !important; gap: 44px !important; }
+          .intro-lead { font-size: 26px !important; }
+        }
+        @media (max-width: 600px) {
+          .intro-lead { font-size: 22px !important; }
+          .intro-stats-grid { grid-template-columns: 1fr 1fr !important; }
+        }
+      `}</style>
+
+      <div style={styles.introKicker}>
+        <span style={styles.introKickerDot} />
+        {t('introKicker')}
+      </div>
+
+      <div className="intro-grid" style={{ marginTop: 40 }}>
+        {/* LEFT — story */}
+        <div>
+          <p className="intro-lead" style={styles.introLead}>
+            {t('introLeadPre')}
+            <em style={styles.introLeadEm}>{t('introLeadEm')}</em>
+            {t('introLeadPost')}
+          </p>
+          <p style={styles.introBody}>{t('introBody')}</p>
+
+          <div className="intro-cta-row">
+            <Link to="/project" className="hero-btn">
+              {t('introCtaProjects')} <ArrowUpRight size={15} strokeWidth={1.5} />
+            </Link>
+            <Link to="/blog" className="hero-btn">{t('introCtaBlog')}</Link>
+            <Link to="/contact" className="hero-btn">{t('introCtaContact')}</Link>
+          </div>
+        </div>
+
+        {/* RIGHT — roles + stats */}
+        <div>
+          <div style={styles.introRolesLabel}>{t('introRolesLabel')}</div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 36 }}>
+            {Array.isArray(roles) && roles.map((r) => (
+              <span key={r} className="role-pill"><span className="rp-dot" />{r}</span>
+            ))}
+          </div>
+
+          <div className="intro-glass intro-stats-grid" style={styles.introStatsGrid}>
+            {Array.isArray(stats) && stats.map((st, i) => (
+              <div
+                key={i}
+                className="stat-cell"
+                style={{
+                  borderRight: i % 2 === 0 ? '1px solid #1a1a2e' : 'none',
+                  borderBottom: i < 2 ? '1px solid #1a1a2e' : 'none',
+                }}
+              >
+                <div style={styles.statNum}>
+                  <AnimatedCounter target={st.n} suffix={st.suffix} />
+                </div>
+                <div style={styles.statLabel}>{st.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -399,9 +474,33 @@ const styles = {
   heroButtons: {
     marginTop: 48, display: 'flex', gap: 16, flexWrap: 'wrap',
   },
-  twoCol: { display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 100, alignItems: 'start' },
-  lead: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 26, lineHeight: 1.4, color: '#e0e0e8', marginBottom: 28, fontWeight: 400 },
-  leadAccent: { fontFamily: "'Instrument Serif', serif", fontStyle: 'italic', fontWeight: 400, color: '#e0e0e8' },
-  aside: { padding: 24, background: '#0f0f1a', border: '1px solid #1a1a2e', borderRadius: 4 },
+  introKicker: {
+    display: 'inline-flex', alignItems: 'center', gap: 10,
+    fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.18em',
+    color: '#5a5a70',
+  },
+  introKickerDot: { width: 7, height: 7, borderRadius: '50%', background: '#00d4ff', boxShadow: '0 0 8px #00d4ff' },
+  introLead: {
+    fontFamily: "'Instrument Sans', sans-serif", fontSize: 30, lineHeight: 1.4,
+    color: '#e0e0e8', fontWeight: 400, marginBottom: 28, letterSpacing: '-0.01em',
+  },
+  introLeadEm: { fontFamily: "'Instrument Serif', serif", fontStyle: 'italic', color: '#00d4ff' },
+  introBody: {
+    fontFamily: "'Instrument Sans', sans-serif", fontSize: 17, lineHeight: 1.7,
+    color: '#9a9ab0', maxWidth: 640,
+  },
+  introRolesLabel: {
+    fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.16em',
+    color: '#4a4a60', marginBottom: 16,
+  },
+  introStatsGrid: { display: 'grid', gridTemplateColumns: '1fr 1fr', overflow: 'hidden' },
+  statNum: {
+    fontFamily: "'Instrument Serif', serif", fontSize: 46, lineHeight: 1,
+    color: '#e0e0e8', marginBottom: 8, fontVariantNumeric: 'tabular-nums',
+  },
+  statLabel: {
+    fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.1em',
+    textTransform: 'uppercase', color: '#5a5a70',
+  },
   footer: { borderTop: '1px solid #1a1a2e', marginTop: 80 },
 };
