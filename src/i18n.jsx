@@ -41,6 +41,40 @@ const en = {
   introCtaBlog: 'Read the Blog',
   introCtaContact: 'Start a conversation',
 
+  // Home hero + sections
+  heroTagline: 'AI ENGINEER IN PROGRESS',
+  heroSubtext: 'Building computer vision systems, machine learning pipelines, and intelligent software with a research-driven mindset.',
+  ctaResume: 'Download Résumé',
+  ctaViewWork: 'View Work',
+
+  metricsKicker: 'FEATURED METRICS // LIVE TELEMETRY',
+  mProjects: 'Featured Projects',
+  mRepos: 'Public Repositories',
+  mCommits: 'GitHub Commits',
+  mResearch: 'Research Projects (in progress)',
+  mModels: 'AI Models Deployed',
+  mImages: 'Images Processed',
+  mDataset: 'Custom Dataset Images',
+  mF1: 'Best Model F1 Score',
+  metricLive: 'LIVE',
+
+  featuredKicker: 'FEATURED PROJECT',
+  featuredCta: 'Read the case study',
+
+  buildingKicker: 'CURRENTLY BUILDING',
+  buildingSub: 'Active experiments and work in progress',
+  buildingItems: [
+    { title: 'LLM Experiments', desc: 'Prompting, fine-tuning, and small agentic tools around open models.', status: 'Exploring' },
+    { title: 'Computer Vision', desc: 'Custom detectors and detection pipelines beyond single-class YOLO.', status: 'Building' },
+    { title: 'Writing Analyzer', desc: 'Extending the bilingual stylometric risk engine and its API.', status: 'Iterating' },
+  ],
+
+  activityKicker: 'GITHUB ACTIVITY // LATEST REPOSITORIES',
+  activitySub: 'Pulled live from GitHub — always current',
+  activityCta: 'View GitHub profile',
+  activityUpdated: 'Updated',
+  activityStars: 'stars',
+
   // About
   aboutLabel: 'About',
   aboutLead: 'CS student, building things and writing about the process.',
@@ -302,6 +336,142 @@ const en = {
   bootLine4: 'Initializing Hall of Armor...',
   bootLine5: 'Welcome back, Mr. Ergune.',
 
+  // Nav (new pages)
+  navExperience: 'Experience',
+  navStack: 'Stack',
+  navResearch: 'Research',
+  navResume: 'Résumé',
+  navHome: 'Home',
+
+  // Experience page
+  expBack: 'Home',
+  expBadge: 'EXPERIENCE',
+  expLabel: 'Experience',
+  expSub: 'Hackathons, applied engineering, and ongoing research — framed as professional work.',
+  expItems: [
+    {
+      org: 'BTK Hackathon 2026', role: 'Full-Stack & AI Developer', period: 'May 2026', type: 'Hackathon', accent: '#ff9f1c',
+      summary: 'Built “Find The Best”, a shopping-intelligence platform for the e-commerce track.',
+      points: [
+        'Designed a multi-store price-comparison engine across Turkish and international marketplaces.',
+        'Integrated Google Gemini for product analysis, buy-timing advice, and fake-review detection.',
+        'Shipped a bilingual Next.js + FastAPI + PostgreSQL stack under Docker Compose.',
+      ],
+      tags: ['Next.js', 'FastAPI', 'Gemini', 'PostgreSQL'], link: '/project/find-the-best',
+    },
+    {
+      org: 'Independent AI / ML Engineering', role: 'Builder & Open-Source Author', period: '2024 — Present', type: 'Applied', accent: '#00d4ff',
+      summary: 'Self-directed engineering across computer vision, NLP, ML, systems, and full-stack.',
+      points: [
+        'Shipped 14 documented projects — from a bare-metal x86 OS to production ML pipelines.',
+        'Trained a single-class YOLO11 detector to 90.3% mAP@50 on a self-collected dataset.',
+        'Benchmarked a two-stage face-detection pipeline across 140,000 images with zero failures.',
+        'Fine-tuned MarianMT for Turkish→English, lifting BLEU from ~36 to ~43.',
+      ],
+      tags: ['PyTorch', 'YOLO11', 'FastAPI', 'C'], link: '/project',
+    },
+    {
+      org: 'Independent Research', role: 'Undergraduate Researcher', period: '2025 — Present', type: 'Research', accent: '#7c5cff',
+      summary: 'Ongoing, in-progress studies growing out of applied projects (no published papers yet).',
+      points: [
+        'Stylometric signals for detecting AI-generated text in English and Turkish.',
+        'A detect-and-verify method for recovering small and occluded faces.',
+        'Fine-tuning strategies for low-resource Turkish→English machine translation.',
+      ],
+      tags: ['NLP', 'Computer Vision', 'Evaluation'], link: '/research',
+    },
+  ],
+
+  // Tech Stack page
+  stackBack: 'Home',
+  stackBadge: 'TECH STACK',
+  stackLabel: 'Tech Stack',
+  stackSub: 'The tools I actually build with, grouped by domain — with an honest proficiency level for each.',
+  stackLegend: 'Proficiency',
+  stackLevels: ['Advanced', 'Proficient', 'Familiar'],
+  stackGroups: [
+    { category: 'AI / ML', accent: '#00d4ff', items: [
+      { name: 'PyTorch', level: 2 }, { name: 'scikit-learn', level: 1 }, { name: 'Ultralytics YOLO11', level: 2 },
+      { name: 'Hugging Face', level: 2 }, { name: 'MediaPipe', level: 2 }, { name: 'OpenCV', level: 2 }, { name: 'Google Gemini API', level: 2 },
+    ]},
+    { category: 'Backend', accent: '#00e5a0', items: [
+      { name: 'FastAPI', level: 1 }, { name: 'REST APIs', level: 1 }, { name: 'PostgreSQL', level: 2 }, { name: 'Redis', level: 3 }, { name: 'Node.js', level: 3 },
+    ]},
+    { category: 'Frontend', accent: '#4d96ff', items: [
+      { name: 'React', level: 1 }, { name: 'Next.js', level: 2 }, { name: 'Tailwind CSS', level: 2 }, { name: 'Vite', level: 2 }, { name: 'Streamlit', level: 2 },
+    ]},
+    { category: 'Languages', accent: '#ffd166', items: [
+      { name: 'Python', level: 1 }, { name: 'JavaScript', level: 1 }, { name: 'TypeScript', level: 2 }, { name: 'C', level: 2 }, { name: 'x86 Assembly', level: 3 }, { name: 'Rust', level: 3 },
+    ]},
+    { category: 'DevOps', accent: '#ff6b35', items: [
+      { name: 'Git & GitHub', level: 1 }, { name: 'Docker / Compose', level: 2 }, { name: 'GitHub Pages', level: 2 }, { name: 'Google Colab', level: 2 },
+    ]},
+    { category: 'Tools', accent: '#f472b6', items: [
+      { name: 'Jupyter', level: 1 }, { name: 'SQLite', level: 2 }, { name: 'Tauri', level: 3 }, { name: 'Ruff / pre-commit', level: 2 }, { name: 'raylib', level: 2 },
+    ]},
+  ],
+
+  // Research page
+  researchBack: 'Home',
+  researchBadge: 'RESEARCH',
+  researchLabel: 'Research',
+  researchSub: 'Independent, in-progress studies growing out of my applied work.',
+  researchDisclaimer: 'These are ongoing, self-directed research projects — not published papers. Nothing here claims peer review or publication.',
+  researchStatus: 'In Progress',
+  researchMethods: 'Methods',
+  researchExpected: 'Expected Outcomes',
+  researchPdf: 'Read draft (PDF)',
+  researchItems: [
+    {
+      title: 'Stylometric Detection of AI-Generated Text (EN + TR)',
+      field: 'NLP · Stylometry', accent: '#ff4d6d',
+      abstract: 'A study of language-independent statistical signals — repetition, burstiness, transition overuse, lexical variety — that separate human writing from formulaic, model-generated prose, with native pipelines for both English and Turkish.',
+      methods: ['Six orthogonal stylometric analyzers over a shared tokenization', 'Turkish morphology via Zeyrek; English stemming via Porter', 'Weighted composite scoring calibrated on human vs LLM samples'],
+      expected: 'A transparent, per-signal risk score that is interpretable rather than a black-box classifier, and a benchmark contrasting the two languages.',
+    },
+    {
+      title: 'Detect-and-Verify for Small and Occluded Faces',
+      field: 'Computer Vision', accent: '#00d4ff',
+      abstract: 'An investigation into recovering faces that off-the-shelf short-range detectors miss, without inflating false positives — by pairing a permissive first pass with a zoom-in re-verification stage.',
+      methods: ['Low-threshold regional candidate search over image halves', 'Zoom-in re-detection with a stricter confidence gate', 'IoU-based deduplication and a human-review queue for edge cases'],
+      expected: 'Measurably higher recall on tiny faces at equal or better precision, quantified over a 140,000-image benchmark.',
+    },
+    {
+      title: 'Fine-Tuning MarianMT for Low-Resource TR→EN Translation',
+      field: 'Machine Translation', accent: '#4d96ff',
+      abstract: 'A reproducible study of how far a lightweight, pretrained MarianMT model can be pushed on Turkish→English with a modest parallel corpus and a single free GPU.',
+      methods: ['Cleaning and 80/10/10 splitting of the Tatoeba corpus', 'Tokenization comparison (char / word / byte / BPE)', 'fp16 fine-tuning with SacreBLEU evaluation and beam search'],
+      expected: 'A documented BLEU lift (~36 → ~43) and a recipe others can rerun end-to-end on a Colab T4.',
+    },
+  ],
+
+  // Resume page
+  resumeBack: 'Home',
+  resumeBadge: 'RÉSUMÉ',
+  resumeTitle: 'Görkem Ergüne',
+  resumeRole: 'Computer Engineering Student · AI Engineer',
+  resumePrint: 'Save as PDF',
+  resumeSummary: 'Second-year Computer Engineering student and self-directed AI engineer building computer-vision systems, machine-learning pipelines, and full-stack software — with a research-driven mindset and a habit of shipping.',
+  resumeSecEducation: 'Education',
+  resumeSecExperience: 'Experience',
+  resumeSecProjects: 'Selected Projects',
+  resumeSecSkills: 'Skills',
+  resumeSecResearch: 'Research (in progress)',
+  resumeEduSchool: 'B.Sc. Computer Engineering',
+  resumeEduDetail: 'Undergraduate · 2025 — Present',
+
+  // Case study
+  csBack: 'Project',
+  csBadge: 'CASE STUDY',
+  csRead: 'Read Case Study',
+  csProblem: 'Problem',
+  csSolution: 'Solution',
+  csArchitecture: 'Architecture',
+  csChallenges: 'Challenges',
+  csResults: 'Results',
+  csLessons: 'Lessons Learned',
+  csNone: 'No case study for this project yet.',
+
   // Blog detail content
   blogPosts: {
     'calculus-aa': {
@@ -391,6 +561,40 @@ const tr = {
   introCtaProjects: 'Cephaneliği Keşfet',
   introCtaBlog: 'Blog’u Oku',
   introCtaContact: 'Bir sohbet başlat',
+
+  // Home hero + sections
+  heroTagline: 'YAPAY ZEKÂ MÜHENDİSİ — GELİŞİM HÂLİNDE',
+  heroSubtext: 'Araştırma odaklı bir yaklaşımla bilgisayarlı görü sistemleri, makine öğrenmesi işlem hatları ve akıllı yazılımlar geliştiriyorum.',
+  ctaResume: 'CV’yi İndir',
+  ctaViewWork: 'Çalışmalar',
+
+  metricsKicker: 'ÖNE ÇIKAN METRİKLER // CANLI TELEMETRİ',
+  mProjects: 'Öne Çıkan Projeler',
+  mRepos: 'Public Depolar',
+  mCommits: 'GitHub Commit',
+  mResearch: 'Araştırma Projesi (devam eden)',
+  mModels: 'Yayınlanan YZ Modeli',
+  mImages: 'İşlenen Görsel',
+  mDataset: 'Özel Veri Kümesi Görseli',
+  mF1: 'En İyi Model F1 Skoru',
+  metricLive: 'CANLI',
+
+  featuredKicker: 'ÖNE ÇIKAN PROJE',
+  featuredCta: 'Vaka analizini oku',
+
+  buildingKicker: 'ŞU AN GELİŞTİRİLENLER',
+  buildingSub: 'Aktif denemeler ve devam eden çalışmalar',
+  buildingItems: [
+    { title: 'LLM Denemeleri', desc: 'Açık modeller çevresinde prompt, ince ayar ve küçük ajan araçları.', status: 'Keşif' },
+    { title: 'Bilgisayarlı Görü', desc: 'Tek sınıflı YOLO’nun ötesinde özel dedektörler ve tespit hatları.', status: 'Geliştirme' },
+    { title: 'Writing Analyzer', desc: 'İki dilli stilometrik risk motorunu ve API’sini genişletme.', status: 'İyileştirme' },
+  ],
+
+  activityKicker: 'GITHUB ETKİNLİĞİ // SON DEPOLAR',
+  activitySub: 'Doğrudan GitHub’dan canlı çekilir — her zaman güncel',
+  activityCta: 'GitHub profilini gör',
+  activityUpdated: 'Güncellendi',
+  activityStars: 'yıldız',
 
   // About
   aboutLabel: 'Hakkımda',
@@ -658,6 +862,142 @@ const tr = {
   bootLine3: 'Proje veritabanı taranıyor...',
   bootLine4: 'Zırh Deposu başlatılıyor...',
   bootLine5: 'Hoş geldiniz, Bay Ergüne.',
+
+  // Nav (new pages)
+  navExperience: 'Deneyim',
+  navStack: 'Teknolojiler',
+  navResearch: 'Araştırma',
+  navResume: 'CV',
+  navHome: 'Ana Sayfa',
+
+  // Experience page
+  expBack: 'Ana Sayfa',
+  expBadge: 'DENEYİM',
+  expLabel: 'Deneyim',
+  expSub: 'Hackathonlar, uygulamalı mühendislik ve devam eden araştırmalar — profesyonel çalışma olarak.',
+  expItems: [
+    {
+      org: 'BTK Hackathon 2026', role: 'Full-Stack & Yapay Zekâ Geliştiricisi', period: 'Mayıs 2026', type: 'Hackathon', accent: '#ff9f1c',
+      summary: 'E-ticaret kategorisi için “Find The Best” alışveriş zekâsı platformunu geliştirdim.',
+      points: [
+        'Türk ve uluslararası pazaryerlerinde çoklu mağaza fiyat karşılaştırma motoru tasarladım.',
+        'Ürün analizi, alım zamanlaması ve sahte yorum tespiti için Google Gemini’yi entegre ettim.',
+        'İki dilli bir Next.js + FastAPI + PostgreSQL yığınını Docker Compose ile yayına aldım.',
+      ],
+      tags: ['Next.js', 'FastAPI', 'Gemini', 'PostgreSQL'], link: '/project/find-the-best',
+    },
+    {
+      org: 'Bağımsız Yapay Zekâ / ML Mühendisliği', role: 'Geliştirici & Açık Kaynak Yazarı', period: '2024 — Günümüz', type: 'Uygulamalı', accent: '#00d4ff',
+      summary: 'Bilgisayarlı görü, NLP, ML, sistemler ve full-stack alanlarında kendi kendine yönlendirdiğim mühendislik.',
+      points: [
+        'Doğrudan donanımda çalışan x86 işletim sisteminden üretim ML hatlarına 14 belgeli proje yayınladım.',
+        'Kendi topladığım veri kümesinde tek sınıflı YOLO11 dedektörünü %90,3 mAP@50’ye eğittim.',
+        'İki aşamalı yüz tespiti hattını 140.000 görselde sıfır hatayla test ettim.',
+        'MarianMT’yi Türkçe→İngilizce için ince ayarlayıp BLEU’yu ~36’dan ~43’e çıkardım.',
+      ],
+      tags: ['PyTorch', 'YOLO11', 'FastAPI', 'C'], link: '/project',
+    },
+    {
+      org: 'Bağımsız Araştırma', role: 'Lisans Araştırmacısı', period: '2025 — Günümüz', type: 'Araştırma', accent: '#7c5cff',
+      summary: 'Uygulamalı projelerden doğan, devam eden çalışmalar (henüz yayınlanmış makale yok).',
+      points: [
+        'İngilizce ve Türkçede yapay zekâ üretimi metni tespit için stilometrik sinyaller.',
+        'Küçük ve kapalı yüzleri yakalamak için tespit-et-doğrula yöntemi.',
+        'Düşük kaynaklı Türkçe→İngilizce çeviri için ince ayar stratejileri.',
+      ],
+      tags: ['NLP', 'Bilgisayarlı Görü', 'Değerlendirme'], link: '/research',
+    },
+  ],
+
+  // Tech Stack page
+  stackBack: 'Ana Sayfa',
+  stackBadge: 'TEKNOLOJİLER',
+  stackLabel: 'Teknoloji Yığını',
+  stackSub: 'Gerçekten kullandığım araçlar, alanlara göre gruplanmış — her biri için dürüst bir yetkinlik seviyesiyle.',
+  stackLegend: 'Yetkinlik',
+  stackLevels: ['İleri', 'Yetkin', 'Aşina'],
+  stackGroups: [
+    { category: 'Yapay Zekâ / ML', accent: '#00d4ff', items: [
+      { name: 'PyTorch', level: 2 }, { name: 'scikit-learn', level: 1 }, { name: 'Ultralytics YOLO11', level: 2 },
+      { name: 'Hugging Face', level: 2 }, { name: 'MediaPipe', level: 2 }, { name: 'OpenCV', level: 2 }, { name: 'Google Gemini API', level: 2 },
+    ]},
+    { category: 'Backend', accent: '#00e5a0', items: [
+      { name: 'FastAPI', level: 1 }, { name: 'REST API', level: 1 }, { name: 'PostgreSQL', level: 2 }, { name: 'Redis', level: 3 }, { name: 'Node.js', level: 3 },
+    ]},
+    { category: 'Frontend', accent: '#4d96ff', items: [
+      { name: 'React', level: 1 }, { name: 'Next.js', level: 2 }, { name: 'Tailwind CSS', level: 2 }, { name: 'Vite', level: 2 }, { name: 'Streamlit', level: 2 },
+    ]},
+    { category: 'Diller', accent: '#ffd166', items: [
+      { name: 'Python', level: 1 }, { name: 'JavaScript', level: 1 }, { name: 'TypeScript', level: 2 }, { name: 'C', level: 2 }, { name: 'x86 Assembly', level: 3 }, { name: 'Rust', level: 3 },
+    ]},
+    { category: 'DevOps', accent: '#ff6b35', items: [
+      { name: 'Git & GitHub', level: 1 }, { name: 'Docker / Compose', level: 2 }, { name: 'GitHub Pages', level: 2 }, { name: 'Google Colab', level: 2 },
+    ]},
+    { category: 'Araçlar', accent: '#f472b6', items: [
+      { name: 'Jupyter', level: 1 }, { name: 'SQLite', level: 2 }, { name: 'Tauri', level: 3 }, { name: 'Ruff / pre-commit', level: 2 }, { name: 'raylib', level: 2 },
+    ]},
+  ],
+
+  // Research page
+  researchBack: 'Ana Sayfa',
+  researchBadge: 'ARAŞTIRMA',
+  researchLabel: 'Araştırma',
+  researchSub: 'Uygulamalı çalışmalarımdan doğan, bağımsız ve devam eden araştırmalar.',
+  researchDisclaimer: 'Bunlar devam eden, kendi kendine yürütülen araştırma projeleridir — yayınlanmış makale değildir. Hiçbiri hakemlik ya da yayın iddiası taşımaz.',
+  researchStatus: 'Devam Ediyor',
+  researchMethods: 'Yöntemler',
+  researchExpected: 'Beklenen Sonuçlar',
+  researchPdf: 'Taslağı oku (PDF)',
+  researchItems: [
+    {
+      title: 'Yapay Zekâ Üretimi Metnin Stilometrik Tespiti (EN + TR)',
+      field: 'NLP · Stilometri', accent: '#ff4d6d',
+      abstract: 'İnsan yazısını kalıplaşmış, model üretimi metinden ayıran dilden bağımsız istatistiksel sinyallerin — tekrar, ritim (burstiness), geçiş aşırı kullanımı, kelime çeşitliliği — hem İngilizce hem Türkçe için yerel işlem hatlarıyla incelenmesi.',
+      methods: ['Ortak tokenizasyon üzerinde altı bağımsız stilometrik analizci', 'Türkçe için Zeyrek biçimbilimi, İngilizce için Porter kök bulma', 'İnsan ve LLM örnekleriyle kalibre edilmiş ağırlıklı bileşik puanlama'],
+      expected: 'Kara kutu bir sınıflandırıcı yerine yorumlanabilir, sinyal bazlı bir risk skoru ve iki dili karşılaştıran bir kıyaslama.',
+    },
+    {
+      title: 'Küçük ve Kapalı Yüzler için Tespit-et-Doğrula',
+      field: 'Bilgisayarlı Görü', accent: '#00d4ff',
+      abstract: 'Hazır kısa menzilli dedektörlerin kaçırdığı yüzleri, hatalı tespitleri artırmadan yakalamanın araştırılması — esnek bir ilk geçişi yakınlaştırmalı bir yeniden doğrulama aşamasıyla eşleyerek.',
+      methods: ['Görsel yarıları üzerinde düşük eşikli bölgesel aday araması', 'Daha katı güven eşiğiyle yakınlaştırmalı yeniden tespit', 'IoU tabanlı tekilleştirme ve sınır durumları için insan inceleme kuyruğu'],
+      expected: 'Küçük yüzlerde eşit ya da daha iyi kesinlikle ölçülebilir biçimde daha yüksek duyarlılık; 140.000 görsellik test üzerinde ölçülmüş.',
+    },
+    {
+      title: 'Düşük Kaynaklı TR→EN Çeviri için MarianMT İnce Ayarı',
+      field: 'Makine Çevirisi', accent: '#4d96ff',
+      abstract: 'Hafif, önceden eğitilmiş bir MarianMT modelinin, mütevazı bir paralel derlem ve tek bir ücretsiz GPU ile Türkçe→İngilizce çeviride ne kadar ileri gidebileceğinin yeniden üretilebilir bir çalışması.',
+      methods: ['Tatoeba derleminin temizlenmesi ve %80/%10/%10 bölünmesi', 'Tokenizasyon karşılaştırması (karakter / kelime / bayt / BPE)', 'SacreBLEU değerlendirmesi ve ışın aramasıyla fp16 ince ayar'],
+      expected: 'Belgelenmiş bir BLEU artışı (~36 → ~43) ve başkalarının Colab T4’te uçtan uca çalıştırabileceği bir reçete.',
+    },
+  ],
+
+  // Resume page
+  resumeBack: 'Ana Sayfa',
+  resumeBadge: 'CV',
+  resumeTitle: 'Görkem Ergüne',
+  resumeRole: 'Bilgisayar Mühendisliği Öğrencisi · Yapay Zekâ Mühendisi',
+  resumePrint: 'PDF olarak kaydet',
+  resumeSummary: 'İkinci sınıf Bilgisayar Mühendisliği öğrencisi ve kendi kendine yönlenen bir yapay zekâ mühendisi; araştırma odaklı bir yaklaşımla bilgisayarlı görü sistemleri, makine öğrenmesi işlem hatları ve full-stack yazılım geliştiriyorum — ve üretmeyi alışkanlık hâline getirdim.',
+  resumeSecEducation: 'Eğitim',
+  resumeSecExperience: 'Deneyim',
+  resumeSecProjects: 'Seçili Projeler',
+  resumeSecSkills: 'Yetenekler',
+  resumeSecResearch: 'Araştırma (devam eden)',
+  resumeEduSchool: 'Bilgisayar Mühendisliği Lisans',
+  resumeEduDetail: 'Lisans · 2025 — Günümüz',
+
+  // Case study
+  csBack: 'Proje',
+  csBadge: 'VAKA ANALİZİ',
+  csRead: 'Vaka Analizini Oku',
+  csProblem: 'Problem',
+  csSolution: 'Çözüm',
+  csArchitecture: 'Mimari',
+  csChallenges: 'Zorluklar',
+  csResults: 'Sonuçlar',
+  csLessons: 'Çıkarımlar',
+  csNone: 'Bu proje için henüz vaka analizi yok.',
 
   // Blog detail content
   blogPosts: {

@@ -1,23 +1,32 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, lazy, Suspense } from "react";
 import { Routes, Route, Link, useLocation } from "react-router-dom";
-import { ArrowUpRight, Globe, Menu, X } from 'lucide-react';
+import { ArrowUpRight, Globe, Menu, X, Search } from 'lucide-react';
 import { useLang } from './i18n.jsx';
 import HallOfArmor from './components/HallOfArmor';
 import IronManBackdrop from './components/IronManBackdrop';
-import BlogDetail from './pages/RoadmapDetail';
-import BlogHub from './pages/BlogHub';
-import FunHub from './pages/FunHub';
-import SorryPage from './pages/SorryPage';
-import BirthdayPage from './pages/BirthdayPage';
-import HangmanPage from './pages/HangmanPage';
-import PuzzlePage from './pages/PuzzlePage';
-import HanoiPage from './pages/HanoiPage';
-import MothersDay from './pages/MothersDay';
-import GoOutPage from './pages/GoOutPage';
-import ContactPage from './pages/ContactPage';
-import JourneyPage from './pages/JourneyPage';
-import ProjectPage from './pages/ProjectPage';
-import ProjectDetail from './pages/ProjectDetail';
+import CommandPalette from './components/CommandPalette';
+import Home from './pages/Home';
+
+// Route-level code-splitting keeps the landing bundle small (better LCP/TBT).
+const BlogDetail = lazy(() => import('./pages/RoadmapDetail'));
+const BlogHub = lazy(() => import('./pages/BlogHub'));
+const FunHub = lazy(() => import('./pages/FunHub'));
+const SorryPage = lazy(() => import('./pages/SorryPage'));
+const BirthdayPage = lazy(() => import('./pages/BirthdayPage'));
+const HangmanPage = lazy(() => import('./pages/HangmanPage'));
+const PuzzlePage = lazy(() => import('./pages/PuzzlePage'));
+const HanoiPage = lazy(() => import('./pages/HanoiPage'));
+const MothersDay = lazy(() => import('./pages/MothersDay'));
+const GoOutPage = lazy(() => import('./pages/GoOutPage'));
+const ContactPage = lazy(() => import('./pages/ContactPage'));
+const JourneyPage = lazy(() => import('./pages/JourneyPage'));
+const ProjectPage = lazy(() => import('./pages/ProjectPage'));
+const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
+const ExperiencePage = lazy(() => import('./pages/ExperiencePage'));
+const StackPage = lazy(() => import('./pages/StackPage'));
+const ResearchPage = lazy(() => import('./pages/ResearchPage'));
+const ResumePage = lazy(() => import('./pages/ResumePage'));
+const CaseStudyPage = lazy(() => import('./pages/CaseStudyPage'));
 
 export default function App() {
   const [time, setTime] = useState('');
@@ -135,6 +144,36 @@ export default function App() {
         }
         .hero-btn:hover svg { color: #0a0a0f !important; }
 
+        .hero-btn-primary { background: #00d4ff; color: #0a0a0f; border-color: #00d4ff; }
+        .hero-btn-primary svg { color: #0a0a0f !important; }
+        .hero-btn-primary:hover { background: #2ee2ff; border-color: #2ee2ff; }
+
+        .cmdk-btn {
+          display: inline-flex; align-items: center; gap: 7px; padding: 6px 11px;
+          border: 1px solid #1a1a2e; border-radius: 6px; background: rgba(15,15,26,0.6);
+          color: #9a9ab0; cursor: pointer; transition: border-color 0.3s, color 0.3s;
+          font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.06em;
+        }
+        .cmdk-btn:hover { border-color: #00d4ff; color: #e0e0e8; }
+
+        .page-enter { animation: page-fade 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        @keyframes page-fade { from { opacity: 0; } to { opacity: 1; } }
+
+        .skip-link {
+          position: fixed; top: -60px; left: 12px; z-index: 400;
+          background: #00d4ff; color: #0a0a0f; padding: 10px 18px; border-radius: 6px;
+          font-family: 'Instrument Sans', sans-serif; font-size: 14px; font-weight: 600;
+          transition: top 0.2s; text-decoration: none;
+        }
+        .skip-link:focus { top: 12px; }
+        a:focus-visible, button:focus-visible {
+          outline: 2px solid #00d4ff; outline-offset: 3px; border-radius: 4px;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+        }
+        @media (max-width: 520px) { .cmdk-label { display: none; } }
+
         .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; color: #e0e0e8; }
 
         .nav-links { display: flex; gap: 28; font-size: 13px; font-family: 'Instrument Sans', sans-serif; color: #8a8aa0; }
@@ -187,6 +226,7 @@ export default function App() {
         }
       `}</style>
 
+      <a href="#main" className="skip-link">Skip to content</a>
       <IronManBackdrop />
 
       <div className="grain" style={{ position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 100 }} />
@@ -205,19 +245,29 @@ export default function App() {
           <Link to="/" style={styles.mark}>
             <span style={{ fontFamily: "'Instrument Serif', serif", fontStyle: 'italic', fontSize: 22 }}>Gorkem</span>
             <span style={styles.dot} />
-            <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.14em', color: '#5a5a70' }}>EST. 20XX</span>
+            <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.14em', color: '#6a6a82' }}>EST. 2025</span>
           </Link>
           <div className="nav-links" style={styles.navLinks}>
-            <Link to="/blog" className="link-hover" style={{ cursor: 'pointer' }}>{t('navBlog')}</Link>
-            <Link to="/fun" className="link-hover" style={{ cursor: 'pointer' }}>{t('navFun')}</Link>
             <Link to="/project" className="link-hover" style={{ cursor: 'pointer' }}>{t('navProject')}</Link>
-            <Link to="/journey" className="link-hover" style={{ cursor: 'pointer' }}>{t('navLifeFlow')}</Link>
+            <Link to="/experience" className="link-hover" style={{ cursor: 'pointer' }}>{t('navExperience')}</Link>
+            <Link to="/stack" className="link-hover" style={{ cursor: 'pointer' }}>{t('navStack')}</Link>
+            <Link to="/research" className="link-hover" style={{ cursor: 'pointer' }}>{t('navResearch')}</Link>
+            <Link to="/blog" className="link-hover" style={{ cursor: 'pointer' }}>{t('navBlog')}</Link>
             <Link to="/contact" className="link-hover" style={{ cursor: 'pointer', color: '#e0e0e8', fontWeight: 500 }}>
               {t('navContact')} <ArrowUpRight size={13} strokeWidth={1.5} />
             </Link>
           </div>
-          <div className="nav-right" style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-            <button onClick={toggleLang} className="lang-btn" style={styles.langBtn}>
+          <div className="nav-right" style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+            <button
+              className="cmdk-btn"
+              onClick={() => window.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', metaKey: true }))}
+              aria-label="Open command palette"
+              style={styles.cmdkBtn}
+            >
+              <Search size={13} strokeWidth={1.6} />
+              <span className="cmdk-label">⌘K</span>
+            </button>
+            <button onClick={toggleLang} className="lang-btn" style={styles.langBtn} aria-label="Toggle language">
               <Globe size={13} strokeWidth={1.5} style={{ marginRight: 5, verticalAlign: -2 }} />
               {lang === 'en' ? 'TR' : 'EN'}
             </button>
@@ -234,176 +284,71 @@ export default function App() {
         {/* MOBILE MENU */}
         {menuOpen && (
           <div className="mobile-menu" style={styles.mobileMenu}>
-            <Link to="/blog" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navBlog')}</Link>
-            <Link to="/fun" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navFun')}</Link>
             <Link to="/project" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navProject')}</Link>
+            <Link to="/experience" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navExperience')}</Link>
+            <Link to="/stack" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navStack')}</Link>
+            <Link to="/research" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navResearch')}</Link>
+            <Link to="/blog" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navBlog')}</Link>
             <Link to="/journey" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navLifeFlow')}</Link>
+            <Link to="/resume" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navResume')}</Link>
+            <Link to="/fun" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navFun')}</Link>
             <Link to="/contact" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navContact')}</Link>
           </div>
         )}
       </nav>
 
       {/* ROUTES */}
-      <Routes>
-        <Route path="/" element={
-          <>
-            {/* HALL OF ARMOR */}
-            <section id="top" ref={heroRef} style={{ position: 'relative', overflow: 'hidden' }}>
-              <HallOfArmor />
-            </section>
+      <main id="main" key={location.pathname} className="page-enter">
+        <Suspense fallback={<div style={{ minHeight: '70vh' }} aria-busy="true" />}>
+        <Routes>
+          <Route path="/" element={
+            <>
+              <section id="top" ref={heroRef} style={{ position: 'relative', overflow: 'hidden' }}>
+                <HallOfArmor />
+              </section>
+              <Home />
+            </>
+          } />
+          <Route path="/blog" element={<BlogHub />} />
+          <Route path="/blog/:slug" element={<BlogDetail />} />
+          <Route path="/fun" element={<FunHub />} />
+          <Route path="/fun/sorry" element={<SorryPage />} />
+          <Route path="/fun/mothersday" element={<MothersDay />} />
+          <Route path="/fun/goout" element={<GoOutPage />} />
+          <Route path="/fun/birthday" element={<BirthdayPage />} />
+          <Route path="/fun/hangman" element={<HangmanPage />} />
+          <Route path="/fun/puzzle" element={<PuzzlePage />} />
+          <Route path="/fun/hanoi" element={<HanoiPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/journey" element={<JourneyPage />} />
+          <Route path="/project" element={<ProjectPage />} />
+          <Route path="/project/:slug" element={<ProjectDetail />} />
+          <Route path="/project/:slug/case-study" element={<CaseStudyPage />} />
+          <Route path="/experience" element={<ExperiencePage />} />
+          <Route path="/stack" element={<StackPage />} />
+          <Route path="/research" element={<ResearchPage />} />
+          <Route path="/resume" element={<ResumePage />} />
+        </Routes>
+        </Suspense>
+      </main>
 
-            {/* IDENTITY / STORYTELLING */}
-            <HomeIntro t={t} />
-          </>
-        } />
-        <Route path="/blog" element={<BlogHub />} />
-        <Route path="/blog/:slug" element={<BlogDetail />} />
-        <Route path="/fun" element={<FunHub />} />
-        <Route path="/fun/sorry" element={<SorryPage />} />
-        <Route path="/fun/mothersday" element={<MothersDay />} />
-        <Route path="/fun/goout" element={<GoOutPage />} />
-        <Route path="/fun/birthday" element={<BirthdayPage />} />
-        <Route path="/fun/hangman" element={<HangmanPage />} />
-        <Route path="/fun/puzzle" element={<PuzzlePage />} />
-        <Route path="/fun/hanoi" element={<HanoiPage />} />
-        <Route path="/contact" element={<ContactPage />} />
-        <Route path="/journey" element={<JourneyPage />} />
-        <Route path="/project" element={<ProjectPage />} />
-        <Route path="/project/:slug" element={<ProjectDetail />} />
-      </Routes>
+      <CommandPalette />
 
       {/* FOOTER */}
       <footer style={styles.footer}>
         <div className="container" style={{ padding: '32px 48px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 16 }}>
-          <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.1em', color: '#4a4a60' }}>
-            &copy; 2026 &middot; Gorkem Ergune
+          <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.1em', color: '#6a6a82' }}>
+            &copy; 2026 &middot; Görkem Ergüne
           </span>
-          <span style={{ fontFamily: "'Instrument Serif', serif", fontStyle: 'italic', fontSize: 14, color: '#5a5a70' }}>
+          <span style={{ fontFamily: "'Instrument Serif', serif", fontStyle: 'italic', fontSize: 14, color: '#7a7a92' }}>
             {t('footerBuilt')}
           </span>
-          <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.1em', color: '#4a4a60' }}>
-            v2.10 &middot; {time}
+          <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.1em', color: '#6a6a82' }}>
+            v2.20 &middot; {time}
           </span>
         </div>
       </footer>
     </div>
-  );
-}
-
-function AnimatedCounter({ target, suffix, duration = 1600 }) {
-  const [value, setValue] = useState(0);
-  const ref = useRef(null);
-  const started = useRef(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const io = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting && !started.current) {
-        started.current = true;
-        const start = performance.now();
-        const tick = (now) => {
-          const p = Math.min((now - start) / duration, 1);
-          const eased = 1 - Math.pow(1 - p, 3);
-          setValue(Math.round(eased * target));
-          if (p < 1) requestAnimationFrame(tick);
-        };
-        requestAnimationFrame(tick);
-      }
-    }, { threshold: 0.4 });
-    io.observe(el);
-    return () => io.disconnect();
-  }, [target, duration]);
-
-  return <span ref={ref}>{value}{suffix}</span>;
-}
-
-function HomeIntro({ t }) {
-  const roles = t('introRoles');
-  const stats = t('introStats');
-
-  return (
-    <section id="identity" className="container intro-section" style={styles.container}>
-      <style>{`
-        .intro-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 72px; align-items: start; }
-        .intro-glass {
-          background: rgba(15,15,26,0.55); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
-          border: 1px solid #1a1a2e; border-radius: 12px;
-        }
-        .role-pill {
-          display: inline-flex; align-items: center; gap: 7px; padding: 8px 14px;
-          border: 1px solid #1a1a2e; border-radius: 999px; background: rgba(15,15,26,0.5);
-          font-family: 'Instrument Sans', sans-serif; font-size: 13px; color: #b0b0c4;
-          transition: all 0.35s cubic-bezier(0.2,0.8,0.2,1); cursor: default;
-        }
-        .role-pill:hover { border-color: #00d4ff; color: #fff; box-shadow: 0 0 18px rgba(0,212,255,0.16); transform: translateY(-2px); }
-        .role-pill .rp-dot { width: 5px; height: 5px; border-radius: 50%; background: #00d4ff; box-shadow: 0 0 6px #00d4ff; }
-        .stat-cell { padding: 22px 20px; transition: border-color 0.4s, box-shadow 0.4s; }
-        .stat-cell:hover { border-color: #2a2a45 !important; box-shadow: inset 0 0 24px rgba(0,212,255,0.05); }
-        .intro-cta-row { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 40px; }
-        @media (max-width: 900px) {
-          .intro-grid { grid-template-columns: 1fr !important; gap: 44px !important; }
-          .intro-lead { font-size: 26px !important; }
-        }
-        @media (max-width: 600px) {
-          .intro-lead { font-size: 22px !important; }
-          .intro-stats-grid { grid-template-columns: 1fr 1fr !important; }
-        }
-      `}</style>
-
-      <div style={styles.introKicker}>
-        <span style={styles.introKickerDot} />
-        {t('introKicker')}
-      </div>
-
-      <div className="intro-grid" style={{ marginTop: 40 }}>
-        {/* LEFT — story */}
-        <div>
-          <p className="intro-lead" style={styles.introLead}>
-            {t('introLeadPre')}
-            <em style={styles.introLeadEm}>{t('introLeadEm')}</em>
-            {t('introLeadPost')}
-          </p>
-          <p style={styles.introBody}>{t('introBody')}</p>
-
-          <div className="intro-cta-row">
-            <Link to="/project" className="hero-btn">
-              {t('introCtaProjects')} <ArrowUpRight size={15} strokeWidth={1.5} />
-            </Link>
-            <Link to="/blog" className="hero-btn">{t('introCtaBlog')}</Link>
-            <Link to="/contact" className="hero-btn">{t('introCtaContact')}</Link>
-          </div>
-        </div>
-
-        {/* RIGHT — roles + stats */}
-        <div>
-          <div style={styles.introRolesLabel}>{t('introRolesLabel')}</div>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 36 }}>
-            {Array.isArray(roles) && roles.map((r) => (
-              <span key={r} className="role-pill"><span className="rp-dot" />{r}</span>
-            ))}
-          </div>
-
-          <div className="intro-glass intro-stats-grid" style={styles.introStatsGrid}>
-            {Array.isArray(stats) && stats.map((st, i) => (
-              <div
-                key={i}
-                className="stat-cell"
-                style={{
-                  borderRight: i % 2 === 0 ? '1px solid #1a1a2e' : 'none',
-                  borderBottom: i < 2 ? '1px solid #1a1a2e' : 'none',
-                }}
-              >
-                <div style={styles.statNum}>
-                  <AnimatedCounter target={st.n} suffix={st.suffix} />
-                </div>
-                <div style={styles.statLabel}>{st.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
   );
 }
 
@@ -425,6 +370,7 @@ const styles = {
   },
   mark: { display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0 },
   dot: { width: 4, height: 4, borderRadius: '50%', background: '#00d4ff', display: 'inline-block' },
+  cmdkBtn: {},
   navLinks: {
     display: 'flex', gap: 28, fontSize: 13,
     fontFamily: "'Instrument Sans', sans-serif", color: '#8a8aa0',

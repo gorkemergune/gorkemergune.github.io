@@ -1,0 +1,72 @@
+import { Link } from 'react-router-dom';
+import { ArrowUpRight } from 'lucide-react';
+import { useLang } from '../i18n.jsx';
+import { useSeo } from '../hooks/useSeo';
+import FeaturedMetrics from '../components/FeaturedMetrics';
+import FeaturedProject from '../components/FeaturedProject';
+import CurrentlyBuilding from '../components/CurrentlyBuilding';
+import GitHubActivity from '../components/GitHubActivity';
+
+export default function Home() {
+  const { t } = useLang();
+  const roles = t('introRoles');
+  useSeo({ description: t('heroSubtext'), path: '/' });
+
+  return (
+    <>
+      {/* IDENTITY / STORY */}
+      <section id="identity" className="container" style={s.section}>
+        <style>{`
+          .home-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 72px; align-items: start; }
+          .role-pill { display: inline-flex; align-items: center; gap: 7px; padding: 8px 14px; border: 1px solid #1a1a2e; border-radius: 999px; background: rgba(15,15,26,0.5); font-family: 'Instrument Sans', sans-serif; font-size: 13px; color: #b6b6ca; transition: all 0.35s cubic-bezier(0.2,0.8,0.2,1); cursor: default; }
+          .role-pill:hover { border-color: #00d4ff; color: #fff; box-shadow: 0 0 18px rgba(0,212,255,0.16); transform: translateY(-2px); }
+          .role-pill .rp-dot { width: 5px; height: 5px; border-radius: 50%; background: #00d4ff; box-shadow: 0 0 6px #00d4ff; }
+          @media (max-width: 900px) { .home-grid { grid-template-columns: 1fr !important; gap: 44px !important; } .home-lead { font-size: 26px !important; } }
+          @media (max-width: 600px) { .home-lead { font-size: 22px !important; } }
+        `}</style>
+
+        <div style={s.kicker}><span style={s.kickerDot} />{t('introKicker')}</div>
+
+        <div className="home-grid" style={{ marginTop: 40 }}>
+          <div>
+            <p className="home-lead" style={s.lead}>
+              {t('introLeadPre')}
+              <em style={s.leadEm}>{t('introLeadEm')}</em>
+              {t('introLeadPost')}
+            </p>
+            <p style={s.body}>{t('introBody')}</p>
+            <div style={s.ctaRow}>
+              <Link to="/project" className="hero-btn">{t('introCtaProjects')} <ArrowUpRight size={15} strokeWidth={1.5} /></Link>
+              <Link to="/experience" className="hero-btn">{t('navExperience')}</Link>
+              <Link to="/contact" className="hero-btn">{t('introCtaContact')}</Link>
+            </div>
+          </div>
+          <div>
+            <div style={s.rolesLabel}>{t('introRolesLabel')}</div>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+              {Array.isArray(roles) && roles.map((r) => (
+                <span key={r} className="role-pill"><span className="rp-dot" />{r}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <FeaturedMetrics />
+      <FeaturedProject />
+      <CurrentlyBuilding />
+      <GitHubActivity />
+    </>
+  );
+}
+
+const s = {
+  section: { maxWidth: 1400, margin: '0 auto', padding: '110px 48px 40px', position: 'relative', zIndex: 2 },
+  kicker: { display: 'inline-flex', alignItems: 'center', gap: 10, fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.18em', color: '#6a6a82' },
+  kickerDot: { width: 7, height: 7, borderRadius: '50%', background: '#00d4ff', boxShadow: '0 0 8px #00d4ff' },
+  lead: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 30, lineHeight: 1.4, color: '#eef0f6', fontWeight: 400, marginBottom: 28, letterSpacing: '-0.01em' },
+  leadEm: { fontFamily: "'Instrument Serif', serif", fontStyle: 'italic', color: '#00d4ff' },
+  body: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 17, lineHeight: 1.7, color: '#a2a2b8', maxWidth: 640 },
+  ctaRow: { display: 'flex', gap: 14, flexWrap: 'wrap', marginTop: 40 },
+  rolesLabel: { fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.16em', color: '#5a5a70', marginBottom: 16 },
+};

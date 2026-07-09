@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { ArrowUpRight, FileText } from 'lucide-react';
 import useAudioFX from './useAudioFX';
 import { useLang } from '../i18n.jsx';
 import PROJECTS from '../data/projects';
@@ -171,6 +172,19 @@ export default function HallOfArmor() {
         <h1 className="hall-name" style={s.name}>
           GORKEM <span style={{ color: '#00d4ff', textShadow: '0 0 30px rgba(0,212,255,0.4)' }}>ERGUNE</span>
         </h1>
+        <div className="hall-tagline" style={s.taglineChip}>
+          <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#00d4ff', boxShadow: '0 0 8px #00d4ff' }} />
+          {t('heroTagline')}
+        </div>
+        <p className="hall-subtext" style={s.heroSub}>{t('heroSubtext')}</p>
+        <div className="hall-ctas" style={s.heroCtas}>
+          <Link to="/project" className="hero-btn hero-btn-primary" onClick={playClick}>
+            {t('ctaViewWork')} <ArrowUpRight size={15} strokeWidth={1.5} />
+          </Link>
+          <Link to="/resume" className="hero-btn" onClick={playClick}>
+            <FileText size={15} strokeWidth={1.5} /> {t('ctaResume')}
+          </Link>
+        </div>
       </div>
 
       {/* PLATFORM */}
@@ -362,13 +376,24 @@ const s = {
   },
   statusLeft: { color: '#6a6a80', letterSpacing: '0.12em' },
   statusCenter: { flex: 1, textAlign: 'center', color: '#3a3a50' },
-  nameWrap: { textAlign: 'center', marginBottom: 48 },
+  nameWrap: { textAlign: 'center', marginBottom: 48, display: 'flex', flexDirection: 'column', alignItems: 'center' },
   name: {
     fontFamily: "'JetBrains Mono', monospace",
     fontSize: 88, fontWeight: 500,
     letterSpacing: '0.08em', color: '#e0e0e8',
     lineHeight: 1, margin: 0,
   },
+  taglineChip: {
+    display: 'inline-flex', alignItems: 'center', gap: 9, marginTop: 24,
+    padding: '7px 16px', border: '1px solid rgba(0,212,255,0.25)', borderRadius: 999,
+    background: 'rgba(0,212,255,0.05)', fontFamily: "'JetBrains Mono', monospace",
+    fontSize: 12, letterSpacing: '0.18em', color: '#bfe9ff',
+  },
+  heroSub: {
+    marginTop: 22, maxWidth: 620, fontFamily: "'Instrument Sans', sans-serif",
+    fontSize: 18, lineHeight: 1.6, color: '#a8a8be',
+  },
+  heroCtas: { marginTop: 30, display: 'flex', gap: 14, flexWrap: 'wrap', justifyContent: 'center' },
   platformWrap: {
     display: 'flex', justifyContent: 'center',
     marginBottom: 72, paddingBottom: 36,

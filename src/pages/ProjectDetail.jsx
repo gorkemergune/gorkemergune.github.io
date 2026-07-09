@@ -1,14 +1,34 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { ArrowLeft, ArrowUpRight, ChevronLeft, ChevronRight, Github, X } from 'lucide-react';
+import { ArrowLeft, ArrowUpRight, ChevronLeft, ChevronRight, Github, X, FileText } from 'lucide-react';
 import { useLang } from '../i18n.jsx';
 import { getProject } from '../data/projects';
+import { getCaseStudy } from '../data/caseStudies';
+import { useSeo } from '../hooks/useSeo';
 
 export default function ProjectDetail() {
   const { slug } = useParams();
   const { lang, t } = useLang();
   const project = getProject(slug);
   const [lightbox, setLightbox] = useState(-1);
+
+  const seoDesc = project ? (lang === 'tr' && project.oneLinerTr ? project.oneLinerTr : project.oneLiner) : undefined;
+  useSeo({
+    title: project?.title,
+    description: seoDesc,
+    image: project ? `/og/${slug}.png` : undefined,
+    type: 'article',
+    jsonLd: project ? {
+      '@context': 'https://schema.org',
+      '@type': 'SoftwareSourceCode',
+      name: project.title,
+      description: seoDesc,
+      codeRepository: project.github,
+      programmingLanguage: project.language,
+      keywords: project.tags.join(', '),
+      author: { '@type': 'Person', name: 'Görkem Ergüne', url: 'https://github.com/gorkemergune' },
+    } : undefined,
+  });
 
   if (!project) {
     return (
@@ -83,7 +103,13 @@ export default function ProjectDetail() {
           ))}
         </div>
 
-        <div style={{ marginTop: 32 }}>
+        <div style={{ marginTop: 32, display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+          {getCaseStudy(slug) && (
+            <Link className="hero-btn hero-btn-primary" to={`/project/${slug}/case-study`} style={{ borderColor: color }}>
+              <FileText size={16} strokeWidth={1.5} />
+              {t('csRead')}
+            </Link>
+          )}
           <a className="hero-btn" href={project.github} target="_blank" rel="noreferrer">
             <Github size={16} strokeWidth={1.5} style={{ color: '#8a8aa0' }} />
             {t('pdViewGithub')}
