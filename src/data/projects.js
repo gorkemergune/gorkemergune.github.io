@@ -9,7 +9,7 @@ const gh = (repo) => `https://github.com/gorkemergune/${repo}`;
 const PROJECTS = [
   {
     slug: 'sorting-visualizer',
-    category: 'Software Engineering',
+    category: 'C',
     cover: '/projects/sorting-visualizer/cover.svg',
     mark: 'MARK I',
     codename: 'The Algorithm',
@@ -77,7 +77,7 @@ const PROJECTS = [
   },
   {
     slug: 'raylib-space-shooter',
-    category: 'Software Engineering',
+    category: 'C',
     cover: '/projects/raylib-space-shooter/cover.svg',
     mark: 'MARK II',
     codename: 'Star Fighter',
@@ -145,7 +145,7 @@ const PROJECTS = [
   },
   {
     slug: 'gorkem-os',
-    category: 'Software Engineering',
+    category: 'C',
     cover: '/projects/gorkem-os/cover.svg',
     mark: 'MARK III',
     codename: 'Bare Metal',
@@ -997,7 +997,7 @@ const PROJECTS = [
   {
     slug: 'nexa-website',
     cover: '/projects/nexa-website/cover.svg',
-    category: 'Open Source',
+    category: 'Web',
     mark: 'MARK XV',
     codename: 'The Collective',
     title: 'NEXA Community Website',

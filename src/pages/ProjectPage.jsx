@@ -5,10 +5,11 @@ import { useLang } from '../i18n.jsx';
 import { useSeo } from '../hooks/useSeo';
 import PROJECTS from '../data/projects';
 
-const CAT_ORDER = ['Computer Vision', 'Machine Learning', 'Deep Learning', 'Large Language Models', 'Research', 'Software Engineering', 'Open Source', 'Utilities'];
+const CAT_ORDER = ['Computer Vision', 'Machine Learning', 'Deep Learning', 'Large Language Models', 'Research', 'Software Engineering', 'Web', 'Mobile', 'C', 'C++', 'Java', 'Open Source', 'Utilities'];
 const CAT_TR = {
   'Computer Vision': 'Bilgisayarlı Görü', 'Machine Learning': 'Makine Öğrenmesi', 'Deep Learning': 'Derin Öğrenme',
   'Large Language Models': 'Büyük Dil Modelleri', 'Research': 'Araştırma', 'Software Engineering': 'Yazılım Mühendisliği',
+  'Web': 'Web', 'Mobile': 'Mobil', 'C': 'C', 'C++': 'C++', 'Java': 'Java',
   'Open Source': 'Açık Kaynak', 'Utilities': 'Araçlar',
 };
 
