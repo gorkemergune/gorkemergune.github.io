@@ -70,7 +70,7 @@ function ArmorCard({ project, index, lang }) {
 
       {/* Preview */}
       <div className="armor-preview" style={s.preview}>
-        <img src={project.images[0].src} alt={project.title} loading="lazy" style={s.previewImg} />
+        <img src={project.cover || project.images[0].src} alt={project.title} loading="lazy" style={{ ...s.previewImg, objectPosition: project.cover ? 'center' : 'top' }} />
         <span style={{ ...s.markTag, color, borderColor: `${color}55`, background: 'rgba(8,8,16,0.85)' }}>
           {project.mark}
         </span>

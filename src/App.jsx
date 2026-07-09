@@ -3,6 +3,7 @@ import { Routes, Route, Link, useLocation } from "react-router-dom";
 import { ArrowUpRight, Globe, Menu, X } from 'lucide-react';
 import { useLang } from './i18n.jsx';
 import HallOfArmor from './components/HallOfArmor';
+import IronManBackdrop from './components/IronManBackdrop';
 import BlogDetail from './pages/RoadmapDetail';
 import BlogHub from './pages/BlogHub';
 import FunHub from './pages/FunHub';
@@ -185,6 +186,8 @@ export default function App() {
           .nav-inner { padding: 14px 16px !important; }
         }
       `}</style>
+
+      <IronManBackdrop />
 
       <div className="grain" style={{ position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 100 }} />
 

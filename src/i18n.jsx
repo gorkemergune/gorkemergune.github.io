@@ -79,16 +79,10 @@ const en = {
   blogLabel: 'Blog',
   blogSub: 'Notes on AI, engineering, and the student life behind them',
   blogItems: [
-    { category: 'Career', date: 'Jun 2026', readTime: '3 min', title: 'Why I Build in Public', excerpt: 'Shipping small projects openly turned out to be the fastest way to learn — and the scariest.', slug: 'why-i-build-in-public' },
-    { category: 'Computer Vision', date: 'Jun 2026', readTime: '3 min', title: 'My First Real Computer Vision Model', excerpt: 'What 117 photos of a single pen taught me about datasets, overfitting, and patience.', slug: 'computer-vision-first-model' },
-    { category: 'Deep Learning', date: 'May 2026', readTime: '4 min', title: 'A Gentle Intuition for Transformers', excerpt: 'Attention is just asking every word which other words it should listen to. Here is the picture in my head.', slug: 'transformers-intuition' },
-    { category: 'Machine Learning', date: 'May 2026', readTime: '3 min', title: 'Why TF-IDF Still Beats Fancy Models', excerpt: 'A logistic regression on TF-IDF hit 0.99 F1 on phishing email. Sometimes the boring tool wins.', slug: 'tfidf-still-matters' },
-    { category: 'Algorithms', date: 'Apr 2026', readTime: '3 min', title: 'The Day Big-O Finally Clicked', excerpt: 'Watching sorting algorithms animate frame by frame did what a hundred lecture slides could not.', slug: 'big-o-that-clicked' },
-    { category: 'Software Engineering', date: 'Apr 2026', readTime: '4 min', title: 'Clean Code Lessons I Learned the Hard Way', excerpt: 'Every naming and structure rule I now follow came from a past project I could no longer read.', slug: 'clean-code-student' },
-    { category: 'University Life', date: 'Mar 2026', readTime: '3 min', title: 'Surviving First-Year Computer Engineering', excerpt: 'Calculus, C pointers, and the quiet realization that consistency beats intensity every time.', slug: 'surviving-first-year-ce' },
-    { category: 'AI', date: 'Mar 2026', readTime: '4 min', title: 'The Roadmap I Would Give My First-Year Self', excerpt: 'If I could start over, this is the order I would learn AI engineering in — and what I would skip.', slug: 'ai-engineer-roadmap' },
-    { category: 'Computer Vision', date: 'Feb 2026', readTime: '3 min', title: 'Teaching a Model to See One Object', excerpt: 'Single-class detection sounds trivial until you try it. Diversity in the data is everything.', slug: 'small-data-detection' },
-    { category: 'Technology', date: 'Feb 2026', readTime: '3 min', title: 'The Tools That Earn Their Place', excerpt: 'A short, honest list of the software I actually keep open all day — and why the rest got deleted.', slug: 'tools-that-earn-their-place' },
+    { category: 'University', date: 'Jun 2026', readTime: '4 min', title: 'How to Get AA in Calculus 1-2', excerpt: 'The habits — not the talent — that carried me through two semesters of calculus with a top grade.', slug: 'calculus-aa' },
+    { category: 'Programming', date: 'May 2026', readTime: '4 min', title: 'Python from Scratch', excerpt: 'A beginner-friendly path into Python: what to learn first, and what to happily ignore for now.', slug: 'python-from-scratch' },
+    { category: 'Programming', date: 'Apr 2026', readTime: '4 min', title: 'C from Scratch', excerpt: 'Pointers, memory, and the compiler that finally taught me how a computer actually works.', slug: 'c-from-scratch' },
+    { category: 'Career', date: 'Mar 2026', readTime: '4 min', title: 'Should You Study Computer Engineering?', excerpt: 'An honest look at the field — who it fits, who it frustrates, and what nobody tells you first.', slug: 'should-you-study-cs' },
   ],
 
   // Puzzle
@@ -250,6 +244,7 @@ const en = {
   // Contact Page
   contactBack: 'Home',
   contactBadge: 'CONTACT',
+  contactCreator: 'CONTENT CREATOR',
 
   // Journey Page
   journeyBack: 'Home',
@@ -309,116 +304,48 @@ const en = {
 
   // Blog detail content
   blogPosts: {
-    'why-i-build-in-public': {
-      title: 'Why I Build in Public',
-      category: 'Career', date: 'Jun 2026', readTime: '3 min',
-      description: 'Shipping small projects openly turned out to be the fastest way to learn — and the scariest.',
+    'calculus-aa': {
+      title: 'How to Get AA in Calculus 1-2',
+      category: 'University', date: 'Jun 2026', readTime: '4 min',
+      description: 'The habits — not the talent — that carried me through two semesters of calculus with a top grade.',
       body: [
-        'For a long time I kept my projects in private repositories, telling myself I would share them once they were "good enough." That day never came. There is always one more bug, one more feature, one more excuse. At some point I realized the polish I was waiting for was just fear wearing a nicer outfit.',
-        'Building in public flipped that. When a project has a README, screenshots, and a link someone might actually click, I hold myself to a different standard. I write cleaner commits. I explain my decisions. I catch mistakes I would have shrugged off in private. The audience does not even have to be large — the mere possibility of one is enough to raise the bar.',
-        'It is also the fastest feedback loop I have found. A stranger pointing out a flaw in my approach teaches me more in five minutes than a week of solo debugging. And every finished, visible project becomes a small proof of work: not a promise that I can build something, but evidence that I already did.',
-        'My advice to anyone hesitating: ship the small thing. Not the perfect thing. The small, honest, finished thing. Momentum compounds, and confidence is a side effect of shipping, not a prerequisite for it.',
+        'Calculus has a reputation for separating the “math people” from everyone else. After two semesters, I’m convinced that reputation is mostly wrong. The students who scored highest were rarely the most naturally gifted — they were the ones who treated calculus like a skill to be practiced daily rather than a talent you either have or don’t.',
+        'The single biggest lever was doing problems, not reading them. I could watch a lecture, nod along, and feel like I understood limits or integration by parts — right until a blank problem stared back at me. Understanding a solution and being able to produce it are two completely different abilities, and only one of them shows up on the exam. So I front-loaded practice: a handful of problems every single day, not a marathon the night before.',
+        'The second was building the chain, not memorizing links. Derivatives feed into integrals; limits underpin both. When I skipped a shaky topic, it quietly sabotaged everything downstream. Going back to patch the weak link always paid off more than pushing ahead.',
+        'The rest is unglamorous: redo the problems you got wrong until they’re boring, keep a page of the tricks that keep reappearing, and ask early when something doesn’t click. AA isn’t a lightning strike of talent — it’s a hundred small, consistent reps.',
       ],
     },
-    'computer-vision-first-model': {
-      title: 'My First Real Computer Vision Model',
-      category: 'Computer Vision', date: 'Jun 2026', readTime: '3 min',
-      description: 'What 117 photos of a single pen taught me about datasets, overfitting, and patience.',
+    'python-from-scratch': {
+      title: 'Python from Scratch',
+      category: 'Programming', date: 'May 2026', readTime: '4 min',
+      description: 'A beginner-friendly path into Python: what to learn first, and what to happily ignore for now.',
       body: [
-        'I wanted to train an object detector on something that existed in no public dataset, so I picked the most ordinary object on my desk: a single mechanical pencil. The plan sounded easy — take some photos, label them, fine-tune a model. The reality was a crash course in why data quality matters more than model choice.',
-        'My first batch of photos was all shot on the same desk, in the same light, from the same angle. The model reached great numbers in training and then failed the moment I showed it the pen anywhere else. It had not learned the pen; it had memorized my desk. Fixing that meant going back and reshooting under different lighting, distances, backgrounds, and partial occlusions.',
-        'That single change — diversity in the data — did more for accuracy than any hyperparameter I touched. The final model reached over 90% mAP@50 from only 117 images, because those images actually taught it what the object was rather than where it usually sat.',
-        'The lesson stuck: when a model underperforms, the instinct is to reach for a bigger architecture. More often, the answer is hiding in your dataset.',
+        'Python is the language I recommend to anyone starting out, and not because it’s trendy. It gets out of your way. You can express an idea in a line or two, run it instantly, and see whether you were right — which is exactly the fast feedback a beginner needs to stay motivated.',
+        'If I were starting over, I’d spend the first weeks on the boring fundamentals until they feel automatic: variables, strings and numbers, if/else, loops, lists and dictionaries, and functions. That’s genuinely most of the language you’ll use day to day. Resist the urge to jump into frameworks or fancy libraries before these are second nature — you’ll only be fighting two unknowns at once.',
+        'The mistake I see most often is passive learning: watching tutorial after tutorial and mistaking recognition for ability. The fix is to type everything yourself, break it on purpose, and build tiny things — a number guessing game, a to-do list, a script that renames your files. Small finished projects teach more than any playlist.',
+        'What can you happily ignore at first? Decorators, metaclasses, async, and the deep object-oriented rabbit holes. They matter eventually, not now. Learn enough to be dangerous, build something real, and let the gaps in your knowledge pull you forward.',
       ],
     },
-    'transformers-intuition': {
-      title: 'A Gentle Intuition for Transformers',
-      category: 'Deep Learning', date: 'May 2026', readTime: '4 min',
-      description: 'Attention is just asking every word which other words it should listen to.',
+    'c-from-scratch': {
+      title: 'C from Scratch',
+      category: 'Programming', date: 'Apr 2026', readTime: '4 min',
+      description: 'Pointers, memory, and the compiler that finally taught me how a computer actually works.',
       body: [
-        'Transformers sound intimidating until you strip them down to one idea: attention. Everything else — the layers, the normalization, the feed-forward blocks — is scaffolding around that single mechanism.',
-        'Here is the picture in my head. Take a sentence and turn each word into a vector. Attention lets every word look at every other word and decide how much to care about it. In "the animal did not cross the street because it was tired," the word "it" quietly asks the rest of the sentence, "who am I referring to?" and attention lets it lean most heavily on "animal." No hand-written grammar rules; the model learns those relationships from data.',
-        'Because every word attends to every other word at once, transformers process a whole sequence in parallel instead of one step at a time like older recurrent models. That parallelism is why they scale so well and why they took over natural language processing so quickly.',
-        'You do not need the math to build a working intuition. Once you picture attention as words voting on which other words matter, papers that used to look like walls of symbols start reading like descriptions of something you already understand.',
+        'After the comfort of Python, C felt like someone had taken away the safety rails. Suddenly I had to think about memory, types, and the fact that the machine will do exactly what I say — even when what I said makes no sense. It was frustrating, and it was the most valuable thing I learned all year.',
+        'C teaches you what higher-level languages hide. A pointer is just an address — a number that says “the thing you want lives over here.” Once that clicked, a huge amount of computing stopped being magic: how arrays really work, why passing something to a function copies it, what the stack and the heap actually are. Python hadn’t lied to me, exactly, but it had spared me the truth.',
+        'The compiler becomes your strict, humourless teacher. A missing semicolon or the wrong type gets rejected on the spot. Segmentation faults punish sloppy memory handling without mercy. Annoying at first — but that strictness forces a mental model of the machine you never quite build in a forgiving language.',
+        'My advice: don’t learn C to build your next app. Learn it to understand the ground everything else stands on. Write small programs, draw the memory on paper, and let the pointers hurt a little. Everything above C makes more sense afterward.',
       ],
     },
-    'tfidf-still-matters': {
-      title: 'Why TF-IDF Still Beats Fancy Models',
-      category: 'Machine Learning', date: 'May 2026', readTime: '3 min',
-      description: 'Sometimes the boring, decades-old tool is the right answer.',
+    'should-you-study-cs': {
+      title: 'Should You Study Computer Engineering?',
+      category: 'Career', date: 'Mar 2026', readTime: '4 min',
+      description: 'An honest look at the field — who it fits, who it frustrates, and what nobody tells you first.',
       body: [
-        'While building a phishing email classifier, I expected the interesting result to come from some heavyweight model. Instead, a logistic regression trained on plain TF-IDF features hit 0.99 F1 on the test set. The boring, decades-old approach won.',
-        'TF-IDF works by weighting words: terms that are distinctive to a specific email count for a lot, while words that appear in every message count for almost nothing. Phishing mail leans on a recognizable vocabulary — verify, suspended, urgent, click here — and that signal survives beautifully in a simple bag-of-words representation. A linear model on top of it is more than enough to draw the line.',
-        'The more instructive experiment was the comparison. I also trained a model on eight hand-crafted numerical features — word count, link count, and so on — and it topped out around 0.68 F1. Same problem, same classifier family, wildly different result. The difference was entirely in how the data was represented.',
-        'The takeaway I keep coming back to: reach for the simplest model that could work, and spend your energy on the features. The representation of your data often matters more than the sophistication of your model.',
-      ],
-    },
-    'big-o-that-clicked': {
-      title: 'The Day Big-O Finally Clicked',
-      category: 'Algorithms', date: 'Apr 2026', readTime: '3 min',
-      description: 'Seeing sorting algorithms animate did what lecture slides could not.',
-      body: [
-        'I understood Big-O notation on paper long before I understood it in my gut. I could recite that quicksort is O(n log n) and bubble sort is O(n²), but the numbers stayed abstract — just symbols to reproduce on an exam.',
-        'What changed things was building a sorting visualizer. Watching bars rearrange themselves frame by frame, I could finally see the difference. Bubble sort crawls: it compares neighbors over and over, and the whole array barely moves. Quicksort snaps: it partitions the data and collapses toward order in a fraction of the steps. The same input, wildly different amounts of work, right there on the screen.',
-        'That visual made the growth curves real. O(n²) is not just a slower label; it is the algorithm visibly grinding as the array grows, while O(n log n) stays brisk. Seeing comparison counters tick up side by side turned a definition into an instinct.',
-        'It reminded me that for a lot of computer science, the fastest path to understanding is to make the invisible visible. If a concept refuses to click, try to build the thing that lets you watch it happen.',
-      ],
-    },
-    'clean-code-student': {
-      title: 'Clean Code Lessons I Learned the Hard Way',
-      category: 'Software Engineering', date: 'Apr 2026', readTime: '4 min',
-      description: 'Every rule I follow came from a past project I could no longer read.',
-      body: [
-        'Nobody convinced me to write clean code with an argument. My own old projects did it, by becoming unreadable. Nothing humbles you like opening a file you wrote three months ago and having no idea what it does.',
-        'The first lesson was naming. A variable called data or a function called process tells you nothing. When I came back to code full of names like that, I had to re-derive the logic from scratch every time. Names that say what they mean — participantScores, fetchResponses — are free documentation that never goes out of date.',
-        'The second was structure. Early on I wrote enormous functions that did five things at once. They worked, right up until I needed to change one of those five things and could not touch it without risking the other four. Splitting logic into small, single-purpose pieces is not academic tidiness; it is what lets you change one part without holding your breath.',
-        'The third was consistency. A tidy folder layout, a predictable file naming scheme, one obvious place for configuration — these sound trivial, but they are what turn a project into something you can navigate months later without a map.',
-        'None of this is glamorous. But writing code your future self can read is one of the highest-return habits I have picked up, and it cost nothing but the discipline to slow down slightly today.',
-      ],
-    },
-    'surviving-first-year-ce': {
-      title: 'Surviving First-Year Computer Engineering',
-      category: 'University Life', date: 'Mar 2026', readTime: '3 min',
-      description: 'Consistency beats intensity, every single time.',
-      body: [
-        'First-year computer engineering is a strange mix of the abstract and the brutally concrete. One afternoon you are proving something in calculus that feels miles from any computer, and the next you are staring at a segmentation fault in C, learning exactly how unforgiving a pointer can be.',
-        'The biggest thing I got wrong at the start was treating effort as something you summon in bursts before a deadline. Cramming works for a memorized fact and fails completely for a skill. You cannot cram your way into understanding recursion or into writing code that compiles under pressure. Those come from showing up in small doses, often.',
-        'What actually worked was almost boring: a little every day. An hour of problems beats a panicked six-hour session the night before, because the daily version gives your brain time to consolidate between sessions. Consistency compounds; intensity just exhausts.',
-        'The other quiet lesson was that struggling is not a sign you do not belong. Everyone around me was also confused, just about different things. The students who pulled ahead were rarely the "naturals" — they were the ones who kept going after the confusing part instead of concluding it meant they were not cut out for it.',
-      ],
-    },
-    'ai-engineer-roadmap': {
-      title: 'The Roadmap I Would Give My First-Year Self',
-      category: 'AI', date: 'Mar 2026', readTime: '4 min',
-      description: 'The order I would learn AI engineering in, and what I would skip.',
-      body: [
-        'If I could hand my first-year self a single page, it would not be a list of trendy models. It would be an order of operations, because most of the frustration in learning AI comes from doing the right things in the wrong sequence.',
-        'Start with Python until it is boring. Not fancy Python — just fluent, comfortable, "I can express any idea quickly" Python. Everything downstream assumes it, and fighting the language while also fighting a new concept is twice the difficulty for no reason.',
-        'Then learn the classics before the neural networks. Linear and logistic regression, train/test splits, overfitting, evaluation metrics. They are the vocabulary of the whole field, and a surprising number of real problems never need anything heavier. Skipping them to jump straight to deep learning is like learning to sprint before you can stand.',
-        'Only then reach for deep learning, and learn it by building. One small computer vision project teaches you more about datasets, training, and failure than a month of watching lectures. Finish things, even tiny things, because a finished project forces you to confront the unglamorous 20% that tutorials quietly skip.',
-        'What would I skip? Chasing every new model release, and collecting courses I never apply. Depth on a few fundamentals beats a shallow tour of everything.',
-      ],
-    },
-    'small-data-detection': {
-      title: 'Teaching a Model to See One Object',
-      category: 'Computer Vision', date: 'Feb 2026', readTime: '3 min',
-      description: 'Single-class detection sounds trivial until you try it.',
-      body: [
-        'Detecting a single class sounds like the easy version of object detection. Only one thing to find — how hard can it be? Harder than it looks, and for an interesting reason: with one class, the model has no other categories to contrast against, so everything rides on how well your data defines the object itself.',
-        'The trap is uniformity. If every training photo shows the object in the same setting, the model quietly learns the setting instead of the object. It will score beautifully in validation and then fall apart on anything new, because it never had to separate the thing from its usual background.',
-        'The fix is deliberate variety. Different lighting teaches it that the object is not defined by warm or cold color. Different distances teach scale. Cluttered backgrounds force it to isolate the object rather than the scene. Partial occlusions teach it to fire on incomplete evidence, which is exactly what real photos demand.',
-        'Once I stopped thinking about the number of images and started thinking about the diversity of them, a small dataset became more than enough. Single-class detection is a good teacher precisely because it gives you nowhere to hide: the quality of your data is the quality of your model.',
-      ],
-    },
-    'tools-that-earn-their-place': {
-      title: 'The Tools That Earn Their Place',
-      category: 'Technology', date: 'Feb 2026', readTime: '3 min',
-      description: 'The software I actually keep open all day, and why the rest got deleted.',
-      body: [
-        'I used to collect tools the way some people collect browser tabs — compulsively, and with a vague sense that having them meant I was being productive. Eventually I realized most of them just added friction. So I ran a quiet experiment: if I did not reach for something in a month, it got uninstalled.',
-        'What survived was a short list. A fast editor I know deeply, because familiarity beats features. A terminal, because the command line is the one interface that never goes out of style. Git, which quietly turned out to be the tool I would least want to give up. A single notes file for anything I want to remember. That is most of it.',
-        'The pattern in the survivors is that they get out of the way. They are fast, they are predictable, and I do not have to think about the tool itself while I use it. The ones I deleted were usually the opposite — flashy, feature-rich, and demanding of my attention just to operate.',
-        'The real lesson was not about any specific app. It was that the best setup is a small one you understand completely, not a large one you half-configure and never master. Tools should earn their place by disappearing.',
+        'People ask me whether they should study computer engineering, usually hoping for a clean yes or no. The honest answer is: it depends on whether you enjoy being confused. That sounds like a joke, but it’s the most useful filter I’ve found. This field is a permanent state of not-quite-understanding-yet, and the people who thrive are the ones who find that exciting rather than exhausting.',
+        'What nobody tells you first is how much of the work is problem solving, not coding. Writing code is the easy, late part. The real job is breaking a fuzzy problem into pieces small enough to solve, and being comfortable when your first three attempts don’t work. If debugging a stubborn error feels like a puzzle rather than a punishment, that’s a very good sign.',
+        'It fits people who are curious, patient, and quietly stubborn — who like building things and don’t need instant results. It frustrates people who want a fixed syllabus of facts to memorize, because the tools change constantly and the answer is often “it depends.”',
+        'You don’t need to be a math genius or to have coded since age ten. You need persistence and genuine interest. If you have those, the rest is learnable — and the field will keep handing you interesting problems for as long as you want them.',
       ],
     },
   },
@@ -503,16 +430,10 @@ const tr = {
   blogLabel: 'Blog',
   blogSub: 'Yapay zekâ, mühendislik ve arkasındaki öğrencilik üzerine notlar',
   blogItems: [
-    { category: 'Kariyer', date: 'Haz 2026', readTime: '3 dk', title: 'Neden Açıkta Üretiyorum', excerpt: 'Küçük projeleri açıkça paylaşmak öğrenmenin en hızlı — ve en korkutucu — yolu çıktı.', slug: 'why-i-build-in-public' },
-    { category: 'Bilgisayarlı Görü', date: 'Haz 2026', readTime: '3 dk', title: 'İlk Gerçek Bilgisayarlı Görü Modelim', excerpt: 'Tek bir kalemin 117 fotoğrafı bana veri kümeleri, aşırı öğrenme ve sabır hakkında çok şey öğretti.', slug: 'computer-vision-first-model' },
-    { category: 'Derin Öğrenme', date: 'May 2026', readTime: '4 dk', title: 'Transformer’lara Sezgisel Bir Bakış', excerpt: 'Dikkat mekanizması aslında her kelimenin diğer hangi kelimeleri dinlemesi gerektiğini sormasıdır.', slug: 'transformers-intuition' },
-    { category: 'Makine Öğrenmesi', date: 'May 2026', readTime: '3 dk', title: 'TF-IDF Neden Hâlâ Gösterişli Modelleri Yener', excerpt: 'TF-IDF üzerine kurulu bir lojistik regresyon, oltalama e-postada 0,99 F1 yaptı. Bazen sıkıcı araç kazanır.', slug: 'tfidf-still-matters' },
-    { category: 'Algoritmalar', date: 'Nis 2026', readTime: '3 dk', title: 'Big-O’nun Kafamda Oturduğu Gün', excerpt: 'Sıralama algoritmalarını kare kare izlemek, yüz slaytın yapamadığını yaptı.', slug: 'big-o-that-clicked' },
-    { category: 'Yazılım Mühendisliği', date: 'Nis 2026', readTime: '4 dk', title: 'Zor Yoldan Öğrendiğim Temiz Kod Dersleri', excerpt: 'Uyguladığım her isimlendirme ve yapı kuralı, artık okuyamadığım eski bir projeden geldi.', slug: 'clean-code-student' },
-    { category: 'Üniversite Hayatı', date: 'Mar 2026', readTime: '3 dk', title: 'Bilgisayar Mühendisliğinde İlk Yıldan Sağ Çıkmak', excerpt: 'Calculus, C işaretçileri ve istikrarın yoğunluğu her seferinde yendiğine dair sessiz bir kavrayış.', slug: 'surviving-first-year-ce' },
-    { category: 'Yapay Zekâ', date: 'Mar 2026', readTime: '4 dk', title: 'İlk Sınıftaki Kendime Vereceğim Yol Haritası', excerpt: 'Baştan başlasam yapay zekâ mühendisliğini hangi sırayla öğrenirdim — ve neyi atlardım.', slug: 'ai-engineer-roadmap' },
-    { category: 'Bilgisayarlı Görü', date: 'Şub 2026', readTime: '3 dk', title: 'Bir Modele Tek Bir Nesneyi Görmeyi Öğretmek', excerpt: 'Tek sınıflı tespit denemeden önce basit görünür. Verideki çeşitlilik her şeydir.', slug: 'small-data-detection' },
-    { category: 'Teknoloji', date: 'Şub 2026', readTime: '3 dk', title: 'Yerini Hak Eden Araçlar', excerpt: 'Gün boyu gerçekten açık tuttuğum yazılımların kısa, dürüst bir listesi — ve gerisini neden sildiğim.', slug: 'tools-that-earn-their-place' },
+    { category: 'Üniversite', date: 'Haz 2026', readTime: '4 dk', title: 'Calculus 1-2’de Nasıl AA Alınır', excerpt: 'İki dönem calculus’ı yüksek notla bitirmemi sağlayan şey yetenek değil, alışkanlıklardı.', slug: 'calculus-aa' },
+    { category: 'Programlama', date: 'May 2026', readTime: '4 dk', title: 'Sıfırdan Python', excerpt: 'Yeni başlayanlar için Python’a giriş: önce ne öğrenmeli, şimdilik neyi gönül rahatlığıyla görmezden gelmeli.', slug: 'python-from-scratch' },
+    { category: 'Programlama', date: 'Nis 2026', readTime: '4 dk', title: 'Sıfırdan C', excerpt: 'İşaretçiler, bellek ve bir bilgisayarın gerçekte nasıl çalıştığını bana nihayet öğreten derleyici.', slug: 'c-from-scratch' },
+    { category: 'Kariyer', date: 'Mar 2026', readTime: '4 dk', title: 'Bilgisayar Mühendisliği Okumalı mısın?', excerpt: 'Alana dürüst bir bakış — kime uyar, kimi bunaltır ve kimsenin önceden söylemediği şey nedir.', slug: 'should-you-study-cs' },
   ],
 
   // Puzzle
@@ -674,6 +595,7 @@ const tr = {
   // Contact Page
   contactBack: 'Ana Sayfa',
   contactBadge: 'İLETİŞİM',
+  contactCreator: 'İÇERİK ÜRETİCİ',
 
   // Journey Page
   journeyBack: 'Ana Sayfa',
@@ -739,116 +661,48 @@ const tr = {
 
   // Blog detail content
   blogPosts: {
-    'why-i-build-in-public': {
-      title: 'Neden Açıkta Üretiyorum',
-      category: 'Kariyer', date: 'Haz 2026', readTime: '3 dk',
-      description: 'Küçük projeleri açıkça paylaşmak öğrenmenin en hızlı — ve en korkutucu — yolu çıktı.',
+    'calculus-aa': {
+      title: 'Calculus 1-2’de Nasıl AA Alınır',
+      category: 'Üniversite', date: 'Haz 2026', readTime: '4 dk',
+      description: 'İki dönem calculus’ı yüksek notla bitirmemi sağlayan şey yetenek değil, alışkanlıklardı.',
       body: [
-        'Uzun süre projelerimi özel depolarda tuttum; kendime “yeterince iyi olunca” paylaşırım dedim. O gün hiç gelmedi. Her zaman düzeltilecek bir hata, eklenecek bir özellik, uydurulacak bir bahane oluyordu. Bir noktada fark ettim ki beklediğim o cila, aslında daha şık bir kılığa girmiş korkudan başka bir şey değildi.',
-        'Açıkta üretmek bunu tersine çevirdi. Bir projenin README’si, ekran görüntüleri ve gerçekten tıklanabilecek bir bağlantısı olunca kendimi bambaşka bir çıtaya tutuyorum. Daha temiz commit’ler yazıyorum. Kararlarımı açıklıyorum. Özelde omuz silkip geçeceğim hataları yakalıyorum. İzleyici kitlesinin büyük olması bile gerekmiyor — bir kişinin olma ihtimali bile çıtayı yükseltmeye yetiyor.',
-        'Ayrıca bulduğum en hızlı geri bildirim döngüsü bu. Bir yabancının yaklaşımımdaki kusuru göstermesi, bana tek başıma bir haftalık hata ayıklamadan daha fazlasını beş dakikada öğretiyor. Bitmiş ve görünür her proje, küçük bir emek kanıtına dönüşüyor: bir şey üretebileceğime dair bir söz değil, çoktan ürettiğime dair bir delil.',
-        'Tereddüt eden herkese tavsiyem: küçük olanı yayınla. Mükemmel olanı değil. Küçük, dürüst, bitmiş olanı. İvme kendini katlar ve özgüven, yayınlamanın bir ön koşulu değil, yan ürünüdür.',
+        'Calculus’ın “matematikçiler” ile geri kalan herkesi ayırdığına dair bir ünü vardır. İki dönemin ardından bu ünün büyük ölçüde yanlış olduğuna ikna oldum. En yüksek notu alan öğrenciler nadiren en yetenekli olanlardı — onlar calculus’a, sahip olduğun ya da olmadığın bir yetenek gibi değil, her gün çalışılacak bir beceri gibi yaklaşanlardı.',
+        'En büyük fark, problemleri okumak değil çözmekti. Bir dersi izleyip başımı sallayabilir, limitleri ya da kısmi integrali anladığımı hissedebilirdim — ta ki boş bir problem karşıma dikilene kadar. Bir çözümü anlamak ile onu üretebilmek tamamen farklı iki yetenektir ve sınavda yalnızca biri işe yarar. Bu yüzden pratiği öne çektim: bir gece önce maraton yerine, her gün birkaç problem.',
+        'İkincisi, halkaları ezberlemek değil zinciri kurmaktı. Türevler integrallere akar; limitler ikisinin de altını döşer. Sağlam olmayan bir konuyu atladığımda, sessizce sonraki her şeyi sabote ediyordu. Geri dönüp zayıf halkayı onarmak, ileri itmekten her zaman daha çok kazandırdı.',
+        'Gerisi gösterişsiz: yanlış yaptığın problemleri sıkılana kadar tekrar çöz, sürekli karşına çıkan püf noktalarını bir sayfada topla ve bir şey oturmadığında erkenden sor. AA bir yetenek şimşeği değildir — yüzlerce küçük, istikrarlı tekrardır.',
       ],
     },
-    'computer-vision-first-model': {
-      title: 'İlk Gerçek Bilgisayarlı Görü Modelim',
-      category: 'Bilgisayarlı Görü', date: 'Haz 2026', readTime: '3 dk',
-      description: 'Tek bir kalemin 117 fotoğrafı bana veri kümeleri, aşırı öğrenme ve sabır hakkında çok şey öğretti.',
+    'python-from-scratch': {
+      title: 'Sıfırdan Python',
+      category: 'Programlama', date: 'May 2026', readTime: '4 dk',
+      description: 'Yeni başlayanlar için Python’a giriş: önce ne öğrenmeli, şimdilik neyi gönül rahatlığıyla görmezden gelmeli.',
       body: [
-        'Hiçbir açık veri kümesinde bulunmayan bir şey üzerinde nesne tespiti eğitmek istedim; bu yüzden masamdaki en sıradan nesneyi seçtim: tek bir mekanik kalem. Plan kolay kulağa geliyordu — birkaç fotoğraf çek, etiketle, bir modeli ince ayarla. Gerçekse, veri kalitesinin neden model seçiminden daha önemli olduğunu anlatan hızlandırılmış bir ders oldu.',
-        'İlk fotoğraf grubunu hep aynı masada, aynı ışıkta, aynı açıdan çekmiştim. Model eğitimde harika sayılar tutturdu, sonra kalemi başka bir yerde gösterdiğim an çöktü. Kalemi öğrenmemişti; masamı ezberlemişti. Bunu düzeltmek, geri dönüp farklı ışıklarda, mesafelerde, arka planlarda ve kısmi kapanmalarla yeniden çekim yapmak demekti.',
-        'İşte o tek değişiklik — verideki çeşitlilik — doğruluğa dokunduğum herhangi bir hiperparametreden çok daha fazlasını kattı. Nihai model yalnızca 117 görselle %90’ın üzerinde mAP@50’ye ulaştı; çünkü artık o görseller ona nesnenin genelde nerede durduğunu değil, ne olduğunu öğretiyordu.',
-        'Ders aklımda kaldı: bir model beklentiyi karşılamayınca ilk içgüdü daha büyük bir mimariye uzanmak olur. Oysa cevap çoğu zaman veri kümenin içinde saklıdır.',
+        'Yeni başlayan herkese Python’ı öneririm; gündemde olduğu için değil. Yolundan çekilir. Bir fikri bir iki satırda ifade edip anında çalıştırabilir ve haklı olup olmadığını görebilirsin — ki yeni başlayanın motive kalması için tam da bu hızlı geri bildirim gerekir.',
+        'Baştan başlasam, ilk haftaları otomatikleşene kadar sıkıcı temellere ayırırdım: değişkenler, metin ve sayılar, if/else, döngüler, listeler ve sözlükler, ve fonksiyonlar. Günlük kullanacağın dilin gerçekten çoğu bu. Bunlar içselleşmeden framework’lere ya da gösterişli kütüphanelere atlama dürtüsüne diren — yoksa aynı anda iki bilinmezle boğuşursun.',
+        'En sık gördüğüm hata pasif öğrenmedir: art arda öğretici izleyip tanımayı yetenek sanmak. Çözüm, her şeyi kendin yazmak, bilerek bozmak ve minik şeyler yapmaktır — bir sayı tahmin oyunu, bir yapılacaklar listesi, dosyalarını yeniden adlandıran bir betik. Bitmiş küçük projeler her oynatma listesinden çok öğretir.',
+        'Başta neyi gönül rahatlığıyla görmezden gelebilirsin? Dekoratörler, metasınıflar, async ve derin nesne yönelimli tavşan delikleri. Zamanla önem kazanırlar, şimdi değil. Tehlikeli olacak kadarını öğren, gerçek bir şey yap ve bilgindeki boşlukların seni ileri çekmesine izin ver.',
       ],
     },
-    'transformers-intuition': {
-      title: 'Transformer’lara Sezgisel Bir Bakış',
-      category: 'Derin Öğrenme', date: 'May 2026', readTime: '4 dk',
-      description: 'Dikkat mekanizması aslında her kelimenin diğer hangi kelimeleri dinlemesi gerektiğini sormasıdır.',
+    'c-from-scratch': {
+      title: 'Sıfırdan C',
+      category: 'Programlama', date: 'Nis 2026', readTime: '4 dk',
+      description: 'İşaretçiler, bellek ve bir bilgisayarın gerçekte nasıl çalıştığını bana nihayet öğreten derleyici.',
       body: [
-        'Transformer’lar, tek bir fikre indirgeyene kadar korkutucu gelir: dikkat (attention). Geri kalan her şey — katmanlar, normalleştirme, ileri beslemeli bloklar — bu tek mekanizmanın etrafına kurulmuş iskeledir.',
-        'Kafamdaki resim şöyle. Bir cümle al ve her kelimeyi bir vektöre dönüştür. Dikkat, her kelimenin diğer tüm kelimelere bakıp onlara ne kadar önem vereceğine karar vermesini sağlar. “Hayvan yorgun olduğu için karşıya geçmedi” cümlesinde “o” kelimesi sessizce cümlenin geri kalanına “ben kimi kastediyorum?” diye sorar ve dikkat, en çok “hayvan” kelimesine yaslanmasını sağlar. Elle yazılmış dilbilgisi kuralı yok; model bu ilişkileri veriden öğrenir.',
-        'Her kelime aynı anda diğer tüm kelimelere dikkat ettiği için, transformer’lar bir diziyi eski yinelemeli modellerdeki gibi adım adım değil, bütün hâlinde paralel işler. Bu paralellik, hem neden bu kadar iyi ölçeklendiklerinin hem de doğal dil işlemeyi bu kadar hızlı ele geçirmelerinin nedenidir.',
-        'Çalışan bir sezgi için matematiğe ihtiyacın yok. Dikkati, kelimelerin hangi diğer kelimelerin önemli olduğuna dair oy vermesi olarak zihninde canlandırdığında, eskiden semboller duvarı gibi görünen makaleler, zaten anladığın bir şeyin tarifi gibi okunmaya başlar.',
+        'Python’ın konforundan sonra C, sanki birileri güvenlik bariyerlerini söküp almış gibi hissettirdi. Birden belleği, tipleri ve makinenin tam olarak söylediğim şeyi yapacağını — söylediğim şey saçma olsa bile — düşünmem gerekiyordu. Sinir bozucuydu ve o yıl öğrendiğim en değerli şeydi.',
+        'C, üst seviye dillerin sakladığını öğretir. Bir işaretçi yalnızca bir adrestir — “istediğin şey şurada duruyor” diyen bir sayı. Bu oturunca, bilişimin büyük bir kısmı sihir olmaktan çıktı: dizilerin gerçekte nasıl çalıştığı, bir şeyi fonksiyona geçirmenin neden onu kopyaladığı, yığının (stack) ve öbeğin (heap) aslında ne olduğu. Python bana yalan söylememişti ama gerçeği de esirgemişti.',
+        'Derleyici, katı ve mizahtan yoksun öğretmenin olur. Eksik bir noktalı virgül ya da yanlış bir tip anında geri çevrilir. Segmentation fault’lar özensiz bellek yönetimini acımasızca cezalandırır. Başta can sıkıcı — ama bu katılık, hoşgörülü bir dilde asla tam kuramadığın bir makine zihinsel modelini kurmaya zorlar.',
+        'Tavsiyem: C’yi bir sonraki uygulamanı yapmak için değil, geri kalan her şeyin üzerinde durduğu zemini anlamak için öğren. Küçük programlar yaz, belleği kâğıda çiz ve işaretçilerin biraz canını yakmasına izin ver. C’nin üstündeki her şey sonrasında daha anlamlı gelir.',
       ],
     },
-    'tfidf-still-matters': {
-      title: 'TF-IDF Neden Hâlâ Gösterişli Modelleri Yener',
-      category: 'Makine Öğrenmesi', date: 'May 2026', readTime: '3 dk',
-      description: 'Bazen sıkıcı, onlarca yıllık araç doğru cevaptır.',
+    'should-you-study-cs': {
+      title: 'Bilgisayar Mühendisliği Okumalı mısın?',
+      category: 'Kariyer', date: 'Mar 2026', readTime: '4 dk',
+      description: 'Alana dürüst bir bakış — kime uyar, kimi bunaltır ve kimsenin önceden söylemediği şey nedir.',
       body: [
-        'Bir oltalama e-posta sınıflandırıcısı yaparken, ilginç sonucun ağır sıklet bir modelden geleceğini bekliyordum. Bunun yerine, düz TF-IDF özellikleri üzerinde eğitilmiş bir lojistik regresyon test kümesinde 0,99 F1 tutturdu. Sıkıcı, onlarca yıllık yaklaşım kazandı.',
-        'TF-IDF kelimeleri ağırlıklandırarak çalışır: belirli bir e-postaya özgü terimler çok, her mesajda geçen kelimeler ise neredeyse hiç sayılır. Oltalama postası tanıdık bir kelime dağarcığına yaslanır — doğrula, askıya alındı, acil, buraya tıkla — ve bu sinyal, basit bir kelime torbası temsilinde harikulade biçimde korunur. Üstüne konan doğrusal bir model, sınırı çizmeye fazlasıyla yeter.',
-        'Daha öğretici deney ise karşılaştırmaydı. Elle çıkarılmış sekiz sayısal özellik — kelime sayısı, bağlantı sayısı vb. — üzerinde de bir model eğittim ve tavanı yaklaşık 0,68 F1’de kaldı. Aynı problem, aynı sınıflandırıcı ailesi, uçurum kadar farklı sonuç. Fark tamamen verinin nasıl temsil edildiğindeydi.',
-        'Sürekli döndüğüm çıkarım şu: işe yarayabilecek en basit modele uzan ve enerjini özelliklere harca. Verinin temsili çoğu zaman modelin karmaşıklığından daha çok şey ifade eder.',
-      ],
-    },
-    'big-o-that-clicked': {
-      title: 'Big-O’nun Kafamda Oturduğu Gün',
-      category: 'Algoritmalar', date: 'Nis 2026', readTime: '3 dk',
-      description: 'Sıralama algoritmalarını izlemek, ders slaytlarının yapamadığını yaptı.',
-      body: [
-        'Big-O gösterimini kâğıt üzerinde, içime sinmesinden çok önce anlamıştım. Quicksort’un O(n log n), bubble sort’un O(n²) olduğunu ezbere sayabiliyordum ama sayılar soyut kalıyordu — sınavda tekrar üretilecek sembollerden ibaretti.',
-        'İşleri değiştiren şey bir sıralama görselleştiricisi yapmak oldu. Çubukların kare kare yeniden dizilişini izleyince farkı nihayet görebildim. Bubble sort sürünür: komşuları defalarca karşılaştırır ve tüm dizi zar zor kımıldar. Quicksort ise adeta şaklar: veriyi bölümler ve çok daha az adımda düzene doğru çöker. Aynı girdi, ekranın orada gözler önünde, uçurum kadar farklı miktarda iş.',
-        'O görsel, büyüme eğrilerini gerçek kıldı. O(n²) sadece “daha yavaş” etiketli değil; dizi büyüdükçe algoritmanın gözle görülür biçimde ağırlaşması demek — O(n log n) ise çevik kalıyor. Karşılaştırma sayaçlarının yan yana tıkır tıkır artışını görmek, bir tanımı bir içgüdüye dönüştürdü.',
-        'Bana bilgisayar biliminin çoğu için anlamaya giden en hızlı yolun, görünmezi görünür kılmak olduğunu hatırlattı. Bir kavram bir türlü oturmuyorsa, onu izlemene imkân veren şeyi inşa etmeyi dene.',
-      ],
-    },
-    'clean-code-student': {
-      title: 'Zor Yoldan Öğrendiğim Temiz Kod Dersleri',
-      category: 'Yazılım Mühendisliği', date: 'Nis 2026', readTime: '4 dk',
-      description: 'Uyguladığım her kural, artık okuyamadığım eski bir projeden geldi.',
-      body: [
-        'Beni temiz kod yazmaya bir argüman ikna etmedi. Kendi eski projelerim, okunmaz hâle gelerek bunu yaptı. Üç ay önce yazdığın bir dosyayı açıp ne yaptığına dair hiçbir fikrinin olmaması kadar insanı hizaya sokan az şey vardır.',
-        'İlk ders isimlendirmeydi. data adında bir değişken ya da process adında bir fonksiyon sana hiçbir şey anlatmaz. Bu tür isimlerle dolu koda geri döndüğümde, mantığı her seferinde sıfırdan çıkarmam gerekiyordu. Ne anlama geldiğini söyleyen isimler — katilimciSkorlari, yanitlariGetir — asla eskimeyen bedava belgelemedir.',
-        'İkincisi yapıydı. Başlarda aynı anda beş iş yapan devasa fonksiyonlar yazıyordum. O beş işten birini değiştirmem gerekene kadar çalışıyorlardı; sonra diğer dördünü riske atmadan hiçbirine dokunamıyordum. Mantığı küçük, tek amaçlı parçalara bölmek akademik bir titizlik değildir; bir bölümü nefesini tutmadan değiştirebilmeni sağlayan şeydir.',
-        'Üçüncüsü tutarlılıktı. Derli toplu bir klasör düzeni, öngörülebilir bir dosya adlandırması, yapılandırma için tek ve bariz bir yer — kulağa önemsiz gelir ama bir projeyi, aylar sonra haritasız gezebileceğin bir şeye dönüştüren tam da bunlardır.',
-        'Bunların hiçbiri göz alıcı değil. Ama gelecekteki kendinin okuyabileceği kod yazmak, edindiğim en yüksek getirili alışkanlıklardan biri ve bugün biraz yavaşlama disiplininden başka hiçbir maliyeti yok.',
-      ],
-    },
-    'surviving-first-year-ce': {
-      title: 'Bilgisayar Mühendisliğinde İlk Yıldan Sağ Çıkmak',
-      category: 'Üniversite Hayatı', date: 'Mar 2026', readTime: '3 dk',
-      description: 'İstikrar, yoğunluğu her seferinde yener.',
-      body: [
-        'Bilgisayar mühendisliğinin ilk yılı, soyutla acımasızca somut olanın tuhaf bir karışımı. Bir öğleden sonra calculus’ta herhangi bir bilgisayardan fersah fersah uzak gibi duran bir şeyi ispatlıyorsun; hemen ardından C’de bir segmentation fault’a bakıp bir işaretçinin ne kadar affetmez olabileceğini birebir öğreniyorsun.',
-        'Başta en yanlış yaptığım şey, çabayı bir teslim tarihinden önce patlamalarla toplanan bir şey gibi görmekti. Ezber, bir bilgi parçası için işe yarar; bir beceri için tamamen başarısız olur. Özyinelemeyi anlamayı ya da baskı altında derlenen kod yazmayı ezberleyemezsin. Bunlar sık sık, küçük dozlarda ortaya çıkmaktan gelir.',
-        'Gerçekten işe yarayan şey neredeyse sıkıcıydı: her gün biraz. Bir saatlik problem çözümü, bir gece önceki panikli altı saatlik seansı yener; çünkü günlük hâli beynine seanslar arasında pekiştirme fırsatı verir. İstikrar kendini katlar; yoğunluksa sadece yorar.',
-        'Diğer sessiz ders, zorlanmanın oraya ait olmadığının bir işareti olmadığıydı. Etrafımdaki herkes de kafası karışıktı, sadece farklı şeylerde. Öne geçen öğrenciler nadiren “doğuştan yetenekli” olanlardı — onlar, kafa karıştıran kısımdan sonra “demek ki bu iş bana göre değil” diye düşünmek yerine devam edenlerdi.',
-      ],
-    },
-    'ai-engineer-roadmap': {
-      title: 'İlk Sınıftaki Kendime Vereceğim Yol Haritası',
-      category: 'Yapay Zekâ', date: 'Mar 2026', readTime: '4 dk',
-      description: 'Yapay zekâ mühendisliğini hangi sırayla öğrenirdim ve neyi atlardım.',
-      body: [
-        'İlk sınıftaki kendime tek bir sayfa uzatabilseydim, bu, gündemdeki modellerin bir listesi olmazdı. Bir işlem sırası olurdu; çünkü yapay zekâ öğrenirken yaşanan sıkıntının çoğu, doğru şeyleri yanlış sırayla yapmaktan gelir.',
-        'Python’la, sıkılana kadar başla. Gösterişli Python’la değil — sadece akıcı, rahat, “herhangi bir fikri hızlıca ifade edebilirim” diyebildiğin Python’la. Sonraki her şey bunu varsayar ve yeni bir kavramla boğuşurken bir de dille boğuşmak, sebepsiz yere iki kat zorluk demektir.',
-        'Sonra sinir ağlarından önce klasikleri öğren. Doğrusal ve lojistik regresyon, eğitim/test bölmesi, aşırı öğrenme, değerlendirme metrikleri. Bunlar tüm alanın kelime dağarcığı ve şaşırtıcı sayıda gerçek problem hiçbir zaman daha ağır bir şeye ihtiyaç duymaz. Doğrudan derin öğrenmeye atlamak için bunları atlamak, ayakta durmadan koşmayı öğrenmeye benzer.',
-        'Ancak ondan sonra derin öğrenmeye uzan ve onu inşa ederek öğren. Küçük bir bilgisayarlı görü projesi, sana veri kümeleri, eğitim ve başarısızlık hakkında bir aylık ders izlemekten daha fazlasını öğretir. Küçük de olsa işleri bitir; çünkü bitmiş bir proje, öğreticilerin sessizce atladığı o gösterişsiz %20’lik kısımla yüzleşmeye zorlar.',
-        'Neyi atlardım? Her yeni model duyurusunun peşinden koşmayı ve hiç uygulamadığım kursları biriktirmeyi. Birkaç temelde derinlik, her şeyin yüzeysel bir turundan iyidir.',
-      ],
-    },
-    'small-data-detection': {
-      title: 'Bir Modele Tek Bir Nesneyi Görmeyi Öğretmek',
-      category: 'Bilgisayarlı Görü', date: 'Şub 2026', readTime: '3 dk',
-      description: 'Tek sınıflı tespit denemeden önce basit görünür.',
-      body: [
-        'Tek bir sınıfı tespit etmek, nesne tespitinin kolay sürümü gibi kulağa gelir. Bulunacak tek bir şey var — ne kadar zor olabilir ki? Göründüğünden zor ve ilginç bir nedenle: tek sınıfla modelin karşılaştıracağı başka kategori yoktur, dolayısıyla her şey verinin nesnenin kendisini ne kadar iyi tanımladığına bağlıdır.',
-        'Tuzak, tekdüzeliktir. Her eğitim fotoğrafı nesneyi aynı ortamda gösteriyorsa, model sessizce nesne yerine ortamı öğrenir. Doğrulamada harika puan alır, sonra yeni herhangi bir şeyde dağılır; çünkü nesneyi alışıldık arka planından ayırması hiç gerekmemiştir.',
-        'Çözüm, bilinçli çeşitliliktir. Farklı ışık, nesnenin sıcak ya da soğuk renkle tanımlanmadığını öğretir. Farklı mesafeler ölçeği öğretir. Karmaşık arka planlar, sahneyi değil nesneyi yalıtmaya zorlar. Kısmi kapanmalar, eksik ipuçlarına dayanarak karar vermeyi öğretir — ki gerçek fotoğrafların talep ettiği tam da budur.',
-        'Görsel sayısını düşünmeyi bırakıp onların çeşitliliğini düşünmeye başladığımda, küçük bir veri kümesi fazlasıyla yeterli hâle geldi. Tek sınıflı tespit iyi bir öğretmendir; çünkü saklanacak hiçbir yer bırakmaz: verinin kalitesi, modelinin kalitesidir.',
-      ],
-    },
-    'tools-that-earn-their-place': {
-      title: 'Yerini Hak Eden Araçlar',
-      category: 'Teknoloji', date: 'Şub 2026', readTime: '3 dk',
-      description: 'Gün boyu gerçekten açık tuttuğum yazılımlar ve gerisini neden sildiğim.',
-      body: [
-        'Eskiden araçları, bazı insanların tarayıcı sekmeleri biriktirdiği gibi biriktirirdim — kompulsif biçimde ve onlara sahip olmanın verimli olduğum anlamına geldiğine dair belirsiz bir histe. Sonunda çoğunun yalnızca sürtünme eklediğini fark ettim. Böylece sessiz bir deney yaptım: bir ay boyunca uzanmadığım her şeyi kaldırdım.',
-        'Hayatta kalanlar kısa bir listeydi. Derinlemesine bildiğim hızlı bir editör; çünkü aşinalık, özellikleri yener. Bir terminal; çünkü komut satırı, asla modası geçmeyen tek arayüz. Git — sessiz sedasız, en son vazgeçmek isteyeceğim araç çıktı. Hatırlamak istediğim her şey için tek bir not dosyası. Aşağı yukarı hepsi bu.',
-        'Hayatta kalanlardaki ortak nokta, yoldan çekilmeleri. Hızlılar, öngörülebilirler ve onları kullanırken aracın kendisini düşünmek zorunda kalmıyorum. Sildiklerim genelde tam tersiydi — gösterişli, özellik dolu ve sırf çalıştırmak için bile dikkatimi talep eden.',
-        'Asıl ders belirli bir uygulamayla ilgili değildi. En iyi kurulumun, yarım yamalak ayarlayıp asla ustalaşamadığın büyük bir düzenek değil, tamamen anladığın küçük bir düzenek olduğuydu. Araçlar, yerlerini gözden kaybolarak hak etmelidir.',
+        'İnsanlar bana bilgisayar mühendisliği okumalı mıyım diye sorar, genelde net bir evet ya da hayır umarak. Dürüst cevap şu: kafanın karışık olmasından hoşlanıp hoşlanmadığına bağlı. Şaka gibi geliyor ama bulduğum en kullanışlı süzgeç bu. Bu alan, kalıcı bir “henüz tam anlamadım” hâlidir ve gelişenler bunu yorucu değil, heyecan verici bulanlardır.',
+        'Kimsenin önceden söylemediği şey, işin ne kadarının kod yazmak değil problem çözmek olduğudur. Kod yazmak kolay ve en son gelen kısımdır. Asıl iş, bulanık bir problemi çözülebilecek kadar küçük parçalara bölmek ve ilk üç denemen tutmadığında rahat olabilmektir. İnatçı bir hatayı ayıklamak sana ceza değil de bulmaca gibi geliyorsa, bu çok iyi bir işarettir.',
+        'Meraklı, sabırlı ve sessizce inatçı insanlara uyar — bir şeyler inşa etmeyi seven ve anında sonuç beklemeyenlere. Ezberlenecek sabit bir olgular müfredatı isteyenleri bunaltır; çünkü araçlar sürekli değişir ve cevap çoğu zaman “duruma göre değişir”dir.',
+        'Matematik dâhisi olman ya da on yaşından beri kod yazıyor olman gerekmiyor. Azim ve gerçek bir ilgi gerekiyor. Bunlar sende varsa, gerisi öğrenilebilir — ve alan, istediğin sürece sana ilginç problemler vermeye devam eder.',
       ],
     },
   },

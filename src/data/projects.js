@@ -333,6 +333,7 @@ const PROJECTS = [
   },
   {
     slug: 'turkish-english-nmt',
+    cover: '/projects/turkish-english-nmt/cover.svg',
     mark: 'MARK VI',
     codename: 'Polyglot',
     title: 'Turkish–English NMT',
@@ -470,6 +471,7 @@ const PROJECTS = [
   },
   {
     slug: 'writing-analyzer',
+    cover: '/projects/writing-analyzer/cover.svg',
     mark: 'MARK VIII',
     codename: 'The Auditor',
     title: 'Writing Analyzer',
@@ -540,6 +542,7 @@ const PROJECTS = [
   },
   {
     slug: 'depression-phq9-analysis',
+    cover: '/projects/depression-phq9-analysis/cover.svg',
     mark: 'MARK IX',
     codename: 'Vitals',
     title: 'PHQ-9 Depression Analysis',
@@ -681,6 +684,7 @@ const PROJECTS = [
   },
   {
     slug: 'build-your-target-body',
+    cover: '/projects/build-your-target-body/cover.svg',
     mark: 'MARK XI',
     codename: 'Body Forge',
     title: 'Build Your Target Body',
@@ -754,6 +758,7 @@ const PROJECTS = [
   },
   {
     slug: 're-mind',
+    cover: '/projects/re-mind/cover.svg',
     mark: 'MARK XII',
     codename: 'Time Keeper',
     title: 'Re-Minder',
@@ -824,6 +829,7 @@ const PROJECTS = [
   },
   {
     slug: 'yolo-custom-detector',
+    cover: '/projects/yolo-custom-detector/cover.svg',
     mark: 'MARK XIII',
     codename: 'The Hunter',
     title: 'Custom YOLO11 Detector',
@@ -901,6 +907,7 @@ const PROJECTS = [
   },
   {
     slug: 'email-phishing-detection',
+    cover: '/projects/email-phishing-detection/cover.svg',
     mark: 'MARK XIV',
     codename: 'The Gatekeeper',
     title: 'Email Phishing Detection',
