@@ -1,4 +1,4 @@
-import{a as d,b as p,j as e,L as m}from"./index-BILcKRu3.js";import{A as g}from"./arrow-left-6Y9ROYpH.js";const l={1:3,2:2,3:1};function f(){const{t:n}=d(),o=n("stackGroups"),r=n("stackLevels");return p({title:n("stackLabel"),description:n("stackSub"),path:"/stack"}),e.jsxs("div",{style:a.container,children:[e.jsx("style",{children:`
+import{a as d,b as p,j as e,L as m}from"./index-Bvsu7DrJ.js";import{A as g}from"./arrow-left-DFquUbUP.js";const l={1:3,2:2,3:1};function f(){const{t:n}=d(),o=n("stackGroups"),r=n("stackLevels");return p({title:n("stackLabel"),description:n("stackSub"),path:"/stack"}),e.jsxs("div",{style:a.container,children:[e.jsx("style",{children:`
         .stack-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
         .stack-tech { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 12px 0; border-bottom: 1px solid #15151f; }
         .stack-tech:last-child { border-bottom: none; }
