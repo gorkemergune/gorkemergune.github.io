@@ -206,7 +206,7 @@ export default function ProjectDetail() {
       <div style={{ ...s.panel, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 20, padding: 32 }}>
         <div>
           <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.1em', color: '#5a5a70', marginBottom: 6 }}>
-            gorkemergune/{project.slug}
+            {project.github.replace('https://github.com/', '')}
           </div>
           <div style={{ fontFamily: "'Instrument Serif', serif", fontStyle: 'italic', fontSize: 18, color: '#8a8aa0' }}>
             {t('pdSourceNote')}

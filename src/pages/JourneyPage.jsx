@@ -105,7 +105,10 @@ function Semester({ item, index, side, expanded, onToggle, t }) {
           onMouseLeave={(e) => { e.currentTarget.style.borderColor = current ? '#ff6b3555' : '#1a1a2e'; e.currentTarget.style.boxShadow = 'none'; }}
         >
           <div style={s.cardHead}>
-            <span style={s.term}>{item.term}</span>
+            <span style={s.termWrap}>
+              <span style={s.term}>{item.term}</span>
+              {item.sub && <span style={s.termSub}>{item.sub}</span>}
+            </span>
             <span style={{ ...s.statusTag, color: accent, borderColor: `${accent}55`, background: `${accent}12` }}>
               {item.status === 'completed' && <Check size={9} strokeWidth={3} style={{ verticalAlign: -1, marginRight: 3 }} />}
               {locked && <Lock size={9} strokeWidth={2.5} style={{ verticalAlign: -1, marginRight: 3 }} />}
@@ -183,7 +186,9 @@ const s = {
   youHere: { display: 'inline-block', marginBottom: 8, padding: '4px 11px', borderRadius: 999, background: 'rgba(255,107,53,0.14)', border: '1px solid rgba(255,107,53,0.4)', fontFamily: "'JetBrains Mono', monospace", fontSize: 9, letterSpacing: '0.16em', color: '#ff8a5c' },
   card: { position: 'relative', background: 'linear-gradient(180deg,#0f0f1a,#0b0b13)', border: '1px solid #1a1a2e', borderRadius: 12, padding: '20px 22px', margin: '0 8px' },
   cardHead: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 10, marginBottom: 10, flexWrap: 'wrap' },
+  termWrap: { display: 'inline-flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap' },
   term: { fontFamily: "'JetBrains Mono', monospace", fontSize: 12, letterSpacing: '0.1em', color: '#c0c0d4' },
+  termSub: { fontFamily: "'JetBrains Mono', monospace", fontSize: 9.5, letterSpacing: '0.04em', color: '#6a6a82' },
   statusTag: { fontFamily: "'JetBrains Mono', monospace", fontSize: 8, letterSpacing: '0.12em', padding: '3px 8px', border: '1px solid', borderRadius: 999 },
   titleRow: { display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 },
   phaseTitle: { fontFamily: "'Instrument Serif', serif", fontSize: 22, fontWeight: 400, lineHeight: 1.15 },

@@ -4,21 +4,10 @@ import { useLang } from '../i18n.jsx';
 import { BIRTHDAY } from '../config';
 
 const birthDate = new Date(BIRTHDAY.year, BIRTHDAY.month - 1, BIRTHDAY.day, 0, 0, 0);
+const YEAR_MS = 365.25 * 24 * 60 * 60 * 1000; // average Gregorian year
 
-function ageBreakdown(now) {
-  let y = now.getFullYear() - birthDate.getFullYear();
-  let mo = now.getMonth() - birthDate.getMonth();
-  let d = now.getDate() - birthDate.getDate();
-  let h = now.getHours() - birthDate.getHours();
-  let mi = now.getMinutes() - birthDate.getMinutes();
-  let s = now.getSeconds() - birthDate.getSeconds();
-  if (s < 0) { s += 60; mi--; }
-  if (mi < 0) { mi += 60; h--; }
-  if (h < 0) { h += 24; d--; }
-  if (d < 0) { d += new Date(now.getFullYear(), now.getMonth(), 0).getDate(); mo--; }
-  if (mo < 0) { mo += 12; y--; }
-  return { y, mo, d, h, mi, s };
-}
+// Live fractional age in years, e.g. 20.934384
+const decimalAge = (now) => ((now.getTime() - birthDate.getTime()) / YEAR_MS).toFixed(6);
 
 function countdown(now) {
   let next = new Date(now.getFullYear(), BIRTHDAY.month - 1, BIRTHDAY.day, 0, 0, 0);
@@ -37,22 +26,14 @@ export default function LiveStatus() {
   const [now, setNow] = useState(() => new Date());
 
   useEffect(() => {
-    const id = setInterval(() => setNow(new Date()), 1000);
+    const id = setInterval(() => setNow(new Date()), 60);
     return () => clearInterval(id);
   }, []);
 
-  const age = ageBreakdown(now);
   const cd = countdown(now);
   const pad = (n) => String(n).padStart(2, '0');
+  const age = decimalAge(now);
 
-  const ageUnits = [
-    { v: age.y, label: t('unitYears') },
-    { v: age.mo, label: t('unitMonths') },
-    { v: age.d, label: t('unitDays') },
-    { v: pad(age.h), label: t('unitHours') },
-    { v: pad(age.mi), label: t('unitMinutes') },
-    { v: pad(age.s), label: t('unitSeconds') },
-  ];
   const cdUnits = [
     { v: cd.d, label: t('unitDays') },
     { v: pad(cd.h), label: t('unitHours') },
@@ -83,13 +64,9 @@ export default function LiveStatus() {
             <span style={{ ...s.headLabel, color: '#00d4ff' }}><Activity size={13} strokeWidth={1.8} /> {t('ageLabel')}</span>
             <span style={s.caption}>{t('ageCaption')}</span>
           </div>
-          <div className="ls-units">
-            {ageUnits.map((u, i) => (
-              <div key={i} className="ls-seg">
-                <div style={{ ...s.num, color: '#eaf6ff' }}>{u.v}</div>
-                <div style={s.unit}>{u.label}</div>
-              </div>
-            ))}
+          <div style={s.ageWrap}>
+            <span style={s.ageNum}>{age}</span>
+            <span style={s.ageUnitLabel}>{t('unitYears')}</span>
           </div>
         </div>
 
@@ -122,4 +99,7 @@ const s = {
   caption: { fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.06em', color: '#6a6a82' },
   num: { fontFamily: "'JetBrains Mono', monospace", fontSize: 30, fontWeight: 500, lineHeight: 1, fontVariantNumeric: 'tabular-nums' },
   unit: { fontFamily: "'JetBrains Mono', monospace", fontSize: 8.5, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#7a7a92', marginTop: 8 },
+  ageWrap: { display: 'flex', alignItems: 'baseline', gap: 12, padding: '8px 0 4px', flexWrap: 'wrap' },
+  ageNum: { fontFamily: "'JetBrains Mono', monospace", fontSize: 46, fontWeight: 600, lineHeight: 1, color: '#eaf6ff', fontVariantNumeric: 'tabular-nums', letterSpacing: '-0.01em' },
+  ageUnitLabel: { fontFamily: "'JetBrains Mono', monospace", fontSize: 12, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#7a7a92' },
 };

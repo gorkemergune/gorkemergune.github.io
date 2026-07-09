@@ -42,12 +42,17 @@ export default function CompetitionsPage() {
           >
             <div style={s.cardTop}>
               <div className="comp-emblem" style={{ ...s.emblem, borderColor: `${c.accent}66`, color: c.accent, background: `${c.accent}12`, transition: 'transform 0.4s' }}>
-                {c.initials}
+                {c.logo ? <img src={c.logo} alt={c.name} style={{ width: '70%', height: '70%', objectFit: 'contain' }} /> : c.initials}
               </div>
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ ...s.type, color: c.accent, borderColor: `${c.accent}55`, background: `${c.accent}12` }}>{loc(c.type)}</div>
                 <h3 style={s.name}>{c.name}</h3>
-                <div style={s.org}>{c.org} · {c.season}</div>
+                <div style={s.metaLine}>
+                  <span>{c.org}</span>
+                  <span style={s.metaDot} />
+                  <span>{c.date}</span>
+                  {c.duration && <><span style={s.metaDot} /><span style={{ color: c.accent }}>{c.duration}</span></>}
+                </div>
               </div>
             </div>
 
@@ -69,15 +74,18 @@ export default function CompetitionsPage() {
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
                 {c.tags.map((tag) => <span key={tag} className="chip">{tag}</span>)}
               </div>
-              {c.projectPath ? (
-                <Link to={c.projectPath} className="link-hover" style={{ ...s.link, color: c.accent }}>
-                  {t('compProject')} <ArrowUpRight size={13} strokeWidth={1.5} />
-                </Link>
-              ) : c.link ? (
-                <a href={c.link} target="_blank" rel="noopener noreferrer" className="link-hover" style={{ ...s.link, color: c.accent }}>
-                  {c.link.includes('github') ? <Github size={13} strokeWidth={1.5} /> : null} {t('compVisit')} <ArrowUpRight size={13} strokeWidth={1.5} />
-                </a>
-              ) : null}
+              <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
+                {c.repo && (
+                  <a href={c.repo} target="_blank" rel="noopener noreferrer" className="link-hover" style={{ ...s.link, color: c.accent }}>
+                    <Github size={13} strokeWidth={1.5} /> GitHub
+                  </a>
+                )}
+                {c.website && (
+                  <a href={c.website} target="_blank" rel="noopener noreferrer" className="link-hover" style={{ ...s.link, color: c.accent }}>
+                    {t('compVisit')} <ArrowUpRight size={13} strokeWidth={1.5} />
+                  </a>
+                )}
+              </div>
             </div>
           </article>
         ))}
@@ -106,7 +114,8 @@ const s = {
   emblem: { width: 52, height: 52, flexShrink: 0, borderRadius: 12, border: '1px solid', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'JetBrains Mono', monospace", fontSize: 16, fontWeight: 600, letterSpacing: '0.02em' },
   type: { display: 'inline-block', padding: '3px 10px', border: '1px solid', borderRadius: 999, fontFamily: "'JetBrains Mono', monospace", fontSize: 9, letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 8 },
   name: { fontFamily: "'Instrument Serif', serif", fontSize: 25, fontWeight: 400, lineHeight: 1.1, color: '#eef0f6' },
-  org: { fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.06em', color: '#7a7a92', marginTop: 5 },
+  metaLine: { display: 'flex', alignItems: 'center', gap: 8, fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.05em', color: '#7a7a92', marginTop: 6, flexWrap: 'wrap' },
+  metaDot: { width: 3, height: 3, borderRadius: '50%', background: '#3a3a50' },
   statRow: { display: 'flex', gap: 10, marginBottom: 20, flexWrap: 'wrap' },
   stat: { flex: 1, minWidth: 84, padding: '12px 14px', background: 'rgba(0,0,0,0.22)', border: '1px solid #17172a', borderRadius: 10 },
   statLabel: { display: 'inline-flex', alignItems: 'center', gap: 5, fontFamily: "'JetBrains Mono', monospace", fontSize: 8.5, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#7a7a92', marginBottom: 8 },

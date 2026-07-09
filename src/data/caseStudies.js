@@ -257,6 +257,56 @@ export const CASE_STUDIES = {
       ],
     },
   },
+  'miniature-transformers-from-scratch': {
+    en: {
+      problem: ['Transformers are usually consumed as a black box — you import a model and call it. I wanted the opposite: to understand every moving part of a GPT by building each one myself, with nothing hidden behind a library call.'],
+      solution: [
+        'I implemented a decoder-only, GPT-style transformer from scratch in PyTorch — writing the tokenizer, embeddings, self- and multi-head attention, causal masking, layer norm, MLP, and decoder blocks by hand, then assembling them into a small trainable model.',
+        'The work is staged as numbered notebooks that grow the model piece by piece, so each concept is built and tested before the next is added.',
+      ],
+      architecture: [
+        'usta_embedding maps token ids to vectors; usta_self_attention and usta_multi_head_attention implement scaled dot-product attention with causal masking; usta_layer_norm and usta_mlp form the feed-forward path; usta_decoder_block stacks attention and MLP with residual connections; and usta_model assembles the blocks and projects to vocabulary logits.',
+        'A custom usta_tokenizer handles encoding/decoding, compared against a Hugging Face tokenizer. A PyTorch training loop trains V1 — a 64-token-context prototype — end to end on a free Colab GPU.',
+      ],
+      challenges: [
+        'Getting causal masking and the attention shapes exactly right is unforgiving — an off-by-one in the mask silently lets the model peek at the future and quietly breaks training.',
+        'Keeping the prototype small enough to train on a free GPU while still learning anything meaningful meant deliberately limiting context and vocabulary.',
+      ],
+      results: [
+        'A working decoder-only GPT built entirely from hand-written components.',
+        'V1 prototype: 64-token context, trained end to end on a free Colab GPU.',
+        'Text-completion inference: give a prompt, get the model’s continuation.',
+      ],
+      lessons: [
+        'Building a transformer by hand turns the paper diagrams into something you actually understand — attention stops being magic.',
+        'The hardest bugs live in shapes and masks, not in the math itself.',
+      ],
+    },
+    tr: {
+      problem: ['Transformer’lar genelde kara kutu olarak kullanılır — bir modeli içe aktarır ve çağırırsın. Ben tam tersini istedim: bir GPT’nin her parçasını, hiçbir şey kütüphane çağrısının arkasına saklanmadan, kendim inşa ederek anlamak.'],
+      solution: [
+        'PyTorch’ta sıfırdan, yalnızca kod çözücülü GPT tarzı bir transformer uyguladım — tokenizer, gömmeler, öz ve çok başlı dikkat, nedensel maskeleme, katman normu, MLP ve kod çözücü bloklarını elle yazıp küçük, eğitilebilir bir modelde birleştirdim.',
+        'Çalışma, modeli parça parça büyüten numaralı not defterlerine bölündü; böylece her kavram bir sonraki eklenmeden önce kurulup test edildi.',
+      ],
+      architecture: [
+        'usta_embedding token kimliklerini vektörlere eşler; usta_self_attention ve usta_multi_head_attention nedensel maskelemeli ölçekli nokta-çarpım dikkatini uygular; usta_layer_norm ve usta_mlp ileri besleme yolunu oluşturur; usta_decoder_block dikkat ve MLP’yi artık bağlantılarla yığar; usta_model blokları birleştirip sözlük logit’lerine yansıtır.',
+        'Özel bir usta_tokenizer kodlama/kod çözmeyi üstlenir ve bir Hugging Face tokenizer ile karşılaştırılır. Bir PyTorch eğitim döngüsü V1’i — 64 token bağlamlı bir prototip — ücretsiz bir Colab GPU’da uçtan uca eğitir.',
+      ],
+      challenges: [
+        'Nedensel maskelemeyi ve dikkat boyutlarını tam doğru yapmak affetmez — maskede bir kayma, modelin sessizce geleceğe bakmasına izin verip eğitimi usulca bozar.',
+        'Prototipi ücretsiz bir GPU’da eğitilecek kadar küçük tutarken anlamlı bir şey öğrenmesini sağlamak, bağlamı ve sözlüğü bilinçli olarak sınırlamayı gerektirdi.',
+      ],
+      results: [
+        'Tamamen elle yazılmış bileşenlerden kurulmuş, çalışan bir yalnızca kod çözücülü GPT.',
+        'V1 prototip: 64 token bağlam, ücretsiz bir Colab GPU’da uçtan uca eğitildi.',
+        'Metin tamamlama çıkarımı: bir istem ver, modelin devamını al.',
+      ],
+      lessons: [
+        'Bir transformer’ı elle inşa etmek, kâğıttaki şemaları gerçekten anladığın bir şeye dönüştürüyor — dikkat artık sihir olmaktan çıkıyor.',
+        'En zor hatalar matematikte değil, boyutlarda ve maskelerde yaşıyor.',
+      ],
+    },
+  },
 };
 
 export const getCaseStudy = (slug) => CASE_STUDIES[slug];
