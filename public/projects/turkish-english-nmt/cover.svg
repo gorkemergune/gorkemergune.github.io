@@ -5,7 +5,7 @@
       <stop offset="0.55" stop-color="#0a0a0f"/>
       <stop offset="1" stop-color="rgba(77,150,255,0.14)"/>
     </linearGradient>
-    <radialGradient id="glow" cx="0.78" cy="0.5" r="0.5">
+    <radialGradient id="glow" cx="0.82" cy="0.5" r="0.5">
       <stop offset="0" stop-color="rgba(77,150,255,0.4)"/>
       <stop offset="0.55" stop-color="rgba(77,150,255,0.08)"/>
       <stop offset="1" stop-color="rgba(0,0,0,0)"/>
@@ -19,7 +19,6 @@
   <rect width="800" height="500" fill="url(#grid)"/>
   <rect width="800" height="500" fill="url(#glow)"/>
 
-  <!-- HUD corner brackets -->
   <g stroke="rgba(77,150,255,0.5)" stroke-width="2" fill="none">
     <path d="M28 60 V28 H60"/>
     <path d="M740 28 H772 V60"/>
@@ -27,26 +26,24 @@
     <path d="M772 440 V472 H740"/>
   </g>
 
-  <!-- Emblem: arc-reactor rings -->
-  <g transform="translate(620 250)">
-    <circle r="150" fill="none" stroke="rgba(77,150,255,0.12)" stroke-width="1"/>
-    <circle r="120" fill="none" stroke="rgba(77,150,255,0.18)" stroke-width="1" stroke-dasharray="4 8"/>
-    <circle r="92" fill="none" stroke="rgba(77,150,255,0.4)" stroke-width="2"/>
-    <circle r="92" fill="rgba(77,150,255,0.06)"/>
-    <circle r="150" fill="none" stroke="#4d96ff" stroke-width="3" stroke-dasharray="60 380" stroke-linecap="round" opacity="0.8"/>
+  <g transform="translate(650 250)">
+    <circle r="118" fill="none" stroke="rgba(77,150,255,0.12)" stroke-width="1"/>
+    <circle r="96" fill="none" stroke="rgba(77,150,255,0.18)" stroke-width="1" stroke-dasharray="4 8"/>
+    <circle r="72" fill="none" stroke="rgba(77,150,255,0.4)" stroke-width="2"/>
+    <circle r="72" fill="rgba(77,150,255,0.06)"/>
+    <circle r="118" fill="none" stroke="#4d96ff" stroke-width="3" stroke-dasharray="48 300" stroke-linecap="round" opacity="0.8"/>
   </g>
-  <g transform="translate(620 250)">
+  <g transform="translate(650 250)">
         <text x="-34" y="6" font-family="Georgia, serif" font-size="60" fill="#4d96ff" text-anchor="middle">A</text>
         <text x="34" y="10" font-family="Georgia, serif" font-size="52" fill="#4d96ff" text-anchor="middle">文</text>
         <path d="M -6 -26 h 12 M 6 -26 l -5 -5 M 6 -26 l -5 5" fill="none" stroke="#4d96ff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
         <path d="M 6 30 h -12 M -6 30 l 5 -5 M -6 30 l 5 5" fill="none" stroke="#4d96ff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" /></g>
 
-  <!-- Text block -->
   <g>
     <rect x="60" y="70" width="12" height="12" fill="#4d96ff"/>
     <text x="84" y="81" font-family="'JetBrains Mono', monospace" font-size="15" fill="#4d96ff" letter-spacing="4">MARK VI</text>
     <text x="60" y="128" font-family="'JetBrains Mono', monospace" font-size="14" fill="rgba(77,150,255,0.85)" letter-spacing="6">POLYGLOT</text>
-    <text x="58" y="210" font-family="Georgia, 'Times New Roman', serif" font-size="72" fill="#eef0f6" letter-spacing="-1">TR ⇄ EN</text>
+    <text x="58" y="206" font-family="Georgia, 'Times New Roman', serif" font-size="68" fill="#eef0f6" letter-spacing="-1">TR ⇄ EN</text>
     <text x="61" y="250" font-family="'Inter', system-ui, sans-serif" font-size="20" fill="#8a8aa0" letter-spacing="1">Neural Machine Translation</text>
   </g>
 
@@ -61,7 +58,6 @@
       <text x="290.7" y="397" font-family="'JetBrains Mono', monospace" font-size="13" fill="#4d96ff" text-anchor="middle" letter-spacing="1">BLEU 43</text>
     </g>
 
-  <!-- Status -->
   <g>
     <circle cx="66" cy="452" r="4" fill="#4d96ff"/>
     <text x="80" y="457" font-family="'JetBrains Mono', monospace" font-size="12" fill="#5a5a70" letter-spacing="3">SYSTEM ONLINE</text>

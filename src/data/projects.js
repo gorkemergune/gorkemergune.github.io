@@ -9,6 +9,7 @@ const gh = (repo) => `https://github.com/gorkemergune/${repo}`;
 const PROJECTS = [
   {
     slug: 'sorting-visualizer',
+    cover: '/projects/sorting-visualizer/cover.svg',
     mark: 'MARK I',
     codename: 'The Algorithm',
     title: 'Sorting Visualizer',
@@ -75,6 +76,7 @@ const PROJECTS = [
   },
   {
     slug: 'raylib-space-shooter',
+    cover: '/projects/raylib-space-shooter/cover.svg',
     mark: 'MARK II',
     codename: 'Star Fighter',
     title: 'Raylib Space Shooter',
@@ -141,6 +143,7 @@ const PROJECTS = [
   },
   {
     slug: 'gorkem-os',
+    cover: '/projects/gorkem-os/cover.svg',
     mark: 'MARK III',
     codename: 'Bare Metal',
     title: 'GorkemOS',
@@ -209,6 +212,7 @@ const PROJECTS = [
   },
   {
     slug: 'synonym-master',
+    cover: '/projects/synonym-master/cover.svg',
     mark: 'MARK IV',
     codename: 'Lexicon',
     title: 'Synonym Master',
@@ -274,6 +278,7 @@ const PROJECTS = [
   },
   {
     slug: 'pynput-macos-macro',
+    cover: '/projects/pynput-macos-macro/cover.svg',
     mark: 'MARK V',
     codename: 'Auto-Pilot',
     title: 'macOS Toggle Macro',
@@ -400,6 +405,7 @@ const PROJECTS = [
   },
   {
     slug: 'face-detection-pipeline',
+    cover: '/projects/face-detection-pipeline/cover.svg',
     mark: 'MARK VII',
     codename: 'The Sentry',
     title: 'Face Detection Pipeline',
@@ -614,6 +620,7 @@ const PROJECTS = [
   },
   {
     slug: 'find-the-best',
+    cover: '/projects/find-the-best/cover.svg',
     mark: 'MARK X',
     codename: 'Market Recon',
     title: 'Find The Best',

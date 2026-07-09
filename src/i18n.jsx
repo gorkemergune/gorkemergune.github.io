@@ -11,7 +11,7 @@ const en = {
   // Hero
   heroChip: 'Portfolio / Version 2.10 / 2026',
   heroRole: 'ROLE',
-  heroRoleValue: '1st year Computer Engineering student',
+  heroRoleValue: '2nd year Computer Engineering student',
   heroBasedIn: 'BASED IN',
   heroBasedInValue: 'Istanbul, Türkiye',
   heroStatus: 'STATUS',
@@ -25,7 +25,7 @@ const en = {
 
   // Intro (home identity section)
   introKicker: 'IDENTITY // WHO IS BEHIND THE ARMOR',
-  introLeadPre: "I'm Görkem — a first-year Computer Engineering student turning ",
+  introLeadPre: "I'm Görkem — a second-year Computer Engineering student turning ",
   introLeadEm: 'curiosity into working systems',
   introLeadPost: '. I build AI that sees, reads, and reasons: object detectors, translation models, phishing classifiers — and the full-stack apps that put them in people’s hands.',
   introBody: 'I learn by shipping. Every armor in the hall is something I designed, trained, broke, and rebuilt — from bare-metal operating systems to production ML pipelines. The goal is simple: to become the kind of AI engineer whose work speaks before he does.',
@@ -362,7 +362,7 @@ const tr = {
   // Hero
   heroChip: 'Portfolyo / Sürüm 2.10 / 2026',
   heroRole: 'ROL',
-  heroRoleValue: '1. sınıf Bilgisayar Mühendisliği öğrencisi',
+  heroRoleValue: '2. sınıf Bilgisayar Mühendisliği öğrencisi',
   heroBasedIn: 'KONUM',
   heroBasedInValue: 'İstanbul, Türkiye',
   heroStatus: 'DURUM',
@@ -376,7 +376,7 @@ const tr = {
 
   // Intro (home identity section)
   introKicker: 'KİMLİK // ZIRHIN ARDINDAKİ',
-  introLeadPre: 'Ben Görkem — birinci sınıf Bilgisayar Mühendisliği öğrencisiyim ve ',
+  introLeadPre: 'Ben Görkem — ikinci sınıf Bilgisayar Mühendisliği öğrencisiyim ve ',
   introLeadEm: 'merakı çalışan sistemlere',
   introLeadPost: ' dönüştürüyorum. Gören, okuyan ve akıl yürüten yapay zekâlar geliştiriyorum: nesne dedektörleri, çeviri modelleri, oltalama sınıflandırıcıları — ve bunları insanların eline veren tam yığın uygulamalar.',
   introBody: 'Üreterek öğreniyorum. Depodaki her zırh; tasarladığım, eğittiğim, bozup yeniden inşa ettiğim bir şey — doğrudan donanımda çalışan işletim sistemlerinden üretim seviyesi ML işlem hatlarına kadar. Amacım basit: işi kendisinden önce konuşan türden bir yapay zekâ mühendisi olmak.',
