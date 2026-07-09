@@ -42,8 +42,8 @@ const en = {
   introCtaContact: 'Start a conversation',
 
   // Home hero + sections
-  heroTagline: 'AI ENGINEER IN PROGRESS',
-  heroSubtext: 'Building computer vision systems, machine learning pipelines, and intelligent software with a research-driven mindset.',
+  heroTagline: 'AI PRODUCT DEVELOPER',
+  heroSubtext: 'I build real products with AI — computer-vision systems, machine-learning pipelines, and full-stack apps. I care more about shipping things people use than training models for their own sake.',
   ctaResume: 'Download Résumé',
   ctaViewWork: 'View Work',
 
@@ -74,6 +74,18 @@ const en = {
   activityCta: 'View GitHub profile',
   activityUpdated: 'Updated',
   activityStars: 'stars',
+
+  lifeKicker: 'LIVE TELEMETRY // SYSTEM UPTIME',
+  ageLabel: 'AGE — TIME ONLINE',
+  countdownLabel: 'NEXT BIRTHDAY',
+  ageCaption: 'Online since 16 Jul 2005',
+  countdownCaption: 'Until 16 July',
+  unitYears: 'Years',
+  unitMonths: 'Months',
+  unitDays: 'Days',
+  unitHours: 'Hours',
+  unitMinutes: 'Minutes',
+  unitSeconds: 'Seconds',
 
   // About
   aboutLabel: 'About',
@@ -388,26 +400,28 @@ const en = {
   stackLabel: 'Tech Stack',
   stackSub: 'The tools I actually build with, grouped by domain — with an honest proficiency level for each.',
   stackLegend: 'Proficiency',
-  stackLevels: ['Advanced', 'Proficient', 'Familiar'],
+  stackLevels: ['Beginner', 'Intermediate', 'Proficient', 'Advanced', 'Expert'],
   stackGroups: [
-    { category: 'AI / ML', accent: '#00d4ff', items: [
-      { name: 'PyTorch', level: 2 }, { name: 'scikit-learn', level: 1 }, { name: 'Ultralytics YOLO11', level: 2 },
-      { name: 'Hugging Face', level: 2 }, { name: 'MediaPipe', level: 2 }, { name: 'OpenCV', level: 2 }, { name: 'Google Gemini API', level: 2 },
-    ]},
-    { category: 'Backend', accent: '#00e5a0', items: [
-      { name: 'FastAPI', level: 1 }, { name: 'REST APIs', level: 1 }, { name: 'PostgreSQL', level: 2 }, { name: 'Redis', level: 3 }, { name: 'Node.js', level: 3 },
+    { category: 'Languages', accent: '#ffd166', items: [
+      { name: 'Python', level: 5 }, { name: 'C', level: 4 }, { name: 'C++', level: 3 }, { name: 'Java', level: 3 }, { name: 'JavaScript', level: 4 }, { name: 'TypeScript', level: 4 }, { name: 'SQL', level: 3 },
     ]},
     { category: 'Frontend', accent: '#4d96ff', items: [
-      { name: 'React', level: 1 }, { name: 'Next.js', level: 2 }, { name: 'Tailwind CSS', level: 2 }, { name: 'Vite', level: 2 }, { name: 'Streamlit', level: 2 },
+      { name: 'React', level: 4 }, { name: 'Next.js', level: 4 }, { name: 'HTML', level: 5 }, { name: 'CSS', level: 4 }, { name: 'Tailwind', level: 4 },
     ]},
-    { category: 'Languages', accent: '#ffd166', items: [
-      { name: 'Python', level: 1 }, { name: 'JavaScript', level: 1 }, { name: 'TypeScript', level: 2 }, { name: 'C', level: 2 }, { name: 'x86 Assembly', level: 3 }, { name: 'Rust', level: 3 },
+    { category: 'Backend', accent: '#00e5a0', items: [
+      { name: 'Node.js', level: 3 }, { name: 'FastAPI', level: 4 }, { name: 'Express', level: 3 },
     ]},
-    { category: 'DevOps', accent: '#ff6b35', items: [
-      { name: 'Git & GitHub', level: 1 }, { name: 'Docker / Compose', level: 2 }, { name: 'GitHub Pages', level: 2 }, { name: 'Google Colab', level: 2 },
+    { category: 'AI / ML', accent: '#00d4ff', items: [
+      { name: 'PyTorch', level: 4 }, { name: 'TensorFlow', level: 3 }, { name: 'OpenCV', level: 4 }, { name: 'Ultralytics YOLO', level: 4 }, { name: 'Hugging Face', level: 4 }, { name: 'Scikit-learn', level: 4 },
+    ]},
+    { category: 'Databases', accent: '#ff9f1c', items: [
+      { name: 'PostgreSQL', level: 4 }, { name: 'SQLite', level: 4 }, { name: 'MongoDB', level: 3 },
     ]},
     { category: 'Tools', accent: '#f472b6', items: [
-      { name: 'Jupyter', level: 1 }, { name: 'SQLite', level: 2 }, { name: 'Tauri', level: 3 }, { name: 'Ruff / pre-commit', level: 2 }, { name: 'raylib', level: 2 },
+      { name: 'Git', level: 5 }, { name: 'GitHub', level: 5 }, { name: 'Docker', level: 4 }, { name: 'Linux', level: 4 }, { name: 'VS Code', level: 5 }, { name: 'Cursor', level: 4 }, { name: 'Claude Code', level: 4 },
+    ]},
+    { category: 'Other', accent: '#9d6bff', items: [
+      { name: 'Full Stack Development', level: 4 }, { name: 'Algorithms', level: 4 }, { name: 'Data Structures', level: 4 }, { name: 'Computer Vision', level: 4 }, { name: 'Machine Learning', level: 4 }, { name: 'Deep Learning', level: 4 }, { name: 'Large Language Models', level: 4 }, { name: 'REST APIs', level: 4 },
     ]},
   ],
 
@@ -423,25 +437,18 @@ const en = {
   researchPdf: 'Read draft (PDF)',
   researchItems: [
     {
-      title: 'Stylometric Detection of AI-Generated Text (EN + TR)',
-      field: 'NLP · Stylometry', accent: '#ff4d6d',
-      abstract: 'A study of language-independent statistical signals — repetition, burstiness, transition overuse, lexical variety — that separate human writing from formulaic, model-generated prose, with native pipelines for both English and Turkish.',
-      methods: ['Six orthogonal stylometric analyzers over a shared tokenization', 'Turkish morphology via Zeyrek; English stemming via Porter', 'Weighted composite scoring calibrated on human vs LLM samples'],
-      expected: 'A transparent, per-signal risk score that is interpretable rather than a black-box classifier, and a benchmark contrasting the two languages.',
+      title: 'Email Phishing Detection',
+      field: 'NLP · Security', accent: '#7c5cff',
+      abstract: 'Phishing emails cost people real money and lean on a recognizable vocabulary of urgency and impersonation. The motivation is to detect them from raw text with a simple, transparent model — and to show that how you represent the data matters as much as the model itself.',
+      methods: ['Text cleaning, then TF-IDF vectorization over words and bigrams', 'Stratified 80/20 split with a fixed random seed', 'Logistic Regression classifier', 'Evaluation with accuracy, precision, recall, F1, a confusion matrix, and ROC'],
+      expected: 'Future work: test on more varied, adversarial email, extend to Turkish for multilingual coverage, and compare against transformer baselines — while keeping the model interpretable.',
     },
     {
-      title: 'Detect-and-Verify for Small and Occluded Faces',
-      field: 'Computer Vision', accent: '#00d4ff',
-      abstract: 'An investigation into recovering faces that off-the-shelf short-range detectors miss, without inflating false positives — by pairing a permissive first pass with a zoom-in re-verification stage.',
-      methods: ['Low-threshold regional candidate search over image halves', 'Zoom-in re-detection with a stricter confidence gate', 'IoU-based deduplication and a human-review queue for edge cases'],
-      expected: 'Measurably higher recall on tiny faces at equal or better precision, quantified over a 140,000-image benchmark.',
-    },
-    {
-      title: 'Fine-Tuning MarianMT for Low-Resource TR→EN Translation',
-      field: 'Machine Translation', accent: '#4d96ff',
-      abstract: 'A reproducible study of how far a lightweight, pretrained MarianMT model can be pushed on Turkish→English with a modest parallel corpus and a single free GPU.',
-      methods: ['Cleaning and 80/10/10 splitting of the Tatoeba corpus', 'Tokenization comparison (char / word / byte / BPE)', 'fp16 fine-tuning with SacreBLEU evaluation and beam search'],
-      expected: 'A documented BLEU lift (~36 → ~43) and a recipe others can rerun end-to-end on a Colab T4.',
+      title: 'PHQ-9 Depression Analysis',
+      field: 'Data Analysis · Mental Health', accent: '#00e5a0',
+      abstract: 'An analysis of PHQ-9 depression-screening responses using AI and data-analysis techniques. A live study with roughly 100 participants was conducted, and the findings were presented and discussed on stage. This is exploratory, ongoing research — not a clinical tool, and not a published study.',
+      methods: ['Collected ~100 real PHQ-9 responses in a live study', 'Clinical scoring with severity classification', 'Statistical analysis and machine-learning exploration of the responses', 'Findings presented and discussed on stage'],
+      expected: 'Ongoing work aims to refine the analysis and explore how AI can support — never replace — mental-health assessment, always with appropriate caution.',
     },
   ],
 
@@ -449,7 +456,7 @@ const en = {
   resumeBack: 'Home',
   resumeBadge: 'RÉSUMÉ',
   resumeTitle: 'Görkem Ergüne',
-  resumeRole: 'Computer Engineering Student · AI Engineer',
+  resumeRole: 'Computer Engineering Student · AI Product Developer',
   resumePrint: 'Save as PDF',
   resumeSummary: 'Second-year Computer Engineering student and self-directed AI engineer building computer-vision systems, machine-learning pipelines, and full-stack software — with a research-driven mindset and a habit of shipping.',
   resumeSecEducation: 'Education',
@@ -563,8 +570,8 @@ const tr = {
   introCtaContact: 'Bir sohbet başlat',
 
   // Home hero + sections
-  heroTagline: 'YAPAY ZEKÂ MÜHENDİSİ — GELİŞİM HÂLİNDE',
-  heroSubtext: 'Araştırma odaklı bir yaklaşımla bilgisayarlı görü sistemleri, makine öğrenmesi işlem hatları ve akıllı yazılımlar geliştiriyorum.',
+  heroTagline: 'YAPAY ZEKÂ ÜRÜN GELİŞTİRİCİSİ',
+  heroSubtext: 'Yapay zekâ ile gerçek ürünler geliştiriyorum — bilgisayarlı görü sistemleri, makine öğrenmesi işlem hatları ve full-stack uygulamalar. Model eğitmekten çok, insanların gerçekten kullandığı şeyler üretmeyi seviyorum.',
   ctaResume: 'CV’yi İndir',
   ctaViewWork: 'Çalışmalar',
 
@@ -595,6 +602,18 @@ const tr = {
   activityCta: 'GitHub profilini gör',
   activityUpdated: 'Güncellendi',
   activityStars: 'yıldız',
+
+  lifeKicker: 'CANLI TELEMETRİ // SİSTEM ÇALIŞMA SÜRESİ',
+  ageLabel: 'YAŞ — ÇEVRİMİÇİ SÜRE',
+  countdownLabel: 'SONRAKİ DOĞUM GÜNÜ',
+  ageCaption: '16 Tem 2005’ten beri çevrimiçi',
+  countdownCaption: '16 Temmuz’a kadar',
+  unitYears: 'Yıl',
+  unitMonths: 'Ay',
+  unitDays: 'Gün',
+  unitHours: 'Saat',
+  unitMinutes: 'Dakika',
+  unitSeconds: 'Saniye',
 
   // About
   aboutLabel: 'Hakkımda',
@@ -915,26 +934,28 @@ const tr = {
   stackLabel: 'Teknoloji Yığını',
   stackSub: 'Gerçekten kullandığım araçlar, alanlara göre gruplanmış — her biri için dürüst bir yetkinlik seviyesiyle.',
   stackLegend: 'Yetkinlik',
-  stackLevels: ['İleri', 'Yetkin', 'Aşina'],
+  stackLevels: ['Başlangıç', 'Orta', 'Yetkin', 'İleri', 'Uzman'],
   stackGroups: [
-    { category: 'Yapay Zekâ / ML', accent: '#00d4ff', items: [
-      { name: 'PyTorch', level: 2 }, { name: 'scikit-learn', level: 1 }, { name: 'Ultralytics YOLO11', level: 2 },
-      { name: 'Hugging Face', level: 2 }, { name: 'MediaPipe', level: 2 }, { name: 'OpenCV', level: 2 }, { name: 'Google Gemini API', level: 2 },
-    ]},
-    { category: 'Backend', accent: '#00e5a0', items: [
-      { name: 'FastAPI', level: 1 }, { name: 'REST API', level: 1 }, { name: 'PostgreSQL', level: 2 }, { name: 'Redis', level: 3 }, { name: 'Node.js', level: 3 },
+    { category: 'Diller', accent: '#ffd166', items: [
+      { name: 'Python', level: 5 }, { name: 'C', level: 4 }, { name: 'C++', level: 3 }, { name: 'Java', level: 3 }, { name: 'JavaScript', level: 4 }, { name: 'TypeScript', level: 4 }, { name: 'SQL', level: 3 },
     ]},
     { category: 'Frontend', accent: '#4d96ff', items: [
-      { name: 'React', level: 1 }, { name: 'Next.js', level: 2 }, { name: 'Tailwind CSS', level: 2 }, { name: 'Vite', level: 2 }, { name: 'Streamlit', level: 2 },
+      { name: 'React', level: 4 }, { name: 'Next.js', level: 4 }, { name: 'HTML', level: 5 }, { name: 'CSS', level: 4 }, { name: 'Tailwind', level: 4 },
     ]},
-    { category: 'Diller', accent: '#ffd166', items: [
-      { name: 'Python', level: 1 }, { name: 'JavaScript', level: 1 }, { name: 'TypeScript', level: 2 }, { name: 'C', level: 2 }, { name: 'x86 Assembly', level: 3 }, { name: 'Rust', level: 3 },
+    { category: 'Backend', accent: '#00e5a0', items: [
+      { name: 'Node.js', level: 3 }, { name: 'FastAPI', level: 4 }, { name: 'Express', level: 3 },
     ]},
-    { category: 'DevOps', accent: '#ff6b35', items: [
-      { name: 'Git & GitHub', level: 1 }, { name: 'Docker / Compose', level: 2 }, { name: 'GitHub Pages', level: 2 }, { name: 'Google Colab', level: 2 },
+    { category: 'Yapay Zekâ / ML', accent: '#00d4ff', items: [
+      { name: 'PyTorch', level: 4 }, { name: 'TensorFlow', level: 3 }, { name: 'OpenCV', level: 4 }, { name: 'Ultralytics YOLO', level: 4 }, { name: 'Hugging Face', level: 4 }, { name: 'Scikit-learn', level: 4 },
+    ]},
+    { category: 'Veritabanları', accent: '#ff9f1c', items: [
+      { name: 'PostgreSQL', level: 4 }, { name: 'SQLite', level: 4 }, { name: 'MongoDB', level: 3 },
     ]},
     { category: 'Araçlar', accent: '#f472b6', items: [
-      { name: 'Jupyter', level: 1 }, { name: 'SQLite', level: 2 }, { name: 'Tauri', level: 3 }, { name: 'Ruff / pre-commit', level: 2 }, { name: 'raylib', level: 2 },
+      { name: 'Git', level: 5 }, { name: 'GitHub', level: 5 }, { name: 'Docker', level: 4 }, { name: 'Linux', level: 4 }, { name: 'VS Code', level: 5 }, { name: 'Cursor', level: 4 }, { name: 'Claude Code', level: 4 },
+    ]},
+    { category: 'Diğer', accent: '#9d6bff', items: [
+      { name: 'Full-Stack Geliştirme', level: 4 }, { name: 'Algoritmalar', level: 4 }, { name: 'Veri Yapıları', level: 4 }, { name: 'Bilgisayarlı Görü', level: 4 }, { name: 'Makine Öğrenmesi', level: 4 }, { name: 'Derin Öğrenme', level: 4 }, { name: 'Büyük Dil Modelleri', level: 4 }, { name: 'REST API', level: 4 },
     ]},
   ],
 
@@ -950,25 +971,18 @@ const tr = {
   researchPdf: 'Taslağı oku (PDF)',
   researchItems: [
     {
-      title: 'Yapay Zekâ Üretimi Metnin Stilometrik Tespiti (EN + TR)',
-      field: 'NLP · Stilometri', accent: '#ff4d6d',
-      abstract: 'İnsan yazısını kalıplaşmış, model üretimi metinden ayıran dilden bağımsız istatistiksel sinyallerin — tekrar, ritim (burstiness), geçiş aşırı kullanımı, kelime çeşitliliği — hem İngilizce hem Türkçe için yerel işlem hatlarıyla incelenmesi.',
-      methods: ['Ortak tokenizasyon üzerinde altı bağımsız stilometrik analizci', 'Türkçe için Zeyrek biçimbilimi, İngilizce için Porter kök bulma', 'İnsan ve LLM örnekleriyle kalibre edilmiş ağırlıklı bileşik puanlama'],
-      expected: 'Kara kutu bir sınıflandırıcı yerine yorumlanabilir, sinyal bazlı bir risk skoru ve iki dili karşılaştıran bir kıyaslama.',
+      title: 'E-posta Oltalama Tespiti',
+      field: 'NLP · Güvenlik', accent: '#7c5cff',
+      abstract: 'Oltalama e-postaları insanlara gerçek para kaybettirir ve tanıdık bir aciliyet ile taklit kelime dağarcığına yaslanır. Motivasyon, bunları ham metinden basit ve şeffaf bir modelle tespit etmek — ve verinin nasıl temsil edildiğinin en az model kadar önemli olduğunu göstermek.',
+      methods: ['Metin temizleme, ardından kelimeler ve ikili öbekler üzerinde TF-IDF vektörleştirme', 'Sabit tohumlu katmanlı %80/%20 bölme', 'Lojistik Regresyon sınıflandırıcı', 'Doğruluk, kesinlik, duyarlılık, F1, karışıklık matrisi ve ROC ile değerlendirme'],
+      expected: 'Gelecek çalışma: daha çeşitli ve düşmanca e-postalarda test etmek, çok dilli kapsam için Türkçeye genişletmek ve transformer temellerle karşılaştırmak — modeli yorumlanabilir tutarak.',
     },
     {
-      title: 'Küçük ve Kapalı Yüzler için Tespit-et-Doğrula',
-      field: 'Bilgisayarlı Görü', accent: '#00d4ff',
-      abstract: 'Hazır kısa menzilli dedektörlerin kaçırdığı yüzleri, hatalı tespitleri artırmadan yakalamanın araştırılması — esnek bir ilk geçişi yakınlaştırmalı bir yeniden doğrulama aşamasıyla eşleyerek.',
-      methods: ['Görsel yarıları üzerinde düşük eşikli bölgesel aday araması', 'Daha katı güven eşiğiyle yakınlaştırmalı yeniden tespit', 'IoU tabanlı tekilleştirme ve sınır durumları için insan inceleme kuyruğu'],
-      expected: 'Küçük yüzlerde eşit ya da daha iyi kesinlikle ölçülebilir biçimde daha yüksek duyarlılık; 140.000 görsellik test üzerinde ölçülmüş.',
-    },
-    {
-      title: 'Düşük Kaynaklı TR→EN Çeviri için MarianMT İnce Ayarı',
-      field: 'Makine Çevirisi', accent: '#4d96ff',
-      abstract: 'Hafif, önceden eğitilmiş bir MarianMT modelinin, mütevazı bir paralel derlem ve tek bir ücretsiz GPU ile Türkçe→İngilizce çeviride ne kadar ileri gidebileceğinin yeniden üretilebilir bir çalışması.',
-      methods: ['Tatoeba derleminin temizlenmesi ve %80/%10/%10 bölünmesi', 'Tokenizasyon karşılaştırması (karakter / kelime / bayt / BPE)', 'SacreBLEU değerlendirmesi ve ışın aramasıyla fp16 ince ayar'],
-      expected: 'Belgelenmiş bir BLEU artışı (~36 → ~43) ve başkalarının Colab T4’te uçtan uca çalıştırabileceği bir reçete.',
+      title: 'PHQ-9 Depresyon Analizi',
+      field: 'Veri Analizi · Ruh Sağlığı', accent: '#00e5a0',
+      abstract: 'PHQ-9 depresyon tarama yanıtlarının yapay zekâ ve veri analizi teknikleriyle incelenmesi. Yaklaşık 100 katılımcıyla canlı bir çalışma yürütüldü ve bulgular sahnede sunulup tartışıldı. Bu, keşifsel ve devam eden bir araştırmadır — klinik bir araç değildir ve yayınlanmış bir çalışma değildir.',
+      methods: ['Canlı bir çalışmada ~100 gerçek PHQ-9 yanıtı toplandı', 'Şiddet sınıflandırmalı klinik puanlama', 'Yanıtların istatistiksel analizi ve makine öğrenmesiyle keşfi', 'Bulgular sahnede sunulup tartışıldı'],
+      expected: 'Devam eden çalışma; analizi geliştirmeyi ve yapay zekânın ruh sağlığı değerlendirmesini nasıl destekleyebileceğini — asla yerine geçmeden, her zaman gerekli dikkatle — keşfetmeyi amaçlıyor.',
     },
   ],
 
@@ -976,7 +990,7 @@ const tr = {
   resumeBack: 'Ana Sayfa',
   resumeBadge: 'CV',
   resumeTitle: 'Görkem Ergüne',
-  resumeRole: 'Bilgisayar Mühendisliği Öğrencisi · Yapay Zekâ Mühendisi',
+  resumeRole: 'Bilgisayar Mühendisliği Öğrencisi · Yapay Zekâ Ürün Geliştiricisi',
   resumePrint: 'PDF olarak kaydet',
   resumeSummary: 'İkinci sınıf Bilgisayar Mühendisliği öğrencisi ve kendi kendine yönlenen bir yapay zekâ mühendisi; araştırma odaklı bir yaklaşımla bilgisayarlı görü sistemleri, makine öğrenmesi işlem hatları ve full-stack yazılım geliştiriyorum — ve üretmeyi alışkanlık hâline getirdim.',
   resumeSecEducation: 'Eğitim',

@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ArrowUpRight, FileText } from 'lucide-react';
 import useAudioFX from './useAudioFX';
 import { useLang } from '../i18n.jsx';
+import { FEATURES } from '../config';
 import PROJECTS from '../data/projects';
 
 const ARMORS = PROJECTS.map((p) => ({
@@ -181,9 +182,12 @@ export default function HallOfArmor() {
           <Link to="/project" className="hero-btn hero-btn-primary" onClick={playClick}>
             {t('ctaViewWork')} <ArrowUpRight size={15} strokeWidth={1.5} />
           </Link>
-          <Link to="/resume" className="hero-btn" onClick={playClick}>
-            <FileText size={15} strokeWidth={1.5} /> {t('ctaResume')}
-          </Link>
+          {/* Résumé CTA temporarily disabled via FEATURES.resume — flip in src/config.js to restore */}
+          {FEATURES.resume && (
+            <Link to="/resume" className="hero-btn" onClick={playClick}>
+              <FileText size={15} strokeWidth={1.5} /> {t('ctaResume')}
+            </Link>
+          )}
         </div>
       </div>
 

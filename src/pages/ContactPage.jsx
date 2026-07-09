@@ -1,9 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Mail, Github, Linkedin, Instagram, ArrowUpRight } from 'lucide-react';
 import { useLang } from '../i18n.jsx';
-
-// Content-creator handle — placeholder, easy to update once the name is decided.
-const CREATOR_HANDLE = 'gorkemergune';
+import { CREATOR_HANDLE } from '../config';
 
 function TikTokIcon({ size = 18 }) {
   return (

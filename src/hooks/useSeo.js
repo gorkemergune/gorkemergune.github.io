@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 const SITE = 'https://gorkemergune.github.io';
-const DEFAULT_DESC = 'Görkem Ergüne — Computer Engineering student and AI engineer building computer-vision systems, machine-learning pipelines, and intelligent software.';
+const DEFAULT_DESC = 'Görkem Ergüne — Computer Engineering student and AI product developer building computer-vision systems, machine-learning pipelines, and full-stack apps.';
 
 const upsert = (attr, key, content) => {
   if (content == null) return;
@@ -17,7 +17,7 @@ export function useSeo({ title, description, image, path, type = 'website', json
   const ld = jsonLd ? JSON.stringify(jsonLd) : null;
 
   useEffect(() => {
-    const full = title ? `${title} · Görkem Ergüne` : 'Görkem Ergüne — AI Engineer';
+    const full = title ? `${title} · Görkem Ergüne` : 'Görkem Ergüne — AI Product Developer';
     document.title = full;
 
     const hashPath = window.location.hash ? '/#' + window.location.hash.replace(/^#/, '') : '/';

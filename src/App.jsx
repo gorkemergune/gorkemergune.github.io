@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef, lazy, Suspense } from "react";
-import { Routes, Route, Link, useLocation } from "react-router-dom";
+import { Routes, Route, Link, Navigate, useLocation } from "react-router-dom";
 import { ArrowUpRight, Globe, Menu, X, Search } from 'lucide-react';
 import { useLang } from './i18n.jsx';
+import { FEATURES } from './config';
 import HallOfArmor from './components/HallOfArmor';
 import IronManBackdrop from './components/IronManBackdrop';
 import CommandPalette from './components/CommandPalette';
@@ -22,7 +23,6 @@ const ContactPage = lazy(() => import('./pages/ContactPage'));
 const JourneyPage = lazy(() => import('./pages/JourneyPage'));
 const ProjectPage = lazy(() => import('./pages/ProjectPage'));
 const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
-const ExperiencePage = lazy(() => import('./pages/ExperiencePage'));
 const StackPage = lazy(() => import('./pages/StackPage'));
 const ResearchPage = lazy(() => import('./pages/ResearchPage'));
 const ResumePage = lazy(() => import('./pages/ResumePage'));
@@ -249,9 +249,9 @@ export default function App() {
           </Link>
           <div className="nav-links" style={styles.navLinks}>
             <Link to="/project" className="link-hover" style={{ cursor: 'pointer' }}>{t('navProject')}</Link>
-            <Link to="/experience" className="link-hover" style={{ cursor: 'pointer' }}>{t('navExperience')}</Link>
             <Link to="/stack" className="link-hover" style={{ cursor: 'pointer' }}>{t('navStack')}</Link>
             <Link to="/research" className="link-hover" style={{ cursor: 'pointer' }}>{t('navResearch')}</Link>
+            <Link to="/journey" className="link-hover" style={{ cursor: 'pointer' }}>{t('navLifeFlow')}</Link>
             <Link to="/blog" className="link-hover" style={{ cursor: 'pointer' }}>{t('navBlog')}</Link>
             <Link to="/contact" className="link-hover" style={{ cursor: 'pointer', color: '#e0e0e8', fontWeight: 500 }}>
               {t('navContact')} <ArrowUpRight size={13} strokeWidth={1.5} />
@@ -285,12 +285,11 @@ export default function App() {
         {menuOpen && (
           <div className="mobile-menu" style={styles.mobileMenu}>
             <Link to="/project" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navProject')}</Link>
-            <Link to="/experience" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navExperience')}</Link>
             <Link to="/stack" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navStack')}</Link>
             <Link to="/research" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navResearch')}</Link>
-            <Link to="/blog" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navBlog')}</Link>
             <Link to="/journey" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navLifeFlow')}</Link>
-            <Link to="/resume" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navResume')}</Link>
+            <Link to="/blog" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navBlog')}</Link>
+            {FEATURES.resume && <Link to="/resume" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navResume')}</Link>}
             <Link to="/fun" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navFun')}</Link>
             <Link to="/contact" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navContact')}</Link>
           </div>
@@ -324,10 +323,10 @@ export default function App() {
           <Route path="/project" element={<ProjectPage />} />
           <Route path="/project/:slug" element={<ProjectDetail />} />
           <Route path="/project/:slug/case-study" element={<CaseStudyPage />} />
-          <Route path="/experience" element={<ExperiencePage />} />
           <Route path="/stack" element={<StackPage />} />
           <Route path="/research" element={<ResearchPage />} />
           <Route path="/resume" element={<ResumePage />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
         </Suspense>
       </main>

@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, CornerDownLeft, Folder, BookOpen, Compass, FileText, Beaker, Cpu, Briefcase } from 'lucide-react';
+import { Search, CornerDownLeft, Folder, BookOpen, Compass, FileText, Beaker, Cpu } from 'lucide-react';
 import { useLang } from '../i18n.jsx';
+import { FEATURES } from '../config';
 import PROJECTS from '../data/projects';
 
 export default function CommandPalette() {
@@ -42,12 +43,11 @@ export default function CommandPalette() {
     const pages = [
       { label: t('navHome'), sub: '/', to: '/', icon: Compass, kind: 'page' },
       { label: t('projectLabel'), sub: '/project', to: '/project', icon: Folder, kind: 'page' },
-      { label: t('expLabel'), sub: '/experience', to: '/experience', icon: Briefcase, kind: 'page' },
       { label: t('stackLabel'), sub: '/stack', to: '/stack', icon: Cpu, kind: 'page' },
       { label: t('researchLabel'), sub: '/research', to: '/research', icon: Beaker, kind: 'page' },
-      { label: t('blogLabel'), sub: '/blog', to: '/blog', icon: BookOpen, kind: 'page' },
       { label: t('journeyLabel'), sub: '/journey', to: '/journey', icon: Compass, kind: 'page' },
-      { label: t('navResume'), sub: '/resume', to: '/resume', icon: FileText, kind: 'page' },
+      { label: t('blogLabel'), sub: '/blog', to: '/blog', icon: BookOpen, kind: 'page' },
+      ...(FEATURES.resume ? [{ label: t('navResume'), sub: '/resume', to: '/resume', icon: FileText, kind: 'page' }] : []),
       { label: t('contactLabel'), sub: '/contact', to: '/contact', icon: FileText, kind: 'page' },
       { label: t('funLabel'), sub: '/fun', to: '/fun', icon: Compass, kind: 'page' },
     ];

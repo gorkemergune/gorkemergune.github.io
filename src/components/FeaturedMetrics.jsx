@@ -11,7 +11,7 @@ export default function FeaturedMetrics() {
     { n: PROJECTS.length, suffix: '', label: t('mProjects') },
     { n: gh.publicRepos, suffix: '', label: t('mRepos'), live: true },
     { n: gh.commits, suffix: '', label: t('mCommits'), live: true },
-    { n: 3, suffix: '', label: t('mResearch') },
+    { n: 2, suffix: '', label: t('mResearch') },
     { n: 2, suffix: '', label: t('mModels') },
     { n: 140, suffix: 'K+', label: t('mImages') },
     { n: 117, suffix: '', label: t('mDataset') },

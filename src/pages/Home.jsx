@@ -3,6 +3,7 @@ import { ArrowUpRight } from 'lucide-react';
 import { useLang } from '../i18n.jsx';
 import { useSeo } from '../hooks/useSeo';
 import FeaturedMetrics from '../components/FeaturedMetrics';
+import LiveStatus from '../components/LiveStatus';
 import FeaturedProject from '../components/FeaturedProject';
 import CurrentlyBuilding from '../components/CurrentlyBuilding';
 import GitHubActivity from '../components/GitHubActivity';
@@ -37,7 +38,7 @@ export default function Home() {
             <p style={s.body}>{t('introBody')}</p>
             <div style={s.ctaRow}>
               <Link to="/project" className="hero-btn">{t('introCtaProjects')} <ArrowUpRight size={15} strokeWidth={1.5} /></Link>
-              <Link to="/experience" className="hero-btn">{t('navExperience')}</Link>
+              <Link to="/research" className="hero-btn">{t('navResearch')}</Link>
               <Link to="/contact" className="hero-btn">{t('introCtaContact')}</Link>
             </div>
           </div>
@@ -53,6 +54,7 @@ export default function Home() {
       </section>
 
       <FeaturedMetrics />
+      <LiveStatus />
       <FeaturedProject />
       <CurrentlyBuilding />
       <GitHubActivity />
