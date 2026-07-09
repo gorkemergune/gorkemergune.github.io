@@ -14,7 +14,7 @@ export default function ContactPage() {
       <div style={s.header}>
         <span className="chip">{t('contactBadge')}</span>
         <h1 className="section-title big-contact" style={s.title}>
-          {t('contactLine1')} {t('contactLine1') ? ' ' : ''}<em className="metallic" style={{ fontStyle: 'italic' }}>{t('contactLine1Em')}</em>.<br />
+          {t('contactLine1')} <em className="metallic" style={{ fontStyle: 'italic' }}>{t('contactLine1Em')}</em>.<br />
           {t('contactLine2')}
         </h1>
       </div>

@@ -43,6 +43,8 @@ export default function JourneyPage() {
           .jv-row { grid-template-columns: 44px 1fr !important; }
           .jv-spine-cell { grid-column: 1 !important; }
           .jv-row.left .jv-card-wrap, .jv-row.right .jv-card-wrap { grid-column: 2 !important; text-align: left !important; }
+          .jv-row.left .jv-card { text-align: left !important; }
+          .jv-spine { left: 21px !important; }
           .jv-hero-name { font-size: 40px !important; }
         }
       `}</style>
