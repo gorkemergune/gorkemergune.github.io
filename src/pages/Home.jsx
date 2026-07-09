@@ -4,6 +4,7 @@ import { useLang } from '../i18n.jsx';
 import { useSeo } from '../hooks/useSeo';
 import FeaturedMetrics from '../components/FeaturedMetrics';
 import LiveStatus from '../components/LiveStatus';
+import AlgorithmJourney from '../components/AlgorithmJourney';
 import FeaturedProject from '../components/FeaturedProject';
 import CurrentlyBuilding from '../components/CurrentlyBuilding';
 import GitHubActivity from '../components/GitHubActivity';
@@ -55,6 +56,7 @@ export default function Home() {
 
       <FeaturedMetrics />
       <LiveStatus />
+      <AlgorithmJourney />
       <FeaturedProject />
       <CurrentlyBuilding />
       <GitHubActivity />

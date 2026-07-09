@@ -1,28 +1,46 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Check, Lock, ChevronDown, Trophy, Rocket, Beaker, Folder, Sparkles } from 'lucide-react';
 import { useLang } from '../i18n.jsx';
 import { useSeo } from '../hooks/useSeo';
 
+const CAT = [
+  { key: 'competitions', label: 'semCompetitions', icon: Trophy },
+  { key: 'hackathons', label: 'semHackathons', icon: Rocket },
+  { key: 'research', label: 'semResearch', icon: Beaker },
+  { key: 'projects', label: 'semProjects', icon: Folder },
+  { key: 'achievements', label: 'semAchievements', icon: Sparkles },
+];
+
 export default function JourneyPage() {
   const { t } = useLang();
-  const journeyItems = t('journeyItems');
+  const items = t('journeySemesters');
+  const list = Array.isArray(items) ? items : [];
+  const currentIdx = list.findIndex((x) => x.status === 'current');
+  const [open, setOpen] = useState(currentIdx >= 0 ? currentIdx : 0);
   useSeo({ title: t('journeyLabel'), description: t('journeySub'), path: '/journey' });
 
   return (
     <div style={s.container}>
       <style>{`
-        .lf-item { position: relative; opacity: 0; transform: translateY(22px); transition: opacity 0.7s cubic-bezier(0.2,0.8,0.2,1), transform 0.7s cubic-bezier(0.2,0.8,0.2,1); }
-        .lf-item.in { opacity: 1; transform: none; }
-        .lf-card { transition: border-color 0.45s, box-shadow 0.45s, transform 0.45s cubic-bezier(0.2,0.8,0.2,1); }
-        .lf-card:hover { transform: translateY(-3px); border-color: #2a2a45 !important; box-shadow: 0 0 30px rgba(0,212,255,0.08); }
-        .lf-card:hover .lf-dot { box-shadow: 0 0 0 5px rgba(0,212,255,0.12), 0 0 14px #00d4ff; }
-        .lf-dot { transition: box-shadow 0.45s; }
-        @media (max-width: 640px) {
-          .lf-rail { left: 18px !important; }
-          .lf-item { padding-left: 46px !important; }
-          .lf-node { left: 18px !important; }
-          .lf-title { font-size: 22px !important; }
+        @keyframes jr-pulse-down { 0% { top: -8%; opacity: 0; } 12% { opacity: 1; } 88% { opacity: 1; } 100% { top: 104%; opacity: 0; } }
+        @keyframes jr-ring { from { transform: rotate(0); } to { transform: rotate(360deg); } }
+        @keyframes jr-expand { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+        .jr-row { position: relative; opacity: 0; transform: translateY(24px); transition: opacity 0.7s cubic-bezier(0.2,0.8,0.2,1), transform 0.7s cubic-bezier(0.2,0.8,0.2,1); }
+        .jr-row.in { opacity: 1; transform: none; }
+        .jr-card { transition: border-color 0.4s, box-shadow 0.4s, transform 0.35s cubic-bezier(0.2,0.8,0.2,1); }
+        .jr-card:hover { transform: translateY(-2px); }
+        .jr-grid { display: grid; grid-template-columns: 1fr 60px 1fr; align-items: start; }
+        .jr-grid.left .jr-wrap { grid-column: 1; }
+        .jr-grid.right .jr-wrap { grid-column: 3; }
+        .jr-mid { grid-column: 2; }
+        .jr-chev { transition: transform 0.35s; }
+        .jr-chev.open { transform: rotate(180deg); }
+        @media (max-width: 780px) {
+          .jr-grid { grid-template-columns: 44px 1fr !important; }
+          .jr-mid { grid-column: 1 !important; }
+          .jr-grid.left .jr-wrap, .jr-grid.right .jr-wrap { grid-column: 2 !important; }
+          .jr-spine { left: 21px !important; }
         }
       `}</style>
 
@@ -37,17 +55,27 @@ export default function JourneyPage() {
       </div>
 
       <div style={s.timeline}>
-        {/* subtle continuous rail */}
-        <div className="lf-rail" style={s.rail} />
-        {Array.isArray(journeyItems) && journeyItems.map((j, i) => (
-          <Phase key={i} item={j} index={i} />
+        <div className="jr-spine" style={s.spine}>
+          <div style={s.spineGlow} />
+          <div style={s.spinePulse} />
+        </div>
+        {list.map((item, i) => (
+          <Semester
+            key={i}
+            item={item}
+            index={i}
+            side={i % 2 === 0 ? 'left' : 'right'}
+            expanded={open === i}
+            onToggle={() => setOpen(open === i ? -1 : i)}
+            t={t}
+          />
         ))}
       </div>
     </div>
   );
 }
 
-function Phase({ item, index }) {
+function Semester({ item, index, side, expanded, onToggle, t }) {
   const ref = useRef(null);
   const [seen, setSeen] = useState(false);
   useEffect(() => {
@@ -58,40 +86,110 @@ function Phase({ item, index }) {
     return () => io.disconnect();
   }, []);
 
-  return (
-    <div ref={ref} className={`lf-item${seen ? ' in' : ''}`} style={{ ...s.item, transitionDelay: `${index * 0.06}s` }}>
-      {/* node on the rail */}
-      <span className="lf-node" style={s.node}>
-        <span className="lf-dot" style={s.dot} />
-      </span>
+  const locked = item.status === 'locked';
+  const current = item.status === 'current';
+  const accent = locked ? '#3a3a50' : current ? '#ff6b35' : '#00d4ff';
+  const glow = locked ? 'rgba(58,58,80,0.2)' : current ? 'rgba(255,107,53,0.4)' : 'rgba(0,212,255,0.35)';
+  const statusLabel = current ? t('journeyStatusActive') : locked ? t('journeyStatusLocked') : t('journeyStatusDone');
+  const hasContent = !locked && CAT.some((c) => (item[c.key] || []).length);
 
-      <div className="lf-card" style={s.card}>
-        <div style={s.metaRow}>
-          <span style={s.num}>{String(index + 1).padStart(2, '0')}</span>
-          <span style={s.year}>{item.year}</span>
+  return (
+    <div ref={ref} className={`jr-grid ${side} jr-row${seen ? ' in' : ''}`} style={{ marginBottom: 10, transitionDelay: `${index * 0.05}s` }}>
+      <div className="jr-wrap">
+        {current && <div style={s.youHere}>{t('journeyNow')}</div>}
+        <div
+          className="jr-card"
+          style={{ ...s.card, borderColor: current ? '#ff6b3555' : '#1a1a2e', cursor: locked ? 'default' : 'pointer' }}
+          onClick={() => !locked && onToggle()}
+          onMouseEnter={(e) => { if (!locked) { e.currentTarget.style.borderColor = `${accent}66`; e.currentTarget.style.boxShadow = `0 0 26px ${glow}`; } }}
+          onMouseLeave={(e) => { e.currentTarget.style.borderColor = current ? '#ff6b3555' : '#1a1a2e'; e.currentTarget.style.boxShadow = 'none'; }}
+        >
+          <div style={s.cardHead}>
+            <span style={s.term}>{item.term}</span>
+            <span style={{ ...s.statusTag, color: accent, borderColor: `${accent}55`, background: `${accent}12` }}>
+              {item.status === 'completed' && <Check size={9} strokeWidth={3} style={{ verticalAlign: -1, marginRight: 3 }} />}
+              {locked && <Lock size={9} strokeWidth={2.5} style={{ verticalAlign: -1, marginRight: 3 }} />}
+              {statusLabel}
+            </span>
+          </div>
+          <div style={s.titleRow}>
+            <h3 style={{ ...s.phaseTitle, color: locked ? '#6a6a82' : '#eef0f6', fontStyle: locked ? 'normal' : 'italic' }}>
+              {locked ? t('journeyLockedNote') : item.title}
+            </h3>
+            {hasContent && <ChevronDown className={`jr-chev${expanded ? ' open' : ''}`} size={16} strokeWidth={1.6} style={{ color: accent, flexShrink: 0 }} />}
+          </div>
+
+          {expanded && hasContent && (
+            <div style={{ ...s.summary, animation: 'jr-expand 0.35s ease' }}>
+              {CAT.map((c) => {
+                const vals = item[c.key] || [];
+                if (!vals.length) return null;
+                const Icon = c.icon;
+                return (
+                  <div key={c.key} style={s.catRow}>
+                    <span style={{ ...s.catLabel, color: accent }}><Icon size={11} strokeWidth={1.8} /> {t(c.label)}</span>
+                    <div style={s.chips}>
+                      {vals.map((v, k) => <span key={k} style={s.chip}>{v}</span>)}
+                    </div>
+                  </div>
+                );
+              })}
+              {current && (
+                <div style={s.catRow}>
+                  <span style={{ ...s.catLabel, color: accent }}><Sparkles size={11} strokeWidth={1.8} /> {t('journeyFocusLabel')}</span>
+                  <div style={s.chips}>
+                    {(t('journeyFocus') || []).map((f, k) => (
+                      <span key={k} style={{ ...s.chip, borderColor: '#ff6b3544', color: '#ffb494', background: 'rgba(255,107,53,0.08)' }}>{f}</span>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
         </div>
-        <h3 className="lf-title" style={s.phaseTitle}>{item.title}</h3>
-        <p style={s.body}>{item.body}</p>
+      </div>
+
+      {/* node */}
+      <div className="jr-mid" style={s.mid}>
+        <div style={{ ...s.node, borderColor: accent }}>
+          {current ? (
+            <>
+              <div style={{ ...s.nodeRing, borderTopColor: accent }} />
+              <span style={{ ...s.core, background: accent, boxShadow: `0 0 12px ${accent}` }} />
+            </>
+          ) : (
+            <span style={{ ...s.core, background: locked ? '#2a2a40' : accent, boxShadow: locked ? 'none' : `0 0 10px ${accent}` }} />
+          )}
+        </div>
       </div>
     </div>
   );
 }
 
 const s = {
-  container: { maxWidth: 820, margin: '0 auto', padding: '60px 48px 120px', position: 'relative', zIndex: 2 },
+  container: { maxWidth: 960, margin: '0 auto', padding: '60px 48px 120px', position: 'relative', zIndex: 2 },
   back: { display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: "'JetBrains Mono', monospace", fontSize: 12, letterSpacing: '0.06em', color: '#6a6a82', marginBottom: 56, cursor: 'pointer' },
-  header: { marginBottom: 64 },
+  header: { marginBottom: 64, maxWidth: 620 },
   title: { fontFamily: "'Instrument Serif', serif", fontSize: 72, fontWeight: 400, lineHeight: 0.95, letterSpacing: '-0.015em', color: '#eef0f6', marginTop: 20, marginBottom: 20 },
-  desc: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 18, lineHeight: 1.6, color: '#9a9ab0', maxWidth: 560 },
+  desc: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 18, lineHeight: 1.6, color: '#9a9ab0' },
   timeline: { position: 'relative' },
-  rail: { position: 'absolute', left: 27, top: 12, bottom: 12, width: 1, background: 'linear-gradient(180deg, transparent, #1e1e30 8%, #1e1e30 92%, transparent)' },
-  item: { position: 'relative', paddingLeft: 66, marginBottom: 20 },
-  node: { position: 'absolute', left: 27, top: 30, transform: 'translateX(-50%)', display: 'flex', alignItems: 'center', justifyContent: 'center', width: 14, height: 14, borderRadius: '50%', background: '#0a0a0f', border: '1px solid #2a2a40', zIndex: 1 },
-  dot: { width: 6, height: 6, borderRadius: '50%', background: '#00d4ff' },
-  card: { background: 'linear-gradient(180deg,#0f0f1a,#0b0b13)', border: '1px solid #1a1a2e', borderRadius: 12, padding: '24px 28px' },
-  metaRow: { display: 'flex', alignItems: 'center', gap: 14, marginBottom: 12 },
-  num: { fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.14em', color: '#00d4ff' },
-  year: { fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.08em', color: '#7a7a92' },
-  phaseTitle: { fontFamily: "'Instrument Serif', serif", fontStyle: 'italic', fontSize: 27, fontWeight: 400, lineHeight: 1.15, color: '#eef0f6', marginBottom: 12 },
-  body: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 15.5, lineHeight: 1.7, color: '#a2a2b8' },
+  spine: { position: 'absolute', left: 'calc(50% - 1px)', top: 0, bottom: 0, width: 2, pointerEvents: 'none' },
+  spineGlow: { position: 'absolute', inset: 0, background: 'linear-gradient(180deg, transparent, #1a2a3a 6%, #1a2a3a 94%, transparent)' },
+  spinePulse: { position: 'absolute', left: -1, width: 4, height: '16%', borderRadius: 4, background: 'linear-gradient(180deg, transparent, #00d4ff, transparent)', boxShadow: '0 0 16px rgba(0,212,255,0.7)', animation: 'jr-pulse-down 6s ease-in-out infinite' },
+  mid: { display: 'flex', justifyContent: 'center', paddingTop: 26 },
+  node: { position: 'relative', width: 26, height: 26, borderRadius: '50%', border: '2px solid', background: '#0a0a0f', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1 },
+  nodeRing: { position: 'absolute', inset: -5, borderRadius: '50%', border: '1.5px solid transparent', animation: 'jr-ring 3s linear infinite' },
+  core: { width: 8, height: 8, borderRadius: '50%' },
+  youHere: { display: 'inline-block', marginBottom: 8, padding: '4px 11px', borderRadius: 999, background: 'rgba(255,107,53,0.14)', border: '1px solid rgba(255,107,53,0.4)', fontFamily: "'JetBrains Mono', monospace", fontSize: 9, letterSpacing: '0.16em', color: '#ff8a5c' },
+  card: { position: 'relative', background: 'linear-gradient(180deg,#0f0f1a,#0b0b13)', border: '1px solid #1a1a2e', borderRadius: 12, padding: '20px 22px', margin: '0 8px' },
+  cardHead: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 10, marginBottom: 10, flexWrap: 'wrap' },
+  term: { fontFamily: "'JetBrains Mono', monospace", fontSize: 12, letterSpacing: '0.1em', color: '#c0c0d4' },
+  statusTag: { fontFamily: "'JetBrains Mono', monospace", fontSize: 8, letterSpacing: '0.12em', padding: '3px 8px', border: '1px solid', borderRadius: 999 },
+  titleRow: { display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 },
+  phaseTitle: { fontFamily: "'Instrument Serif', serif", fontSize: 22, fontWeight: 400, lineHeight: 1.15 },
+  summary: { marginTop: 16, paddingTop: 16, borderTop: '1px solid #1a1a2e', display: 'flex', flexDirection: 'column', gap: 12 },
+  catRow: { display: 'flex', flexDirection: 'column', gap: 8 },
+  catLabel: { display: 'inline-flex', alignItems: 'center', gap: 6, fontFamily: "'JetBrains Mono', monospace", fontSize: 9, letterSpacing: '0.12em', textTransform: 'uppercase' },
+  chips: { display: 'flex', flexWrap: 'wrap', gap: 6 },
+  chip: { padding: '4px 9px', border: '1px solid #22223400', borderRadius: 6, background: 'rgba(255,255,255,0.03)', fontFamily: "'Instrument Sans', sans-serif", fontSize: 12, color: '#c4c4d4' },
 };

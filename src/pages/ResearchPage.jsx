@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Beaker, AlertCircle, FileText } from 'lucide-react';
+import { ArrowLeft, Beaker, AlertCircle, FileText, Check, Loader } from 'lucide-react';
 import { useLang } from '../i18n.jsx';
 import { useSeo } from '../hooks/useSeo';
 
@@ -43,7 +43,16 @@ export default function ResearchPage() {
           >
             <div style={s.cardTop}>
               <span style={{ ...s.field, color: it.accent }}><Beaker size={12} strokeWidth={1.6} /> {it.field}</span>
-              <span style={s.status}><span style={s.statusDot} />{t('researchStatus')}</span>
+              {(() => {
+                const done = it.status === 'completed';
+                const c = done ? '#00e5a0' : '#ffb454';
+                return (
+                  <span style={{ ...s.status, color: c, borderColor: `${c}4d`, background: `${c}14` }}>
+                    {done ? <Check size={10} strokeWidth={2.6} /> : <Loader size={10} strokeWidth={2} />}
+                    {done ? t('researchCompleted') : t('researchStatus')}
+                  </span>
+                );
+              })()}
             </div>
             <h3 style={s.rtitle}>{it.title}</h3>
             <p style={s.abstract}>{it.abstract}</p>
@@ -56,7 +65,7 @@ export default function ResearchPage() {
                 </ul>
               </div>
               <div>
-                <div style={{ ...s.subLabel, color: it.accent }}>{t('researchExpected')}</div>
+                <div style={{ ...s.subLabel, color: it.accent }}>{it.status === 'completed' ? t('researchOutcomes') : t('researchExpected')}</div>
                 <p style={s.expected}>{it.expected}</p>
               </div>
             </div>

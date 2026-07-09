@@ -23,6 +23,7 @@ const ContactPage = lazy(() => import('./pages/ContactPage'));
 const JourneyPage = lazy(() => import('./pages/JourneyPage'));
 const ProjectPage = lazy(() => import('./pages/ProjectPage'));
 const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
+const CompetitionsPage = lazy(() => import('./pages/CompetitionsPage'));
 const StackPage = lazy(() => import('./pages/StackPage'));
 const ResearchPage = lazy(() => import('./pages/ResearchPage'));
 const ResumePage = lazy(() => import('./pages/ResumePage'));
@@ -249,7 +250,7 @@ export default function App() {
           </Link>
           <div className="nav-links" style={styles.navLinks}>
             <Link to="/project" className="link-hover" style={{ cursor: 'pointer' }}>{t('navProject')}</Link>
-            <Link to="/stack" className="link-hover" style={{ cursor: 'pointer' }}>{t('navStack')}</Link>
+            <Link to="/competitions" className="link-hover" style={{ cursor: 'pointer' }}>{t('navCompetitions')}</Link>
             <Link to="/research" className="link-hover" style={{ cursor: 'pointer' }}>{t('navResearch')}</Link>
             <Link to="/journey" className="link-hover" style={{ cursor: 'pointer' }}>{t('navLifeFlow')}</Link>
             <Link to="/blog" className="link-hover" style={{ cursor: 'pointer' }}>{t('navBlog')}</Link>
@@ -285,6 +286,7 @@ export default function App() {
         {menuOpen && (
           <div className="mobile-menu" style={styles.mobileMenu}>
             <Link to="/project" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navProject')}</Link>
+            <Link to="/competitions" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navCompetitions')}</Link>
             <Link to="/stack" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navStack')}</Link>
             <Link to="/research" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navResearch')}</Link>
             <Link to="/journey" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navLifeFlow')}</Link>
@@ -323,6 +325,7 @@ export default function App() {
           <Route path="/project" element={<ProjectPage />} />
           <Route path="/project/:slug" element={<ProjectDetail />} />
           <Route path="/project/:slug/case-study" element={<CaseStudyPage />} />
+          <Route path="/competitions" element={<CompetitionsPage />} />
           <Route path="/stack" element={<StackPage />} />
           <Route path="/research" element={<ResearchPage />} />
           <Route path="/resume" element={<ResumePage />} />

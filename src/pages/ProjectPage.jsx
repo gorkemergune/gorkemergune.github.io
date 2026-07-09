@@ -5,18 +5,30 @@ import { useLang } from '../i18n.jsx';
 import { useSeo } from '../hooks/useSeo';
 import PROJECTS from '../data/projects';
 
+const CAT_ORDER = ['Computer Vision', 'Machine Learning', 'Deep Learning', 'Large Language Models', 'Research', 'Software Engineering', 'Open Source', 'Utilities'];
+const CAT_TR = {
+  'Computer Vision': 'Bilgisayarlı Görü', 'Machine Learning': 'Makine Öğrenmesi', 'Deep Learning': 'Derin Öğrenme',
+  'Large Language Models': 'Büyük Dil Modelleri', 'Research': 'Araştırma', 'Software Engineering': 'Yazılım Mühendisliği',
+  'Open Source': 'Açık Kaynak', 'Utilities': 'Araçlar',
+};
+
 export default function ProjectPage() {
   const { lang, t } = useLang();
   const [q, setQ] = useState('');
+  const [cat, setCat] = useState('All');
   useSeo({ title: t('projectLabel'), description: t('projectSub'), path: '/project' });
+
+  const cats = useMemo(() => ['All', ...CAT_ORDER.filter((c) => PROJECTS.some((p) => p.category === c))], []);
+  const catLabel = (c) => (c === 'All' ? (lang === 'tr' ? 'Tümü' : 'All') : (lang === 'tr' ? CAT_TR[c] || c : c));
 
   const filtered = useMemo(() => {
     const s = q.trim().toLowerCase();
-    if (!s) return PROJECTS;
-    return PROJECTS.filter((p) =>
-      (p.title + ' ' + p.codename + ' ' + p.language + ' ' + p.tags.join(' ') + ' ' + (p.oneLiner || '')).toLowerCase().includes(s)
-    );
-  }, [q]);
+    return PROJECTS.filter((p) => {
+      if (cat !== 'All' && p.category !== cat) return false;
+      if (!s) return true;
+      return (p.title + ' ' + p.codename + ' ' + p.language + ' ' + p.tags.join(' ') + ' ' + (p.oneLiner || '')).toLowerCase().includes(s);
+    });
+  }, [q, cat]);
 
   return (
     <div style={s.container}>
@@ -31,6 +43,10 @@ export default function ProjectPage() {
         .armor-card:hover .armor-preview img { transform: scale(1.05); }
         .armor-card .armor-open { transition: background 0.3s, color 0.3s; }
         .proj-search:focus-within { border-color: #00d4ff !important; }
+        .cat-tab { padding: 8px 16px; border: 1px solid #1a1a2e; border-radius: 999px; background: rgba(15,15,26,0.5); font-family: 'Instrument Sans', sans-serif; font-size: 13px; color: #9a9ab0; cursor: pointer; transition: all 0.3s cubic-bezier(0.2,0.8,0.2,1); white-space: nowrap; }
+        .cat-tab:hover { color: #e0e0e8; border-color: #2a2a45; }
+        .cat-tab.active { background: #00d4ff; color: #0a0a0f; border-color: #00d4ff; font-weight: 500; }
+        .cat-tabs { display: flex; flex-wrap: wrap; gap: 8px; }
       `}</style>
 
       <Link to="/" className="link-hover" style={s.back}>
@@ -51,14 +67,28 @@ export default function ProjectPage() {
             style={s.searchInput}
             aria-label={lang === 'tr' ? 'Projelerde ara' : 'Search projects'}
           />
-          {q && <span style={s.count}>{filtered.length}</span>}
+          {(q || cat !== 'All') && <span style={s.count}>{filtered.length}</span>}
+        </div>
+
+        <div className="cat-tabs" style={{ marginTop: 18 }} role="tablist">
+          {cats.map((c) => (
+            <button
+              key={c}
+              className={`cat-tab${cat === c ? ' active' : ''}`}
+              onClick={() => setCat(c)}
+              role="tab"
+              aria-selected={cat === c}
+            >
+              {catLabel(c)}
+            </button>
+          ))}
         </div>
       </div>
 
       {filtered.length === 0 ? (
         <p style={s.empty}>{lang === 'tr' ? 'Eşleşen proje yok.' : 'No matching projects.'}</p>
       ) : (
-        <div className="armory-grid">
+        <div className="armory-grid" key={cat}>
           {filtered.map((p, i) => (
             <ArmorCard key={p.slug} project={p} index={i} lang={lang} />
           ))}
