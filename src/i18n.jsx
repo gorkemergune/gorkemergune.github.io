@@ -25,10 +25,10 @@ const en = {
 
   // Intro (home identity section)
   introKicker: 'IDENTITY // WHO IS BEHIND THE ARMOR',
-  introLeadPre: "I'm Görkem — a second-year Computer Engineering student turning ",
+  introLeadPre: "I'm Görkem, and I spend my days turning ",
   introLeadEm: 'curiosity into working systems',
-  introLeadPost: '. I build AI that sees, reads, and reasons: object detectors, translation models, phishing classifiers — and the full-stack apps that put them in people’s hands.',
-  introBody: 'I learn by shipping. Every armor in the hall is something I designed, trained, broke, and rebuilt — from bare-metal operating systems to production ML pipelines. The goal is simple: to become the kind of AI engineer whose work speaks before he does.',
+  introLeadPost: ': object detectors, translation models, phishing classifiers — and the apps that put them in people’s hands.',
+  introBody: 'I learn by shipping. Every armor in the hall is something I designed, trained, broke, and rebuilt — from a bare-metal operating system to production ML pipelines. The goal is simple: to become the kind of AI engineer whose work speaks before he does.',
   introRolesLabel: 'OPERATING DOMAINS',
   introRoles: ['AI Engineer', 'Machine Learning', 'Computer Vision', 'Deep Learning', 'Full-Stack Development', 'Open Source', 'Research'],
   introStats: [
@@ -43,7 +43,7 @@ const en = {
 
   // Home hero + sections
   heroTagline: 'AI PRODUCT DEVELOPER',
-  heroSubtext: 'I build real products with AI — computer-vision systems, machine-learning pipelines, and full-stack apps. I care more about shipping things people use than training models for their own sake.',
+  heroSubtext: 'I build real products with AI. What matters to me is shipping things people actually use, not training models for their own sake.',
   ctaResume: 'Download Résumé',
   ctaViewWork: 'View Work',
 
@@ -621,11 +621,11 @@ const tr = {
   marquee: ['Portfolyo', 'Blog', 'Odak', 'Anlar', 'Günlük', 'Saha Rehberi', 'Arşiv'],
 
   // Intro (home identity section)
-  introKicker: 'KİMLİK // ZIRHIN ARDINDAKİ',
-  introLeadPre: 'Ben Görkem — ikinci sınıf Bilgisayar Mühendisliği öğrencisiyim ve ',
+  introKicker: 'KİMLİK // ZIRHIN ARKASINDA KİM VAR',
+  introLeadPre: 'Ben Görkem. Günlerimi ',
   introLeadEm: 'merakı çalışan sistemlere',
-  introLeadPost: ' dönüştürüyorum. Gören, okuyan ve akıl yürüten yapay zekâlar geliştiriyorum: nesne dedektörleri, çeviri modelleri, oltalama sınıflandırıcıları — ve bunları insanların eline veren tam yığın uygulamalar.',
-  introBody: 'Üreterek öğreniyorum. Depodaki her zırh; tasarladığım, eğittiğim, bozup yeniden inşa ettiğim bir şey — doğrudan donanımda çalışan işletim sistemlerinden üretim seviyesi ML işlem hatlarına kadar. Amacım basit: işi kendisinden önce konuşan türden bir yapay zekâ mühendisi olmak.',
+  introLeadPost: ' dönüştürerek geçiriyorum: nesne dedektörleri, çeviri modelleri, oltalama sınıflandırıcıları ve bunları insanların eline ulaştıran uygulamalar.',
+  introBody: 'Üreterek öğreniyorum. Zırh Deposu’ndaki her zırh; doğrudan donanımda çalışan bir işletim sisteminden üretim seviyesindeki makine öğrenmesi hatlarına kadar tasarladığım, eğittiğim, bozup yeniden inşa ettiğim bir şey. Amacım basit: işi kendisinden önce konuşan bir yapay zekâ mühendisi olmak.',
   introRolesLabel: 'ÇALIŞMA ALANLARI',
   introRoles: ['Yapay Zekâ Mühendisi', 'Makine Öğrenmesi', 'Bilgisayarlı Görü', 'Derin Öğrenme', 'Tam Yığın Geliştirme', 'Açık Kaynak', 'Araştırma'],
   introStats: [
@@ -640,18 +640,18 @@ const tr = {
 
   // Home hero + sections
   heroTagline: 'YAPAY ZEKÂ ÜRÜN GELİŞTİRİCİSİ',
-  heroSubtext: 'Yapay zekâ ile gerçek ürünler geliştiriyorum — bilgisayarlı görü sistemleri, makine öğrenmesi işlem hatları ve full-stack uygulamalar. Model eğitmekten çok, insanların gerçekten kullandığı şeyler üretmeyi seviyorum.',
+  heroSubtext: 'Yapay zekâ ile gerçek ürünler geliştiriyorum. Benim için önemli olan, sırf eğitmiş olmak için model eğitmek değil, insanların gerçekten kullandığı şeyler üretmek.',
   ctaResume: 'CV’yi İndir',
-  ctaViewWork: 'Çalışmalar',
+  ctaViewWork: 'Çalışmaları Gör',
 
   metricsKicker: 'ÖNE ÇIKAN METRİKLER // CANLI TELEMETRİ',
   mProjects: 'Öne Çıkan Projeler',
-  mRepos: 'Public Depolar',
-  mCommits: 'GitHub Commit',
+  mRepos: 'Herkese Açık Depolar',
+  mCommits: 'GitHub Commit’leri',
   mResearch: 'Araştırma Projeleri',
   mAlgo: 'Algoritma Problemleri',
   mCompetitions: 'Yarışmalar',
-  mModels: 'Yayınlanan YZ Modeli',
+  mModels: 'Yayınlanan Yapay Zekâ Modelleri',
   mImages: 'İşlenen Görsel',
   mDataset: 'Özel Veri Kümesi Görseli',
   mF1: 'En İyi Model F1 Skoru',
@@ -669,7 +669,7 @@ const tr = {
   ],
 
   activityKicker: 'GITHUB ETKİNLİĞİ // SON DEPOLAR',
-  activitySub: 'Doğrudan GitHub’dan canlı çekilir — her zaman güncel',
+  activitySub: 'Doğrudan GitHub’dan canlı olarak çekilir ve her zaman günceldir',
   activityCta: 'GitHub profilini gör',
   activityUpdated: 'Güncellendi',
   activityStars: 'yıldız',
@@ -727,7 +727,7 @@ const tr = {
     { category: 'Üniversite', date: 'Haz 2026', readTime: '6 dk', title: 'Calculus I ve Calculus II’den Nasıl AA Aldım?', excerpt: 'İki dönem calculus’ı yüksek notla bitirmemi sağlayan şey yetenek değil, alışkanlıklardı.', slug: 'calculus-aa' },
     { category: 'Programlama', date: 'May 2026', readTime: '6 dk', title: 'Python’a Sıfırdan Nasıl Başlanmalı?', excerpt: 'Yeni başlayanlar için Python’a giriş: önce ne öğrenmeli, şimdilik neyi gönül rahatlığıyla görmezden gelmeli.', slug: 'python-from-scratch' },
     { category: 'Programlama', date: 'Nis 2026', readTime: '4 dk', title: 'Sıfırdan C', excerpt: 'İşaretçiler, bellek ve bir bilgisayarın gerçekte nasıl çalıştığını bana nihayet öğreten derleyici.', slug: 'c-from-scratch' },
-    { category: 'Kariyer', date: 'Mar 2026', readTime: '5 dk', title: '2026’da Bilgisayar Mühendisliği Okunur mu?', excerpt: 'Alana dürüst bir bakış — kime uyar, kimi bunaltır ve kimsenin önceden söylemediği şey nedir.', slug: 'should-you-study-cs' },
+    { category: 'Kariyer', date: 'Mar 2026', readTime: '5 dk', title: '2026’da Bilgisayar Mühendisliği Okunur mu?', excerpt: 'Alana dürüst bir bakış: kime uyar, kimi bunaltır ve kimsenin önceden söylemediği şey nedir.', slug: 'should-you-study-cs' },
   ],
 
   // Puzzle
@@ -759,8 +759,8 @@ const tr = {
   puzzleHide: 'Gizle',
   puzzleExTitle: 'İyi Sıralama İlkesi (Well-Ordering Principle)',
   puzzleExP1: 'Pozitif tam sayıların boş olmayan her alt kümesinin bir en küçük elemanı vardır.',
-  puzzleExP2: 'Bu bulmacada, kalan her alt kümenin en küçüğünü bularak bu ilkeyi doğruladın — aslında seçmeli sıralama (selection sort) uyguladın. İlke, her zaman bir en küçük elemanın var olduğunu garanti eder; bu yüzden görev her zaman çözülebilir.',
-  puzzleExP3: 'En iyi strateji: geçişlilik özelliğini kullan. A < B ve B < C ise A < C’dir — A ile C’yi ayrıca karşılaştırmaya gerek yok.',
+  puzzleExP2: 'Bu bulmacada, kalan her alt kümenin en küçüğünü bularak bu ilkeyi doğruladın; aslında seçmeli sıralama (selection sort) uyguladın. İlke, her zaman bir en küçük elemanın var olduğunu garanti eder; bu yüzden görev her zaman çözülebilir.',
+  puzzleExP3: 'En iyi strateji: geçişlilik özelliğini kullan. A < B ve B < C ise A < C’dir; A ile C’yi ayrıca karşılaştırmaya gerek yok.',
   puzzlePlayAgain: 'Tekrar Oyna',
 
   // Contact
@@ -835,7 +835,7 @@ const tr = {
   hanoiExTitle: 'Hanoi Kulesi ve Özyineleme',
   hanoiExP1: 'n diskli Hanoi Kulesi’ni çözmek için gereken en az hamle sayısı 2ⁿ − 1’dir.',
   hanoiExP2: 'Özyinelemeli strateji: n−1 diski yardımcı çubuğa taşı, en büyük diski hedefe taşı, ardından n−1 diski yardımcı çubuktan hedefe taşı.',
-  hanoiExP3: 'Yardımcı: 2. çubuk — Hedef: 3. çubuk. Bu bulmaca üstel büyümeyi gösterir — eklenen her disk, en az hamle sayısını iki katına çıkarıp bir artırır.',
+  hanoiExP3: 'Yardımcı: 2. çubuk, Hedef: 3. çubuk. Bu bulmaca üstel büyümeyi gösterir; eklenen her disk, en az hamle sayısını iki katına çıkarıp bir artırır.',
 
   // Sorry Page
   sorryPageTitle: 'Özür Dilerim...',
@@ -899,7 +899,7 @@ const tr = {
   journeyStatusLocked: 'KİLİTLİ',
   journeyPhase: 'AŞAMA',
   journeyTimeline: 'GÖREV ZAMAN ÇİZELGESİ',
-  journeySoon: 'Şifreli — sırası gelince açılır.',
+  journeySoon: 'Şifreli; sırası gelince açılır.',
 
   // Project Page
   projectBack: 'Ana Sayfa',
@@ -936,7 +936,7 @@ const tr = {
   rdBadge: 'BLOG',
   rdNotFoundTitle: 'Sayfa bulunamadı',
   rdNotFoundDesc: 'Bu blog yazısı henüz mevcut değil.',
-  rdBottomNote: 'Yer tutucu yazı — tonu belirlemek için yazıldı. Gerçek içerik yakında bunun yerini alacak.',
+  rdBottomNote: 'Tonu belirlemek için yazılmış yer tutucu bir yazı. Gerçek içerik yakında bunun yerini alacak.',
   rdBottomLink: 'Tüm blog yazılarına dön',
   rdNextUp: 'Sıradaki',
   blogSoon: 'YAKINDA',
@@ -947,7 +947,7 @@ const tr = {
   hallPlatformLabel: 'ARK REAKTÖRÜ — ÇEVRİMİÇİ',
   hallInit: 'SİSTEMLER BAŞLATILIYOR...',
   hallDeploy: 'BAŞLAT',
-  bootLine1: 'JARVIS çevrimiçi — tüm sistemler normal',
+  bootLine1: 'JARVIS çevrimiçi; tüm sistemler normal',
   bootLine2: 'Zırh konfigürasyonları yükleniyor...',
   bootLine3: 'Proje veritabanı taranıyor...',
   bootLine4: 'Zırh Deposu başlatılıyor...',
@@ -964,7 +964,7 @@ const tr = {
   expBack: 'Ana Sayfa',
   expBadge: 'DENEYİM',
   expLabel: 'Deneyim',
-  expSub: 'Hackathonlar, uygulamalı mühendislik ve devam eden araştırmalar — profesyonel çalışma olarak.',
+  expSub: 'Hackathonlar, uygulamalı mühendislik ve devam eden araştırmalar; profesyonel çalışma çerçevesinde sunuldu.',
   expItems: [
     {
       org: 'BTK Hackathon 2026', role: 'Full-Stack & Yapay Zekâ Geliştiricisi', period: 'Mayıs 2026', type: 'Hackathon', accent: '#ff9f1c',
@@ -991,9 +991,9 @@ const tr = {
       org: 'Bağımsız Araştırma', role: 'Lisans Araştırmacısı', period: '2025 — Günümüz', type: 'Araştırma', accent: '#7c5cff',
       summary: 'Uygulamalı projelerden doğan, devam eden çalışmalar (henüz yayınlanmış makale yok).',
       points: [
-        'İngilizce ve Türkçede yapay zekâ üretimi metni tespit için stilometrik sinyaller.',
-        'Küçük ve kapalı yüzleri yakalamak için tespit-et-doğrula yöntemi.',
-        'Düşük kaynaklı Türkçe→İngilizce çeviri için ince ayar stratejileri.',
+        'İngilizce ve Türkçe metinlerde yapay zekâ üretimi metni tespit etmek için stilometrik sinyaller.',
+        'Küçük ve kısmen görünen yüzleri yakalamak için tespit et-doğrula yöntemi.',
+        'Düşük kaynaklı Türkçe→İngilizce makine çevirisi için ince ayar stratejileri.',
       ],
       tags: ['NLP', 'Bilgisayarlı Görü', 'Değerlendirme'], link: '/research',
     },
@@ -1003,7 +1003,7 @@ const tr = {
   stackBack: 'Ana Sayfa',
   stackBadge: 'TEKNOLOJİLER',
   stackLabel: 'Teknoloji Yığını',
-  stackSub: 'Gerçekten kullandığım araçlar, alanlara göre gruplanmış — her biri için dürüst bir yetkinlik seviyesiyle.',
+  stackSub: 'Gerçekten kullandığım araçlar, alanlara göre gruplandı; her biri için dürüst bir yetkinlik seviyesi belirttim.',
   stackLegend: 'Yetkinlik',
   stackLevels: ['Başlangıç', 'Orta', 'Yetkin', 'İleri', 'Uzman'],
   stackGroups: [
@@ -1035,7 +1035,7 @@ const tr = {
   researchBadge: 'ARAŞTIRMA',
   researchLabel: 'Araştırma',
   researchSub: 'Uygulamalı çalışmalarımdan doğan, bağımsız ve devam eden araştırmalar.',
-  researchDisclaimer: 'Bunlar devam eden, kendi kendine yürütülen araştırma projeleridir — yayınlanmış makale değildir. Hiçbiri hakemlik ya da yayın iddiası taşımaz.',
+  researchDisclaimer: 'Bunlar kendi yürüttüğüm, devam eden araştırma projeleridir; yayınlanmış makale değildir. Hiçbiri hakem denetimi ya da yayın iddiası taşımaz.',
   researchStatus: 'Devam Ediyor',
   researchCompleted: 'Tamamlandı',
   researchOutcomes: 'Sonuçlar',
@@ -1046,16 +1046,16 @@ const tr = {
     {
       title: 'E-posta Oltalama Tespiti',
       field: 'NLP · Güvenlik', accent: '#7c5cff', status: 'in-progress',
-      abstract: 'Oltalama e-postaları insanlara gerçek para kaybettirir ve tanıdık bir aciliyet ile taklit kelime dağarcığına yaslanır. Motivasyon, bunları ham metinden basit ve şeffaf bir modelle tespit etmek — ve verinin nasıl temsil edildiğinin en az model kadar önemli olduğunu göstermek.',
+      abstract: 'Oltalama e-postaları insanlara gerçek para kaybettirir ve aciliyet ile taklide dayalı, tanıdık bir kelime dağarcığına yaslanır. Amaç, bunları ham metinden basit ve şeffaf bir modelle tespit etmek ve verinin nasıl temsil edildiğinin en az model kadar önemli olduğunu göstermek.',
       methods: ['Metin temizleme, ardından kelimeler ve ikili öbekler üzerinde TF-IDF vektörleştirme', 'Sabit tohumlu katmanlı %80/%20 bölme', 'Lojistik Regresyon sınıflandırıcı', 'Doğruluk, kesinlik, duyarlılık, F1, karışıklık matrisi ve ROC ile değerlendirme'],
-      expected: 'Gelecek çalışma: daha çeşitli ve düşmanca e-postalarda test etmek, çok dilli kapsam için Türkçeye genişletmek ve transformer temellerle karşılaştırmak — modeli yorumlanabilir tutarak.',
+      expected: 'Gelecek çalışma: modeli yorumlanabilir tutarak daha çeşitli ve düşmanca e-postalarda test etmek, çok dilli kapsam için Türkçeye genişletmek ve transformer tabanlı modellerle karşılaştırmak.',
     },
     {
       title: 'PHQ-9 Depresyon Analizi',
       field: 'Veri Analizi · Ruh Sağlığı', accent: '#00e5a0', status: 'completed',
-      abstract: 'PHQ-9 depresyon tarama yanıtlarının yapay zekâ ve veri analizi teknikleriyle incelenmesi. Yaklaşık 100 katılımcıyla canlı bir çalışma yürütüldü ve bulgular sahnede sunulup tartışıldı. Canlı çalışma artık tamamlandı — bu keşifsel bir araştırmadır, klinik bir araç değildir ve yayınlanmış bir çalışma değildir.',
+      abstract: 'PHQ-9 depresyon tarama yanıtlarının yapay zekâ ve veri analizi teknikleriyle incelenmesi. Yaklaşık 100 katılımcıyla canlı bir çalışma yürütüldü ve bulgular sahnede sunulup tartışıldı. Canlı çalışma artık tamamlandı. Bu keşifsel bir araştırmadır; klinik bir araç ya da yayınlanmış bir çalışma değildir.',
       methods: ['~100 gerçek PHQ-9 yanıtıyla canlı bir çalışma yürütüldü', 'Şiddet sınıflandırmalı klinik puanlama', 'Yanıtların istatistiksel analizi ve makine öğrenmesiyle keşfi', 'Bulgular sahnede sunulup tartışıldı'],
-      expected: 'Canlı çalışma tamamlandığında, çalışma; yapay zekâ ve veri analizinin ruh sağlığı değerlendirmesini nasıl destekleyebileceğini — asla yerine geçmeden, her zaman gerekli dikkatle — inceledi.',
+      expected: 'Tamamlanan bu çalışma; yapay zekâ ve veri analizinin ruh sağlığı değerlendirmesini, asla onun yerine geçmeden ve her zaman gerekli özenle, nasıl destekleyebileceğini inceledi.',
     },
   ],
 
@@ -1065,7 +1065,7 @@ const tr = {
   resumeTitle: 'Görkem Ergüne',
   resumeRole: 'Bilgisayar Mühendisliği Öğrencisi · Yapay Zekâ Ürün Geliştiricisi',
   resumePrint: 'PDF olarak kaydet',
-  resumeSummary: 'İkinci sınıf Bilgisayar Mühendisliği öğrencisi ve kendi kendine yönlenen bir yapay zekâ mühendisi; araştırma odaklı bir yaklaşımla bilgisayarlı görü sistemleri, makine öğrenmesi işlem hatları ve full-stack yazılım geliştiriyorum — ve üretmeyi alışkanlık hâline getirdim.',
+  resumeSummary: 'İkinci sınıf Bilgisayar Mühendisliği öğrencisi ve kendi yolunu çizen bir yapay zekâ mühendisi adayıyım. Araştırma odaklı bir yaklaşımla bilgisayarlı görü sistemleri, makine öğrenmesi işlem hatları ve full-stack yazılımlar geliştiriyorum; üretip yayınlamayı alışkanlık hâline getirdim.',
   resumeSecEducation: 'Eğitim',
   resumeSecExperience: 'Deneyim',
   resumeSecProjects: 'Seçili Projeler',
@@ -1089,7 +1089,7 @@ const tr = {
   // Algorithm Journey
   navCompetitions: 'Yarışmalar',
   algoKicker: 'ALGORİTMA YOLCULUĞU // GITHUB’DAN CANLI',
-  algoSub: 'Platformlarda çözülen problemler — algorithms depomdan canlı çekilir, her push’ta güncellenir.',
+  algoSub: 'Farklı platformlarda çözdüğüm problemler. Algorithms depomdan canlı çekilir ve her push ile güncellenir.',
   algoTotalLabel: 'Toplam Çözülen',
   algoLive: 'CANLI',
 
@@ -1097,7 +1097,7 @@ const tr = {
   compBack: 'Ana Sayfa',
   compBadge: 'YARIŞMALAR',
   compLabel: 'Yarışmalar',
-  compSub: 'Hackathonlar, algoritma yarışmaları ve competitive programming kampları — yolculuğun rekabetçi tarafı.',
+  compSub: 'Hackathonlar, algoritma yarışmaları ve yarışmacı programlama kampları: yolculuğun rekabetçi tarafı.',
   compScore: 'Skor',
   compRank: 'Sıralama',
   compTeam: 'Takım',
@@ -1111,7 +1111,7 @@ const tr = {
   journeyFocusLabel: 'Güncel odak',
   journeyFocus: ['Büyük Dil Modelleri', 'Bilgisayarlı Görü', 'Makine Öğrenmesi', 'Algoritmalar'],
   journeyExpand: 'Aç',
-  journeyLockedNote: 'Kilitli — sırası gelince açılır.',
+  journeyLockedNote: 'Kilitli; sırası gelince açılır.',
   semCompetitions: 'Yarışmalar',
   semHackathons: 'Hackathonlar',
   semResearch: 'Araştırma',
@@ -1121,11 +1121,11 @@ const tr = {
     { term: '2024 Güz', sub: '(A2 Hazırlık)', status: 'completed', title: 'İngilizce Hazırlık — Temeli Kurmak',
       competitions: [], hackathons: [], research: [], projects: [], achievements: ['Tamamen İngilizcemi geliştirmeye odaklandım'] },
     { term: '2025 Bahar', sub: '(B1 Hazırlık)', status: 'completed', title: 'Hazırlık — Okuma & İlk Kodlar',
-      competitions: [], hackathons: [], research: [], projects: ['Python’a başladım', 'HTML & CSS'], achievements: ['Yoğun İngilizce okuma — makaleler & akademik metinler', 'Kod yazmaya başladım'] },
+      competitions: [], hackathons: [], research: [], projects: ['Python’a başladım', 'HTML & CSS'], achievements: ['Yoğun İngilizce okuma: makaleler & akademik metinler', 'Kod yazmaya başladım'] },
     { term: '2025 Yaz', sub: '(B2 Hazırlık)', status: 'completed', title: 'Speaking, Yapay Zekâ & İlk Projeler',
       competitions: [], hackathons: [], research: [], projects: ['Synonym Master', 'Mini LLM projesi', 'Temel problem çözme'], achievements: ['İngilizce speaking’i geliştirdim', 'Yapay zekâ öğrenmeye başladım'] },
     { term: '2025 Güz', sub: '(1. Yıl · 1. Dönem)', status: 'completed', title: 'Bilgisayar Mühendisliği — 1. Yıl',
-      competitions: ['IEEEXtreme', 'AlgoLeague Kış Kampı'], hackathons: [], research: ['Sağlık alanında araştırmaya başladım'], projects: ['Task Manager', 'Bank App', 'Quizzer', 'Küçük Kaggle projeleri'], achievements: ['Python ile gelişim — veri yapıları & algoritmalar', 'ML & Data Science’a başladım', 'Competitive programming’e başlangıç'] },
+      competitions: ['IEEEXtreme', 'AlgoLeague Kış Kampı'], hackathons: [], research: ['Sağlık alanında araştırmaya başladım'], projects: ['Task Manager', 'Bank App', 'Quizzer', 'Küçük Kaggle projeleri'], achievements: ['Python ile gelişim: veri yapıları & algoritmalar', 'ML & Data Science’a başladım', 'Yarışmacı programlamaya başlangıç'] },
     { term: '2026 Bahar', sub: '(1. Yıl · 2. Dönem)', status: 'completed', title: 'NEXA, C & Hackathonlar',
       competitions: ['AlgoLeague Bahar Kampı'], hackathons: ['BTK E-Ticaret Hackathon', 'Tıkla Gelsin Foodathon', 'Med-Health Erken Uyarı'], research: ['PHQ-9 Depresyon Analizi'], projects: ['Sorting Visualizer', 'Space Shooter', 'GorkemOS', 'Find The Best', 'Yüz Tespiti', 'NEXA Web Sitesi'], achievements: ['Kendi ekibim NEXA’yı kurdum', 'C öğrenip 3 proje geliştirdim', 'Derin Öğrenmeye giriş', 'Online staj tamamladım'] },
     { term: '2026 Yaz', sub: '(Şu an)', status: 'current', title: 'Yapay Zekâ Ürünleri & Araştırma',
@@ -1186,7 +1186,7 @@ const tr = {
     'should-you-study-cs': {
       title: '2026’da Bilgisayar Mühendisliği Okunur mu?',
       category: 'Kariyer', date: 'Mar 2026', readTime: '5 dk',
-      description: 'Alana dürüst bir bakış — kime uyar, kimi bunaltır ve kimsenin önceden söylemediği şey nedir.',
+      description: 'Alana dürüst bir bakış: kime uyar, kimi bunaltır ve kimsenin önceden söylemediği şey nedir.',
       body: [
         'Son yılların en klasik sorusu: “Bu devirde Bilgisayar Mühendisliği okunur mu?” Yıl 2026, yapay zekâ hiç olmadığı kadar gelişmiş durumda. Aylık 20-30 dolarlık yapay zekâ araçları birçok işi inanılmaz hızlı yapabiliyor ve bu, özellikle üniversite tercih dönemindeki öğrencilerde ciddi bir gelecek kaygısı oluşturuyor: “Mezun olunca iş bulabilecek miyim?” Benim düşüncelerim şöyle.',
         '1. Gerçekten ilginiz yoksa okumayın. Sadece maaşı yüksek diye ya da “geleceğin mesleği” denildiği için bu bölümü seçmeyin. Bilgisayar mühendisliği sürekli problem çözmeyi, araştırmayı ve üretmeyi gerektiren bir alan; karşınıza zor dersler, uzun projeler ve bazen günlerce çözemeyeceğiniz problemler çıkacak. Bunlardan keyif almıyorsanız dört yıl sizin için oldukça yorucu geçebilir.',
