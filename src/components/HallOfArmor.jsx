@@ -24,6 +24,7 @@ export default function HallOfArmor() {
   const navigate = useNavigate();
   const { playClick, playBootSound, playHover } = useAudioFX();
   const [hoveredCapsule, setHoveredCapsule] = useState(null);
+  const [tilt, setTilt] = useState({ rx: 0, ry: 0 });
   const [bootPhase, setBootPhase] = useState(() => {
     try { return sessionStorage.getItem('hall_booted') ? 3 : 0; } catch { return 0; }
   });
@@ -101,6 +102,17 @@ export default function HallOfArmor() {
         @keyframes boot-fade-out {
           from { opacity: 1; pointer-events: all; }
           to { opacity: 0; pointer-events: none; }
+        }
+        @keyframes holo-spin {
+          from { transform: rotateY(0deg); }
+          to { transform: rotateY(360deg); }
+        }
+        @keyframes holo-floor {
+          0%, 100% { opacity: 0.35; transform: translateX(-50%) scaleX(1); }
+          50% { opacity: 0.7; transform: translateX(-50%) scaleX(1.25); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .holo-stage { animation: none !important; }
         }
         @media (max-width: 900px) {
           .hall-capsules { flex-wrap: wrap !important; justify-content: center !important; }
@@ -238,7 +250,13 @@ export default function HallOfArmor() {
               animation: bootDone ? `capsule-rise 0.7s cubic-bezier(0.2,0.8,0.2,1) ${i * 0.1}s both` : 'none',
             }}
             onMouseEnter={() => { setHoveredCapsule(i); playHover(); }}
-            onMouseLeave={() => setHoveredCapsule(null)}
+            onMouseMove={(e) => {
+              const r = e.currentTarget.getBoundingClientRect();
+              const px = (e.clientX - r.left) / r.width - 0.5;
+              const py = (e.clientY - r.top) / r.height - 0.5;
+              setTilt({ rx: -py * 14, ry: px * 14 });
+            }}
+            onMouseLeave={() => { setHoveredCapsule(null); setTilt({ rx: 0, ry: 0 }); }}
             onClick={() => { playClick(); navigate(armor.href); }}
           >
             {/* LED strip */}
@@ -258,11 +276,14 @@ export default function HallOfArmor() {
               border: `1px solid ${hoveredCapsule === i ? armor.color : '#1a1a2e'}`,
               borderRadius: 4,
               minHeight: 210,
-              position: 'relative', overflow: 'hidden',
-              transition: 'border-color 0.3s, box-shadow 0.3s, transform 0.3s cubic-bezier(0.2,0.8,0.2,1)',
-              transform: hoveredCapsule === i ? 'scale(1.05)' : 'scale(1)',
+              position: 'relative',
+              transformStyle: 'preserve-3d',
+              transition: 'border-color 0.3s, box-shadow 0.3s, transform 0.25s cubic-bezier(0.2,0.8,0.2,1)',
+              transform: hoveredCapsule === i
+                ? `rotateX(${tilt.rx}deg) rotateY(${tilt.ry}deg) translateZ(22px) scale(1.05)`
+                : 'rotateX(0deg) rotateY(0deg) translateZ(0) scale(1)',
               boxShadow: hoveredCapsule === i
-                ? `0 0 24px ${armor.glow}, inset 0 0 24px rgba(0,0,0,0.4)`
+                ? `0 18px 40px rgba(0,0,0,0.55), 0 0 24px ${armor.glow}, inset 0 0 24px rgba(0,0,0,0.4)`
                 : 'inset 0 0 20px rgba(0,0,0,0.3)',
             }}>
               {/* Mark badge */}
@@ -270,18 +291,44 @@ export default function HallOfArmor() {
                 {armor.mark}
               </div>
 
-              {/* Armor silhouette */}
-              <div className="capsule-silhouette" style={{ margin: '10px 0 6px', display: 'flex', justifyContent: 'center' }}>
-                <svg viewBox="0 0 40 80" width="36" height="72" style={{ opacity: hoveredCapsule === i ? 0.95 : 0.35, transition: 'opacity 0.3s' }}>
-                  <rect x="14" y="1" width="12" height="10" rx="2" fill={armor.color} />
-                  <rect x="10" y="11" width="20" height="26" rx="3" fill={armor.color} />
-                  <rect x="2" y="13" width="8" height="16" rx="2" fill={armor.color} opacity="0.7" />
-                  <rect x="30" y="13" width="8" height="16" rx="2" fill={armor.color} opacity="0.7" />
-                  <rect x="12" y="37" width="7" height="28" rx="2" fill={armor.color} opacity="0.8" />
-                  <rect x="21" y="37" width="7" height="28" rx="2" fill={armor.color} opacity="0.8" />
-                  <ellipse cx="20" cy="23" rx="4" ry="4" fill="rgba(10,10,15,0.6)" />
-                  <ellipse cx="20" cy="23" rx="2" ry="2" fill={armor.color} opacity="0.8" />
-                </svg>
+              {/* Armor silhouette — holographic 3D turntable */}
+              <div className="capsule-silhouette" style={{ margin: '10px 0 6px', display: 'flex', flexDirection: 'column', alignItems: 'center', perspective: 320, transform: 'translateZ(26px)' }}>
+                <div className="holo-stage" style={{
+                  position: 'relative', width: 36, height: 72,
+                  transformStyle: 'preserve-3d',
+                  animation: `holo-spin ${6 + i * 0.5}s linear infinite`,
+                }}>
+                  {[0, 90].map((deg) => (
+                    <svg key={deg} viewBox="0 0 40 80" width="36" height="72" style={{
+                      position: 'absolute', inset: 0,
+                      transform: `rotateY(${deg}deg)`,
+                      opacity: hoveredCapsule === i ? 0.95 : 0.45,
+                      transition: 'opacity 0.3s',
+                      filter: hoveredCapsule === i ? `drop-shadow(0 0 6px ${armor.glow})` : 'none',
+                    }}>
+                      <rect x="14" y="1" width="12" height="10" rx="2" fill={armor.color} />
+                      <rect x="10" y="11" width="20" height="26" rx="3" fill={armor.color} />
+                      <rect x="2" y="13" width="8" height="16" rx="2" fill={armor.color} opacity="0.7" />
+                      <rect x="30" y="13" width="8" height="16" rx="2" fill={armor.color} opacity="0.7" />
+                      <rect x="12" y="37" width="7" height="28" rx="2" fill={armor.color} opacity="0.8" />
+                      <rect x="21" y="37" width="7" height="28" rx="2" fill={armor.color} opacity="0.8" />
+                      <ellipse cx="20" cy="23" rx="4" ry="4" fill="rgba(10,10,15,0.6)" />
+                      <ellipse cx="20" cy="23" rx="2" ry="2" fill={armor.color} opacity="0.8" />
+                    </svg>
+                  ))}
+                </div>
+                {/* hologram floor */}
+                <div style={{
+                  position: 'relative', width: 44, height: 8, marginTop: 4,
+                }}>
+                  <div style={{
+                    position: 'absolute', left: '50%', top: 0, width: 44, height: 8,
+                    transform: 'translateX(-50%)',
+                    borderRadius: '50%',
+                    background: `radial-gradient(ellipse, ${armor.color}55 0%, transparent 70%)`,
+                    animation: `holo-floor ${2.4 + i * 0.2}s ease-in-out infinite`,
+                  }} />
+                </div>
               </div>
 
               {/* Armor name */}
@@ -298,7 +345,7 @@ export default function HallOfArmor() {
                 display: 'flex', flexDirection: 'column',
                 overflow: 'hidden',
                 opacity: hoveredCapsule === i ? 1 : 0,
-                transform: hoveredCapsule === i ? 'translateY(0)' : 'translateY(6px)',
+                transform: hoveredCapsule === i ? 'translateY(0) translateZ(34px)' : 'translateY(6px) translateZ(0)',
                 transition: 'opacity 0.25s, transform 0.25s',
                 pointerEvents: hoveredCapsule === i ? 'auto' : 'none',
               }}>
@@ -410,11 +457,14 @@ const s = {
   capsules: {
     display: 'flex', gap: 12, justifyContent: 'center',
     alignItems: 'stretch', flexWrap: 'wrap',
+    perspective: 1400,
   },
   capsuleItem: {
     display: 'flex', flexDirection: 'column',
     width: 'calc(14.285% - 11px)', maxWidth: 200, minWidth: 120,
     cursor: 'pointer',
     flexShrink: 0,
+    perspective: 900,
+    transformStyle: 'preserve-3d',
   },
 };

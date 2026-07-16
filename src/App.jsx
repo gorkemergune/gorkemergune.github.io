@@ -24,7 +24,6 @@ const JourneyPage = lazy(() => import('./pages/JourneyPage'));
 const ProjectPage = lazy(() => import('./pages/ProjectPage'));
 const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
 const CompetitionsPage = lazy(() => import('./pages/CompetitionsPage'));
-const StackPage = lazy(() => import('./pages/StackPage'));
 const ResearchPage = lazy(() => import('./pages/ResearchPage'));
 const ResumePage = lazy(() => import('./pages/ResumePage'));
 const CaseStudyPage = lazy(() => import('./pages/CaseStudyPage'));
@@ -287,7 +286,6 @@ export default function App() {
           <div className="mobile-menu" style={styles.mobileMenu}>
             <Link to="/project" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navProject')}</Link>
             <Link to="/competitions" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navCompetitions')}</Link>
-            <Link to="/stack" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navStack')}</Link>
             <Link to="/research" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navResearch')}</Link>
             <Link to="/journey" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navLifeFlow')}</Link>
             <Link to="/blog" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navBlog')}</Link>
@@ -326,7 +324,6 @@ export default function App() {
           <Route path="/project/:slug" element={<ProjectDetail />} />
           <Route path="/project/:slug/case-study" element={<CaseStudyPage />} />
           <Route path="/competitions" element={<CompetitionsPage />} />
-          <Route path="/stack" element={<StackPage />} />
           <Route path="/research" element={<ResearchPage />} />
           <Route path="/resume" element={<ResumePage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
@@ -342,11 +339,8 @@ export default function App() {
           <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.1em', color: '#6a6a82' }}>
             &copy; 2026 &middot; Görkem Ergüne
           </span>
-          <span style={{ fontFamily: "'Instrument Serif', serif", fontStyle: 'italic', fontSize: 14, color: '#7a7a92' }}>
-            {t('footerBuilt')}
-          </span>
           <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.1em', color: '#6a6a82' }}>
-            v2.20 &middot; {time}
+            v2.30 &middot; {time}
           </span>
         </div>
       </footer>

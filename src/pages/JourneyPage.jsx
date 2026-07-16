@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Check, Lock, ChevronDown, Trophy, Rocket, Beaker, Folder, Sparkles } from 'lucide-react';
+import { ArrowLeft, ArrowUpRight, Check, Lock, ChevronDown, Trophy, Rocket, Beaker, Folder, Sparkles } from 'lucide-react';
 import { useLang } from '../i18n.jsx';
 import { useSeo } from '../hooks/useSeo';
 
@@ -11,6 +11,41 @@ const CAT = [
   { key: 'projects', label: 'semProjects', icon: Folder },
   { key: 'achievements', label: 'semAchievements', icon: Sparkles },
 ];
+
+// Timeline chips that exist elsewhere on the site link straight to that page.
+// Both the English and Turkish labels map to the same destination.
+const CHIP_LINKS = {
+  'Synonym Master': '/project/synonym-master',
+  'Sorting Visualizer': '/project/sorting-visualizer',
+  'Space Shooter': '/project/raylib-space-shooter',
+  'GorkemOS': '/project/gorkem-os',
+  'Face Detection': '/project/face-detection-pipeline',
+  'Yüz Tespiti': '/project/face-detection-pipeline',
+  'NEXA Website': '/project/nexa-website',
+  'NEXA Web Sitesi': '/project/nexa-website',
+  'YOLO Custom Detector': '/project/yolo-custom-detector',
+  'YOLO Özel Dedektör': '/project/yolo-custom-detector',
+  'Re-Minder': '/project/re-mind',
+  'FaceLock': '/project/facelock',
+  'WorldCup BPE Tokenizer': '/project/worldcup-bpe-tokenizer',
+  'PHQ-9 Depression Analysis': '/project/depression-phq9-analysis',
+  'PHQ-9 Depresyon Analizi': '/project/depression-phq9-analysis',
+  'Email Phishing Detection': '/project/email-phishing-detection',
+  'E-posta Oltalama Tespiti': '/project/email-phishing-detection',
+  'Find The Best': '/competitions',
+  'BTK E-Commerce Hackathon': '/competitions',
+  'BTK E-Ticaret Hackathon': '/competitions',
+  'Tıkla Gelsin Foodathon': '/competitions',
+  'Med-Health Early Warning': '/competitions',
+  'Med-Health Erken Uyarı': '/competitions',
+  'IEEEXtreme': '/competitions',
+  'AlgoLeague Winter Camp': '/competitions',
+  'AlgoLeague Kış Kampı': '/competitions',
+  'AlgoLeague Spring Camp': '/competitions',
+  'AlgoLeague Bahar Kampı': '/competitions',
+  'AlgoLeague Summer Camp': '/competitions',
+  'AlgoLeague Yaz Kampı': '/competitions',
+};
 
 export default function JourneyPage() {
   const { t } = useLang();
@@ -30,17 +65,16 @@ export default function JourneyPage() {
         .jr-row.in { opacity: 1; transform: none; }
         .jr-card { transition: border-color 0.4s, box-shadow 0.4s, transform 0.35s cubic-bezier(0.2,0.8,0.2,1); }
         .jr-card:hover { transform: translateY(-2px); }
-        .jr-grid { display: grid; grid-template-columns: 1fr 60px 1fr; align-items: start; }
-        .jr-grid.left .jr-wrap { grid-column: 1; }
-        .jr-grid.right .jr-wrap { grid-column: 3; }
-        .jr-mid { grid-column: 2; }
+        .jr-grid { display: grid; grid-template-columns: 52px 1fr; align-items: start; }
+        .jr-grid .jr-wrap { grid-column: 2; }
+        .jr-mid { grid-column: 1; grid-row: 1; }
         .jr-chev { transition: transform 0.35s; }
         .jr-chev.open { transform: rotate(180deg); }
+        .jr-chip-link { transition: border-color 0.3s, color 0.3s, background 0.3s, transform 0.25s; }
+        .jr-chip-link:hover { transform: translateY(-1px); }
         @media (max-width: 780px) {
-          .jr-grid { grid-template-columns: 44px 1fr !important; }
-          .jr-mid { grid-column: 1 !important; }
-          .jr-grid.left .jr-wrap, .jr-grid.right .jr-wrap { grid-column: 2 !important; }
-          .jr-spine { left: 21px !important; }
+          .jr-grid { grid-template-columns: 40px 1fr !important; }
+          .jr-spine { left: 19px !important; }
         }
       `}</style>
 
@@ -64,7 +98,6 @@ export default function JourneyPage() {
             key={i}
             item={item}
             index={i}
-            side={i % 2 === 0 ? 'left' : 'right'}
             expanded={open === i}
             onToggle={() => setOpen(open === i ? -1 : i)}
             t={t}
@@ -75,7 +108,7 @@ export default function JourneyPage() {
   );
 }
 
-function Semester({ item, index, side, expanded, onToggle, t }) {
+function Semester({ item, index, expanded, onToggle, t }) {
   const ref = useRef(null);
   const [seen, setSeen] = useState(false);
   useEffect(() => {
@@ -94,7 +127,7 @@ function Semester({ item, index, side, expanded, onToggle, t }) {
   const hasContent = !locked && CAT.some((c) => (item[c.key] || []).length);
 
   return (
-    <div ref={ref} className={`jr-grid ${side} jr-row${seen ? ' in' : ''}`} style={{ marginBottom: 10, transitionDelay: `${index * 0.05}s` }}>
+    <div ref={ref} className={`jr-grid jr-row${seen ? ' in' : ''}`} style={{ marginBottom: 14, transitionDelay: `${index * 0.05}s` }}>
       <div className="jr-wrap">
         {current && <div style={s.youHere}>{t('journeyNow')}</div>}
         <div
@@ -132,7 +165,22 @@ function Semester({ item, index, side, expanded, onToggle, t }) {
                   <div key={c.key} style={s.catRow}>
                     <span style={{ ...s.catLabel, color: accent }}><Icon size={11} strokeWidth={1.8} /> {t(c.label)}</span>
                     <div style={s.chips}>
-                      {vals.map((v, k) => <span key={k} style={s.chip}>{v}</span>)}
+                      {vals.map((v, k) => {
+                        const to = CHIP_LINKS[v];
+                        if (!to) return <span key={k} style={s.chip}>{v}</span>;
+                        return (
+                          <Link
+                            key={k}
+                            to={to}
+                            className="jr-chip-link"
+                            onClick={(e) => e.stopPropagation()}
+                            style={{ ...s.chip, borderColor: `${accent}44`, color: '#e4e4f0', background: `${accent}10`, cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: 5 }}
+                          >
+                            {v}
+                            <ArrowUpRight size={11} strokeWidth={2} style={{ color: accent }} />
+                          </Link>
+                        );
+                      })}
                     </div>
                   </div>
                 );
@@ -176,7 +224,7 @@ const s = {
   title: { fontFamily: "'Instrument Serif', serif", fontSize: 72, fontWeight: 400, lineHeight: 0.95, letterSpacing: '-0.015em', color: '#eef0f6', marginTop: 20, marginBottom: 20 },
   desc: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 18, lineHeight: 1.6, color: '#9a9ab0' },
   timeline: { position: 'relative' },
-  spine: { position: 'absolute', left: 'calc(50% - 1px)', top: 0, bottom: 0, width: 2, pointerEvents: 'none' },
+  spine: { position: 'absolute', left: 25, top: 0, bottom: 0, width: 2, pointerEvents: 'none' },
   spineGlow: { position: 'absolute', inset: 0, background: 'linear-gradient(180deg, transparent, #1a2a3a 6%, #1a2a3a 94%, transparent)' },
   spinePulse: { position: 'absolute', left: -1, width: 4, height: '16%', borderRadius: 4, background: 'linear-gradient(180deg, transparent, #00d4ff, transparent)', boxShadow: '0 0 16px rgba(0,212,255,0.7)', animation: 'jr-pulse-down 6s ease-in-out infinite' },
   mid: { display: 'flex', justifyContent: 'center', paddingTop: 26 },
@@ -184,7 +232,7 @@ const s = {
   nodeRing: { position: 'absolute', inset: -5, borderRadius: '50%', border: '1.5px solid transparent', animation: 'jr-ring 3s linear infinite' },
   core: { width: 8, height: 8, borderRadius: '50%' },
   youHere: { display: 'inline-block', marginBottom: 8, padding: '4px 11px', borderRadius: 999, background: 'rgba(255,107,53,0.14)', border: '1px solid rgba(255,107,53,0.4)', fontFamily: "'JetBrains Mono', monospace", fontSize: 9, letterSpacing: '0.16em', color: '#ff8a5c' },
-  card: { position: 'relative', background: 'linear-gradient(180deg,#0f0f1a,#0b0b13)', border: '1px solid #1a1a2e', borderRadius: 12, padding: '20px 22px', margin: '0 8px' },
+  card: { position: 'relative', background: 'linear-gradient(180deg,#0f0f1a,#0b0b13)', border: '1px solid #1a1a2e', borderRadius: 12, padding: '22px 26px', margin: 0 },
   cardHead: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 10, marginBottom: 10, flexWrap: 'wrap' },
   termWrap: { display: 'inline-flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap' },
   term: { fontFamily: "'JetBrains Mono', monospace", fontSize: 12, letterSpacing: '0.1em', color: '#c0c0d4' },
@@ -192,9 +240,9 @@ const s = {
   statusTag: { fontFamily: "'JetBrains Mono', monospace", fontSize: 8, letterSpacing: '0.12em', padding: '3px 8px', border: '1px solid', borderRadius: 999 },
   titleRow: { display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 },
   phaseTitle: { fontFamily: "'Instrument Serif', serif", fontSize: 22, fontWeight: 400, lineHeight: 1.15 },
-  summary: { marginTop: 16, paddingTop: 16, borderTop: '1px solid #1a1a2e', display: 'flex', flexDirection: 'column', gap: 12 },
+  summary: { marginTop: 16, paddingTop: 16, borderTop: '1px solid #1a1a2e', display: 'flex', flexDirection: 'column', gap: 14 },
   catRow: { display: 'flex', flexDirection: 'column', gap: 8 },
   catLabel: { display: 'inline-flex', alignItems: 'center', gap: 6, fontFamily: "'JetBrains Mono', monospace", fontSize: 9, letterSpacing: '0.12em', textTransform: 'uppercase' },
-  chips: { display: 'flex', flexWrap: 'wrap', gap: 6 },
-  chip: { padding: '4px 9px', border: '1px solid #22223400', borderRadius: 6, background: 'rgba(255,255,255,0.03)', fontFamily: "'Instrument Sans', sans-serif", fontSize: 12, color: '#c4c4d4' },
+  chips: { display: 'flex', flexWrap: 'wrap', gap: 8 },
+  chip: { padding: '5px 11px', border: '1px solid #22223400', borderRadius: 6, background: 'rgba(255,255,255,0.03)', fontFamily: "'Instrument Sans', sans-serif", fontSize: 12.5, color: '#c4c4d4' },
 };

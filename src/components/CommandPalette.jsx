@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, CornerDownLeft, Folder, BookOpen, Compass, FileText, Beaker, Cpu, Trophy } from 'lucide-react';
+import { Search, CornerDownLeft, Folder, BookOpen, Compass, FileText, Beaker, Trophy } from 'lucide-react';
 import { useLang } from '../i18n.jsx';
 import { FEATURES } from '../config';
 import PROJECTS from '../data/projects';
@@ -44,7 +44,6 @@ export default function CommandPalette() {
       { label: t('navHome'), sub: '/', to: '/', icon: Compass, kind: 'page' },
       { label: t('projectLabel'), sub: '/project', to: '/project', icon: Folder, kind: 'page' },
       { label: t('compLabel'), sub: '/competitions', to: '/competitions', icon: Trophy, kind: 'page' },
-      { label: t('stackLabel'), sub: '/stack', to: '/stack', icon: Cpu, kind: 'page' },
       { label: t('researchLabel'), sub: '/research', to: '/research', icon: Beaker, kind: 'page' },
       { label: t('journeyLabel'), sub: '/journey', to: '/journey', icon: Compass, kind: 'page' },
       { label: t('blogLabel'), sub: '/blog', to: '/blog', icon: BookOpen, kind: 'page' },

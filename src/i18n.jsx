@@ -30,9 +30,9 @@ const en = {
   introLeadPost: ': object detectors, translation models, phishing classifiers — and the apps that put them in people’s hands.',
   introBody: 'I learn by shipping. Every armor in the hall is something I designed, trained, broke, and rebuilt — from a bare-metal operating system to production ML pipelines. The goal is simple: to become the kind of AI engineer whose work speaks before he does.',
   introRolesLabel: 'OPERATING DOMAINS',
-  introRoles: ['AI Engineer', 'Machine Learning', 'Computer Vision', 'Deep Learning', 'Full-Stack Development', 'Open Source', 'Research'],
+  introRoles: ['AI Engineer', 'Computer Vision (DL)', 'Machine Learning (ML)', 'Large Language Models (LLM)', 'Full-Stack Development', 'Open Source', 'Research'],
   introStats: [
-    { n: 14, suffix: '', label: 'Projects shipped' },
+    { n: 16, suffix: '', label: 'Projects shipped' },
     { n: 25, suffix: '+', label: 'Technologies used' },
     { n: 99, suffix: '%', label: 'Peak model F1' },
     { n: 6, suffix: '', label: 'Domains explored' },
@@ -43,7 +43,7 @@ const en = {
 
   // Home hero + sections
   heroTagline: 'AI PRODUCT DEVELOPER',
-  heroSubtext: 'I build real products with AI. What matters to me is shipping things people actually use, not training models for their own sake.',
+  heroSubtext: 'I build real products with AI — working on computer vision (DL), machine learning (ML), large language models (LLM), and full-stack development. What matters to me is shipping things people actually use.',
   ctaResume: 'Download Résumé',
   ctaViewWork: 'View Work',
 
@@ -171,9 +171,6 @@ const en = {
   contactLine1: "Reach out",
   contactLine1Em: 'anytime',
   contactLine2: 'Open to collaboration',
-
-  // Footer
-  footerBuilt: 'Built slowly, by hand.',
 
   // Nav Fun
   navFun: 'Fun',
@@ -309,7 +306,7 @@ const en = {
   projectDetailBack: 'Hall of Armor',
   projectBadge: 'HALL OF ARMOR',
   projectLabel: 'Armory',
-  projectSub: 'Fourteen armors, one per project. Open a capsule to inspect its specs, architecture, and results.',
+  projectSub: 'Sixteen armors, one per project. Open a capsule to inspect its specs, architecture, and results.',
   projectOpen: 'Open Project',
 
   // Project Detail
@@ -352,7 +349,6 @@ const en = {
 
   // Nav (new pages)
   navExperience: 'Experience',
-  navStack: 'Stack',
   navResearch: 'Research',
   navResume: 'Résumé',
   navHome: 'Home',
@@ -377,7 +373,7 @@ const en = {
       org: 'Independent AI / ML Engineering', role: 'Builder & Open-Source Author', period: '2024 — Present', type: 'Applied', accent: '#00d4ff',
       summary: 'Self-directed engineering across computer vision, NLP, ML, systems, and full-stack.',
       points: [
-        'Shipped 14 documented projects — from a bare-metal x86 OS to production ML pipelines.',
+        'Shipped 16 documented projects — from a bare-metal x86 OS to production ML pipelines.',
         'Trained a single-class YOLO11 detector to 90.3% mAP@50 on a self-collected dataset.',
         'Benchmarked a two-stage face-detection pipeline across 140,000 images with zero failures.',
         'Fine-tuned MarianMT for Turkish→English, lifting BLEU from ~36 to ~43.',
@@ -396,13 +392,7 @@ const en = {
     },
   ],
 
-  // Tech Stack page
-  stackBack: 'Home',
-  stackBadge: 'TECH STACK',
-  stackLabel: 'Tech Stack',
-  stackSub: 'The tools I actually build with, grouped by domain — with an honest proficiency level for each.',
-  stackLegend: 'Proficiency',
-  stackLevels: ['Beginner', 'Intermediate', 'Proficient', 'Advanced', 'Expert'],
+  // Skill groups — feeds the résumé skills section (the standalone Tech Stack page was removed)
   stackGroups: [
     { category: 'Languages', accent: '#ffd166', items: [
       { name: 'Python', level: 5 }, { name: 'C', level: 4 }, { name: 'C++', level: 3 }, { name: 'Java', level: 3 }, { name: 'JavaScript', level: 4 }, { name: 'TypeScript', level: 4 }, { name: 'SQL', level: 3 },
@@ -520,13 +510,13 @@ const en = {
     { term: '2025 Spring', sub: '(B1 Prep)', status: 'completed', title: 'Prep — Reading & First Code',
       competitions: [], hackathons: [], research: [], projects: ['Started Python', 'HTML & CSS'], achievements: ['Heavy English reading — articles & academic texts', 'Started learning to code'] },
     { term: '2025 Summer', sub: '(B2 Prep)', status: 'completed', title: 'Speaking, AI & First Builds',
-      competitions: [], hackathons: [], research: [], projects: ['Synonym Master', 'Mini LLM project', 'Basic problem solving'], achievements: ['Developed English speaking', 'Started learning AI'] },
+      competitions: [], hackathons: [], research: [], projects: ['Mini LLM project', 'Basic problem solving'], achievements: ['Developed English speaking', 'Started learning AI'] },
     { term: '2025 Fall', sub: '(Year 1 · Term 1)', status: 'completed', title: 'Computer Engineering — Year 1 Begins',
       competitions: ['IEEEXtreme', 'AlgoLeague Winter Camp'], hackathons: [], research: ['Started health-domain research'], projects: ['Task Manager', 'Bank App', 'Quizzer', 'Small Kaggle projects'], achievements: ['Grew with Python — data structures & algorithms', 'Started ML & Data Science', 'Started competitive programming'] },
     { term: '2026 Spring', sub: '(Year 1 · Term 2)', status: 'completed', title: 'NEXA, C & Hackathons',
-      competitions: ['AlgoLeague Spring Camp'], hackathons: ['BTK E-Commerce Hackathon', 'Tıkla Gelsin Foodathon', 'Med-Health Early Warning'], research: ['PHQ-9 Depression Analysis'], projects: ['Sorting Visualizer', 'Space Shooter', 'GorkemOS', 'Find The Best', 'Face Detection', 'NEXA Website'], achievements: ['Founded my own team, NEXA', 'Learned C & built 3 projects with it', 'Intro to Deep Learning', 'Completed an online internship'] },
+      competitions: ['AlgoLeague Spring Camp'], hackathons: ['BTK E-Commerce Hackathon', 'Tıkla Gelsin Foodathon', 'Med-Health Early Warning'], research: ['PHQ-9 Depression Analysis'], projects: ['Sorting Visualizer', 'Space Shooter', 'GorkemOS', 'Find The Best', 'Face Detection', 'NEXA Website', 'Synonym Master'], achievements: ['Founded my own team, NEXA', 'Learned C & built 3 projects with it', 'Intro to Deep Learning', 'Completed an online internship', 'Reached C1-level English'] },
     { term: '2026 Summer', sub: '(Current)', status: 'current', title: 'AI Products & Research',
-      competitions: ['AlgoLeague Summer Camp'], hackathons: [], research: ['Email Phishing Detection'], projects: ['YOLO Custom Detector', 'Re-Minder'], achievements: ['Deeper work in LLM · ML · DL', 'Reading papers', 'Shipping more AI projects'] },
+      competitions: ['AlgoLeague Summer Camp'], hackathons: [], research: ['Email Phishing Detection'], projects: ['YOLO Custom Detector', 'Re-Minder', 'FaceLock', 'WorldCup BPE Tokenizer'], achievements: ['Deeper work in LLM · ML · DL', 'Reading papers', 'Shipping more AI projects'] },
     { term: '2026 Fall', sub: '(Year 2 · Term 1)', status: 'locked', title: '', competitions: [], hackathons: [], research: [], projects: [], achievements: [] },
     { term: '2027 Spring', sub: '(Year 2 · Term 2)', status: 'locked', title: '', competitions: [], hackathons: [], research: [], projects: [], achievements: [] },
     { term: '2027 Summer', sub: '(Summer)', status: 'locked', title: '', competitions: [], hackathons: [], research: [], projects: [], achievements: [] },
@@ -627,9 +617,9 @@ const tr = {
   introLeadPost: ' dönüştürerek geçiriyorum: nesne dedektörleri, çeviri modelleri, oltalama sınıflandırıcıları ve bunları insanların eline ulaştıran uygulamalar.',
   introBody: 'Üreterek öğreniyorum. Zırh Deposu’ndaki her zırh; doğrudan donanımda çalışan bir işletim sisteminden üretim seviyesindeki makine öğrenmesi hatlarına kadar tasarladığım, eğittiğim, bozup yeniden inşa ettiğim bir şey. Amacım basit: işi kendisinden önce konuşan bir yapay zekâ mühendisi olmak.',
   introRolesLabel: 'ÇALIŞMA ALANLARI',
-  introRoles: ['Yapay Zekâ Mühendisi', 'Makine Öğrenmesi', 'Bilgisayarlı Görü', 'Derin Öğrenme', 'Tam Yığın Geliştirme', 'Açık Kaynak', 'Araştırma'],
+  introRoles: ['Yapay Zekâ Mühendisi', 'Görüntü İşleme (DL)', 'Makine Öğrenmesi (ML)', 'Büyük Dil Modelleri (LLM)', 'Full-Stack Geliştirme', 'Açık Kaynak', 'Araştırma'],
   introStats: [
-    { n: 14, suffix: '', label: 'Yayınlanan proje' },
+    { n: 16, suffix: '', label: 'Yayınlanan proje' },
     { n: 25, suffix: '+', label: 'Kullanılan teknoloji' },
     { n: 99, suffix: '%', label: 'En yüksek model F1' },
     { n: 6, suffix: '', label: 'Keşfedilen alan' },
@@ -640,7 +630,7 @@ const tr = {
 
   // Home hero + sections
   heroTagline: 'YAPAY ZEKÂ ÜRÜN GELİŞTİRİCİSİ',
-  heroSubtext: 'Yapay zekâ ile gerçek ürünler geliştiriyorum. Benim için önemli olan, sırf eğitmiş olmak için model eğitmek değil, insanların gerçekten kullandığı şeyler üretmek.',
+  heroSubtext: 'Yapay zekâ ile gerçek ürünler geliştiriyorum; görüntü işleme (DL), makine öğrenmesi (ML), büyük dil modelleri (LLM) ve full stack üzerine çalışıyorum. Benim için önemli olan, insanların gerçekten kullandığı şeyler üretmek.',
   ctaResume: 'CV’yi İndir',
   ctaViewWork: 'Çalışmaları Gör',
 
@@ -768,9 +758,6 @@ const tr = {
   contactLine1: 'İstediğin zaman',
   contactLine1Em: 'yaz',
   contactLine2: 'İş birliğine açığım',
-
-  // Footer
-  footerBuilt: 'Acele etmeden, elle yapıldı.',
 
   // Nav Fun
   navFun: 'Eğlence',
@@ -906,7 +893,7 @@ const tr = {
   projectDetailBack: 'Zırh Deposu',
   projectBadge: 'ZIRH DEPOSU',
   projectLabel: 'Cephanelik',
-  projectSub: 'On dört zırh, her biri bir proje. Özellikleri, mimariyi ve sonuçları incelemek için bir kapsül aç.',
+  projectSub: 'On altı zırh, her biri bir proje. Özellikleri, mimariyi ve sonuçları incelemek için bir kapsül aç.',
   projectOpen: 'Projeyi Aç',
 
   // Project Detail
@@ -955,7 +942,6 @@ const tr = {
 
   // Nav (new pages)
   navExperience: 'Deneyim',
-  navStack: 'Teknolojiler',
   navResearch: 'Araştırma',
   navResume: 'CV',
   navHome: 'Ana Sayfa',
@@ -980,7 +966,7 @@ const tr = {
       org: 'Bağımsız Yapay Zekâ / ML Mühendisliği', role: 'Geliştirici & Açık Kaynak Yazarı', period: '2024 — Günümüz', type: 'Uygulamalı', accent: '#00d4ff',
       summary: 'Bilgisayarlı görü, NLP, ML, sistemler ve full-stack alanlarında kendi kendine yönlendirdiğim mühendislik.',
       points: [
-        'Doğrudan donanımda çalışan x86 işletim sisteminden üretim ML hatlarına 14 belgeli proje yayınladım.',
+        'Doğrudan donanımda çalışan x86 işletim sisteminden üretim ML hatlarına 16 belgeli proje yayınladım.',
         'Kendi topladığım veri kümesinde tek sınıflı YOLO11 dedektörünü %90,3 mAP@50’ye eğittim.',
         'İki aşamalı yüz tespiti hattını 140.000 görselde sıfır hatayla test ettim.',
         'MarianMT’yi Türkçe→İngilizce için ince ayarlayıp BLEU’yu ~36’dan ~43’e çıkardım.',
@@ -999,13 +985,7 @@ const tr = {
     },
   ],
 
-  // Tech Stack page
-  stackBack: 'Ana Sayfa',
-  stackBadge: 'TEKNOLOJİLER',
-  stackLabel: 'Teknoloji Yığını',
-  stackSub: 'Gerçekten kullandığım araçlar, alanlara göre gruplandı; her biri için dürüst bir yetkinlik seviyesi belirttim.',
-  stackLegend: 'Yetkinlik',
-  stackLevels: ['Başlangıç', 'Orta', 'Yetkin', 'İleri', 'Uzman'],
+  // Yetenek grupları — CV sayfasındaki yetenekler bölümünü besler (Teknoloji Yığını sayfası kaldırıldı)
   stackGroups: [
     { category: 'Diller', accent: '#ffd166', items: [
       { name: 'Python', level: 5 }, { name: 'C', level: 4 }, { name: 'C++', level: 3 }, { name: 'Java', level: 3 }, { name: 'JavaScript', level: 4 }, { name: 'TypeScript', level: 4 }, { name: 'SQL', level: 3 },
@@ -1123,13 +1103,13 @@ const tr = {
     { term: '2025 Bahar', sub: '(B1 Hazırlık)', status: 'completed', title: 'Hazırlık — Okuma & İlk Kodlar',
       competitions: [], hackathons: [], research: [], projects: ['Python’a başladım', 'HTML & CSS'], achievements: ['Yoğun İngilizce okuma: makaleler & akademik metinler', 'Kod yazmaya başladım'] },
     { term: '2025 Yaz', sub: '(B2 Hazırlık)', status: 'completed', title: 'Speaking, Yapay Zekâ & İlk Projeler',
-      competitions: [], hackathons: [], research: [], projects: ['Synonym Master', 'Mini LLM projesi', 'Temel problem çözme'], achievements: ['İngilizce speaking’i geliştirdim', 'Yapay zekâ öğrenmeye başladım'] },
+      competitions: [], hackathons: [], research: [], projects: ['Mini LLM projesi', 'Temel problem çözme'], achievements: ['İngilizce speaking’i geliştirdim', 'Yapay zekâ öğrenmeye başladım'] },
     { term: '2025 Güz', sub: '(1. Yıl · 1. Dönem)', status: 'completed', title: 'Bilgisayar Mühendisliği — 1. Yıl',
       competitions: ['IEEEXtreme', 'AlgoLeague Kış Kampı'], hackathons: [], research: ['Sağlık alanında araştırmaya başladım'], projects: ['Task Manager', 'Bank App', 'Quizzer', 'Küçük Kaggle projeleri'], achievements: ['Python ile gelişim: veri yapıları & algoritmalar', 'ML & Data Science’a başladım', 'Yarışmacı programlamaya başlangıç'] },
     { term: '2026 Bahar', sub: '(1. Yıl · 2. Dönem)', status: 'completed', title: 'NEXA, C & Hackathonlar',
-      competitions: ['AlgoLeague Bahar Kampı'], hackathons: ['BTK E-Ticaret Hackathon', 'Tıkla Gelsin Foodathon', 'Med-Health Erken Uyarı'], research: ['PHQ-9 Depresyon Analizi'], projects: ['Sorting Visualizer', 'Space Shooter', 'GorkemOS', 'Find The Best', 'Yüz Tespiti', 'NEXA Web Sitesi'], achievements: ['Kendi ekibim NEXA’yı kurdum', 'C öğrenip 3 proje geliştirdim', 'Derin Öğrenmeye giriş', 'Online staj tamamladım'] },
+      competitions: ['AlgoLeague Bahar Kampı'], hackathons: ['BTK E-Ticaret Hackathon', 'Tıkla Gelsin Foodathon', 'Med-Health Erken Uyarı'], research: ['PHQ-9 Depresyon Analizi'], projects: ['Sorting Visualizer', 'Space Shooter', 'GorkemOS', 'Find The Best', 'Yüz Tespiti', 'NEXA Web Sitesi', 'Synonym Master'], achievements: ['Kendi ekibim NEXA’yı kurdum', 'C öğrenip 3 proje geliştirdim', 'Derin Öğrenmeye giriş', 'Online staj tamamladım', 'İngilizcede C1 seviyesine ulaştım'] },
     { term: '2026 Yaz', sub: '(Şu an)', status: 'current', title: 'Yapay Zekâ Ürünleri & Araştırma',
-      competitions: ['AlgoLeague Yaz Kampı'], hackathons: [], research: ['E-posta Oltalama Tespiti'], projects: ['YOLO Özel Dedektör', 'Re-Minder'], achievements: ['LLM · ML · DL alanında daha derin çalışma', 'Makale okumaları', 'Daha çok yapay zekâ projesi'] },
+      competitions: ['AlgoLeague Yaz Kampı'], hackathons: [], research: ['E-posta Oltalama Tespiti'], projects: ['YOLO Özel Dedektör', 'Re-Minder', 'FaceLock', 'WorldCup BPE Tokenizer'], achievements: ['LLM · ML · DL alanında daha derin çalışma', 'Makale okumaları', 'Daha çok yapay zekâ projesi'] },
     { term: '2026 Güz', sub: '(2. Yıl · 1. Dönem)', status: 'locked', title: '', competitions: [], hackathons: [], research: [], projects: [], achievements: [] },
     { term: '2027 Bahar', sub: '(2. Yıl · 2. Dönem)', status: 'locked', title: '', competitions: [], hackathons: [], research: [], projects: [], achievements: [] },
     { term: '2027 Yaz', sub: '(Yaz)', status: 'locked', title: '', competitions: [], hackathons: [], research: [], projects: [], achievements: [] },
