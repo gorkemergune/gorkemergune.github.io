@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500" role="img" aria-label="FaceLock">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b0b13"/>
+      <stop offset="0.55" stop-color="#0a0a0f"/>
+      <stop offset="1" stop-color="rgba(45,212,191,0.14)"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.82" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="rgba(45,212,191,0.4)"/>
+      <stop offset="0.55" stop-color="rgba(45,212,191,0.08)"/>
+      <stop offset="1" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0 H0 V40" fill="none" stroke="rgba(45,212,191,0.05)" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#bg)"/>
+  <rect width="800" height="500" fill="url(#grid)"/>
+  <rect width="800" height="500" fill="url(#glow)"/>
+
+  <g stroke="rgba(45,212,191,0.5)" stroke-width="2" fill="none">
+    <path d="M28 60 V28 H60"/>
+    <path d="M740 28 H772 V60"/>
+    <path d="M28 440 V472 H60"/>
+    <path d="M772 440 V472 H740"/>
+  </g>
+
+  <g transform="translate(650 250)">
+    <circle r="118" fill="none" stroke="rgba(45,212,191,0.12)" stroke-width="1"/>
+    <circle r="96" fill="none" stroke="rgba(45,212,191,0.18)" stroke-width="1" stroke-dasharray="4 8"/>
+    <circle r="72" fill="none" stroke="rgba(45,212,191,0.4)" stroke-width="2"/>
+    <circle r="72" fill="rgba(45,212,191,0.06)"/>
+    <circle r="118" fill="none" stroke="#2dd4bf" stroke-width="3" stroke-dasharray="48 300" stroke-linecap="round" opacity="0.8"/>
+  </g>
+  <g transform="translate(650 250)" fill="none" stroke="#2dd4bf" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M -44 -28 V -44 H -28" />
+    <path d="M 28 -44 H 44 V -28" />
+    <path d="M -44 28 V 44 H -28" />
+    <path d="M 44 28 V 44 H 28" />
+    <circle r="22" cy="-4" opacity="0.85"/>
+    <path d="M -14 30 Q 0 16 14 30" opacity="0.85"/>
+    <path d="M -52 4 H 52" opacity="0.45" stroke-width="4"/>
+  </g>
+
+  <g>
+    <rect x="60" y="70" width="12" height="12" fill="#2dd4bf"/>
+    <text x="84" y="81" font-family="'JetBrains Mono', monospace" font-size="15" fill="#2dd4bf" letter-spacing="4">MARK XVI</text>
+    <text x="60" y="128" font-family="'JetBrains Mono', monospace" font-size="14" fill="rgba(45,212,191,0.85)" letter-spacing="6">THE SENTINEL</text>
+    <text x="58" y="206" font-family="Georgia, 'Times New Roman', serif" font-size="52" fill="#eef0f6" letter-spacing="-1">FaceLock</text>
+    <text x="61" y="250" font-family="'Inter', system-ui, sans-serif" font-size="20" fill="#8a8aa0" letter-spacing="1">Real-Time Face Detection &amp; Recognition</text>
+  </g>
+
+  <g>
+      <rect x="60" y="378" width="72" height="28" rx="14" fill="rgba(45,212,191,0.09)" stroke="rgba(45,212,191,0.4)"/>
+      <text x="96" y="397" font-family="'JetBrains Mono', monospace" font-size="13" fill="#2dd4bf" text-anchor="middle" letter-spacing="1">Python</text>
+    </g><g>
+      <rect x="144" y="378" width="100" height="28" rx="14" fill="rgba(45,212,191,0.09)" stroke="rgba(45,212,191,0.4)"/>
+      <text x="194" y="397" font-family="'JetBrains Mono', monospace" font-size="13" fill="#2dd4bf" text-anchor="middle" letter-spacing="1">MediaPipe</text>
+    </g><g>
+      <rect x="256" y="378" width="58" height="28" rx="14" fill="rgba(45,212,191,0.09)" stroke="rgba(45,212,191,0.4)"/>
+      <text x="285" y="397" font-family="'JetBrains Mono', monospace" font-size="13" fill="#2dd4bf" text-anchor="middle" letter-spacing="1">dlib</text>
+    </g>
+
+  <g>
+    <circle cx="66" cy="452" r="4" fill="#2dd4bf"/>
+    <text x="80" y="457" font-family="'JetBrains Mono', monospace" font-size="12" fill="#5a5a70" letter-spacing="3">SYSTEM ONLINE</text>
+  </g>
+  <text x="740" y="457" font-family="'JetBrains Mono', monospace" font-size="12" fill="#3a3a50" text-anchor="end" letter-spacing="2">STARK INDUSTRIES</text>
+</svg>
