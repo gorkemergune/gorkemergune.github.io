@@ -8,6 +8,7 @@ import AlgorithmJourney from '../components/AlgorithmJourney';
 import FeaturedProject from '../components/FeaturedProject';
 import CurrentlyBuilding from '../components/CurrentlyBuilding';
 import GitHubActivity from '../components/GitHubActivity';
+import HuggingFaceActivity from '../components/HuggingFaceActivity';
 
 export default function Home() {
   const { t } = useLang();
@@ -60,6 +61,7 @@ export default function Home() {
       <FeaturedProject />
       <CurrentlyBuilding />
       <GitHubActivity />
+      <HuggingFaceActivity />
     </>
   );
 }

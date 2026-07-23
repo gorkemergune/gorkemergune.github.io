@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 462" font-family="SF Mono, Menlo, monospace" font-size="14">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0" stop-color="#12121f"/><stop offset="1" stop-color="#0a0a12"/></linearGradient></defs>
+<rect width="860" height="462" rx="12" fill="url(#bg)" stroke="#2a2a3e"/>
+<text x="34" y="44" fill="#a06bff" font-size="15" letter-spacing="2">DATASET PIPELINE — ayarlicazhocam_finetune</text>
+<text x="34" y="66" fill="#6a6a80" font-size="12">three complementary sources → merged corpus → Hugging Face Hub</text>
+
+<!-- Source 1: scraped -->
+<g>
+<rect x="34" y="92" width="240" height="118" rx="8" fill="rgba(160,107,255,0.06)" stroke="rgba(160,107,255,0.4)"/>
+<text x="50" y="118" fill="#a06bff" font-size="13">① SCRAPED</text>
+<text x="50" y="142" fill="#c0c0d0" font-size="12">dev.to · GitHub trending</text>
+<text x="50" y="162" fill="#c0c0d0" font-size="12">Hugging Face · Stack Overflow</text>
+<text x="50" y="182" fill="#c0c0d0" font-size="12">arXiv · Wikipedia (tech)</text>
+<text x="50" y="202" fill="#6a6a80" font-size="11">scrapers/scrape_*.py</text>
+</g>
+
+<!-- Source 2: hand-written -->
+<g>
+<rect x="310" y="92" width="240" height="118" rx="8" fill="rgba(160,107,255,0.06)" stroke="rgba(160,107,255,0.4)"/>
+<text x="326" y="118" fill="#a06bff" font-size="13">② HAND-WRITTEN</text>
+<text x="326" y="142" fill="#c0c0d0" font-size="12">persona conversations</text>
+<text x="326" y="162" fill="#c0c0d0" font-size="12">instructions + responses</text>
+<text x="326" y="182" fill="#c0c0d0" font-size="12">domain knowledge (TR + EN)</text>
+<text x="326" y="202" fill="#6a6a80" font-size="11">data/tr.json · data/eng.json</text>
+</g>
+
+<!-- Source 3: synthetic -->
+<g>
+<rect x="586" y="92" width="240" height="118" rx="8" fill="rgba(160,107,255,0.06)" stroke="rgba(160,107,255,0.4)"/>
+<text x="602" y="118" fill="#a06bff" font-size="13">③ SYNTHETIC</text>
+<text x="602" y="142" fill="#c0c0d0" font-size="12">bulk generated pairs</text>
+<text x="602" y="166" fill="#febc2e" font-size="13">34 EN  +  36 TR  batches</text>
+<text x="602" y="192" fill="#c0c0d0" font-size="12">= 70 bulk_*.json files</text>
+<text x="602" y="204" fill="#6a6a80" font-size="11" opacity="0"> </text>
+</g>
+
+<!-- arrows down -->
+<g stroke="rgba(160,107,255,0.5)" stroke-width="2" fill="none">
+<path d="M154 210 V244" marker-end="url(#a)"/>
+<path d="M430 210 V244" marker-end="url(#a)"/>
+<path d="M706 210 V244" marker-end="url(#a)"/>
+</g>
+<defs><marker id="a" markerWidth="8" markerHeight="8" refX="4" refY="6" orient="auto"><path d="M0 0 L4 6 L8 0" fill="#a06bff"/></marker></defs>
+
+<!-- merge -->
+<rect x="34" y="252" width="792" height="52" rx="8" fill="rgba(160,107,255,0.10)" stroke="#a06bff"/>
+<text x="430" y="284" fill="#e0e0e8" font-size="14" text-anchor="middle">scrapers/merge_all.py  →  chat-template preprocessing  →  ~2,000 bilingual rows</text>
+
+<path d="M430 304 V336" stroke="rgba(160,107,255,0.5)" stroke-width="2" fill="none" marker-end="url(#a)"/>
+
+<!-- publish -->
+<g>
+<rect x="180" y="344" width="500" height="90" rx="8" fill="rgba(46,196,182,0.06)" stroke="rgba(46,196,182,0.4)"/>
+<text x="430" y="374" fill="#2ec4b6" font-size="14" text-anchor="middle">🤗  push_to_hub</text>
+<text x="430" y="400" fill="#c0c0d0" font-size="12" text-anchor="middle">dataset → gorkemergune/ayarlicazhocam_finetune</text>
+<text x="430" y="420" fill="#6a6a80" font-size="12" text-anchor="middle">parquet · size 1K–10K · TR + EN · 80 downloads</text>
+</g>
+</svg>

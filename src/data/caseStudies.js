@@ -307,6 +307,63 @@ export const CASE_STUDIES = {
       ],
     },
   },
+
+  'llm-lora-finetuning': {
+    en: {
+      problem: [
+        'Everyone shows off the fine-tune that worked. I wanted to actually learn the full LoRA/SFT workflow — data collection, dataset design, training, publishing, evaluation — on my own assistant, "ayarlicazhocam," built on the open-source Llama 3.2-3B. And I decided up front that whatever the result was, I would measure it honestly and keep the record public.',
+      ],
+      solution: [
+        'I built the entire pipeline end to end. The dataset came from three sources: scrapers pulling public developer content, hand-written conversations to shape the persona, and 70 batches of synthetically generated instruction/response pairs (34 English + 36 Turkish). Everything merged into one bilingual corpus.',
+        'Training used Unsloth to load Llama-3.2-3B in 4-bit, LoRA adapters, and TRL’s SFTTrainer. Both the model and the dataset were published to the Hugging Face Hub as gorkemergune/ayarlicazhocam-llama-3.2-3b and gorkemergune/ayarlicazhocam_finetune.',
+      ],
+      architecture: [
+        'Data lives under scrapers/: per-source scrapers (dev.to, GitHub trending, Hugging Face, Stack Overflow, arXiv, Wikipedia), hand-authored JSON, and generate_bulk_*.py producing the synthetic batches, all combined by merge_all.py. Training and merging happen in src/Llama3.2-3BFinetune.ipynb.',
+        'Evaluation is where I refused to cut corners. I ported a Turkish MMLU benchmark into a local, safe version (disabling its push_to_hub calls) and scored the merged GGUF under ollama on a stratified 310-question sample — proportional to the full 6,200-question set, so it is representative.',
+      ],
+      challenges: [
+        'The result was bad, and the benchmark told me exactly how bad: 20.65% on Turkish MMLU — statistically identical to random guessing on 5-choice questions, 61st out of 67 models, and roughly half the score of the stock llama3.2:latest of the same size.',
+        'Digging in, two symptoms stood out. The model followed the multiple-choice format 0% of the time — it echoed the prompt instead of answering. And asked "Who is Gorkem?", it invented a completely different biography every single run (a model, a blockchain figure, an actor), even though the correct answer is right there in the training data.',
+      ],
+      results: [
+        'Root cause, traced from the published adapter: the shipped chat_template.jinja was still a Gemma-3 template (<start_of_turn> / <end_of_turn>) running on a Llama tokenizer, where those tokens aren’t special — so the turn structure silently broke and the persona facts never made it into the weights.',
+        'The inconsistency itself is the proof: a model that had learned a fact would repeat it. Different fabrications each run means the fact was never learned — a distribution shift, not retrieval.',
+        'The notebook is now corrected to the proper llama-3.1 template, with retraining and re-evaluation staged as the next iteration. Every number and finding is written up in BENCHMARK_REPORT.md.',
+      ],
+      lessons: [
+        'The chat template is not a formatting detail — it is load-bearing. A template mismatch can quietly zero out an entire training run while every step still "succeeds".',
+        'A negative result you can explain is worth more than a positive one you can’t. Measuring the failure properly taught me more than a lucky success would have.',
+        'Fine-tuning shifts weight distributions; it does not memorize facts on command. Weak, malformed signal means the base model’s priors win — and you get confident hallucination.',
+      ],
+    },
+    tr: {
+      problem: [
+        'Herkes işe yarayan ince ayarı sergiler. Ben ise LoRA/SFT iş akışının tamamını gerçekten öğrenmek istedim — veri toplama, veri kümesi tasarımı, eğitim, yayınlama, değerlendirme — hem de açık kaynaklı Llama 3.2-3B üzerine kurduğum kendi asistanım “ayarlicazhocam” üzerinde. Ve sonuç ne olursa olsun onu dürüstçe ölçeceğime, kaydı da herkese açık tutacağıma en baştan karar verdim.',
+      ],
+      solution: [
+        'Tüm hattı uçtan uca kurdum. Veri kümesi üç kaynaktan geldi: herkese açık geliştirici içeriğini çeken kazıyıcılar, personayı şekillendiren elle yazılmış konuşmalar ve programatik üretilen 70 grup sentetik talimat/yanıt çifti (34 İngilizce + 36 Türkçe). Hepsi tek bir iki dilli derlemde birleşti.',
+        'Eğitimde Llama-3.2-3B’yi 4-bit yüklemek için Unsloth, LoRA adaptörleri ve TRL’nin SFTTrainer’ı kullanıldı. Hem model hem veri kümesi Hugging Face Hub’a gorkemergune/ayarlicazhocam-llama-3.2-3b ve gorkemergune/ayarlicazhocam_finetune olarak yayınlandı.',
+      ],
+      architecture: [
+        'Veri scrapers/ altında durur: kaynak başına kazıyıcılar (dev.to, GitHub trending, Hugging Face, Stack Overflow, arXiv, Wikipedia), elle yazılmış JSON ve sentetik grupları üreten generate_bulk_*.py; hepsi merge_all.py ile birleştirilir. Eğitim ve birleştirme src/Llama3.2-3BFinetune.ipynb içinde yapılır.',
+        'Değerlendirmede köşe kesmeyi reddettim. Bir Türkçe MMLU benchmark’ını yerel ve güvenli bir sürüme taşıdım (push_to_hub çağrılarını devre dışı bırakarak) ve birleştirilmiş GGUF’yi ollama altında katmanlı 310 soruluk bir örneklemle puanladım — tam 6.200 soruluk setle orantılı, dolayısıyla temsili.',
+      ],
+      challenges: [
+        'Sonuç kötüydü ve benchmark tam olarak ne kadar kötü olduğunu söyledi: Türkçe MMLU’da %20,65 — 5 şıklı sorularda rastgele tahminle istatistiksel olarak aynı, 67 model içinde 61., ve aynı boyuttaki stok llama3.2:latest’in yaklaşık yarısı.',
+        'Derine indikçe iki belirti öne çıktı. Model çoktan seçmeli formatı %0 oranında takip etti — cevap vermek yerine istemi tekrarladı. Ve “Görkem kimdir?” diye sorulduğunda, doğru cevap eğitim verisinde dururken her koşuda bambaşka bir biyografi uydurdu (model, blockchain figürü, oyuncu).',
+      ],
+      results: [
+        'Yayınlanan adaptörden izlenen kök neden: gönderilen chat_template.jinja hâlâ bir Gemma-3 template’iydi (<start_of_turn> / <end_of_turn>) ve bunlar Llama tokenizer’ında özel token değil — böylece tur yapısı sessizce bozuldu ve persona bilgileri ağırlıklara hiç işlenemedi.',
+        'Tutarsızlığın kendisi kanıt: bir gerçeği öğrenmiş model onu tekrar ederdi. Her koşuda farklı uydurma, gerçeğin hiç öğrenilmediği anlamına gelir — bu bir dağılım kayması, retrieval değil.',
+        'Not defteri artık doğru llama-3.1 template’ine düzeltildi; yeniden eğitim ve yeniden değerlendirme bir sonraki yineleme olarak sıraya alındı. Her sayı ve bulgu BENCHMARK_REPORT.md’de yazılı.',
+      ],
+      lessons: [
+        'Chat template bir biçimlendirme ayrıntısı değil — taşıyıcı bir öğedir. Bir template uyumsuzluğu, her adım “başarılı” görünürken tüm bir eğitim koşusunu sessizce sıfırlayabilir.',
+        'Açıklayabildiğin bir olumsuz sonuç, açıklayamadığın bir olumludan daha değerlidir. Başarısızlığı düzgün ölçmek bana şanslı bir başarıdan çok daha fazlasını öğretti.',
+        'İnce ayar ağırlık dağılımlarını kaydırır; komutla gerçek ezberlemez. Zayıf, bozuk sinyal, temel modelin önsel eğilimlerinin kazanması demektir — ve karşılığında kendinden emin halüsinasyon alırsın.',
+      ],
+    },
+  },
 };
 
 export const getCaseStudy = (slug) => CASE_STUDIES[slug];

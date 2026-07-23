@@ -3,7 +3,7 @@ import { ArrowUpRight, FileText } from 'lucide-react';
 import { useLang } from '../i18n.jsx';
 import { getProject } from '../data/projects';
 
-const FEATURED_SLUG = 'yolo-custom-detector';
+const FEATURED_SLUG = 'llm-lora-finetuning';
 
 export default function FeaturedProject() {
   const { lang, t } = useLang();

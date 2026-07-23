@@ -64,7 +64,7 @@ export default function GitHubActivity() {
 }
 
 const s = {
-  section: { maxWidth: 1400, margin: '0 auto', padding: '40px 48px 90px', position: 'relative', zIndex: 2 },
+  section: { maxWidth: 1400, margin: '0 auto', padding: '40px 48px 40px', position: 'relative', zIndex: 2 },
   head: { marginBottom: 6 },
   kicker: { display: 'inline-flex', alignItems: 'center', gap: 10, fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.18em', color: '#6a6a82' },
   dot: { width: 7, height: 7, borderRadius: '50%', background: '#00d4ff', boxShadow: '0 0 8px #00d4ff' },

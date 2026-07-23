@@ -77,6 +77,13 @@ const en = {
   activityUpdated: 'Updated',
   activityStars: 'stars',
 
+  hfKicker: 'HUGGING FACE // MODELS & DATASETS',
+  hfSub: 'What I have shipped to the Hub — fine-tunes, tokenizers, and the data behind them',
+  hfCta: 'View Hugging Face profile',
+  hfModel: 'MODEL',
+  hfDataset: 'DATASET',
+  hfViewProject: 'Project',
+
   lifeKicker: 'LIVE TELEMETRY // SYSTEM UPTIME',
   ageLabel: 'AGE — TIME ONLINE',
   countdownLabel: 'NEXT BIRTHDAY',
@@ -662,6 +669,12 @@ const tr = {
   activitySub: 'Doğrudan GitHub’dan canlı olarak çekilir ve her zaman günceldir',
   activityCta: 'GitHub profilini gör',
   activityUpdated: 'Güncellendi',
+  hfKicker: 'HUGGING FACE // MODELLER & VERİ KÜMELERİ',
+  hfSub: 'Hub’a yayınladıklarım — ince ayarlar, tokenizer’lar ve arkalarındaki veri',
+  hfCta: 'Hugging Face profilini gör',
+  hfModel: 'MODEL',
+  hfDataset: 'VERİ KÜMESİ',
+  hfViewProject: 'Proje',
   activityStars: 'yıldız',
 
   lifeKicker: 'CANLI TELEMETRİ // SİSTEM ÇALIŞMA SÜRESİ',

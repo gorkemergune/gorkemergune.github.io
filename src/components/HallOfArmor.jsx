@@ -116,7 +116,7 @@ export default function HallOfArmor() {
         }
         @media (max-width: 900px) {
           .hall-capsules { flex-wrap: wrap !important; justify-content: center !important; }
-          .capsule-item { width: calc(33.333% - 10px) !important; min-width: 110px !important; max-width: none !important; }
+          .capsule-item { width: calc(33.333% - 10px) !important; min-width: 130px !important; max-width: none !important; }
           .hall-platform { width: 180px !important; height: 180px !important; }
           .hall-name { font-size: 64px !important; }
         }
@@ -275,7 +275,7 @@ export default function HallOfArmor() {
               background: 'linear-gradient(180deg, #0f0f1a 0%, #080810 100%)',
               border: `1px solid ${hoveredCapsule === i ? armor.color : '#1a1a2e'}`,
               borderRadius: 4,
-              minHeight: 210,
+              minHeight: 290,
               position: 'relative',
               transformStyle: 'preserve-3d',
               transition: 'border-color 0.3s, box-shadow 0.3s, transform 0.25s cubic-bezier(0.2,0.8,0.2,1)',
@@ -291,41 +291,62 @@ export default function HallOfArmor() {
                 {armor.mark}
               </div>
 
-              {/* Armor silhouette — holographic 3D turntable */}
-              <div className="capsule-silhouette" style={{ margin: '10px 0 6px', display: 'flex', flexDirection: 'column', alignItems: 'center', perspective: 320, transform: 'translateZ(26px)' }}>
+              {/* Armor silhouette — holographic 3D turntable (solid box prism, always spinning) */}
+              <div className="capsule-silhouette" style={{ margin: '16px 0 10px', display: 'flex', flexDirection: 'column', alignItems: 'center', perspective: 480, transform: 'translateZ(30px)' }}>
                 <div className="holo-stage" style={{
-                  position: 'relative', width: 36, height: 72,
+                  position: 'relative', width: 58, height: 116,
                   transformStyle: 'preserve-3d',
-                  animation: `holo-spin ${6 + i * 0.5}s linear infinite`,
+                  animation: `holo-spin ${16 + i * 0.6}s linear infinite`,
                 }}>
-                  {[0, 90].map((deg) => (
-                    <svg key={deg} viewBox="0 0 40 80" width="36" height="72" style={{
+                  {[
+                    { deg: 0, z: 22, op: 1 },
+                    { deg: 90, z: 22, op: 0.62 },
+                    { deg: 180, z: 22, op: 0.85 },
+                    { deg: 270, z: 22, op: 0.62 },
+                  ].map(({ deg, z, op }) => (
+                    <svg key={deg} viewBox="0 0 40 80" width="58" height="116" style={{
                       position: 'absolute', inset: 0,
-                      transform: `rotateY(${deg}deg)`,
-                      opacity: hoveredCapsule === i ? 0.95 : 0.45,
+                      transform: `rotateY(${deg}deg) translateZ(${z}px)`,
+                      backfaceVisibility: 'hidden',
+                      opacity: (hoveredCapsule === i ? Math.min(1, op + 0.15) : op),
                       transition: 'opacity 0.3s',
-                      filter: hoveredCapsule === i ? `drop-shadow(0 0 6px ${armor.glow})` : 'none',
+                      filter: hoveredCapsule === i
+                        ? `drop-shadow(0 0 8px ${armor.glow})`
+                        : `drop-shadow(0 0 3px ${armor.glow})`,
                     }}>
-                      <rect x="14" y="1" width="12" height="10" rx="2" fill={armor.color} />
-                      <rect x="10" y="11" width="20" height="26" rx="3" fill={armor.color} />
-                      <rect x="2" y="13" width="8" height="16" rx="2" fill={armor.color} opacity="0.7" />
-                      <rect x="30" y="13" width="8" height="16" rx="2" fill={armor.color} opacity="0.7" />
-                      <rect x="12" y="37" width="7" height="28" rx="2" fill={armor.color} opacity="0.8" />
-                      <rect x="21" y="37" width="7" height="28" rx="2" fill={armor.color} opacity="0.8" />
-                      <ellipse cx="20" cy="23" rx="4" ry="4" fill="rgba(10,10,15,0.6)" />
-                      <ellipse cx="20" cy="23" rx="2" ry="2" fill={armor.color} opacity="0.8" />
+                      <defs>
+                        <linearGradient id={`armorFill-${armor.mark.replace(/\s/g, '')}-${deg}`} x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="0" stopColor={armor.color} stopOpacity="0.95" />
+                          <stop offset="1" stopColor={armor.color} stopOpacity="0.6" />
+                        </linearGradient>
+                      </defs>
+                      {(() => {
+                        const fill = `url(#armorFill-${armor.mark.replace(/\s/g, '')}-${deg})`;
+                        return (
+                          <>
+                            <rect x="14" y="1" width="12" height="10" rx="2" fill={fill} />
+                            <rect x="10" y="11" width="20" height="26" rx="3" fill={fill} />
+                            <rect x="2" y="13" width="8" height="16" rx="2" fill={armor.color} opacity="0.7" />
+                            <rect x="30" y="13" width="8" height="16" rx="2" fill={armor.color} opacity="0.7" />
+                            <rect x="12" y="37" width="7" height="28" rx="2" fill={armor.color} opacity="0.85" />
+                            <rect x="21" y="37" width="7" height="28" rx="2" fill={armor.color} opacity="0.85" />
+                            <ellipse cx="20" cy="23" rx="4.4" ry="4.4" fill="rgba(10,10,15,0.7)" />
+                            <ellipse cx="20" cy="23" rx="2.2" ry="2.2" fill="#eafcff" opacity="0.95" />
+                          </>
+                        );
+                      })()}
                     </svg>
                   ))}
                 </div>
                 {/* hologram floor */}
                 <div style={{
-                  position: 'relative', width: 44, height: 8, marginTop: 4,
+                  position: 'relative', width: 64, height: 12, marginTop: 8,
                 }}>
                   <div style={{
-                    position: 'absolute', left: '50%', top: 0, width: 44, height: 8,
+                    position: 'absolute', left: '50%', top: 0, width: 64, height: 12,
                     transform: 'translateX(-50%)',
                     borderRadius: '50%',
-                    background: `radial-gradient(ellipse, ${armor.color}55 0%, transparent 70%)`,
+                    background: `radial-gradient(ellipse, ${armor.color}66 0%, transparent 70%)`,
                     animation: `holo-floor ${2.4 + i * 0.2}s ease-in-out infinite`,
                   }} />
                 </div>
@@ -461,7 +482,7 @@ const s = {
   },
   capsuleItem: {
     display: 'flex', flexDirection: 'column',
-    width: 'calc(14.285% - 11px)', maxWidth: 200, minWidth: 120,
+    width: 'calc(20% - 13px)', maxWidth: 250, minWidth: 150,
     cursor: 'pointer',
     flexShrink: 0,
     perspective: 900,
