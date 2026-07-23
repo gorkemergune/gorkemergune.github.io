@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 462" font-family="SF Mono, Menlo, monospace" font-size="14">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0" stop-color="#12121f"/><stop offset="1" stop-color="#0a0a12"/></linearGradient></defs>
+<rect width="860" height="462" rx="12" fill="url(#bg)" stroke="#2a2a3e"/>
+<text x="34" y="44" fill="#e0e0e8" font-size="15">HALLUCINATION ANALYSIS — "Who is Gorkem?"</text>
+<text x="34" y="66" fill="#6a6a80" font-size="12">the dataset has a clear, consistent answer — the model never gives it</text>
+
+<!-- ground truth -->
+<rect x="34" y="82" width="792" height="52" rx="8" fill="rgba(46,196,182,0.06)" stroke="rgba(46,196,182,0.4)"/>
+<text x="50" y="106" fill="#2ec4b6" font-size="12">DATASET TRUTH</text>
+<text x="50" y="126" fill="#c0c0d0" font-size="12">Görkem Ergüne — Computer Engineering student at Yeditepe · AI Product Developer · İstanbul</text>
+
+<text x="34" y="162" fill="#ff5f57" font-size="12">MODEL OUTPUTS  (a different fabricated bio every single run)</text>
+
+<g font-size="13">
+<rect x="34" y="176" width="792" height="30" rx="6" fill="rgba(255,95,87,0.05)" stroke="rgba(255,95,87,0.25)"/>
+<text x="46" y="196" fill="#c0c0d0" xml:space="preserve">run 1  "...software developer and a GitHub Premium member..."          ✗</text>
+
+<rect x="34" y="212" width="792" height="30" rx="6" fill="rgba(255,95,87,0.05)" stroke="rgba(255,95,87,0.25)"/>
+<text x="46" y="232" fill="#c0c0d0" xml:space="preserve">run 2  "...25 years old... at İTÜ... data science at NYU..."           ✗</text>
+
+<rect x="34" y="248" width="792" height="30" rx="6" fill="rgba(255,95,87,0.05)" stroke="rgba(255,95,87,0.25)"/>
+<text x="46" y="268" fill="#c0c0d0" xml:space="preserve">run 3  "...one of the most active names in blockchain &amp; metaverse..."  ✗</text>
+
+<rect x="34" y="284" width="792" height="30" rx="6" fill="rgba(255,95,87,0.05)" stroke="rgba(255,95,87,0.25)"/>
+<text x="46" y="304" fill="#c0c0d0" xml:space="preserve">run 4  "...Turkish actor and model... Vogue Turkey cover..."           ✗</text>
+
+<rect x="34" y="320" width="792" height="30" rx="6" fill="rgba(255,95,87,0.05)" stroke="rgba(255,95,87,0.25)"/>
+<text x="46" y="340" fill="#c0c0d0" xml:space="preserve">run 5  "...Koç University... worked at Google, Facebook..."            ✗</text>
+</g>
+
+<rect x="34" y="364" width="792" height="1" fill="#2a2a3e"/>
+<text x="34" y="392" fill="#a06bff" font-size="13">WHY IT MATTERS</text>
+<text x="34" y="414" fill="#c0c0d0" font-size="13" xml:space="preserve">a model that <tspan fill="#e0e0e8">knew</tspan> a fact would repeat it. Different lies each run =</text>
+<text x="34" y="436" fill="#c0c0d0" font-size="13" xml:space="preserve">proof the fact was never written to the weights — the clearest signal of the template bug.</text>
+</svg>
