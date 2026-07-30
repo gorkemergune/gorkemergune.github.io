@@ -1,15 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500" role="img" aria-label="LLM LoRA Fine-Tuning">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500" role="img" aria-label="ayarlicazhocam-training — v1 vs v2">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#0b0b13"/>
       <stop offset="0.55" stop-color="#0a0a0f"/>
       <stop offset="1" stop-color="rgba(160,107,255,0.16)"/>
     </linearGradient>
-    <radialGradient id="glow" cx="0.82" cy="0.5" r="0.5">
-      <stop offset="0" stop-color="rgba(160,107,255,0.4)"/>
-      <stop offset="0.55" stop-color="rgba(160,107,255,0.08)"/>
-      <stop offset="1" stop-color="rgba(0,0,0,0)"/>
-    </radialGradient>
     <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
       <path d="M40 0 H0 V40" fill="none" stroke="rgba(160,107,255,0.05)" stroke-width="1"/>
     </pattern>
@@ -17,55 +12,57 @@
 
   <rect width="800" height="500" fill="url(#bg)"/>
   <rect width="800" height="500" fill="url(#grid)"/>
-  <rect width="800" height="500" fill="url(#glow)"/>
 
   <g stroke="rgba(160,107,255,0.5)" stroke-width="2" fill="none">
-    <path d="M28 60 V28 H60"/>
-    <path d="M740 28 H772 V60"/>
-    <path d="M28 440 V472 H60"/>
-    <path d="M772 440 V472 H740"/>
-  </g>
-
-  <!-- LoRA low-rank decomposition motif: W + B·A -->
-  <g transform="translate(650 250)" font-family="'JetBrains Mono', monospace">
-    <circle r="118" fill="none" stroke="rgba(160,107,255,0.12)" stroke-width="1"/>
-    <circle r="96" fill="none" stroke="rgba(160,107,255,0.18)" stroke-width="1" stroke-dasharray="4 8"/>
-    <circle r="118" fill="none" stroke="#a06bff" stroke-width="3" stroke-dasharray="48 300" stroke-linecap="round" opacity="0.8"/>
-    <rect x="-64" y="-34" width="52" height="68" rx="4" fill="rgba(160,107,255,0.10)" stroke="rgba(160,107,255,0.45)"/>
-    <text x="-38" y="4" font-size="20" fill="#a06bff" text-anchor="middle">W</text>
-    <text x="-2" y="4" font-size="20" fill="#8a8aa0" text-anchor="middle">+</text>
-    <rect x="12" y="-34" width="20" height="68" rx="4" fill="rgba(160,107,255,0.16)" stroke="#a06bff"/>
-    <text x="22" y="4" font-size="14" fill="#a06bff" text-anchor="middle">B</text>
-    <rect x="36" y="-14" width="34" height="28" rx="4" fill="rgba(160,107,255,0.16)" stroke="#a06bff"/>
-    <text x="53" y="4" font-size="14" fill="#a06bff" text-anchor="middle">A</text>
-    <text x="0" y="60" font-size="12" fill="rgba(160,107,255,0.7)" text-anchor="middle">low-rank Δ</text>
+    <path d="M28 60 V28 H60"/><path d="M740 28 H772 V60"/>
+    <path d="M28 440 V472 H60"/><path d="M772 440 V472 H740"/>
   </g>
 
   <g>
-    <rect x="60" y="70" width="12" height="12" fill="#a06bff"/>
-    <text x="84" y="81" font-family="'JetBrains Mono', monospace" font-size="15" fill="#a06bff" letter-spacing="4">MARK XIX</text>
-    <text x="60" y="128" font-family="'JetBrains Mono', monospace" font-size="14" fill="rgba(160,107,255,0.85)" letter-spacing="6">THE APPRENTICE</text>
-    <text x="58" y="200" font-family="Georgia, 'Times New Roman', serif" font-size="46" fill="#eef0f6" letter-spacing="-1">LLM LoRA Fine-Tuning</text>
-    <text x="61" y="244" font-family="'Inter', system-ui, sans-serif" font-size="20" fill="#8a8aa0" letter-spacing="1">Llama 3.2-3B · SFT · an honest first fine-tune</text>
+    <rect x="60" y="60" width="12" height="12" fill="#a06bff"/>
+    <text x="84" y="71" font-family="'JetBrains Mono', monospace" font-size="14" fill="#a06bff" letter-spacing="4">MARK XIX · TWO FINE-TUNES</text>
+    <text x="58" y="126" font-family="Georgia, 'Times New Roman', serif" font-size="44" fill="#eef0f6" letter-spacing="-1">ayarlicazhocam-training</text>
+    <text x="61" y="160" font-family="'Inter', system-ui, sans-serif" font-size="17" fill="#8a8aa0">A broken v1 on Llama, fixed into a thinking, tool-calling v2 on Gemma-4</text>
   </g>
 
-  <g>
-      <rect x="60" y="378" width="72" height="28" rx="14" fill="rgba(160,107,255,0.09)" stroke="rgba(160,107,255,0.4)"/>
-      <text x="96" y="397" font-family="'JetBrains Mono', monospace" font-size="13" fill="#a06bff" text-anchor="middle" letter-spacing="1">Python</text>
-    </g><g>
-      <rect x="144" y="378" width="84" height="28" rx="14" fill="rgba(160,107,255,0.09)" stroke="rgba(160,107,255,0.4)"/>
-      <text x="186" y="397" font-family="'JetBrains Mono', monospace" font-size="13" fill="#a06bff" text-anchor="middle" letter-spacing="1">Unsloth</text>
-    </g><g>
-      <rect x="240" y="378" width="64" height="28" rx="14" fill="rgba(160,107,255,0.09)" stroke="rgba(160,107,255,0.4)"/>
-      <text x="272" y="397" font-family="'JetBrains Mono', monospace" font-size="13" fill="#a06bff" text-anchor="middle" letter-spacing="1">PEFT</text>
-    </g><g>
-      <rect x="316" y="378" width="60" height="28" rx="14" fill="rgba(160,107,255,0.09)" stroke="rgba(160,107,255,0.4)"/>
-      <text x="346" y="397" font-family="'JetBrains Mono', monospace" font-size="13" fill="#a06bff" text-anchor="middle" letter-spacing="1">TRL</text>
+  <!-- v1 card -->
+  <g transform="translate(60 200)">
+    <rect x="0" y="0" width="300" height="230" rx="12" fill="rgba(255,77,109,0.05)" stroke="rgba(255,77,109,0.35)"/>
+    <text x="20" y="34" font-family="'JetBrains Mono', monospace" font-size="12" fill="#ff6b81" letter-spacing="2">v1 · RETIRED</text>
+    <text x="20" y="66" font-family="Georgia, serif" font-size="24" fill="#e6e6ee">Llama 3.2-3B</text>
+    <text x="20" y="92" font-family="'Inter', sans-serif" font-size="13" fill="rgba(255,255,255,0.45)">LoRA / SFT · Colab</text>
+    <g font-family="'JetBrains Mono', monospace">
+      <text x="20" y="132" font-size="13" fill="rgba(255,255,255,0.55)">Tool-calling</text>
+      <text x="280" y="132" font-size="18" fill="#ff6b81" text-anchor="end" font-weight="700">17%</text>
+      <text x="20" y="164" font-size="13" fill="rgba(255,255,255,0.55)">Identity</text>
+      <text x="280" y="164" font-size="14" fill="#ff6b81" text-anchor="end">hallucinated</text>
+      <text x="20" y="196" font-size="13" fill="rgba(255,255,255,0.55)">Root cause</text>
+      <text x="280" y="196" font-size="13" fill="#ff6b81" text-anchor="end">chat-template bug</text>
     </g>
-
-  <g>
-    <circle cx="66" cy="452" r="4" fill="#a06bff"/>
-    <text x="80" y="457" font-family="'JetBrains Mono', monospace" font-size="12" fill="#5a5a70" letter-spacing="3">SYSTEM ONLINE</text>
   </g>
-  <text x="740" y="457" font-family="'JetBrains Mono', monospace" font-size="12" fill="#3a3a50" text-anchor="end" letter-spacing="2">STARK INDUSTRIES</text>
+
+  <!-- arrow -->
+  <g transform="translate(378 315)">
+    <line x1="0" y1="0" x2="42" y2="0" stroke="#a06bff" stroke-width="3"/>
+    <path d="M42 0 l-12 -6 v12 z" fill="#a06bff"/>
+    <text x="21" y="-14" font-family="'JetBrains Mono', monospace" font-size="11" fill="rgba(160,107,255,0.8)" text-anchor="middle">FIXED</text>
+  </g>
+
+  <!-- v2 card -->
+  <g transform="translate(440 200)">
+    <rect x="0" y="0" width="300" height="230" rx="12" fill="rgba(52,211,153,0.06)" stroke="#34d399" stroke-width="2"/>
+    <text x="20" y="34" font-family="'JetBrains Mono', monospace" font-size="12" fill="#34d399" letter-spacing="2">v2 · CURRENT</text>
+    <text x="20" y="66" font-family="Georgia, serif" font-size="24" fill="#f5f5f7">Gemma-4-E4B</text>
+    <text x="20" y="92" font-family="'Inter', sans-serif" font-size="13" fill="rgba(255,255,255,0.5)">QLoRA · local RTX 5070</text>
+    <g font-family="'JetBrains Mono', monospace">
+      <text x="20" y="132" font-size="13" fill="rgba(255,255,255,0.6)">Tool-calling</text>
+      <text x="280" y="132" font-size="18" fill="#6ee7b7" text-anchor="end" font-weight="700">92%</text>
+      <text x="20" y="164" font-size="13" fill="rgba(255,255,255,0.6)">Identity</text>
+      <text x="280" y="164" font-size="14" fill="#6ee7b7" text-anchor="end">consistent</text>
+      <text x="20" y="196" font-size="13" fill="rgba(255,255,255,0.6)">Thinking</text>
+      <text x="280" y="196" font-size="14" fill="#6ee7b7" text-anchor="end">native on/off</text>
+    </g>
+  </g>
+
+  <text x="740" y="468" font-family="'JetBrains Mono', monospace" font-size="11" fill="#3a3a50" text-anchor="end" letter-spacing="2">STARK INDUSTRIES</text>
 </svg>
