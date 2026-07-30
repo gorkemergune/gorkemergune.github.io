@@ -328,7 +328,7 @@ export const CASE_STUDIES = {
       results: [
         'Root cause, traced from the published adapter: the shipped chat_template.jinja was still a Gemma-3 template (<start_of_turn> / <end_of_turn>) running on a Llama tokenizer, where those tokens aren’t special — so the turn structure silently broke and the persona facts never made it into the weights.',
         'The inconsistency itself is the proof: a model that had learned a fact would repeat it. Different fabrications each run means the fact was never learned — a distribution shift, not retrieval.',
-        'The notebook is now corrected to the proper llama-3.1 template, with retraining and re-evaluation staged as the next iteration. Every number and finding is written up in BENCHMARK_REPORT.md.',
+        'v2 is the resolution: rebuilt on Gemma-4-E4B with QLoRA, the chat template is now always pulled from the model’s own AutoProcessor and guarded by a mandatory round-trip test (which itself caught Gemma-4 silently dropping a "thinking" field). The result learns a single consistent identity, keeps native thinking, and reaches a 92% correct-tool rate — up from 17%. Every number and finding is written up across BENCHMARK_REPORT.md and BENCHMARK_REPORT_V2.md.',
       ],
       lessons: [
         'The chat template is not a formatting detail — it is load-bearing. A template mismatch can quietly zero out an entire training run while every step still "succeeds".',
@@ -355,12 +355,68 @@ export const CASE_STUDIES = {
       results: [
         'Yayınlanan adaptörden izlenen kök neden: gönderilen chat_template.jinja hâlâ bir Gemma-3 template’iydi (<start_of_turn> / <end_of_turn>) ve bunlar Llama tokenizer’ında özel token değil — böylece tur yapısı sessizce bozuldu ve persona bilgileri ağırlıklara hiç işlenemedi.',
         'Tutarsızlığın kendisi kanıt: bir gerçeği öğrenmiş model onu tekrar ederdi. Her koşuda farklı uydurma, gerçeğin hiç öğrenilmediği anlamına gelir — bu bir dağılım kayması, retrieval değil.',
-        'Not defteri artık doğru llama-3.1 template’ine düzeltildi; yeniden eğitim ve yeniden değerlendirme bir sonraki yineleme olarak sıraya alındı. Her sayı ve bulgu BENCHMARK_REPORT.md’de yazılı.',
+        'v2, çözümün kendisi: Gemma-4-E4B üzerine QLoRA ile yeniden kuruldu; chat template artık her zaman modelin kendi AutoProcessor’ından alınır ve zorunlu bir gidiş-dönüş testiyle korunur (bu test, Gemma-4’ün bir "thinking" alanını sessizce düşürdüğünü yakaladı). Sonuç, tek ve tutarlı bir kimlik öğrenir, yerel düşünmeyi korur ve %92 doğru-araç oranına ulaşır — %17’den. Her sayı ve bulgu BENCHMARK_REPORT.md ve BENCHMARK_REPORT_V2.md’de yazılı.',
       ],
       lessons: [
         'Chat template bir biçimlendirme ayrıntısı değil — taşıyıcı bir öğedir. Bir template uyumsuzluğu, her adım “başarılı” görünürken tüm bir eğitim koşusunu sessizce sıfırlayabilir.',
         'Açıklayabildiğin bir olumsuz sonuç, açıklayamadığın bir olumludan daha değerlidir. Başarısızlığı düzgün ölçmek bana şanslı bir başarıdan çok daha fazlasını öğretti.',
         'İnce ayar ağırlık dağılımlarını kaydırır; komutla gerçek ezberlemez. Zayıf, bozuk sinyal, temel modelin önsel eğilimlerinin kazanması demektir — ve karşılığında kendinden emin halüsinasyon alırsın.',
+      ],
+    },
+  },
+  'mihenk-benchmark': {
+    en: {
+      problem: [
+        'Public LLM leaderboards rarely tell you two things I cared about: how a model actually reasons (versus recalls a memorized fact), and how it holds up in Turkish versus English. Most benchmarks are English-first, easy to contaminate, and dominated by trivia. I wanted a bilingual test that measures reasoning, is impossible to game by memorization, and scores itself the same way every time.',
+      ],
+      solution: [
+        'So I built MIHENK from scratch: 800 original items, each authored independently in Turkish and English, across 20 disciplines and four calibrated difficulty tiers (L1–L4). Every item is deliberately solvable from the information given — and just as deliberately padded with irrelevant premises, so a model has to isolate what matters instead of pattern-matching.',
+        'Everything is auto-scorable by design. Only two formats exist: multiple choice (exact-letter) and short answer (≤7 words, normalized canonical/alias match with numeric tolerance). An off-format answer scores 0, which quietly turns the benchmark into an instruction-following test too.',
+      ],
+      architecture: [
+        'Each record follows a fixed JSON schema — id, language, discipline, format, difficulty, question, answer(s), an English-only explanation used only by reviewers, source, version, and a public/private split. scoring/score.py is the single reference scorer; scripts/evaluate.py builds a standardized 0-shot prompt, calls a model through a pluggable backend (Anthropic, any OpenAI-compatible endpoint for Ollama/OpenRouter, or a dryrun), and reports accuracy broken down by discipline, language, difficulty, and format — plus a language-consistency index (the mean absolute TR/EN gap).',
+        'A separate local path (evaluate_local.py) runs 4-bit HF inference on a 12 GB GPU and merges a LoRA adapter, so a fine-tune can be scored weight-matched against its own base. Only the public split ships on the Hugging Face Hub; the majority is a private holdout, and a CHANGELOG records every item change so results stay reproducible under semantic versioning.',
+      ],
+      challenges: [
+        'The hard part of a benchmark is proving it actually discriminates rather than being "too easy" or "broken". If everything scores 100% or everything scores 30%, it measures nothing.',
+        'The other trap is the short-answer format: reasoning models and chatty fine-tunes love to over-explain, and a verbose but correct answer that breaks the ≤7-word rule has to score 0 — that is a deliberate signal, not a bug, but it means the scorer has to be strict and predictable.',
+      ],
+      results: [
+        'Across 11 models the benchmark shows a clean capability spread: a 12B saturates at 97.6% while a 3B lands at 49.0% — a 49-point gap with a clean L1→L4 gradient (62%→39%). It is not too easy; the ceiling is reached only by capable models.',
+        'The language signal is real: the 3B model is far weaker in Turkish than English (39% vs 59%, LCI 20.0), exactly the cross-lingual weakness MIHENK exists to surface, while the 12B shows almost no gap (LCI 2.2).',
+        'I ran my own two fine-tunes through it, each measured against its own base — an unusually honest thing to publish. Both regress modestly (the persona/chat training costs short-answer format compliance), which is the point: the benchmark caught the trade-off my fine-tuning made.',
+      ],
+      lessons: [
+        'A benchmark you author yourself forces you to be precise about what "reasoning" even means — every ambiguous item is one you have to resolve before a model ever sees it.',
+        'Automatic, strict scoring is worth more than a bigger dataset. Reproducibility comes from the scorer being boringly deterministic, not from volume.',
+        'Measuring my own models against their bases — and publishing the regressions — taught me more than a flattering number would have.',
+      ],
+    },
+    tr: {
+      problem: [
+        'Herkese açık LLM liderlik tabloları, benim önemsediğim iki şeyi nadiren söyler: bir modelin gerçekten nasıl muhakeme ettiği (ezberlediği bir gerçeği hatırlamasına karşı) ve Türkçede İngilizceye kıyasla nasıl dayandığı. Çoğu benchmark İngilizce-öncelikli, kolayca kontamine olan ve trivia ağırlıklıdır. Muhakemeyi ölçen, ezberle oyunlanamayan ve kendini her seferinde aynı şekilde puanlayan iki dilli bir test istedim.',
+      ],
+      solution: [
+        'Bu yüzden MIHENK’i sıfırdan kurdum: 20 disiplin ve dört kalibre zorluk seviyesinde (L1–L4), her biri Türkçe ve İngilizce olarak bağımsız yazılmış 800 özgün soru. Her soru bilinçli olarak verilen bilgiden çözülebilir — ve yine bilinçli olarak alakasız öncüllerle doldurulmuştur; böylece model kalıp eşleştirmek yerine neyin önemli olduğunu ayıklamak zorunda kalır.',
+        'Her şey tasarım gereği otomatik puanlanabilir. Yalnızca iki format vardır: çoktan seçmeli (tam harf) ve kısa cevap (≤7 kelime, sayısal toleranslı normalleştirilmiş kanonik/alias eşleşme). Format dışı bir cevap 0 alır; bu da benchmark’ı sessizce bir talimat-takibi testine de dönüştürür.',
+      ],
+      architecture: [
+        'Her kayıt sabit bir JSON şemasını izler — id, dil, disiplin, format, zorluk, soru, cevap(lar), yalnızca hakemlerce kullanılan İngilizce-only bir açıklama, kaynak, sürüm ve public/private split. scoring/score.py tek referans puanlayıcıdır; scripts/evaluate.py standart bir 0-shot istem kurar, modeli takılabilir bir arka uç üzerinden çağırır (Anthropic, Ollama/OpenRouter için OpenAI-uyumlu herhangi bir uç nokta ya da dryrun) ve doğruluğu disiplin, dil, zorluk ve format bazında raporlar — artı bir dil tutarlılık indeksi (ortalama mutlak TR/EN farkı).',
+        'Ayrı bir yerel yol (evaluate_local.py), 12 GB GPU’da 4-bit HF çıkarımı yapar ve bir LoRA adaptörünü birleştirir; böylece bir ince ayar kendi tabanına karşı ağırlık-eşleşmeli puanlanabilir. Hub’a yalnızca herkese açık bölüm gönderilir; çoğunluk özel bir holdout’tur ve bir CHANGELOG her soru değişikliğini kaydeder; böylece sonuçlar anlamsal sürümleme altında yeniden üretilebilir kalır.',
+      ],
+      challenges: [
+        'Bir benchmark’ın zor kısmı, “çok kolay” ya da “bozuk” olmak yerine gerçekten ayırt ettiğini kanıtlamaktır. Her şey %100 ya da her şey %30 alıyorsa, hiçbir şey ölçmüyordur.',
+        'Diğer tuzak kısa-cevap formatıdır: muhakeme modelleri ve konuşkan ince ayarlar aşırı açıklamayı sever ve ≤7 kelime kuralını bozan ayrıntılı ama doğru bir cevap 0 almak zorundadır — bu bir hata değil, bilinçli bir sinyaldir, ama puanlayıcının katı ve öngörülebilir olmasını gerektirir.',
+      ],
+      results: [
+        '11 model boyunca benchmark temiz bir yetenek yelpazesi gösterir: bir 12B %97,6’da doyarken bir 3B %49,0’da kalır — temiz bir L1→L4 gradyanıyla (%62→%39) 49 puanlık fark. Çok kolay değil; tavana yalnızca yetkin modeller ulaşır.',
+        'Dil sinyali gerçek: 3B model Türkçede İngilizceden çok daha zayıf (%39 vs %59, LCI 20,0), tam olarak MIHENK’in ortaya çıkarmak için var olduğu diller arası zayıflık; 12B ise neredeyse hiç fark göstermez (LCI 2,2).',
+        'Kendi iki ince ayarımı, her birini kendi tabanına karşı ölçerek üzerinden geçirdim — yayınlamak için alışılmadık derecede dürüst bir şey. İkisi de mütevazı biçimde geriler (persona/chat eğitimi kısa-cevap format uyumuna mal olur); asıl mesele de bu: benchmark, ince ayarımın yaptığı takası yakaladı.',
+      ],
+      lessons: [
+        'Kendi yazdığın bir benchmark, “muhakemenin” ne demek olduğu konusunda kesin olmaya zorlar — her belirsiz soru, model onu görmeden önce çözmen gereken bir sorudur.',
+        'Otomatik, katı puanlama daha büyük bir veri kümesinden daha değerlidir. Yeniden üretilebilirlik, puanlayıcının sıkıcı derecede deterministik olmasından gelir, hacimden değil.',
+        'Kendi modellerimi tabanlarına karşı ölçmek — ve gerilemeleri yayınlamak — bana gurur okşayan bir sayıdan çok daha fazlasını öğretti.',
       ],
     },
   },

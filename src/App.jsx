@@ -17,6 +17,11 @@ const BirthdayPage = lazy(() => import('./pages/BirthdayPage'));
 const HangmanPage = lazy(() => import('./pages/HangmanPage'));
 const PuzzlePage = lazy(() => import('./pages/PuzzlePage'));
 const HanoiPage = lazy(() => import('./pages/HanoiPage'));
+const ReactionPage = lazy(() => import('./pages/ReactionPage'));
+const MemoryPage = lazy(() => import('./pages/MemoryPage'));
+const TicTacToePage = lazy(() => import('./pages/TicTacToePage'));
+const Game2048Page = lazy(() => import('./pages/Game2048Page'));
+const SimonPage = lazy(() => import('./pages/SimonPage'));
 const MothersDay = lazy(() => import('./pages/MothersDay'));
 const GoOutPage = lazy(() => import('./pages/GoOutPage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
@@ -253,6 +258,7 @@ export default function App() {
             <Link to="/research" className="link-hover" style={{ cursor: 'pointer' }}>{t('navResearch')}</Link>
             <Link to="/journey" className="link-hover" style={{ cursor: 'pointer' }}>{t('navLifeFlow')}</Link>
             <Link to="/blog" className="link-hover" style={{ cursor: 'pointer' }}>{t('navBlog')}</Link>
+            <Link to="/fun" className="link-hover" style={{ cursor: 'pointer' }}>{t('navFun')}</Link>
             <Link to="/contact" className="link-hover" style={{ cursor: 'pointer', color: '#e0e0e8', fontWeight: 500 }}>
               {t('navContact')} <ArrowUpRight size={13} strokeWidth={1.5} />
             </Link>
@@ -318,6 +324,11 @@ export default function App() {
           <Route path="/fun/hangman" element={<HangmanPage />} />
           <Route path="/fun/puzzle" element={<PuzzlePage />} />
           <Route path="/fun/hanoi" element={<HanoiPage />} />
+          <Route path="/fun/reaction" element={<ReactionPage />} />
+          <Route path="/fun/memory" element={<MemoryPage />} />
+          <Route path="/fun/tictactoe" element={<TicTacToePage />} />
+          <Route path="/fun/2048" element={<Game2048Page />} />
+          <Route path="/fun/simon" element={<SimonPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/journey" element={<JourneyPage />} />
           <Route path="/project" element={<ProjectPage />} />

@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500" role="img" aria-label="Pose-Invariant Face ID">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b0b13"/>
+      <stop offset="0.55" stop-color="#0a0a0f"/>
+      <stop offset="1" stop-color="rgba(34,211,238,0.14)"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.8" cy="0.45" r="0.55">
+      <stop offset="0" stop-color="rgba(34,211,238,0.32)"/>
+      <stop offset="0.55" stop-color="rgba(34,211,238,0.07)"/>
+      <stop offset="1" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0 H0 V40" fill="none" stroke="rgba(34,211,238,0.05)" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#bg)"/>
+  <rect width="800" height="500" fill="url(#grid)"/>
+  <rect width="800" height="500" fill="url(#glow)"/>
+
+  <g stroke="rgba(34,211,238,0.5)" stroke-width="2" fill="none">
+    <path d="M28 60 V28 H60"/>
+    <path d="M740 28 H772 V60"/>
+    <path d="M28 440 V472 H60"/>
+    <path d="M772 440 V472 H740"/>
+  </g>
+
+  <g font-family="'JetBrains Mono', monospace">
+    <text x="60" y="110" font-size="13" letter-spacing="4" fill="rgba(34,211,238,0.7)">POSE-INVARIANT FACE VERIFICATION</text>
+    <text x="58" y="166" font-size="34" font-weight="700" fill="#f5f5f7">ArcFace under rotation</text>
+    <text x="60" y="198" font-size="13" fill="rgba(255,255,255,0.45)">identity-disjoint · FEI 200 subjects · ~180° yaw sweep</text>
+  </g>
+
+  <!-- head rotation arc: frontal to profile -->
+  <g transform="translate(400 320)">
+    <path d="M-190 0 A 190 190 0 0 1 190 0" fill="none" stroke="rgba(34,211,238,0.18)" stroke-width="1.5" stroke-dasharray="3 7"/>
+    <g fill="none" stroke="#22d3ee" stroke-width="2">
+      <circle cx="-170" cy="-30" r="20" opacity="0.5"/>
+      <circle cx="-90" cy="-95" r="22" opacity="0.7"/>
+      <circle cx="0" cy="-120" r="24"/>
+      <circle cx="90" cy="-95" r="22" opacity="0.7"/>
+      <circle cx="170" cy="-30" r="20" opacity="0.5"/>
+    </g>
+    <g font-family="'JetBrains Mono', monospace" font-size="12" text-anchor="middle">
+      <text x="-170" y="18" fill="rgba(34,211,238,0.6)">−65°</text>
+      <text x="0" y="-146" fill="#22d3ee" font-weight="700">0°</text>
+      <text x="170" y="18" fill="rgba(34,211,238,0.6)">+68°</text>
+    </g>
+  </g>
+
+  <g font-family="'JetBrains Mono', monospace" font-size="12" fill="rgba(255,255,255,0.4)">
+    <text x="60" y="430">AUC 1.000 in every bin — but the genuine margin shrinks 0.867 → 0.702</text>
+  </g>
+</svg>

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, Gamepad2 } from 'lucide-react';
 import { useLang } from '../i18n.jsx';
 import { useSeo } from '../hooks/useSeo';
 import FeaturedMetrics from '../components/FeaturedMetrics';
@@ -41,6 +41,7 @@ export default function Home() {
             <div style={s.ctaRow}>
               <Link to="/project" className="hero-btn">{t('introCtaProjects')} <ArrowUpRight size={15} strokeWidth={1.5} /></Link>
               <Link to="/research" className="hero-btn">{t('navResearch')}</Link>
+              <Link to="/fun" className="hero-btn">{t('navFun')} <Gamepad2 size={15} strokeWidth={1.5} /></Link>
               <Link to="/contact" className="hero-btn">{t('introCtaContact')}</Link>
             </div>
           </div>

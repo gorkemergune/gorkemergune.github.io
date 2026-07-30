@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500" role="img" aria-label="MIHENK Benchmark">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b0b13"/>
+      <stop offset="0.55" stop-color="#0a0a0f"/>
+      <stop offset="1" stop-color="rgba(245,179,1,0.14)"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.8" cy="0.4" r="0.55">
+      <stop offset="0" stop-color="rgba(245,179,1,0.35)"/>
+      <stop offset="0.55" stop-color="rgba(245,179,1,0.07)"/>
+      <stop offset="1" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0 H0 V40" fill="none" stroke="rgba(245,179,1,0.05)" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#bg)"/>
+  <rect width="800" height="500" fill="url(#grid)"/>
+  <rect width="800" height="500" fill="url(#glow)"/>
+
+  <g stroke="rgba(245,179,1,0.5)" stroke-width="2" fill="none">
+    <path d="M28 60 V28 H60"/>
+    <path d="M740 28 H772 V60"/>
+    <path d="M28 440 V472 H60"/>
+    <path d="M772 440 V472 H740"/>
+  </g>
+
+  <g font-family="'JetBrains Mono', monospace">
+    <text x="60" y="120" font-size="13" letter-spacing="6" fill="rgba(245,179,1,0.7)">BILINGUAL LLM BENCHMARK</text>
+    <text x="58" y="188" font-size="66" font-weight="700" fill="#f5f5f7" letter-spacing="2">MIHENK</text>
+    <text x="62" y="224" font-size="12" fill="rgba(255,255,255,0.45)">Reasoning over recall · TR / EN · 800 items · L1–L4</text>
+  </g>
+
+  <!-- podium -->
+  <g transform="translate(500 300)">
+    <rect x="70" y="40" width="70" height="120" rx="4" fill="rgba(245,179,1,0.10)" stroke="rgba(245,179,1,0.45)"/>
+    <rect x="-10" y="0" width="70" height="160" rx="4" fill="rgba(245,179,1,0.16)" stroke="#f5b301" stroke-width="2"/>
+    <rect x="150" y="70" width="70" height="90" rx="4" fill="rgba(245,179,1,0.07)" stroke="rgba(245,179,1,0.35)"/>
+    <text x="25" y="-14" font-size="26" text-anchor="middle">🥇</text>
+    <text x="105" y="26" font-size="20" text-anchor="middle">🥈</text>
+    <text x="185" y="56" font-size="18" text-anchor="middle">🥉</text>
+    <g font-family="'JetBrains Mono', monospace" text-anchor="middle" fill="#f5b301">
+      <text x="25" y="86" font-size="20" font-weight="700">98%</text>
+      <text x="105" y="96" font-size="16" fill="rgba(245,179,1,0.75)">92%</text>
+      <text x="185" y="116" font-size="14" fill="rgba(245,179,1,0.6)">77%</text>
+    </g>
+  </g>
+
+  <g font-family="'JetBrains Mono', monospace" fill="rgba(255,255,255,0.35)" font-size="11">
+    <text x="60" y="420">20 disciplines</text>
+    <text x="230" y="420">·  auto-scored</text>
+    <text x="390" y="420">·  LCI language gap</text>
+  </g>
+</svg>
