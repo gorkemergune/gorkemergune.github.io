@@ -55,10 +55,38 @@ const CHIP_LINKS = {
   'AlgoLeague Yaz Kampı': '/competitions',
 };
 
+const MONTHS = {
+  en: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+  tr: ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'],
+};
+
+// Auto-generate the locked future months (Aug 2026 → graduation Jun 2029) so the
+// timeline stays month-by-month all the way through without hardcoding dozens of
+// empty entries. Academic terms follow a Turkish university calendar.
+function futureMonths(lang) {
+  const months = MONTHS[lang] || MONTHS.en;
+  const out = [];
+  let y = 2026, m = 7;                 // August 2026 (0-indexed month)
+  const endY = 2029, endM = 5;         // June 2029 (graduation)
+  while (y < endY || (y === endY && m <= endM)) {
+    const seasonStart = m >= 8 ? y : y - 1;   // academic year that began the prior September
+    const yearNo = seasonStart - 2024;        // 2026 → 2, 2027 → 3, 2028 → 4
+    let sub;
+    if (y === endY && m === endM) sub = lang === 'tr' ? '(Mezuniyet)' : '(Graduation)';
+    else if (m === 6 || m === 7) sub = lang === 'tr' ? '(Yaz)' : '(Summer)';
+    else if (m >= 8 || m === 0) sub = lang === 'tr' ? `(${yearNo}. Yıl · 1. Dönem)` : `(Year ${yearNo} · Term 1)`;
+    else sub = lang === 'tr' ? `(${yearNo}. Yıl · 2. Dönem)` : `(Year ${yearNo} · Term 2)`;
+    out.push({ term: `${months[m]} ${y}`, sub, status: 'locked', title: '', competitions: [], hackathons: [], research: [], projects: [], achievements: [] });
+    m += 1; if (m > 11) { m = 0; y += 1; }
+  }
+  return out;
+}
+
 export default function JourneyPage() {
-  const { t } = useLang();
+  const { t, lang } = useLang();
   const items = t('journeySemesters');
-  const list = Array.isArray(items) ? items : [];
+  const base = Array.isArray(items) ? items : [];
+  const list = [...base, ...futureMonths(lang)];
   const currentIdx = list.findIndex((x) => x.status === 'current');
   const [open, setOpen] = useState(currentIdx >= 0 ? currentIdx : 0);
   useSeo({ title: t('journeyLabel'), description: t('journeySub'), path: '/journey' });

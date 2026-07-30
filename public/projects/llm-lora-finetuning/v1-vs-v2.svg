@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" width="900" height="560" role="img" aria-label="v1 vs v2 model comparison">
+  <rect width="900" height="560" fill="#0b0b12"/>
+  <text x="34" y="46" font-family="'JetBrains Mono', monospace" font-size="18" fill="#a06bff" letter-spacing="1">Two fine-tunes, side by side</text>
+  <text x="34" y="72" font-family="'Instrument Sans', sans-serif" font-size="14" fill="rgba(255,255,255,0.5)">v1 — Llama 3.2-3B (retired)   vs   v2 — Gemma-4-E4B (current)</text>
+
+  <!-- legend -->
+  <g font-family="'JetBrains Mono', monospace" font-size="12">
+    <rect x="620" y="34" width="14" height="14" rx="3" fill="#ff6b81"/>
+    <text x="642" y="46" fill="rgba(255,255,255,0.65)">v1 · Llama</text>
+    <rect x="740" y="34" width="14" height="14" rx="3" fill="#34d399"/>
+    <text x="762" y="46" fill="rgba(255,255,255,0.65)">v2 · Gemma-4</text>
+  </g>
+
+  <!-- rows: metric label | v1 bar | v2 bar | delta -->
+  <g font-family="'JetBrains Mono', monospace">
+    <!-- Tool-calling -->
+    <g transform="translate(0 120)">
+      <text x="34" y="4" font-size="14" fill="#e6e6ee">Correct-tool rate</text>
+      <rect x="300" y="-14" width="72" height="24" rx="4" fill="#ff6b81" opacity="0.85"/>
+      <text x="380" y="4" font-size="13" fill="#ff9caa">17%</text>
+      <rect x="300" y="16" width="390" height="24" rx="4" fill="#34d399"/>
+      <text x="700" y="34" font-size="13" fill="#6ee7b7" font-weight="700">92%</text>
+      <text x="856" y="18" font-size="13" fill="#5cd68a" text-anchor="end">+75 pts</text>
+    </g>
+    <!-- Identity -->
+    <g transform="translate(0 200)">
+      <text x="34" y="4" font-size="14" fill="#e6e6ee">Identity ("Who is Gorkem?")</text>
+      <rect x="300" y="-14" width="200" height="24" rx="4" fill="#ff6b81" opacity="0.5"/>
+      <text x="308" y="3" font-size="12" fill="#0b0b12">new fake bio every run</text>
+      <rect x="300" y="16" width="390" height="24" rx="4" fill="#34d399"/>
+      <text x="308" y="33" font-size="12" fill="#052e22">single, consistent, learned</text>
+      <text x="856" y="18" font-size="13" fill="#5cd68a" text-anchor="end">fixed</text>
+    </g>
+    <!-- Thinking -->
+    <g transform="translate(0 280)">
+      <text x="34" y="4" font-size="14" fill="#e6e6ee">Native thinking</text>
+      <rect x="300" y="-14" width="90" height="24" rx="4" fill="#ff6b81" opacity="0.5"/>
+      <text x="308" y="3" font-size="12" fill="#0b0b12">none</text>
+      <rect x="300" y="16" width="300" height="24" rx="4" fill="#34d399"/>
+      <text x="308" y="33" font-size="12" fill="#052e22">preserved · on / off</text>
+      <text x="856" y="18" font-size="13" fill="#5cd68a" text-anchor="end">new</text>
+    </g>
+    <!-- MIHENK -->
+    <g transform="translate(0 360)">
+      <text x="34" y="4" font-size="14" fill="#e6e6ee">MIHENK vs own base</text>
+      <rect x="300" y="-14" width="176" height="24" rx="4" fill="#ff6b81" opacity="0.6"/>
+      <text x="308" y="3" font-size="12" fill="#0b0b12">43.2% (below base 49%)</text>
+      <rect x="300" y="16" width="312" height="24" rx="4" fill="#34d399"/>
+      <text x="308" y="33" font-size="12" fill="#052e22">73.4% vs base 76.6% · MC +3.3</text>
+      <text x="856" y="18" font-size="12" fill="#e9c46a" text-anchor="end">honest trade-off</text>
+    </g>
+    <!-- Chat template -->
+    <g transform="translate(0 440)">
+      <text x="34" y="4" font-size="14" fill="#e6e6ee">Chat template</text>
+      <rect x="300" y="-14" width="240" height="24" rx="4" fill="#ff6b81" opacity="0.6"/>
+      <text x="308" y="3" font-size="12" fill="#0b0b12">Gemma-3 on Llama → broke it</text>
+      <rect x="300" y="16" width="360" height="24" rx="4" fill="#34d399"/>
+      <text x="308" y="33" font-size="12" fill="#052e22">from AutoProcessor + round-trip test</text>
+      <text x="856" y="18" font-size="13" fill="#5cd68a" text-anchor="end">fixed</text>
+    </g>
+  </g>
+
+  <line x1="34" y1="490" x2="866" y2="490" stroke="rgba(255,255,255,0.1)"/>
+  <text x="34" y="522" font-family="'Instrument Sans', sans-serif" font-size="14" fill="rgba(255,255,255,0.55)">The same root-cause fix that revived instruction-following also unlocked tool-calling and a learned identity.</text>
+  <text x="34" y="544" font-family="'JetBrains Mono', monospace" font-size="11" fill="#a06bff">v1 kept public as an honest research record · full write-ups in BENCHMARK_REPORT.md + _V2.md</text>
+</svg>

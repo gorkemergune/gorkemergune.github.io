@@ -1286,6 +1286,7 @@ const PROJECTS = [
     tags: ['Python', 'Unsloth', 'QLoRA', 'Gemma-4', 'Tool Calling'],
     github: gh('ayarlicazhocam-training'),
     images: [
+      { src: '/projects/llm-lora-finetuning/v1-vs-v2.svg', caption: 'The headline: two fine-tunes measured side by side — v1 (Llama 3.2-3B) vs v2 (Gemma-4-E4B). Tool-calling 17% → 92%, identity and chat template both fixed', captionTr: 'Ana bulgu: yan yana ölçülen iki ince ayar — v1 (Llama 3.2-3B) vs v2 (Gemma-4-E4B). Araç çağırma %17 → %92; kimlik ve chat template düzeltildi' },
       { src: '/projects/llm-lora-finetuning/pipeline.svg', caption: 'Bilingual dataset from scraping, hand-authoring, and synthetic pairs — v2 adds ~20% thinking traces and tool-calling examples', captionTr: 'Kazıma, elle yazım ve sentetik çiftlerden iki dilli veri kümesi — v2, ~%20 düşünme izi ve araç çağırma örnekleri ekler' },
       { src: '/projects/llm-lora-finetuning/training.svg', caption: 'v2: text-only 4-bit QLoRA on Gemma-4-E4B, trained locally on an RTX 5070 (12 GB) — multimodal towers offloaded to CPU, 9.8 GB peak', captionTr: 'v2: Gemma-4-E4B üzerinde metin-only 4-bit QLoRA, yerelde RTX 5070 (12 GB) ile eğitildi — multimodal kuleler CPU’ya taşındı, tepe 9,8 GB' },
       { src: '/projects/llm-lora-finetuning/benchmark.svg', caption: 'The honest arc: v1 scored ~random on MMLU (chat-template bug); v2 fixes the template and reaches 92% correct-tool rate', captionTr: 'Dürüst hikâye: v1 MMLU’da ~rastgele aldı (chat-template hatası); v2 template’i düzeltir ve %92 doğru-araç oranına ulaşır' },
