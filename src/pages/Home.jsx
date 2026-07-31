@@ -1,7 +1,7 @@
-import { Link } from 'react-router-dom';
-import { ArrowUpRight, Gamepad2 } from 'lucide-react';
 import { useLang } from '../i18n.jsx';
 import { useSeo } from '../hooks/useSeo';
+import GooeyNav from '../components/GooeyNav';
+import ScrambledText from '../components/ScrambledText';
 import FeaturedMetrics from '../components/FeaturedMetrics';
 import LiveStatus from '../components/LiveStatus';
 import AlgorithmJourney from '../components/AlgorithmJourney';
@@ -37,12 +37,25 @@ export default function Home() {
               <em style={s.leadEm}>{t('introLeadEm')}</em>
               {t('introLeadPost')}
             </p>
-            <p style={s.body}>{t('introBody')}</p>
+            <ScrambledText style={s.body} radius={90} duration={1.1} speed={0.5} scrambleChars=".:">
+              {t('introBody')}
+            </ScrambledText>
             <div style={s.ctaRow}>
-              <Link to="/project" className="hero-btn">{t('introCtaProjects')} <ArrowUpRight size={15} strokeWidth={1.5} /></Link>
-              <Link to="/research" className="hero-btn">{t('navResearch')}</Link>
-              <Link to="/fun" className="hero-btn">{t('navFun')} <Gamepad2 size={15} strokeWidth={1.5} /></Link>
-              <Link to="/contact" className="hero-btn">{t('introCtaContact')}</Link>
+              <GooeyNav
+                items={[
+                  { label: t('introCtaProjects'), href: '/project' },
+                  { label: t('navResearch'), href: '/research' },
+                  { label: t('navFun'), href: '/fun' },
+                  { label: t('introCtaContact'), href: '/contact' },
+                ]}
+                particleCount={15}
+                particleDistances={[90, 10]}
+                particleR={100}
+                initialActiveIndex={0}
+                animationTime={600}
+                timeVariance={300}
+                colors={[1, 2, 3, 1, 2, 3, 1, 4]}
+              />
             </div>
           </div>
           <div>

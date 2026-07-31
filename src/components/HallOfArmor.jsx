@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowUpRight, FileText } from 'lucide-react';
+import Crosshair from './Crosshair';
 import useAudioFX from './useAudioFX';
 import { useLang } from '../i18n.jsx';
 import { FEATURES } from '../config';
@@ -29,6 +30,7 @@ export default function HallOfArmor() {
     try { return sessionStorage.getItem('hall_booted') ? 3 : 0; } catch { return 0; }
   });
   const [visibleLines, setVisibleLines] = useState(0);
+  const nameRef = useRef(null);
   const bootDone = bootPhase === 3;
 
   useEffect(() => {
@@ -103,27 +105,16 @@ export default function HallOfArmor() {
           from { opacity: 1; pointer-events: all; }
           to { opacity: 0; pointer-events: none; }
         }
-        @keyframes holo-float {
-          0%, 100% { transform: translateY(0) rotateY(-9deg); }
-          50% { transform: translateY(-7px) rotateY(9deg); }
-        }
-        @keyframes eye-glow {
-          0%, 100% { opacity: 0.7; }
-          50% { opacity: 1; }
-        }
-        @keyframes emblem-sweep {
-          0% { transform: translateY(-6px); opacity: 0; }
-          15% { opacity: 0.85; }
-          85% { opacity: 0.85; }
-          100% { transform: translateY(92px); opacity: 0; }
+        @keyframes holo-spin {
+          from { transform: rotateY(0deg); }
+          to { transform: rotateY(360deg); }
         }
         @keyframes holo-floor {
           0%, 100% { opacity: 0.35; transform: translateX(-50%) scaleX(1); }
           50% { opacity: 0.7; transform: translateX(-50%) scaleX(1.25); }
         }
-        .armor-eye { animation: eye-glow 2.6s ease-in-out infinite; }
         @media (prefers-reduced-motion: reduce) {
-          .holo-stage, .emblem-sweep, .armor-eye { animation: none !important; }
+          .holo-stage { animation: none !important; }
         }
         @media (max-width: 900px) {
           .hall-capsules { flex-wrap: wrap !important; justify-content: center !important; }
@@ -193,9 +184,12 @@ export default function HallOfArmor() {
 
       {/* NAME */}
       <div style={s.nameWrap}>
-        <h1 className="hall-name" style={s.name}>
-          GORKEM <span style={{ color: '#00d4ff', textShadow: '0 0 30px rgba(0,212,255,0.4)' }}>ERGUNE</span>
-        </h1>
+        <div ref={nameRef} style={s.nameCrosshairBox}>
+          {bootDone && <Crosshair containerRef={nameRef} color="#00d4ff" />}
+          <h1 className="hall-name" style={s.name}>
+            GORKEM <span style={{ color: '#00d4ff', textShadow: '0 0 30px rgba(0,212,255,0.4)' }}>ERGUNE</span>
+          </h1>
+        </div>
         <div className="hall-tagline" style={s.taglineChip}>
           <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#00d4ff', boxShadow: '0 0 8px #00d4ff' }} />
           {t('heroTagline')}
@@ -302,71 +296,66 @@ export default function HallOfArmor() {
                 {armor.mark}
               </div>
 
-              {/* Armor emblem — a clean holographic Iron Man helmet in the armor's own color */}
-              {(() => {
-                const uid = armor.mark.replace(/\s/g, '');
-                const on = hoveredCapsule === i;
-                return (
-                  <div className="capsule-silhouette" style={{ margin: '18px 0 10px', display: 'flex', flexDirection: 'column', alignItems: 'center', perspective: 520, transform: 'translateZ(30px)' }}>
-                    <div className="holo-stage" style={{
-                      position: 'relative', width: 78, height: 100,
-                      transformStyle: 'preserve-3d',
-                      animation: `holo-float ${6.5 + i * 0.5}s ease-in-out infinite`,
-                      filter: on ? `drop-shadow(0 0 14px ${armor.glow})` : `drop-shadow(0 0 6px ${armor.glow})`,
-                      transition: 'filter 0.3s',
+              {/* Armor silhouette — holographic 3D turntable (solid box prism, always spinning) */}
+              <div className="capsule-silhouette" style={{ margin: '16px 0 10px', display: 'flex', flexDirection: 'column', alignItems: 'center', perspective: 480, transform: 'translateZ(30px)' }}>
+                <div className="holo-stage" style={{
+                  position: 'relative', width: 58, height: 116,
+                  transformStyle: 'preserve-3d',
+                  animation: `holo-spin ${16 + i * 0.6}s linear infinite`,
+                }}>
+                  {[
+                    { deg: 0, z: 22, op: 1 },
+                    { deg: 90, z: 22, op: 0.62 },
+                    { deg: 180, z: 22, op: 0.85 },
+                    { deg: 270, z: 22, op: 0.62 },
+                  ].map(({ deg, z, op }) => (
+                    <svg key={deg} viewBox="0 0 40 80" width="58" height="116" style={{
+                      position: 'absolute', inset: 0,
+                      transform: `rotateY(${deg}deg) translateZ(${z}px)`,
+                      backfaceVisibility: 'hidden',
+                      opacity: (hoveredCapsule === i ? Math.min(1, op + 0.15) : op),
+                      transition: 'opacity 0.3s',
+                      filter: hoveredCapsule === i
+                        ? `drop-shadow(0 0 8px ${armor.glow})`
+                        : `drop-shadow(0 0 3px ${armor.glow})`,
                     }}>
-                      <svg viewBox="0 0 64 84" width="78" height="100" style={{ display: 'block' }}>
-                        <defs>
-                          <linearGradient id={`helm-${uid}`} x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0" stopColor={armor.color} stopOpacity="0.95" />
-                            <stop offset="0.5" stopColor={armor.color} stopOpacity="0.62" />
-                            <stop offset="1" stopColor={armor.color} stopOpacity="0.34" />
-                          </linearGradient>
-                          <linearGradient id={`eye-${uid}`} x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0" stopColor="#f6ffff" />
-                            <stop offset="1" stopColor={armor.color} />
-                          </linearGradient>
-                        </defs>
-                        {/* helmet body */}
-                        <path
-                          d="M32 3 C22 3 16 9 15 21 L14 34 C13 40 13 46 16 52 L20 63 C23 71 27 76 32 80 C37 76 41 71 44 63 L48 52 C51 46 51 40 50 34 L49 21 C48 9 42 3 32 3 Z"
-                          fill={`url(#helm-${uid})`} stroke={armor.color} strokeOpacity={on ? 1 : 0.85} strokeWidth="1.1"
-                        />
-                        {/* faceplate panel seams */}
-                        <g stroke="rgba(6,8,14,0.55)" strokeWidth="1.1" fill="none" strokeLinecap="round">
-                          <path d="M32 4 L32 27" />
-                          <path d="M16.5 29 Q32 24 47.5 29" />
-                          <path d="M20 47 L44 47" />
-                          <path d="M24 55 L40 55" />
-                          <path d="M26 62 L38 62" />
-                        </g>
-                        {/* glowing eyes */}
-                        <g className="armor-eye">
-                          <path d="M18 33 L29 30.5 L29 36.5 L18 38.5 Z" fill={`url(#eye-${uid})`} />
-                          <path d="M46 33 L35 30.5 L35 36.5 L46 38.5 Z" fill={`url(#eye-${uid})`} />
-                        </g>
-                      </svg>
-                      {/* light sweep */}
-                      <div className="emblem-sweep" style={{
-                        position: 'absolute', left: '14%', right: '14%', top: 0, height: 2,
-                        background: `linear-gradient(90deg, transparent, ${armor.color}, transparent)`,
-                        borderRadius: 2,
-                        animation: `emblem-sweep ${3.4 + i * 0.25}s ease-in-out ${i * 0.3}s infinite`,
-                        pointerEvents: 'none',
-                      }} />
-                    </div>
-                    {/* hologram floor */}
-                    <div style={{ position: 'relative', width: 64, height: 12, marginTop: 10 }}>
-                      <div style={{
-                        position: 'absolute', left: '50%', top: 0, width: 64, height: 12,
-                        transform: 'translateX(-50%)', borderRadius: '50%',
-                        background: `radial-gradient(ellipse, ${armor.color}66 0%, transparent 70%)`,
-                        animation: `holo-floor ${2.4 + i * 0.2}s ease-in-out infinite`,
-                      }} />
-                    </div>
-                  </div>
-                );
-              })()}
+                      <defs>
+                        <linearGradient id={`armorFill-${armor.mark.replace(/\s/g, '')}-${deg}`} x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="0" stopColor={armor.color} stopOpacity="0.95" />
+                          <stop offset="1" stopColor={armor.color} stopOpacity="0.6" />
+                        </linearGradient>
+                      </defs>
+                      {(() => {
+                        const fill = `url(#armorFill-${armor.mark.replace(/\s/g, '')}-${deg})`;
+                        return (
+                          <>
+                            <rect x="14" y="1" width="12" height="10" rx="2" fill={fill} />
+                            <rect x="10" y="11" width="20" height="26" rx="3" fill={fill} />
+                            <rect x="2" y="13" width="8" height="16" rx="2" fill={armor.color} opacity="0.7" />
+                            <rect x="30" y="13" width="8" height="16" rx="2" fill={armor.color} opacity="0.7" />
+                            <rect x="12" y="37" width="7" height="28" rx="2" fill={armor.color} opacity="0.85" />
+                            <rect x="21" y="37" width="7" height="28" rx="2" fill={armor.color} opacity="0.85" />
+                            <ellipse cx="20" cy="23" rx="4.4" ry="4.4" fill="rgba(10,10,15,0.7)" />
+                            <ellipse cx="20" cy="23" rx="2.2" ry="2.2" fill="#eafcff" opacity="0.95" />
+                          </>
+                        );
+                      })()}
+                    </svg>
+                  ))}
+                </div>
+                {/* hologram floor */}
+                <div style={{
+                  position: 'relative', width: 64, height: 12, marginTop: 8,
+                }}>
+                  <div style={{
+                    position: 'absolute', left: '50%', top: 0, width: 64, height: 12,
+                    transform: 'translateX(-50%)',
+                    borderRadius: '50%',
+                    background: `radial-gradient(ellipse, ${armor.color}66 0%, transparent 70%)`,
+                    animation: `holo-floor ${2.4 + i * 0.2}s ease-in-out infinite`,
+                  }} />
+                </div>
+              </div>
 
               {/* Armor name */}
               <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 9, letterSpacing: '0.08em', color: '#c0c0d0', textAlign: 'center', lineHeight: 1.4, marginTop: 'auto' }}>
@@ -465,6 +454,7 @@ const s = {
   statusLeft: { color: '#6a6a80', letterSpacing: '0.12em' },
   statusCenter: { flex: 1, textAlign: 'center', color: '#3a3a50' },
   nameWrap: { textAlign: 'center', marginBottom: 48, display: 'flex', flexDirection: 'column', alignItems: 'center' },
+  nameCrosshairBox: { position: 'relative', overflow: 'hidden', padding: '10px 24px' },
   name: {
     fontFamily: "'JetBrains Mono', monospace",
     fontSize: 88, fontWeight: 500,
