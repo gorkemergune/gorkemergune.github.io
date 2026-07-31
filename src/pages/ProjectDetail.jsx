@@ -2,7 +2,6 @@ import { useCallback, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { ArrowLeft, ArrowUpRight, ChevronLeft, ChevronRight, Github, X, FileText } from 'lucide-react';
 import { useLang } from '../i18n.jsx';
-import ScrambledText from '../components/ScrambledText';
 import { getProject } from '../data/projects';
 import { getCaseStudy } from '../data/caseStudies';
 import { useSeo } from '../hooks/useSeo';
@@ -151,9 +150,7 @@ export default function ProjectDetail() {
 
       {/* OVERVIEW */}
       <SectionLabel n={num()} label={t('pdOverview')} color={color} />
-      <ScrambledText style={{ ...s.lead, marginBottom: 88 }} radius={90} duration={1.1} speed={0.5} scrambleChars=".:">
-        {overview}
-      </ScrambledText>
+      <p style={{ ...s.lead, marginBottom: 88 }}>{overview}</p>
 
       {/* HIGHLIGHTS */}
       <SectionLabel n={num()} label={t('pdHighlights')} color={color} />

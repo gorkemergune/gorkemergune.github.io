@@ -1,7 +1,6 @@
 import { useLang } from '../i18n.jsx';
 import { useSeo } from '../hooks/useSeo';
 import GooeyNav from '../components/GooeyNav';
-import ScrambledText from '../components/ScrambledText';
 import FeaturedMetrics from '../components/FeaturedMetrics';
 import LiveStatus from '../components/LiveStatus';
 import AlgorithmJourney from '../components/AlgorithmJourney';
@@ -37,9 +36,7 @@ export default function Home() {
               <em style={s.leadEm}>{t('introLeadEm')}</em>
               {t('introLeadPost')}
             </p>
-            <ScrambledText style={s.body} radius={90} duration={1.1} speed={0.5} scrambleChars=".:">
-              {t('introBody')}
-            </ScrambledText>
+            <p style={s.body}>{t('introBody')}</p>
             <div style={s.ctaRow}>
               <GooeyNav
                 items={[

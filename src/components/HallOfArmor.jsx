@@ -1,7 +1,6 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowUpRight, FileText } from 'lucide-react';
-import Crosshair from './Crosshair';
 import useAudioFX from './useAudioFX';
 import { useLang } from '../i18n.jsx';
 import { FEATURES } from '../config';
@@ -30,7 +29,6 @@ export default function HallOfArmor() {
     try { return sessionStorage.getItem('hall_booted') ? 3 : 0; } catch { return 0; }
   });
   const [visibleLines, setVisibleLines] = useState(0);
-  const nameRef = useRef(null);
   const bootDone = bootPhase === 3;
 
   useEffect(() => {
@@ -184,12 +182,9 @@ export default function HallOfArmor() {
 
       {/* NAME */}
       <div style={s.nameWrap}>
-        <div ref={nameRef} style={s.nameCrosshairBox}>
-          {bootDone && <Crosshair containerRef={nameRef} color="#00d4ff" />}
-          <h1 className="hall-name" style={s.name}>
-            GORKEM <span style={{ color: '#00d4ff', textShadow: '0 0 30px rgba(0,212,255,0.4)' }}>ERGUNE</span>
-          </h1>
-        </div>
+        <h1 className="hall-name" style={s.name}>
+          GORKEM <span style={{ color: '#00d4ff', textShadow: '0 0 30px rgba(0,212,255,0.4)' }}>ERGUNE</span>
+        </h1>
         <div className="hall-tagline" style={s.taglineChip}>
           <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#00d4ff', boxShadow: '0 0 8px #00d4ff' }} />
           {t('heroTagline')}
@@ -454,7 +449,6 @@ const s = {
   statusLeft: { color: '#6a6a80', letterSpacing: '0.12em' },
   statusCenter: { flex: 1, textAlign: 'center', color: '#3a3a50' },
   nameWrap: { textAlign: 'center', marginBottom: 48, display: 'flex', flexDirection: 'column', alignItems: 'center' },
-  nameCrosshairBox: { position: 'relative', overflow: 'hidden', padding: '10px 24px' },
   name: {
     fontFamily: "'JetBrains Mono', monospace",
     fontSize: 88, fontWeight: 500,
