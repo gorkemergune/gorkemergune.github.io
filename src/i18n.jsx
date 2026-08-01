@@ -215,6 +215,15 @@ const en = {
   funGame2048Desc: 'Slide and merge tiles until you reach the 2048 tile.',
   funSimonTitle: 'Simon Says',
   funSimonDesc: 'Watch the color sequence, then repeat it. It grows every round.',
+  funComplimentsTitle: 'Compliment Cards',
+  funComplimentsDesc: 'Flip a card and reveal a little compliment made just for you.',
+
+  // Compliment Cards page
+  complimentsSub: 'Sixteen cards, sixteen kind words. Flip one to reveal a compliment — open them all, then shuffle again.',
+  complimentsProgress: 'Opened',
+  complimentsShuffle: 'Shuffle Again',
+  complimentsAllOpened: 'Every card is open — hope they made you smile. Shuffle for another round.',
+  complimentsCardLabel: 'Face-down card — flip to reveal a compliment',
 
   // Reaction game
   reactionSub: 'A quick test of your reflexes. Wait for green, then click as fast as you can.',
@@ -881,6 +890,15 @@ const tr = {
   funGame2048Desc: 'Kareleri kaydırıp birleştir ve 2048 karesine ulaş.',
   funSimonTitle: 'Simon',
   funSimonDesc: 'Renk dizisini izle, sonra tekrarla. Her turda uzuyor.',
+  funComplimentsTitle: 'İltifat Kartları',
+  funComplimentsDesc: 'Bir kart çevir ve sana özel küçük bir iltifatı ortaya çıkar.',
+
+  // Compliment Cards page
+  complimentsSub: 'On altı kart, on altı güzel söz. Bir kartı çevir ve iltifatı gör — hepsini aç, sonra yeniden karıştır.',
+  complimentsProgress: 'Açılan',
+  complimentsShuffle: 'Yeniden Karıştır',
+  complimentsAllOpened: 'Tüm kartlar açıldı — umarım seni gülümsetmiştir. Yeni bir tur için karıştır.',
+  complimentsCardLabel: 'Kapalı kart — çevirip iltifatı gör',
 
   // Reaction game
   reactionSub: 'Reflekslerin için kısa bir test. Yeşili bekle, sonra olabildiğince hızlı tıkla.',

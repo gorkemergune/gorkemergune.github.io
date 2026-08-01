@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowLeft, ArrowUpRight, Heart, Cake, Gamepad2, Puzzle, Layers, Flower2, Sun, Zap, Grid3x3, Hash, Grid2x2, Radio } from 'lucide-react';
+import { ArrowLeft, ArrowUpRight, Heart, Cake, Gamepad2, Puzzle, Layers, Flower2, Sun, Zap, Grid3x3, Hash, Grid2x2, Radio, Sparkles } from 'lucide-react';
 import { useLang } from '../i18n.jsx';
 
 // Two groups: mini-games (self-contained, playable now) and surprises
@@ -15,6 +15,7 @@ const GAMES = [
   { key: 'hanoi', path: '/fun/hanoi', icon: Layers, color: '#f472b6' },
 ];
 const SURPRISES = [
+  { key: 'compliments', path: '/fun/compliments', icon: Sparkles, color: '#ff4d6d' },
   { key: 'sorry', path: '/fun/sorry', icon: Heart, color: '#ff4d6d' },
   { key: 'mothersday', path: '/fun/mothersday', icon: Flower2, color: '#f472b6' },
   { key: 'goout', path: '/fun/goout', icon: Sun, color: '#ffd166' },
@@ -26,12 +27,14 @@ const TITLES = {
   game2048: 'funGame2048Title', simon: 'funSimonTitle', hangman: 'funHangmanTitle',
   puzzle: 'funPuzzleTitle', hanoi: 'funHanoiTitle', sorry: 'funSorryTitle',
   mothersday: 'funMothersDayTitle', goout: 'funGoOutTitle', birthday: 'funBirthdayTitle',
+  compliments: 'funComplimentsTitle',
 };
 const DESCS = {
   reaction: 'funReactionDesc', memory: 'funMemoryDesc', tictactoe: 'funTttDesc',
   game2048: 'funGame2048Desc', simon: 'funSimonDesc', hangman: 'funHangmanDesc',
   puzzle: 'funPuzzleDesc', hanoi: 'funHanoiDesc', sorry: 'funSorryDesc',
   mothersday: 'funMothersDayDesc', goout: 'funGoOutDesc', birthday: 'funBirthdayDesc',
+  compliments: 'funComplimentsDesc',
 };
 
 function Card({ c, t }) {

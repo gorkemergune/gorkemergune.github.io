@@ -22,6 +22,7 @@ const MemoryPage = lazy(() => import('./pages/MemoryPage'));
 const TicTacToePage = lazy(() => import('./pages/TicTacToePage'));
 const Game2048Page = lazy(() => import('./pages/Game2048Page'));
 const SimonPage = lazy(() => import('./pages/SimonPage'));
+const ComplimentCardsPage = lazy(() => import('./pages/ComplimentCardsPage'));
 const MothersDay = lazy(() => import('./pages/MothersDay'));
 const GoOutPage = lazy(() => import('./pages/GoOutPage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
@@ -329,6 +330,7 @@ export default function App() {
           <Route path="/fun/tictactoe" element={<TicTacToePage />} />
           <Route path="/fun/2048" element={<Game2048Page />} />
           <Route path="/fun/simon" element={<SimonPage />} />
+          <Route path="/fun/compliments" element={<ComplimentCardsPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/journey" element={<JourneyPage />} />
           <Route path="/project" element={<ProjectPage />} />
