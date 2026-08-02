@@ -2,11 +2,11 @@ import { Link } from 'react-router-dom';
 import { ArrowLeft, ArrowUpRight, Heart, Cake, Gamepad2, Puzzle, Layers, Flower2, Sun, Zap, Grid3x3, Hash, Grid2x2, Radio, Sparkles, HeartHandshake, Disc3 } from 'lucide-react';
 import { useLang } from '../i18n.jsx';
 
-// Two groups: mini-games (self-contained, playable now) and surprises
-// (heartfelt pages you send to a friend). Each card carries an accent color.
+// Three groups: mini-games (self-contained, playable now), "surprise me"
+// (playful little delights — a compatibility score, a wheel, a compliment) and
+// surprises to send (heartfelt pages you share with a friend). Each card
+// carries an accent color.
 const GAMES = [
-  { key: 'lovemeter', path: '/fun/lovemeter', icon: HeartHandshake, color: '#ff4d6d' },
-  { key: 'wheel', path: '/fun/wheel', icon: Disc3, color: '#9d6bff' },
   { key: 'reaction', path: '/fun/reaction', icon: Zap, color: '#00e5a0' },
   { key: 'memory', path: '/fun/memory', icon: Grid3x3, color: '#00d4ff' },
   { key: 'tictactoe', path: '/fun/tictactoe', icon: Hash, color: '#ff6b35' },
@@ -16,8 +16,12 @@ const GAMES = [
   { key: 'puzzle', path: '/fun/puzzle', icon: Puzzle, color: '#4d96ff' },
   { key: 'hanoi', path: '/fun/hanoi', icon: Layers, color: '#f472b6' },
 ];
+const SURPRISE_ME = [
+  { key: 'lovemeter', path: '/fun/lovemeter', icon: HeartHandshake, color: '#ff4d6d' },
+  { key: 'wheel', path: '/fun/wheel', icon: Disc3, color: '#9d6bff' },
+  { key: 'compliments', path: '/fun/compliments', icon: Sparkles, color: '#ffd166' },
+];
 const SURPRISES = [
-  { key: 'compliments', path: '/fun/compliments', icon: Sparkles, color: '#ff4d6d' },
   { key: 'sorry', path: '/fun/sorry', icon: Heart, color: '#ff4d6d' },
   { key: 'mothersday', path: '/fun/mothersday', icon: Flower2, color: '#f472b6' },
   { key: 'goout', path: '/fun/goout', icon: Sun, color: '#ffd166' },
@@ -88,6 +92,11 @@ export default function FunHub() {
       <div style={s.sectionLabel}><Gamepad2 size={13} strokeWidth={1.6} style={{ color: '#00d4ff' }} /> {t('funGamesLabel')}</div>
       <div className="fun-grid" style={s.grid}>
         {GAMES.map((c) => <Card key={c.key} c={c} t={t} />)}
+      </div>
+
+      <div style={{ ...s.sectionLabel, marginTop: 56 }}><Sparkles size={13} strokeWidth={1.6} style={{ color: '#9d6bff' }} /> {t('funSurpriseMeLabel')}</div>
+      <div className="fun-grid" style={s.grid}>
+        {SURPRISE_ME.map((c) => <Card key={c.key} c={c} t={t} />)}
       </div>
 
       <div style={{ ...s.sectionLabel, marginTop: 56 }}><Heart size={13} strokeWidth={1.6} style={{ color: '#ff4d6d' }} /> {t('funSurprisesLabel')}</div>
