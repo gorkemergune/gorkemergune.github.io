@@ -1,10 +1,12 @@
 import { Link } from 'react-router-dom';
-import { ArrowLeft, ArrowUpRight, Heart, Cake, Gamepad2, Puzzle, Layers, Flower2, Sun, Zap, Grid3x3, Hash, Grid2x2, Radio, Sparkles } from 'lucide-react';
+import { ArrowLeft, ArrowUpRight, Heart, Cake, Gamepad2, Puzzle, Layers, Flower2, Sun, Zap, Grid3x3, Hash, Grid2x2, Radio, Sparkles, HeartHandshake, Disc3 } from 'lucide-react';
 import { useLang } from '../i18n.jsx';
 
 // Two groups: mini-games (self-contained, playable now) and surprises
 // (heartfelt pages you send to a friend). Each card carries an accent color.
 const GAMES = [
+  { key: 'lovemeter', path: '/fun/lovemeter', icon: HeartHandshake, color: '#ff4d6d' },
+  { key: 'wheel', path: '/fun/wheel', icon: Disc3, color: '#9d6bff' },
   { key: 'reaction', path: '/fun/reaction', icon: Zap, color: '#00e5a0' },
   { key: 'memory', path: '/fun/memory', icon: Grid3x3, color: '#00d4ff' },
   { key: 'tictactoe', path: '/fun/tictactoe', icon: Hash, color: '#ff6b35' },
@@ -23,6 +25,7 @@ const SURPRISES = [
 ];
 
 const TITLES = {
+  lovemeter: 'funLoveTitle', wheel: 'funWheelTitle',
   reaction: 'funReactionTitle', memory: 'funMemoryTitle', tictactoe: 'funTttTitle',
   game2048: 'funGame2048Title', simon: 'funSimonTitle', hangman: 'funHangmanTitle',
   puzzle: 'funPuzzleTitle', hanoi: 'funHanoiTitle', sorry: 'funSorryTitle',
@@ -30,6 +33,7 @@ const TITLES = {
   compliments: 'funComplimentsTitle',
 };
 const DESCS = {
+  lovemeter: 'funLoveDesc', wheel: 'funWheelDesc',
   reaction: 'funReactionDesc', memory: 'funMemoryDesc', tictactoe: 'funTttDesc',
   game2048: 'funGame2048Desc', simon: 'funSimonDesc', hangman: 'funHangmanDesc',
   puzzle: 'funPuzzleDesc', hanoi: 'funHanoiDesc', sorry: 'funSorryDesc',

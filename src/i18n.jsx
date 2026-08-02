@@ -217,6 +217,30 @@ const en = {
   funSimonDesc: 'Watch the color sequence, then repeat it. It grows every round.',
   funComplimentsTitle: 'Compliment Cards',
   funComplimentsDesc: 'Flip a card and reveal a little compliment made just for you.',
+  funLoveTitle: 'Love Meter',
+  funLoveDesc: 'Two names, one playful compatibility score. Just for fun.',
+  funWheelTitle: 'Spin the Wheel',
+  funWheelDesc: 'Give it a spin and land on a little feel-good challenge.',
+
+  // Love Meter page
+  loveSub: 'Type two names and let the stars do the (completely unscientific) math.',
+  loveDisclaimer: 'Just for fun — not a real compatibility test.',
+  loveName1Label: 'Your Name',
+  loveName1Placeholder: 'e.g. Alex',
+  loveName2Label: "Crush's Name",
+  loveName2Placeholder: 'e.g. Emma',
+  loveCalculate: 'Calculate',
+  loveCompatibility: 'Compatibility',
+  loveAgain: 'Try Again',
+  loveEmptyError: 'Please enter both names.',
+
+  // Spin the Wheel page
+  wheelSub: 'Thirty tiny challenges. Give the wheel a spin and see where it lands.',
+  wheelSpin: 'Spin',
+  wheelSpinning: 'Spinning…',
+  wheelAgain: 'Spin Again',
+  wheelChallengeLabel: 'Your challenge',
+  wheelHint: 'Press Spin — the wheel turns for a few seconds.',
 
   // Compliment Cards page
   complimentsSub: 'Sixteen cards, sixteen kind words. Flip one to reveal a compliment — open them all, then shuffle again.',
@@ -892,6 +916,30 @@ const tr = {
   funSimonDesc: 'Renk dizisini izle, sonra tekrarla. Her turda uzuyor.',
   funComplimentsTitle: 'İltifat Kartları',
   funComplimentsDesc: 'Bir kart çevir ve sana özel küçük bir iltifatı ortaya çıkar.',
+  funLoveTitle: 'Aşk Ölçer',
+  funLoveDesc: 'İki isim, eğlencelik bir uyum puanı. Sadece keyif için.',
+  funWheelTitle: 'Çarkı Çevir',
+  funWheelDesc: 'Çarkı çevir ve küçük, keyifli bir göreve dön.',
+
+  // Love Meter page
+  loveSub: 'İki isim yaz ve hesabı (tamamen bilim dışı) yıldızlara bırak.',
+  loveDisclaimer: 'Sadece eğlence için — gerçek bir uyum testi değildir.',
+  loveName1Label: 'Senin Adın',
+  loveName1Placeholder: 'örn. Alex',
+  loveName2Label: 'Hoşlandığının Adı',
+  loveName2Placeholder: 'örn. Emma',
+  loveCalculate: 'Hesapla',
+  loveCompatibility: 'Uyum',
+  loveAgain: 'Tekrar Dene',
+  loveEmptyError: 'Lütfen iki ismi de gir.',
+
+  // Spin the Wheel page
+  wheelSub: 'Otuz küçük görev. Çarkı çevir ve nereye geldiğini gör.',
+  wheelSpin: 'Çevir',
+  wheelSpinning: 'Dönüyor…',
+  wheelAgain: 'Tekrar Çevir',
+  wheelChallengeLabel: 'Görevin',
+  wheelHint: 'Çevir’e bas — çark birkaç saniye döner.',
 
   // Compliment Cards page
   complimentsSub: 'On altı kart, on altı güzel söz. Bir kartı çevir ve iltifatı gör — hepsini aç, sonra yeniden karıştır.',
