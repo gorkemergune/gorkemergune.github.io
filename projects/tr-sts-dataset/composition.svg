@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 420" width="1000" height="420" role="img" aria-label="Dataset composition" font-family="'JetBrains Mono', monospace">
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0c0c15"/><stop offset="1" stop-color="#08080e"/></linearGradient></defs>
+  <rect width="1000" height="420" fill="url(#bg)"/>
+  <rect x="0.5" y="0.5" width="999" height="419" fill="none" stroke="#151522"/>
+  <text x="40" y="52" font-size="15" letter-spacing="3" fill="#38bdf8">COMPOSITION</text>
+  <text x="40" y="74" font-size="11.5" fill="rgba(255,255,255,0.4)">1,037 sentence pairs · scored with SentenceTransformers over L2-normalized embeddings.</text>
+
+  <!-- big stats -->
+  <g text-anchor="middle">
+    <g><rect x="40" y="110" width="200" height="120" rx="10" fill="rgba(56,189,248,0.06)" stroke="rgba(56,189,248,0.4)"/>
+      <text x="140" y="168" font-size="34" fill="#eef6ff" font-weight="700">933 / 104</text>
+      <text x="140" y="196" font-size="11" fill="rgba(255,255,255,0.55)">train / test split</text></g>
+    <g><rect x="260" y="110" width="200" height="120" rx="10" fill="rgba(56,189,248,0.06)" stroke="rgba(56,189,248,0.4)"/>
+      <text x="360" y="168" font-size="34" fill="#eef6ff" font-weight="700">38 + 999</text>
+      <text x="360" y="192" font-size="11" fill="rgba(255,255,255,0.55)">manual + synthetic</text>
+      <text x="360" y="210" font-size="9.5" fill="rgba(255,255,255,0.4)">template-generated</text></g>
+    <g><rect x="480" y="110" width="200" height="120" rx="10" fill="rgba(56,189,248,0.06)" stroke="rgba(56,189,248,0.4)"/>
+      <text x="580" y="168" font-size="34" fill="#eef6ff" font-weight="700">9</text>
+      <text x="580" y="192" font-size="11" fill="rgba(255,255,255,0.55)">news domains</text></g>
+    <g><rect x="700" y="110" width="260" height="120" rx="10" fill="rgba(56,189,248,0.06)" stroke="rgba(56,189,248,0.4)"/>
+      <text x="830" y="162" font-size="26" fill="#eef6ff" font-weight="700">−0.04 → 0.97</text>
+      <text x="830" y="190" font-size="11" fill="rgba(255,255,255,0.55)">score range covered</text></g>
+  </g>
+
+  <!-- domains -->
+  <g font-size="11" transform="translate(40 280)">
+    <text x="0" y="0" fill="#38bdf8" font-size="11">DOMAINS</text>
+    <g fill="rgba(255,255,255,0.7)">
+      <g>
+        <rect x="0"  y="16" width="110" height="30" rx="6" fill="rgba(56,189,248,0.05)" stroke="rgba(56,189,248,0.25)"/><text x="55" y="36" text-anchor="middle">celebrity</text>
+        <rect x="122" y="16" width="90"  height="30" rx="6" fill="rgba(56,189,248,0.05)" stroke="rgba(56,189,248,0.25)"/><text x="167" y="36" text-anchor="middle">sports</text>
+        <rect x="224" y="16" width="120" height="30" rx="6" fill="rgba(56,189,248,0.05)" stroke="rgba(56,189,248,0.25)"/><text x="284" y="36" text-anchor="middle">economics</text>
+        <rect x="356" y="16" width="100" height="30" rx="6" fill="rgba(56,189,248,0.05)" stroke="rgba(56,189,248,0.25)"/><text x="406" y="36" text-anchor="middle">politics</text>
+        <rect x="468" y="16" width="100" height="30" rx="6" fill="rgba(56,189,248,0.05)" stroke="rgba(56,189,248,0.25)"/><text x="518" y="36" text-anchor="middle">weather</text>
+        <rect x="580" y="16" width="90"  height="30" rx="6" fill="rgba(56,189,248,0.05)" stroke="rgba(56,189,248,0.25)"/><text x="625" y="36" text-anchor="middle">crime</text>
+        <rect x="682" y="16" width="90"  height="30" rx="6" fill="rgba(56,189,248,0.05)" stroke="rgba(56,189,248,0.25)"/><text x="727" y="36" text-anchor="middle">health</text>
+        <rect x="784" y="16" width="110" height="30" rx="6" fill="rgba(56,189,248,0.05)" stroke="rgba(56,189,248,0.25)"/><text x="839" y="36" text-anchor="middle">technology</text>
+      </g>
+      <rect x="0" y="54" width="180" height="30" rx="6" fill="rgba(56,189,248,0.05)" stroke="rgba(56,189,248,0.25)"/><text x="90" y="74" text-anchor="middle">international news</text>
+    </g>
+    <text x="220" y="74" font-size="10.5" fill="rgba(255,255,255,0.45)">Published on the Hugging Face Hub as gorkemergune/stsb-tr.</text>
+  </g>
+</svg>

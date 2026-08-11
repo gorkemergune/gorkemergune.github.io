@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 400" width="1000" height="400" role="img" aria-label="Provider verification" font-family="'JetBrains Mono', monospace">
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0c0c15"/><stop offset="1" stop-color="#08080e"/></linearGradient></defs>
+  <rect width="1000" height="400" fill="url(#bg)"/>
+  <rect x="0.5" y="0.5" width="999" height="399" fill="none" stroke="#151522"/>
+  <text x="40" y="52" font-size="15" letter-spacing="3" fill="#e879f9">MULTI-PROVIDER · VERIFIED 2026-08-02</text>
+  <text x="40" y="74" font-size="11.5" fill="rgba(255,255,255,0.4)">One unified agent interface, four back-ends — create / list / update / complete tested end to end.</text>
+
+  <!-- table -->
+  <g font-size="11.5">
+    <g fill="rgba(232,121,249,0.7)" font-size="10.5">
+      <text x="60" y="120">PROVIDER</text><text x="330" y="120">MODEL</text><text x="600" y="120">TOOL LOOP</text><text x="820" y="120">LATENCY</text>
+    </g>
+    <line x1="40" y1="132" x2="960" y2="132" stroke="#20202f"/>
+    <g fill="rgba(255,255,255,0.82)">
+      <text x="60" y="164">Ollama <tspan fill="rgba(255,255,255,0.4)">(default)</tspan></text><text x="330" y="164">qwen2.5:7b</text><text x="600" y="164" fill="#8ff0cf">✓ full</text><text x="820" y="164" fill="rgba(255,255,255,0.6)">0.8–7 s</text>
+      <line x1="40" y1="180" x2="960" y2="180" stroke="#161622"/>
+      <text x="60" y="212">Groq</text><text x="330" y="212">llama-3.3-70b-versatile</text><text x="600" y="212" fill="#8ff0cf">✓ full</text><text x="820" y="212" fill="rgba(255,255,255,0.6)">0.8–1.1 s</text>
+      <line x1="40" y1="228" x2="960" y2="228" stroke="#161622"/>
+      <text x="60" y="260">Gemini</text><text x="330" y="260">Gemini 2.0 Flash</text><text x="600" y="260" fill="#f0d68a">◑ single-turn</text><text x="820" y="260" fill="rgba(255,255,255,0.6)">cloud</text>
+      <line x1="40" y1="276" x2="960" y2="276" stroke="#161622"/>
+      <text x="60" y="308">Local FT</text><text x="330" y="308">fine-tuned Gemma + Jinja template</text><text x="600" y="308" fill="#8ff0cf">✓ native</text><text x="820" y="308" fill="rgba(232,121,249,0.85)">mine</text>
+    </g>
+  </g>
+
+  <g transform="translate(40 336)">
+    <rect x="0" y="0" width="200" height="44" rx="8" fill="rgba(232,121,249,0.08)" stroke="#e879f9"/>
+    <text x="100" y="28" font-size="14" fill="#f6dcff" text-anchor="middle" font-weight="700">112 tests passing</text>
+  </g>
+  <text x="260" y="364" font-size="10.5" fill="rgba(255,255,255,0.5)">pytest · repository + service + agent layers · SQLite-backed, deterministic seed.</text>
+</svg>

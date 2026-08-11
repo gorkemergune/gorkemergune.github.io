@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 380" width="1000" height="380" role="img" aria-label="Three relatedness tiers" font-family="'JetBrains Mono', monospace">
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0c0c15"/><stop offset="1" stop-color="#08080e"/></linearGradient></defs>
+  <rect width="1000" height="380" fill="url(#bg)"/>
+  <rect x="0.5" y="0.5" width="999" height="379" fill="none" stroke="#151522"/>
+  <text x="40" y="52" font-size="15" letter-spacing="3" fill="#38bdf8">THREE RELATEDNESS TIERS</text>
+  <text x="40" y="74" font-size="11.5" fill="rgba(255,255,255,0.4)">Each synthetic pair is built to land in one tier — giving graded supervision across the whole scale.</text>
+
+  <g font-size="12">
+    <g>
+      <rect x="40" y="110" width="290" height="230" rx="12" fill="rgba(56,189,248,0.04)" stroke="rgba(56,189,248,0.3)"/>
+      <text x="60" y="146" font-size="13" fill="#7fd4fb">① UNRELATED</text>
+      <text x="60" y="174" font-size="10.5" fill="rgba(255,255,255,0.55)">different topics entirely</text>
+      <text x="60" y="220" font-size="30" fill="#eef6ff" font-weight="700">~0.148</text>
+      <text x="60" y="244" font-size="10" fill="rgba(255,255,255,0.4)">mean similarity</text>
+      <rect x="60" y="266" width="210" height="56" rx="8" fill="rgba(255,255,255,0.02)" stroke="#20202f"/>
+      <text x="72" y="288" font-size="9.5" fill="rgba(255,255,255,0.6)" font-style="italic">“Borsa yükseldi.”</text>
+      <text x="72" y="308" font-size="9.5" fill="rgba(255,255,255,0.6)" font-style="italic">“Yağmur bekleniyor.”</text>
+    </g>
+    <g>
+      <rect x="356" y="110" width="290" height="230" rx="12" fill="rgba(56,189,248,0.05)" stroke="rgba(56,189,248,0.4)"/>
+      <text x="376" y="146" font-size="13" fill="#7fd4fb">② RELATED</text>
+      <text x="376" y="174" font-size="10.5" fill="rgba(255,255,255,0.55)">same topic, different events</text>
+      <text x="376" y="220" font-size="30" fill="#eef6ff" font-weight="700">~0.406</text>
+      <text x="376" y="244" font-size="10" fill="rgba(255,255,255,0.4)">mean similarity</text>
+      <rect x="376" y="266" width="210" height="56" rx="8" fill="rgba(255,255,255,0.02)" stroke="#20202f"/>
+      <text x="388" y="288" font-size="9.5" fill="rgba(255,255,255,0.6)" font-style="italic">“Takım maçı kazandı.”</text>
+      <text x="388" y="308" font-size="9.5" fill="rgba(255,255,255,0.6)" font-style="italic">“Antrenör açıklama yaptı.”</text>
+    </g>
+    <g>
+      <rect x="672" y="110" width="288" height="230" rx="12" fill="rgba(56,189,248,0.07)" stroke="#38bdf8"/>
+      <text x="692" y="146" font-size="13" fill="#cdeeff">③ PARAPHRASE</text>
+      <text x="692" y="174" font-size="10.5" fill="rgba(255,255,255,0.55)">same event, different wording</text>
+      <text x="692" y="220" font-size="30" fill="#eef6ff" font-weight="700">~0.844</text>
+      <text x="692" y="244" font-size="10" fill="rgba(255,255,255,0.4)">mean similarity</text>
+      <rect x="692" y="266" width="210" height="56" rx="8" fill="rgba(255,255,255,0.02)" stroke="#20202f"/>
+      <text x="704" y="288" font-size="9.5" fill="rgba(255,255,255,0.6)" font-style="italic">“Bakan istifa etti.”</text>
+      <text x="704" y="308" font-size="9.5" fill="rgba(255,255,255,0.6)" font-style="italic">“Bakan görevinden ayrıldı.”</text>
+    </g>
+  </g>
+</svg>

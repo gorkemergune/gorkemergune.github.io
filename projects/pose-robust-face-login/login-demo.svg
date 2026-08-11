@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 440" width="1000" height="440" role="img" aria-label="Login match demo" font-family="'JetBrains Mono', monospace">
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0c0c15"/><stop offset="1" stop-color="#08080e"/></linearGradient></defs>
+  <rect width="1000" height="440" fill="url(#bg)"/>
+  <rect x="0.5" y="0.5" width="999" height="439" fill="none" stroke="#151522"/>
+  <text x="40" y="52" font-size="15" letter-spacing="3" fill="#818cf8">LIVE LOGIN — CROSS-POSE MATCH</text>
+  <text x="40" y="74" font-size="11.5" fill="rgba(255,255,255,0.4)">A profile probe matches a gallery enrolled from many angles — verification survives pose change.</text>
+
+  <!-- probe webcam frame -->
+  <g transform="translate(60 110)">
+    <rect x="0" y="0" width="260" height="240" rx="10" fill="#05050a" stroke="#818cf8" stroke-width="1.6"/>
+    <text x="14" y="26" font-size="10" fill="rgba(129,140,248,0.8)">● LIVE  webcam probe</text>
+    <!-- profile head -->
+    <g transform="translate(130 140)" stroke="#818cf8" stroke-width="2" fill="none">
+      <ellipse cx="6" cy="0" rx="42" ry="56"/>
+      <path d="M40 -6 q 14 6 0 14" />
+      <circle cx="22" cy="-12" r="3.5" fill="#c7cbff" stroke="none"/>
+    </g>
+    <!-- bbox -->
+    <rect x="72" y="70" width="120" height="150" fill="none" stroke="#a5b0ff" stroke-width="1.4" stroke-dasharray="5 4"/>
+    <text x="72" y="64" font-size="9" fill="#a5b0ff">yaw ≈ +62°  ·  q 0.91</text>
+  </g>
+
+  <!-- match arrow -->
+  <g transform="translate(340 230)" font-size="11" text-anchor="middle">
+    <path d="M0 0 H120" stroke="#818cf8" stroke-width="1.8" marker-end="url(#ar2)"/>
+    <text x="60" y="-14" fill="#eef0ff">cosine</text>
+    <text x="60" y="26" fill="#818cf8" font-size="20" font-weight="700">0.71</text>
+  </g>
+  <defs><marker id="ar2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#818cf8"/></marker></defs>
+
+  <!-- gallery -->
+  <g transform="translate(500 110)">
+    <rect x="0" y="0" width="300" height="240" rx="10" fill="#07070d" stroke="#2a2a3d" stroke-width="1.4"/>
+    <text x="14" y="26" font-size="10" fill="rgba(255,255,255,0.5)">enrolled gallery — multi-pose</text>
+    <g transform="translate(20 46)">
+      <g stroke="#818cf8" stroke-width="1.6" fill="none" opacity="0.85">
+        <g transform="translate(24 40)"><ellipse rx="18" ry="24"/><circle cx="7" cy="-4" r="2" fill="#818cf8" stroke="none"/></g>
+        <g transform="translate(90 40)"><ellipse rx="20" ry="25"/><circle cx="-6" cy="-4" r="2" fill="#818cf8" stroke="none"/><circle cx="6" cy="-4" r="2" fill="#818cf8" stroke="none"/></g>
+        <g transform="translate(160 40)"><ellipse rx="20" ry="25"/><circle cx="-7" cy="-4" r="2" fill="#c7cbff" stroke="none"/><circle cx="7" cy="-4" r="2" fill="#c7cbff" stroke="none"/></g>
+        <g transform="translate(230 40)"><ellipse rx="18" ry="24"/><circle cx="-7" cy="-4" r="2" fill="#818cf8" stroke="none"/></g>
+        <g transform="translate(60 130)"><ellipse rx="19" ry="24"/><circle cx="-5" cy="-4" r="2" fill="#818cf8" stroke="none"/><circle cx="7" cy="-4" r="2" fill="#818cf8" stroke="none"/></g>
+        <g transform="translate(190 130)"><ellipse rx="19" ry="24"/><circle cx="-7" cy="-4" r="2" fill="#818cf8" stroke="none"/><circle cx="5" cy="-4" r="2" fill="#818cf8" stroke="none"/></g>
+      </g>
+      <g font-size="8.5" fill="rgba(255,255,255,0.4)" text-anchor="middle">
+        <text x="24" y="76">−90°</text><text x="90" y="76">−30°</text><text x="160" y="76">0°</text><text x="230" y="76">+90°</text>
+        <text x="60" y="166">−60°</text><text x="190" y="166">+45°</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- result banner -->
+  <g transform="translate(500 372)">
+    <rect x="0" y="0" width="300" height="44" rx="8" fill="rgba(129,140,248,0.12)" stroke="#818cf8"/>
+    <text x="150" y="28" font-size="14" fill="#eef0ff" text-anchor="middle" font-weight="700">✔ ACCESS GRANTED · 0.71 ≥ 0.44</text>
+  </g>
+  <g transform="translate(60 372)" font-size="10.5" fill="rgba(255,255,255,0.5)">
+    <text x="0" y="16">Two different people score ≈ 0.10 → DENIED.</text>
+    <text x="0" y="34">Decision threshold configurable in config.yaml.</text>
+  </g>
+</svg>
