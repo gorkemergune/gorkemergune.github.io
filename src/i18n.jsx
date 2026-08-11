@@ -467,6 +467,14 @@ const en = {
   expSub: 'Hackathons, applied engineering, and ongoing research — framed as professional work.',
   expItems: [
     {
+      org: 'Remote AI Internship', role: 'AI Research Intern', period: '2026', type: 'Internship', accent: '#38bdf8',
+      summary: 'Applied-AI internship, with an in-progress AI feature research study (Neuron) in the research phase.',
+      points: [
+        'Running internship research on AI product features — currently in the research phase.',
+      ],
+      tags: ['AI', 'Research'], link: '/research',
+    },
+    {
       org: 'BTK Hackathon 2026', role: 'Full-Stack & AI Developer', period: 'May 2026', type: 'Hackathon', accent: '#ff9f1c',
       summary: 'Built “Find The Best”, a shopping-intelligence platform for the e-commerce track.',
       points: [
@@ -538,11 +546,18 @@ const en = {
   researchPdf: 'Read draft (PDF)',
   researchItems: [
     {
+      title: 'Neuron AI Research',
+      field: 'Applied AI · Internship', accent: '#38bdf8', status: 'in-progress',
+      abstract: 'An internship-linked research project. Currently in the research phase.',
+      methods: [],
+      expected: '',
+    },
+    {
       title: 'Email Phishing Detection',
-      field: 'NLP · Security', accent: '#7c5cff', status: 'in-progress',
+      field: 'NLP · Security', accent: '#7c5cff', status: 'completed',
       abstract: 'Phishing emails cost people real money and lean on a recognizable vocabulary of urgency and impersonation. The motivation is to detect them from raw text with a simple, transparent model — and to show that how you represent the data matters as much as the model itself.',
       methods: ['Text cleaning, then TF-IDF vectorization over words and bigrams', 'Stratified 80/20 split with a fixed random seed', 'Logistic Regression classifier', 'Evaluation with accuracy, precision, recall, F1, a confusion matrix, and ROC'],
-      expected: 'Future work: test on more varied, adversarial email, extend to Turkish for multilingual coverage, and compare against transformer baselines — while keeping the model interpretable.',
+      expected: 'The transparent TF-IDF + Logistic Regression pipeline flags phishing from raw text with strong precision and recall, and confirmed the central point: how you represent the data matters as much as the model. The study is complete and documented in the project.',
     },
     {
       title: 'PHQ-9 Depression Analysis',
@@ -1173,6 +1188,14 @@ const tr = {
   expSub: 'Hackathonlar, uygulamalı mühendislik ve devam eden araştırmalar; profesyonel çalışma çerçevesinde sunuldu.',
   expItems: [
     {
+      org: 'Uzaktan Yapay Zekâ Stajı', role: 'Yapay Zekâ Araştırma Stajyeri', period: '2026', type: 'Staj', accent: '#38bdf8',
+      summary: 'Uygulamalı yapay zekâ stajı; araştırma aşamasında devam eden bir YZ özellik araştırması (Neuron) ile.',
+      points: [
+        'Yapay zekâ ürün özellikleri üzerine staj araştırması yürütüyorum — şu anda araştırma aşamasında.',
+      ],
+      tags: ['Yapay Zekâ', 'Araştırma'], link: '/research',
+    },
+    {
       org: 'BTK Hackathon 2026', role: 'Full-Stack & Yapay Zekâ Geliştiricisi', period: 'Mayıs 2026', type: 'Hackathon', accent: '#ff9f1c',
       summary: 'E-ticaret kategorisi için “Find The Best” alışveriş zekâsı platformunu geliştirdim.',
       points: [
@@ -1244,11 +1267,18 @@ const tr = {
   researchPdf: 'Taslağı oku (PDF)',
   researchItems: [
     {
+      title: 'Neuron AI Araştırması',
+      field: 'Uygulamalı YZ · Staj', accent: '#38bdf8', status: 'in-progress',
+      abstract: 'Staja bağlı bir araştırma projesi. Şu anda araştırma aşamasında.',
+      methods: [],
+      expected: '',
+    },
+    {
       title: 'E-posta Oltalama Tespiti',
-      field: 'NLP · Güvenlik', accent: '#7c5cff', status: 'in-progress',
+      field: 'NLP · Güvenlik', accent: '#7c5cff', status: 'completed',
       abstract: 'Oltalama e-postaları insanlara gerçek para kaybettirir ve aciliyet ile taklide dayalı, tanıdık bir kelime dağarcığına yaslanır. Amaç, bunları ham metinden basit ve şeffaf bir modelle tespit etmek ve verinin nasıl temsil edildiğinin en az model kadar önemli olduğunu göstermek.',
       methods: ['Metin temizleme, ardından kelimeler ve ikili öbekler üzerinde TF-IDF vektörleştirme', 'Sabit tohumlu katmanlı %80/%20 bölme', 'Lojistik Regresyon sınıflandırıcı', 'Doğruluk, kesinlik, duyarlılık, F1, karışıklık matrisi ve ROC ile değerlendirme'],
-      expected: 'Gelecek çalışma: modeli yorumlanabilir tutarak daha çeşitli ve düşmanca e-postalarda test etmek, çok dilli kapsam için Türkçeye genişletmek ve transformer tabanlı modellerle karşılaştırmak.',
+      expected: 'Şeffaf TF-IDF + Lojistik Regresyon hattı, oltalamayı ham metinden yüksek kesinlik ve duyarlılıkla işaretliyor ve ana fikri doğruladı: verinin nasıl temsil edildiği en az model kadar önemli. Çalışma tamamlandı ve projede belgelendi.',
     },
     {
       title: 'PHQ-9 Depresyon Analizi',

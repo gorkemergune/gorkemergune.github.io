@@ -55,20 +55,22 @@ export default function ResearchPage() {
               })()}
             </div>
             <h3 style={s.rtitle}>{it.title}</h3>
-            <p style={s.abstract}>{it.abstract}</p>
+            {it.abstract && <p style={s.abstract}>{it.abstract}</p>}
 
-            <div className="rs-cols" style={{ marginTop: 22 }}>
-              <div>
-                <div style={{ ...s.subLabel, color: it.accent }}>{t('researchMethods')}</div>
-                <ul style={s.ul}>
-                  {it.methods.map((m, j) => <li key={j} style={s.li}><span style={{ ...s.bullet, background: it.accent }} />{m}</li>)}
-                </ul>
+            {Array.isArray(it.methods) && it.methods.length > 0 && (
+              <div className="rs-cols" style={{ marginTop: 22 }}>
+                <div>
+                  <div style={{ ...s.subLabel, color: it.accent }}>{t('researchMethods')}</div>
+                  <ul style={s.ul}>
+                    {it.methods.map((m, j) => <li key={j} style={s.li}><span style={{ ...s.bullet, background: it.accent }} />{m}</li>)}
+                  </ul>
+                </div>
+                <div>
+                  <div style={{ ...s.subLabel, color: it.accent }}>{it.status === 'completed' ? t('researchOutcomes') : t('researchExpected')}</div>
+                  <p style={s.expected}>{it.expected}</p>
+                </div>
               </div>
-              <div>
-                <div style={{ ...s.subLabel, color: it.accent }}>{it.status === 'completed' ? t('researchOutcomes') : t('researchExpected')}</div>
-                <p style={s.expected}>{it.expected}</p>
-              </div>
-            </div>
+            )}
 
             {it.pdf && (
               <a href={it.pdf} target="_blank" rel="noopener noreferrer" className="link-hover" style={{ ...s.pdf, color: it.accent }}>

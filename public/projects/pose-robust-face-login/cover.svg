@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500" role="img" aria-label="Pose-Robust Face Login">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b0b13"/><stop offset="0.55" stop-color="#0a0a0f"/><stop offset="1" stop-color="rgba(129,140,248,0.15)"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.82" cy="0.35" r="0.6">
+      <stop offset="0" stop-color="rgba(129,140,248,0.34)"/><stop offset="0.55" stop-color="rgba(129,140,248,0.07)"/><stop offset="1" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0 H0 V40" fill="none" stroke="rgba(129,140,248,0.05)" stroke-width="1"/></pattern>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg)"/>
+  <rect width="800" height="500" fill="url(#grid)"/>
+  <rect width="800" height="500" fill="url(#glow)"/>
+  <g stroke="rgba(129,140,248,0.5)" stroke-width="2" fill="none">
+    <path d="M28 60 V28 H60"/><path d="M740 28 H772 V60"/><path d="M28 440 V472 H60"/><path d="M772 440 V472 H740"/>
+  </g>
+  <g font-family="'JetBrains Mono', monospace">
+    <text x="60" y="118" font-size="13" letter-spacing="5" fill="rgba(129,140,248,0.75)">FACE AUTHENTICATION · MULTI-POSE</text>
+    <text x="58" y="182" font-size="46" font-weight="700" fill="#f5f5f7" letter-spacing="1">Face Login</text>
+    <text x="62" y="218" font-size="12.5" fill="rgba(255,255,255,0.46)">Pose-robust webcam login · ArcFace embeddings · no images stored</text>
+  </g>
+
+  <!-- pose arc of heads -->
+  <g transform="translate(400 330)">
+    <path d="M-260 0 A 260 150 0 0 1 260 0" fill="none" stroke="rgba(129,140,248,0.25)" stroke-width="1.4" stroke-dasharray="4 5"/>
+    <g fill="none" stroke="rgba(129,140,248,0.7)" stroke-width="2">
+      <!-- profile L -->
+      <g transform="translate(-240 -12) scale(0.8)"><ellipse cx="0" cy="0" rx="16" ry="22"/><circle cx="8" cy="-2" r="2.2" fill="#818cf8" stroke="none"/></g>
+      <g transform="translate(-140 -78) scale(0.9)"><ellipse cx="0" cy="0" rx="18" ry="23"/><circle cx="-5" cy="-3" r="2.2" fill="#818cf8" stroke="none"/><circle cx="7" cy="-3" r="2.2" fill="#818cf8" stroke="none"/></g>
+      <g transform="translate(0 -110)"><ellipse cx="0" cy="0" rx="20" ry="25"/><circle cx="-7" cy="-4" r="2.4" fill="#c7cbff" stroke="none"/><circle cx="7" cy="-4" r="2.4" fill="#c7cbff" stroke="none"/></g>
+      <g transform="translate(140 -78) scale(0.9)"><ellipse cx="0" cy="0" rx="18" ry="23"/><circle cx="-7" cy="-3" r="2.2" fill="#818cf8" stroke="none"/><circle cx="5" cy="-3" r="2.2" fill="#818cf8" stroke="none"/></g>
+      <g transform="translate(240 -12) scale(0.8)"><ellipse cx="0" cy="0" rx="16" ry="22"/><circle cx="-8" cy="-2" r="2.2" fill="#818cf8" stroke="none"/></g>
+    </g>
+    <g font-family="'JetBrains Mono', monospace" font-size="10" fill="rgba(129,140,248,0.6)" text-anchor="middle">
+      <text x="-240" y="24">−90°</text><text x="-140" y="-102">−45°</text><text x="0" y="-128">0°</text><text x="140" y="-102">+45°</text><text x="240" y="24">+90°</text>
+    </g>
+  </g>
+
+  <g font-family="'JetBrains Mono', monospace" fill="rgba(255,255,255,0.36)" font-size="11">
+    <text x="60" y="452">512-d embeddings</text>
+    <text x="230" y="452">·  cosine ≥ 0.44</text>
+    <text x="380" y="452">·  &lt; 100 ms / frame</text>
+    <text x="560" y="452">·  SQLite gallery</text>
+  </g>
+</svg>

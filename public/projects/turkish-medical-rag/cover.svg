@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500" role="img" aria-label="Turkish Medical RAG">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b0b13"/>
+      <stop offset="0.55" stop-color="#0a0a0f"/>
+      <stop offset="1" stop-color="rgba(16,185,129,0.14)"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.82" cy="0.35" r="0.6">
+      <stop offset="0" stop-color="rgba(16,185,129,0.34)"/>
+      <stop offset="0.55" stop-color="rgba(16,185,129,0.07)"/>
+      <stop offset="1" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0 H0 V40" fill="none" stroke="rgba(16,185,129,0.05)" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#bg)"/>
+  <rect width="800" height="500" fill="url(#grid)"/>
+  <rect width="800" height="500" fill="url(#glow)"/>
+
+  <g stroke="rgba(16,185,129,0.5)" stroke-width="2" fill="none">
+    <path d="M28 60 V28 H60"/>
+    <path d="M740 28 H772 V60"/>
+    <path d="M28 440 V472 H60"/>
+    <path d="M772 440 V472 H740"/>
+  </g>
+
+  <g font-family="'JetBrains Mono', monospace">
+    <text x="60" y="118" font-size="13" letter-spacing="5" fill="rgba(16,185,129,0.72)">RETRIEVAL-AUGMENTED GENERATION · TR</text>
+    <text x="58" y="184" font-size="52" font-weight="700" fill="#f5f5f7" letter-spacing="1">Medical RAG</text>
+    <text x="62" y="220" font-size="12.5" fill="rgba(255,255,255,0.46)">Threshold-first retrieval · refuse to hallucinate · E5 + ChromaDB + Claude</text>
+  </g>
+
+  <!-- gated pipeline strip -->
+  <g transform="translate(60 290)" font-family="'JetBrains Mono', monospace">
+    <g fill="none" stroke="rgba(16,185,129,0.45)" stroke-width="1.4">
+      <rect x="0" y="0" width="120" height="52" rx="6" fill="rgba(16,185,129,0.06)"/>
+      <rect x="168" y="0" width="120" height="52" rx="6" fill="rgba(16,185,129,0.06)"/>
+      <path d="M120 26 H168" marker-end="url(#a)"/>
+    </g>
+    <text x="60" y="24" font-size="11" fill="#d7f5ea" text-anchor="middle">query</text>
+    <text x="60" y="40" font-size="9" fill="rgba(255,255,255,0.4)" text-anchor="middle">Türkçe</text>
+    <text x="228" y="24" font-size="11" fill="#d7f5ea" text-anchor="middle">E5 embed</text>
+    <text x="228" y="40" font-size="9" fill="rgba(255,255,255,0.4)" text-anchor="middle">1024-d</text>
+
+    <!-- gate diamond -->
+    <g transform="translate(340 26)">
+      <path d="M0 -34 L46 0 L0 34 L-46 0 Z" fill="rgba(16,185,129,0.12)" stroke="#10b981" stroke-width="2"/>
+      <text x="0" y="-2" font-size="11" fill="#eafff6" text-anchor="middle" font-weight="700">≥ 0.575</text>
+      <text x="0" y="14" font-size="8.5" fill="rgba(255,255,255,0.55)" text-anchor="middle">gate</text>
+    </g>
+    <path d="M288 26 H294" stroke="rgba(16,185,129,0.45)" stroke-width="1.4"/>
+
+    <!-- two outcomes -->
+    <g stroke-width="1.4" fill="none">
+      <path d="M386 12 C 430 -6 470 -6 508 -6" stroke="rgba(16,185,129,0.5)"/>
+      <path d="M386 40 C 430 58 470 58 508 58" stroke="rgba(255,90,90,0.5)"/>
+    </g>
+    <g>
+      <rect x="508" y="-24" width="172" height="34" rx="6" fill="rgba(16,185,129,0.08)" stroke="rgba(16,185,129,0.5)" stroke-width="1.4"/>
+      <text x="594" y="-3" font-size="10.5" fill="#d7f5ea" text-anchor="middle">grounded Claude answer</text>
+      <rect x="508" y="42" width="172" height="34" rx="6" fill="rgba(255,90,90,0.06)" stroke="rgba(255,90,90,0.45)" stroke-width="1.4"/>
+      <text x="594" y="63" font-size="10.5" fill="#ffb3b3" text-anchor="middle">reject — no LLM call</text>
+    </g>
+  </g>
+
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="rgba(16,185,129,0.6)"/>
+    </marker>
+  </defs>
+
+  <g font-family="'JetBrains Mono', monospace" fill="rgba(255,255,255,0.36)" font-size="11">
+    <text x="60" y="420">22,162 docs</text>
+    <text x="190" y="420">·  2,072 chunks</text>
+    <text x="345" y="420">·  30-question benchmark</text>
+    <text x="560" y="420">·  107 tests</text>
+  </g>
+</svg>
