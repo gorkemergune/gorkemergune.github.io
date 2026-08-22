@@ -30,7 +30,7 @@ const en = {
   introLeadPost: ': object detectors, translation models, phishing classifiers — and the apps that put them in people’s hands.',
   introBody: 'I learn by shipping. Every armor in the hall is something I designed, trained, broke, and rebuilt — from a bare-metal operating system to production ML pipelines. The goal is simple: to become the kind of AI engineer whose work speaks before he does.',
   introRolesLabel: 'OPERATING DOMAINS',
-  introRoles: ['AI Engineer', 'Computer Vision (DL)', 'Machine Learning (ML)', 'Large Language Models (LLM)', 'Full-Stack Development', 'Open Source', 'Research'],
+  introRoles: ['AI Engineer', 'Computer Vision (CV)', 'Machine Learning (ML)', 'Large Language Models (LLM)', 'Full-Stack Development', 'Open Source', 'Research'],
   introStats: [
     { n: 22, suffix: '', label: 'Projects shipped' },
     { n: 25, suffix: '+', label: 'Technologies used' },
@@ -43,7 +43,7 @@ const en = {
 
   // Home hero + sections
   heroTagline: 'AI PRODUCT DEVELOPER',
-  heroSubtext: 'I build real products with AI — working on computer vision (DL), machine learning (ML), large language models (LLM), and full-stack development. What matters to me is shipping things people actually use.',
+  heroSubtext: 'I build real products with AI — working on computer vision (CV), machine learning (ML), large language models (LLM), and full-stack development. What matters to me is shipping things people actually use.',
   ctaResume: 'Download Résumé',
   ctaViewWork: 'View Work',
 
@@ -528,7 +528,7 @@ const en = {
       { name: 'Git', level: 5 }, { name: 'GitHub', level: 5 }, { name: 'Docker', level: 4 }, { name: 'Linux', level: 4 }, { name: 'VS Code', level: 5 }, { name: 'Cursor', level: 4 }, { name: 'Claude Code', level: 4 },
     ]},
     { category: 'Other', accent: '#9d6bff', items: [
-      { name: 'Full Stack Development', level: 4 }, { name: 'Algorithms', level: 4 }, { name: 'Data Structures', level: 4 }, { name: 'Computer Vision', level: 4 }, { name: 'Machine Learning', level: 4 }, { name: 'Deep Learning', level: 4 }, { name: 'Large Language Models', level: 4 }, { name: 'REST APIs', level: 4 },
+      { name: 'Full-Stack Development', level: 4 }, { name: 'Algorithms', level: 4 }, { name: 'Data Structures', level: 4 }, { name: 'Computer Vision', level: 4 }, { name: 'Machine Learning', level: 4 }, { name: 'Deep Learning', level: 4 }, { name: 'Large Language Models', level: 4 }, { name: 'REST APIs', level: 4 },
     ]},
   ],
 
@@ -746,7 +746,7 @@ const tr = {
   introLeadPost: ' dönüştürerek geçiriyorum: nesne dedektörleri, çeviri modelleri, oltalama sınıflandırıcıları ve bunları insanların eline ulaştıran uygulamalar.',
   introBody: 'Üreterek öğreniyorum. Zırh Deposu’ndaki her zırh; doğrudan donanımda çalışan bir işletim sisteminden üretim seviyesindeki makine öğrenmesi hatlarına kadar tasarladığım, eğittiğim, bozup yeniden inşa ettiğim bir şey. Amacım basit: işi kendisinden önce konuşan bir yapay zekâ mühendisi olmak.',
   introRolesLabel: 'ÇALIŞMA ALANLARI',
-  introRoles: ['Yapay Zekâ Mühendisi', 'Görüntü İşleme (DL)', 'Makine Öğrenmesi (ML)', 'Büyük Dil Modelleri (LLM)', 'Full-Stack Geliştirme', 'Açık Kaynak', 'Araştırma'],
+  introRoles: ['Yapay Zekâ Mühendisi', 'Bilgisayarlı Görü (CV)', 'Makine Öğrenmesi (ML)', 'Büyük Dil Modelleri (LLM)', 'Full-Stack Geliştirme', 'Açık Kaynak', 'Araştırma'],
   introStats: [
     { n: 22, suffix: '', label: 'Yayınlanan proje' },
     { n: 25, suffix: '+', label: 'Kullanılan teknoloji' },
@@ -759,7 +759,7 @@ const tr = {
 
   // Home hero + sections
   heroTagline: 'YAPAY ZEKÂ ÜRÜN GELİŞTİRİCİSİ',
-  heroSubtext: 'Yapay zekâ ile gerçek ürünler geliştiriyorum; görüntü işleme (DL), makine öğrenmesi (ML), büyük dil modelleri (LLM) ve full stack üzerine çalışıyorum. Benim için önemli olan, insanların gerçekten kullandığı şeyler üretmek.',
+  heroSubtext: 'Yapay zekâ ile gerçek ürünler geliştiriyorum; bilgisayarlı görü (CV), makine öğrenmesi (ML), büyük dil modelleri (LLM) ve full-stack üzerine çalışıyorum. Benim için önemli olan, insanların gerçekten kullandığı şeyler üretmek.',
   ctaResume: 'CV’yi İndir',
   ctaViewWork: 'Çalışmaları Gör',
 
@@ -1372,7 +1372,7 @@ const tr = {
       competitions: [], hackathons: ['BTK E-Ticaret Hackathon'], research: [], projects: ['GorkemOS', 'NEXA Web Sitesi'], achievements: ['C & Assembly ile sıfırdan işletim sistemi', 'Derin Öğrenmeye giriş'] },
     { term: 'Mayıs 2026', sub: '(1. Yıl · 2. Dönem)', status: 'completed', title: 'Hackathonlar, Araştırma & İngilizce',
       competitions: [], hackathons: ['Tıkla Gelsin Foodathon', 'Med-Health Erken Uyarı'], research: ['PHQ-9 Depresyon Analizi'], projects: ['Synonym Master', 'Find The Best'], achievements: ['İngilizcede C1 seviyesine ulaştım', 'İlk uygulamalı ML araştırma projesi'] },
-    { term: 'Haziran 2026', sub: '(1. Yıl · 2. Dönem · finaller)', status: 'completed', title: 'Görüntü İşleme & Staj',
+    { term: 'Haziran 2026', sub: '(1. Yıl · 2. Dönem · finaller)', status: 'completed', title: 'Bilgisayarlı Görü & Staj',
       competitions: ['AlgoLeague Yaz Kampı'], hackathons: [], research: ['E-posta Oltalama Tespiti'], projects: ['Yüz Tespiti'], achievements: ['Online staj tamamladım', '2. Dönem’i Calculus II’den AA ile kapattım'] },
     { term: 'Temmuz 2026', sub: '(Şu an · yaz)', status: 'current', title: 'Yapay Zekâ Dalgası — Modeller, Benchmarklar & Kendi İnce Ayarlarım',
       competitions: [], hackathons: [], research: ['Poz-Değişmez Yüz Kimliği'], projects: ['YOLO Özel Dedektör', 'Re-Minder', 'FaceLock', 'WorldCup BPE Tokenizer', 'wiki2bpe', 'ayarlicazhocam-training', 'MIHENK Benchmark’ı', 'Araç Ajanı'], achievements: ['Kendi iki LLM ince ayarımı geliştirip kıyasladım', 'Araç/fonksiyon çağırmayı uçtan uca öğrendim', 'LLM · ML · DL alanında daha derin çalışma', 'Makale okumaları'] },
