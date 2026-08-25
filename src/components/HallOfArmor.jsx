@@ -1,35 +1,99 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowUpRight, FileText } from 'lucide-react';
 import useAudioFX from './useAudioFX';
 import { useLang } from '../i18n.jsx';
 import { FEATURES } from '../config';
 import PROJECTS from '../data/projects';
+import { prefersReducedMotion } from '../utils/prefersReducedMotion';
 
 const ARMORS = PROJECTS.map((p) => ({
   mark: p.mark,
   name: p.codename,
+  title: p.title,
   descEn: p.oneLiner,
   descTr: p.oneLinerTr,
   color: p.color,
   glow: p.glow,
+  language: p.language,
   tags: [p.language, ...p.tags.filter((t) => t !== p.language)].slice(0, 4),
   href: `/project/${p.slug}`,
 }));
 
 const BOOT_LINES = ['bootLine1', 'bootLine2', 'bootLine3', 'bootLine4', 'bootLine5'];
 
+// Front-facing armor figure. The body carries each project's identity colour;
+// the arc reactor is always the same cyan so the whole rack reads as one system.
+function ArmorFigure({ armor, uid }) {
+  const id = `${armor.mark}-${uid}`.replace(/[^a-zA-Z0-9]/g, '');
+  const body = `url(#body-${id})`;
+  return (
+    <svg viewBox="0 0 64 132" width="100%" height="100%" style={{ display: 'block' }} aria-hidden="true">
+      <defs>
+        <linearGradient id={`body-${id}`} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor={armor.color} stopOpacity="0.96" />
+          <stop offset="1" stopColor={armor.color} stopOpacity="0.5" />
+        </linearGradient>
+        <radialGradient id={`reactor-${id}`} cx="50%" cy="50%" r="50%">
+          <stop offset="0" stopColor="#ffffff" />
+          <stop offset="0.5" stopColor="#7fe9ff" />
+          <stop offset="1" stopColor="#00d4ff" />
+        </radialGradient>
+      </defs>
+      {/* legs */}
+      <rect x="24" y="80" width="7.4" height="46" rx="3" fill={body} opacity="0.9" />
+      <rect x="32.6" y="80" width="7.4" height="46" rx="3" fill={body} opacity="0.9" />
+      {/* pelvis */}
+      <path d="M23 72 L41 72 L39.5 82 L24.5 82 Z" fill={body} />
+      {/* arms */}
+      <path d="M18 30 L11 35 L10 62 L16 64 L19.5 42 Z" fill={body} opacity="0.82" />
+      <path d="M46 30 L53 35 L54 62 L48 64 L44.5 42 Z" fill={body} opacity="0.82" />
+      {/* torso */}
+      <path d="M22 27 L42 27 L46 40 L41.5 73 L22.5 73 L18 40 Z" fill={body} />
+      {/* chest plate seams */}
+      <path d="M32 30 L32 40" stroke="#0a0a12" strokeWidth="0.8" opacity="0.35" />
+      <path d="M24 34 L40 34" stroke="#0a0a12" strokeWidth="0.7" opacity="0.28" />
+      {/* helmet */}
+      <path d="M24 11 Q24 4 32 4 Q40 4 40 11 L40 20 Q40 25 32 26 Q24 25 24 20 Z" fill={body} />
+      {/* eye slits */}
+      <rect x="26.5" y="14.5" width="4" height="2.3" rx="1" fill="#eafcff" opacity="0.92" />
+      <rect x="33.5" y="14.5" width="4" height="2.3" rx="1" fill="#eafcff" opacity="0.92" />
+      {/* arc reactor */}
+      <circle cx="32" cy="45" r="6.4" fill="#06060c" opacity="0.85" />
+      <circle cx="32" cy="45" r="6.4" fill="none" stroke="#00d4ff" strokeWidth="0.8" opacity="0.55" />
+      <circle cx="32" cy="45" r="3.4" fill={`url(#reactor-${id})`} />
+    </svg>
+  );
+}
+
 export default function HallOfArmor() {
   const { lang, t } = useLang();
   const navigate = useNavigate();
   const { playClick, playBootSound, playHover } = useAudioFX();
-  const [hoveredCapsule, setHoveredCapsule] = useState(null);
-  const [tilt, setTilt] = useState({ rx: 0, ry: 0 });
+
   const [bootPhase, setBootPhase] = useState(() => {
     try { return sessionStorage.getItem('hall_booted') ? 3 : 0; } catch { return 0; }
   });
   const [visibleLines, setVisibleLines] = useState(0);
   const bootDone = bootPhase === 3;
+
+  // ---- Carousel state ----
+  const [active, setActive] = useState(0);
+  const [dragging, setDragging] = useState(false);
+  const [interacted, setInteracted] = useState(false);
+  const [dims, setDims] = useState({ cardW: 208, cardH: 300 });
+
+  const viewportRef = useRef(null);
+  const trackRef = useRef(null);
+  const cardsRef = useRef([]);
+  const offsetRef = useRef(0);
+  const velRef = useRef(0);
+  const hoverRef = useRef(false);
+  const activeRef = useRef(0);
+  const dragRef = useRef({ active: false, lastX: 0, lastT: 0, moved: 0 });
+  const metricsRef = useRef({ cardW: 208, step: 224, setW: 1, vw: 1200, N: ARMORS.length });
+
+  const DOUBLE = useMemo(() => [...ARMORS, ...ARMORS], []);
 
   useEffect(() => {
     if (bootPhase !== 0) return;
@@ -61,75 +125,188 @@ export default function HallOfArmor() {
     return () => clearTimeout(tid);
   }, [bootPhase]);
 
+  // ---- Carousel engine: single rAF loop, direct DOM writes (no per-frame re-render) ----
+  useEffect(() => {
+    const reduce = prefersReducedMotion();
+    const N = ARMORS.length;
+    const AUTO = reduce ? 0 : 24; // px/s, right -> left
+
+    const measure = () => {
+      const w = window.innerWidth;
+      const cardW = w <= 600 ? 158 : w <= 900 ? 178 : 208;
+      const cardH = w <= 600 ? 232 : w <= 900 ? 262 : 300;
+      const step = cardW + 16;
+      const vw = viewportRef.current?.clientWidth || w;
+      metricsRef.current = { cardW, step, setW: N * step, vw, N };
+      setDims({ cardW, cardH });
+    };
+    measure();
+    window.addEventListener('resize', measure);
+
+    const apply = () => {
+      const m = metricsRef.current;
+      const off = offsetRef.current;
+      if (trackRef.current) trackRef.current.style.transform = `translate3d(${-off}px,0,0)`;
+      const half = m.vw / 2;
+      const F = Math.max(260, m.vw * 0.5);
+      const cards = cardsRef.current;
+      for (let j = 0; j < cards.length; j++) {
+        const el = cards[j];
+        if (!el) continue;
+        const cx = j * m.step + m.cardW / 2 - off;
+        const t = Math.min(1, Math.abs(cx - half) / F);
+        el.style.transform = `scale(${(1 - t * 0.2).toFixed(4)})`;
+        el.style.opacity = (1 - t * 0.5).toFixed(3);
+        el.style.zIndex = String(100 - Math.round(t * 100));
+      }
+      const centerIdx = Math.round((off + half - m.cardW / 2) / m.step);
+      const a = ((centerIdx % m.N) + m.N) % m.N;
+      if (a !== activeRef.current) { activeRef.current = a; setActive(a); }
+    };
+
+    let raf;
+    let last = performance.now();
+    const loop = (now) => {
+      const dt = Math.min(0.05, (now - last) / 1000);
+      last = now;
+      const m = metricsRef.current;
+      if (!dragRef.current.active) {
+        const target = hoverRef.current ? 0 : AUTO;
+        velRef.current += (target - velRef.current) * (1 - Math.exp(-dt / 0.9));
+        offsetRef.current += velRef.current * dt;
+      }
+      if (m.setW > 0) {
+        let o = offsetRef.current % m.setW;
+        if (o < 0) o += m.setW;
+        offsetRef.current = o;
+      }
+      apply();
+      raf = requestAnimationFrame(loop);
+    };
+    raf = requestAnimationFrame(loop);
+    return () => { cancelAnimationFrame(raf); window.removeEventListener('resize', measure); };
+  }, []);
+
+  // ---- Pointer (mouse + touch unified) ----
+  const onPointerDown = (e) => {
+    dragRef.current = { active: true, lastX: e.clientX, lastT: performance.now(), moved: 0 };
+    velRef.current = 0;
+    setDragging(true);
+    setInteracted(true);
+    try { viewportRef.current.setPointerCapture(e.pointerId); } catch { /* noop */ }
+  };
+  const onPointerMove = (e) => {
+    const d = dragRef.current;
+    if (!d.active) return;
+    const now = performance.now();
+    const dx = e.clientX - d.lastX;
+    const dtt = Math.max(0.001, (now - d.lastT) / 1000);
+    offsetRef.current -= dx;
+    d.moved += Math.abs(dx);
+    velRef.current = Math.max(-2400, Math.min(2400, -dx / dtt));
+    d.lastX = e.clientX;
+    d.lastT = now;
+  };
+  const endDrag = (e) => {
+    const d = dragRef.current;
+    if (!d.active) return;
+    d.active = false;
+    setDragging(false);
+    try { viewportRef.current.releasePointerCapture(e.pointerId); } catch { /* noop */ }
+  };
+  const onEnter = (e) => { if (e.pointerType === 'mouse') hoverRef.current = true; };
+  const onLeave = (e) => { if (e.pointerType === 'mouse') hoverRef.current = false; endDrag(e); };
+  const onCardClick = (armor) => {
+    if (dragRef.current.moved > 6) return; // it was a drag, not a click
+    playClick();
+    navigate(armor.href);
+  };
+
   const marquee = t('marquee');
+  const act = ARMORS[active] || ARMORS[0];
 
   return (
-    <div style={s.wrap}>
+    <div className="hall-wrap" style={s.wrap}>
       <style>{`
-        @keyframes led-breathe {
-          0%, 100% { opacity: 0.35; }
-          50% { opacity: 1; }
-        }
-        @keyframes platform-rotate {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-        @keyframes platform-rotate-reverse {
-          from { transform: rotate(360deg); }
-          to { transform: rotate(0deg); }
-        }
+        @keyframes led-breathe { 0%,100%{opacity:0.35;} 50%{opacity:1;} }
+        @keyframes platform-rotate { from{transform:rotate(0);} to{transform:rotate(360deg);} }
+        @keyframes platform-rotate-reverse { from{transform:rotate(360deg);} to{transform:rotate(0);} }
         @keyframes platform-pulse {
-          0%, 100% { box-shadow: 0 0 12px rgba(0,212,255,0.4), 0 0 24px rgba(0,212,255,0.2); }
-          50% { box-shadow: 0 0 24px rgba(0,212,255,0.7), 0 0 48px rgba(0,212,255,0.35); }
+          0%,100%{ box-shadow:0 0 12px rgba(0,212,255,0.4),0 0 24px rgba(0,212,255,0.2); }
+          50%{ box-shadow:0 0 24px rgba(0,212,255,0.7),0 0 48px rgba(0,212,255,0.35); }
         }
-        @keyframes capsule-rise {
-          from { opacity: 0; transform: translateY(40px); }
-          to { opacity: 1; transform: translateY(0); }
+        @keyframes boot-blink { 0%,100%{opacity:1;} 50%{opacity:0;} }
+        @keyframes scanline-move { 0%{transform:translateY(-100%);} 100%{transform:translateY(200vh);} }
+        @keyframes boot-fade-out { from{opacity:1;pointer-events:all;} to{opacity:0;pointer-events:none;} }
+        @keyframes floor-pulse { 0%,100%{opacity:0.4;transform:translateX(-50%) scaleX(1);} 50%{opacity:0.7;transform:translateX(-50%) scaleX(1.2);} }
+        @keyframes hint-pulse { 0%,100%{opacity:0.55;} 50%{opacity:1;} }
+
+        .armory-frame {
+          position: relative; margin-top: 4px; padding: 14px 0 18px;
+          border-top: 1px solid rgba(0,212,255,0.10);
+          border-bottom: 1px solid rgba(0,212,255,0.10);
         }
-        @keyframes hud-scan {
-          0% { top: 0%; opacity: 0.5; }
-          80% { opacity: 0.5; }
-          100% { top: 100%; opacity: 0; }
+        .armory-viewport {
+          position: relative; overflow: hidden; touch-action: pan-y;
+          -webkit-mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
         }
-        @keyframes boot-blink {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0; }
+        .armory-track { display: flex; gap: 16px; align-items: center; will-change: transform; padding: 8px 0; }
+        .armor-pod { flex: 0 0 auto; cursor: pointer; will-change: transform, opacity; }
+        .pod-inner {
+          position: relative; height: 100%;
+          display: flex; flex-direction: column; align-items: center;
+          padding: 12px 12px 14px; border-radius: 6px;
+          background: linear-gradient(180deg, #10101d 0%, #08080f 100%);
+          border: 1px solid #1a1a2e;
+          transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s cubic-bezier(0.2,0.8,0.2,1);
+          box-shadow: inset 0 0 24px rgba(0,0,0,0.4);
         }
-        @keyframes scanline-move {
-          0% { transform: translateY(-100%); }
-          100% { transform: translateY(200vh); }
+        .armor-pod:hover .pod-inner { transform: translateY(-6px); }
+        .pod-top {
+          width: 100%; display: flex; align-items: center; justify-content: space-between;
+          font-family: 'JetBrains Mono', monospace; font-size: 8px; letter-spacing: 0.2em;
         }
-        @keyframes boot-fade-out {
-          from { opacity: 1; pointer-events: all; }
-          to { opacity: 0; pointer-events: none; }
+        .pod-figure { flex: 1; width: 62%; max-width: 96px; display: flex; align-items: center; justify-content: center; margin: 8px 0 4px; filter: drop-shadow(0 6px 10px rgba(0,0,0,0.5)); }
+        .pod-floor { width: 66%; height: 12px; border-radius: 50%; margin-bottom: 8px; animation: floor-pulse 3s ease-in-out infinite; }
+        .pod-name { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.06em; color: #d2d2e0; text-align: center; line-height: 1.35; }
+        .pod-lang { font-family: 'JetBrains Mono', monospace; font-size: 8px; letter-spacing: 0.14em; margin-top: 5px; }
+
+        .armory-readout { max-width: 720px; margin: 26px auto 0; text-align: center; min-height: 116px; }
+        .ro-line { display: flex; align-items: baseline; justify-content: center; gap: 10px; flex-wrap: wrap; }
+        .ro-mark { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.16em; }
+        .ro-name { font-family: 'JetBrains Mono', monospace; font-size: 16px; letter-spacing: 0.03em; color: #e6e6f0; }
+        .ro-name em { font-style: normal; color: #7a7a92; font-size: 13px; }
+        .ro-desc { font-family: 'Instrument Sans', sans-serif; font-size: 14px; line-height: 1.55; color: #a6a6bc; margin: 12px auto 0; max-width: 620px; }
+        .ro-bottom { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 14px; flex-wrap: wrap; }
+        .ro-tags { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
+        .ro-tag { font-family: 'JetBrains Mono', monospace; font-size: 8px; letter-spacing: 0.08em; padding: 3px 7px; border-radius: 3px; }
+        .ro-deploy { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; padding: 6px 14px; border-radius: 4px; border: 1px solid; text-decoration: none; transition: all 0.25s; }
+        .ro-deploy:hover { background: rgba(255,255,255,0.04); }
+
+        .armory-head { text-align: center; margin-bottom: 10px; }
+        .armory-kicker { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.28em; color: #00d4ff; }
+        .armory-sub { font-family: 'Instrument Sans', sans-serif; font-size: 13px; color: #7a7a92; margin-top: 8px; }
+        .drag-hint {
+          position: absolute; left: 50%; bottom: -6px; transform: translateX(-50%);
+          font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.3em; color: #4a4a60;
+          pointer-events: none; transition: opacity 0.6s; z-index: 7; animation: hint-pulse 2.4s ease-in-out infinite;
         }
-        @keyframes holo-spin {
-          from { transform: rotateY(0deg); }
-          to { transform: rotateY(360deg); }
-        }
-        @keyframes holo-floor {
-          0%, 100% { opacity: 0.35; transform: translateX(-50%) scaleX(1); }
-          50% { opacity: 0.7; transform: translateX(-50%) scaleX(1.25); }
-        }
+
         @media (prefers-reduced-motion: reduce) {
-          .holo-stage { animation: none !important; }
+          .pod-floor, .drag-hint, .marquee, .holo-stage { animation: none !important; }
         }
         @media (max-width: 900px) {
-          .hall-capsules { flex-wrap: wrap !important; justify-content: center !important; }
-          .capsule-item { width: calc(33.333% - 10px) !important; min-width: 130px !important; max-width: none !important; }
           .hall-platform { width: 180px !important; height: 180px !important; }
           .hall-name { font-size: 64px !important; }
         }
         @media (max-width: 600px) {
-          .hall-capsules { flex-direction: column !important; align-items: stretch !important; gap: 8px !important; }
-          .capsule-item { width: 100% !important; min-width: unset !important; flex-direction: row !important; }
-          .capsule-body-inner { flex-direction: row !important; min-height: 72px !important; padding: 10px 14px !important; align-items: center !important; gap: 12px !important; }
-          .capsule-silhouette { display: none !important; }
-          .capsule-led-bar { height: 3px !important; width: 100% !important; }
           .hall-platform { width: 140px !important; height: 140px !important; }
           .hall-name { font-size: 36px !important; letter-spacing: 0.04em !important; }
           .hall-status-bar { flex-direction: column !important; gap: 6px !important; align-items: flex-start !important; }
           .hall-wrap { padding: 40px 16px 32px !important; }
+          .ro-name { font-size: 14px !important; }
+          .armory-readout { min-height: 132px !important; }
         }
       `}</style>
 
@@ -194,7 +371,6 @@ export default function HallOfArmor() {
           <Link to="/project" className="hero-btn hero-btn-primary" onClick={playClick}>
             {t('ctaViewWork')} <ArrowUpRight size={15} strokeWidth={1.5} />
           </Link>
-          {/* Résumé CTA temporarily disabled via FEATURES.resume — flip in src/config.js to restore */}
           {FEATURES.resume && (
             <Link to="/resume" className="hero-btn" onClick={playClick}>
               <FileText size={15} strokeWidth={1.5} /> {t('ctaResume')}
@@ -203,7 +379,7 @@ export default function HallOfArmor() {
         </div>
       </div>
 
-      {/* PLATFORM */}
+      {/* PLATFORM — arc reactor */}
       <div style={s.platformWrap}>
         <div className="hall-platform" style={s.platform}>
           <div style={{
@@ -239,180 +415,92 @@ export default function HallOfArmor() {
         </div>
       </div>
 
-      {/* CAPSULES */}
-      <div className="hall-capsules" style={s.capsules}>
-        {ARMORS.map((armor, i) => (
-          <div
-            key={armor.mark}
-            className="capsule-item"
-            style={{
-              ...s.capsuleItem,
-              animation: bootDone ? `capsule-rise 0.7s cubic-bezier(0.2,0.8,0.2,1) ${i * 0.1}s both` : 'none',
-            }}
-            onMouseEnter={() => { setHoveredCapsule(i); playHover(); }}
-            onMouseMove={(e) => {
-              const r = e.currentTarget.getBoundingClientRect();
-              const px = (e.clientX - r.left) / r.width - 0.5;
-              const py = (e.clientY - r.top) / r.height - 0.5;
-              setTilt({ rx: -py * 14, ry: px * 14 });
-            }}
-            onMouseLeave={() => { setHoveredCapsule(null); setTilt({ rx: 0, ry: 0 }); }}
-            onClick={() => { playClick(); navigate(armor.href); }}
-          >
-            {/* LED strip */}
-            <div className="capsule-led-bar" style={{
-              height: 2, width: '100%', borderRadius: 1,
-              background: `linear-gradient(90deg, transparent 0%, ${armor.color} 30%, ${armor.color} 70%, transparent 100%)`,
-              boxShadow: `0 0 8px ${armor.glow}`,
-              animation: `led-breathe ${2.2 + i * 0.35}s ease-in-out ${i * 0.28}s infinite`,
-              marginBottom: 2,
-            }} />
+      {/* ARMOR COLLECTION — infinite carousel */}
+      <div className="armory-head">
+        <div className="armory-kicker">{t('hallCollection')} <span style={{ color: '#2a2a40' }}>//</span> {String(ARMORS.length).padStart(2, '0')} {t('hallBuilds')}</div>
+        <div className="armory-sub">{t('hallCollectionSub')}</div>
+      </div>
 
-            {/* Glass panel */}
-            <div className="capsule-body-inner" style={{
-              display: 'flex', flexDirection: 'column',
-              alignItems: 'center', padding: '14px 10px 12px',
-              background: 'linear-gradient(180deg, #0f0f1a 0%, #080810 100%)',
-              border: `1px solid ${hoveredCapsule === i ? armor.color : '#1a1a2e'}`,
-              borderRadius: 4,
-              minHeight: 290,
-              position: 'relative',
-              transformStyle: 'preserve-3d',
-              transition: 'border-color 0.3s, box-shadow 0.3s, transform 0.25s cubic-bezier(0.2,0.8,0.2,1)',
-              transform: hoveredCapsule === i
-                ? `rotateX(${tilt.rx}deg) rotateY(${tilt.ry}deg) translateZ(22px) scale(1.05)`
-                : 'rotateX(0deg) rotateY(0deg) translateZ(0) scale(1)',
-              boxShadow: hoveredCapsule === i
-                ? `0 18px 40px rgba(0,0,0,0.55), 0 0 24px ${armor.glow}, inset 0 0 24px rgba(0,0,0,0.4)`
-                : 'inset 0 0 20px rgba(0,0,0,0.3)',
-            }}>
-              {/* Mark badge */}
-              <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 8, letterSpacing: '0.2em', color: armor.color, alignSelf: 'flex-start', opacity: 0.85 }}>
-                {armor.mark}
-              </div>
+      <div className="armory-frame">
+        {/* center spotlight in the active armor's colour */}
+        <div style={{
+          position: 'absolute', top: 0, bottom: 0, left: '50%', width: 260,
+          transform: 'translateX(-50%)', pointerEvents: 'none', zIndex: 0,
+          background: `radial-gradient(ellipse 60% 70% at 50% 45%, ${act.color}14 0%, transparent 70%)`,
+          transition: 'background 0.6s ease',
+        }} />
+        {/* edge fades over the frame border */}
+        <div style={{ position: 'absolute', top: 0, bottom: 0, left: 0, width: 40, zIndex: 6, pointerEvents: 'none', background: 'linear-gradient(90deg, #0a0a0f, transparent)' }} />
+        <div style={{ position: 'absolute', top: 0, bottom: 0, right: 0, width: 40, zIndex: 6, pointerEvents: 'none', background: 'linear-gradient(270deg, #0a0a0f, transparent)' }} />
 
-              {/* Armor silhouette — holographic 3D turntable (solid box prism, always spinning) */}
-              <div className="capsule-silhouette" style={{ margin: '16px 0 10px', display: 'flex', flexDirection: 'column', alignItems: 'center', perspective: 480, transform: 'translateZ(30px)' }}>
-                <div className="holo-stage" style={{
-                  position: 'relative', width: 58, height: 116,
-                  transformStyle: 'preserve-3d',
-                  animation: `holo-spin ${16 + i * 0.6}s linear infinite`,
-                }}>
-                  {[
-                    { deg: 0, z: 22, op: 1 },
-                    { deg: 90, z: 22, op: 0.62 },
-                    { deg: 180, z: 22, op: 0.85 },
-                    { deg: 270, z: 22, op: 0.62 },
-                  ].map(({ deg, z, op }) => (
-                    <svg key={deg} viewBox="0 0 40 80" width="58" height="116" style={{
-                      position: 'absolute', inset: 0,
-                      transform: `rotateY(${deg}deg) translateZ(${z}px)`,
-                      backfaceVisibility: 'hidden',
-                      opacity: (hoveredCapsule === i ? Math.min(1, op + 0.15) : op),
-                      transition: 'opacity 0.3s',
-                      filter: hoveredCapsule === i
-                        ? `drop-shadow(0 0 8px ${armor.glow})`
-                        : `drop-shadow(0 0 3px ${armor.glow})`,
-                    }}>
-                      <defs>
-                        <linearGradient id={`armorFill-${armor.mark.replace(/\s/g, '')}-${deg}`} x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="0" stopColor={armor.color} stopOpacity="0.95" />
-                          <stop offset="1" stopColor={armor.color} stopOpacity="0.6" />
-                        </linearGradient>
-                      </defs>
-                      {(() => {
-                        const fill = `url(#armorFill-${armor.mark.replace(/\s/g, '')}-${deg})`;
-                        return (
-                          <>
-                            <rect x="14" y="1" width="12" height="10" rx="2" fill={fill} />
-                            <rect x="10" y="11" width="20" height="26" rx="3" fill={fill} />
-                            <rect x="2" y="13" width="8" height="16" rx="2" fill={armor.color} opacity="0.7" />
-                            <rect x="30" y="13" width="8" height="16" rx="2" fill={armor.color} opacity="0.7" />
-                            <rect x="12" y="37" width="7" height="28" rx="2" fill={armor.color} opacity="0.85" />
-                            <rect x="21" y="37" width="7" height="28" rx="2" fill={armor.color} opacity="0.85" />
-                            <ellipse cx="20" cy="23" rx="4.4" ry="4.4" fill="rgba(10,10,15,0.7)" />
-                            <ellipse cx="20" cy="23" rx="2.2" ry="2.2" fill="#eafcff" opacity="0.95" />
-                          </>
-                        );
-                      })()}
-                    </svg>
-                  ))}
-                </div>
-                {/* hologram floor */}
-                <div style={{
-                  position: 'relative', width: 64, height: 12, marginTop: 8,
-                }}>
-                  <div style={{
-                    position: 'absolute', left: '50%', top: 0, width: 64, height: 12,
-                    transform: 'translateX(-50%)',
-                    borderRadius: '50%',
-                    background: `radial-gradient(ellipse, ${armor.color}66 0%, transparent 70%)`,
-                    animation: `holo-floor ${2.4 + i * 0.2}s ease-in-out infinite`,
-                  }} />
+        <div
+          ref={viewportRef}
+          className="armory-viewport"
+          onPointerDown={onPointerDown}
+          onPointerMove={onPointerMove}
+          onPointerUp={endDrag}
+          onPointerCancel={endDrag}
+          onPointerEnter={onEnter}
+          onPointerLeave={onLeave}
+          style={{ cursor: dragging ? 'grabbing' : 'grab' }}
+        >
+          <div ref={trackRef} className="armory-track">
+            {DOUBLE.map((armor, j) => (
+              <div
+                key={j}
+                ref={(el) => { cardsRef.current[j] = el; }}
+                className="armor-pod"
+                style={{ width: dims.cardW, height: dims.cardH }}
+                onClick={() => onCardClick(armor)}
+                onPointerEnter={() => { if (!dragRef.current.active) playHover(); }}
+              >
+                <div className="pod-inner">
+                  {/* top LED + mark */}
+                  <div className="pod-top">
+                    <span style={{ color: armor.color, opacity: 0.9 }}>{armor.mark}</span>
+                    <span style={{
+                      width: 5, height: 5, borderRadius: '50%', background: armor.color,
+                      boxShadow: `0 0 6px ${armor.glow}`, animation: `led-breathe ${2.4 + (j % 6) * 0.3}s ease-in-out infinite`,
+                    }} />
+                  </div>
+                  <div className="pod-figure">
+                    <ArmorFigure armor={armor} uid={j} />
+                  </div>
+                  <div className="pod-floor" style={{ background: `radial-gradient(ellipse, ${armor.color}66 0%, transparent 70%)` }} />
+                  <div className="pod-name">{armor.name}</div>
+                  <div className="pod-lang" style={{ color: armor.color, opacity: 0.85 }}>{armor.language}</div>
                 </div>
               </div>
-
-              {/* Armor name */}
-              <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 9, letterSpacing: '0.08em', color: '#c0c0d0', textAlign: 'center', lineHeight: 1.4, marginTop: 'auto' }}>
-                {armor.name}
-              </div>
-
-              {/* HUD overlay on hover */}
-              <div style={{
-                position: 'absolute', inset: 0,
-                background: 'rgba(8,8,16,0.93)',
-                border: `1px solid ${armor.color}`,
-                borderRadius: 4, padding: '10px 10px 8px',
-                display: 'flex', flexDirection: 'column',
-                overflow: 'hidden',
-                opacity: hoveredCapsule === i ? 1 : 0,
-                transform: hoveredCapsule === i ? 'translateY(0) translateZ(34px)' : 'translateY(6px) translateZ(0)',
-                transition: 'opacity 0.25s, transform 0.25s',
-                pointerEvents: hoveredCapsule === i ? 'auto' : 'none',
-              }}>
-                {/* Scan line */}
-                <div style={{
-                  position: 'absolute', left: 0, right: 0, height: 1,
-                  background: `linear-gradient(90deg, transparent, ${armor.color}88, transparent)`,
-                  animation: 'hud-scan 2s linear infinite',
-                  pointerEvents: 'none',
-                }} />
-                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 8, color: armor.color, letterSpacing: '0.14em', marginBottom: 6 }}>
-                  {armor.mark} // {lang === 'tr' ? 'ÇEVRİMİÇİ' : 'ONLINE'}
-                </div>
-                <div style={{ fontFamily: "'Instrument Sans', sans-serif", fontSize: 10, color: '#b0b0c0', lineHeight: 1.45, marginBottom: 8, flex: 1, overflow: 'hidden' }}>
-                  {lang === 'tr' && armor.descTr ? armor.descTr : armor.descEn}
-                </div>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 3, marginBottom: 8 }}>
-                  {armor.tags.map(tag => (
-                    <span key={tag} style={{
-                      fontFamily: "'JetBrains Mono', monospace", fontSize: 7,
-                      padding: '2px 5px',
-                      border: `1px solid ${armor.color}44`,
-                      borderRadius: 2, color: armor.color,
-                      background: `${armor.color}0e`,
-                      letterSpacing: '0.06em',
-                    }}>{tag}</span>
-                  ))}
-                </div>
-                <Link to={armor.href} style={{
-                  display: 'block', textAlign: 'center',
-                  fontFamily: "'JetBrains Mono', monospace", fontSize: 8,
-                  color: armor.color, letterSpacing: '0.12em',
-                  padding: '5px 0',
-                  borderTop: `1px solid ${armor.color}33`,
-                  textDecoration: 'none',
-                }}>
-                  {t('hallDeploy')} →
-                </Link>
-              </div>
-            </div>
+            ))}
           </div>
-        ))}
+        </div>
+
+        <div className="drag-hint" style={{ opacity: interacted ? 0 : 1 }}>
+          &larr;&nbsp;&nbsp;{t('hallDrag')}&nbsp;&nbsp;&rarr;
+        </div>
+      </div>
+
+      {/* ACTIVE ARMOR READOUT */}
+      <div className="armory-readout">
+        <div className="ro-line">
+          <span className="ro-mark" style={{ color: act.color }}>{act.mark}</span>
+          <span className="ro-name">{act.name} <em>— {act.title}</em></span>
+        </div>
+        <p className="ro-desc">{lang === 'tr' && act.descTr ? act.descTr : act.descEn}</p>
+        <div className="ro-bottom">
+          <div className="ro-tags">
+            {act.tags.map((tag) => (
+              <span key={tag} className="ro-tag" style={{ color: act.color, border: `1px solid ${act.color}44`, background: `${act.color}0e` }}>{tag}</span>
+            ))}
+          </div>
+          <Link to={act.href} className="ro-deploy" style={{ color: act.color, borderColor: `${act.color}66` }} onClick={playClick}>
+            {t('hallDeploy')} &rarr;
+          </Link>
+        </div>
       </div>
 
       {/* MARQUEE */}
-      <div style={{ marginTop: 64 }}>
+      <div style={{ marginTop: 56 }}>
         <div className="hairline" style={{ marginBottom: 40 }} />
         <div className="marquee-wrap">
           <div className="marquee">
@@ -448,7 +536,7 @@ const s = {
   },
   statusLeft: { color: '#6a6a80', letterSpacing: '0.12em' },
   statusCenter: { flex: 1, textAlign: 'center', color: '#3a3a50' },
-  nameWrap: { textAlign: 'center', marginBottom: 48, display: 'flex', flexDirection: 'column', alignItems: 'center' },
+  nameWrap: { textAlign: 'center', marginBottom: 40, display: 'flex', flexDirection: 'column', alignItems: 'center' },
   name: {
     fontFamily: "'JetBrains Mono', monospace",
     fontSize: 88, fontWeight: 500,
@@ -468,24 +556,11 @@ const s = {
   heroCtas: { marginTop: 30, display: 'flex', gap: 14, flexWrap: 'wrap', justifyContent: 'center' },
   platformWrap: {
     display: 'flex', justifyContent: 'center',
-    marginBottom: 72, paddingBottom: 36,
+    marginBottom: 52, paddingBottom: 30,
   },
   platform: {
-    width: 240, height: 240,
+    width: 200, height: 200,
     position: 'relative',
     display: 'flex', alignItems: 'center', justifyContent: 'center',
-  },
-  capsules: {
-    display: 'flex', gap: 12, justifyContent: 'center',
-    alignItems: 'stretch', flexWrap: 'wrap',
-    perspective: 1400,
-  },
-  capsuleItem: {
-    display: 'flex', flexDirection: 'column',
-    width: 'calc(20% - 13px)', maxWidth: 250, minWidth: 150,
-    cursor: 'pointer',
-    flexShrink: 0,
-    perspective: 900,
-    transformStyle: 'preserve-3d',
   },
 };
