@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowLeft, ArrowUpRight, Trophy, Users, Github } from 'lucide-react';
+import { ArrowLeft, ArrowUpRight, Trophy, Users, Github, ListOrdered } from 'lucide-react';
 import { useLang } from '../i18n.jsx';
 import { useSeo } from '../hooks/useSeo';
 import COMPETITIONS from '../data/competitions';
@@ -78,6 +78,11 @@ export default function CompetitionsPage() {
                 {c.repo && (
                   <a href={c.repo} target="_blank" rel="noopener noreferrer" className="link-hover" style={{ ...s.link, color: c.accent }}>
                     <Github size={13} strokeWidth={1.5} /> GitHub
+                  </a>
+                )}
+                {c.leaderboard && (
+                  <a href={c.leaderboard} target="_blank" rel="noopener noreferrer" className="link-hover" style={{ ...s.link, color: c.accent }}>
+                    <ListOrdered size={13} strokeWidth={1.5} /> {t('compLeaderboard')}
                   </a>
                 )}
                 {c.website && (

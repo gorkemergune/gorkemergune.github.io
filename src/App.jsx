@@ -33,6 +33,7 @@ const ProjectPage = lazy(() => import('./pages/ProjectPage'));
 const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
 const CompetitionsPage = lazy(() => import('./pages/CompetitionsPage'));
 const ResearchPage = lazy(() => import('./pages/ResearchPage'));
+const LearningPathPage = lazy(() => import('./pages/LearningPathPage'));
 const ResumePage = lazy(() => import('./pages/ResumePage'));
 const CaseStudyPage = lazy(() => import('./pages/CaseStudyPage'));
 
@@ -259,6 +260,7 @@ export default function App() {
             <Link to="/project" className="link-hover" style={{ cursor: 'pointer' }}>{t('navProject')}</Link>
             <Link to="/competitions" className="link-hover" style={{ cursor: 'pointer' }}>{t('navCompetitions')}</Link>
             <Link to="/research" className="link-hover" style={{ cursor: 'pointer' }}>{t('navResearch')}</Link>
+            <Link to="/learning-path" className="link-hover" style={{ cursor: 'pointer' }}>{t('navLearning')}</Link>
             <Link to="/journey" className="link-hover" style={{ cursor: 'pointer' }}>{t('navLifeFlow')}</Link>
             <Link to="/blog" className="link-hover" style={{ cursor: 'pointer' }}>{t('navBlog')}</Link>
             <Link to="/fun" className="link-hover" style={{ cursor: 'pointer' }}>{t('navFun')}</Link>
@@ -296,6 +298,7 @@ export default function App() {
             <Link to="/project" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navProject')}</Link>
             <Link to="/competitions" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navCompetitions')}</Link>
             <Link to="/research" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navResearch')}</Link>
+            <Link to="/learning-path" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navLearning')}</Link>
             <Link to="/journey" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navLifeFlow')}</Link>
             <Link to="/blog" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navBlog')}</Link>
             {FEATURES.resume && <Link to="/resume" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navResume')}</Link>}
@@ -342,6 +345,7 @@ export default function App() {
           <Route path="/project/:slug/case-study" element={<CaseStudyPage />} />
           <Route path="/competitions" element={<CompetitionsPage />} />
           <Route path="/research" element={<ResearchPage />} />
+          <Route path="/learning-path" element={<LearningPathPage />} />
           <Route path="/resume" element={<ResumePage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

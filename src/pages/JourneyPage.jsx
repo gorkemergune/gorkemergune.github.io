@@ -55,30 +55,39 @@ const CHIP_LINKS = {
   'AlgoLeague Yaz Kampı': '/competitions',
 };
 
-const MONTHS = {
-  en: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-  tr: ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'],
-};
-
-// Auto-generate the locked future months (Aug 2026 → graduation Jun 2029) so the
-// timeline stays month-by-month all the way through without hardcoding dozens of
-// empty entries. Academic terms follow a Turkish university calendar.
+// Auto-generate the locked future terms (Year 2 → graduation, Jun 2029) at the
+// same coarse, term-level granularity as the completed entries — a short
+// chronology, not a month-by-month log. Academic terms follow a Turkish
+// university calendar.
 function futureMonths(lang) {
-  const months = MONTHS[lang] || MONTHS.en;
+  const tr = lang === 'tr';
   const out = [];
-  let y = 2026, m = 7;                 // August 2026 (0-indexed month)
-  const endY = 2029, endM = 5;         // June 2029 (graduation)
-  while (y < endY || (y === endY && m <= endM)) {
-    const seasonStart = m >= 8 ? y : y - 1;   // academic year that began the prior September
-    const yearNo = seasonStart - 2024;        // 2026 → 2, 2027 → 3, 2028 → 4
-    let sub;
-    if (y === endY && m === endM) sub = lang === 'tr' ? '(Mezuniyet)' : '(Graduation)';
-    else if (m === 6 || m === 7) sub = lang === 'tr' ? '(Yaz)' : '(Summer)';
-    else if (m >= 8 || m === 0) sub = lang === 'tr' ? `(${yearNo}. Yıl · 1. Dönem)` : `(Year ${yearNo} · Term 1)`;
-    else sub = lang === 'tr' ? `(${yearNo}. Yıl · 2. Dönem)` : `(Year ${yearNo} · Term 2)`;
-    out.push({ term: `${months[m]} ${y}`, sub, status: 'locked', title: '', competitions: [], hackathons: [], research: [], projects: [], achievements: [] });
-    m += 1; if (m > 11) { m = 0; y += 1; }
+  // Year 2 (2026–27) through Year 4 (2028–29)
+  for (let yearNo = 2; yearNo <= 4; yearNo += 1) {
+    const startYear = 2024 + yearNo;       // Year 2 → 2026
+    out.push({
+      term: tr ? `${yearNo}. Yıl · 1. Dönem` : `Year ${yearNo} · Term 1`,
+      sub: tr ? `(${startYear} · Güz)` : `(${startYear} · Fall)`,
+      status: 'locked', title: '', competitions: [], hackathons: [], research: [], projects: [], achievements: [],
+    });
+    out.push({
+      term: tr ? `${yearNo}. Yıl · 2. Dönem` : `Year ${yearNo} · Term 2`,
+      sub: tr ? `(${startYear + 1} · Bahar)` : `(${startYear + 1} · Spring)`,
+      status: 'locked', title: '', competitions: [], hackathons: [], research: [], projects: [], achievements: [],
+    });
+    if (yearNo < 4) {
+      out.push({
+        term: tr ? `${startYear + 1} Yazı` : `Summer ${startYear + 1}`,
+        sub: tr ? '(Yaz)' : '(Summer)',
+        status: 'locked', title: '', competitions: [], hackathons: [], research: [], projects: [], achievements: [],
+      });
+    }
   }
+  out.push({
+    term: tr ? 'Mezuniyet' : 'Graduation',
+    sub: tr ? '(Haziran 2029)' : '(June 2029)',
+    status: 'locked', title: '', competitions: [], hackathons: [], research: [], projects: [], achievements: [],
+  });
   return out;
 }
 

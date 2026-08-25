@@ -27,6 +27,7 @@ const COMPETITIONS = [
       tr: ['887 puan — Türkiye 48.’si', 'ayarlicazhocam takımıyla 24 saat kesintisiz algoritma maratonu'],
     },
     website: 'https://ieeextreme.org',
+    leaderboard: 'https://ieeextreme.org/ieeextreme-19-0-ranking/',
   },
   {
     id: 'algoleague-winter',
@@ -47,6 +48,7 @@ const COMPETITIONS = [
     },
     achievements: { en: ['Solved 6/10 problems — ranked 23rd of 92'], tr: ['10 sorudan 6’sını çözdüm — 92 kişi içinde 23.'] },
     website: 'https://algoleague.com',
+    leaderboard: 'https://algoleague.com/contest/algorithm-competition-winter-camp-2026-qualification-round/leaderboard',
   },
   {
     id: 'algoleague-spring',
@@ -67,6 +69,7 @@ const COMPETITIONS = [
     },
     achievements: { en: ['Solved 5/10 problems — ranked 11th of 90'], tr: ['10 sorudan 5’ini çözdüm — 90 kişi içinde 11.'] },
     website: 'https://algoleague.com',
+    leaderboard: 'https://algoleague.com/contest/algorithm-program-2025-2026-spring-qualification-round/leaderboard',
   },
   {
     id: 'algoleague-summer',
@@ -87,6 +90,7 @@ const COMPETITIONS = [
     },
     achievements: { en: ['Solved 8/12 problems — ranked 11th of 102'], tr: ['12 sorudan 8’ini çözdüm — 102 kişi içinde 11.'] },
     website: 'https://algoleague.com',
+    leaderboard: 'https://algoleague.com/contest/algorithm-competition-summer-camp-2026-qualification-round/leaderboard',
   },
   {
     id: 'btk-hackathon',

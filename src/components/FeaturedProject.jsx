@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
-import { ArrowUpRight, FileText, Trophy } from 'lucide-react';
+import { ArrowUpRight, FileText, Trophy, Github } from 'lucide-react';
 import { useLang } from '../i18n.jsx';
 import { getProject } from '../data/projects';
 
 const FEATURED_SLUG = 'mihenk-benchmark';
+const SECOND_SLUG = 'vlm-groundbench';
 
 // Compact leaderboard shown on the featured card. Mirrors mihenk-benchmark's
 // full-set table; `mine` flags the two models that are my own fine-tunes.
@@ -18,6 +19,7 @@ const BOARD = [
 export default function FeaturedProject() {
   const { lang, t } = useLang();
   const p = getProject(FEATURED_SLUG);
+  const p2 = getProject(SECOND_SLUG);
   if (!p) return null;
   const loc = (en, tr) => (lang === 'tr' && tr ? tr : en);
 
@@ -31,7 +33,12 @@ export default function FeaturedProject() {
         .fp-card:hover .fp-media img { transform: scale(1.04); }
         .fp-lb-row { transition: background 0.3s, border-color 0.3s; }
         .fp-lb-row:hover { background: ${p.color}12; }
-        @media (max-width: 820px) { .fp-card { grid-template-columns: 1fr !important; } .fp-media { min-height: 200px; } }
+        .fp2-card { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 0; border: 1px solid #1a1a2e; border-radius: 14px; overflow: hidden; background: linear-gradient(180deg,#0f0f1a,#0b0b13); transition: border-color 0.4s, box-shadow 0.4s; }
+        .fp2-card:hover { border-color: ${p2 ? p2.color : '#1a1a2e'}66; box-shadow: 0 0 34px ${p2 ? p2.glow : 'transparent'}; }
+        .fp2-media { position: relative; overflow: hidden; background: #080810; min-height: 240px; }
+        .fp2-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s cubic-bezier(0.2,0.8,0.2,1); }
+        .fp2-card:hover .fp2-media img { transform: scale(1.04); }
+        @media (max-width: 820px) { .fp-card { grid-template-columns: 1fr !important; } .fp-media { min-height: 200px; } .fp2-card { grid-template-columns: 1fr !important; } .fp2-media { min-height: 180px; } }
       `}</style>
 
       <div style={s.kicker}><span style={{ ...s.kickerDot, background: p.color, boxShadow: `0 0 8px ${p.glow}` }} />{t('featuredKicker')}</div>
@@ -88,6 +95,34 @@ export default function FeaturedProject() {
           </div>
         </div>
       </div>
+
+      {p2 && (
+        <div className="fp2-card" style={{ marginTop: 20 }}>
+          <div className="fp2-media" style={{ '--acc': p2.color }}>
+            <img src={p2.cover || p2.images[0].src} alt={p2.title} loading="lazy" />
+          </div>
+          <div style={s.body2}>
+            <div style={{ display: 'flex', gap: 10, alignItems: 'center', marginBottom: 12, flexWrap: 'wrap' }}>
+              <span style={{ ...s.alsoTag, color: p2.color, borderColor: `${p2.color}55` }}>{t('featuredAlso')}</span>
+              <span style={{ ...s.markChip, color: p2.color, borderColor: `${p2.color}55` }}>{p2.mark}</span>
+              <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.16em', color: '#8a8aa0' }}>{p2.codename.toUpperCase()}</span>
+            </div>
+            <h3 style={s.title2}>{p2.title}</h3>
+            <p style={s.desc2}>{loc(p2.oneLiner, p2.oneLinerTr)}</p>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 22 }}>
+              {p2.tags.slice(0, 4).map((tag) => (<span key={tag} className="chip">{tag}</span>))}
+            </div>
+            <div style={s.ctaRow}>
+              <Link to={`/project/${p2.slug}`} className="hero-btn" style={{ borderColor: `${p2.color}66` }}>
+                {t('projectOpen')} <ArrowUpRight size={14} strokeWidth={1.5} />
+              </Link>
+              <a href={p2.github} target="_blank" rel="noreferrer" className="hero-btn">
+                <Github size={15} strokeWidth={1.5} style={{ color: '#8a8aa0' }} /> {t('pdViewGithub')}
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
@@ -110,4 +145,8 @@ const s = {
   lbNote: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 11, color: '#6a6a82', whiteSpace: 'nowrap' },
   lbScore: { fontFamily: "'JetBrains Mono', monospace", fontSize: 13, fontWeight: 600, fontVariantNumeric: 'tabular-nums' },
   ctaRow: { display: 'flex', gap: 12, flexWrap: 'wrap' },
+  body2: { padding: '30px 32px', display: 'flex', flexDirection: 'column', justifyContent: 'center' },
+  alsoTag: { display: 'inline-block', padding: '3px 11px', border: '1px solid', borderRadius: 999, fontFamily: "'JetBrains Mono', monospace", fontSize: 9, letterSpacing: '0.16em' },
+  title2: { fontFamily: "'Instrument Serif', serif", fontSize: 32, fontWeight: 400, lineHeight: 1.08, color: '#eef0f6', marginBottom: 12 },
+  desc2: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 15.5, lineHeight: 1.6, color: '#a8a8be', marginBottom: 18 },
 };

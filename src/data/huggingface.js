@@ -85,32 +85,6 @@ const HF_ARTIFACTS = [
     stats: [{ label: 'Pairs', value: '1,037 · 933/104' }, { label: 'Tiers', value: '3 · 9 domains' }],
     project: 'tr-sts-dataset',
   },
-  {
-    id: 'gorkemergune/worldcup-bpe-tokenizer',
-    name: 'worldcup-bpe-tokenizer',
-    kind: 'model',
-    url: 'https://huggingface.co/gorkemergune/worldcup-bpe-tokenizer',
-    task: 'Tokenizer',
-    downloads: 0,
-    descEn: 'A 1,024-token byte-level BPE tokenizer trained on 2022 World Cup Wikipedia text — small enough to beat 150K+ production vocabularies on its own domain.',
-    descTr: '2022 Dünya Kupası Wikipedia metniyle eğitilmiş 1.024 tokenlık bayt seviyesi BPE tokenizer — kendi alanında 150 bin+ üretim sözlüklerini geçecek kadar minik.',
-    tags: ['tokenizer', 'bpe', 'byte-level'],
-    stats: [{ label: 'Vocab', value: '1,024' }, { label: 'Domain', value: 'World Cup' }],
-    project: 'worldcup-bpe-tokenizer',
-  },
-  {
-    id: 'gorkemergune/my-tokenizer',
-    name: 'my-tokenizer',
-    kind: 'model',
-    url: 'https://huggingface.co/gorkemergune/my-tokenizer',
-    task: 'Tokenizer',
-    downloads: 0,
-    descEn: 'The tokenizer produced by the wiki2bpe pipeline: scrape a Wikipedia article, train a 2,048-token byte-level BPE, and push it straight to the Hub.',
-    descTr: 'wiki2bpe hattının ürettiği tokenizer: bir Wikipedia makalesini çek, 2.048 tokenlık bayt seviyesi BPE eğit ve doğrudan Hub’a gönder.',
-    tags: ['tokenizer', 'bpe', 'byte-level'],
-    stats: [{ label: 'Vocab', value: '2,048' }, { label: 'Source', value: 'Wikipedia' }],
-    project: 'wiki2bpe',
-  },
 ];
 
 export default HF_ARTIFACTS;

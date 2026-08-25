@@ -62,6 +62,7 @@ const en = {
 
   featuredKicker: 'FEATURED PROJECT',
   featuredCta: 'Read the case study',
+  featuredAlso: 'ALSO FEATURED',
   featuredLbTitle: 'MIHENK leaderboard · full set',
   featuredLbNote: '2 rows are my own fine-tunes',
 
@@ -70,7 +71,7 @@ const en = {
   buildingItems: [
     { title: 'LLM Experiments', desc: 'Prompting, fine-tuning, and small agentic tools around open models.', status: 'Exploring' },
     { title: 'Computer Vision', desc: 'Custom detectors and detection pipelines beyond single-class YOLO.', status: 'Building' },
-    { title: 'Writing Analyzer', desc: 'Extending the bilingual stylometric risk engine and its API.', status: 'Iterating' },
+    { title: 'Product Manager & Problem Solver', desc: 'Turning rough ideas into scoped products — thinking in problems, users, and trade-offs, then shipping.', status: 'Iterating' },
   ],
 
   activityKicker: 'GITHUB ACTIVITY // LATEST REPOSITORIES',
@@ -80,10 +81,12 @@ const en = {
   activityStars: 'stars',
 
   hfKicker: 'HUGGING FACE // MODELS & DATASETS',
-  hfSub: 'What I have shipped to the Hub — fine-tunes, tokenizers, and the data behind them',
+  hfSub: 'What I have shipped to the Hub — fine-tunes and the datasets behind them',
   hfCta: 'View Hugging Face profile',
   hfModel: 'MODEL',
   hfDataset: 'DATASET',
+  hfGroupModels: 'Models',
+  hfGroupDatasets: 'Datasets',
   hfViewProject: 'Project',
 
   lifeKicker: 'LIVE TELEMETRY // SYSTEM UPTIME',
@@ -413,7 +416,7 @@ const en = {
   projectDetailBack: 'Hall of Armor',
   projectBadge: 'HALL OF ARMOR',
   projectLabel: 'Armory',
-  projectSub: 'Sixteen armors, one per project. Open a capsule to inspect its specs, architecture, and results.',
+  projectSub: 'One armor per project. Open a capsule to inspect its specs, architecture, and results.',
   projectOpen: 'Open Project',
 
   // Project Detail
@@ -568,6 +571,47 @@ const en = {
     },
   ],
 
+  // Learning Path
+  navLearning: 'Learning Path',
+  learningBack: 'Home',
+  learningBadge: 'LEARNING PATH',
+  learningLabel: 'Learning Path',
+  learningSub: 'The foundations I build on — languages and hardware I learn by working through, one repo at a time.',
+  learningStatus: 'In Progress',
+  learningCompleted: 'Completed',
+  learningUpcoming: 'Upcoming',
+  learningTopics: 'What it covers',
+  learningRepo: 'View repository',
+  learningItems: [
+    {
+      title: 'C Foundations',
+      field: 'Systems · C', accent: '#f5b301', status: 'completed',
+      abstract: 'My C course from the ground up — lecture notes, code, labs, and exam solutions from CSE 114 at Yeditepe. Where I first learned to think algorithmically, decompose problems, and debug real programs.',
+      topics: ['C11', 'Algorithmic thinking', 'Pointers & memory', 'Labs & homework', 'GCC / Clang'],
+      repo: 'https://github.com/gorkemergune/c-foundations',
+    },
+    {
+      title: 'C++ Foundations',
+      field: 'Systems · C++', accent: '#a06bff', status: 'in-progress',
+      abstract: 'The C++ leg of the journey, picking up where C left off — lecture notes, worked examples, labs, and projects. Moving from procedural C into objects, templates, and the standard library.',
+      topics: ['C++11+', 'OOP', 'Templates & STL', 'Worked examples', 'g++ / clang++'],
+      repo: 'https://github.com/gorkemergune/cpp-foundations',
+    },
+    {
+      title: 'Arduino Sandbox',
+      field: 'Embedded · Electronics', accent: '#34d399', status: 'in-progress',
+      abstract: 'Hands-on embedded experiments on an Arduino Uno R3 — progressing from blinking LEDs and buttons through sensors, displays, and motors up to integrated systems. Foundational electronics plus embedded C++.',
+      topics: ['Arduino Uno R3', 'Embedded C++', 'Sensors & displays', 'Motors', 'Arduino IDE 2.x'],
+      repo: 'https://github.com/gorkemergune/ardunio-sandbox',
+    },
+    {
+      title: 'Java Foundations',
+      field: 'JVM · Java', accent: '#ff6b35', status: 'upcoming',
+      abstract: 'Next on the path. Java is coming — a dedicated foundations repo will follow the same shape as the C and C++ ones once I start the course.',
+      topics: ['Java', 'OOP', 'JVM', 'Coming soon'],
+    },
+  ],
+
   // Resume page
   resumeBack: 'Home',
   resumeBadge: 'RÉSUMÉ',
@@ -614,6 +658,7 @@ const en = {
   compProject: 'Project',
   compTBD: 'TBD',
   compVisit: 'Visit',
+  compLeaderboard: 'Leaderboard',
 
   // Life Flow (semester roadmap)
   journeyNow: 'YOU ARE HERE',
@@ -627,34 +672,14 @@ const en = {
   semProjects: 'Projects',
   semAchievements: 'Achievements',
   journeySemesters: [
-    { term: '2024 Fall', sub: '(A2 Prep)', status: 'completed', title: 'English Prep — Building the Foundation',
-      competitions: [], hackathons: [], research: [], projects: [], achievements: ['Focused entirely on developing my English'] },
-    { term: '2025 Spring', sub: '(B1 Prep)', status: 'completed', title: 'Prep — Reading & First Code',
-      competitions: [], hackathons: [], research: [], projects: ['Started Python', 'HTML & CSS'], achievements: ['Heavy English reading — articles & academic texts', 'Started learning to code'] },
-    { term: '2025 Summer', sub: '(B2 Prep)', status: 'completed', title: 'Speaking, AI & First Builds',
-      competitions: [], hackathons: [], research: [], projects: ['Mini LLM project', 'Basic problem solving'], achievements: ['Developed English speaking', 'Started learning AI'] },
-    { term: 'September 2025', sub: '(Year 1 · Term 1)', status: 'completed', title: 'Computer Engineering — Day One',
-      competitions: [], hackathons: [], research: [], projects: [], achievements: ['Started Computer Engineering', 'Grew with Python — data structures & algorithms', 'Started competitive programming'] },
-    { term: 'October 2025', sub: '(Year 1 · Term 1)', status: 'completed', title: 'First Contest & Machine Learning',
-      competitions: ['IEEEXtreme'], hackathons: [], research: [], projects: ['Task Manager', 'Bank App'], achievements: ['Started ML & Data Science'] },
-    { term: 'November 2025', sub: '(Year 1 · Term 1)', status: 'completed', title: 'Building & Health Research',
-      competitions: [], hackathons: [], research: ['Started health-domain research'], projects: ['Quizzer', 'Small Kaggle projects'], achievements: ['Kept building small apps to practice'] },
-    { term: 'December 2025', sub: '(Year 1 · Term 1)', status: 'completed', title: 'NEXA Founded',
-      competitions: ['AlgoLeague Winter Camp'], hackathons: [], research: [], projects: [], achievements: ['Founded my own team, NEXA'] },
-    { term: 'January 2026', sub: '(Year 1 · Term 1 · finals)', status: 'completed', title: 'Finals & First Semester Closed',
-      competitions: [], hackathons: [], research: [], projects: [], achievements: ['Closed Year 1 · Term 1 through finals', 'Aced Calculus I with an AA', 'Winter break — heavy self-study'] },
-    { term: 'February 2026', sub: '(Year 1 · Term 2 begins)', status: 'completed', title: 'Term 2 Begins — C from Scratch',
-      competitions: ['AlgoLeague Spring Camp'], hackathons: [], research: [], projects: [], achievements: ['Started learning C from scratch'] },
-    { term: 'March 2026', sub: '(Year 1 · Term 2)', status: 'completed', title: 'Learning C by Building',
-      competitions: [], hackathons: [], research: [], projects: ['Sorting Visualizer', 'Space Shooter'], achievements: ['Wrote real programs in C', 'Kept grinding competitive programming'] },
-    { term: 'April 2026', sub: '(Year 1 · Term 2)', status: 'completed', title: 'Bare Metal & First Hackathon',
-      competitions: [], hackathons: ['BTK E-Commerce Hackathon'], research: [], projects: ['GorkemOS', 'NEXA Website'], achievements: ['Built an OS from scratch in C & Assembly', 'Intro to Deep Learning'] },
-    { term: 'May 2026', sub: '(Year 1 · Term 2)', status: 'completed', title: 'Hackathons, Research & English',
-      competitions: [], hackathons: ['Tıkla Gelsin Foodathon', 'Med-Health Early Warning'], research: ['PHQ-9 Depression Analysis'], projects: ['Synonym Master', 'Find The Best'], achievements: ['Reached C1-level English', 'First applied-ML research project'] },
-    { term: 'June 2026', sub: '(Year 1 · Term 2 · finals)', status: 'completed', title: 'Computer Vision & Internship',
-      competitions: ['AlgoLeague Summer Camp'], hackathons: [], research: ['Email Phishing Detection'], projects: ['Face Detection'], achievements: ['Completed an online internship', 'Closed Term 2 with an AA in Calculus II'] },
-    { term: 'July 2026', sub: '(Current · summer)', status: 'current', title: 'The AI Wave — Models, Benchmarks & My Own Fine-Tunes',
-      competitions: [], hackathons: [], research: ['Pose-Invariant Face ID'], projects: ['YOLO Custom Detector', 'Re-Minder', 'FaceLock', 'WorldCup BPE Tokenizer', 'wiki2bpe', 'ayarlicazhocam-training', 'MIHENK Benchmark', 'Tool Agent'], achievements: ['Built & benchmarked my own two LLM fine-tunes', 'Learned tool/function calling end to end', 'Deeper work in LLM · ML · DL', 'Reading papers'] },
+    { term: '2024–25', sub: '(English Prep)', status: 'completed', title: 'Prep Year — Foundation & First Code',
+      competitions: [], hackathons: [], research: [], projects: [], achievements: ['Built my English up to fluency', 'Started Python and first steps into AI'] },
+    { term: 'Year 1 · Term 1', sub: '(2025 · Fall)', status: 'completed', title: 'Computer Engineering & First Contest',
+      competitions: ['IEEEXtreme', 'AlgoLeague Winter Camp'], hackathons: [], research: [], projects: [], achievements: ['Started Computer Engineering & competitive programming', 'Moved into ML & Data Science', 'Founded my team, NEXA'] },
+    { term: 'Year 1 · Term 2', sub: '(2026 · Spring)', status: 'completed', title: 'C, Hackathons & First Research',
+      competitions: ['AlgoLeague Spring Camp', 'AlgoLeague Summer Camp'], hackathons: ['BTK E-Commerce Hackathon'], research: ['PHQ-9 Depression Analysis'], projects: ['GorkemOS', 'Face Detection'], achievements: ['Learned C by building real projects', 'First applied-ML research & an online internship'] },
+    { term: 'Summer 2026', sub: '(Current)', status: 'current', title: 'The AI Wave — My Own Fine-Tunes & Benchmarks',
+      competitions: [], hackathons: [], research: ['Pose-Invariant Face ID'], projects: ['MIHENK Benchmark', 'ayarlicazhocam-training'], achievements: ['Built & benchmarked my own two LLM fine-tunes', 'Learned tool/function calling end to end'] },
   ],
   // Blog detail content
   blogPosts: {
@@ -778,6 +803,7 @@ const tr = {
 
   featuredKicker: 'ÖNE ÇIKAN PROJE',
   featuredCta: 'Vaka analizini oku',
+  featuredAlso: 'AYRICA ÖNE ÇIKAN',
   featuredLbTitle: 'MIHENK liderlik tablosu · tam set',
   featuredLbNote: '2 satır kendi ince ayarlarım',
 
@@ -786,7 +812,7 @@ const tr = {
   buildingItems: [
     { title: 'LLM Denemeleri', desc: 'Açık modeller çevresinde prompt, ince ayar ve küçük ajan araçları.', status: 'Keşif' },
     { title: 'Bilgisayarlı Görü', desc: 'Tek sınıflı YOLO’nun ötesinde özel dedektörler ve tespit hatları.', status: 'Geliştirme' },
-    { title: 'Writing Analyzer', desc: 'İki dilli stilometrik risk motorunu ve API’sini genişletme.', status: 'İyileştirme' },
+    { title: 'Ürün Yöneticisi & Problem Çözücü', desc: 'Ham fikirleri kapsamı belli ürünlere dönüştürme — problem, kullanıcı ve ödünleşimlerle düşünüp sonra hayata geçirme.', status: 'İyileştirme' },
   ],
 
   activityKicker: 'GITHUB ETKİNLİĞİ // SON DEPOLAR',
@@ -794,10 +820,12 @@ const tr = {
   activityCta: 'GitHub profilini gör',
   activityUpdated: 'Güncellendi',
   hfKicker: 'HUGGING FACE // MODELLER & VERİ KÜMELERİ',
-  hfSub: 'Hub’a yayınladıklarım — ince ayarlar, tokenizer’lar ve arkalarındaki veri',
+  hfSub: 'Hub’a yayınladıklarım — ince ayarlar ve arkalarındaki veri kümeleri',
   hfCta: 'Hugging Face profilini gör',
   hfModel: 'MODEL',
   hfDataset: 'VERİ KÜMESİ',
+  hfGroupModels: 'Modeller',
+  hfGroupDatasets: 'Veri Kümeleri',
   hfViewProject: 'Proje',
   activityStars: 'yıldız',
 
@@ -1128,7 +1156,7 @@ const tr = {
   projectDetailBack: 'Zırh Deposu',
   projectBadge: 'ZIRH DEPOSU',
   projectLabel: 'Cephanelik',
-  projectSub: 'On altı zırh, her biri bir proje. Özellikleri, mimariyi ve sonuçları incelemek için bir kapsül aç.',
+  projectSub: 'Her proje bir zırh. Özellikleri, mimariyi ve sonuçları incelemek için bir kapsül aç.',
   projectOpen: 'Projeyi Aç',
 
   // Project Detail
@@ -1289,6 +1317,47 @@ const tr = {
     },
   ],
 
+  // Learning Path
+  navLearning: 'Öğrenme Yolu',
+  learningBack: 'Ana Sayfa',
+  learningBadge: 'ÖĞRENME YOLU',
+  learningLabel: 'Öğrenme Yolu',
+  learningSub: 'Üzerine inşa ettiğim temeller — üzerinde çalışarak öğrendiğim diller ve donanım, her seferinde bir repo.',
+  learningStatus: 'Devam Ediyor',
+  learningCompleted: 'Tamamlandı',
+  learningUpcoming: 'Yakında',
+  learningTopics: 'Neleri kapsıyor',
+  learningRepo: 'Depoyu gör',
+  learningItems: [
+    {
+      title: 'C Temelleri',
+      field: 'Sistem · C', accent: '#f5b301', status: 'completed',
+      abstract: 'C dersim sıfırdan — Yeditepe CSE 114’ten ders notları, kod, laboratuvarlar ve sınav çözümleri. Algoritmik düşünmeyi, problemleri parçalamayı ve gerçek programları hata ayıklamayı ilk burada öğrendim.',
+      topics: ['C11', 'Algoritmik düşünme', 'İşaretçiler & bellek', 'Lab & ödev', 'GCC / Clang'],
+      repo: 'https://github.com/gorkemergune/c-foundations',
+    },
+    {
+      title: 'C++ Temelleri',
+      field: 'Sistem · C++', accent: '#a06bff', status: 'in-progress',
+      abstract: 'Yolculuğun C++ ayağı; C’nin bıraktığı yerden devam ediyor — ders notları, işlenmiş örnekler, laboratuvarlar ve projeler. Prosedürel C’den nesnelere, şablonlara ve standart kütüphaneye geçiş.',
+      topics: ['C++11+', 'OOP', 'Şablonlar & STL', 'İşlenmiş örnekler', 'g++ / clang++'],
+      repo: 'https://github.com/gorkemergune/cpp-foundations',
+    },
+    {
+      title: 'Arduino Sandbox',
+      field: 'Gömülü · Elektronik', accent: '#34d399', status: 'in-progress',
+      abstract: 'Arduino Uno R3 üzerinde uygulamalı gömülü denemeler — yanıp sönen LED’ler ve butonlardan sensörlere, ekranlara, motorlara ve entegre sistemlere doğru ilerliyor. Temel elektronik artı gömülü C++.',
+      topics: ['Arduino Uno R3', 'Gömülü C++', 'Sensör & ekran', 'Motorlar', 'Arduino IDE 2.x'],
+      repo: 'https://github.com/gorkemergune/ardunio-sandbox',
+    },
+    {
+      title: 'Java Temelleri',
+      field: 'JVM · Java', accent: '#ff6b35', status: 'upcoming',
+      abstract: 'Yolun bir sonraki durağı. Java geliyor — dersi almaya başlayınca, C ve C++ repolarıyla aynı biçimi izleyen özel bir temeller reposu gelecek.',
+      topics: ['Java', 'OOP', 'JVM', 'Yakında'],
+    },
+  ],
+
   // Resume page
   resumeBack: 'Ana Sayfa',
   resumeBadge: 'CV',
@@ -1335,6 +1404,7 @@ const tr = {
   compProject: 'Proje',
   compTBD: 'Yakında',
   compVisit: 'Git',
+  compLeaderboard: 'Sıralama',
 
   // Life Flow (semester roadmap)
   journeyNow: 'BURADASIN',
@@ -1348,34 +1418,14 @@ const tr = {
   semProjects: 'Projeler',
   semAchievements: 'Başarılar',
   journeySemesters: [
-    { term: '2024 Güz', sub: '(A2 Hazırlık)', status: 'completed', title: 'İngilizce Hazırlık — Temeli Kurmak',
-      competitions: [], hackathons: [], research: [], projects: [], achievements: ['Tamamen İngilizcemi geliştirmeye odaklandım'] },
-    { term: '2025 Bahar', sub: '(B1 Hazırlık)', status: 'completed', title: 'Hazırlık — Okuma & İlk Kodlar',
-      competitions: [], hackathons: [], research: [], projects: ['Python’a başladım', 'HTML & CSS'], achievements: ['Yoğun İngilizce okuma: makaleler & akademik metinler', 'Kod yazmaya başladım'] },
-    { term: '2025 Yaz', sub: '(B2 Hazırlık)', status: 'completed', title: 'Speaking, Yapay Zekâ & İlk Projeler',
-      competitions: [], hackathons: [], research: [], projects: ['Mini LLM projesi', 'Temel problem çözme'], achievements: ['İngilizce speaking’i geliştirdim', 'Yapay zekâ öğrenmeye başladım'] },
-    { term: 'Eylül 2025', sub: '(1. Yıl · 1. Dönem)', status: 'completed', title: 'Bilgisayar Mühendisliği — İlk Gün',
-      competitions: [], hackathons: [], research: [], projects: [], achievements: ['Bilgisayar Mühendisliğine başladım', 'Python ile gelişim: veri yapıları & algoritmalar', 'Yarışmacı programlamaya başlangıç'] },
-    { term: 'Ekim 2025', sub: '(1. Yıl · 1. Dönem)', status: 'completed', title: 'İlk Yarışma & Makine Öğrenmesi',
-      competitions: ['IEEEXtreme'], hackathons: [], research: [], projects: ['Task Manager', 'Bank App'], achievements: ['ML & Data Science’a başladım'] },
-    { term: 'Kasım 2025', sub: '(1. Yıl · 1. Dönem)', status: 'completed', title: 'Üretme & Sağlık Araştırması',
-      competitions: [], hackathons: [], research: ['Sağlık alanında araştırmaya başladım'], projects: ['Quizzer', 'Küçük Kaggle projeleri'], achievements: ['Pratik için küçük uygulamalar geliştirdim'] },
-    { term: 'Aralık 2025', sub: '(1. Yıl · 1. Dönem)', status: 'completed', title: 'NEXA Kuruldu',
-      competitions: ['AlgoLeague Kış Kampı'], hackathons: [], research: [], projects: [], achievements: ['Kendi ekibim NEXA’yı kurdum'] },
-    { term: 'Ocak 2026', sub: '(1. Yıl · 1. Dönem · finaller)', status: 'completed', title: 'Finaller & Kapanan İlk Dönem',
-      competitions: [], hackathons: [], research: [], projects: [], achievements: ['1. Yıl · 1. Dönem’i finallerle kapattım', 'Calculus I’den AA aldım', 'Sömestr tatili — yoğun bireysel çalışma'] },
-    { term: 'Şubat 2026', sub: '(1. Yıl · 2. Dönem başlangıcı)', status: 'completed', title: '2. Dönem Başladı — Sıfırdan C',
-      competitions: ['AlgoLeague Bahar Kampı'], hackathons: [], research: [], projects: [], achievements: ['Sıfırdan C öğrenmeye başladım'] },
-    { term: 'Mart 2026', sub: '(1. Yıl · 2. Dönem)', status: 'completed', title: 'Üreterek C Öğrenmek',
-      competitions: [], hackathons: [], research: [], projects: ['Sorting Visualizer', 'Space Shooter'], achievements: ['C ile gerçek programlar yazdım', 'Yarışmacı programlamaya devam'] },
-    { term: 'Nisan 2026', sub: '(1. Yıl · 2. Dönem)', status: 'completed', title: 'Donanıma Yakın & İlk Hackathon',
-      competitions: [], hackathons: ['BTK E-Ticaret Hackathon'], research: [], projects: ['GorkemOS', 'NEXA Web Sitesi'], achievements: ['C & Assembly ile sıfırdan işletim sistemi', 'Derin Öğrenmeye giriş'] },
-    { term: 'Mayıs 2026', sub: '(1. Yıl · 2. Dönem)', status: 'completed', title: 'Hackathonlar, Araştırma & İngilizce',
-      competitions: [], hackathons: ['Tıkla Gelsin Foodathon', 'Med-Health Erken Uyarı'], research: ['PHQ-9 Depresyon Analizi'], projects: ['Synonym Master', 'Find The Best'], achievements: ['İngilizcede C1 seviyesine ulaştım', 'İlk uygulamalı ML araştırma projesi'] },
-    { term: 'Haziran 2026', sub: '(1. Yıl · 2. Dönem · finaller)', status: 'completed', title: 'Bilgisayarlı Görü & Staj',
-      competitions: ['AlgoLeague Yaz Kampı'], hackathons: [], research: ['E-posta Oltalama Tespiti'], projects: ['Yüz Tespiti'], achievements: ['Online staj tamamladım', '2. Dönem’i Calculus II’den AA ile kapattım'] },
-    { term: 'Temmuz 2026', sub: '(Şu an · yaz)', status: 'current', title: 'Yapay Zekâ Dalgası — Modeller, Benchmarklar & Kendi İnce Ayarlarım',
-      competitions: [], hackathons: [], research: ['Poz-Değişmez Yüz Kimliği'], projects: ['YOLO Özel Dedektör', 'Re-Minder', 'FaceLock', 'WorldCup BPE Tokenizer', 'wiki2bpe', 'ayarlicazhocam-training', 'MIHENK Benchmark’ı', 'Araç Ajanı'], achievements: ['Kendi iki LLM ince ayarımı geliştirip kıyasladım', 'Araç/fonksiyon çağırmayı uçtan uca öğrendim', 'LLM · ML · DL alanında daha derin çalışma', 'Makale okumaları'] },
+    { term: '2024–25', sub: '(İngilizce Hazırlık)', status: 'completed', title: 'Hazırlık Yılı — Temel & İlk Kodlar',
+      competitions: [], hackathons: [], research: [], projects: [], achievements: ['İngilizcemi akıcılığa taşıdım', 'Python’a ve yapay zekâya ilk adımlar'] },
+    { term: '1. Yıl · 1. Dönem', sub: '(2025 · Güz)', status: 'completed', title: 'Bilgisayar Mühendisliği & İlk Yarışma',
+      competitions: ['IEEEXtreme', 'AlgoLeague Kış Kampı'], hackathons: [], research: [], projects: [], achievements: ['Bilgisayar Mühendisliği & yarışmacı programlamaya başladım', 'ML & Data Science’a geçtim', 'Kendi ekibim NEXA’yı kurdum'] },
+    { term: '1. Yıl · 2. Dönem', sub: '(2026 · Bahar)', status: 'completed', title: 'C, Hackathonlar & İlk Araştırma',
+      competitions: ['AlgoLeague Bahar Kampı', 'AlgoLeague Yaz Kampı'], hackathons: ['BTK E-Ticaret Hackathon'], research: ['PHQ-9 Depresyon Analizi'], projects: ['GorkemOS', 'Yüz Tespiti'], achievements: ['Üreterek C öğrendim', 'İlk uygulamalı ML araştırması & online staj'] },
+    { term: '2026 Yazı', sub: '(Şu an)', status: 'current', title: 'Yapay Zekâ Dalgası — Kendi İnce Ayarlarım & Benchmarklar',
+      competitions: [], hackathons: [], research: ['Poz-Değişmez Yüz Kimliği'], projects: ['MIHENK Benchmark’ı', 'ayarlicazhocam-training'], achievements: ['Kendi iki LLM ince ayarımı geliştirip kıyasladım', 'Araç/fonksiyon çağırmayı uçtan uca öğrendim'] },
   ],
   // Blog detail content
   blogPosts: {

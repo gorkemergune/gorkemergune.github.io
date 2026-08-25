@@ -37,10 +37,74 @@ function useLiveDownloads() {
   return dls;
 }
 
+function HFCard({ a, downloads, lang, t, loc }) {
+  const isDataset = a.kind === 'dataset';
+  const Icon = isDataset ? Database : Box;
+  const dl = downloads[a.id] ?? a.downloads ?? 0;
+  return (
+    <div className="hf-card">
+      <div style={s.cardTop}>
+        <span style={s.typeBadge}>
+          <Icon size={12} strokeWidth={1.7} style={{ color: HF }} />
+          {isDataset ? t('hfDataset') : t('hfModel')}
+        </span>
+        <span style={s.task}>{a.task}</span>
+        <span style={s.dlBadge} title={loc('Downloads (live from the Hub)', 'İndirme (Hub’dan canlı)')}>
+          <Download size={11} strokeWidth={1.7} style={{ color: HF }} />
+          {dl.toLocaleString(lang === 'tr' ? 'tr-TR' : 'en-US')}
+        </span>
+        <a href={a.url} target="_blank" rel="noopener noreferrer" style={{ lineHeight: 0 }} aria-label={a.name}>
+          <ArrowUpRight className="hf-arrow" size={16} strokeWidth={1.5} style={{ color: '#6a6a58' }} />
+        </a>
+      </div>
+
+      <a href={a.url} target="_blank" rel="noopener noreferrer" style={s.name}>
+        <span style={{ color: '#6a6a58' }}>gorkemergune/</span>{a.name}
+      </a>
+
+      <p style={s.desc}>{loc(a.descEn, a.descTr)}</p>
+
+      <div style={s.statRow}>
+        <span style={s.stat}>
+          <span style={s.statLabel}>{loc('Downloads', 'İndirme')}</span>
+          <span style={s.statVal}>{dl.toLocaleString(lang === 'tr' ? 'tr-TR' : 'en-US')}</span>
+        </span>
+        {a.stats.map((st) => (
+          <span key={st.label} style={s.stat}>
+            <span style={s.statLabel}>{st.label}</span>
+            <span style={s.statVal}>{st.value}</span>
+          </span>
+        ))}
+      </div>
+
+      <div style={s.footer}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+          {a.tags.map((tg) => (
+            <span key={tg} style={s.tag}>{tg}</span>
+          ))}
+        </div>
+        {a.project && (
+          <Link to={`/project/${a.project}`} className="link-hover" style={s.projectLink}>
+            {t('hfViewProject')} <ArrowUpRight size={12} strokeWidth={1.5} />
+          </Link>
+        )}
+      </div>
+    </div>
+  );
+}
+
 export default function HuggingFaceActivity() {
   const { lang, t } = useLang();
   const loc = (en, tr) => (lang === 'tr' && tr ? tr : en);
   const downloads = useLiveDownloads();
+
+  const models = HF_ARTIFACTS.filter((a) => a.kind !== 'dataset');
+  const datasets = HF_ARTIFACTS.filter((a) => a.kind === 'dataset');
+
+  const groups = [
+    { key: 'models', Icon: Box, label: t('hfGroupModels'), items: models },
+    { key: 'datasets', Icon: Database, label: t('hfGroupDatasets'), items: datasets },
+  ];
 
   return (
     <section className="container" style={s.section} aria-label="Hugging Face activity">
@@ -58,63 +122,20 @@ export default function HuggingFaceActivity() {
         <p style={s.sub}>{t('hfSub')}</p>
       </div>
 
-      <div className="hf-grid" style={{ marginTop: 26 }}>
-        {HF_ARTIFACTS.map((a) => {
-          const isDataset = a.kind === 'dataset';
-          const Icon = isDataset ? Database : Box;
-          const dl = downloads[a.id] ?? a.downloads ?? 0;
-          return (
-            <div key={a.id} className="hf-card">
-              <div style={s.cardTop}>
-                <span style={s.typeBadge}>
-                  <Icon size={12} strokeWidth={1.7} style={{ color: HF }} />
-                  {isDataset ? t('hfDataset') : t('hfModel')}
-                </span>
-                <span style={s.task}>{a.task}</span>
-                <span style={s.dlBadge} title={loc('Downloads (live from the Hub)', 'İndirme (Hub’dan canlı)')}>
-                  <Download size={11} strokeWidth={1.7} style={{ color: HF }} />
-                  {dl.toLocaleString(lang === 'tr' ? 'tr-TR' : 'en-US')}
-                </span>
-                <a href={a.url} target="_blank" rel="noopener noreferrer" style={{ lineHeight: 0 }} aria-label={a.name}>
-                  <ArrowUpRight className="hf-arrow" size={16} strokeWidth={1.5} style={{ color: '#6a6a58' }} />
-                </a>
-              </div>
-
-              <a href={a.url} target="_blank" rel="noopener noreferrer" style={s.name}>
-                <span style={{ color: '#6a6a58' }}>gorkemergune/</span>{a.name}
-              </a>
-
-              <p style={s.desc}>{loc(a.descEn, a.descTr)}</p>
-
-              <div style={s.statRow}>
-                <span style={s.stat}>
-                  <span style={s.statLabel}>{loc('Downloads', 'İndirme')}</span>
-                  <span style={s.statVal}>{dl.toLocaleString(lang === 'tr' ? 'tr-TR' : 'en-US')}</span>
-                </span>
-                {a.stats.map((st) => (
-                  <span key={st.label} style={s.stat}>
-                    <span style={s.statLabel}>{st.label}</span>
-                    <span style={s.statVal}>{st.value}</span>
-                  </span>
-                ))}
-              </div>
-
-              <div style={s.footer}>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
-                  {a.tags.map((tg) => (
-                    <span key={tg} style={s.tag}>{tg}</span>
-                  ))}
-                </div>
-                {a.project && (
-                  <Link to={`/project/${a.project}`} className="link-hover" style={s.projectLink}>
-                    {t('hfViewProject')} <ArrowUpRight size={12} strokeWidth={1.5} />
-                  </Link>
-                )}
-              </div>
-            </div>
-          );
-        })}
-      </div>
+      {groups.map((g) => g.items.length > 0 && (
+        <div key={g.key} style={{ marginTop: 30 }}>
+          <div style={s.groupHead}>
+            <g.Icon size={13} strokeWidth={1.8} style={{ color: HF }} />
+            <span>{g.label}</span>
+            <span style={s.groupCount}>{g.items.length}</span>
+          </div>
+          <div className="hf-grid" style={{ marginTop: 16 }}>
+            {g.items.map((a) => (
+              <HFCard key={a.id} a={a} downloads={downloads} lang={lang} t={t} loc={loc} />
+            ))}
+          </div>
+        </div>
+      ))}
 
       <a href={HF_PROFILE} target="_blank" rel="noopener noreferrer" className="link-hover" style={s.cta}>
         {t('hfCta')} <ArrowUpRight size={14} strokeWidth={1.5} />
@@ -128,6 +149,8 @@ const s = {
   head: { marginBottom: 6 },
   kicker: { display: 'inline-flex', alignItems: 'center', gap: 10, fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.18em', color: '#8a8258' },
   dot: { width: 7, height: 7, borderRadius: '50%', background: HF, boxShadow: `0 0 8px ${HF}` },
+  groupHead: { display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#c8c8a8' },
+  groupCount: { fontFamily: "'JetBrains Mono', monospace", fontSize: 10, color: '#8a8258', padding: '1px 7px', border: `1px solid ${HF}33`, borderRadius: 999, background: 'rgba(255,210,30,0.05)' },
   sub: { fontFamily: "'Instrument Serif', serif", fontStyle: 'italic', fontSize: 16, color: '#8a8aa0', marginTop: 10 },
   cardTop: { display: 'flex', alignItems: 'center', gap: 10 },
   typeBadge: { display: 'inline-flex', alignItems: 'center', gap: 5, fontFamily: "'JetBrains Mono', monospace", fontSize: 9, letterSpacing: '0.12em', color: HF, padding: '3px 8px', border: `1px solid ${HF}44`, borderRadius: 999, background: 'rgba(255,210,30,0.06)' },
