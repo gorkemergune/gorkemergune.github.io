@@ -28,7 +28,7 @@ function ArmorFigure({ armor, uid }) {
   const id = `${armor.mark}-${uid}`.replace(/[^a-zA-Z0-9]/g, '');
   const body = `url(#body-${id})`;
   return (
-    <svg viewBox="0 0 64 132" width="100%" height="100%" style={{ display: 'block' }} aria-hidden="true">
+    <svg viewBox="0 0 64 132" style={{ height: '100%', width: 'auto', display: 'block' }} aria-hidden="true">
       <defs>
         <linearGradient id={`body-${id}`} x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stopColor={armor.color} stopOpacity="0.96" />
@@ -129,13 +129,13 @@ export default function HallOfArmor() {
   useEffect(() => {
     const reduce = prefersReducedMotion();
     const N = ARMORS.length;
-    const AUTO = reduce ? 0 : 24; // px/s, right -> left
+    const AUTO = reduce ? 0 : 19; // px/s, right -> left — a display mechanism, not a ticker
 
     const measure = () => {
       const w = window.innerWidth;
-      const cardW = w <= 600 ? 158 : w <= 900 ? 178 : 208;
-      const cardH = w <= 600 ? 232 : w <= 900 ? 262 : 300;
-      const step = cardW + 16;
+      const cardW = w <= 600 ? 150 : w <= 900 ? 172 : 196;
+      const cardH = w <= 600 ? 268 : w <= 900 ? 316 : 360;
+      const step = cardW + (w <= 600 ? 14 : 26);
       const vw = viewportRef.current?.clientWidth || w;
       metricsRef.current = { cardW, step, setW: N * step, vw, N };
       setDims({ cardW, cardH });
@@ -155,9 +155,12 @@ export default function HallOfArmor() {
         if (!el) continue;
         const cx = j * m.step + m.cardW / 2 - off;
         const t = Math.min(1, Math.abs(cx - half) / F);
-        el.style.transform = `scale(${(1 - t * 0.2).toFixed(4)})`;
-        el.style.opacity = (1 - t * 0.5).toFixed(3);
+        const f = Math.pow(1 - t, 1.7); // focus: sharp near centre, 0 at edges
+        // outer transform: gentle scale + a small rise so the selected suit lifts forward
+        el.style.transform = `translateY(${(-10 * f).toFixed(2)}px) scale(${(0.82 + 0.18 * (1 - t)).toFixed(4)})`;
+        el.style.opacity = (0.5 + 0.5 * (1 - t)).toFixed(3);
         el.style.zIndex = String(100 - Math.round(t * 100));
+        el.style.setProperty('--f', f.toFixed(3));
       }
       const centerIdx = Math.round((off + half - m.cardW / 2) / m.step);
       const a = ((centerIdx % m.N) + m.N) % m.N;
@@ -228,7 +231,6 @@ export default function HallOfArmor() {
   return (
     <div className="hall-wrap" style={s.wrap}>
       <style>{`
-        @keyframes led-breathe { 0%,100%{opacity:0.35;} 50%{opacity:1;} }
         @keyframes platform-rotate { from{transform:rotate(0);} to{transform:rotate(360deg);} }
         @keyframes platform-rotate-reverse { from{transform:rotate(360deg);} to{transform:rotate(0);} }
         @keyframes platform-pulse {
@@ -238,63 +240,121 @@ export default function HallOfArmor() {
         @keyframes boot-blink { 0%,100%{opacity:1;} 50%{opacity:0;} }
         @keyframes scanline-move { 0%{transform:translateY(-100%);} 100%{transform:translateY(200vh);} }
         @keyframes boot-fade-out { from{opacity:1;pointer-events:all;} to{opacity:0;pointer-events:none;} }
-        @keyframes floor-pulse { 0%,100%{opacity:0.4;transform:translateX(-50%) scaleX(1);} 50%{opacity:0.7;transform:translateX(-50%) scaleX(1.2);} }
-        @keyframes hint-pulse { 0%,100%{opacity:0.55;} 50%{opacity:1;} }
+        @keyframes hint-pulse { 0%,100%{opacity:0.5;} 50%{opacity:0.95;} }
 
-        .armory-frame {
-          position: relative; margin-top: 4px; padding: 14px 0 18px;
-          border-top: 1px solid rgba(0,212,255,0.10);
-          border-bottom: 1px solid rgba(0,212,255,0.10);
+        /* ---- Armory environment ---- */
+        .armory-frame { position: relative; margin-top: 8px; padding: 20px 0 26px; }
+        /* perspective floor grid — the facility the suits stand in */
+        .armory-grid {
+          position: absolute; left: 0; right: 0; bottom: 0; height: 46%; z-index: 0; pointer-events: none;
+          background-image:
+            linear-gradient(90deg, rgba(0,212,255,0.16) 1px, transparent 1px),
+            linear-gradient(0deg, rgba(0,212,255,0.12) 1px, transparent 1px);
+          background-size: 46px 30px;
+          transform: perspective(320px) rotateX(66deg); transform-origin: bottom center;
+          -webkit-mask-image: radial-gradient(ellipse 60% 120% at 50% 100%, #000 0%, transparent 72%);
+          mask-image: radial-gradient(ellipse 60% 120% at 50% 100%, #000 0%, transparent 72%);
+          opacity: 0.5;
         }
+        /* soft ceiling light wash */
+        .armory-ceiling {
+          position: absolute; left: 50%; top: -4%; width: 66%; height: 60%; transform: translateX(-50%);
+          z-index: 0; pointer-events: none; filter: blur(24px);
+          background: radial-gradient(ellipse 50% 100% at 50% 0%, rgba(0,212,255,0.07) 0%, transparent 70%);
+        }
+        .frame-bracket { position: absolute; width: 16px; height: 16px; z-index: 6; pointer-events: none; border: 1px solid rgba(0,212,255,0.35); }
+        .fb-tl { top: 6px; left: 8px; border-right: none; border-bottom: none; }
+        .fb-tr { top: 6px; right: 8px; border-left: none; border-bottom: none; }
+        .fb-bl { bottom: 6px; left: 8px; border-right: none; border-top: none; }
+        .fb-br { bottom: 6px; right: 8px; border-left: none; border-top: none; }
+        .bay-tick { position: absolute; left: 50%; transform: translateX(-50%); width: 1px; height: 14px; z-index: 5; pointer-events: none;
+          background: linear-gradient(180deg, rgba(0,212,255,0.55), transparent); }
+        .bay-tick.top { top: 4px; }
+        .bay-tick.bottom { bottom: 4px; transform: translateX(-50%) rotate(180deg); }
+
         .armory-viewport {
-          position: relative; overflow: hidden; touch-action: pan-y;
-          -webkit-mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
-          mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
+          position: relative; z-index: 2; overflow: hidden; touch-action: pan-y;
+          -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
         }
-        .armory-track { display: flex; gap: 16px; align-items: center; will-change: transform; padding: 8px 0; }
-        .armor-pod { flex: 0 0 auto; cursor: pointer; will-change: transform, opacity; }
-        .pod-inner {
-          position: relative; height: 100%;
-          display: flex; flex-direction: column; align-items: center;
-          padding: 12px 12px 14px; border-radius: 6px;
-          background: linear-gradient(180deg, #10101d 0%, #08080f 100%);
-          border: 1px solid #1a1a2e;
-          transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s cubic-bezier(0.2,0.8,0.2,1);
-          box-shadow: inset 0 0 24px rgba(0,0,0,0.4);
-        }
-        .armor-pod:hover .pod-inner { transform: translateY(-6px); }
-        .pod-top {
-          width: 100%; display: flex; align-items: center; justify-content: space-between;
-          font-family: 'JetBrains Mono', monospace; font-size: 8px; letter-spacing: 0.2em;
-        }
-        .pod-figure { flex: 1; width: 62%; max-width: 96px; display: flex; align-items: center; justify-content: center; margin: 8px 0 4px; filter: drop-shadow(0 6px 10px rgba(0,0,0,0.5)); }
-        .pod-floor { width: 66%; height: 12px; border-radius: 50%; margin-bottom: 8px; animation: floor-pulse 3s ease-in-out infinite; }
-        .pod-name { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.06em; color: #d2d2e0; text-align: center; line-height: 1.35; }
-        .pod-lang { font-family: 'JetBrains Mono', monospace; font-size: 8px; letter-spacing: 0.14em; margin-top: 5px; }
+        .armory-track { display: flex; gap: 26px; align-items: center; will-change: transform; padding: 16px 0 6px; }
 
-        .armory-readout { max-width: 720px; margin: 26px auto 0; text-align: center; min-height: 116px; }
-        .ro-line { display: flex; align-items: baseline; justify-content: center; gap: 10px; flex-wrap: wrap; }
-        .ro-mark { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.16em; }
-        .ro-name { font-family: 'JetBrains Mono', monospace; font-size: 16px; letter-spacing: 0.03em; color: #e6e6f0; }
-        .ro-name em { font-style: normal; color: #7a7a92; font-size: 13px; }
-        .ro-desc { font-family: 'Instrument Sans', sans-serif; font-size: 14px; line-height: 1.55; color: #a6a6bc; margin: 12px auto 0; max-width: 620px; }
-        .ro-bottom { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 14px; flex-wrap: wrap; }
+        /* ---- A suit on display — no card, just the armor in its environment ---- */
+        .armor-pod { flex: 0 0 auto; cursor: pointer; will-change: transform, opacity; --f: 0; }
+        .pod-stage {
+          position: relative; height: 100%;
+          display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+        }
+        .pod-beam {
+          position: absolute; top: 3%; left: 50%; transform: translateX(-50%);
+          width: 60%; height: 74%; z-index: 0; pointer-events: none;
+          background: linear-gradient(180deg, rgba(190,235,255,0.06) 0%, rgba(190,235,255,0.02) 42%, transparent 80%);
+          -webkit-mask-image: linear-gradient(90deg, transparent, #000 32%, #000 68%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 32%, #000 68%, transparent);
+          opacity: calc(0.2 + var(--f) * 0.8);
+        }
+        .pod-halo {
+          position: absolute; left: 50%; top: 40%; width: 128%; height: 56%;
+          transform: translate(-50%, -50%); border-radius: 50%; z-index: 0; pointer-events: none;
+          filter: blur(15px); opacity: calc(0.14 + var(--f) * 0.62);
+        }
+        .pod-mark {
+          position: relative; z-index: 3; font-family: 'JetBrains Mono', monospace;
+          font-size: 8px; letter-spacing: 0.26em; margin-bottom: auto; padding-top: 6px;
+          opacity: calc(0.4 + var(--f) * 0.6);
+        }
+        .pod-figwrap { position: relative; z-index: 2; width: 100%; height: 66%;
+          display: flex; flex-direction: column; align-items: center; justify-content: flex-start; }
+        .pod-figure {
+          height: 76%; display: flex; align-items: flex-end; justify-content: center;
+          filter: drop-shadow(0 12px 16px rgba(0,0,0,0.6));
+          -webkit-box-reflect: below 1px linear-gradient(transparent 66%, rgba(190,230,255,0.13));
+        }
+        .pod-floorline { width: 62%; height: 2px; margin-top: 5px; border-radius: 2px;
+          filter: blur(0.3px); opacity: calc(0.32 + var(--f) * 0.62); }
+        .pod-puddle { position: absolute; left: 50%; bottom: 21%; width: 78%; height: 20px;
+          transform: translateX(-50%); border-radius: 50%; z-index: 0; pointer-events: none;
+          filter: blur(5px); opacity: calc(0.18 + var(--f) * 0.5); }
+        .pod-name { position: relative; z-index: 3; font-family: 'JetBrains Mono', monospace; font-size: 10px;
+          letter-spacing: 0.05em; color: #d2d2e0; text-align: center; line-height: 1.35; margin-top: 10px;
+          opacity: calc(0.55 + var(--f) * 0.45); }
+        .pod-lang { position: relative; z-index: 3; font-family: 'JetBrains Mono', monospace; font-size: 8px;
+          letter-spacing: 0.14em; margin-top: 5px; opacity: calc(0.5 + var(--f) * 0.45); }
+
+        /* ---- Selected-suit engineering readout ---- */
+        .armory-readout { max-width: 640px; margin: 30px auto 0; min-height: 150px; }
+        .ro-panel { position: relative; padding: 20px 26px 18px; text-align: center;
+          border-top: 1px solid rgba(0,212,255,0.12); border-bottom: 1px solid rgba(0,212,255,0.12);
+          background: radial-gradient(ellipse 80% 120% at 50% 0%, rgba(0,212,255,0.03), transparent 70%); }
+        .ro-corner { position: absolute; width: 9px; height: 9px; border: 1px solid rgba(0,212,255,0.3); }
+        .ro-c-tl { top: -1px; left: -1px; border-right: none; border-bottom: none; }
+        .ro-c-tr { top: -1px; right: -1px; border-left: none; border-bottom: none; }
+        .ro-c-bl { bottom: -1px; left: -1px; border-right: none; border-top: none; }
+        .ro-c-br { bottom: -1px; right: -1px; border-left: none; border-top: none; }
+        .ro-head { display: flex; align-items: center; justify-content: center; gap: 12px;
+          font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.2em; margin-bottom: 12px; }
+        .ro-status { display: inline-flex; align-items: center; gap: 6px; }
+        .ro-idx { color: #4a4a60; }
+        .ro-name { font-family: 'JetBrains Mono', monospace; font-size: 18px; letter-spacing: 0.03em; color: #eef0f6; }
+        .ro-sub { font-family: 'Instrument Sans', sans-serif; font-size: 12px; color: #7a7a92; margin-top: 4px; }
+        .ro-desc { font-family: 'Instrument Sans', sans-serif; font-size: 14px; line-height: 1.55; color: #a6a6bc; margin: 12px auto 0; max-width: 560px; }
+        .ro-bottom { display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 16px; flex-wrap: wrap; }
         .ro-tags { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
         .ro-tag { font-family: 'JetBrains Mono', monospace; font-size: 8px; letter-spacing: 0.08em; padding: 3px 7px; border-radius: 3px; }
-        .ro-deploy { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; padding: 6px 14px; border-radius: 4px; border: 1px solid; text-decoration: none; transition: all 0.25s; }
-        .ro-deploy:hover { background: rgba(255,255,255,0.04); }
+        .ro-deploy { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; padding: 7px 16px; border-radius: 4px; border: 1px solid; text-decoration: none; transition: all 0.25s; }
+        .ro-deploy:hover { background: rgba(255,255,255,0.05); }
 
-        .armory-head { text-align: center; margin-bottom: 10px; }
+        .armory-head { text-align: center; margin-bottom: 6px; }
         .armory-kicker { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.28em; color: #00d4ff; }
         .armory-sub { font-family: 'Instrument Sans', sans-serif; font-size: 13px; color: #7a7a92; margin-top: 8px; }
         .drag-hint {
-          position: absolute; left: 50%; bottom: -6px; transform: translateX(-50%);
-          font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.3em; color: #4a4a60;
-          pointer-events: none; transition: opacity 0.6s; z-index: 7; animation: hint-pulse 2.4s ease-in-out infinite;
+          position: absolute; left: 50%; bottom: 5px; transform: translateX(-50%);
+          font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.3em; color: #46465c;
+          pointer-events: none; transition: opacity 0.6s; z-index: 6; animation: hint-pulse 2.6s ease-in-out infinite;
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .pod-floor, .drag-hint, .marquee, .holo-stage { animation: none !important; }
+          .drag-hint, .marquee { animation: none !important; }
         }
         @media (max-width: 900px) {
           .hall-platform { width: 180px !important; height: 180px !important; }
@@ -305,8 +365,10 @@ export default function HallOfArmor() {
           .hall-name { font-size: 36px !important; letter-spacing: 0.04em !important; }
           .hall-status-bar { flex-direction: column !important; gap: 6px !important; align-items: flex-start !important; }
           .hall-wrap { padding: 40px 16px 32px !important; }
-          .ro-name { font-size: 14px !important; }
-          .armory-readout { min-height: 132px !important; }
+          .armory-track { gap: 14px !important; }
+          .ro-panel { padding: 18px 18px 16px !important; }
+          .ro-name { font-size: 16px !important; }
+          .armory-readout { min-height: 168px !important; }
         }
       `}</style>
 
@@ -422,16 +484,23 @@ export default function HallOfArmor() {
       </div>
 
       <div className="armory-frame">
-        {/* center spotlight in the active armor's colour */}
+        {/* environment — perspective floor grid + ceiling wash */}
+        <div className="armory-grid" />
+        <div className="armory-ceiling" />
+        {/* localized spotlight in the active armor's colour — a vertical shaft, not a full-screen wash */}
         <div style={{
-          position: 'absolute', top: 0, bottom: 0, left: '50%', width: 260,
-          transform: 'translateX(-50%)', pointerEvents: 'none', zIndex: 0,
-          background: `radial-gradient(ellipse 60% 70% at 50% 45%, ${act.color}14 0%, transparent 70%)`,
-          transition: 'background 0.6s ease',
+          position: 'absolute', top: 0, bottom: 0, left: '50%', width: 300,
+          transform: 'translateX(-50%)', pointerEvents: 'none', zIndex: 1,
+          background: `radial-gradient(ellipse 45% 82% at 50% 42%, ${act.color}1f 0%, ${act.color}0a 40%, transparent 72%)`,
+          transition: 'background 0.7s ease',
         }} />
-        {/* edge fades over the frame border */}
-        <div style={{ position: 'absolute', top: 0, bottom: 0, left: 0, width: 40, zIndex: 6, pointerEvents: 'none', background: 'linear-gradient(90deg, #0a0a0f, transparent)' }} />
-        <div style={{ position: 'absolute', top: 0, bottom: 0, right: 0, width: 40, zIndex: 6, pointerEvents: 'none', background: 'linear-gradient(270deg, #0a0a0f, transparent)' }} />
+        {/* HUD framing */}
+        <div className="frame-bracket fb-tl" /><div className="frame-bracket fb-tr" />
+        <div className="frame-bracket fb-bl" /><div className="frame-bracket fb-br" />
+        <div className="bay-tick top" /><div className="bay-tick bottom" />
+        {/* edge fades */}
+        <div style={{ position: 'absolute', top: 0, bottom: 0, left: 0, width: 60, zIndex: 4, pointerEvents: 'none', background: 'linear-gradient(90deg, #0a0a0f, transparent)' }} />
+        <div style={{ position: 'absolute', top: 0, bottom: 0, right: 0, width: 60, zIndex: 4, pointerEvents: 'none', background: 'linear-gradient(270deg, #0a0a0f, transparent)' }} />
 
         <div
           ref={viewportRef}
@@ -454,21 +523,19 @@ export default function HallOfArmor() {
                 onClick={() => onCardClick(armor)}
                 onPointerEnter={() => { if (!dragRef.current.active) playHover(); }}
               >
-                <div className="pod-inner">
-                  {/* top LED + mark */}
-                  <div className="pod-top">
-                    <span style={{ color: armor.color, opacity: 0.9 }}>{armor.mark}</span>
-                    <span style={{
-                      width: 5, height: 5, borderRadius: '50%', background: armor.color,
-                      boxShadow: `0 0 6px ${armor.glow}`, animation: `led-breathe ${2.4 + (j % 6) * 0.3}s ease-in-out infinite`,
-                    }} />
+                <div className="pod-stage">
+                  <div className="pod-beam" />
+                  <div className="pod-halo" style={{ background: `radial-gradient(ellipse, ${armor.color}66 0%, ${armor.color}1a 45%, transparent 72%)` }} />
+                  <div className="pod-mark" style={{ color: armor.color }}>{armor.mark}</div>
+                  <div className="pod-figwrap">
+                    <div className="pod-puddle" style={{ background: `radial-gradient(ellipse, ${armor.color}5a 0%, transparent 70%)` }} />
+                    <div className="pod-figure">
+                      <ArmorFigure armor={armor} uid={j} />
+                    </div>
+                    <div className="pod-floorline" style={{ background: `linear-gradient(90deg, transparent, ${armor.color} 25%, ${armor.color} 75%, transparent)`, boxShadow: `0 0 8px ${armor.glow}` }} />
                   </div>
-                  <div className="pod-figure">
-                    <ArmorFigure armor={armor} uid={j} />
-                  </div>
-                  <div className="pod-floor" style={{ background: `radial-gradient(ellipse, ${armor.color}66 0%, transparent 70%)` }} />
                   <div className="pod-name">{armor.name}</div>
-                  <div className="pod-lang" style={{ color: armor.color, opacity: 0.85 }}>{armor.language}</div>
+                  <div className="pod-lang" style={{ color: armor.color }}>{armor.language}</div>
                 </div>
               </div>
             ))}
@@ -480,22 +547,31 @@ export default function HallOfArmor() {
         </div>
       </div>
 
-      {/* ACTIVE ARMOR READOUT */}
+      {/* ACTIVE ARMOR READOUT — engineering terminal */}
       <div className="armory-readout">
-        <div className="ro-line">
-          <span className="ro-mark" style={{ color: act.color }}>{act.mark}</span>
-          <span className="ro-name">{act.name} <em>— {act.title}</em></span>
-        </div>
-        <p className="ro-desc">{lang === 'tr' && act.descTr ? act.descTr : act.descEn}</p>
-        <div className="ro-bottom">
-          <div className="ro-tags">
-            {act.tags.map((tag) => (
-              <span key={tag} className="ro-tag" style={{ color: act.color, border: `1px solid ${act.color}44`, background: `${act.color}0e` }}>{tag}</span>
-            ))}
+        <div className="ro-panel">
+          <div className="ro-corner ro-c-tl" /><div className="ro-corner ro-c-tr" />
+          <div className="ro-corner ro-c-bl" /><div className="ro-corner ro-c-br" />
+          <div className="ro-head">
+            <span className="ro-status" style={{ color: act.color }}>
+              <span style={{ width: 5, height: 5, borderRadius: '50%', background: act.color, boxShadow: `0 0 6px ${act.glow}` }} />
+              {act.mark} · {t('hallSelected')}
+            </span>
+            <span className="ro-idx">{String(active + 1).padStart(2, '0')} / {String(ARMORS.length).padStart(2, '0')}</span>
           </div>
-          <Link to={act.href} className="ro-deploy" style={{ color: act.color, borderColor: `${act.color}66` }} onClick={playClick}>
-            {t('hallDeploy')} &rarr;
-          </Link>
+          <div className="ro-name">{act.name}</div>
+          <div className="ro-sub">{act.title}</div>
+          <p className="ro-desc">{lang === 'tr' && act.descTr ? act.descTr : act.descEn}</p>
+          <div className="ro-bottom">
+            <div className="ro-tags">
+              {act.tags.map((tag) => (
+                <span key={tag} className="ro-tag" style={{ color: act.color, border: `1px solid ${act.color}44`, background: `${act.color}0e` }}>{tag}</span>
+              ))}
+            </div>
+            <Link to={act.href} className="ro-deploy" style={{ color: act.color, borderColor: `${act.color}66` }} onClick={playClick}>
+              {t('hallDeploy')} &rarr;
+            </Link>
+          </div>
         </div>
       </div>
 
