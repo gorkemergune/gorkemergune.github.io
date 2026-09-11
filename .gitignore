@@ -28,9 +28,13 @@ yarn-error.log*
 # OS
 .DS_Store
 
-# Personal notes & local backups
+# Personal notes, working prompts & local backups
 my_notes.txt
 TASKS.md
 tasks.md
+tasks/
+
+# Local paper copies (annotated PDFs stay off the repo)
+/*.pdf
 img
 .git-icloud-broken/
