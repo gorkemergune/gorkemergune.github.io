@@ -5,12 +5,16 @@ import { useLang } from '../i18n.jsx';
 import { useSeo } from '../hooks/useSeo';
 import PROJECTS from '../data/projects';
 
-const CAT_ORDER = ['Computer Vision', 'Machine Learning', 'Deep Learning', 'Large Language Models', 'Research', 'Software Engineering', 'Web', 'Mobile', 'C', 'C++', 'Java', 'Open Source', 'Utilities'];
+// Category order drives both the filter tabs and the grouped sections below.
+const CAT_ORDER = ['Research & Benchmarks', 'LLM & NLP', 'AI Agents & Tooling', 'Computer Vision', 'Machine Learning', 'Systems & Graphics', 'Apps & Tools'];
 const CAT_TR = {
-  'Computer Vision': 'Bilgisayarlı Görü', 'Machine Learning': 'Makine Öğrenmesi', 'Deep Learning': 'Derin Öğrenme',
-  'Large Language Models': 'Büyük Dil Modelleri', 'Research': 'Araştırma', 'Software Engineering': 'Yazılım Mühendisliği',
-  'Web': 'Web', 'Mobile': 'Mobil', 'C': 'C', 'C++': 'C++', 'Java': 'Java',
-  'Open Source': 'Açık Kaynak', 'Utilities': 'Araçlar',
+  'Research & Benchmarks': 'Araştırma & Benchmark',
+  'LLM & NLP': 'Dil Modelleri & NLP',
+  'AI Agents & Tooling': 'Yapay Zekâ Ajanları',
+  'Computer Vision': 'Bilgisayarlı Görü',
+  'Machine Learning': 'Makine Öğrenmesi',
+  'Systems & Graphics': 'Sistem & Grafik',
+  'Apps & Tools': 'Uygulamalar & Araçlar',
 };
 
 export default function ProjectPage() {
@@ -30,6 +34,14 @@ export default function ProjectPage() {
       return (p.title + ' ' + p.codename + ' ' + p.language + ' ' + p.tags.join(' ') + ' ' + (p.oneLiner || '')).toLowerCase().includes(s);
     });
   }, [q, cat]);
+
+  // Unfiltered browsing reads better as titled sections; searching or picking a
+  // single category collapses back to one flat grid.
+  const grouped = cat === 'All' && !q.trim();
+  const groups = useMemo(
+    () => (grouped ? CAT_ORDER.map((c) => [c, filtered.filter((p) => p.category === c)]).filter(([, items]) => items.length) : []),
+    [grouped, filtered],
+  );
 
   return (
     <div style={s.container}>
@@ -88,6 +100,20 @@ export default function ProjectPage() {
 
       {filtered.length === 0 ? (
         <p style={s.empty}>{lang === 'tr' ? 'Eşleşen proje yok.' : 'No matching projects.'}</p>
+      ) : grouped ? (
+        groups.map(([groupCat, items]) => (
+          <section key={groupCat} style={{ marginBottom: 64 }}>
+            <div style={s.groupHead}>
+              <h2 style={s.groupTitle}>{catLabel(groupCat)}</h2>
+              <span style={s.groupCount}>{String(items.length).padStart(2, '0')}</span>
+            </div>
+            <div className="armory-grid">
+              {items.map((p, i) => (
+                <ArmorCard key={p.slug} project={p} index={i} lang={lang} />
+              ))}
+            </div>
+          </section>
+        ))
       ) : (
         <div className="armory-grid" key={cat}>
           {filtered.map((p, i) => (
@@ -103,6 +129,7 @@ function ArmorCard({ project, index, lang }) {
   const { t } = useLang();
   const { color, glow } = project;
   const oneLiner = lang === 'tr' && project.oneLinerTr ? project.oneLinerTr : project.oneLiner;
+  const metric = lang === 'tr' && project.metricTr ? project.metricTr : project.metric;
 
   return (
     <Link
@@ -144,6 +171,10 @@ function ArmorCard({ project, index, lang }) {
         <h3 style={s.cardTitle}>{project.title}</h3>
         <p style={s.cardDesc}>{oneLiner}</p>
 
+        {metric && (
+          <div style={{ ...s.metric, color, borderColor: `${color}33`, background: `${color}0f` }}>{metric}</div>
+        )}
+
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 18 }}>
           <span style={{ ...s.cardLang, borderColor: color, color, background: `${color}14` }}>
             {project.language}
@@ -173,6 +204,15 @@ const s = {
   search: { display: 'flex', alignItems: 'center', gap: 10, marginTop: 28, maxWidth: 440, padding: '11px 16px', border: '1px solid #1a1a2e', borderRadius: 8, background: 'rgba(15,15,26,0.6)', transition: 'border-color 0.3s' },
   searchInput: { flex: 1, background: 'transparent', border: 'none', outline: 'none', color: '#e6e6f0', fontFamily: "'Instrument Sans', sans-serif", fontSize: 14.5 },
   count: { fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: '#00d4ff', flexShrink: 0 },
+  groupHead: { display: 'flex', alignItems: 'baseline', gap: 14, marginBottom: 22, paddingBottom: 14, borderBottom: '1px solid #15152a' },
+  groupTitle: { fontFamily: "'Instrument Serif', serif", fontSize: 30, fontWeight: 400, color: '#e0e0e8', letterSpacing: '-0.01em' },
+  groupCount: { fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.12em', color: '#4a4a60' },
+  metric: {
+    display: 'inline-block', alignSelf: 'flex-start', marginBottom: 14,
+    padding: '5px 11px', border: '1px solid', borderRadius: 4,
+    fontFamily: "'JetBrains Mono', monospace", fontSize: 11.5, letterSpacing: '0.04em',
+    fontVariantNumeric: 'tabular-nums',
+  },
   empty: { fontFamily: "'Instrument Serif', serif", fontStyle: 'italic', fontSize: 20, color: '#7a7a92', padding: '40px 0' },
   card: {
     display: 'flex', flexDirection: 'column',
