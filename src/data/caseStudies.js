@@ -35,11 +35,11 @@ export const CASE_STUDIES = {
         'Modern nesne dedektörleri, yaygın kategorilerden oluşan açık veri kümeleriyle eğitilir. Peki bulman gereken nesne hiçbir veri kümesinde yoksa — tek, belirli bir gerçek nesneyse? Bir dedektöre sıfırdan, uçtan uca yepyeni bir nesne öğretebildiğimi kanıtlamak istedim.',
       ],
       solution: [
-        'Belirli tek bir Rotring mekanik kalemi yeni bir sınıf olarak ele aldım ve tüm hattı bunun etrafına kurdum: farklı koşullarda fotoğraflama, sınırlayıcı kutuları elle etiketleme, veriyi bölme ve YOLO11n’i önceden eğitilmiş kontrol noktasından ince ayarlama.',
-        'Omurga genel görsel özellikleri zaten bildiği için ince ayarın yalnızca yeni nesneyi öğretmesi yeterliydi — yaklaşık yüz görselin üretim seviyesi doğruluğa ulaşmaya yetmesinin nedeni de budur.',
+        'Belirli tek bir Rotring mekanik kalemi yeni bir sınıf olarak ele aldım ve tüm hattı bunun etrafına kurdum: farklı koşullarda fotoğraflama, sınırlayıcı kutuları elle etiketleme, veriyi bölme ve YOLO11n’i önceden eğitilmiş kontrol noktasından fine-tune yapma.',
+        'Omurga genel görsel özellikleri zaten bildiği için fine-tune’un yalnızca yeni nesneyi öğretmesi yeterliydi — yaklaşık yüz görselin üretim seviyesi doğruluğa ulaşmaya yetmesinin nedeni de budur.',
       ],
       architecture: [
-        'Depo, birkaç odaklı betikten oluşur: veri kümesi doğrulama, deterministik %70/%20/%10 bölme, 640×640 çözünürlükte 50 epoch eğitim (otomatik batch ve erken durdurmayla) ve tespit kutusunu çizen çıkarım.',
+        'Depo, birkaç odaklı betikten oluşur: veri kümesi doğrulama, deterministik %70/%20/%10 bölme, 640×640 çözünürlükte 50 epoch eğitim (otomatik batch ve erken durdurmayla) ve tespit kutusunu çizen inference.',
         'En iyi kontrol noktası otomatik olarak models/best.pt’ye kopyalanır; merkezî bir config tüm yolları ve hiperparametreleri tutar; böylece çalışmanın tamamı yeniden üretilebilir.',
       ],
       challenges: [
@@ -186,12 +186,12 @@ export const CASE_STUDIES = {
     tr: {
       problem: ['Türkçe, İngilizceye kıyasla sondan eklemeli ve düşük kaynaklı bir dildir. Hafif, önceden eğitilmiş bir çeviri modeli, mütevazı bir derlem ve tek bir ücretsiz GPU ile Türkçe→İngilizce çeviride ne kadar ileri gidebilir?'],
       solution: [
-        'Helsinki-NLP’nin opus-mt-tr-en (MarianMT) modelini Tatoeba paralel derlemi üzerinde ince ayarladım; veri temizlemeden BLEU değerlendirmesine tüm iş akışını kapsayarak.',
+        'Helsinki-NLP’nin opus-mt-tr-en (MarianMT) modelini Tatoeba paralel derlemi üzerinde fine-tune ettim; veri temizlemeden BLEU değerlendirmesine tüm iş akışını kapsayarak.',
         'Deneyin tamamı, ücretsiz bir Colab T4’te yaklaşık bir saatte uçtan uca yeniden üretilebilir.',
       ],
       architecture: [
-        'Numaralı bir hat: derlemi temizle ve %80/%10/%10 böl, karakter/kelime/bayt/BPE tokenizasyonunu karşılaştır, Hugging Face Trainer ile ince ayarla (fp16, efektif batch 128, 3 epoch), sonra SacreBLEU ve etkileşimli ışın aramalı demo ile değerlendir.',
-        'Model, 62 bin tokenlık ortak bir SentencePiece BPE sözlüğüne sahip, en fazla 128 uzunlukta eğitilmiş bir Transformer kodlayıcı-kod çözücüdür.',
+        'Numaralı bir hat: derlemi temizle ve %80/%10/%10 böl, karakter/kelime/bayt/BPE tokenizasyonunu karşılaştır, Hugging Face Trainer ile fine-tune yap (fp16, efektif batch 128, 3 epoch), sonra SacreBLEU ve etkileşimli ışın aramalı demo ile değerlendir.',
+        'Model, 62 bin tokenlık ortak bir SentencePiece BPE sözlüğüne sahip, en fazla 128 uzunlukta eğitilmiş bir Transformer kodlayıcı-decoder’dır.',
       ],
       challenges: [
         'Gerçek bir eğitimi ücretsiz bir GPU’nun bellek ve zaman bütçesine sığdırmak; fp16, 128’lik efektif batch için gradyan biriktirme ve erken durdurma demekti.',
@@ -203,7 +203,7 @@ export const CASE_STUDIES = {
         '522.975 cümle çifti üzerinde tek bir T4’te ~60–90 dakikada eğitildi.',
       ],
       lessons: [
-        'Güçlü bir önceden eğitilmiş kontrol noktası artı özenli ince ayar, özellikle sınırlı veri ve işlem gücüyle, sıfırdan eğitmeyi yener.',
+        'Güçlü bir önceden eğitilmiş kontrol noktası artı özenli fine-tune, özellikle sınırlı veri ve işlem gücüyle, sıfırdan eğitmeyi yener.',
         'Biçimbilimsel açıdan zengin diller için tokenizasyon, sonradan düşünülecek bir ayrıntı değil, birinci sınıf bir tasarım kararıdır.',
       ],
     },
@@ -285,7 +285,7 @@ export const CASE_STUDIES = {
     tr: {
       problem: ['Transformer’lar genelde kara kutu olarak kullanılır — bir modeli içe aktarır ve çağırırsın. Ben tam tersini istedim: bir GPT’nin her parçasını, hiçbir şey kütüphane çağrısının arkasına saklanmadan, kendim inşa ederek anlamak.'],
       solution: [
-        'PyTorch’ta sıfırdan, yalnızca kod çözücülü GPT tarzı bir transformer uyguladım — tokenizer, gömmeler, öz ve çok başlı dikkat, nedensel maskeleme, katman normu, MLP ve kod çözücü bloklarını elle yazıp küçük, eğitilebilir bir modelde birleştirdim.',
+        'PyTorch’ta sıfırdan, decoder-only GPT tarzı bir transformer uyguladım — tokenizer, embedding’ler, öz ve çok başlı dikkat, nedensel maskeleme, katman normu, MLP ve decoder bloklarını elle yazıp küçük, eğitilebilir bir modelde birleştirdim.',
         'Çalışma, modeli parça parça büyüten numaralı not defterlerine bölündü; böylece her kavram bir sonraki eklenmeden önce kurulup test edildi.',
       ],
       architecture: [
@@ -297,9 +297,9 @@ export const CASE_STUDIES = {
         'Prototipi ücretsiz bir GPU’da eğitilecek kadar küçük tutarken anlamlı bir şey öğrenmesini sağlamak, bağlamı ve sözlüğü bilinçli olarak sınırlamayı gerektirdi.',
       ],
       results: [
-        'Tamamen elle yazılmış bileşenlerden kurulmuş, çalışan bir yalnızca kod çözücülü GPT.',
+        'Tamamen elle yazılmış bileşenlerden kurulmuş, çalışan bir decoder-only GPT.',
         'V1 prototip: 64 token bağlam, ücretsiz bir Colab GPU’da uçtan uca eğitildi.',
-        'Metin tamamlama çıkarımı: bir istem ver, modelin devamını al.',
+        'Metin tamamlama inference’ı: bir prompt ver, modelin devamını al.',
       ],
       lessons: [
         'Bir transformer’ı elle inşa etmek, kâğıttaki şemaları gerçekten anladığın bir şeye dönüştürüyor — dikkat artık sihir olmaktan çıkıyor.',
@@ -338,7 +338,7 @@ export const CASE_STUDIES = {
     },
     tr: {
       problem: [
-        'Herkes işe yarayan ince ayarı sergiler. Ben ise LoRA/SFT iş akışının tamamını gerçekten öğrenmek istedim — veri toplama, veri kümesi tasarımı, eğitim, yayınlama, değerlendirme — hem de açık kaynaklı Llama 3.2-3B üzerine kurduğum kendi asistanım “ayarlicazhocam” üzerinde. Ve sonuç ne olursa olsun onu dürüstçe ölçeceğime, kaydı da herkese açık tutacağıma en baştan karar verdim.',
+        'Herkes işe yarayan fine-tune’u sergiler. Ben ise LoRA/SFT iş akışının tamamını gerçekten öğrenmek istedim — veri toplama, veri kümesi tasarımı, eğitim, yayınlama, değerlendirme — hem de açık kaynaklı Llama 3.2-3B üzerine kurduğum kendi asistanım “ayarlicazhocam” üzerinde. Ve sonuç ne olursa olsun onu dürüstçe ölçeceğime, kaydı da herkese açık tutacağıma en baştan karar verdim.',
       ],
       solution: [
         'Tüm hattı uçtan uca kurdum. Veri kümesi üç kaynaktan geldi: herkese açık geliştirici içeriğini çeken kazıyıcılar, personayı şekillendiren elle yazılmış konuşmalar ve programatik üretilen 70 grup sentetik talimat/yanıt çifti (34 İngilizce + 36 Türkçe). Hepsi tek bir iki dilli derlemde birleşti.',
@@ -350,7 +350,7 @@ export const CASE_STUDIES = {
       ],
       challenges: [
         'Sonuç kötüydü ve benchmark tam olarak ne kadar kötü olduğunu söyledi: Türkçe MMLU’da %20,65 — 5 şıklı sorularda rastgele tahminle istatistiksel olarak aynı, 67 model içinde 61., ve aynı boyuttaki stok llama3.2:latest’in yaklaşık yarısı.',
-        'Derine indikçe iki belirti öne çıktı. Model çoktan seçmeli formatı %0 oranında takip etti — cevap vermek yerine istemi tekrarladı. Ve “Görkem kimdir?” diye sorulduğunda, doğru cevap eğitim verisinde dururken her koşuda bambaşka bir biyografi uydurdu (model, blockchain figürü, oyuncu).',
+        'Derine indikçe iki belirti öne çıktı. Model çoktan seçmeli formatı %0 oranında takip etti — cevap vermek yerine prompt’u tekrarladı. Ve “Görkem kimdir?” diye sorulduğunda, doğru cevap eğitim verisinde dururken her koşuda bambaşka bir biyografi uydurdu (model, blockchain figürü, oyuncu).',
       ],
       results: [
         'Yayınlanan adaptörden izlenen kök neden: gönderilen chat_template.jinja hâlâ bir Gemma-3 template’iydi (<start_of_turn> / <end_of_turn>) ve bunlar Llama tokenizer’ında özel token değil — böylece tur yapısı sessizce bozuldu ve persona bilgileri ağırlıklara hiç işlenemedi.',
@@ -401,17 +401,17 @@ export const CASE_STUDIES = {
         'Her şey tasarım gereği otomatik puanlanabilir. Yalnızca iki format vardır: çoktan seçmeli (tam harf) ve kısa cevap (≤7 kelime, sayısal toleranslı normalleştirilmiş kanonik/alias eşleşme). Format dışı bir cevap 0 alır; bu da benchmark’ı sessizce bir talimat-takibi testine de dönüştürür.',
       ],
       architecture: [
-        'Her kayıt sabit bir JSON şemasını izler — id, dil, disiplin, format, zorluk, soru, cevap(lar), yalnızca hakemlerce kullanılan İngilizce-only bir açıklama, kaynak, sürüm ve public/private split. scoring/score.py tek referans puanlayıcıdır; scripts/evaluate.py standart bir 0-shot istem kurar, modeli takılabilir bir arka uç üzerinden çağırır (Anthropic, Ollama/OpenRouter için OpenAI-uyumlu herhangi bir uç nokta ya da dryrun) ve doğruluğu disiplin, dil, zorluk ve format bazında raporlar — artı bir dil tutarlılık indeksi (ortalama mutlak TR/EN farkı).',
-        'Ayrı bir yerel yol (evaluate_local.py), 12 GB GPU’da 4-bit HF çıkarımı yapar ve bir LoRA adaptörünü birleştirir; böylece bir ince ayar kendi tabanına karşı ağırlık-eşleşmeli puanlanabilir. Hub’a yalnızca herkese açık bölüm gönderilir; çoğunluk özel bir holdout’tur ve bir CHANGELOG her soru değişikliğini kaydeder; böylece sonuçlar anlamsal sürümleme altında yeniden üretilebilir kalır.',
+        'Her kayıt sabit bir JSON şemasını izler — id, dil, disiplin, format, zorluk, soru, cevap(lar), yalnızca hakemlerce kullanılan İngilizce-only bir açıklama, kaynak, sürüm ve public/private split. scoring/score.py tek referans puanlayıcıdır; scripts/evaluate.py standart bir 0-shot prompt kurar, modeli takılabilir bir backend üzerinden çağırır (Anthropic, Ollama/OpenRouter için OpenAI-uyumlu herhangi bir uç nokta ya da dryrun) ve doğruluğu disiplin, dil, zorluk ve format bazında raporlar — artı bir dil tutarlılık indeksi (ortalama mutlak TR/EN farkı).',
+        'Ayrı bir yerel yol (evaluate_local.py), 12 GB GPU’da 4-bit HF inference’ı yapar ve bir LoRA adaptörünü birleştirir; böylece bir fine-tune kendi tabanına karşı ağırlık-eşleşmeli puanlanabilir. Hub’a yalnızca herkese açık bölüm gönderilir; çoğunluk özel bir holdout’tur ve bir CHANGELOG her soru değişikliğini kaydeder; böylece sonuçlar anlamsal sürümleme altında yeniden üretilebilir kalır.',
       ],
       challenges: [
         'Bir benchmark’ın zor kısmı, “çok kolay” ya da “bozuk” olmak yerine gerçekten ayırt ettiğini kanıtlamaktır. Her şey %100 ya da her şey %30 alıyorsa, hiçbir şey ölçmüyordur.',
-        'Diğer tuzak kısa-cevap formatıdır: muhakeme modelleri ve konuşkan ince ayarlar aşırı açıklamayı sever ve ≤7 kelime kuralını bozan ayrıntılı ama doğru bir cevap 0 almak zorundadır — bu bir hata değil, bilinçli bir sinyaldir, ama puanlayıcının katı ve öngörülebilir olmasını gerektirir.',
+        'Diğer tuzak kısa-cevap formatıdır: muhakeme modelleri ve konuşkan fine-tune’lar aşırı açıklamayı sever ve ≤7 kelime kuralını bozan ayrıntılı ama doğru bir cevap 0 almak zorundadır — bu bir hata değil, bilinçli bir sinyaldir, ama puanlayıcının katı ve öngörülebilir olmasını gerektirir.',
       ],
       results: [
         '11 model boyunca benchmark temiz bir yetenek yelpazesi gösterir: bir 12B %97,6’da doyarken bir 3B %49,0’da kalır — temiz bir L1→L4 gradyanıyla (%62→%39) 49 puanlık fark. Çok kolay değil; tavana yalnızca yetkin modeller ulaşır.',
         'Dil sinyali gerçek: 3B model Türkçede İngilizceden çok daha zayıf (%39 vs %59, LCI 20,0), tam olarak MIHENK’in ortaya çıkarmak için var olduğu diller arası zayıflık; 12B ise neredeyse hiç fark göstermez (LCI 2,2).',
-        'Kendi iki ince ayarımı, her birini kendi tabanına karşı ölçerek üzerinden geçirdim — yayınlamak için alışılmadık derecede dürüst bir şey. İkisi de mütevazı biçimde geriler (persona/chat eğitimi kısa-cevap format uyumuna mal olur); asıl mesele de bu: benchmark, ince ayarımın yaptığı takası yakaladı.',
+        'Kendi iki fine-tune’umu, her birini kendi tabanına karşı ölçerek üzerinden geçirdim — yayınlamak için alışılmadık derecede dürüst bir şey. İkisi de mütevazı biçimde geriler (persona/chat eğitimi kısa-cevap format uyumuna mal olur); asıl mesele de bu: benchmark, fine-tune’umun yaptığı takası yakaladı.',
       ],
       lessons: [
         'Kendi yazdığın bir benchmark, “muhakemenin” ne demek olduğu konusunda kesin olmaya zorlar — her belirsiz soru, model onu görmeden önce çözmen gereken bir sorudur.',
