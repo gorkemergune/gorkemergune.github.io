@@ -47,7 +47,6 @@ export default function CommandPalette() {
       { label: t('researchLabel'), sub: '/research', to: '/research', icon: Beaker, kind: 'page' },
       { label: t('articlesLabel'), sub: '/articles', to: '/articles', icon: FileText, kind: 'page' },
       { label: t('learningLabel'), sub: '/learning-path', to: '/learning-path', icon: GraduationCap, kind: 'page' },
-      { label: t('journeyLabel'), sub: '/journey', to: '/journey', icon: Compass, kind: 'page' },
       { label: t('blogLabel'), sub: '/blog', to: '/blog', icon: BookOpen, kind: 'page' },
       ...(FEATURES.resume ? [{ label: t('navResume'), sub: '/resume', to: '/resume', icon: FileText, kind: 'page' }] : []),
       { label: t('contactLabel'), sub: '/contact', to: '/contact', icon: FileText, kind: 'page' },

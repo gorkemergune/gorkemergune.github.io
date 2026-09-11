@@ -6,7 +6,7 @@
 // Adding a paper: append to `read` with a new slug. Everything on the page
 // is driven from here — no component changes needed.
 // `pdf` may point to a file under public/papers/ when redistribution of the
-// annotated copy is permitted by the paper's license; otherwise leave it null
+// annotated copy is permitted by the paper’s license; otherwise leave it null
 // and readers go to `url`.
 
 const ARTICLES = {
@@ -100,13 +100,13 @@ const ARTICLES = {
             name: 'Qwen3VL-8B',
             scores: ['53.8 / 40.3', '83.9 / 65.7', '99.7 / 57.1'],
             verdict: 'Best overall. Probe-to-text gap of 3.3 on named points, 13.7 on unnamed.',
-            verdictTr: 'Genel olarak en iyisi. İsimli noktalarda prob-metin farkı 3,3, isimsizde 13,7.',
+            verdictTr: 'Genel olarak en iyisi. İsimli noktalarda probe-text farkı 3,3, isimsizde 13,7.',
           },
           {
             name: 'Gemma3-4B',
             scores: ['25.7 / 24.8', '49.8 / 32.4', '50.6 / 30.5'],
             verdict: 'At chance on real images, but the information is in there: 91.7 probe on unknown shapes.',
-            verdictTr: 'Gerçek görüntüde şans seviyesinde ama içi dolu: bilinmeyen şekillerde prob 91,7.',
+            verdictTr: 'Gerçek görüntüde şans seviyesinde ama içi dolu: bilinmeyen şekillerde probe 91,7.',
           },
           {
             name: 'Gemma3-12B',
@@ -124,13 +124,13 @@ const ARTICLES = {
             name: 'InternVL3.5-8B',
             scores: ['34.3 / 28.2', 'n/a', '66.4 / 27.7'],
             verdict: 'Sits out the face task because it cannot recognize celebrities. Probe-to-text gap of 59.1 on unknown shapes.',
-            verdictTr: 'Ünlüleri tanımadığı için yüz görevine giremiyor. Bilinmeyen şekillerde prob-metin farkı 59,1.',
+            verdictTr: 'Ünlüleri tanımadığı için yüz görevine giremiyor. Bilinmeyen şekillerde probe-text farkı 59,1.',
           },
           {
             name: 'InternVL3.5-14B',
             scores: ['31.9 / 28.4', 'n/a', '55.1 / 32.6'],
             verdict: 'Bigger did not help: it trails the 8B on known shapes, with a 57.8-point probe-to-text gap.',
-            verdictTr: 'Büyük olmak işe yaramamış: bilinen şekillerde 8B’nin gerisinde, prob-metin farkı 57,8.',
+            verdictTr: 'Büyük olmak işe yaramamış: bilinen şekillerde 8B’nin gerisinde, probe-text farkı 57,8.',
           },
         ],
       },

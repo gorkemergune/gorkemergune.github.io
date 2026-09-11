@@ -49,8 +49,7 @@ export default function CompetitionsPage() {
                 <h3 style={s.name}>{c.name}</h3>
                 <div style={s.metaLine}>
                   <span>{c.org}</span>
-                  <span style={s.metaDot} />
-                  <span>{c.date}</span>
+                  {c.date && <><span style={s.metaDot} /><span>{c.date}</span></>}
                   {c.duration && <><span style={s.metaDot} /><span style={{ color: c.accent }}>{c.duration}</span></>}
                 </div>
               </div>

@@ -9,7 +9,7 @@ const en = {
   navContact: 'Contact',
 
   // Hero
-  heroChip: 'Portfolio / Version 2.10 / 2026',
+  heroChip: 'Portfolio / Version 2.4 / 2026',
   heroRole: 'ROLE',
   heroRoleValue: '2nd year Computer Engineering student',
   heroBasedIn: 'BASED IN',
@@ -25,7 +25,7 @@ const en = {
 
   // Intro (home identity section)
   introKicker: 'IDENTITY // WHO IS BEHIND THE ARMOR',
-  introLeadPre: "I'm Görkem, and I spend my days turning ",
+  introLeadPre: "I’m Görkem, and I spend my days turning ",
   introLeadEm: 'curiosity into working systems',
   introLeadPost: ': object detectors, translation models, phishing classifiers — and the apps that put them in people’s hands.',
   introBody: 'I learn by shipping. Every armor in the hall is something I designed, trained, broke, and rebuilt — from a bare-metal operating system to production ML pipelines. The goal is simple: to become the kind of AI engineer whose work speaks before he does.',
@@ -114,20 +114,9 @@ const en = {
   statLanguagesVal: 'TR · EN',
   statMail: 'Mail',
 
-  // Journey
-  journeyLabel: 'Life flow',
-  journeySub: 'A short chronology',
-  journeyItems: [
-    { year: 'Sep 2024 Aug 2025', title: 'English Prep School', body: 'Built English foundation. Reached speaking fluency for daily use. Started Python and basic problem solving. First introduction to LLM concepts.' },
-    { year: 'Sep 2025 Jun 2026', title: '1/4 Computer Engineering', body: 'Started core CS journey. Learned C and improved algorithm skills. Studied ML & DL fundamentals. Built small Python/C projects. Began experimenting with LLM ideas. Increased Social Media, GitHub and LinkedIn activity.' },
-    { year: 'Sep 2026 Jun 2027', title: '2/4 Computer Engineering', body: 'Coming soon..' },
-    { year: 'Sep 2027 Jun 2028', title: '3/4 Computer Engineering', body: 'Coming soon..' },
-    { year: 'Sep 2028 Jun 2029', title: '4/4 Computer Engineering', body: 'Coming soon..' },
-  ],
-
   // Focus
   focusLabel: 'Focus',
-  focusSub: "What I'm paying attention to, now",
+  focusSub: "What I’m paying attention to, now",
   focusItems: [
     { label: 'Reading', value: 'Title — Author' },
     { label: 'Building', value: 'A quiet project in progress' },
@@ -192,7 +181,7 @@ const en = {
   funSub: 'Surprises to share with friends',
   funBack: 'Home',
   funBadge: 'FUN',
-  funSorryTitle: "I'm Sorry",
+  funSorryTitle: "I’m Sorry",
   funSorryDesc: 'Send this to a friend and make peace.',
   funBirthdayTitle: 'Birthday',
   funBirthdayDesc: 'Create a custom birthday cake for your friend.',
@@ -202,7 +191,7 @@ const en = {
   funPuzzleDesc: 'Can you crack the sorting algorithm?',
   funHanoiTitle: 'Tower of Hanoi',
   funHanoiDesc: 'Move all disks to the last peg.',
-  funMothersDayTitle: "Mother's Day",
+  funMothersDayTitle: "Mother’s Day",
   funMothersDayDesc: 'A surprise for your mom with flowers and love.',
   funGoOutTitle: 'Shall We Go Out?',
   funGoOutDesc: 'Send this to a friend and get them outside.',
@@ -231,7 +220,7 @@ const en = {
   loveDisclaimer: 'Just for fun — not a real compatibility test.',
   loveName1Label: 'Your Name',
   loveName1Placeholder: 'e.g. Alex',
-  loveName2Label: "Crush's Name",
+  loveName2Label: "Crush’s Name",
   loveName2Placeholder: 'e.g. Emma',
   loveCalculate: 'Calculate',
   loveCompatibility: 'Compatibility',
@@ -305,18 +294,18 @@ const en = {
   simonStart: 'Start',
   simonAgain: 'Play again',
 
-  // Mother's Day Page
-  mothersDayTitle: "Happy Mother's Day,\nMy Dear Mom",
+  // Mother’s Day Page
+  mothersDayTitle: "Happy Mother’s Day,\nMy Dear Mom",
   mothersDaySub: 'You are the most beautiful flower in the world',
   mothersDayMessage: 'Thank you for everything you do. You are the light of my life, the warmth of my heart. I love you more than words can say.',
 
   // Go Out Page
   goOutPageTitle: 'Shall We Go Out?',
-  goOutPageSub: "Come on, let's go outside!",
+  goOutPageSub: "Come on, let’s go outside!",
   goOutYes: 'Yes!',
   goOutNo: 'No',
-  goOutYayTitle: "Let's Go!",
-  goOutYayText: "Get ready, we're heading out! The world awaits! ☀️",
+  goOutYayTitle: "Let’s Go!",
+  goOutYayText: "Get ready, we’re heading out! The world awaits! ☀️",
 
   // Hanoi Page
   hanoiPageBack: 'Fun',
@@ -348,16 +337,16 @@ const en = {
   hanoiExP3: 'Auxiliary: Peg 2 — Target: Peg 3. This puzzle demonstrates exponential growth — each additional disk doubles the minimum moves and adds one.',
 
   // Sorry Page
-  sorryPageTitle: "I'm Sorry...",
+  sorryPageTitle: "I’m Sorry...",
   sorryPageSub: 'Can we make up?',
   sorryYes: 'Yes',
   sorryNo: 'No',
   sorryYayTitle: 'Yaaay!',
-  sorryYayText: "We made up! Let's never fight again! 🎉",
+  sorryYayText: "We made up! Let’s never fight again! 🎉",
 
   // Birthday Page
   bdayPageTitle: 'Birthday Celebration!',
-  bdayNameLabel: "Friend's name",
+  bdayNameLabel: "Friend’s name",
   bdayNamePlaceholder: 'Enter name...',
   bdayAgeLabel: 'Age',
   bdayAgePlaceholder: 'Enter age...',
@@ -387,7 +376,6 @@ const en = {
 
   // Nav
   navProject: 'Project',
-  navLifeFlow: 'Life Flow',
 
   // Hero buttons
   heroBtnBlog: 'Blog',
@@ -402,14 +390,6 @@ const en = {
   contactCreator: 'CONTENT CREATOR',
 
   // Journey Page
-  journeyBack: 'Home',
-  journeyBadge: 'LIFE FLOW',
-  journeyStatusDone: 'COMPLETE',
-  journeyStatusActive: 'IN PROGRESS',
-  journeyStatusLocked: 'LOCKED',
-  journeyPhase: 'PHASE',
-  journeyTimeline: 'MISSION TIMELINE',
-  journeySoon: 'Encrypted — unlocks in sequence.',
 
   // Project Page
   projectBack: 'Home',
@@ -685,26 +665,6 @@ const en = {
   compLeaderboard: 'Leaderboard',
 
   // Life Flow (semester roadmap)
-  journeyNow: 'YOU ARE HERE',
-  journeyFocusLabel: 'Current focus',
-  journeyFocus: ['Large Language Models', 'Computer Vision', 'Machine Learning', 'Algorithms'],
-  journeyExpand: 'Expand',
-  journeyLockedNote: 'Locked — unlocks in sequence.',
-  semCompetitions: 'Competitions',
-  semHackathons: 'Hackathons',
-  semResearch: 'Research',
-  semProjects: 'Projects',
-  semAchievements: 'Achievements',
-  journeySemesters: [
-    { term: '2024–25', sub: '(English Prep)', status: 'completed', title: 'Prep Year — Foundation & First Code',
-      competitions: [], hackathons: [], research: [], projects: [], achievements: ['Built my English up to fluency', 'Started Python and first steps into AI'] },
-    { term: 'Year 1 · Term 1', sub: '(2025 · Fall)', status: 'completed', title: 'Computer Engineering & First Contest',
-      competitions: ['IEEEXtreme', 'AlgoLeague Winter Camp'], hackathons: [], research: [], projects: [], achievements: ['Started Computer Engineering & competitive programming', 'Moved into ML & Data Science', 'Founded my team, NEXA'] },
-    { term: 'Year 1 · Term 2', sub: '(2026 · Spring)', status: 'completed', title: 'C, Hackathons & First Research',
-      competitions: ['AlgoLeague Spring Camp', 'AlgoLeague Summer Camp'], hackathons: ['BTK E-Commerce Hackathon'], research: ['PHQ-9 Depression Analysis'], projects: ['GorkemOS', 'Face Detection'], achievements: ['Learned C by building real projects', 'First applied-ML research & an online internship'] },
-    { term: 'Summer 2026', sub: '(Current)', status: 'current', title: 'The AI Wave — My Own Fine-Tunes & Benchmarks',
-      competitions: [], hackathons: [], research: ['Pose-Invariant Face ID'], projects: ['MIHENK Benchmark', 'ayarlicazhocam-training'], achievements: ['Built & benchmarked my own two LLM fine-tunes', 'Learned tool/function calling end to end'] },
-  ],
   // Blog detail content
   blogPosts: {
     'calculus-aa': {
@@ -774,7 +734,7 @@ const tr = {
   navContact: 'İletişim',
 
   // Hero
-  heroChip: 'Portfolyo / Sürüm 2.10 / 2026',
+  heroChip: 'Portfolyo / Sürüm 2.4 / 2026',
   heroRole: 'ROL',
   heroRoleValue: '2. sınıf Bilgisayar Mühendisliği öğrencisi',
   heroBasedIn: 'KONUM',
@@ -793,9 +753,9 @@ const tr = {
   introLeadPre: 'Ben Görkem. Günlerimi ',
   introLeadEm: 'merakı çalışan sistemlere',
   introLeadPost: ' dönüştürerek geçiriyorum: nesne dedektörleri, çeviri modelleri, oltalama sınıflandırıcıları ve bunları insanların eline ulaştıran uygulamalar.',
-  introBody: 'Üreterek öğreniyorum. Zırh Deposu’ndaki her zırh; doğrudan donanımda çalışan bir işletim sisteminden üretim seviyesindeki makine öğrenmesi hatlarına kadar tasarladığım, eğittiğim, bozup yeniden inşa ettiğim bir şey. Amacım basit: işi kendisinden önce konuşan bir yapay zekâ mühendisi olmak.',
+  introBody: 'Üreterek öğreniyorum. Zırh Deposu’ndaki her zırh; doğrudan donanımda çalışan bir işletim sisteminden üretim seviyesindeki makine öğrenmesi pipeline’larına kadar tasarladığım, eğittiğim, bozup yeniden inşa ettiğim bir şey. Amacım basit: işi kendisinden önce konuşan bir yapay zekâ mühendisi olmak.',
   introRolesLabel: 'ÇALIŞMA ALANLARI',
-  introRoles: ['Yapay Zekâ Mühendisi', 'Bilgisayarlı Görü (CV)', 'Makine Öğrenmesi (ML)', 'Büyük Dil Modelleri (LLM)', 'Full-Stack Geliştirme', 'Açık Kaynak', 'Araştırma'],
+  introRoles: ['Yapay Zekâ Mühendisi', 'Bilgisayarlı Görü (CV)', 'Makine Öğrenmesi (ML)', 'LLM', 'Full-Stack Geliştirme', 'Açık Kaynak', 'Araştırma'],
   introStats: [
     { n: 29, suffix: '', label: 'Yayınlanan proje' },
     { n: 25, suffix: '+', label: 'Kullanılan teknoloji' },
@@ -829,13 +789,13 @@ const tr = {
   featuredCta: 'Vaka analizini oku',
   featuredAlso: 'AYRICA ÖNE ÇIKAN',
   featuredLbTitle: 'MIHENK liderlik tablosu · tam set',
-  featuredLbNote: '2 satır kendi ince ayarlarım',
+  featuredLbNote: '2 satır kendi fine-tune’larım',
 
   buildingKicker: 'ŞU AN GELİŞTİRİLENLER',
   buildingSub: 'Aktif denemeler ve devam eden çalışmalar',
   buildingItems: [
-    { title: 'LLM Denemeleri', desc: 'Açık modeller çevresinde prompt, ince ayar ve küçük ajan araçları.', status: 'Keşif' },
-    { title: 'Bilgisayarlı Görü', desc: 'Tek sınıflı YOLO’nun ötesinde özel dedektörler ve tespit hatları.', status: 'Geliştirme' },
+    { title: 'LLM Denemeleri', desc: 'Açık modeller çevresinde prompt, fine-tune ve küçük ajan araçları.', status: 'Keşif' },
+    { title: 'Bilgisayarlı Görü', desc: 'Tek sınıflı YOLO’nun ötesinde özel dedektörler ve tespit pipeline’ları.', status: 'Geliştirme' },
     { title: 'Ürün Yöneticisi & Problem Çözücü', desc: 'Ham fikirleri kapsamı belli ürünlere dönüştürme — problem, kullanıcı ve ödünleşimlerle düşünüp sonra hayata geçirme.', status: 'İyileştirme' },
   ],
 
@@ -844,7 +804,7 @@ const tr = {
   activityCta: 'GitHub profilini gör',
   activityUpdated: 'Güncellendi',
   hfKicker: 'HUGGING FACE // MODELLER & VERİ KÜMELERİ',
-  hfSub: 'Hub’a yayınladıklarım — ince ayarlar ve arkalarındaki veri kümeleri',
+  hfSub: 'Hub’a yayınladıklarım — fine-tune’lar ve arkalarındaki veri kümeleri',
   hfCta: 'Hugging Face profilini gör',
   hfModel: 'MODEL',
   hfDataset: 'VERİ KÜMESİ',
@@ -877,17 +837,6 @@ const tr = {
   statLanguages: 'Diller',
   statLanguagesVal: 'TR · EN',
   statMail: 'E-posta',
-
-  // Journey
-  journeyLabel: 'Hayat akışı',
-  journeySub: 'Kısa bir kronoloji',
-  journeyItems: [
-    { year: 'Eyl 2024 – Ağu 2025', title: 'İngilizce Hazırlık', body: 'İngilizce temelimi oluşturdum. Günlük kullanımda akıcı konuşma seviyesine ulaştım. Python’a ve temel problem çözmeye başladım. LLM kavramlarıyla ilk kez tanıştım.' },
-    { year: 'Eyl 2025 – Haz 2026', title: 'Bilgisayar Mühendisliği 1/4', body: 'Temel bilgisayar bilimi yolculuğuma başladım. C öğrendim, algoritma becerilerimi geliştirdim. Makine Öğrenmesi ve Derin Öğrenme temellerini çalıştım. Küçük Python/C projeleri geliştirdim. LLM fikirleri üzerinde denemelere başladım. Sosyal medya, GitHub ve LinkedIn etkinliğimi artırdım.' },
-    { year: 'Eyl 2026 – Haz 2027', title: 'Bilgisayar Mühendisliği 2/4', body: 'Çok yakında...' },
-    { year: 'Eyl 2027 – Haz 2028', title: 'Bilgisayar Mühendisliği 3/4', body: 'Çok yakında...' },
-    { year: 'Eyl 2028 – Haz 2029', title: 'Bilgisayar Mühendisliği 4/4', body: 'Çok yakında...' },
-  ],
 
   // Focus
   focusLabel: 'Odak',
@@ -1069,7 +1018,7 @@ const tr = {
   simonStart: 'Başlat',
   simonAgain: 'Tekrar oyna',
 
-  // Mother's Day Page
+  // Mother’s Day Page
   mothersDayTitle: 'Anneler Günün Kutlu Olsun,\nCanım Annem',
   mothersDaySub: 'Dünyanın en güzel çiçeği sensin',
   mothersDayMessage: 'Her şey için teşekkür ederim. Hayatımın ışığı, kalbimin sıcaklığısın. Seni kelimelerle anlatamayacağım kadar çok seviyorum.',
@@ -1151,7 +1100,6 @@ const tr = {
 
   // Nav
   navProject: 'Proje',
-  navLifeFlow: 'Hayat Akışı',
 
   // Hero buttons
   heroBtnBlog: 'Blog',
@@ -1166,14 +1114,6 @@ const tr = {
   contactCreator: 'İÇERİK ÜRETİCİ',
 
   // Journey Page
-  journeyBack: 'Ana Sayfa',
-  journeyBadge: 'HAYAT AKIŞI',
-  journeyStatusDone: 'TAMAMLANDI',
-  journeyStatusActive: 'DEVAM EDİYOR',
-  journeyStatusLocked: 'KİLİTLİ',
-  journeyPhase: 'AŞAMA',
-  journeyTimeline: 'GÖREV ZAMAN ÇİZELGESİ',
-  journeySoon: 'Şifreli; sırası gelince açılır.',
 
   // Project Page
   projectBack: 'Ana Sayfa',
@@ -1266,10 +1206,10 @@ const tr = {
       org: 'Bağımsız Yapay Zekâ / ML Mühendisliği', role: 'Geliştirici & Açık Kaynak Yazarı', period: '2024 — Günümüz', type: 'Uygulamalı', accent: '#00d4ff',
       summary: 'Bilgisayarlı görü, NLP, ML, sistemler ve full-stack alanlarında kendi kendine yönlendirdiğim mühendislik.',
       points: [
-        'Doğrudan donanımda çalışan x86 işletim sisteminden üretim ML hatlarına 16 belgeli proje yayınladım.',
+        'Doğrudan donanımda çalışan x86 işletim sisteminden üretim ML pipeline’larına 16 belgeli proje yayınladım.',
         'Kendi topladığım veri kümesinde tek sınıflı YOLO11 dedektörünü %90,3 mAP@50’ye eğittim.',
-        'İki aşamalı yüz tespiti hattını 140.000 görselde sıfır hatayla test ettim.',
-        'MarianMT’yi Türkçe→İngilizce için ince ayarlayıp BLEU’yu ~36’dan ~43’e çıkardım.',
+        'İki aşamalı yüz tespiti pipeline’ını 140.000 görselde sıfır hatayla test ettim.',
+        'MarianMT’yi Türkçe→İngilizce için fine-tune edip BLEU’yu ~36’dan ~43’e çıkardım.',
       ],
       tags: ['PyTorch', 'YOLO11', 'FastAPI', 'C'], link: '/project',
     },
@@ -1279,7 +1219,7 @@ const tr = {
       points: [
         'İngilizce ve Türkçe metinlerde yapay zekâ üretimi metni tespit etmek için stilometrik sinyaller.',
         'Küçük ve kısmen görünen yüzleri yakalamak için tespit et-doğrula yöntemi.',
-        'Düşük kaynaklı Türkçe→İngilizce makine çevirisi için ince ayar stratejileri.',
+        'Düşük kaynaklı Türkçe→İngilizce makine çevirisi için fine-tune stratejileri.',
       ],
       tags: ['NLP', 'Bilgisayarlı Görü', 'Değerlendirme'], link: '/research',
     },
@@ -1306,7 +1246,7 @@ const tr = {
       { name: 'Git', level: 5 }, { name: 'GitHub', level: 5 }, { name: 'Docker', level: 4 }, { name: 'Linux', level: 4 }, { name: 'VS Code', level: 5 }, { name: 'Cursor', level: 4 }, { name: 'Claude Code', level: 4 },
     ]},
     { category: 'Diğer', accent: '#9d6bff', items: [
-      { name: 'Full-Stack Geliştirme', level: 4 }, { name: 'Algoritmalar', level: 4 }, { name: 'Veri Yapıları', level: 4 }, { name: 'Bilgisayarlı Görü', level: 4 }, { name: 'Makine Öğrenmesi', level: 4 }, { name: 'Derin Öğrenme', level: 4 }, { name: 'Büyük Dil Modelleri', level: 4 }, { name: 'REST API', level: 4 },
+      { name: 'Full-Stack Geliştirme', level: 4 }, { name: 'Algoritmalar', level: 4 }, { name: 'Veri Yapıları', level: 4 }, { name: 'Bilgisayarlı Görü', level: 4 }, { name: 'Makine Öğrenmesi', level: 4 }, { name: 'Derin Öğrenme', level: 4 }, { name: 'LLM', level: 4 }, { name: 'REST API', level: 4 },
     ]},
   ],
 
@@ -1354,7 +1294,7 @@ const tr = {
       field: 'NLP · Güvenlik', accent: '#7c5cff', status: 'completed',
       abstract: 'Oltalama e-postaları insanlara gerçek para kaybettirir ve aciliyet ile taklide dayalı, tanıdık bir kelime dağarcığına yaslanır. Amaç, bunları ham metinden basit ve şeffaf bir modelle tespit etmek ve verinin nasıl temsil edildiğinin en az model kadar önemli olduğunu göstermek.',
       methods: ['Metin temizleme, ardından kelimeler ve ikili öbekler üzerinde TF-IDF vektörleştirme', 'Sabit tohumlu katmanlı %80/%20 bölme', 'Lojistik Regresyon sınıflandırıcı', 'Doğruluk, kesinlik, duyarlılık, F1, karışıklık matrisi ve ROC ile değerlendirme'],
-      expected: 'Şeffaf TF-IDF + Lojistik Regresyon hattı, oltalamayı ham metinden yüksek kesinlik ve duyarlılıkla işaretliyor ve ana fikri doğruladı: verinin nasıl temsil edildiği en az model kadar önemli. Çalışma tamamlandı ve projede belgelendi.',
+      expected: 'Şeffaf TF-IDF + Lojistik Regresyon pipeline’ı, oltalamayı ham metinden yüksek kesinlik ve duyarlılıkla işaretliyor ve ana fikri doğruladı: verinin nasıl temsil edildiği en az model kadar önemli. Çalışma tamamlandı ve projede belgelendi.',
     },
     {
       title: 'PHQ-9 Depresyon Analizi',
@@ -1412,7 +1352,7 @@ const tr = {
   resumeTitle: 'Görkem Ergüne',
   resumeRole: 'Bilgisayar Mühendisliği Öğrencisi · Yapay Zekâ Ürün Geliştiricisi',
   resumePrint: 'PDF olarak kaydet',
-  resumeSummary: 'İkinci sınıf Bilgisayar Mühendisliği öğrencisi ve kendi yolunu çizen bir yapay zekâ mühendisi adayıyım. Araştırma odaklı bir yaklaşımla bilgisayarlı görü sistemleri, makine öğrenmesi işlem hatları ve full-stack yazılımlar geliştiriyorum; üretip yayınlamayı alışkanlık hâline getirdim.',
+  resumeSummary: 'İkinci sınıf Bilgisayar Mühendisliği öğrencisi ve kendi yolunu çizen bir yapay zekâ mühendisi adayıyım. Araştırma odaklı bir yaklaşımla bilgisayarlı görü sistemleri, makine öğrenmesi pipeline’ları ve full-stack yazılımlar geliştiriyorum; üretip yayınlamayı alışkanlık hâline getirdim.',
   resumeSecEducation: 'Eğitim',
   resumeSecExperience: 'Deneyim',
   resumeSecProjects: 'Seçili Projeler',
@@ -1455,26 +1395,6 @@ const tr = {
   compLeaderboard: 'Sıralama',
 
   // Life Flow (semester roadmap)
-  journeyNow: 'BURADASIN',
-  journeyFocusLabel: 'Güncel odak',
-  journeyFocus: ['Büyük Dil Modelleri', 'Bilgisayarlı Görü', 'Makine Öğrenmesi', 'Algoritmalar'],
-  journeyExpand: 'Aç',
-  journeyLockedNote: 'Kilitli; sırası gelince açılır.',
-  semCompetitions: 'Yarışmalar',
-  semHackathons: 'Hackathonlar',
-  semResearch: 'Araştırma',
-  semProjects: 'Projeler',
-  semAchievements: 'Başarılar',
-  journeySemesters: [
-    { term: '2024–25', sub: '(İngilizce Hazırlık)', status: 'completed', title: 'Hazırlık Yılı — Temel & İlk Kodlar',
-      competitions: [], hackathons: [], research: [], projects: [], achievements: ['İngilizcemi akıcılığa taşıdım', 'Python’a ve yapay zekâya ilk adımlar'] },
-    { term: '1. Yıl · 1. Dönem', sub: '(2025 · Güz)', status: 'completed', title: 'Bilgisayar Mühendisliği & İlk Yarışma',
-      competitions: ['IEEEXtreme', 'AlgoLeague Kış Kampı'], hackathons: [], research: [], projects: [], achievements: ['Bilgisayar Mühendisliği & yarışmacı programlamaya başladım', 'ML & Data Science’a geçtim', 'Kendi ekibim NEXA’yı kurdum'] },
-    { term: '1. Yıl · 2. Dönem', sub: '(2026 · Bahar)', status: 'completed', title: 'C, Hackathonlar & İlk Araştırma',
-      competitions: ['AlgoLeague Bahar Kampı', 'AlgoLeague Yaz Kampı'], hackathons: ['BTK E-Ticaret Hackathon'], research: ['PHQ-9 Depresyon Analizi'], projects: ['GorkemOS', 'Yüz Tespiti'], achievements: ['Üreterek C öğrendim', 'İlk uygulamalı ML araştırması & online staj'] },
-    { term: '2026 Yazı', sub: '(Şu an)', status: 'current', title: 'Yapay Zekâ Dalgası — Kendi İnce Ayarlarım & Benchmarklar',
-      competitions: [], hackathons: [], research: ['Poz-Değişmez Yüz Kimliği'], projects: ['MIHENK Benchmark’ı', 'ayarlicazhocam-training'], achievements: ['Kendi iki LLM ince ayarımı geliştirip kıyasladım', 'Araç/fonksiyon çağırmayı uçtan uca öğrendim'] },
-  ],
   // Blog detail content
   blogPosts: {
     'calculus-aa': {

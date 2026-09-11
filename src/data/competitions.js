@@ -33,7 +33,7 @@ const COMPETITIONS = [
     id: 'algoleague-winter',
     name: 'AlgoLeague Winter Camp',
     org: 'AlgoLeague',
-    date: 'Jun 3, 2026',
+    date: null,   // exact camp date unconfirmed — shown as unset rather than guessed
     duration: null,
     initials: 'AW',
     accent: '#4d96ff',
@@ -54,7 +54,7 @@ const COMPETITIONS = [
     id: 'algoleague-spring',
     name: 'AlgoLeague Spring Camp',
     org: 'AlgoLeague',
-    date: 'Mar 7, 2026',
+    date: null,   // exact camp date unconfirmed — shown as unset rather than guessed
     duration: null,
     initials: 'AS',
     accent: '#00e5a0',
@@ -75,7 +75,7 @@ const COMPETITIONS = [
     id: 'algoleague-summer',
     name: 'AlgoLeague Summer Camp',
     org: 'AlgoLeague',
-    date: 'May 23, 2026',
+    date: null,   // exact camp date unconfirmed — shown as unset rather than guessed
     duration: null,
     initials: 'AU',
     accent: '#ffd166',

@@ -28,7 +28,6 @@ const SpinWheelPage = lazy(() => import('./pages/SpinWheelPage'));
 const MothersDay = lazy(() => import('./pages/MothersDay'));
 const GoOutPage = lazy(() => import('./pages/GoOutPage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
-const JourneyPage = lazy(() => import('./pages/JourneyPage'));
 const ProjectPage = lazy(() => import('./pages/ProjectPage'));
 const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
 const CompetitionsPage = lazy(() => import('./pages/CompetitionsPage'));
@@ -221,10 +220,6 @@ export default function App() {
           .nav-right .clock-display { display: none !important; }
           .hamburger { display: block !important; }
           .mobile-menu { display: flex !important; }
-          .journey-row { flex-direction: column !important; gap: 8px !important; }
-          .journey-row .journey-title { width: auto !important; }
-          .journey-row .journey-year { width: auto !important; }
-          .journey-row .journey-num { width: auto !important; }
           .roadmap-row { flex-wrap: wrap !important; gap: 12px !important; }
           .roadmap-row .roadmap-title { width: auto !important; flex: 1 1 100% !important; }
           .big-contact { font-size: 56px !important; }
@@ -272,7 +267,6 @@ export default function App() {
             <Link to="/research" className="link-hover" style={{ cursor: 'pointer' }}>{t('navResearch')}</Link>
             <Link to="/articles" className="link-hover" style={{ cursor: 'pointer' }}>{t('navArticles')}</Link>
             <Link to="/learning-path" className="link-hover" style={{ cursor: 'pointer' }}>{t('navLearning')}</Link>
-            <Link to="/journey" className="link-hover" style={{ cursor: 'pointer' }}>{t('navLifeFlow')}</Link>
             <Link to="/blog" className="link-hover" style={{ cursor: 'pointer' }}>{t('navBlog')}</Link>
             <Link to="/fun" className="link-hover" style={{ cursor: 'pointer' }}>{t('navFun')}</Link>
             <Link to="/contact" className="link-hover" style={{ cursor: 'pointer', color: '#e0e0e8', fontWeight: 500 }}>
@@ -311,7 +305,6 @@ export default function App() {
             <Link to="/research" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navResearch')}</Link>
             <Link to="/articles" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navArticles')}</Link>
             <Link to="/learning-path" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navLearning')}</Link>
-            <Link to="/journey" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navLifeFlow')}</Link>
             <Link to="/blog" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navBlog')}</Link>
             {FEATURES.resume && <Link to="/resume" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navResume')}</Link>}
             <Link to="/fun" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navFun')}</Link>
@@ -351,7 +344,6 @@ export default function App() {
           <Route path="/fun/lovemeter" element={<LoveMeterPage />} />
           <Route path="/fun/wheel" element={<SpinWheelPage />} />
           <Route path="/contact" element={<ContactPage />} />
-          <Route path="/journey" element={<JourneyPage />} />
           <Route path="/project" element={<ProjectPage />} />
           <Route path="/project/:slug" element={<ProjectDetail />} />
           <Route path="/project/:slug/case-study" element={<CaseStudyPage />} />
@@ -374,7 +366,7 @@ export default function App() {
             &copy; 2026 &middot; Görkem Ergüne
           </span>
           <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.1em', color: '#6a6a82' }}>
-            v2.30 &middot; {time}
+            v2.4 &middot; {time}
           </span>
         </div>
       </footer>

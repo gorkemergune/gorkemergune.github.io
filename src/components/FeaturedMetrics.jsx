@@ -16,7 +16,7 @@ export default function FeaturedMetrics() {
     { n: gh.commits, suffix: '', label: t('mCommits'), live: true },
     { n: algo.total, suffix: '', label: t('mAlgo'), live: true },
     { n: COMPETITIONS.length, suffix: '', label: t('mCompetitions') },
-    { n: 2, suffix: '', label: t('mResearch') },
+    { n: (t('researchItems') || []).length, suffix: '', label: t('mResearch') },
   ];
 
   return (
