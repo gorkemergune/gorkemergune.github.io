@@ -52,7 +52,8 @@ export default function ProjectDetail() {
   const roleLabels = t('pdRole') || {};
   const statusLabels = t('pdStatus') || {};
 
-  // New schema only. Legacy `highlights`, `results` and `metric` are never read here.
+  // New schema only. The legacy highlights / results / metric fields were removed
+  // from projects.js on 12 Sep 2026; nothing below ever read them.
   const images = project.images.map((img) => ({ ...img, caption: loc(img.caption, img.captionTr) }));
   const problem = loc(project.problem, project.problemTr);
   const built = loc(project.overview, project.overviewTr);

@@ -22,8 +22,6 @@ const PROJECTS = [
     color: '#f5b301',
     glow: 'rgba(245,179,1,0.5)',
     tags: ['LLM Eval', 'Benchmark', 'TR + EN'],
-    metric: '11 models · 97.6% top score',
-    metricTr: '11 model · %97,6 en yüksek',
     github: gh('mihenk-benchmark'),
     // Field Notes — migrated verbatim from caseStudies.js (12 Sep 2026).
     challenges: [
@@ -53,22 +51,6 @@ const PROJECTS = [
       'MIHENK (Multilingual Intelligence, High-level Evaluation and Neural Knowledge) is a benchmark I designed from scratch to measure reasoning rather than memorized recall. Every one of its 800 items is original and generated rather than copied from any examination bank — each record declares its provenance — exists in both Turkish and English as its own item rather than a translation, and is automatically and objectively scorable — so results are reproducible and comparable over time. Items deliberately include irrelevant premises, forcing a model to isolate what matters. I then ran 11 models through it, from a 3B up to a 12B, cloud and local — and included my own two fine-tunes, each measured against its own base.',
     overviewTr:
       'MIHENK (Multilingual Intelligence, High-level Evaluation and Neural Knowledge), ezberden hatırlamayı değil muhakemeyi ölçmek için sıfırdan tasarladığım bir benchmark. 800 sorunun her biri özgün ve herhangi bir soru bankasından kopyalanmak yerine üretilmiş — her kayıt kendi kaynağını beyan eder — hem Türkçe hem İngilizce olarak çeviri değil kendi sorusu hâlinde mevcut ve otomatik ile nesnel biçimde puanlanabilir — böylece sonuçlar yeniden üretilebilir ve zaman içinde karşılaştırılabilir. Sorular bilinçli olarak alakasız öncüller içerir; model neyin önemli olduğunu ayıklamak zorunda kalır. Ardından 3B’den 12B’ye, bulut ve yerel, 11 modeli bu benchmark’tan geçirdim — kendi iki fine-tune’umu da her biri kendi base modeline karşı ölçerek dahil ettim.',
-    highlights: [
-      'Fully bilingual: each item authored independently in Turkish and English, so per-language performance and the gap between them can be reported',
-      '800 original items across 20 disciplines (math, logic, programming, law, physics, chart & data analysis, …) and 4 calibrated difficulty tiers (L1–L4)',
-      'Two auto-scorable formats only — multiple choice (exact-letter) and short answer (normalized canonical/alias + numeric tolerance) — off-format answers score 0, which also measures instruction-following',
-      'Language-consistency index (LCI): the mean absolute TR/EN accuracy gap, surfacing cross-lingual weakness (a 3B scored LCI 20.0; a 12B, 2.2)',
-      '11 models evaluated — Gemma, Qwen, DeepSeek-R1, Llama, Phi, Mistral, Claude Haiku — via Ollama, OpenRouter, and local 4-bit HF',
-      'Contamination control: only a public split ships on the Hugging Face Hub; the majority is a private holdout, with provenance recorded on every record',
-    ],
-    highlightsTr: [
-      'Tamamen iki dilli: her soru Türkçe ve İngilizce olarak bağımsız yazıldı; böylece dil bazında performans ve aradaki fark raporlanabilir',
-      '20 disiplin (matematik, mantık, programlama, hukuk, fizik, grafik ve veri analizi, …) ve 4 kalibre edilmiş zorluk seviyesinde (L1–L4) 800 özgün soru',
-      'Yalnızca iki otomatik puanlanabilir format — çoktan seçmeli (tam harf) ve kısa cevap (normalleştirilmiş kanonik/alias + sayısal tolerans) — format dışı cevaplar 0 alır; bu da talimat takibini ölçer',
-      'Dil tutarlılık indeksi (LCI): ortalama mutlak TR/EN doğruluk farkı, diller arası zayıflığı ortaya çıkarır (bir 3B, LCI 20,0 aldı; bir 12B, 2,2)',
-      '11 model değerlendirildi — Gemma, Qwen, DeepSeek-R1, Llama, Phi, Mistral, Claude Haiku — Ollama, OpenRouter ve yerel 4-bit HF üzerinden',
-      'Kontaminasyon kontrolü: Hugging Face Hub’a yalnızca herkese açık bir bölüm gönderilir; çoğunluk özel bir holdout olarak tutulur ve her kayıtta kaynak bilgisi bulunur',
-    ],
     stack: [
       { label: 'Languages', items: ['Python 3'] },
       { label: 'Libraries', items: ['anthropic', 'openai (Ollama/OpenRouter-compatible)', 'transformers', 'bitsandbytes'] },
@@ -82,20 +64,6 @@ const PROJECTS = [
     architectureTr: [
       'Her soru sabit bir JSON şemasını izler — id, dil, disiplin, format, zorluk, soru, seçenekler/cevap ya da answer_short/answer_aliases, açıklama (her zaman İngilizce meta veri; modele asla gösterilmez), kaynak, sürüm ve split. scoring/score.py tek referans puanlayıcıdır: çoktan seçmeli için tam-harf regex; kısa cevap için küçük harfe indirgenmiş, noktalama-normalleştirilmiş kanonik/alias eşleştirme ve sayısal tolerans.',
       'scripts/evaluate.py format başına standart 0-shot prompt kurar, modeli takılabilir bir backend üzerinden çağırır (referans anthropic backend’i, Ollama/OpenRouter için OpenAI-uyumlu herhangi bir endpoint ve CI için dryrun), her soruyu puanlar ve disiplin, dil, zorluk ve format bazında dökümleri artı LCI’yi yazdırır. scripts/evaluate_local.py 12 GB GPU’da 4-bit HF inference’ı yapar ve fine-tune ile base model karşılaştırmaları için bir LoRA adaptörünü birleştirir. validate.py, assign_splits.py ve build_hf.py veriyi şema-geçerli, zorluk-dengeli ve yeniden üretilebilir tutar; bir CHANGELOG her soru değişikliğini kaydeder.',
-    ],
-    results: [
-      { label: 'Items', value: '800 original · TR + EN · 20 disciplines · L1–L4' },
-      { label: 'Top score', value: 'gemma4:12b — 97.6% (a 3B lands ~49%)' },
-      { label: 'Models evaluated', value: '11 — cloud + local, incl. 2 own fine-tunes' },
-      { label: 'Scoring', value: 'Fully automatic, exact/normalized — reproducible' },
-      { label: 'Published', value: 'Public split on the Hugging Face Hub' },
-    ],
-    resultsTr: [
-      { label: 'Soru', value: '800 özgün · TR + EN · 20 disiplin · L1–L4' },
-      { label: 'En yüksek skor', value: 'gemma4:12b — %97,6 (bir 3B ~%49’da kalır)' },
-      { label: 'Değerlendirilen model', value: '11 — bulut + yerel, 2 kendi fine-tune’um dahil' },
-      { label: 'Puanlama', value: 'Tamamen otomatik, tam/normalleştirilmiş — yeniden üretilebilir' },
-      { label: 'Yayınlandı', value: 'Hugging Face Hub’da herkese açık bölüm' },
     ],
     // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
     role: 'Solo',
@@ -183,8 +151,6 @@ const PROJECTS = [
     color: '#a06bff',
     glow: 'rgba(160,107,255,0.5)',
     tags: ['QLoRA', 'Unsloth', 'Tool Calling'],
-    metric: 'Tool-calling 17% → 92%',
-    metricTr: 'Tool calling %17 → %92',
     github: gh('ayarlicazhocam-training'),
     // Field Notes — migrated verbatim from caseStudies.js (12 Sep 2026).
     challenges: [
@@ -216,22 +182,6 @@ const PROJECTS = [
       'The full training pipeline behind “ayarlicazhocam,” my bilingual assistant — and a research log I keep honest across two versions. v1 fine-tuned Llama 3.2-3B and failed in an instructive way: a mismatched chat template quietly zeroed out most of the training, which the benchmark caught. v2 rebuilds on the open-source Gemma-4-E4B with QLoRA, fixes the root cause, and adds two real capabilities — native thinking and tool/function calling — trained locally on a single 12 GB GPU. Both models and datasets are published to the Hugging Face Hub, failures and fixes documented in the open.',
     overviewTr:
       '“ayarlicazhocam” adlı iki dilli asistanımın arkasındaki eksiksiz eğitim pipeline’ı — ve iki sürüm boyunca dürüst tuttuğum bir araştırma günlüğü. v1, Llama 3.2-3B’yi fine-tune etti ve öğretici biçimde başarısız oldu: yanlış eşleşen bir chat template eğitimin çoğunu sessizce sıfırladı ve bunu benchmark yakaladı. v2, açık kaynaklı Gemma-4-E4B üzerine QLoRA ile yeniden kurulur, kök nedeni düzeltir ve iki gerçek yetenek ekler — thinking ve araç/function calling — üstelik tek bir 12 GB GPU’da yerelde eğitilerek. Her iki modelin ve veri kümesinin tamamı Hugging Face Hub’a yayınlandı; başarısızlıklar ve düzeltmeler açıkça belgelendi.',
-    highlights: [
-      'v2 on Gemma-4-E4B: text-only 4-bit QLoRA trained locally on an RTX 5070 (12 GB) — multimodal towers + elastic per-layer embeddings offloaded to CPU, 9.8 GB peak',
-      'Tool / function calling learned: 17% → 92% correct-tool rate on a held-out 12-scenario set, including an unseen tool',
-      'Native thinking preserved (on/off) and a single consistent identity learned — where v1 hallucinated a new bio every run',
-      'Root cause of v1 fixed: chat template is always taken from the model’s own AutoProcessor, guarded by a mandatory round-trip test (which caught Gemma-4 silently dropping a "thinking" field — the correct key is "reasoning")',
-      'Bilingual (TR + EN) instruction dataset from three sources — scraped, hand-written, and 70 synthetic bulk batches (34 EN + 36 TR)',
-      'Honest evaluation on MIHENK: v2 trades a modest overall dip for a large tool-calling gain, with multiple-choice actually improving',
-    ],
-    highlightsTr: [
-      'Gemma-4-E4B üzerinde v2: metin-only 4-bit QLoRA, RTX 5070 (12 GB) ile yerelde eğitildi — multimodal kuleler + esnek katman-başı embedding’ler CPU’ya taşındı, tepe 9,8 GB',
-      'Araç / function calling öğrenildi: ayrılmış 12 senaryoluk kümede %17 → %92 doğru-araç oranı (görülmemiş bir araç dahil)',
-      'Yerel düşünme (açık/kapalı) korundu ve tek tutarlı bir kimlik öğrenildi — v1 her koşuda yeni bir biyografi uydururken',
-      'v1’in kök nedeni düzeltildi: chat template her zaman modelin kendi AutoProcessor’ından alınır ve zorunlu bir gidiş-dönüş testiyle korunur (bu test, Gemma-4’ün bir "thinking" alanını sessizce düşürdüğünü yakaladı — doğru anahtar "reasoning")',
-      'Üç kaynaktan iki dilli (TR + EN) talimat veri kümesi — kazınmış, elle yazılmış ve 70 sentetik toplu grup (34 EN + 36 TR)',
-      'MIHENK üzerinde dürüst değerlendirme: v2, mütevazı bir genel düşüşü büyük bir tool calling kazancıyla takas eder ve çoktan seçmeli aslında iyileşir',
-    ],
     stack: [
       { label: 'Languages', items: ['Python 3'] },
       { label: 'Frameworks', items: ['Unsloth', 'Hugging Face Transformers', 'TRL', 'PEFT'] },
@@ -246,20 +196,6 @@ const PROJECTS = [
     architectureTr: [
       'Veri kümesi scrapers/ altında toplanır: özel kazıyıcılar herkese açık geliştirici kaynaklarından (dev.to, GitHub trending, Hugging Face, Stack Overflow, arXiv, Wikipedia) veri çeker; elle yazılmış konuşmalar personayı şekillendirir; generate_bulk_*.py betikleri 34 İngilizce ve 36 Türkçe sentetik grup üretir. merge_all.py hepsini birleştirir; v2’nin derlemi (gorkemergune/ayarlicazhocam_finetune_v2) buna ek olarak ~%20 düşünme izi ve açık tool calling turları katmanlar.',
       'v2 eğitimi src/phase*.py içinde yürür: Gemma-4-E4B metin-only 4-bit yüklenir (multimodal kuleleri ve esnek katman-başı embedding’leri 12 GB’a sığması için CPU’ya taşınır), bir QLoRA adaptörü eğitilir ve chat template her zaman modelin kendi AutoProcessor’ından alınıp zorunlu bir gidiş-dönüş testiyle doğrulanır — bu, v1’in başarısızlığını ortaya çıkaran korumadır. Değerlendirme bilinçli olarak titizdir: ayrılmış 12 senaryoluk tool calling kümesi ve MIHENK benchmark’ı, birleştirilmiş modeli kendi base modeliyle eşleştirerek puanlar. v1 (src/Llama3.2-3BFinetune.ipynb, BENCHMARK_REPORT.md), düzelttiği chat-template uyumsuzluğunun araştırma kaydı olarak saklanır.',
-    ],
-    results: [
-      { label: 'v2 base model', value: 'Gemma-4-E4B (text-only 4-bit QLoRA)' },
-      { label: 'Tool-calling', value: '17% → 92% correct-tool rate (held-out)' },
-      { label: 'MIHENK (v2 vs base)', value: '73.4% vs 76.6% — MC improves, short-answer regresses on verbosity' },
-      { label: 'Trained on', value: 'One RTX 5070, 12 GB (9.8 GB peak)' },
-      { label: 'Published', value: 'v1 + v2 models & datasets on the Hub' },
-    ],
-    resultsTr: [
-      { label: 'v2 temel model', value: 'Gemma-4-E4B (metin-only 4-bit QLoRA)' },
-      { label: 'Tool calling', value: '%17 → %92 doğru-araç oranı (ayrılmış küme)' },
-      { label: 'MIHENK (v2 vs base)', value: '%73,4 vs %76,6 — çoktan seçmeli iyileşir, kısa cevap ayrıntı yüzünden geriler' },
-      { label: 'Eğitildiği donanım', value: 'Tek RTX 5070, 12 GB (tepe 9,8 GB)' },
-      { label: 'Yayınlandı', value: 'Hub’da v1 + v2 modelleri ve veri kümeleri' },
     ],
     // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
     role: 'Solo',
@@ -348,22 +284,6 @@ const PROJECTS = [
       'The third piece of the ayarlicazhocam ecosystem: after the fine-tune (identity) and MIHENK (reasoning), this is interaction with the outside world. A live Gradio app on Hugging Face Spaces where Gemma-4 (served through the Gemini API with native function calling) fetches live weather from the public Open-Meteo API and converts temperature units. It can chain several tools across turns — two get_weather calls, then two convert_temperature calls, then compute a difference itself — and after every answer the UI transparently shows which tools were called, with which arguments, and what they returned.',
     overviewTr:
       'ayarlicazhocam ekosisteminin üçüncü parçası: fine-tune’dan (kimlik) ve MIHENK’ten (muhakeme) sonra, bu, dış dünyayla etkileşim. Hugging Face Spaces üzerinde canlı bir Gradio uygulaması; Gemma-4 (yerel function calling’li Gemini API üzerinden sunulur), açık Open-Meteo API’sinden canlı hava durumu çeker ve sıcaklık birimlerini çevirir. Turlar boyunca birden fazla aracı zincirleyebilir — iki get_weather çağrısı, sonra iki convert_temperature çağrısı, ardından farkı kendisi hesaplar — ve her yanıttan sonra arayüz, hangi araçların hangi argümanlarla çağrıldığını ve ne döndürdüğünü şeffafça gösterir.',
-    highlights: [
-      'Native function calling: tool schemas defined as typed google.genai FunctionDeclarations, not hand-written JSON strings',
-      'Two tools — get_weather (geocode + current conditions from Open-Meteo) and convert_temperature (°C ⇄ °F) — with a real HTTP request always made by Python, never the model',
-      'Multi-turn tool loop: the model can call several tools in a row and reason over their combined results',
-      'Every returned function-call argument is validated (type/format) before execution — the model is never given code-execution access',
-      'Transparent trace: the Gradio UI renders each tool call as its own collapsible block under the final answer',
-      'Model ID is resolved from the Gemini API’s live model list (not hard-coded) and overridable via an env var; keys live in Secrets, never in code',
-    ],
-    highlightsTr: [
-      'Yerel function calling: araç şemaları elle yazılmış JSON yerine tipli google.genai FunctionDeclaration’ları olarak tanımlandı',
-      'İki araç — get_weather (Open-Meteo’dan geocode + güncel koşullar) ve convert_temperature (°C ⇄ °F) — gerçek HTTP isteği her zaman Python tarafından yapılır, model tarafından değil',
-      'Çok turlu araç döngüsü: model art arda birkaç aracı çağırabilir ve birleşik sonuçları üzerinde muhakeme yapabilir',
-      'Dönen her fonksiyon-çağrı argümanı çalıştırılmadan önce doğrulanır (tip/format) — modele asla kod çalıştırma erişimi verilmez',
-      'Şeffaf iz: Gradio arayüzü her tool call’ını nihai cevabın altında kendi açılabilir bloğu olarak gösterir',
-      'Model kimliği Gemini API’sinin canlı model listesinden çözülür (sabit kodlanmaz) ve bir ortam değişkeniyle geçersiz kılınabilir; anahtarlar kodda değil Secrets’ta durur',
-    ],
     stack: [
       { label: 'Languages', items: ['Python 3'] },
       { label: 'Frameworks', items: ['Gradio', 'google-genai SDK'] },
@@ -377,20 +297,6 @@ const PROJECTS = [
     architectureTr: [
       'app.py; Gemini API istemcisini, araç şemalarını, tool calling döngüsünü ve Gradio arayüzünü barındırır. Persona (ayarlicazhocam kimliği) system_instruction ile uygulanır. Model bir function_call döndürdüğünde Python tarafı argümanları doğrular, gerçek Open-Meteo isteğini yapar (geocoding → tahmin) ve sonucu bir function_response olarak geri gönderir; model ardından nihai doğal dil cevabını üretir. Döngü, tur başına ve turlar arası birkaç tool call’ını destekler.',
       'tools.py; get_weather ve convert_temperature’ı modelden ayrık, çevrimdışı test edilebilir sade fonksiyonlar olarak uygular; böylece hiçbir API olmadan birim testi yapılabilir. Model kimliği sabit kodlanmaz — Gemini API’sinin canlı model listesinden çözülür (MODEL_ID ile geçersiz kılınabilir) — ve GOOGLE_API_KEY yerelde git-yok-sayılan bir .env’den, dağıtımda ise Spaces Secrets’tan yüklenir.',
-    ],
-    results: [
-      { label: 'Model', value: 'Gemma-4 via Gemini API — native function calling' },
-      { label: 'Tools', value: 'get_weather (Open-Meteo) · convert_temperature' },
-      { label: 'Loop', value: 'Multi-turn, multiple tool calls per turn' },
-      { label: 'Safety', value: 'Args validated before exec · no code-exec access' },
-      { label: 'Deploy', value: 'Live Gradio app on Hugging Face Spaces' },
-    ],
-    resultsTr: [
-      { label: 'Model', value: 'Gemini API üzerinden Gemma-4 — yerel function calling' },
-      { label: 'Araçlar', value: 'get_weather (Open-Meteo) · convert_temperature' },
-      { label: 'Döngü', value: 'Çok turlu, tur başına birden fazla tool call' },
-      { label: 'Güvenlik', value: 'Argümanlar çalıştırmadan önce doğrulanır · kod-exec erişimi yok' },
-      { label: 'Dağıtım', value: 'Hugging Face Spaces’te canlı Gradio uygulaması' },
     ],
     // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
     role: 'Solo',
@@ -449,8 +355,6 @@ const PROJECTS = [
     color: '#e879f9',
     glow: 'rgba(232,121,249,0.5)',
     tags: ['Tool Calling', 'SQLite', 'Ollama'],
-    metric: '112 tests · 4 providers',
-    metricTr: '112 test · 4 sağlayıcı',
     github: gh('ayarlicazhocam-agent'),
     images: [
       { src: '/projects/ayarlicazhocam-agent/architecture.svg', caption: 'Layered architecture — Gradio UI → agent orchestrator → tool registry → TaskService → repository → SQLite', captionTr: 'Katmanlı mimari — Gradio arayüz → ajan orkestratörü → araç kaydı → TaskService → depo → SQLite' },
@@ -461,24 +365,6 @@ const PROJECTS = [
       'A conversational task manager that lets an LLM do real work instead of just talking about it. You chat in Turkish or English, and behind the scenes the agent runs a bounded tool-calling loop against a SQLite database — creating, listing, and updating tasks — with every claim grounded in what the database actually returns. It is the down-to-earth, product side of the ayarlicazhocam line: not a fine-tune this time, but the agent scaffolding that makes native tool-calling models genuinely useful.',
     overviewTr:
       'Bir LLM’in sadece konuşmak yerine gerçek iş yapmasını sağlayan konuşma tabanlı bir görev yöneticisi. Türkçe ya da İngilizce sohbet edersin; perde arkasında ajan, SQLite veritabanına karşı sınırlı bir tool calling döngüsü çalıştırır — görev oluşturur, listeler ve günceller — ve her iddia veritabanının gerçekten döndürdüğüne dayanır. Bu, ayarlicazhocam serisinin ayakları yere basan, ürün tarafıdır: bu kez bir fine-tune değil, yerel araç-çağıran modelleri gerçekten faydalı kılan ajan iskelesi.',
-    highlights: [
-      'Bounded tool-calling loop with normalized results and execution telemetry — the model acts, then reads back what really happened',
-      'Three task tools — create_task, get_tasks, update_task — behind a standardized envelope (success / data / message / error)',
-      'Bilingual (Turkish + English) natural-language control over tasks stored persistently in SQLite',
-      'Multi-provider by design: local Ollama (qwen2.5:7b default), Groq (llama-3.3-70b), Google Gemini, and a custom fine-tuned Gemma — all behind one agent interface',
-      'Execution trace UI showing each tool call, its arguments, status, and duration, plus a statistics dashboard by status and priority',
-      'Grounds every answer in the database and fails gracefully — it invents nothing when a tool errors',
-      'Verified end to end (2026-08-02): 112 tests passing, with Ollama and Groq confirmed for create/list/update/complete',
-    ],
-    highlightsTr: [
-      'Normalleştirilmiş sonuçlar ve yürütme telemetrisiyle sınırlı tool calling döngüsü — model eyler, sonra gerçekte ne olduğunu geri okur',
-      'Standart bir zarfın (success / data / message / error) ardında üç görev aracı — create_task, get_tasks, update_task',
-      'SQLite’ta kalıcı saklanan görevler üzerinde iki dilli (Türkçe + İngilizce) doğal-dil kontrolü',
-      'Tasarımdan çok-sağlayıcılı: yerel Ollama (varsayılan qwen2.5:7b), Groq (llama-3.3-70b), Google Gemini ve özel fine-tune’lu bir Gemma — hepsi tek ajan arayüzünün ardında',
-      'Her tool call’ını, argümanlarını, durumunu ve süresini gösteren yürütme izi arayüzü; ayrıca duruma ve önceliğe göre bir istatistik panosu',
-      'Her cevabı veritabanına dayandırır ve zarifçe başarısız olur — bir araç hata verdiğinde hiçbir şey uydurmaz',
-      'Uçtan uca doğrulandı (2026-08-02): 112 test geçiyor; oluştur/listele/güncelle/tamamla için Ollama ve Groq onaylandı',
-    ],
     stack: [
       { label: 'Languages', items: ['Python 3.11+'] },
       { label: 'Interface', items: ['Gradio'] },
@@ -493,20 +379,6 @@ const PROJECTS = [
     architectureTr: [
       'Sistem yukarıdan aşağıya katmanlıdır: Gradio arayüz → ajan orkestratörü → araç kaydı → görev araçları → TaskService → depo → SQLite. Orkestratör, sınırlı bir tool calling döngüsü çalıştırır — modele küçük bir fonksiyon şeması kümesi verir, çağırdığı her şeyi yürütür, her sonucu standart bir zarfa (success, data, message, error) normalleştirir ve bunu geri besler; böylece sonraki tur bir tahmin üzerinde değil, gerçek durum üzerinde akıl yürütür. Yürütme telemetrisi (argümanlar, durum, süre) çağrı başına yakalanır ve iz arayüzünde gösterilir.',
       'Kalıcılık, beş tablo üzerinde bir depodur — projects, tasks, daily_plans, daily_plan_items, work_logs — küçük bir demoyla (3 proje, 5 görev) yinelenebilir biçimde tohumlanır. Sağlayıcı seçimi, aynı arayüzün ardında bir değiş-tokuştur: güvenilir yerel tool calling için varsayılan yerel Ollama’da qwen2.5:7b, hız ya da erişim için Groq ve Gemini, ve kendi Jinja sohbet şablonuna sahip özel fine-tune’lu bir Gemma şirket-içi seçenek olarak. Sonuç, veritabanını mutlak gerçek sayan ve onun ötesinde cevap vermeyi reddeden bir ajandır.',
-    ],
-    results: [
-      { label: 'Tools', value: '3 — create / get / update task' },
-      { label: 'Providers', value: 'Ollama · Groq · Gemini · fine-tuned Gemma' },
-      { label: 'Ollama latency', value: '0.8–7 s per turn (local)' },
-      { label: 'Groq latency', value: '0.8–1.1 s per turn' },
-      { label: 'Tests', value: '112 passing (verified 2026-08-02)' },
-    ],
-    resultsTr: [
-      { label: 'Araçlar', value: '3 — görev oluştur / getir / güncelle' },
-      { label: 'Sağlayıcılar', value: 'Ollama · Groq · Gemini · fine-tune’lu Gemma' },
-      { label: 'Ollama gecikmesi', value: 'tur başına 0,8–7 sn (yerel)' },
-      { label: 'Groq gecikmesi', value: 'tur başına 0,8–1,1 sn' },
-      { label: 'Testler', value: '112 test geçiyor (2026-08-02 doğrulandı)' },
     ],
     // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
     role: 'Solo',
@@ -575,8 +447,6 @@ const PROJECTS = [
     color: '#10b981',
     glow: 'rgba(16,185,129,0.5)',
     tags: ['RAG', 'ChromaDB', 'Claude'],
-    metric: 'Gate F1 1.000 · 107 tests',
-    metricTr: 'Eşik F1 1,000 · 107 test',
     github: gh('turkish-medical-rag'),
     images: [
       { src: '/projects/turkish-medical-rag/pipeline.svg', caption: 'The gated pipeline — query → E5 embedding → ChromaDB top-5 → threshold gate → grounded answer or hard reject', captionTr: 'Kapılı pipeline — sorgu → E5 embedding → ChromaDB ilk-5 → eşik kapısı → temellendirilmiş cevap ya da kesin ret' },
@@ -588,24 +458,6 @@ const PROJECTS = [
       'A retrieval-augmented generation system for Turkish medical text, built around one principle: in a domain where false confidence is dangerous, it is better to refuse than to hallucinate. A hard similarity threshold sits in front of the language model — if the best retrieved chunk is not similar enough to the question, the query is rejected with a fixed Turkish message and the LLM is never called. That makes refusal deterministic and auditable rather than a matter of prompt luck.',
     overviewTr:
       'Türkçe tıbbi metinler için, tek bir ilkeyle kurulmuş bir RAG sistemi: yanlış özgüvenin tehlikeli olduğu bir alanda uydurmaktansa reddetmek daha iyidir. Dil modelinin önünde sert bir benzerlik eşiği durur — getirilen en iyi parça soruya yeterince benzemiyorsa, sorgu sabit bir Türkçe mesajla reddedilir ve LLM hiç çağrılmaz. Bu, reddi prompt şansına bırakmak yerine belirlenimci ve denetlenebilir kılar.',
-    highlights: [
-      'Threshold-first design: a top-1 cosine gate (≥ 0.575) rejects unsupported questions before any LLM call — refusal is deterministic',
-      'Turkish-specialized retrieval: ytu-ce-cosmos/turkish-e5-large embeddings (1024-d, L2-normalized) over a persistent ChromaDB cosine index',
-      'Deterministic corpus prep: 24,612 hospital articles cleaned to 22,162, 300 sampled with seed 42, split into 2,072 chunks (mean 6.91/doc) with 0 lost words',
-      'Paragraph-then-token chunking on cl100k_base: greedy 512-token groups, 64-token overlap on oversized units, sub-30-token fragments merged away',
-      'A frozen 30-question benchmark (20 positive, 10 out-of-domain negative) with expected chunk IDs and evidence excerpts verified at build time',
-      'Grounded answering: accepted queries feed a context-only Turkish prompt with source attribution; rejected ones return a fixed message and never touch the model',
-      'Honest about its limits: the threshold is calibrated on the eval set itself, so the perfect scores reflect calibration, not generalization — 107 offline tests pass',
-    ],
-    highlightsTr: [
-      'Eşik-öncelikli tasarım: ilk-1 kosinüs kapısı (≥ 0,575), desteksiz soruları herhangi bir LLM çağrısından önce reddeder — ret belirlenimcidir',
-      'Türkçeye özel retrieval: kalıcı bir ChromaDB kosinüs indeksi üzerinde ytu-ce-cosmos/turkish-e5-large embedding’leri (1024-d, L2-normalleştirilmiş)',
-      'Belirlenimci derlem hazırlığı: 24.612 hastane makalesi 22.162’ye temizlendi, 42 tohumuyla 300’ü örneklendi, 2.072 parçaya bölündü (doküman başına ort. 6,91) ve 0 kelime kaybedildi',
-      'cl100k_base üzerinde paragraf-sonra-token parçalama: açgözlü 512-token grupları, büyük birimlerde 64-token örtüşme, 30 tokenin altındaki parçalar birleştirilir',
-      'Dondurulmuş 30 soruluk benchmark (20 pozitif, 10 alan-dışı negatif); beklenen parça kimlikleri ve kanıt alıntıları derleme anında doğrulandı',
-      'Temellendirilmiş cevap: kabul edilen sorgular yalnızca-bağlam Türkçe prompt’u ve kaynak atıfı besler; reddedilenler sabit bir mesaj döndürür ve modele hiç dokunmaz',
-      'Sınırları konusunda dürüst: eşik, değerlendirme kümesinin kendisinde kalibre edildi; kusursuz skorlar genellemeyi değil kalibrasyonu yansıtır — 107 çevrimdışı test geçer',
-    ],
     stack: [
       { label: 'Languages', items: ['Python 3.10+'] },
       { label: 'Frameworks', items: ['ChromaDB', 'sentence-transformers', 'Streamlit'] },
@@ -619,20 +471,6 @@ const PROJECTS = [
     architectureTr: [
       'Pipeline bir zincir değil, bir kapıdır. Kullanıcı sorusu turkish-e5-large ile embedding’e çevrilir (E5 instruct kuralıyla — sorgular bir talimat şablonuna sarılır, dokümanlar öneksiz bırakılır), ardından ilk-5 parçayı döndüren kalıcı bir ChromaDB HNSW kosinüs indeksine karşı eşleştirilir. İlk-1 benzerliği dondurulmuş 0,575 eşiğiyle karşılaştırılır: altındaysa sorgu sabit bir Türkçe cümleyle reddedilir ve hiçbir model çağrılmaz; üstündeyse getirilen parçalar skora göre sıralanır, 6.000 karakterle sınırlanır ve dış bilgiyi yasaklayan, kaynak atıfını ayrıca döndüren yalnızca-bağlam prompt’unun ardında Claude’a verilir.',
       'Yukarı akıştaki her şey yeniden üretilebilir. Sekiz aşamalı bir pipeline, umutertugrul/turkish-hospital-medical-articles veri kümesini indirip tekilleştirir (24.612 → 22.162 geçerli), 42 tohumuyla 300 doküman örnekler ve cl100k_base üzerinde paragraf-sonra-token parçalayıcı uygular; sonuç 2.072 doğrulanmış parçadır (tümü 1024-d, NaN/Inf yok, sıfır kelime kaybı). 0,575 eşiği, pozitiflerin 0,583’te dibe vurduğu ve negatiflerin 0,567’de tavana çıktığı 30 soruluk bir benchmark’tan türetilir; o 0,0161’lik boşluğun ortası kapı olur. Bir CLI (scripts/chat.py) ve bir Streamlit uygulaması (scripts/app.py) tüm kanıt zincirini gösterir; 107 çevrimdışı test her şeyi dürüst tutar.',
-    ],
-    results: [
-      { label: 'Corpus', value: '24,612 → 22,162 valid · 300 sampled · 2,072 chunks' },
-      { label: 'Retrieval', value: '20/20 parent @ rank-1 · 20/20 in top-5' },
-      { label: 'Gate accuracy', value: 'P / R / F1 = 1.000 · FAR / FRR = 0.000' },
-      { label: 'Threshold', value: 'cosine 0.575 · separation gap 0.0161' },
-      { label: 'Tests', value: '107 passing, fully offline' },
-    ],
-    resultsTr: [
-      { label: 'Derlem', value: '24.612 → 22.162 geçerli · 300 örnek · 2.072 parça' },
-      { label: 'Getirme', value: '20/20 ebeveyn 1. sırada · 20/20 ilk-5’te' },
-      { label: 'Kapı doğruluğu', value: 'P / R / F1 = 1,000 · YKO / YRO = 0,000' },
-      { label: 'Eşik', value: 'kosinüs 0,575 · ayrım boşluğu 0,0161' },
-      { label: 'Testler', value: '107 test geçiyor, tamamen çevrimdışı' },
     ],
     // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
     role: 'Solo',
@@ -711,8 +549,6 @@ const PROJECTS = [
     color: '#22d3ee',
     glow: 'rgba(34,211,238,0.5)',
     tags: ['ArcFace', 'Face Recognition', 'Study'],
-    metric: 'Genuine margin −19% frontal→profile',
-    metricTr: 'Gerçek marj cepheden profile −%19',
     github: gh('pose-invariant-face-id'),
     images: [
       { src: '/projects/pose-invariant-face-id/pipeline.svg', caption: 'The pipeline: RetinaFace detect & align → yaw pose labeling → identity-disjoint split → ArcFace embeddings → verification', captionTr: 'Pipeline: RetinaFace tespit ve hizalama → yaw poz etiketleme → kimlik-ayrık bölme → ArcFace embedding’leri → doğrulama' },
@@ -726,22 +562,6 @@ const PROJECTS = [
       'A clean measurement of one question: how much does head pose (yaw) hurt face verification — "are these two photos the same person?" — when you use a modern pretrained recognition model off the shelf? The protocol is strictly identity-disjoint: the identities used to pick the decision threshold and to test are never seen during any fitting. On the controlled FEI face database (200 subjects, ~180° of rotation), pretrained ArcFace turns out to be effectively pose-invariant at the decision level — but the genuine-pair similarity margin shrinks steadily as the two views diverge, and that shrinking margin, not the saturated accuracy, is the real signal.',
     overviewTr:
       'Tek bir sorunun temiz bir ölçümü: modern, önceden eğitilmiş bir tanıma modelini hazır kullandığında, kafa pozu (yaw) yüz doğrulamayı — “bu iki fotoğraf aynı kişi mi?” — ne kadar bozar? Protokol kesinlikle kimlik-ayrıktır: karar eşiğini seçmek ve test etmek için kullanılan kimlikler hiçbir uydurma sırasında görülmez. Kontrollü FEI yüz veritabanında (200 kişi, ~180° dönüş), önceden eğitilmiş ArcFace karar seviyesinde fiilen poz-değişmez çıkar — ancak gerçek çift benzerlik marjı, iki görüş ayrıştıkça istikrarlı biçimde daralır ve asıl sinyal, doymuş doğruluk değil, bu daralan marjdır.',
-    highlights: [
-      'Strictly identity-disjoint protocol: 200 FEI subjects split 160/20/20 by identity (seed 42), with zero subject overlap and no pair crossing a split boundary',
-      'RetinaFace (InsightFace buffalo_l) detect + 5-point similarity align to 112×112; 2782/2800 images aligned (the 18 failures are dark-frontal frames, not a pose failure)',
-      'Per-image yaw estimated and binned into frontal / half-profile / profile — mean yaw is monotonic with the FEI capture index, validating the estimator',
-      'Verification on frozen thresholds chosen on val only (FAR 1e-3 and 1e-2 both land at cosine 0.44): AUC 1.000, EER 0.000, accuracy 1.000 overall',
-      'Key finding: the pose effect lives in the margin, not the decision — genuine-pair cosine falls 0.867 (frontal↔frontal) → 0.702 (frontal↔profile), a ~19% relative drop, while impostor scores stay flat',
-      'Embedding geometry confirms it: identity silhouette 0.777 vs pose silhouette −0.006 — the embedding encodes identity dominantly and pose barely at all; cross-pose retrieval (profile → frontal gallery) is 1.000 at rank 1',
-    ],
-    highlightsTr: [
-      'Kesinlikle kimlik-ayrık protokol: 200 FEI kişisi kimliğe göre 160/20/20 bölündü (tohum 42), sıfır kişi örtüşmesi ve hiçbir çiftin bölme sınırını geçmemesiyle',
-      'RetinaFace (InsightFace buffalo_l) tespit + 5 nokta benzerlik hizalamasıyla 112×112; 2782/2800 görsel hizalandı (18 başarısız kare, poz değil karanlık-cephe kareleri)',
-      'Görsel başına yaw tahmin edildi ve cephe / yarım-profil / profil olarak kümelendi — ortalama yaw, FEI çekim indeksiyle tekdüze; bu da tahminciyi doğrular',
-      'Yalnızca doğrulama kümesinde seçilen dondurulmuş eşiklerle doğrulama (FAR 1e-3 ve 1e-2 ikisi de kosinüs 0,44’e denk gelir): genelde AUC 1,000, EER 0,000, doğruluk 1,000',
-      'Ana bulgu: poz etkisi kararda değil marjda yaşar — gerçek çift kosinüsü 0,867’den (cephe↔cephe) 0,702’ye (cephe↔profil) düşer, ~%19 göreli düşüş; sahtekâr skorları ise düz kalır',
-      'Embedding geometrisi bunu doğrular: kimlik silhouette 0,777 vs poz silhouette −0,006 — embedding baskın olarak kimliği, pozu ise neredeyse hiç kodlamaz; çapraz-poz retrieval (profil → cephe galeri) 1. sırada 1,000',
-    ],
     stack: [
       { label: 'Languages', items: ['Python 3'] },
       { label: 'Frameworks', items: ['InsightFace', 'Gradio (demo)'] },
@@ -755,20 +575,6 @@ const PROJECTS = [
     architectureTr: [
       'Pipeline, eğitim değil ölçümdür. Her FEI görseli RetinaFace ile tespit edilip hizalanır, görsel başına bir yaw ile etiketlenip kümelenir (cephe <20°, yarım-profil 20–60°, profil >60°), ardından önceden eğitilmiş ArcFace ile embedding’e çevrilir (512-d, L2-normalleştirilmiş). Pozitifler tüm kişi-içi çiftlerdir; negatifler, altı poz-kümesi kombinasyonunu dengelemek için örneklenen kişi-arası çiftlerdir, pozitiflerle 1:1 eşleştirilir. Karar eşikleri yalnızca doğrulama kimliklerinde seçilir, dondurulur ve ayrık test kimliklerine uygulanır; AUC ve EER eşikten bağımsızdır.',
       'app.py bir Gradio demosudur: iki fotoğraf yükle, dondurulmuş 0,44 eşiğine karşı kosinüs benzerliğinden aynı/farklı bildirir, skoru ve marjıyla birlikte (ör. bir kişinin cephe ve profili 0,719 → AYNI; iki farklı kişi 0,098 → FARKLI). Seyrek profil–profil kümesi (21 pozitif) 1000-yeniden-örnekli bootstrap GA alır ve tüm çalışma kendi tavan-etkisi ve veri-kümesi-gerçekçiliği kısıtlarıyla belgelenir.',
-    ],
-    results: [
-      { label: 'Protocol', value: 'Identity-disjoint · FEI 200 subjects · off-the-shelf ArcFace' },
-      { label: 'Verification', value: 'AUC 1.000 · EER 0.000 in every pose bin' },
-      { label: 'The real signal', value: 'Genuine margin 0.867 → 0.702 frontal→profile (~19% drop)' },
-      { label: 'Embedding', value: 'Identity silhouette 0.777 vs pose −0.006' },
-      { label: 'Cross-pose retrieval', value: '1.000 @ rank-1 (profile → frontal gallery)' },
-    ],
-    resultsTr: [
-      { label: 'Protokol', value: 'Kimlik-ayrık · FEI 200 kişi · hazır ArcFace' },
-      { label: 'Doğrulama', value: 'Her poz kümesinde AUC 1,000 · EER 0,000' },
-      { label: 'Asıl sinyal', value: 'Gerçek marj 0,867 → 0,702 cephe→profil (~%19 düşüş)' },
-      { label: 'Gömme', value: 'Kimlik silhouette 0,777 vs poz −0,006' },
-      { label: 'Çapraz-poz retrieval', value: '1. sırada 1,000 (profil → cephe galeri)' },
     ],
     // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
     role: 'Solo',
@@ -847,8 +653,6 @@ const PROJECTS = [
     color: '#818cf8',
     glow: 'rgba(129,140,248,0.5)',
     tags: ['ArcFace', 'Face Login', 'SQLite'],
-    metric: '< 100 ms per frame',
-    metricTr: 'Kare başına < 100 ms',
     github: gh('pose-robust-face-login'),
     images: [
       { src: '/projects/pose-robust-face-login/pipeline.svg', caption: 'Enroll and login as one clean-architecture pipeline — perception and persistence sit beneath the service layer', captionTr: 'Kaydol ve giriş yap, tek bir temiz-mimari pipeline olarak — algılama ve kalıcılık, servis katmanının altında durur' },
@@ -860,24 +664,6 @@ const PROJECTS = [
       'A real-time face-login application that handles the hard case: verifying a person even when the login angle is nothing like enrollment. Users enroll by turning their head across the full pose range (−90° to +90° yaw), and the system captures a small gallery of ArcFace embeddings indexed by pose. Login is a single webcam frame matched by cosine similarity — no passwords, and, deliberately, no images are ever stored, only normalized embeddings and metadata. It is the applied, product-facing counterpart to my pose-invariant face-ID study.',
     overviewTr:
       'Zor durumu ele alan gerçek zamanlı bir yüz-giriş uygulaması: giriş açısı kayıttakine hiç benzemese bile kişiyi doğrulamak. Kullanıcılar kafalarını tüm poz aralığında (−90° ile +90° yaw) çevirerek kaydolur ve sistem, poza göre indekslenmiş küçük bir ArcFace embedding galerisi yakalar. Giriş, kosinüs benzerliğiyle eşleştirilen tek bir webcam karesidir — parola yok ve bilinçli olarak hiç görsel saklanmaz, yalnızca normalleştirilmiş embedding’ler ve meta veri. Bu, poz-değişmez yüz-kimliği çalışmamın uygulamalı, ürüne dönük karşılığıdır.',
-    highlights: [
-      'Multi-pose enrollment: guided head rotation fills every yaw bin from −90° to +90° before the identity is registered',
-      'Real-time login from a single webcam frame — cosine match against the gallery at a configurable 0.44 threshold',
-      'Head-pose estimation via solvePnP over five landmarks, so each embedding is tagged with its yaw and quality score',
-      'Automatic quality filtering (size, blur, confidence) keeps low-quality frames out of the gallery',
-      'Privacy by design: only 512-d L2-normalized embeddings and metadata are stored — never a face image',
-      'Clean architecture: perception adapters and SQLite persistence sit beneath a service layer, with the UI fully decoupled from the pipeline',
-      'Runs on CPU or CUDA via ONNX Runtime; the buffalo_l model pack downloads automatically on first run',
-    ],
-    highlightsTr: [
-      'Çok-pozlu kayıt: kimlik kaydedilmeden önce yönlendirilmiş kafa dönüşü, −90°’den +90°’ye her yaw kümesini doldurur',
-      'Tek bir webcam karesinden gerçek zamanlı giriş — galeriye karşı, yapılandırılabilir 0,44 eşiğinde kosinüs eşleşmesi',
-      'Beş nokta üzerinde solvePnP ile kafa-poz tahmini; böylece her embedding kendi yaw ve kalite skoruyla etiketlenir',
-      'Otomatik kalite filtreleme (boyut, bulanıklık, güven) düşük kaliteli kareleri galeriden uzak tutar',
-      'Tasarımdan gelen gizlilik: yalnızca 512-d L2-normalleştirilmiş embedding’ler ve meta veri saklanır — hiç yüz görseli değil',
-      'Temiz mimari: algılama adaptörleri ve SQLite kalıcılığı bir servis katmanının altında durur, arayüz hattan tamamen ayrıktır',
-      'ONNX Runtime ile CPU ya da CUDA’da çalışır; buffalo_l model paketi ilk çalıştırmada otomatik iner',
-    ],
     stack: [
       { label: 'Languages', items: ['Python 3.12+'] },
       { label: 'Frameworks', items: ['InsightFace', 'ONNX Runtime (CPU / CUDA)'] },
@@ -892,20 +678,6 @@ const PROJECTS = [
     architectureTr: [
       'Kod tabanı, dört katmanlı temiz mimariyi izler. Algılama (cv/); kamera yakalama, RetinaFace tespiti, 5 nokta benzerlik hizalaması, solvePnP kafa-poz tahmini, kalite filtreleme ve ArcFace embedding’ini üstlenir. Üstünde; kapsama takibi, kosinüs eşleştirme ve kayıt/giriş iş akışları için bir servis katmanı bulunur. Kalıcılık, dört tablolu, depo-desenli bir SQLite deposudur — kullanıcılar, float32 BLOB olarak poza özel embedding’ler, oturumlar ve meta veri — yabancı anahtarlar ve art arda silmeyle bağlanmıştır. Arayüz (bindirme çizimi, kapsama görselleştirme, pencere yönetimi) hattan bilinçle ayrıktır.',
       'Kayıt bir kapsama problemidir: uygulama hangi yaw kümelerinin dolu olduğunu izler ve galeri poz aralığını kaplayana dek kafayı yönlendirir; bu genelde 30 saniyenin altında olur. Giriş, tek bir kareyi gömer ve saklanan embedding’lere karşı kosinüs benzerliğiyle puanlar, yapılandırılabilir 0,44 eşiğinin üstünde kabul eder — kimlik-ayrık poz çalışmasının vardığı eşiğin aynısı. Yüzler birçok açıdan kaydedildiği için, bir profil örneği çoğunlukla başka görüşlerden kurulmuş bir galeriyle yine de eşleşir; ki bu tam da naif tek-kare kaydın başarısız olduğu yerdir.',
-    ],
-    results: [
-      { label: 'Enrollment range', value: '−90° to +90° yaw · full-coverage guided scan' },
-      { label: 'Recognition latency', value: '< 100 ms / frame (CPU or CUDA)' },
-      { label: 'Embedding', value: '512-d, L2-normalized · no images stored' },
-      { label: 'Decision threshold', value: 'cosine 0.44 (configurable)' },
-      { label: 'Registration time', value: '< 30 s for full coverage' },
-    ],
-    resultsTr: [
-      { label: 'Kayıt aralığı', value: '−90° ile +90° yaw · tam-kapsama yönlendirmeli tarama' },
-      { label: 'Tanıma gecikmesi', value: 'kare başına < 100 ms (CPU ya da CUDA)' },
-      { label: 'Gömme', value: '512-d, L2-normalleştirilmiş · görsel saklanmaz' },
-      { label: 'Karar eşiği', value: 'kosinüs 0,44 (yapılandırılabilir)' },
-      { label: 'Kayıt süresi', value: 'tam kapsama için < 30 sn' },
     ],
     // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
     role: 'Solo',
@@ -978,8 +750,6 @@ const PROJECTS = [
     color: '#4d96ff',
     glow: 'rgba(77,150,255,0.5)',
     tags: ['MarianMT', 'Translation', 'Fine-Tuning'],
-    metric: 'BLEU 36 → 43',
-    metricTr: 'BLEU 36 → 43',
     github: gh('turkish-english-nmt'),
     // Field Notes — migrated verbatim from caseStudies.js (12 Sep 2026).
     challenges: [
@@ -1006,20 +776,6 @@ const PROJECTS = [
       'A neural machine translation project that fine-tunes Helsinki-NLP’s opus-mt-tr-en (MarianMT) on the ManyThings/Tatoeba Turkish–English parallel corpus. The repository covers the full workflow — data cleaning, tokenizer comparison, training, BLEU evaluation, and report generation — runnable both locally and end-to-end on a free Colab T4 GPU.',
     overviewTr:
       'Helsinki-NLP’nin opus-mt-tr-en (MarianMT) modelini ManyThings/Tatoeba Türkçe–İngilizce paralel derlemi üzerinde fine-tune eden bir nöral makine çevirisi projesi. Depo; veri temizleme, tokenizer karşılaştırması, eğitim, BLEU değerlendirmesi ve rapor üretimi dahil iş akışının tamamını kapsar ve hem yerelde hem de ücretsiz bir Colab T4 GPU’sunda uçtan uca çalıştırılabilir.',
-    highlights: [
-      'Complete numbered pipeline: cleaning/splitting → tokenization study → training → evaluation → charts',
-      'Tokenization comparison script contrasting character, word, byte, and BPE approaches',
-      'Fine-tuning with Hugging Face Trainer: fp16, effective batch 128, lr 5e-5, 3 epochs',
-      'SacreBLEU evaluation plus an interactive translation demo with beam search',
-      'Single-file colab.py that reproduces the whole experiment on a T4 GPU in ~60–90 minutes',
-    ],
-    highlightsTr: [
-      'Eksiksiz numaralı pipeline: temizleme/bölme → tokenizasyon çalışması → eğitim → değerlendirme → grafikler',
-      'Karakter, kelime, bayt ve BPE yaklaşımlarını karşılaştıran tokenizasyon betiği',
-      'Hugging Face Trainer ile fine-tune: fp16, efektif batch 128, öğrenme oranı 5e-5, 3 epoch',
-      'SacreBLEU değerlendirmesi ve ışın aramalı (beam search) etkileşimli çeviri demosu',
-      'Deneyin tamamını T4 GPU’da ~60–90 dakikada yeniden üreten tek dosyalık colab.py',
-    ],
     stack: [
       { label: 'Languages', items: ['Python 3.13'] },
       { label: 'Frameworks', items: ['PyTorch', 'Hugging Face Transformers'] },
@@ -1034,20 +790,6 @@ const PROJECTS = [
     architectureTr: [
       'Pipeline numaralı betiklere bölünmüştür. 01_data_cleaning.py ham Tatoeba dökümünü normalleştirir ve %80/%10/%10 eğitim/doğrulama/test bölmesi üretir; 02_tokenization.py derlem üzerinde karakter, kelime, bayt ve BPE tokenizasyonunu karşılaştırır; 04_training.py MarianMT’yi Hugging Face Trainer ile fine-tune’lar; 05_evaluation_and_inference.py SacreBLEU ile BLEU hesaplar ve 4 ışınlı arama kullanan etkileşimli çeviri sunar; 06_report_generator.py eğitim eğrisi ve karşılaştırma grafiklerini üretir.',
       'Model, 62.389 tokenlık ortak bir SentencePiece BPE sözlüğüne sahip Transformer encoder-decoder’dır (MarianMT); en fazla 128 dizi uzunluğunda, fp16 ile eğitilmiştir. colab.py aynı akışı Colab için tek betikte paketler; veriyi Drive’dan okur ve fine-tune’lu modeli yine oraya kaydeder.',
-    ],
-    results: [
-      { label: 'Dataset', value: '522,975 sentence pairs (418,380 train)' },
-      { label: 'BLEU', value: '~36 → ~43 (+7)' },
-      { label: '1-gram / 2-gram precision', value: '+7% / +8%' },
-      { label: 'Model size', value: '76.6M parameters' },
-      { label: 'Training time', value: '~60–90 min on a T4' },
-    ],
-    resultsTr: [
-      { label: 'Veri kümesi', value: '522.975 cümle çifti (418.380 eğitim)' },
-      { label: 'BLEU', value: '~36 → ~43 (+7)' },
-      { label: '1-gram / 2-gram kesinliği', value: '+%7 / +%8' },
-      { label: 'Model boyutu', value: '76,6 milyon parametre' },
-      { label: 'Eğitim süresi', value: 'T4 üzerinde ~60–90 dk' },
     ],
     // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
     role: 'Solo',
@@ -1139,22 +881,6 @@ const PROJECTS = [
       'A learning-first language model: a decoder-only, GPT-style transformer implemented from scratch in PyTorch, with every core component written by hand instead of imported. The goal was to truly understand transformers by building each piece — tokenizer, embeddings, self- and multi-head attention with causal masking, layer norm, MLP, and decoder blocks — then assembling them into a small working model (V1: a 64-token prototype trained on Colab).',
     overviewTr:
       'Öğrenme öncelikli bir dil modeli: PyTorch’ta sıfırdan uygulanmış, decoder-only GPT tarzı bir transformer; her temel bileşen içe aktarılmak yerine elle yazıldı. Amaç; tokenizer, embedding (embedding), nedensel maskelemeli öz ve çok başlı dikkat, katman normu, MLP ve decoder bloklarının her birini inşa ederek transformer’ları gerçekten anlamak ve ardından bunları küçük, çalışan bir modelde birleştirmekti (V1: Colab’da eğitilmiş 64 tokenlık bir prototip).',
-    highlights: [
-      'Every core transformer component hand-written: embeddings, self-attention, multi-head attention, causal masking, layer norm, and MLP',
-      'A custom tokenizer (usta_tokenizer) alongside a Hugging Face tokenizer comparison',
-      'Decoder-only (GPT-style) architecture assembled from the modules into a single usta_model',
-      'Numbered Jupyter modules (module0 → module_3) that build and train the pieces step by step',
-      'Text-completion inference: give a prompt, get the model’s continuation',
-      'Runs end-to-end on a free Colab GPU',
-    ],
-    highlightsTr: [
-      'Her temel transformer bileşeni elle yazıldı: embedding’ler, öz-dikkat, çok başlı dikkat, nedensel maskeleme, katman normu ve MLP',
-      'Özel bir tokenizer (usta_tokenizer) ve bir Hugging Face tokenizer karşılaştırması',
-      'Modüllerden tek bir usta_model içinde birleştirilen decoder-only (GPT tarzı) mimari',
-      'Parçaları adım adım kurup eğiten numaralı Jupyter modülleri (module0 → module_3)',
-      'Metin tamamlama inference’ı: bir prompt ver, modelin devamını al',
-      'Ücretsiz bir Colab GPU’sunda uçtan uca çalışır',
-    ],
     stack: [
       { label: 'Languages', items: ['Python'] },
       { label: 'Frameworks', items: ['PyTorch'] },
@@ -1168,20 +894,6 @@ const PROJECTS = [
     architectureTr: [
       'Model decoder-only’dur. usta_embedding token kimliklerini vektörlere eşler; usta_self_attention ve usta_multi_head_attention nedensel maskelemeli ölçekli nokta-çarpım dikkatini uygular; usta_layer_norm ve usta_mlp ileri besleme yolunu oluşturur; usta_decoder_block dikkat ve MLP’yi artık bağlantılarla üst üste yığar; usta_model ise decoder bloklarını birleştirip sözlük logit’lerine yansıtır. usta_tokenizer kodlama ve kod çözmeyi üstlenir.',
       'Yapı, modeli tokenizasyon ve embedding’lerden dikkate ve eğitilebilir bir decoder’a doğru aşamalı büyüten numaralı not defterlerine (module0’dan module_3’e) bölünmüştür; bir PyTorch eğitim döngüsü ve küçük bir metin derlemi eşlik eder. V1, ölçek için değil anlamak için tasarlanmış 64 token bağlamlı bir prototiptir.',
-    ],
-    results: [
-      { label: 'Model', value: 'Decoder-only GPT, from scratch' },
-      { label: 'V1 prototype', value: '64-token context' },
-      { label: 'Hand-written', value: 'tokenizer · attention · MHA · norm · MLP · decoder' },
-      { label: 'Built', value: 'Aug 14 → Oct 3, 2025' },
-      { label: 'Runs on', value: 'Free Colab GPU' },
-    ],
-    resultsTr: [
-      { label: 'Model', value: 'Sıfırdan, decoder-only GPT' },
-      { label: 'V1 prototip', value: '64 token bağlam' },
-      { label: 'Elle yazılan', value: 'tokenizer · attention · MHA · norm · MLP · decoder' },
-      { label: 'Yapım', value: '14 Ağu → 3 Eki 2025' },
-      { label: 'Çalıştığı yer', value: 'Ücretsiz Colab GPU' },
     ],
     // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
     role: 'Solo',
@@ -1232,8 +944,6 @@ const PROJECTS = [
     color: '#00d4ff',
     glow: 'rgba(0,212,255,0.5)',
     tags: ['BlazeFace', 'MediaPipe', 'Two-Stage'],
-    metric: '140K images · ~11 ms/image',
-    metricTr: '140K görüntü · ~11 ms/görüntü',
     github: gh('face-detection-pipeline'),
     // Field Notes — migrated verbatim from caseStudies.js (12 Sep 2026).
     challenges: [
@@ -1265,22 +975,6 @@ const PROJECTS = [
       'Off-the-shelf short-range face detectors miss small faces and hallucinate faces in blurred textures — and no single confidence threshold fixes both. This project wraps MediaPipe’s BlazeFace in a two-stage detect-and-verify pipeline: candidates are collected permissively, then each is zoomed into and re-detected. Real faces re-score above 0.90 when enlarged; false positives fail re-detection. Same model, same dependencies, measurably better accuracy.',
     overviewTr:
       'Hazır kısa menzilli yüz dedektörleri küçük yüzleri kaçırır, bulanık dokularda ise olmayan yüzler görür; tek bir güven eşiği iki sorunu birden çözmez. Bu proje, MediaPipe’ın BlazeFace modelini iki aşamalı bir tespit et-doğrula hattıyla sarar: adaylar önce esnek bir eşikle toplanır, ardından her biri yakınlaştırılıp yeniden tespit edilir. Gerçek yüzler büyütüldüğünde 0,90’ın üzerinde puan alır; hatalı tespitler ise yeniden doğrulamayı geçemez. Aynı model, aynı bağımlılıklar, ölçülebilir biçimde daha iyi doğruluk.',
-    highlights: [
-      'Two-stage detection: low-threshold candidate search, then zoom-in re-verification of every candidate',
-      'Batch processing of whole folders with annotated output copies',
-      '140,000-image Kaggle benchmark with per-image CSV logging and safe resume after interruption',
-      'Human-review queue: zero-face, low-confidence, and many-face images routed to review/ with full metadata',
-      'Corrupt or unreadable images are skipped with a warning — a batch never crashes',
-      'CPU-only: no GPU, no cloud, and the 230 KB model ships inside the repo',
-    ],
-    highlightsTr: [
-      'İki aşamalı tespit: düşük eşikli aday araması, ardından her adayın yakınlaştırılarak yeniden doğrulanması',
-      'Klasörlerin toplu işlenmesi ve işaretlenmiş çıktı kopyaları',
-      'Görsel başına CSV kaydı ve kesinti sonrası güvenli devam özelliğiyle 140.000 görsellik Kaggle performans testi',
-      'İnsan inceleme kuyruğu: yüz bulunamayan, düşük güvenli ve çok yüzlü görseller tüm meta verileriyle review/ klasörüne yönlendirilir',
-      'Bozuk ya da okunamayan görseller uyarı verilerek atlanır; toplu işlem asla çökmez',
-      'Yalnızca CPU: GPU yok, bulut yok; 230 KB’lik model depoyla birlikte gelir',
-    ],
     stack: [
       { label: 'Languages', items: ['Python 3.12+'] },
       { label: 'Libraries', items: ['MediaPipe (Tasks API)', 'OpenCV 4.x', 'NumPy', 'kagglehub'] },
@@ -1293,20 +987,6 @@ const PROJECTS = [
     architectureTr: [
       '1. aşama, dedektörü esnek bir 0,30 eşiğiyle görselin tamamı ile üst ve alt yarıları üzerinde çalıştırır; kareyi ikiye bölmek, küçük yüzleri modele oranla büyütür. 2. aşama her aday bölgeye yakınlaşır ve 0,65 eşiğiyle yeniden tespit yapar; yalnızca kırpmanın ortasındaki yüzleri kabul eder ve kutuyu yakınlaştırılmış tespite göre iyileştirir. Çakışan tespitler IoU ≥ 0,4 ölçütüyle tekilleştirilir; yüksek puanlı olan tutulur.',
       'detect.py pipeline’ı ve kutu çizimini uygular; main.py dataset/ klasörünü toplu işler; evaluate.py ise görsel başına CSV kaydı, devam ettirilebilir çalıştırmalar ve inceleme kuyruğu örneklemesiyle 140 binlik performans testini yürütür.',
-    ],
-    results: [
-      { label: 'Images processed', value: '140,000 — 0 failures' },
-      { label: 'Speed', value: '~11 ms/image, single-threaded Apple M3 CPU' },
-      { label: 'Total runtime', value: '25 m 17 s' },
-      { label: 'Flagged for human review', value: '0.26%' },
-      { label: 'Faces detected', value: '140,836 (1.006 avg/image)' },
-    ],
-    resultsTr: [
-      { label: 'İşlenen görsel', value: '140.000 — 0 hata' },
-      { label: 'Hız', value: 'Görsel başına ~11 ms, tek iş parçacıklı Apple M3 CPU' },
-      { label: 'Toplam süre', value: '25 dk 17 sn' },
-      { label: 'İncelemeye ayrılan', value: '%0,26' },
-      { label: 'Tespit edilen yüz', value: '140.836 (görsel başına ort. 1,006)' },
     ],
     // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
     role: 'Solo',
@@ -1377,8 +1057,6 @@ const PROJECTS = [
     color: '#ff3b30',
     glow: 'rgba(255,59,48,0.5)',
     tags: ['YOLO11', 'Object Detection', 'Ultralytics'],
-    metric: '90.3% mAP@50',
-    metricTr: '%90,3 mAP@50',
     github: gh('yolo-custom-detector'),
     // Field Notes — migrated verbatim from caseStudies.js (12 Sep 2026).
     challenges: [
@@ -1414,22 +1092,6 @@ const PROJECTS = [
       'A custom single-class object detector that learns one specific real-world object — my own Rotring mechanical pencil — and finds it in any photo. It is deliberately not a generic pen detector: the goal was to walk the full workflow of teaching a modern detector a brand-new object that exists in no public dataset. Every stage is done by hand, from photographing the object under varied conditions to annotating, splitting, fine-tuning YOLO11n, and running inference — reaching 90.3% mAP@50 on the validation set.',
     overviewTr:
       'Belirli tek bir gerçek nesneyi (kendi Rotring mekanik kalemimi) öğrenip herhangi bir fotoğrafta bulan, özel ve tek sınıflı bir nesne tespit modeli. Bilinçli olarak genel bir kalem dedektörü değil: amaç, hiçbir açık veri kümesinde bulunmayan yepyeni bir nesneyi modern bir dedektöre öğretmenin tüm sürecini baştan sona yaşamaktı. Nesneyi farklı koşullarda fotoğraflamaktan etiketlemeye, veriyi bölmeye, YOLO11n’i fine-tune yapmaya ve inference yapmaya kadar her adım elle yapıldı; doğrulama kümesinde %90,3 mAP@50’ye ulaşıldı.',
-    highlights: [
-      'Self-collected dataset of 117 photos, captured across varied lighting, angles, distances, backgrounds, and partial occlusions',
-      'Hand-annotated bounding boxes in makesense.ai, exported to YOLO format, split deterministically 82 / 23 / 12 (train / valid / test)',
-      'Fine-tunes the lightweight YOLO11n checkpoint (~2.6M parameters) — one command from dataset to best.pt',
-      '90.3% mAP@50 and 0.90 precision on validation; 11 of 12 held-out test images detected at 0.88–0.95 confidence',
-      'Generalizes to a brand-new photo taken after training finished',
-      'CPU-only: ~45 ms per image on Apple silicon, no discrete GPU required; best.pt ships in the repo at ~5 MB',
-    ],
-    highlightsTr: [
-      'Farklı ışık, açı, mesafe, arka plan ve kısmi kapanmalar altında çekilmiş, kendi topladığım 117 fotoğraflık veri kümesi',
-      'makesense.ai’de elle çizilip YOLO formatına aktarılan sınırlayıcı kutular; 82 / 23 / 12 (eğitim / doğrulama / test) olarak deterministik bölme',
-      'Hafif YOLO11n kontrol noktasının (~2,6 milyon parametre) fine-tune’u; veri kümesinden best.pt’ye tek komut',
-      'Doğrulamada %90,3 mAP@50 ve 0,90 kesinlik; ayrılmış 12 test görselinin 11’i 0,88–0,95 güvenle tespit edildi',
-      'Eğitim bittikten sonra çekilmiş yepyeni bir fotoğrafa da genelleme yapar',
-      'Yalnızca CPU: Apple silikonda görsel başına ~45 ms, ayrı GPU gerektirmez; best.pt ~5 MB olarak depoyla birlikte gelir',
-    ],
     stack: [
       { label: 'Languages', items: ['Python 3.11+'] },
       { label: 'Frameworks', items: ['PyTorch'] },
@@ -1444,20 +1106,6 @@ const PROJECTS = [
     architectureTr: [
       'Pipeline, src/ altında birkaç odaklı betikten oluşur. prepare_dataset.py ham fotoğrafları doğrular ve bozulma, kopya ve bölme sızıntılarını raporlar; split_dataset.py deterministik bir %70/%20/%10 bölme yapar; train.py YOLO11n’i önceden eğitilmiş kontrol noktasından 640×640 çözünürlükte, 50 epoch boyunca, otomatik batch boyutu ve erken durdurmayla (patience 20) fine-tune’lar; predict.py herhangi bir görselde inference yapıp tespit kutusunu çizer. Merkezî bir config.py yolları, tek sınıf adını ve hiperparametreleri tutar.',
       'Eğitim, önceden eğitilmiş yolo11n.pt’den başlar; böylece omurga genel görsel özellikleri zaten bilir ve fine-tune yalnızca yeni nesneyi öğretir; ~100 görselin yeterli olmasının nedeni de budur. En iyi kontrol noktası otomatik olarak models/best.pt’ye kopyalanır; çalışmanın tüm çıktıları (metrikler, eğriler, ağırlıklar) runs/ altında toplanır.',
-    ],
-    results: [
-      { label: 'Precision / Recall', value: '0.90 / 0.83 (validation)' },
-      { label: 'mAP@50 / mAP@50-95', value: '0.903 / 0.740' },
-      { label: 'Dataset', value: '117 self-collected photos, 1 class' },
-      { label: 'Model', value: 'YOLO11n — ~2.6M params, best.pt ~5 MB' },
-      { label: 'Inference', value: '~45 ms/image on a laptop CPU' },
-    ],
-    resultsTr: [
-      { label: 'Kesinlik / Duyarlılık', value: '0,90 / 0,83 (doğrulama)' },
-      { label: 'mAP@50 / mAP@50-95', value: '0,903 / 0,740' },
-      { label: 'Veri kümesi', value: '117 fotoğraf (kendim topladım), 1 sınıf' },
-      { label: 'Model', value: 'YOLO11n, ~2,6 milyon parametre, best.pt ~5 MB' },
-      { label: 'Çıkarım', value: 'Dizüstü CPU’da görsel başına ~45 ms' },
     ],
     // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
     role: 'Solo',
@@ -1547,22 +1195,6 @@ const PROJECTS = [
       'A real-time face detection and recognition system that watches a webcam and reacts to faces live: every human face gets a green box, trained people are greeted by name, and strangers are rejected with a “person not found”. Detection and recognition are deliberately split — a cheap detector runs on every frame while the expensive recognizer runs only every Nth frame — so the video stays smooth on an ordinary laptop CPU.',
     overviewTr:
       'Web kamerasını izleyip yüzlere canlı tepki veren bir gerçek zamanlı yüz tespiti ve tanıma sistemi: her insan yüzü yeşil bir kutuyla işaretlenir, eğitilmiş kişiler adıyla karşılanır, yabancılar ise “kişi bulunamadı” uyarısıyla reddedilir. Tespit ve tanıma bilinçli olarak ayrılmıştır — ucuz dedektör her karede, pahalı tanıyıcı ise yalnızca her N. karede çalışır — böylece görüntü sıradan bir dizüstü CPU’sunda bile akıcı kalır.',
-    highlights: [
-      'Two-tier pipeline: MediaPipe BlazeFace detects on every frame, dlib 128-d encodings recognize every Nth frame',
-      'Training keeps all encodings per person (no averaging); matching uses nearest neighbor, so angles and lighting all contribute',
-      'Strict 0.50 match threshold — unknown faces are rejected instead of guessed',
-      'Detection-only fallback when no model is trained yet, so the camera can be tested immediately',
-      'Handles real-world pitfalls: EXIF-rotated phone photos, small-face 2x upsampling, auto-downloaded BlazeFace model',
-      'All knobs (threshold, interval, camera index) live at the top of one file',
-    ],
-    highlightsTr: [
-      'İki katmanlı pipeline: MediaPipe BlazeFace her karede tespit eder, dlib 128 boyutlu kodlamalar her N. karede tanır',
-      'Eğitim, kişi başına tüm kodlamaları saklar (ortalama almaz); eşleştirme en yakın komşuyla yapılır, böylece açı ve ışık çeşitliliği katkı sağlar',
-      'Sıkı 0,50 eşleşme eşiği: bilinmeyen yüzler tahmin edilmek yerine reddedilir',
-      'Model henüz eğitilmemişse yalnızca tespit modu devreye girer; kamera hemen test edilebilir',
-      'Gerçek dünya tuzaklarını çözer: EXIF ile döndürülmüş telefon fotoğrafları, küçük yüzler için 2x büyütme, otomatik indirilen BlazeFace modeli',
-      'Tüm ayarlar (eşik, aralık, kamera indeksi) tek dosyanın başında toplanmıştır',
-    ],
     stack: [
       { label: 'Languages', items: ['Python 3.9–3.13'] },
       { label: 'Libraries', items: ['MediaPipe (Tasks API)', 'face_recognition (dlib)', 'OpenCV', 'NumPy'] },
@@ -1575,20 +1207,6 @@ const PROJECTS = [
     architectureTr: [
       'main.py canlı döngüyü çalıştırır: her web kamerası karesi tespit ve kutu çizimi için MediaPipe BlazeFace’ten (Tasks API) geçer; her RECOGNITION_INTERVAL karede bir, kırpılan bölge face_recognition’a verilir, 128 boyutlu dlib kodlaması hesaplanır ve encodings.pickle içindeki en yakın komşu bulunur. Aradaki kareler son bilinen sonucu kullanır; FPS’i akıcı tutan da budur.',
       'train_model.py bu pickle dosyasını, her alt klasörün bir kişiye karşılık geldiği dataset/ klasöründen üretir: telefon fotoğraflarına EXIF düzeltmesi uygular, küçük yüzleri 2x büyütmeyle yeniden dener ve kişi başına ortalama yerine tüm kodlamaları saklar; en yakın komşuya göre eşleştirme sayesinde farklı açılar ve ışık koşulları da katkı sağlar. Bir eşleşmenin kabulü için 0,50’nin altında bir mesafe gerekir.',
-    ],
-    results: [
-      { label: 'Pipeline', value: 'Detect every frame · recognize every Nth' },
-      { label: 'Match threshold', value: '0.50 face distance' },
-      { label: 'Unknown-face tests', value: 'Rejected at 0.72 / 0.79 distance' },
-      { label: 'Hardware', value: 'CPU-only, ordinary webcam' },
-      { label: 'Training set', value: '20–30 photos per person' },
-    ],
-    resultsTr: [
-      { label: 'Pipeline', value: 'Her karede tespit · her N. karede tanıma' },
-      { label: 'Eşleşme eşiği', value: '0,50 yüz mesafesi' },
-      { label: 'Bilinmeyen yüz testleri', value: '0,72 / 0,79 mesafeyle reddedildi' },
-      { label: 'Donanım', value: 'Yalnızca CPU, sıradan web kamerası' },
-      { label: 'Eğitim kümesi', value: 'Kişi başına 20–30 fotoğraf' },
     ],
     // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
     role: 'Solo',
@@ -1641,8 +1259,6 @@ const PROJECTS = [
     color: '#ff9f1c',
     glow: 'rgba(255,159,28,0.5)',
     tags: ['BPE', 'Tokenizer', 'Domain-Specific'],
-    metric: '1,024 tokens beat 150K+ vocabs',
-    metricTr: '1.024 token, 150K+ sözlükleri geçti',
     github: gh('worldcup-bpe-tokenizer'),
     images: [
       { src: '/projects/worldcup-bpe-tokenizer/tokenizer_comparison.png', caption: 'The same sentence tokenized by our 1,024-token BPE vs the real Qwen, Gemma, and DeepSeek tokenizers', captionTr: 'Aynı cümle, 1.024 tokenlık BPE’miz ile gerçek Qwen, Gemma ve DeepSeek tokenizer’ları tarafından bölünüyor' },
@@ -1654,22 +1270,6 @@ const PROJECTS = [
       'Two experiments in one repository. First, a byte-level BPE tokenizer (vocab_size 1,024) trained on 2022 FIFA World Cup Wikipedia articles and compared head-to-head against the real Qwen, Gemma, and DeepSeek tokenizers — despite being 125–250× smaller, it is often shorter on football text because it learned rare names like “Mbappé” and “Lusail” as single tokens. Second, four tiny transformer architectures (Qwen3, Qwen3.5, Gemma, DeepSeek-V3) built from scratch and trained under identical conditions so any difference comes from the architecture itself.',
     overviewTr:
       'Tek depoda iki deney. Birincisi, 2022 FIFA Dünya Kupası Wikipedia makaleleri üzerinde eğitilen byte-level bir BPE tokenizer (sözlük boyutu 1.024); gerçek Qwen, Gemma ve DeepSeek tokenizer’larıyla birebir karşılaştırıldı ve 125–250 kat küçük olmasına rağmen futbol metinlerinde çoğu zaman daha kısa sonuç veriyor, çünkü “Mbappé” ve “Lusail” gibi nadir isimleri tek token olarak öğrendi. İkincisi, sıfırdan inşa edilen dört minik transformer mimarisi (Qwen3, Qwen3.5, Gemma, DeepSeek-V3); tüm farkın mimariden gelmesi için birebir aynı koşullarda eğitildi.',
-    highlights: [
-      'Byte-level BPE (vocab 1,024) trained on a ~9,149-word World Cup corpus fetched via the MediaWiki API',
-      'Every encode → decode round-trip is lossless — byte-level pre-tokenization means no character is ever unknown',
-      'Domain words collapse into single tokens: Messi, Qatar, Lusail, penalty, knockout each get their own ID',
-      'Head-to-head comparison against production Qwen2.5 (151K), Gemma-2 (256K), and DeepSeek-V3 (129K) tokenizers',
-      'Four from-scratch tiny architectures — RMSNorm/GQA/RoPE, Gated DeltaNet, sliding-window attention, MLA + MoE — trained with an identical loop',
-      'All four models train far below the uniform baseline and generate 100% valid Turkish names',
-    ],
-    highlightsTr: [
-      'MediaWiki API ile çekilen ~9.149 kelimelik Dünya Kupası derlemi üzerinde eğitilmiş byte-level BPE (sözlük 1.024)',
-      'Her kodlama → çözme turu kayıpsız: byte-level ön-tokenizasyon sayesinde hiçbir karakter bilinmez kalmaz',
-      'Alan kelimeleri tek tokena iner: Messi, Qatar, Lusail, penalty, knockout — her birinin kendi kimliği var',
-      'Üretimdeki Qwen2.5 (151 bin), Gemma-2 (256 bin) ve DeepSeek-V3 (129 bin) tokenizer’larıyla birebir karşılaştırma',
-      'Sıfırdan dört minik mimari — RMSNorm/GQA/RoPE, Gated DeltaNet, kayan pencere dikkati, MLA + MoE — birebir aynı döngüyle eğitildi',
-      'Dört model de tekdüze baseline’ın çok altına iner ve %100 geçerli Türkçe isimler üretir',
-    ],
     stack: [
       { label: 'Languages', items: ['Python 3'] },
       { label: 'Frameworks', items: ['PyTorch'] },
@@ -1684,20 +1284,6 @@ const PROJECTS = [
     architectureTr: [
       '1. bölüm (src/train_bpe.py) MediaWiki extracts API’siyle iki Dünya Kupası Wikipedia makalesini indirir, temizleyip derleme dönüştürür, Hugging Face tokenizers ile byte-level bir BPE eğitir (sözlük 1.024, min_frequency 2, pad/unk/bos/eos özel tokenları) ve analiz raporu yazar: örnek tokenlar, gidiş-dönüş testleri ve ~1,81 token/kelime sıkıştırma değeri. Ayrı bir betik, gerçek Qwen, Gemma ve DeepSeek tokenizer’larıyla görsel karşılaştırmayı üretir.',
       '2. bölüm (src/train_models.py) dört karakter seviyesi mimariyi Türkçe isimler üzerinde, her şey sabit tutularak eğitir: veri, tokenizer, batch, adım sayısı, optimizasyon ve tohum. Her model kendi ailesinin imza mekanizmalarını yeniden uygular: TinyQwen (RMSNorm, QK-Norm, GQA, RoPE, SwiGLU), TinyQwen35 (tam dikkat ile dönüşümlü Gated DeltaNet doğrusal dikkati), TinyGemma (sandviç norm, kayan pencere dikkati, çift RoPE, GeGLU) ve TinyDeepSeek (MLA sıkıştırılmış-KV dikkati ve ortak uzmanlı MoE). Her model klasörü kendi train.py ve generate.py dosyalarıyla bağımsız da çalıştırılabilir.',
-    ],
-    results: [
-      { label: 'Vocabulary', value: '1,024 tokens — 125–250× smaller than production tokenizers' },
-      { label: 'Compression', value: '~1.81 tokens/word, lossless round-trips' },
-      { label: 'Domain words', value: 'Mbappé: 1 token vs 2–3 in Qwen/Gemma/DeepSeek' },
-      { label: 'Tiny LLMs', value: '4 architectures, 19K–63K params, best loss 0.514' },
-      { label: 'Valid generated names', value: '100% at temperature 0.7' },
-    ],
-    resultsTr: [
-      { label: 'Sözlük', value: '1.024 token; üretim tokenizer’larından 125–250 kat küçük' },
-      { label: 'Sıkıştırma', value: '~1,81 token/kelime, kayıpsız gidiş-dönüş' },
-      { label: 'Alan kelimeleri', value: 'Mbappé: 1 token — Qwen/Gemma/DeepSeek’te 2–3' },
-      { label: 'Minik LLM’ler', value: '4 mimari, 19–63 bin parametre, en iyi kayıp 0,514' },
-      { label: 'Geçerli üretilen isim', value: '0,7 sıcaklıkta %100' },
     ],
     // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
     role: 'Solo',
@@ -1780,22 +1366,6 @@ const PROJECTS = [
       'A minimal, end-to-end pipeline that turns any Wikipedia article into a working tokenizer. scraper.py fetches clean article text through the MediaWiki extracts API using nothing but the Python standard library, and script.py trains a byte-level Byte-Pair Encoding tokenizer on it and publishes the result straight to the Hugging Face Hub. The published tokenizer lives at gorkemergune/my-tokenizer and loads with a single AutoTokenizer.from_pretrained call. It is the groundwork for the larger WorldCup BPE experiment.',
     overviewTr:
       'Herhangi bir Wikipedia makalesini çalışır bir tokenizer’a dönüştüren, uçtan uca ve olabildiğince yalın bir pipeline. scraper.py, yalnızca Python standart kütüphanesini kullanarak MediaWiki extracts API’si üzerinden temiz makale metnini çeker; script.py ise bunun üzerinde byte-level bir Byte-Pair Encoding tokenizer eğitir ve sonucu doğrudan Hugging Face Hub’a yayınlar. Yayınlanan tokenizer gorkemergune/my-tokenizer adresinde durur ve tek bir AutoTokenizer.from_pretrained çağrısıyla yüklenir. Daha büyük WorldCup BPE deneyinin de temelini oluşturur.',
-    highlights: [
-      'Two-script pipeline: scraper.py (data) → script.py (train + publish)',
-      'Scraper uses the Python standard library only — no external packages to fetch Wikipedia text',
-      'Byte-level BPE with vocab size 2,048 (2¹¹) and <unk> <pad> <bos> <eos> special tokens',
-      'Byte-level encoding means any UTF-8 text tokenizes with zero unknown tokens',
-      'One command pushes the finished tokenizer to the Hugging Face Hub',
-      'Reusable on any article — just change the source URL',
-    ],
-    highlightsTr: [
-      'İki betiklik pipeline: scraper.py (veri) → script.py (eğitim + yayın)',
-      'Kazıyıcı yalnızca Python standart kütüphanesini kullanır; Wikipedia metnini çekmek için harici paket gerekmez',
-      'Sözlük boyutu 2.048 (2¹¹) ve <unk> <pad> <bos> <eos> özel tokenlarıyla byte-level BPE',
-      'Bayt seviyesi kodlama sayesinde her UTF-8 metin sıfır bilinmeyen tokenla parçalanır',
-      'Tek komut, biten tokenizer’ı Hugging Face Hub’a gönderir',
-      'Kaynak URL’yi değiştirerek herhangi bir makalede yeniden kullanılabilir',
-    ],
     stack: [
       { label: 'Languages', items: ['Python 3.10+'] },
       { label: 'Libraries', items: ['Hugging Face tokenizers', 'transformers'] },
@@ -1808,18 +1378,6 @@ const PROJECTS = [
     architectureTr: [
       'scraper.py, MediaWiki extracts endpoint’ini çağırır, HTML ve kaynak işaretlemesini temizler ve düz metni text.txt’ye yazar; tamamen standart kütüphanedeki urllib ve json ile yazıldığından hiçbir kurulum adımı olmadan her yerde çalışır.',
       'script.py, Hugging Face tokenizers ile bir ByteLevel ön-tokenizer + BPE modeli kurar, bunu text.txt üzerinde 2.048 tokenlık sözlüğe ve dört özel tokena eğitir, PreTrainedTokenizerFast olarak sarar ve huggingface-cli login sonrası push_to_hub çağırır. Sonuç, herhangi bir transformers modelinin kullanabileceği standart bir tokenizer’dır.',
-    ],
-    results: [
-      { label: 'Vocabulary', value: '2,048 tokens (2¹¹)' },
-      { label: 'Pipeline', value: '2 scripts, scrape → train → publish' },
-      { label: 'Scraper deps', value: '0 — standard library only' },
-      { label: 'Published', value: 'gorkemergune/my-tokenizer on the Hub' },
-    ],
-    resultsTr: [
-      { label: 'Sözlük', value: '2.048 token (2¹¹)' },
-      { label: 'Pipeline', value: '2 betik, çek → eğit → yayınla' },
-      { label: 'Kazıyıcı bağımlılığı', value: '0 — yalnızca standart kütüphane' },
-      { label: 'Yayınlandı', value: 'Hub’da gorkemergune/my-tokenizer' },
     ],
     // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
     role: 'Solo',
@@ -1876,8 +1434,6 @@ const PROJECTS = [
     color: '#38bdf8',
     glow: 'rgba(56,189,248,0.5)',
     tags: ['Dataset', 'STS', 'Embeddings'],
-    metric: '1,037 pairs · published on the Hub',
-    metricTr: '1.037 çift · Hub’da yayında',
     github: gh('tr-sts-dataset'),
     images: [
       { src: '/projects/tr-sts-dataset/distribution.svg', caption: 'Similarity distribution — a deliberately heavy tail of near-zero (unrelated) pairs across the full [−0.04, 0.97] range', captionTr: 'Benzerlik dağılımı — tüm [−0,04, 0,97] aralığında, sıfıra yakın (ilgisiz) çiftlerden oluşan bilinçli ağır bir kuyruk' },
@@ -1888,24 +1444,6 @@ const PROJECTS = [
       'A semantic textual similarity (STS) dataset for Turkish, built to fix a common gap: most similarity data is paraphrase-heavy, which teaches a model to spot rewordings but not to judge how unrelated two sentences are. This set deliberately spans the whole spectrum — a large number of near-zero pairs, a band of same-topic-but-different-event pairs, and true paraphrases — so a downstream system can actually calibrate a similarity threshold rather than guess one. It is published on the Hugging Face Hub as gorkemergune/stsb-tr.',
     overviewTr:
       'Türkçe için bir anlamsal metin benzerliği (STS) veri kümesi; yaygın bir eksiği gidermek için kuruldu: benzerlik verilerinin çoğu yeniden-ifade ağırlıklıdır, bu da modele yeniden ifadeleri yakalamayı öğretir ama iki cümlenin ne kadar ilgisiz olduğunu değerlendirmeyi öğretmez. Bu küme, tüm yelpazeyi bilinçle kapsar — çok sayıda sıfıra yakın çift, aynı-konu-ama-farklı-olay çiftlerinden bir bant ve gerçek yeniden-ifadeler — böylece bir alt sistem bir benzerlik eşiğini tahmin etmek yerine gerçekten kalibre edebilir. Hugging Face Hub’da gorkemergune/stsb-tr olarak yayımlandı.',
-    highlights: [
-      'Full-spectrum coverage: unrelated, related, and paraphrase tiers instead of a paraphrase-only set',
-      '1,037 sentence pairs split 933 train / 104 test, each scored on a roughly −0.04 to 0.97 cosine scale',
-      'Two sources combined: 38 manually collected pairs plus 999 template-generated synthetic pairs',
-      'Nine news domains — celebrity, sports, economics, politics, weather, crime, health, technology, and international',
-      'Clear tier separation in scores: unrelated ≈ 0.148, related ≈ 0.406, paraphrase ≈ 0.844 average similarity',
-      'Reproducible tooling: scripts for generation, deduplication, and visualization ship with the repo',
-      'Honest scope: synthetic sentences are template-generated and scores are model outputs, not human judgments',
-    ],
-    highlightsTr: [
-      'Tam-yelpaze kapsama: yalnızca-yeniden-ifade kümesi yerine ilgisiz, ilgili ve yeniden-ifade seviyeleri',
-      '1.037 cümle çifti, 933 eğitim / 104 test olarak bölündü; her biri yaklaşık −0,04 ile 0,97 kosinüs ölçeğinde puanlandı',
-      'İki kaynak birleştirildi: elle toplanan 38 çift ve şablonla üretilen 999 sentetik çift',
-      'Dokuz haber alanı — ünlüler, spor, ekonomi, siyaset, hava durumu, asayiş, sağlık, teknoloji ve uluslararası',
-      'Skorlarda net seviye ayrımı: ilgisiz ≈ 0,148, ilgili ≈ 0,406, yeniden-ifade ≈ 0,844 ortalama benzerlik',
-      'Yeniden üretilebilir araçlar: üretim, tekilleştirme ve görselleştirme betikleri depoyla gelir',
-      'Dürüst kapsam: sentetik cümleler şablonla üretilir ve skorlar insan yargısı değil, model çıktısıdır',
-    ],
     stack: [
       { label: 'Languages', items: ['Python 3'] },
       { label: 'Frameworks', items: ['SentenceTransformers'] },
@@ -1919,20 +1457,6 @@ const PROJECTS = [
     architectureTr: [
       'Veri kümesi iki akıştan birleştirilir. Elle toplanmış küçük bir 38 gerçek Türkçe cümle çifti kümesi, veriyi özgün ifadelere demirler; çok daha büyük bir sentetik üretici ise dokuz haber alanı ve üç ilgililik seviyesi — ilgisiz (farklı konular), ilgili (aynı konu, farklı olaylar) ve yeniden-ifade (aynı olay, farklı sözcükler) — arasından şablonlar çekerek 999 çift üretir. Her çift, L2-normalleştirilmiş embedding’ler üzerinde kosinüs benzerliğiyle SentenceTransformers kullanılarak puanlanır ve pipeline, son 933/104 eğitim/test bölmesini yazmadan önce tekilleştirir.',
       'Seviyeler olmaları gereken yere düşer: ilgisiz çiftler ortalama ~0,148, ilgili ~0,406 ve yeniden-ifadeler ~0,844; genel skorlar yaklaşık −0,04 ile 0,97 arasını kapsar. Bu dereceli yayılım — özellikle bilinçle büyük tutulan sıfıra yakın çift kütlesi — asıl meseledir: alt akıştaki bir getirici ya da doğrulayıcının bir eşiği tahmin etmek yerine veriden seçmesine olanak tanır. Depo, kapsam konusunda dürüsttür: sentetik cümleler kazınmış haber değil şablonla üretilmiştir ve skorlar insan işaretlemesi değil, model çıktısıdır.',
-    ],
-    results: [
-      { label: 'Size', value: '1,037 pairs · 933 train / 104 test' },
-      { label: 'Sources', value: '38 manual + 999 synthetic' },
-      { label: 'Domains', value: '9 news domains · 3 relatedness tiers' },
-      { label: 'Tier means', value: 'unrelated 0.148 · related 0.406 · paraphrase 0.844' },
-      { label: 'Published', value: 'Hugging Face — gorkemergune/stsb-tr' },
-    ],
-    resultsTr: [
-      { label: 'Boyut', value: '1.037 çift · 933 eğitim / 104 test' },
-      { label: 'Kaynaklar', value: '38 elle + 999 sentetik' },
-      { label: 'Alanlar', value: '9 haber alanı · 3 ilgililik seviyesi' },
-      { label: 'Seviye ortalamaları', value: 'ilgisiz 0,148 · ilgili 0,406 · yeniden-ifade 0,844' },
-      { label: 'Yayım', value: 'Hugging Face — gorkemergune/stsb-tr' },
     ],
     // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
     role: 'Solo',
@@ -2024,22 +1548,6 @@ const PROJECTS = [
       'A writing-quality analysis platform that scores text across six independent linguistic dimensions and aggregates them into a composite Academic Risk Score from 0 to 100. It does not claim AI authorship with certainty — it surfaces evidence-based signals statistically associated with formulaic, repetitive, or low-variance prose. Both English and Turkish are supported natively, including Turkish morphological analysis, for academic integrity support and stylometric research.',
     overviewTr:
       'Metni altı bağımsız dilbilimsel boyutta puanlayan ve bunları 0–100 arası bileşik bir Akademik Risk Skoru’nda birleştiren bir yazı kalitesi analiz platformu. Yapay zekâ yazarlığını kesin olarak iddia etmez; kalıplaşmış, tekrarlı ya da düşük çeşitlilikteki metinlerle istatistiksel olarak ilişkili, kanıta dayalı sinyalleri ortaya koyar. Türkçe biçimbilimsel analiz dahil olmak üzere hem İngilizce hem Türkçe yerel olarak desteklenir; akademik dürüstlük desteği ve stilometrik araştırmalar için tasarlandı.',
-    highlights: [
-      'Six independent analyzers: repetition, transition-word overuse, burstiness (sentence rhythm), readability, cliché density, and lexical poverty',
-      'Weighted composite scoring with four risk tiers, a confidence estimate, and per-component contribution scores for transparent verdicts',
-      'Fully bilingual: language auto-detection, separate stop-word sets, Zeyrek morphology for Turkish, Porter stemming for English',
-      'FastAPI REST API with Pydantic v2 schemas plus a Streamlit frontend',
-      'Benchmark harness comparing human-written vs LLM-generated samples per signal',
-      'Unit and integration tests, Ruff-enforced style, pre-commit hooks',
-    ],
-    highlightsTr: [
-      'Altı bağımsız analizci: tekrar, geçiş kelimesi aşırı kullanımı, cümle ritmi (burstiness), okunabilirlik, klişe yoğunluğu ve kelime fakirliği',
-      'Dört risk seviyesi, güven tahmini ve şeffaf kararlar için bileşen bazlı katkı puanlarıyla ağırlıklı bileşik puanlama',
-      'Tamamen iki dilli: otomatik dil algılama, ayrı durak kelime kümeleri, Türkçe için Zeyrek biçimbilimi, İngilizce için Porter kök bulma',
-      'Pydantic v2 şemalı FastAPI REST API ve Streamlit arayüzü',
-      'İnsan yazımı ile LLM üretimi örnekleri sinyal bazında karşılaştıran test düzeneği',
-      'Birim ve entegrasyon testleri, Ruff ile stil denetimi, pre-commit kancaları',
-    ],
     stack: [
       { label: 'Languages', items: ['Python 3.13'] },
       { label: 'Frameworks', items: ['FastAPI', 'Streamlit'] },
@@ -2053,20 +1561,6 @@ const PROJECTS = [
     architectureTr: [
       'Sinyal başına bir sınıf içeren temiz mimari: altı analiz modülü, LanguageDetector’ın İngilizce ya da Türkçe pipeline’ını seçtiği TokenizerService tarafından üretilen ortak tokenizasyon üzerinde bağımsız çalışır. AnalysisService analizcileri yönetir ve çıktılarını, yapılandırılabilir ScoringWeights uygulayan ve bileşen bazlı katkı puanları üreten AcademicRiskScorer’a iletir. Bağımlılıklar lru_cache tekilleriyle bağlanır.',
       'Puanlama modeli ağırlıklı bir toplamdır (tekrar 0,25; ritim 0,20; geçişler 0,15; kelime fakirliği 0,15; klişe 0,15; okunabilirlik 0,10) ve dört risk seviyesine eşlenir; güven değeri 300 kelimede doyuma ulaşır. API, GET /health ve POST /api/v1/analyze endpoint’lerini sunar; Streamlit arayüzü bunu ince bir api_client üzerinden kullanır.',
-    ],
-    results: [
-      { label: 'Signals analyzed', value: '6 orthogonal dimensions' },
-      { label: 'Output', value: 'Risk score 0–100, 4 tiers, per-component contributions' },
-      { label: 'Languages', value: 'English + Turkish, auto-detected' },
-      { label: 'Interfaces', value: 'REST API + Streamlit UI' },
-      { label: 'Quality gates', value: 'Unit + integration tests, Ruff, pre-commit' },
-    ],
-    resultsTr: [
-      { label: 'Analiz edilen sinyal', value: '6 bağımsız boyut' },
-      { label: 'Çıktı', value: '0–100 risk skoru, 4 seviye, bileşen bazlı katkılar' },
-      { label: 'Diller', value: 'İngilizce + Türkçe, otomatik algılama' },
-      { label: 'Arayüzler', value: 'REST API + Streamlit arayüzü' },
-      { label: 'Kalite kontrolleri', value: 'Birim + entegrasyon testleri, Ruff, pre-commit' },
     ],
     // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
     role: 'Solo',
@@ -2144,8 +1638,6 @@ const PROJECTS = [
     color: '#00e5a0',
     glow: 'rgba(0,229,160,0.5)',
     tags: ['PHQ-9', 'scikit-learn', 'Data Analysis'],
-    metric: '~100 live participants',
-    metricTr: '~100 canlı katılımcı',
     github: gh('depression-phq9-analysis'),
     images: [
       { src: '/projects/depression-phq9-analysis/dashboard.png', caption: 'Interactive Plotly dashboard — aggregate charts (demo data)', captionTr: 'Etkileşimli Plotly panosu: toplu grafikler (demo verisi)' },
@@ -2160,22 +1652,6 @@ const PROJECTS = [
       'A depression screening and analysis system built around an extended 15-question PHQ-9 scale. It creates and distributes the questionnaire through Google Forms, fetches responses via API, performs clinical scoring with severity classification, runs six machine-learning models, applies formal statistical testing, and generates interactive dashboards plus per-participant PDF reports. Built for pilot-study research settings; strictly educational and research use.',
     overviewTr:
       'Genişletilmiş 15 soruluk PHQ-9 ölçeği etrafında kurulmuş bir depresyon tarama ve analiz sistemi. Anketi Google Forms üzerinden oluşturup dağıtır, yanıtları API ile çeker, şiddet sınıflandırmalı klinik puanlama yapar, altı makine öğrenmesi modeli çalıştırır, biçimsel istatistiksel testler uygular; etkileşimli panolar ve katılımcı başına PDF raporları üretir. Pilot çalışma niteliğindeki araştırma ortamları için geliştirildi; kullanım amacı kesinlikle eğitim ve araştırmadır.',
-    highlights: [
-      'Google Forms integration: programmatic form creation and API response fetching',
-      'Clinical scoring engine: total score, severity tier, depression percentage, and a flagged critical question for self-harm ideation',
-      'Six ML models — K-Means, Random Forest, Logistic Regression, SVM, Decision Tree, Naive Bayes — combined into an ensemble weighted 60% clinical / 40% ML',
-      'Statistical analysis: 95% confidence intervals, Shapiro-Wilk normality, Pearson & Spearman correlation, t-test / Mann-Whitney U group comparison',
-      'Interactive dark-themed Plotly dashboard with 10+ visualizations, plus summary and individual PDF reports',
-      'Demo mode generating 30 synthetic participants to run the full pipeline without any Google credentials',
-    ],
-    highlightsTr: [
-      'Google Forms entegrasyonu: programatik form oluşturma ve API ile yanıt çekme',
-      'Klinik puanlama motoru: toplam skor, şiddet seviyesi, depresyon yüzdesi ve kendine zarar verme düşüncesi için işaretlenen kritik soru',
-      'Altı makine öğrenmesi modeli (K-Means, Random Forest, Lojistik Regresyon, SVM, Karar Ağacı, Naive Bayes) %60 klinik / %40 ML ağırlıklı bir toplulukta (ensemble) birleştirildi',
-      'İstatistiksel analiz: %95 güven aralıkları, Shapiro-Wilk normallik testi, Pearson ve Spearman korelasyonu, t-testi / Mann-Whitney U grup karşılaştırması',
-      '10’dan fazla görselleştirme içeren koyu temalı etkileşimli Plotly panosu; özet ve bireysel PDF raporları',
-      'Google kimlik bilgisi gerektirmeden tüm pipeline’ı çalıştıran, 30 sentetik katılımcı üreten demo modu',
-    ],
     stack: [
       { label: 'Languages', items: ['Python 3'] },
       { label: 'Libraries', items: ['scikit-learn', 'pandas', 'SciPy', 'Plotly', 'Matplotlib', 'ReportLab'] },
@@ -2188,20 +1664,6 @@ const PROJECTS = [
     architectureTr: [
       'main.py dört modlu bir komut satırı aracıdır: --demo (sentetik pilot çalışma), --anket-olustur (Google Form oluşturma), --sonuclar (yanıtları çekip analiz etme) ve --full-pipeline (her şeyi bir Google Sheet üzerinden yürütme). Kaynak kod sorumluluklara göre ayrılmıştır: google_forms/ form oluşturma ve yanıt çekmeyi üstlenir; analysis/ klinik PHQ-9 puanlama motorunu, katmanlı 5 katlı çapraz doğrulamalı altı modelli ML modülünü ve istatistiksel test paketini içerir; reporting/ ise Plotly panosunu, statik grafikleri ve PDF raporlarını üretir.',
       'Yapılandırma (PHQ-9 sabitleri, şiddet eşikleri ve 60/40 klinik/ML topluluk ağırlığı) merkezî olarak config/settings.py içindedir; böylece puanlama kuralları tek bir yerden denetlenebilir.',
-    ],
-    results: [
-      { label: 'Scale', value: '15-question extended PHQ-9, max score 45' },
-      { label: 'Severity tiers', value: '5 (Minimal → Severe)' },
-      { label: 'ML models', value: '6 + weighted ensemble' },
-      { label: 'Validation', value: 'Stratified 5-fold cross-validation' },
-      { label: 'Outputs', value: 'HTML dashboard · summary PDF · per-participant PDFs · PNG charts' },
-    ],
-    resultsTr: [
-      { label: 'Ölçek', value: '15 soruluk genişletilmiş PHQ-9, en yüksek skor 45' },
-      { label: 'Şiddet seviyesi', value: '5 (Minimal → Şiddetli)' },
-      { label: 'ML modeli', value: '6 + ağırlıklı topluluk' },
-      { label: 'Doğrulama', value: 'Katmanlı 5 katlı çapraz doğrulama' },
-      { label: 'Çıktılar', value: 'HTML pano · özet PDF · katılımcı başına PDF · PNG grafikler' },
     ],
     // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
     role: 'Solo',
@@ -2268,8 +1730,6 @@ const PROJECTS = [
     color: '#7c5cff',
     glow: 'rgba(124,92,255,0.5)',
     tags: ['TF-IDF', 'Logistic Regression', 'Text Classification'],
-    metric: '0.99 vs 0.68 F1',
-    metricTr: '0,99 — 0,68 F1',
     github: gh('email-phishing-detection'),
     // Field Notes — migrated verbatim from caseStudies.js (12 Sep 2026).
     challenges: [
@@ -2299,22 +1759,6 @@ const PROJECTS = [
       'An educational machine-learning project built for a university presentation and shipped as a fully documented notebook in both English and Turkish. It walks through the entire workflow step by step — cleaning, vectorization, training, evaluation, and live prediction — and deliberately compares raw-text features against a handful of hand-crafted numerical ones to show why the representation of the data matters as much as the model.',
     overviewTr:
       'Bir üniversite sunumu için hazırlanan ve hem İngilizce hem Türkçe olarak, baştan sona belgelenmiş bir not defteri biçiminde yayınlanan eğitim amaçlı bir makine öğrenmesi projesi. Temizleme, vektörleştirme, eğitim, değerlendirme ve canlı tahmin dahil tüm iş akışını adım adım anlatır; ham metin özelliklerini birkaç elle çıkarılmış sayısal özellikle bilinçli olarak karşılaştırarak, verinin temsilinin en az model kadar önemli olduğunu gösterir.',
-    highlights: [
-      'Clean linear pipeline: text cleaning → TF-IDF vectorization → stratified 80/20 split → Logistic Regression → evaluation',
-      'Text cleaning that lowercases, strips links and punctuation, and collapses whitespace before vectorizing',
-      'TF-IDF over words and bigrams, weighting terms distinctive to individual emails above ones that appear everywhere',
-      'Exploratory analysis of class balance and “signal words” associated with phishing (verify, account, click, update)',
-      'Feature-engineering comparison: raw-text TF-IDF vs 8 hand-crafted numerical features on a 525K-row dataset',
-      'Full evaluation — accuracy, precision, recall, F1, confusion matrix, ROC — plus live classification of your own pasted email',
-    ],
-    highlightsTr: [
-      'Temiz doğrusal pipeline: metin temizleme → TF-IDF vektörleştirme → katmanlı %80/%20 bölme → Lojistik Regresyon → değerlendirme',
-      'Vektörleştirmeden önce küçük harfe çeviren, bağlantı ve noktalama işaretlerini kaldıran ve boşlukları sadeleştiren metin temizleme',
-      'Kelimeler ve ikili öbekler üzerinde TF-IDF; tek tek e-postalara özgü terimleri, her yerde görülenlere göre daha ağır tartan yaklaşım',
-      'Sınıf dengesi ve oltalamayla ilişkili “sinyal kelimeler” (verify, account, click, update) üzerine keşifsel analiz',
-      'Özellik mühendisliği karşılaştırması: ham metin TF-IDF’i, 525 bin satırlık veri kümesindeki 8 elle çıkarılmış sayısal özellikle karşılaştırma',
-      'Eksiksiz değerlendirme (doğruluk, kesinlik, duyarlılık, F1, karışıklık matrisi, ROC) ve yapıştırdığın kendi e-postanı canlı sınıflandırma',
-    ],
     stack: [
       { label: 'Languages', items: ['Python 3'] },
       { label: 'Libraries', items: ['scikit-learn', 'pandas', 'NumPy', 'Matplotlib', 'kagglehub'] },
@@ -2327,20 +1771,6 @@ const PROJECTS = [
     architectureTr: [
       'Proje, İngilizce (eng.ipynb) ve Türkçe (tr.ipynb) olarak iki dilde yansıtılan tek bir doğrusal not defterinde yaşar. CEAS_08 veri kümesinden (~39.000 e-posta, ~%56 oltalama) gelen ham e-posta metni temizlenir, ardından bir TfidfVectorizer ile binlerce ağırlıklı kelime ve ikili öbek özelliğine dönüştürülür. Veri, katmanlı ve sabit tohumlu biçimde %80/%20 bölünür; bir LogisticRegression sınıflandırıcı eğitilir ve doğruluk, kesinlik, duyarlılık, F1, karışıklık matrisi ve ROC eğrisiyle değerlendirilir.',
       'Yalnızca 8 önceden çıkarılmış sayısal özellik taşıyan, ham metni olmayan ~525.000 satırlık ikinci bir veri kümesi ise sırf karşılaştırma için kullanılır: tokenizasyon ve TF-IDF gibi metin tabanlı adımlar buna uygulanamadığından, iki temsili karşılaştırmanın kendisi bir derstir. Veri kümeleri kagglehub ile otomatik indirilir ve son hücre, bir değişkene yapıştırılan herhangi bir e-posta metnini sınıflandırarak oltalama olasılığı döndürür.',
-    ],
-    results: [
-      { label: 'Main model', value: 'TF-IDF + Logistic Regression' },
-      { label: 'Accuracy / F1', value: '0.99 / 0.99 (test set)' },
-      { label: 'Precision / Recall', value: '0.99 / 1.00' },
-      { label: 'Numerical-feature baseline', value: '0.68 F1 — text carries far more signal' },
-      { label: 'Datasets', value: 'CEAS_08 (~39K) + 525K feature set' },
-    ],
-    resultsTr: [
-      { label: 'Ana model', value: 'TF-IDF + Lojistik Regresyon' },
-      { label: 'Doğruluk / F1', value: '0,99 / 0,99 (test kümesi)' },
-      { label: 'Kesinlik / Duyarlılık', value: '0,99 / 1,00' },
-      { label: 'Sayısal özellik temeli', value: '0,68 F1; metin çok daha fazla sinyal taşır' },
-      { label: 'Veri kümeleri', value: 'CEAS_08 (~39 bin) + 525 bin satırlık özellik kümesi' },
     ],
     // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
     role: 'Solo',
@@ -2432,24 +1862,6 @@ const PROJECTS = [
       'A hobby operating system for the x86 architecture, written in C and NASM Assembly as a learning project to understand how computers work at the lowest level — from the first boot sector instruction to a running shell. Everything is built by hand, guided by the OSDev Wiki and the Intel Software Developer Manual.',
     overviewTr:
       'Bilgisayarların en alt seviyede nasıl çalıştığını anlamak amacıyla C ve NASM Assembly ile yazılmış, x86 mimarisi için hobi amaçlı bir işletim sistemi. İlk önyükleme sektörü komutundan çalışan bir kabuğa kadar her şey, OSDev Wiki ve Intel Yazılım Geliştirici Kılavuzu rehberliğinde elle inşa edildi.',
-    highlights: [
-      'Custom bootloader in Assembly that loads the kernel from disk',
-      'Full interrupt infrastructure: GDT, IDT, PIC remapping, and ISR handlers',
-      'Memory management: physical memory manager, paging, and a kernel heap',
-      'Process abstraction with a scheduler and assembly context switching',
-      'Hardware drivers: VGA text mode, keyboard, PIT timer, and ATA disk',
-      'GorkemFS — a custom file system — plus an interactive shell',
-      'Snake, running on bare metal',
-    ],
-    highlightsTr: [
-      'Çekirdeği diskten yükleyen, Assembly ile yazılmış özel bootloader',
-      'Eksiksiz kesme altyapısı: GDT, IDT, PIC yeniden eşleme ve ISR işleyicileri',
-      'Bellek yönetimi: fiziksel bellek yöneticisi, sayfalama ve çekirdek yığını',
-      'Zamanlayıcı ve Assembly ile bağlam değiştirme içeren süreç soyutlaması',
-      'Donanım sürücüleri: VGA metin modu, klavye, PIT zamanlayıcı ve ATA disk',
-      'GorkemFS adında özel bir dosya sistemi ve etkileşimli bir kabuk',
-      'Doğrudan donanım üzerinde çalışan Snake',
-    ],
     stack: [
       { label: 'Languages', items: ['C', 'x86 Assembly (NASM)'] },
       { label: 'Tools', items: ['i686-elf-gcc cross-compiler', 'NASM', 'QEMU', 'GNU Make', 'GDB'] },
@@ -2461,18 +1873,6 @@ const PROJECTS = [
     architectureTr: [
       'NASM bootloader çekirdek imajını diskten yükler ve kontrolü C çekirdeğine devreden küçük bir Assembly giriş koduna atlar. Çekirdek ardından GDT ve IDT’yi kurar, PIC’i yeniden eşler ve istisnalar, zamanlayıcı ve klavye için ISR köprülerini C işleyicilerine bağlar.',
       'Bellek katmanlar hâlinde yönetilir: fiziksel bellek yöneticisi çerçeve dağıtır, sayfalama sanal adresleri eşler, en üstte de dinamik ayırma için çekirdek yığını bulunur. Süreçler, bağlam değiştirmesi Assembly ile yazılmış (switch.asm) zamanlayıcı güdümlü bir görev zamanlayıcı tarafından çalıştırılır. VGA metin çıkışı, klavye girişi, PIT ve ATA disk erişimi sürücüleri üst katmanları besler: özel GorkemFS dosya sistemi ve Snake’i de başlatabilen etkileşimli kabuk.',
-    ],
-    results: [
-      { label: 'Boots on', value: 'x86 via QEMU' },
-      { label: 'Kernel subsystems', value: 'GDT/IDT · paging · PMM · heap · scheduler' },
-      { label: 'Drivers', value: 'VGA · keyboard · timer · ATA' },
-      { label: 'Extras', value: 'Custom FS · shell · Snake' },
-    ],
-    resultsTr: [
-      { label: 'Çalıştığı ortam', value: 'QEMU üzerinde x86' },
-      { label: 'Çekirdek alt sistemleri', value: 'GDT/IDT · sayfalama · PMM · yığın · zamanlayıcı' },
-      { label: 'Sürücüler', value: 'VGA · klavye · zamanlayıcı · ATA' },
-      { label: 'Ekstralar', value: 'Özel dosya sistemi · kabuk · Snake' },
     ],
     // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
     role: 'Solo',
@@ -2537,22 +1937,6 @@ const PROJECTS = [
       'A body transformation tracker built for Turkish users with full English support. It tracks weight, body fat, eight body measurements, daily macros, and workouts; visualizes trends; and computes an estimated completion date for the user’s goal. A Gemini-powered coach answers questions with the user’s complete data as context, and the whole app installs as a PWA with offline support.',
     overviewTr:
       'Türk kullanıcılar için geliştirilen, tam İngilizce desteğine sahip bir vücut dönüşüm takipçisi. Kilo, vücut yağı, sekiz vücut ölçüsü, günlük makrolar ve antrenmanları takip eder; eğilimleri görselleştirir ve kullanıcının hedefi için tahmini bir tamamlanma tarihi hesaplar. Gemini destekli koç, kullanıcının tüm verisini bağlam olarak kullanarak soruları yanıtlar; uygulamanın tamamı da çevrimdışı destekli bir PWA olarak kurulabilir.',
-    highlights: [
-      'Four goal modes — weight loss, weight gain, recomposition, muscle gain — with a progress engine, ETA, and consistency score',
-      'Daily weight and body-fat logs with trend charts and weekly averages, plus 8 body measurements with per-field trends',
-      'Nutrition tracking (calories, protein, carbs, fat, water) with a food journal, and workout logging with volume analytics',
-      'Progress photo gallery with side-by-side comparison and diff stats',
-      'Gemini AI coach with full user context, plus weekly/monthly AI-generated PDF reports',
-      'Installable PWA with offline support; production Docker deployment with automated daily backups',
-    ],
-    highlightsTr: [
-      'Dört hedef modu (kilo verme, kilo alma, yeniden şekillenme, kas kazanımı); ilerleme motoru, tahmini bitiş tarihi ve istikrar puanıyla birlikte',
-      'Eğilim grafikleri ve haftalık ortalamalarla günlük kilo ve vücut yağı kayıtları; ayrıca alan bazlı eğilimlerle 8 vücut ölçüsü',
-      'Yemek günlüğüyle beslenme takibi (kalori, protein, karbonhidrat, yağ, su) ve hacim analiziyle antrenman kaydı',
-      'Yan yana karşılaştırma ve fark istatistikleriyle ilerleme fotoğrafı galerisi',
-      'Tam kullanıcı bağlamına sahip Gemini yapay zekâ koçu; haftalık/aylık yapay zekâ üretimi PDF raporları',
-      'Çevrimdışı destekli kurulabilir PWA; otomatik günlük yedeklemeli üretim Docker dağıtımı',
-    ],
     stack: [
       { label: 'Languages', items: ['TypeScript', 'Python'] },
       { label: 'Frameworks', items: ['Next.js', 'React', 'FastAPI', 'Tailwind CSS'] },
@@ -2567,20 +1951,6 @@ const PROJECTS = [
     architectureTr: [
       'Üç servisli bir Docker Compose yığını: Next.js ön yüzü (service worker ve çevrimdışı sayfalı PWA), JWT kimlik doğrulamalı ve Alembic yönetimli PostgreSQL şemasına sahip FastAPI backend’i ve veritabanının kendisi; ayrıca ilerleme fotoğrafları için kalıcı bir yükleme birimi. Kod, derleme sırasında imajlara gömülür; geliştirme ve üretim için ayrı compose dosyaları vardır. Üretimde birden fazla Uvicorn işçisi çalışır, API dokümantasyonu gizlenir ve veritabanı portu içeride tutulur.',
       'Yapay zekâ özellikleri Gemini servisinin arkasında yalıtılmıştır ve API anahtarı yoksa uygulama sorunsuz çalışmayı sürdürür. Operasyonlar betiklerle yönetilir: backup.sh veritabanını cron takvimiyle döker ve yüklemeleri arşivler, restore.sh herhangi bir anlık görüntüden geri yükler, /health endpoint’i da veritabanı, depolama ve Gemini durumunu raporlar.',
-    ],
-    results: [
-      { label: 'Platforms', value: 'Android · iOS · desktop (PWA)' },
-      { label: 'Tracking domains', value: 'Weight · body fat · 8 measurements · nutrition · workouts · photos' },
-      { label: 'Deployment', value: 'Dockerized dev + production configs, health checks' },
-      { label: 'Operations', value: 'Automated daily backups with restore script' },
-      { label: 'Locales', value: 'Turkish + English' },
-    ],
-    resultsTr: [
-      { label: 'Platformlar', value: 'Android · iOS · masaüstü (PWA)' },
-      { label: 'Takip alanları', value: 'Kilo · vücut yağı · 8 ölçü · beslenme · antrenman · fotoğraflar' },
-      { label: 'Dağıtım', value: 'Docker ile geliştirme + üretim yapılandırmaları, sağlık kontrolleri' },
-      { label: 'Operasyon', value: 'Geri yükleme betikli otomatik günlük yedekler' },
-      { label: 'Yerel ayarlar', value: 'Türkçe + İngilizce' },
     ],
     // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
     role: 'Solo',
@@ -2653,8 +2023,6 @@ const PROJECTS = [
     color: '#3b82f6',
     glow: 'rgba(59,130,246,0.5)',
     tags: ['Community', 'Redesign', 'Open Source'],
-    metric: '~40 commits · live at nexa-tr.com',
-    metricTr: '~40 commit · nexa-tr.com yayında',
     github: 'https://github.com/gorkemergune/website',
     images: [
       { src: '/projects/nexa-website/cover.svg', caption: 'NEXA — the nexa-tr community website I contributed to (Astro)', captionTr: 'NEXA — katkıda bulunduğum nexa-tr topluluk web sitesi (Astro)' },
@@ -2663,22 +2031,6 @@ const PROJECTS = [
       'A collaborative, open-source contribution: I helped build and maintain the website for NEXA (nexa-tr), a student/community organization. Working from the team’s Astro codebase, my contributions were front-end — a new design and overall concept, homepage layout and content, and the members/team and recruitment sections — delivered across roughly forty commits. This is community work as a contributor, not a solo project.',
     overviewTr:
       'İş birliğiyle yapılan, açık kaynak bir katkı: bir öğrenci/topluluk oluşumu olan NEXA (nexa-tr) için web sitesinin geliştirilmesine ve bakımına yardım ettim. Ekibin Astro kod tabanı üzerinde çalıştım ve katkılarım ön yüz odaklıydı: yeni bir tasarım ve genel konsept, ana sayfa düzeni ve içeriği, üyeler/ekip ve başvuru bölümleri; toplamda yaklaşık kırk commit. Bu, tek kişilik bir proje değil, katkıda bulunan olarak bir topluluk çalışmasıdır.',
-    highlights: [
-      'Delivered a new design and overall concept for the site (April 2026)',
-      'Built and iterated on the homepage layout and content',
-      'Maintained the members/team section — adding members and reordering the roster',
-      'Set up the team-recruitment pages for the February intake',
-      'Added and edited project listings on the site',
-      '~40 commits to the Astro codebase between December 2025 and April 2026',
-    ],
-    highlightsTr: [
-      'Site için yeni bir tasarım ve genel konsept sundum (Nisan 2026)',
-      'Ana sayfa düzenini ve içeriğini kurup geliştirdim',
-      'Üyeler/ekip bölümünü sürdürdüm: üye ekleme ve listeyi yeniden sıralama',
-      'Şubat alımı için ekip başvuru sayfalarını hazırladım',
-      'Sitedeki proje listelerini ekleyip düzenledim',
-      'Aralık 2025 – Nisan 2026 arasında Astro kod tabanına ~40 commit',
-    ],
     stack: [
       { label: 'Languages', items: ['Astro', 'HTML', 'CSS', 'JavaScript'] },
       { label: 'Tools', items: ['Git', 'GitHub'] },
@@ -2688,20 +2040,6 @@ const PROJECTS = [
     ],
     architectureTr: [
       'Site, NEXA ekibi tarafından sürdürülen statik bir Astro projesidir. Çalışmam ön yüz ve içerik odaklıydı: ana sayfa, üyeler/ekip listesi, başvuru sayfaları ve proje listeleri için sayfa düzeni ve metinler; Nisan’daki daha kapsamlı yeniden tasarım ve konsept yenilemesi dahil, Aralık 2025’ten Nisan 2026’ya kadar yaklaşık kırk commit boyunca geliştirildi.',
-    ],
-    results: [
-      { label: 'Role', value: 'Contributor · front-end' },
-      { label: 'Commits', value: '~40 (Dec 2025 – Apr 2026)' },
-      { label: 'Areas', value: 'homepage · members · recruitment · projects' },
-      { label: 'Stack', value: 'Astro static site' },
-      { label: 'Live', value: 'nexa-tr.com' },
-    ],
-    resultsTr: [
-      { label: 'Rol', value: 'Katkıda bulunan · ön yüz' },
-      { label: 'Commit', value: '~40 (Ara 2025 – Nis 2026)' },
-      { label: 'Alanlar', value: 'ana sayfa · üyeler · başvuru · projeler' },
-      { label: 'Yığın', value: 'Astro statik site' },
-      { label: 'Canlı', value: 'nexa-tr.com' },
     ],
     // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
     role: 'Contributor',
@@ -2756,8 +2094,6 @@ const PROJECTS = [
     color: '#f472b6',
     glow: 'rgba(244,114,182,0.5)',
     tags: ['Tauri', 'Rust', 'macOS'],
-    metric: '28-day focus history, fully local',
-    metricTr: '28 günlük odak geçmişi, tamamen yerel',
     github: gh('re-mind'),
     images: [
       { src: '/projects/re-mind/tasks.jpg', caption: 'Task dashboard', captionTr: 'Görev panosu' },
@@ -2770,22 +2106,6 @@ const PROJECTS = [
       'A native macOS productivity app that lives in the menu bar: it reminds you when tasks are due, nudges you to take breaks at regular intervals, and silently tracks focus time. Built with Tauri instead of Electron, so it stays light on memory and launches instantly. No account, no server, no internet — everything is stored in a local SQLite database.',
     overviewTr:
       'Menü çubuğunda yaşayan yerel bir macOS üretkenlik uygulaması: görevlerin zamanı geldiğinde hatırlatır, düzenli aralıklarla mola vermen için dürter ve odak süreni sessizce takip eder. Electron yerine Tauri ile geliştirildi; bu sayede bellekte hafif kalır ve anında açılır. Hesap yok, sunucu yok, internet yok; her şey yerel bir SQLite veritabanında saklanır.',
-    highlights: [
-      'Task scheduling with repeat modes (once, daily, weekdays, weekly), native notifications, in-app popups, and sound alerts',
-      'Pre-reminder toasts at configurable offsets — 60, 30, 15, and 5 minutes before a task, each shown exactly once',
-      'Fullscreen break overlays on a configurable interval, with take/skip/snooze tracked for compliance stats',
-      'Focus analytics: 28-day totals, weekly bar chart, a 14-day × 18-hour heatmap, and automated insights like peak focus hour',
-      'Always-on-top floating widget with clock, next task, and real-time break countdown',
-      'System tray residency — closing the window keeps the app running',
-    ],
-    highlightsTr: [
-      'Tekrar modlarıyla (bir kez, her gün, hafta içi, haftalık) görev zamanlama; yerel bildirimler, uygulama içi pencereler ve sesli uyarılar',
-      'Yapılandırılabilir sürelerde ön hatırlatma bildirimleri: görevden 60, 30, 15 ve 5 dakika önce, her biri yalnızca bir kez',
-      'Yapılandırılabilir aralıklarla tam ekran mola katmanları; uyum istatistikleri için al/atla/ertele takibi',
-      'Odak analizi: 28 günlük toplamlar, haftalık çubuk grafik, 14 gün × 18 saatlik ısı haritası ve en verimli odak saati gibi otomatik içgörüler',
-      'Saat, sıradaki görev ve gerçek zamanlı mola geri sayımı gösteren, hep üstte duran yüzen bileşen',
-      'Sistem tepsisinde kalıcılık; pencereyi kapatmak uygulamayı kapatmaz',
-    ],
     stack: [
       { label: 'Languages', items: ['TypeScript 5.8 (strict)', 'Rust'] },
       { label: 'Frameworks', items: ['Tauri v2', 'React 19', 'Tailwind CSS 4'] },
@@ -2799,20 +2119,6 @@ const PROJECTS = [
     architectureTr: [
       'Tauri v2 kabuğu React ön yüzünü barındırır; tüm kalıcı veriler yerel bir SQLite veritabanında (rusqlite), dört tabloda tutulur: tasks, break_stats, settings ve focus_sessions. Temel güvenilirlik sorunu (pencere gizliyken WKWebView’in JavaScript zamanlayıcılarını kısması), bir sonraki mola zamanının mutlak Unix zaman damgası olarak localStorage’a yazılması ve bir Rust arka plan iş parçacığının her 30 saniyede bir backend-tick olayı yayınlamasıyla çözülür; ön yüz, kısıtlamadan bağımsız olarak Date.now() değerini saklanan zaman damgasıyla karşılaştırır.',
       'Bildirim tekilleştirme anahtarları yeniden başlatmalarda korunur; böylece zamanı geçmiş görevler bir daha bildirim üretmez. useFocusTracker kancası, ön planda geçirilen süreyi Page Visibility API ile kaydeder ve oturumları saat sınırlarına bölerek her 60 saniyede bir SQLite’a yazar; saat bazlı ısı haritasını mümkün kılan da budur.',
-    ],
-    results: [
-      { label: 'Platform', value: 'macOS 12+ (.app in Releases)' },
-      { label: 'Footprint', value: 'Native Tauri — no Electron runtime' },
-      { label: 'Privacy', value: '100% local — no account, no server' },
-      { label: 'Storage', value: '4 SQLite tables' },
-      { label: 'Analytics', value: '28-day focus history at per-hour granularity' },
-    ],
-    resultsTr: [
-      { label: 'Platform', value: 'macOS 12+ (Releases’ta .app)' },
-      { label: 'Ayak izi', value: 'Yerel Tauri, Electron çalışma zamanı yok' },
-      { label: 'Gizlilik', value: '%100 yerel: hesap yok, sunucu yok' },
-      { label: 'Depolama', value: '4 SQLite tablosu' },
-      { label: 'Analiz', value: 'Saat bazlı ayrıntıda 28 günlük odak geçmişi' },
     ],
     // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
     role: 'Solo',
@@ -2896,22 +2202,6 @@ const PROJECTS = [
       'A desktop quiz game for learning and retaining C1-level English synonyms, built in the second semester of my first year — the same stretch in which I reached C1-level English myself. Each session runs 30 rounds: a word appears and you pick its synonym from four options. Wrong answers are collected into a notebook so the words you actually struggle with come back for review.',
     overviewTr:
       'C1 seviyesi İngilizce eş anlamlıları öğrenmek ve kalıcı hâle getirmek için bir masaüstü quiz oyunu; 1. sınıfın 2. döneminde, İngilizcede C1 seviyesine ulaştığım süreçte geliştirildi. Her oturum 30 tur sürer: ekrana bir kelime gelir ve dört seçenek arasından eş anlamlısını seçersin. Yanlış cevaplar bir deftere kaydedilir; böylece gerçekten zorlandığın kelimeler tekrar karşına çıkar.',
-    highlights: [
-      'Roughly 80 C1-level word groups, each with multiple synonyms',
-      'Bidirectional questions — both a word and any of its synonyms can be the prompt',
-      'Mistake notebook that collects wrong answers during play',
-      'End-of-game summary listing every missed word with its synonyms',
-      'Dark-themed UI with instant green/red answer feedback',
-      'Runs on stock Python — no pip install at all',
-    ],
-    highlightsTr: [
-      'Her biri birden fazla eş anlamlı içeren yaklaşık 80 C1 seviyesi kelime grubu',
-      'Çift yönlü sorular: hem kelimenin kendisi hem de eş anlamlılarından herhangi biri soru olabilir',
-      'Oyun sırasında yanlış cevapları toplayan hata defteri',
-      'Kaçırılan her kelimeyi eş anlamlılarıyla birlikte listeleyen oyun sonu özeti',
-      'Anında yeşil/kırmızı cevap geri bildirimli koyu temalı arayüz',
-      'Standart Python ile çalışır; pip install hiç gerekmez',
-    ],
     stack: [
       { label: 'Languages', items: ['Python 3.8+'] },
       { label: 'Libraries', items: ['Tkinter (standard library)'] },
@@ -2921,18 +2211,6 @@ const PROJECTS = [
     ],
     architectureTr: [
       'Yaklaşık 650 satırlık tek bir dosya. DICTIONARY listesi kelime/eş anlamlı gruplarını tutar; generate_rounds() her oturum için 30 soru örnekler ve bir grubun herhangi bir üyesinin soru, kalanların cevap olmasına izin verir. SynonymGame sınıfı Tkinter bileşenlerini, skor durumunu ve hata defterini yönetir; quiz turları ile final özeti arasında çerçeveleri değiştirir. Kelime listesi düz dict kayıtları eklenerek genişletilir; veri dosyası ya da yapılandırma gerekmez.',
-    ],
-    results: [
-      { label: 'Word groups', value: '~80, C1 level' },
-      { label: 'Rounds per session', value: '30' },
-      { label: 'External dependencies', value: '0' },
-      { label: 'Platforms', value: 'Anywhere Python + Tkinter runs' },
-    ],
-    resultsTr: [
-      { label: 'Kelime grubu', value: '~80, C1 seviyesi' },
-      { label: 'Oturum başına tur', value: '30' },
-      { label: 'Harici bağımlılık', value: '0' },
-      { label: 'Platformlar', value: 'Python + Tkinter çalışan her yerde' },
     ],
     // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
     role: 'Solo',
@@ -2983,8 +2261,6 @@ const PROJECTS = [
     color: '#c0c0c0',
     glow: 'rgba(192,192,192,0.5)',
     tags: ['raylib', 'Game Dev'],
-    metric: '~840 lines, zero assets',
-    metricTr: '~840 satır, sıfır görsel',
     github: gh('raylib-space-shooter'),
     images: [
       { src: '/projects/raylib-space-shooter/menu.png', caption: 'Menu screen with scrolling starfield', captionTr: 'Kayan yıldız alanıyla menü ekranı' },
@@ -2996,22 +2272,6 @@ const PROJECTS = [
       'A complete 2D space shooter built with raylib, structured as a hands-on tutorial: every system in the code is documented as a numbered lesson. The goal is a codebase a beginner can read top to bottom and understand how a real game loop, entity management, and difficulty scaling fit together.',
     overviewTr:
       'raylib ile geliştirilmiş eksiksiz bir 2D uzay oyunu; uygulamalı bir eğitim olarak yapılandırıldı: koddaki her sistem numaralı bir ders olarak belgelendi. Amaç, yeni başlayan birinin baştan sona okuyup gerçek bir oyun döngüsünün, varlık yönetiminin ve zorluk ölçeklemesinin nasıl bir araya geldiğini anlayabileceği bir kod tabanı sunmak.',
-    highlights: [
-      'Three enemy types with different speed, HP, and point values (square / triangle / hexagon)',
-      'Difficulty scales automatically every 30 seconds — faster spawns, faster enemies',
-      'Five HP with a one-second invincibility window after each hit',
-      'Particle effects and a scrolling starfield, all drawn with shapes — no texture assets',
-      'Menu, gameplay, and game-over states with score, wave, and survival-time tracking',
-      'Every system commented as a numbered lesson for learners',
-    ],
-    highlightsTr: [
-      'Farklı hız, can ve puan değerlerine sahip üç düşman türü (kare / üçgen / altıgen)',
-      'Zorluk her 30 saniyede bir otomatik olarak artar: daha hızlı doğuş, daha hızlı düşmanlar',
-      'Beş can; her vuruştan sonra bir saniyelik dokunulmazlık süresi',
-      'Parçacık efektleri ve kayan yıldız alanı; tamamı şekillerle çizildi, hiç doku dosyası kullanılmadı',
-      'Skor, dalga ve hayatta kalma süresi takibiyle menü, oynanış ve oyun sonu durumları',
-      'Öğrenenler için her sistem numaralı bir ders olarak yorum satırlarıyla açıklandı',
-    ],
     stack: [
       { label: 'Languages', items: ['C (C99)'] },
       { label: 'Libraries', items: ['raylib 5.x'] },
@@ -3024,18 +2284,6 @@ const PROJECTS = [
     architectureTr: [
       'Yaklaşık 840 satırlık tek bir main.c; Player, Bullet, Enemy, Star, Particle gibi tipli varlıklar etrafında düzenlenmiştir. Varlıklar, aktiflik bayraklarıyla sabit boyutlu statik dizilerde tutulur; kodun hiçbir yerinde dinamik bellek ayırma yoktur. Menü / oynanış / oyun sonu akışını bir GameState enum’u yönetir.',
       'UpdateGame() her karede zamanlayıcıları, düşman doğuşunu, hareketi, çarpışma kontrollerini ve 30 saniyelik zorluk çarpanını ilerletir; DrawGame() her şeyi raylib şekil ilkelleriyle çizer. Nesne havuzları pasif yuvalar taranarak geri dönüştürülür; bu da kare döngüsünü bellek ayırmadan arındırır.',
-    ],
-    results: [
-      { label: 'Enemy types', value: '3' },
-      { label: 'Codebase', value: '~840 lines, single file' },
-      { label: 'Assets required', value: '0 — shapes only' },
-      { label: 'Platforms', value: 'Linux · macOS · Windows' },
-    ],
-    resultsTr: [
-      { label: 'Düşman türü', value: '3' },
-      { label: 'Kod tabanı', value: '~840 satır, tek dosya' },
-      { label: 'Gereken varlık dosyası', value: '0 — yalnızca şekiller' },
-      { label: 'Platformlar', value: 'Linux · macOS · Windows' },
     ],
     // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
     role: 'Solo',
@@ -3094,8 +2342,6 @@ const PROJECTS = [
     color: '#9d6bff',
     glow: 'rgba(157,107,255,0.5)',
     tags: ['pynput', 'macOS', 'Automation'],
-    metric: '51 lines',
-    metricTr: '51 satır',
     github: gh('pynput-macos-macro'),
     images: [
       { src: '/projects/pynput-macos-macro/session.svg', caption: 'Terminal session — F8 toggling the macro loop on and off', captionTr: 'Terminal oturumu: F8, makro döngüsünü açıp kapatıyor' },
@@ -3106,20 +2352,6 @@ const PROJECTS = [
       'A small automation utility: press F8 and it replays a configurable key sequence (2 → 3 → 4 by default) in a loop until toggled off. Written for repetitive input tasks on macOS, where global input hooks require Accessibility permissions and mouse side buttons are invisible to Python — both of which the README documents workarounds for.',
     overviewTr:
       'Küçük bir otomasyon aracı: F8’e bastığında, yapılandırılabilir bir tuş dizisini (varsayılan olarak 2 → 3 → 4) kapatılana dek döngü hâlinde tekrarlar. macOS’teki tekrarlı girdi görevleri için yazıldı; bu platformda genel girdi kancaları Erişilebilirlik izni gerektirir ve fare yan tuşları Python tarafından görülmez; README her iki sorunun da çözüm yolunu belgeler.',
-    highlights: [
-      'Single-key toggle (F8) to start and stop the macro loop',
-      'Configurable key sequence and per-key delay at the top of the script',
-      'Clean thread shutdown via threading.Event — no orphaned loops',
-      'Step-by-step macOS Accessibility permission setup guide',
-      'Karabiner-Elements rule (JSON included) to map mouse side buttons to F8, since pynput cannot see button4/button5 on macOS',
-    ],
-    highlightsTr: [
-      'Makro döngüsünü başlatıp durdurmak için tek tuş (F8)',
-      'Betiğin başında yapılandırılabilir tuş dizisi ve tuş başına gecikme',
-      'threading.Event ile temiz iş parçacığı kapanışı; başıboş döngü kalmaz',
-      'Adım adım macOS Erişilebilirlik izni kurulum rehberi',
-      'pynput macOS’te button4/button5’i göremediği için fare yan tuşlarını F8’e eşleyen Karabiner-Elements kuralı (JSON dahil)',
-    ],
     stack: [
       { label: 'Languages', items: ['Python 3'] },
       { label: 'Libraries', items: ['pynput'] },
@@ -3130,16 +2362,6 @@ const PROJECTS = [
     ],
     architectureTr: [
       'İki iş parçacıklı, 51 satırlık bir betik. Ana iş parçacığında pynput keyboard.Listener açma/kapama tuşunu izler; makro açıldığında, tuş dizisini keyboard.Controller üzerinden yapılandırılabilir gecikmeyle tekrarlayan bir daemon iş parçacığı başlatılır. Kapatıldığında ise döngünün her tuş basımı arasında kontrol ettiği bir threading.Event işaretlenir; böylece döngü anında durur ve hiçbir tuş yarım basılı kalmaz.',
-    ],
-    results: [
-      { label: 'Codebase', value: '51 lines' },
-      { label: 'Dependencies', value: '1 (pynput)' },
-      { label: 'Platform', value: 'macOS' },
-    ],
-    resultsTr: [
-      { label: 'Kod tabanı', value: '51 satır' },
-      { label: 'Bağımlılık', value: '1 (pynput)' },
-      { label: 'Platform', value: 'macOS' },
     ],
     // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
     role: 'Solo',
@@ -3192,8 +2414,6 @@ const PROJECTS = [
     color: '#8a8a8a',
     glow: 'rgba(138,138,138,0.5)',
     tags: ['raylib', 'Algorithms', 'Animation'],
-    metric: '6 algorithms in one ~690-line file',
-    metricTr: 'Tek ~690 satırlık dosyada 6 algoritma',
     github: gh('sorting-visualizer'),
     images: [
       { src: '/projects/sorting-visualizer/bubble-sort.png', caption: 'Bubble sort mid-run — comparisons in yellow, sorted tail in green', captionTr: 'Kabarcık sıralaması çalışırken: karşılaştırmalar sarı, sıralanan kuyruk yeşil' },
@@ -3205,22 +2425,6 @@ const PROJECTS = [
       'A desktop tool that animates Bubble, Selection, Insertion, Merge, Quick, and Heap sort as they run. Built to make algorithm behavior visible instead of abstract — every comparison, swap, and confirmed position is color-coded on screen. Useful for students learning data structures and for anyone who wants an intuition for why O(n log n) beats O(n²).',
     overviewTr:
       'Bubble, Selection, Insertion, Merge, Quick ve Heap sort algoritmalarını çalışırken canlandıran bir masaüstü aracı. Algoritma davranışını soyut olmaktan çıkarıp görünür kılmak için geliştirildi: her karşılaştırma, takas ve kesinleşen konum ekranda renk kodlarıyla gösterilir. Veri yapılarını öğrenen öğrenciler ve O(n log n) karmaşıklığın O(n²) karşısında neden üstün olduğunu sezgisel olarak kavramak isteyen herkes için faydalıdır.',
-    highlights: [
-      'Six algorithms: Bubble, Selection, Insertion, Merge, Quick, and Heap sort, switchable at runtime with number keys',
-      'Auto mode with play/pause, plus manual frame-by-frame stepping when paused',
-      'Adjustable animation speed on the fly',
-      'Color-coded states: comparing, swapping, sorted, and pivot (Quick sort)',
-      'Live comparison and swap counters',
-      'Shuffle and restart at any point',
-    ],
-    highlightsTr: [
-      'Altı algoritma: Bubble, Selection, Insertion, Merge, Quick ve Heap sort; sayı tuşlarıyla çalışma sırasında değiştirilebilir',
-      'Oynat/duraklat özellikli otomatik mod; duraklatıldığında kare kare manuel ilerleme',
-      'Çalışma sırasında ayarlanabilir animasyon hızı',
-      'Renk kodlu durumlar: karşılaştırma, takas, sıralanmış ve pivot (Quick sort)',
-      'Canlı karşılaştırma ve takas sayaçları',
-      'İstenilen anda karıştırma ve yeniden başlatma',
-    ],
     stack: [
       { label: 'Languages', items: ['C (C99)'] },
       { label: 'Libraries', items: ['raylib 5.x'] },
@@ -3233,18 +2437,6 @@ const PROJECTS = [
     architectureTr: [
       'Programın tamamı yaklaşık 690 satırlık tek bir C99 dosyasından oluşur. Her algoritma, artımlı bir durum makinesi olarak uygulanmıştır — bubble_step(), selection_step(), insertion_step() gibi fonksiyonlar döngü indekslerini statik değişkenlerde tutar ve her çağrıda tam olarak bir karşılaştırma ya da takas ilerletir. Ana raylib döngüsü her animasyon adımında bir step çağırır; böylece sıralama, tek seferde tamamlanmak yerine kare kare ekrana çizilir.',
       'Çubuk konumları, takasların akıcı görünmesi için ayrı bir görüntüleme dizisi üzerinden ara değerlerle hesaplanır; sıralanmış maskesi ise kesinleşen elemanları çalışmanın sonuna dek yeşil tutar. Merge sort, kontrol akışı basit döngü sayaçlarına sığmadığı için kendi birleştirme durumu yapısını taşır.',
-    ],
-    results: [
-      { label: 'Algorithms', value: '6' },
-      { label: 'Codebase', value: '~690 lines, single file' },
-      { label: 'Dependencies', value: 'raylib only' },
-      { label: 'Platforms', value: 'Linux · macOS · Windows' },
-    ],
-    resultsTr: [
-      { label: 'Algoritma', value: '6' },
-      { label: 'Kod tabanı', value: '~690 satır, tek dosya' },
-      { label: 'Bağımlılıklar', value: 'Yalnızca raylib' },
-      { label: 'Platformlar', value: 'Linux · macOS · Windows' },
     ],
     // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
     role: 'Solo',
@@ -3309,8 +2501,6 @@ const PROJECTS = [
     color: '#e23636',
     glow: 'rgba(226,54,54,0.5)',
     tags: ['Tool Calling', 'Ollama', 'Fully Offline'],
-    metric: '47 tests · 24-scenario eval',
-    metricTr: '47 test · 24 senaryoluk değerlendirme',
     github: gh('automotive-racing-assistant'),
     images: [
       { src: '/projects/automotive-racing-assistant/cover.svg', caption: 'Local Qwen2.5 7B decides which of four tools to call, then answers grounded in what they return', captionTr: 'Yerel Qwen2.5 7B dört araçtan hangisini çağıracağına karar verir, sonra döndürdüklerine dayanarak yanıtlar' },
@@ -3320,22 +2510,6 @@ const PROJECTS = [
       'A terminal assistant for a fictional university automotive racing team, built to show that a small local model plus disciplined scaffolding beats a heavier framework. It runs entirely offline on Qwen2.5 7B through Ollama with native tool calling — no LangChain, LangGraph, or CrewAI, just direct HTTP and a tight loop. The model itself decides when and which tools to invoke; Python executes them and feeds the results back, so every answer is grounded in real tool output and unknown questions are refused rather than invented.',
     overviewTr:
       'Kurgusal bir üniversite otomotiv yarış takımı için bir terminal asistanı; küçük bir yerel modelin, disiplinli bir iskeleyle, ağır bir framework’ü geçtiğini göstermek için kuruldu. Yerel tool calling ile Ollama üzerinden Qwen2.5 7B ile tamamen çevrimdışı çalışır — LangChain, LangGraph ya da CrewAI yok, yalnızca doğrudan HTTP ve sıkı bir döngü. Hangi araçları ne zaman çağıracağına modelin kendisi karar verir; Python bunları çalıştırıp sonuçları geri besler, böylece her cevap gerçek araç çıktısına dayanır ve bilinmeyen sorular uydurulmak yerine reddedilir.',
-    highlights: [
-      'Native tool calling — the model autonomously selects among four tools and can chain several across turns',
-      'Four tools: internet_search (DuckDuckGo/Wikipedia, keyless), get_weather (live Open-Meteo), check_part_status and get_race_regulations (clearly-labeled mock data)',
-      'Bounded execution loop capped at 5 tool rounds — no runaway calls, no infinite loops',
-      'Grounded by design: answers are built from actual tool results, and unknown queries are refused instead of fabricated',
-      'Zero heavy dependencies — direct HTTP with requests, no LangChain / LangGraph / CrewAI',
-      'Verified: 47 unit tests passing (no network needed) plus a 24-scenario live tool-selection evaluation',
-    ],
-    highlightsTr: [
-      'Yerel tool calling — model dört araç arasından bağımsızca seçim yapar ve turlar boyunca birkaçını zincirleyebilir',
-      'Dört araç: internet_search (DuckDuckGo/Wikipedia, anahtarsız), get_weather (canlı Open-Meteo), check_part_status ve get_race_regulations (açıkça etiketlenmiş sahte veri)',
-      '5 araç turuyla sınırlı yürütme döngüsü — kaçak çağrı yok, sonsuz döngü yok',
-      'Tasarımdan temellendirilmiş: cevaplar gerçek araç sonuçlarından kurulur ve bilinmeyen sorgular uydurulmak yerine reddedilir',
-      'Sıfır ağır bağımlılık — requests ile doğrudan HTTP, LangChain / LangGraph / CrewAI yok',
-      'Doğrulandı: 47 birim test geçiyor (ağ gerekmez) artı 24 senaryoluk canlı araç-seçimi değerlendirmesi',
-    ],
     stack: [
       { label: 'Languages', items: ['Python 3 (3.12)'] },
       { label: 'Libraries', items: ['requests', 'unittest'] },
@@ -3349,20 +2523,6 @@ const PROJECTS = [
     architectureTr: [
       'run_conversation, sınırlı bir tool calling döngüsüdür: Qwen2.5’e sistem prompt’unu ve dört araç şemasını verir; model tool call’ları döndürdükçe Python bunları çalıştırır ve tekrar sormadan önce sonuçları ekler. Döngü beş turla sınırlıdır, böylece çok araçlı istekler asla kontrolden çıkmadan çözülür. Ağır işi sistem prompt’u yapar — modele araçlara güvenmesini, sahte veriyi kurgusal olarak etiketlemesini ve hiçbir şey uymadığında uydurmak yerine reddetmesini söyler.',
       'Araçlar net biçimde ayrılmıştır: internet_search ve get_weather gerçek, anahtarsız açık endpoint’lere gider; check_part_status ve get_race_regulations ise açıkça kurgusal olarak işaretlenmiş gösterim verisi döndürür. Test iki katmanlıdır — ağ gerektirmeyen 47 belirlenimci birim testi, artı çekirdek görevlerde kusursuz kategorilemeyi ve kapsam dışı sorularda uydurma olmadığını doğrulayan 24 senaryoluk canlı araç-seçimi değerlendirmesi. Apache-2.0 lisanslı.',
-    ],
-    results: [
-      { label: 'Model', value: 'Qwen2.5 7B — local via Ollama' },
-      { label: 'Tools', value: '4 — search · weather · part status · regulations' },
-      { label: 'Loop', value: 'Bounded — max 5 tool rounds' },
-      { label: 'Tests', value: '47 unit tests + 24-scenario live eval' },
-      { label: 'License', value: 'Apache-2.0 · fully offline core' },
-    ],
-    resultsTr: [
-      { label: 'Model', value: 'Qwen2.5 7B — Ollama ile yerel' },
-      { label: 'Araçlar', value: '4 — arama · hava · parça durumu · kurallar' },
-      { label: 'Döngü', value: 'Sınırlı — en fazla 5 araç turu' },
-      { label: 'Testler', value: '47 birim testi + 24 senaryoluk canlı değerlendirme' },
-      { label: 'Lisans', value: 'Apache-2.0 · tamamen çevrimdışı çekirdek' },
     ],
     // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
     role: 'Solo',
@@ -3433,8 +2593,6 @@ const PROJECTS = [
     color: '#22d3ee',
     glow: 'rgba(34,211,238,0.5)',
     tags: ['VLM', 'Grounding', 'Evaluation'],
-    metric: 'No model runs yet — by design',
-    metricTr: 'Henüz model koşusu yok — bilinçli',
     github: gh('vlm-groundbench'),
     images: [
       { src: '/projects/vlm-groundbench/cover.svg', caption: 'The task: localize an object from a natural-language description — scored against immutable ground truth', captionTr: 'Görev: bir nesneyi doğal dil açıklamasından konumlandırmak — değiştirilemez referansa karşı puanlanır' },
@@ -3444,24 +2602,6 @@ const PROJECTS = [
       'A benchmark framework for measuring how well vision-language models localize objects described in free text — and an experiment in doing evaluation in the honest order. The evaluator, the metric definitions, the prompt registry, and the model capability matrix are written and tested first; the protocol is frozen; only then do experiments get to run. Two end-to-end smoke runs prove the pipeline works on fixtures, and there are still zero model results, which is the point: nothing in the repository can be tuned toward a number nobody has seen yet.',
     overviewTr:
       'Vision-language modellerinin serbest metinle tarif edilen nesneleri ne kadar iyi konumlandırdığını ölçen bir benchmark çerçevesi — ve değerlendirmeyi dürüst sırayla yapma denemesi. Değerlendirici, metrik tanımları, prompt kaydı ve model yetenek matrisi önce yazılıp test edilir; protokol dondurulur; deneyler ancak ondan sonra koşabilir. İki uçtan uca smoke koşusu pipeline’ın çalıştığını fikstürler üzerinde kanıtlıyor ve hâlâ sıfır model sonucu var — asıl mesele de bu: depoda hiçbir şey, henüz kimsenin görmediği bir sayıya göre ayarlanamaz.',
-    highlights: [
-      'Models are classified by what the vendor actually documents, not by what a prompt can coax out: native bbox, native point, or prompt-induced coordinates — and a prompt-induced box is never reported as native grounding',
-      'A point is never converted into a box and never scored with IoU; the two capability classes get separate metric families and are not compared head to head',
-      'Five models sit in the matrix with per-capability evidence tags — Qwen2.5-VL-7B (native bbox), Cosmos3-Nano-Reasoner (native point), Llama 3.2 11B and 90B Vision, and Nemotron 3 Nano Omni (prompt-induced)',
-      'The evaluator is implemented and tested: IoU, accuracy at 0.5 and 0.75, point-in-box accuracy, hallucination rates for absent referents and wrong boxes or points, and parse-success rate',
-      'Every run writes a manifest — protocol version, model revision, split hash, seed, environment hash, git commit — so a third party can recompute any headline number from the raw outputs',
-      'Raw model responses are stored verbatim and never edited; derived metrics live in a separate tree, enforced by a test rather than a convention',
-      'Two end-to-end smoke runs (one bbox, one point) exercise the whole pipeline on fixtures — they are plumbing checks, not results',
-    ],
-    highlightsTr: [
-      'Modeller, bir prompt’un söküp alabildiğine göre değil, üreticinin gerçekten belgelediğine göre sınıflandırılır: yerel bbox, yerel nokta ya da prompt’la üretilmiş koordinat — ve prompt’la üretilmiş bir kutu asla yerel grounding diye raporlanmaz',
-      'Bir nokta asla kutuya çevrilmez ve asla IoU ile puanlanmaz; iki yetenek sınıfı ayrı metrik ailelerine girer ve doğrudan karşılaştırılmaz',
-      'Matriste, yetenek başına kanıt etiketiyle beş model var — Qwen2.5-VL-7B (yerel bbox), Cosmos3-Nano-Reasoner (yerel nokta), Llama 3.2 11B ve 90B Vision ve Nemotron 3 Nano Omni (prompt’la üretilmiş)',
-      'Değerlendirici yazıldı ve test edildi: IoU, 0,5 ve 0,75 eşiklerinde doğruluk, nokta-kutu içinde doğruluğu, olmayan hedef ile yanlış kutu/nokta için halüsinasyon oranları ve ayrıştırma başarı oranı',
-      'Her koşu bir manifest yazar — protokol sürümü, model revizyonu, bölüm özeti, tohum, ortam özeti, git commit’i — böylece üçüncü bir taraf herhangi bir başlık sayısını ham çıktılardan yeniden hesaplayabilir',
-      'Ham model yanıtları olduğu gibi saklanır ve asla düzenlenmez; türetilmiş metrikler ayrı bir ağaçta durur ve bu, bir gelenekle değil bir testle güvence altına alınır',
-      'İki uçtan uca smoke koşusu (biri bbox, biri nokta) tüm pipeline’ı fikstürler üzerinde çalıştırır — bunlar sonuç değil, tesisat kontrolüdür',
-    ],
     stack: [
       { label: 'Languages', items: ['Python 3'] },
       { label: 'Testing', items: ['pytest — 12 test modules covering metrics, parsers, manifests, raw/derived separation, and locked decisions'] },
@@ -3475,20 +2615,6 @@ const PROJECTS = [
     architectureTr: [
       'Depo, tartışılabilir olanı tartışılamaz olandan ayırır. docs/ donmuş protokolü, metrik spesifikasyonunu ve her yeteneğin kanıt etiketi taşıdığı model matrisini barındırır; evaluation/ geometriyi, ayrıştırıcıları, eşleştirmeyi, metrik ailelerini ve değerlendiricinin kendisini uygular; experiments/ commit’lenmiş koşu yapılandırmalarını ve çalıştırıcıyı tutar; results/ olduğu gibi saklanan raw_outputs’u türetilmiş metriklerden ayırır. Testler kuralları varsaymaz, zorunlu kılar — biri ham ve türetilmiş çıktıların asla karışmadığını, diğeri protokoldeki kilitli kararların sessizce değişmediğini denetler.',
       'Sessizce bozulmaya en yatkın kısım koordinat işleme olduğu için her koşul için sabitlenmiştir: Qwen mutlak piksel xyxy üretir ve kanonik xywh’ye çevrilir, Cosmos 0–1000 aralığına normalleştirilmiş nokta üretir ve ön işleme sonrası görüntü boyutlarıyla ölçeklenir, prompt’la üretilmiş her koordinat ise savunmacı biçimde ayrıştırılıp öyle etiketlenir. Veri kümeleri ve model adaptörleri kalan iş; proje, sonuçların başlayacağı çizgide bilinçli olarak duruyor.',
-    ],
-    results: [
-      { label: 'Status', value: 'Protocol frozen · evaluator implemented · no model runs yet' },
-      { label: 'Model matrix', value: '5 models, capabilities verified against vendor docs' },
-      { label: 'Metric families', value: 'BBox (IoU, acc@0.5/0.75) and Point (in-box accuracy) — never mixed' },
-      { label: 'Pipeline proof', value: '2 end-to-end smoke runs on fixtures (not results)' },
-      { label: 'Next', value: 'Download the splits, implement the adapters, then run E1' },
-    ],
-    resultsTr: [
-      { label: 'Durum', value: 'Protokol donduruldu · değerlendirici yazıldı · henüz model koşusu yok' },
-      { label: 'Model matrisi', value: '5 model, yetenekler üretici belgelerine karşı doğrulandı' },
-      { label: 'Metrik aileleri', value: 'BBox (IoU, 0,5/0,75 doğruluk) ve Nokta (kutu içinde doğruluk) — asla karıştırılmaz' },
-      { label: 'Pipeline kanıtı', value: 'Fikstürler üzerinde 2 uçtan uca smoke koşusu (sonuç değil)' },
-      { label: 'Sırada', value: 'Bölümleri indir, adaptörleri yaz, sonra E1’i koş' },
     ],
     // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
     role: 'Solo',
@@ -3571,8 +2697,6 @@ const PROJECTS = [
     color: '#60a5fa',
     glow: 'rgba(96,165,250,0.5)',
     tags: ['MCP', 'Mentoring', 'SQLite'],
-    metric: '9 tools · 535 tests',
-    metricTr: '9 tool · 535 test',
     github: gh('algorithm-mentor-mcp'),
     images: [
       { src: '/projects/algorithm-mentor-mcp/cover.svg', caption: 'The loop: assess, pick a topic, solve, review, update the profile, choose what comes next', captionTr: 'Döngü: değerlendir, konu seç, çöz, incele, profili güncelle, sıradakini belirle' },
@@ -3585,24 +2709,6 @@ const PROJECTS = [
       'A Model Context Protocol server that plugs into a host like Claude Desktop and runs an algorithm study session with you, in Turkish or English. The design problem it solves is the obvious failure mode of studying algorithms with an LLM: ask for help and you get the solution, which teaches nothing and leaves no record of what you actually know. Here the model is only the interface. It cannot award points, cannot see hidden test cases, and cannot write to your profile with a number it made up — the server derives every score from a fixed table, using narrow inputs like whether the tests passed and how many hints were spent.',
     overviewTr:
       'Claude Desktop gibi bir host’a bağlanan ve seninle Türkçe ya da İngilizce bir algoritma çalışma oturumu yürüten bir Model Context Protocol sunucusu. Çözdüğü tasarım problemi, algoritmayı bir LLM’le çalışmanın bariz açığı: yardım istersin, çözümü alırsın; bu hiçbir şey öğretmez ve gerçekte ne bildiğine dair bir kayıt bırakmaz. Burada model yalnızca arayüz. Puan veremez, gizli test case’leri göremez ve profiline uydurduğu bir sayıyı yazamaz — sunucu her puanı sabit bir tablodan, testlerin geçip geçmediği ve kaç ipucu harcandığı gibi dar girdilerle üretir.',
-    highlights: [
-      'Scoring lives on the server, never in the host: the model supplies only bounded facts, so it cannot inflate a profile by inventing a number',
-      'Nine tools cover the full session — assess, fetch a problem, submit, hint, explain an approach, review, update the profile, pick the next topic',
-      'Graded hints cost you: 1.0 with no hint, 0.8 with one, 0.6 with two or more, and 0.5 for correctly explaining an approach without writing code',
-      'Topic mastery is an exponential moving average, so recent attempts count more; three consecutive failures drop you back to a prerequisite instead of repeating the same wall',
-      'Submitted code runs in a separate process behind time and resource limits, checked against test cases the learner never sees',
-      'Eleven topics wired into a prerequisite graph — hashmap needs arrays, graphs need DFS and BFS — with 22 problems authored in both languages',
-      'Every user-facing string ships in Turkish and English, and the schema test fails the build on a missing language or edge case',
-    ],
-    highlightsTr: [
-      'Puanlama sunucuda yaşar, host’ta asla: model yalnızca sınırlı olgular sağlar, dolayısıyla bir sayı uydurarak profili şişiremez',
-      'Dokuz tool tüm oturumu kapsar — değerlendir, problem al, gönder, ipucu, yaklaşımı anlat, incele, profili güncelle, sıradaki konuyu seç',
-      'Kademeli ipuçlarının bedeli var: ipucusuz 1.0, bir ipucuyla 0.8, iki ve üzeriyle 0.6; kod yazmadan yaklaşımı doğru anlatmak 0.5',
-      'Konu hakimiyeti üstel hareketli ortalama, yani son denemeler daha ağır basar; üst üste üç başarısızlıkta aynı duvara tekrar çarpmak yerine bir ön koşula döner',
-      'Gönderilen kod, ayrı bir süreçte zaman ve kaynak limitleriyle, öğrencinin hiç görmediği test case’lere karşı çalışır',
-      'On bir konu bir ön koşul grafiğine bağlı — hashmap dizileri, graflar DFS ile BFS’i ister — ve 22 problem iki dilde yazıldı',
-      'Kullanıcıya gösterilen her metin Türkçe ve İngilizce gelir; şema testi eksik dil ya da eksik edge case’te derlemeyi düşürür',
-    ],
     stack: [
       { label: 'Languages', items: ['Python 3.11+'] },
       { label: 'Frameworks', items: ['MCP Python SDK (v2)'] },
@@ -3617,20 +2723,6 @@ const PROJECTS = [
     architectureTr: [
       'Sunucu dokuz tool yayınlar ve host bunları sırayla çağırır. Kritik sınır şu: host asla puan hesaplamaz; review_solution sabit bir tablodan okur, hata tipini sınıflandırır ve update_profile sonucu, hiçbir şey yazılmadan önce doğrular. Profil verisi — konu bazlı skorlar, son kanıtlar ve tüm deneme geçmişi — yolu çalışma dizininden bağımsız çözülen bir SQLite veritabanında durur; böylece sunucu nereden başlatılırsa başlatılsın aynı profil açılır.',
       'Kod çalıştırma, altında subprocess tabanlı bir PythonRunner bulunan ExecutionEngine arayüzünün arkasındadır ve duvar saati zaman aşımı ile kaynak limitleriyle sınırlanır; ileride Docker tabanlı bir runner’a geçmek çağıranlara sızmaz. Alan mantığı; tool’lar ve depolamadan ayrılmıştır (domain/, execution/, storage/, tools/), her tool yazılmadan önce docs/TOOLS.md’de spesifiye edilir ve her tool en az bir testle gelir — gerçek bir uçtan uca MCP oturumuna kadar toplam 535 test.',
-    ],
-    results: [
-      { label: 'Tools', value: '9 — assess, problem, submit, hint, explain, reference, review, update, next' },
-      { label: 'Content', value: '22 problems · 11 topics on a prerequisite graph · TR + EN' },
-      { label: 'Scoring', value: 'Server-side rubric + EMA mastery — the model cannot fake a score' },
-      { label: 'Safety', value: 'Separate process, time and resource limits, hidden test cases' },
-      { label: 'Tests', value: '535, including an end-to-end MCP session' },
-    ],
-    resultsTr: [
-      { label: 'Tool', value: '9 — değerlendir, problem, gönder, ipucu, anlat, referans, incele, güncelle, sıradaki' },
-      { label: 'İçerik', value: '22 problem · ön koşul grafiğinde 11 konu · TR + EN' },
-      { label: 'Puanlama', value: 'Sunucu tarafı tablo + EMA hakimiyet — model puan uyduramaz' },
-      { label: 'Güvenlik', value: 'Ayrı süreç, zaman ve kaynak limitleri, gizli test case’ler' },
-      { label: 'Test', value: '535, uçtan uca bir MCP oturumu dahil' },
     ],
     // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
     role: 'Solo',

@@ -134,9 +134,11 @@ function ArmorCard({ project, index, lang }) {
   const { color, glow } = project;
   const oneLiner = lang === 'tr' && project.oneLinerTr ? project.oneLinerTr : project.oneLiner;
   // New schema only: the card chip derives from metrics[0], so the card and the
-  // page can never disagree. Legacy `metric` / `metricTr` are not read.
+  // page can never disagree. The legacy metric / metricTr fields no longer exist.
   const metricRows = (lang === 'tr' && project.metricsTr ? project.metricsTr : project.metrics) || [];
-  const metric = metricRows.length ? metricRows[0].value : null;
+  // The chip carries the label too: on its own a value like '535' or '0.903 / 0.740'
+  // says nothing, and the label is what makes it a result rather than a number.
+  const metric = metricRows.length ? metricRows[0] : null;
   const roleLabels = t('pdRole') || {};
   const statusLabels = t('pdStatus') || {};
   const metaLine = [roleLabels[project.role] || project.role, project.period, statusLabels[project.status] || project.status].filter(Boolean).join(' · ');
@@ -182,7 +184,10 @@ function ArmorCard({ project, index, lang }) {
         <p style={s.cardDesc}>{oneLiner}</p>
 
         {metric && (
-          <div style={{ ...s.metric, color, borderColor: `${color}33`, background: `${color}0f` }}>{metric}</div>
+          <div style={{ ...s.metric, color, borderColor: `${color}33`, background: `${color}0f` }}>
+            <span style={s.metricLabel}>{metric.label}</span>
+            {metric.value}
+          </div>
         )}
 
         <div style={s.cardMeta}>{metaLine}</div>
@@ -220,6 +225,10 @@ const s = {
   groupHead: { display: 'flex', alignItems: 'baseline', gap: 14, marginBottom: 22, paddingBottom: 14, borderBottom: '1px solid #15152a' },
   groupTitle: { fontFamily: "'Instrument Serif', serif", fontSize: 30, fontWeight: 400, color: '#e0e0e8', letterSpacing: '-0.01em' },
   groupCount: { fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.12em', color: '#4a4a60' },
+  metricLabel: {
+    display: 'block', fontSize: 9, letterSpacing: '0.12em', textTransform: 'uppercase',
+    opacity: 0.7, marginBottom: 3, fontWeight: 400,
+  },
   metric: {
     display: 'inline-block', alignSelf: 'flex-start', marginBottom: 14,
     padding: '5px 11px', border: '1px solid', borderRadius: 4,
