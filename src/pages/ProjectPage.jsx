@@ -6,6 +6,10 @@ import { useSeo } from '../hooks/useSeo';
 import PROJECTS from '../data/projects';
 
 // Category order drives both the filter tabs and the grouped sections below.
+// Featured projects lead their category; the rest keep their MARK order.
+const TIER_ORDER = { featured: 0, research: 1, supporting: 2, experimental: 3, archive: 4 };
+const byTier = (a, b) => (TIER_ORDER[a.tier] ?? 9) - (TIER_ORDER[b.tier] ?? 9);
+
 const CAT_ORDER = ['Research & Benchmarks', 'LLM & NLP', 'AI Agents & Tooling', 'Computer Vision', 'Machine Learning', 'Systems & Graphics', 'Apps & Tools'];
 const CAT_TR = {
   'Research & Benchmarks': 'Araştırma & Benchmark',
@@ -39,7 +43,7 @@ export default function ProjectPage() {
   // single category collapses back to one flat grid.
   const grouped = cat === 'All' && !q.trim();
   const groups = useMemo(
-    () => (grouped ? CAT_ORDER.map((c) => [c, filtered.filter((p) => p.category === c)]).filter(([, items]) => items.length) : []),
+    () => (grouped ? CAT_ORDER.map((c) => [c, filtered.filter((p) => p.category === c).sort(byTier)]).filter(([, items]) => items.length) : []),
     [grouped, filtered],
   );
 
@@ -129,7 +133,13 @@ function ArmorCard({ project, index, lang }) {
   const { t } = useLang();
   const { color, glow } = project;
   const oneLiner = lang === 'tr' && project.oneLinerTr ? project.oneLinerTr : project.oneLiner;
-  const metric = lang === 'tr' && project.metricTr ? project.metricTr : project.metric;
+  // New schema only: the card chip derives from metrics[0], so the card and the
+  // page can never disagree. Legacy `metric` / `metricTr` are not read.
+  const metricRows = (lang === 'tr' && project.metricsTr ? project.metricsTr : project.metrics) || [];
+  const metric = metricRows.length ? metricRows[0].value : null;
+  const roleLabels = t('pdRole') || {};
+  const statusLabels = t('pdStatus') || {};
+  const metaLine = [roleLabels[project.role] || project.role, project.period, statusLabels[project.status] || project.status].filter(Boolean).join(' · ');
 
   return (
     <Link
@@ -175,6 +185,8 @@ function ArmorCard({ project, index, lang }) {
           <div style={{ ...s.metric, color, borderColor: `${color}33`, background: `${color}0f` }}>{metric}</div>
         )}
 
+        <div style={s.cardMeta}>{metaLine}</div>
+
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 18 }}>
           <span style={{ ...s.cardLang, borderColor: color, color, background: `${color}14` }}>
             {project.language}
@@ -196,6 +208,7 @@ function ArmorCard({ project, index, lang }) {
 }
 
 const s = {
+  cardMeta: { fontFamily: "'JetBrains Mono', monospace", fontSize: 9, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#4a4a60', marginBottom: 14 },
   container: { maxWidth: 1400, margin: '0 auto', padding: '60px 48px 120px', position: 'relative', zIndex: 2 },
   back: { display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: "'JetBrains Mono', monospace", fontSize: 12, letterSpacing: '0.06em', color: '#5a5a70', marginBottom: 60, cursor: 'pointer' },
   header: { marginBottom: 48 },

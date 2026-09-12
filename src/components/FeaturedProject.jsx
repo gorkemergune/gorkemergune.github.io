@@ -86,7 +86,7 @@ export default function FeaturedProject() {
           </div>
 
           <div style={s.ctaRow}>
-            <Link to={`/project/${p.slug}/case-study`} className="hero-btn" style={{ borderColor: `${p.color}66` }}>
+            <Link to={`/project/${p.slug}`} className="hero-btn" style={{ borderColor: `${p.color}66` }}>
               <FileText size={15} strokeWidth={1.5} /> {t('featuredCta')}
             </Link>
             <Link to={`/project/${p.slug}`} className="hero-btn">

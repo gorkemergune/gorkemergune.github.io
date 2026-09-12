@@ -35,7 +35,6 @@ const ResearchPage = lazy(() => import('./pages/ResearchPage'));
 const ArticlesPage = lazy(() => import('./pages/ArticlesPage'));
 const LearningPathPage = lazy(() => import('./pages/LearningPathPage'));
 const ResumePage = lazy(() => import('./pages/ResumePage'));
-const CaseStudyPage = lazy(() => import('./pages/CaseStudyPage'));
 
 export default function App() {
   const [time, setTime] = useState('');
@@ -346,7 +345,6 @@ export default function App() {
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/project" element={<ProjectPage />} />
           <Route path="/project/:slug" element={<ProjectDetail />} />
-          <Route path="/project/:slug/case-study" element={<CaseStudyPage />} />
           <Route path="/competitions" element={<CompetitionsPage />} />
           <Route path="/research" element={<ResearchPage />} />
           <Route path="/articles" element={<ArticlesPage />} />

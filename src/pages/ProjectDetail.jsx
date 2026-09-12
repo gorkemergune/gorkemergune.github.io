@@ -1,9 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { ArrowLeft, ArrowUpRight, ChevronLeft, ChevronRight, Github, X, FileText } from 'lucide-react';
+import { ArrowLeft, ArrowUpRight, ChevronLeft, ChevronRight, Github, X } from 'lucide-react';
 import { useLang } from '../i18n.jsx';
 import { getProject } from '../data/projects';
-import { getCaseStudy } from '../data/caseStudies';
 import { useSeo } from '../hooks/useSeo';
 
 export default function ProjectDetail() {
@@ -11,6 +10,7 @@ export default function ProjectDetail() {
   const { lang, t } = useLang();
   const project = getProject(slug);
   const [lightbox, setLightbox] = useState(-1);
+  const [showAllImages, setShowAllImages] = useState(false);
 
   const seoDesc = project ? (lang === 'tr' && project.oneLinerTr ? project.oneLinerTr : project.oneLiner) : undefined;
   useSeo({
@@ -48,28 +48,66 @@ export default function ProjectDetail() {
   const { color, glow } = project;
   const loc = (enVal, trVal) => (lang === 'tr' && trVal ? trVal : enVal);
   const stackLabels = t('stackLabels') || {};
+  const metricKind = t('pdMetricKind') || {};
+  const roleLabels = t('pdRole') || {};
+  const statusLabels = t('pdStatus') || {};
+
+  // New schema only. Legacy `highlights`, `results` and `metric` are never read here.
   const images = project.images.map((img) => ({ ...img, caption: loc(img.caption, img.captionTr) }));
-  const overview = loc(project.overview, project.overviewTr);
-  const highlights = loc(project.highlights, project.highlightsTr);
-  const architecture = loc(project.architecture, project.architectureTr);
-  const results = loc(project.results, project.resultsTr);
+  const problem = loc(project.problem, project.problemTr);
+  const built = loc(project.overview, project.overviewTr);
+  const metrics = loc(project.metrics, project.metricsTr) || [];
+  const useCases = loc(project.useCases, project.useCasesTr) || [];
+  const flow = loc(project.flow, project.flowTr);
+  const architecture = loc(project.architecture, project.architectureTr) || [];
+  const decisions = loc(project.decisions, project.decisionsTr) || [];
+  const contribution = loc(project.contribution, project.contributionTr) || [];
+  const limitations = loc(project.limitations, project.limitationsTr) || [];
+  const futureWork = loc(project.futureWork, project.futureWorkTr) || [];
+  const challenges = loc(project.challenges, project.challengesTr) || [];
+  const lessons = loc(project.lessons, project.lessonsTr) || [];
+  const provenanceNote = loc(project.provenanceNote, project.provenanceNoteTr);
+
+  const proof = metrics.slice(0, 3);
+  const visibleImages = showAllImages ? images : images.slice(0, 6);
+
   let section = 0;
   const num = () => String(++section).padStart(2, '0');
+
+  // `condition` is written as "<kind> — <detail>"; the kind renders as its own chip.
+  const splitCondition = (condition) => {
+    if (!condition) return { kind: null, detail: null };
+    const i = condition.indexOf(' — ');
+    if (i === -1) return { kind: metricKind[condition] || condition, detail: null };
+    const kind = condition.slice(0, i);
+    return { kind: metricKind[kind] || kind, detail: condition.slice(i + 3) };
+  };
+
+  const metaLine = [
+    roleLabels[project.role] || project.role,
+    project.period,
+    statusLabels[project.status] || project.status,
+  ].filter(Boolean).join(' · ');
 
   return (
     <div style={s.container}>
       <style>{`
         .pd-img-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
         .pd-img-grid .pd-img-full { grid-column: 1 / -1; }
-        .pd-results-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-        .pd-highlight-row { transition: background 0.4s, padding-left 0.4s; }
-        .pd-highlight-row:hover { background: #12121f; padding-left: 24px !important; }
+        .pd-proof { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+        .pd-metric-row { display: grid; grid-template-columns: 190px 200px 1fr; gap: 20px; align-items: baseline; padding: 16px 8px; border-bottom: 1px solid #1a1a2e; }
+        .pd-flow { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+        .pd-list-row { transition: background 0.4s, padding-left 0.4s; }
+        .pd-list-row:hover { background: #12121f; padding-left: 24px !important; }
         .pd-img-card img { transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); }
         .pd-img-card:hover img { transform: scale(1.02); }
+        @media (max-width: 860px) {
+          .pd-proof { grid-template-columns: 1fr; gap: 14px; }
+        }
         @media (max-width: 700px) {
           .pd-img-grid { grid-template-columns: 1fr !important; }
-          .pd-results-grid { grid-template-columns: 1fr !important; }
-          .pd-hero-title { font-size: 44px !important; }
+          .pd-metric-row { grid-template-columns: 1fr !important; gap: 4px; padding: 14px 8px; }
+          .pd-hero-title { font-size: 40px !important; }
         }
       `}</style>
 
@@ -78,7 +116,7 @@ export default function ProjectDetail() {
       </Link>
 
       {/* HERO */}
-      <header style={{ marginBottom: 72 }} className="reveal reveal-1">
+      <header style={{ marginBottom: 44 }} className="reveal reveal-1">
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap', marginBottom: 20 }}>
           <span style={{ ...s.markChip, borderColor: `${color}55`, color }}>{project.mark}</span>
           <span style={{ ...s.markChip, borderColor: '#1a1a2e', color: '#8a8aa0' }}>{project.codename.toUpperCase()}</span>
@@ -86,9 +124,7 @@ export default function ProjectDetail() {
             display: 'inline-block', width: 6, height: 6, borderRadius: '50%',
             background: color, boxShadow: `0 0 8px ${glow}`,
           }} />
-          <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 9, letterSpacing: '0.14em', color: '#4a4a60' }}>
-            {t('sysOnline')}
-          </span>
+          <span style={s.metaLine}>{metaLine}</span>
         </div>
 
         <h1 className="section-title pd-hero-title" style={s.title}>{project.title}</h1>
@@ -104,12 +140,6 @@ export default function ProjectDetail() {
         </div>
 
         <div style={{ marginTop: 32, display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-          {getCaseStudy(slug) && (
-            <Link className="hero-btn hero-btn-primary" to={`/project/${slug}/case-study`} style={{ borderColor: color }}>
-              <FileText size={16} strokeWidth={1.5} />
-              {t('csRead')}
-            </Link>
-          )}
           <a className="hero-btn" href={project.github} target="_blank" rel="noreferrer">
             <Github size={16} strokeWidth={1.5} style={{ color: '#8a8aa0' }} />
             {t('pdViewGithub')}
@@ -118,29 +148,199 @@ export default function ProjectDetail() {
         </div>
       </header>
 
-      {/* IMAGES */}
-      <SectionLabel n={num()} label={t('pdVisualFeed')} color={color} />
-      <div className="pd-img-grid reveal reveal-2" style={{ marginBottom: 88 }}>
-        {images.map((img, i) => (
-          <figure
-            key={img.src}
-            className={`pd-img-card${images.length % 2 === 1 && i === 0 ? ' pd-img-full' : ''}`}
-            style={{ ...s.imgCard, cursor: 'zoom-in' }}
-            onClick={() => setLightbox(i)}
-          >
-            <div style={{ overflow: 'hidden', borderRadius: 3 }}>
-              <img src={img.src} alt={img.caption} loading="lazy" style={s.img} />
+      {/* PROOF STRIP — only when the project actually measured something */}
+      {proof.length > 0 && (
+        <div className="pd-proof reveal reveal-2" style={{ marginBottom: 80 }}>
+          {proof.map((m) => {
+            const { kind } = splitCondition(m.condition);
+            return (
+              <div key={m.label} style={{ ...s.proofCard, borderTopColor: color }}>
+                <span style={s.proofValue}>{m.value}</span>
+                <span style={s.proofLabel}>{m.label}</span>
+                {kind && <span style={{ ...s.kindChip, color, borderColor: `${color}44` }}>{kind}</span>}
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      {/* 01 — THE PROBLEM */}
+      <SectionLabel n={num()} label={t('pdProblem')} color={color} />
+      <p style={{ ...s.lead, marginBottom: 80 }}>{problem}</p>
+
+      {/* 02 — WHAT I BUILT */}
+      <SectionLabel n={num()} label={t('pdBuilt')} color={color} />
+      <p style={{ ...s.body, marginBottom: 80 }}>{built}</p>
+
+      {/* 03 — RESULTS */}
+      {metrics.length > 0 && (
+        <>
+          <SectionLabel n={num()} label={t('pdResults')} color={color} />
+          <div style={{ marginBottom: 80 }}>
+            {metrics.map((m) => {
+              const { kind, detail } = splitCondition(m.condition);
+              return (
+                <div key={m.label} className="pd-metric-row">
+                  <span style={s.metricLabel}>{m.label}</span>
+                  <span style={s.metricValue}>{m.value}</span>
+                  <span style={s.metricCondition}>
+                    {kind && <span style={{ ...s.kindChip, color, borderColor: `${color}44`, marginRight: 10 }}>{kind}</span>}
+                    {detail}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        </>
+      )}
+
+      {/* 04 — WHERE IT CAN BE USED */}
+      {useCases.length > 0 && (
+        <>
+          <SectionLabel n={num()} label={t('pdUseCases')} color={color} />
+          <div style={{ marginBottom: 80 }}>
+            {useCases.map((u, i) => (
+              <div key={i} className="pd-list-row" style={s.listRow}>
+                <span style={{ ...s.listMarker, color }}>&#9656;</span>
+                <span style={s.listText}>{u}</span>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
+
+      {/* 05 — HOW IT WORKS */}
+      <SectionLabel n={num()} label={t('pdHowItWorks')} color={color} />
+      <div style={{ marginBottom: 80 }}>
+        {flow && (
+          <div style={{ ...s.flowPanel, borderLeftColor: color }}>
+            <div className="pd-flow">
+              {flow.split('→').map((stage, i, all) => (
+                <span key={i} style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+                  <span style={s.flowNode}>{stage.trim()}</span>
+                  {i < all.length - 1 && <span style={{ color, fontSize: 13 }}>&#8594;</span>}
+                </span>
+              ))}
             </div>
-            <figcaption style={s.imgCaption}>
-              <span style={{ color, marginRight: 8 }}>&#9656;</span>{img.caption}
-            </figcaption>
-          </figure>
+          </div>
+        )}
+        {architecture.map((para, i) => (
+          <p key={i} style={{ ...s.body, marginBottom: i < architecture.length - 1 ? 20 : 0 }}>{para}</p>
         ))}
       </div>
 
+      {/* 06 — ENGINEERING DECISIONS */}
+      {decisions.length > 0 && (
+        <>
+          <SectionLabel n={num()} label={t('pdDecisions')} color={color} />
+          <div style={{ marginBottom: 80, display: 'flex', flexDirection: 'column', gap: 16 }}>
+            {decisions.map((d, i) => (
+              <div key={i} style={{ ...s.decisionCard, borderLeftColor: color }}>
+                <div style={s.decisionChoice}>{d.choice}</div>
+                <div style={s.decisionRow}>
+                  <span style={{ ...s.decisionKey, color }}>{t('pdWhy')}</span>
+                  <span style={s.decisionVal}>{d.why}</span>
+                </div>
+                <div style={s.decisionRow}>
+                  <span style={s.decisionKey}>{t('pdTradeoff')}</span>
+                  <span style={s.decisionVal}>{d.tradeoff}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
+
+      {/* 07 — MY CONTRIBUTION */}
+      <SectionLabel n={num()} label={t('pdContribution')} color={color} />
+      <div style={{ marginBottom: 80 }}>
+        {contribution.map((c, i) => (
+          <div key={i} className="pd-list-row" style={s.listRow}>
+            <span style={{ ...s.listNum, color }}>{String(i + 1).padStart(2, '0')}</span>
+            <span style={s.listText}>{c}</span>
+          </div>
+        ))}
+        {project.provenance && provenanceNote && (
+          <div style={s.provenancePanel}>
+            <span style={s.provenanceLabel}>
+              {t('pdProvenance')} · <span style={{ color: '#f5b301' }}>{project.provenance}</span>
+            </span>
+            <span style={s.provenanceText}>{provenanceNote}</span>
+          </div>
+        )}
+      </div>
+
+      {/* 08 — LIMITATIONS & NEXT */}
+      {(limitations.length > 0 || futureWork.length > 0) && (
+        <>
+          <SectionLabel n={num()} label={t('pdLimitations')} color={color} />
+          <div style={{ marginBottom: 80 }}>
+            {limitations.map((l, i) => (
+              <div key={i} className="pd-list-row" style={s.listRow}>
+                <span style={{ ...s.listMarker, color: '#6a6a82' }}>&#9656;</span>
+                <span style={s.listText}>{l}</span>
+              </div>
+            ))}
+            {futureWork.length > 0 && (
+              <div style={{ marginTop: 24 }}>
+                <span style={s.subLabel}>{t('pdNext')}</span>
+                {futureWork.map((f, i) => (
+                  <p key={i} style={{ ...s.body, marginTop: 8, marginBottom: 0 }}>{f}</p>
+                ))}
+              </div>
+            )}
+          </div>
+        </>
+      )}
+
+      {/* 09 — FIELD NOTES */}
+      {(challenges.length > 0 || lessons.length > 0) && (
+        <>
+          <SectionLabel n={num()} label={t('pdFieldNotes')} color={color} />
+          <div style={{ marginBottom: 80 }}>
+            {[...challenges, ...lessons].map((n, i) => (
+              <p key={i} style={{ ...s.body, marginBottom: 16 }}>{n}</p>
+            ))}
+          </div>
+        </>
+      )}
+
+      {/* 10 — SCREENSHOTS */}
+      {images.length > 0 && (
+        <>
+          <SectionLabel n={num()} label={t('pdScreenshots')} color={color} />
+          <div className="pd-img-grid" style={{ marginBottom: images.length > 6 ? 20 : 80 }}>
+            {visibleImages.map((img, i) => (
+              <figure
+                key={img.src}
+                className={`pd-img-card${visibleImages.length % 2 === 1 && i === 0 ? ' pd-img-full' : ''}`}
+                style={{ ...s.imgCard, cursor: 'zoom-in' }}
+                onClick={() => setLightbox(i)}
+              >
+                <div style={{ overflow: 'hidden', borderRadius: 3 }}>
+                  <img src={img.src} alt={img.caption} loading="lazy" style={s.img} />
+                </div>
+                <figcaption style={s.imgCaption}>
+                  <span style={{ color, marginRight: 8 }}>&#9656;</span>{img.caption}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+          {images.length > 6 && (
+            <button
+              className="hero-btn"
+              style={{ marginBottom: 80 }}
+              onClick={() => setShowAllImages((v) => !v)}
+            >
+              {showAllImages ? t('pdShowLess') : `${t('pdShowAll')} (${images.length})`}
+            </button>
+          )}
+        </>
+      )}
+
       {lightbox >= 0 && (
         <Lightbox
-          images={images}
+          images={visibleImages}
           index={lightbox}
           color={color}
           onNavigate={setLightbox}
@@ -148,24 +348,9 @@ export default function ProjectDetail() {
         />
       )}
 
-      {/* OVERVIEW */}
-      <SectionLabel n={num()} label={t('pdOverview')} color={color} />
-      <p style={{ ...s.lead, marginBottom: 88 }}>{overview}</p>
-
-      {/* HIGHLIGHTS */}
-      <SectionLabel n={num()} label={t('pdHighlights')} color={color} />
-      <div style={{ marginBottom: 88 }}>
-        {highlights.map((h, i) => (
-          <div key={i} className="pd-highlight-row" style={s.highlightRow}>
-            <span style={{ ...s.highlightNum, color }}>{String(i + 1).padStart(2, '0')}</span>
-            <span style={s.highlightText}>{h}</span>
-          </div>
-        ))}
-      </div>
-
-      {/* TECHNICAL STACK */}
+      {/* 11 — STACK & SOURCE */}
       <SectionLabel n={num()} label={t('pdStack')} color={color} />
-      <div style={{ ...s.panel, marginBottom: 88 }}>
+      <div style={{ ...s.panel, marginBottom: 32 }}>
         {project.stack.map((row) => (
           <div key={row.label} style={s.stackRow}>
             <span style={s.stackLabel}>{stackLabels[row.label] ?? row.label}</span>
@@ -178,31 +363,6 @@ export default function ProjectDetail() {
         ))}
       </div>
 
-      {/* ARCHITECTURE */}
-      <SectionLabel n={num()} label={t('pdArchitecture')} color={color} />
-      <div style={{ marginBottom: 88 }}>
-        {architecture.map((p, i) => (
-          <p key={i} style={{ ...s.body, marginBottom: i < architecture.length - 1 ? 20 : 0 }}>{p}</p>
-        ))}
-      </div>
-
-      {/* RESULTS */}
-      <SectionLabel n={num()} label={t('pdResults')} color={color} />
-      <div className="pd-results-grid" style={{ marginBottom: 88 }}>
-        {results.map((r) => (
-          <div key={r.label} style={s.resultCard}>
-            <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#4a4a60' }}>
-              {r.label}
-            </span>
-            <span style={{ fontFamily: "'Instrument Serif', serif", fontSize: 22, lineHeight: 1.25, color: '#e0e0e8' }}>
-              {r.value}
-            </span>
-          </div>
-        ))}
-      </div>
-
-      {/* GITHUB */}
-      <SectionLabel n={num()} label={t('pdSource')} color={color} />
       <div style={{ ...s.panel, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 20, padding: 32 }}>
         <div>
           <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.1em', color: '#5a5a70', marginBottom: 6 }}>
@@ -349,23 +509,51 @@ const s = {
   imgCaption: { fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.06em', color: '#5a5a70', padding: '10px 4px 2px' },
   lead: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 20, lineHeight: 1.55, color: '#c8c8d4', maxWidth: 780 },
   body: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 15.5, lineHeight: 1.7, color: '#a8a8b8', maxWidth: 780 },
-  highlightRow: {
-    display: 'flex', alignItems: 'baseline', gap: 20,
-    padding: '16px 8px', borderBottom: '1px solid #1a1a2e',
+  metaLine: { fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#4a4a60' },
+
+  proofCard: {
+    background: '#0f0f1a', border: '1px solid #1a1a2e', borderTop: '2px solid', borderRadius: 4,
+    padding: '22px 24px', display: 'flex', flexDirection: 'column', gap: 10, alignItems: 'flex-start',
   },
-  highlightNum: { fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.1em', flexShrink: 0 },
-  highlightText: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 15, lineHeight: 1.55, color: '#c8c8d4' },
-  panel: { background: '#0f0f1a', border: '1px solid #1a1a2e', borderRadius: 4, padding: '8px 24px' },
-  stackRow: {
-    display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-    gap: 24, padding: '16px 0', borderBottom: '1px solid #1a1a2e', flexWrap: 'wrap',
+  proofValue: { fontFamily: "'Instrument Serif', serif", fontSize: 30, lineHeight: 1.1, color: '#e0e0e8' },
+  proofLabel: { fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#8a8aa0' },
+  kindChip: {
+    display: 'inline-block', fontFamily: "'JetBrains Mono', monospace", fontSize: 9,
+    letterSpacing: '0.1em', textTransform: 'uppercase', border: '1px solid', borderRadius: 999,
+    padding: '2px 9px', whiteSpace: 'nowrap',
   },
-  stackLabel: {
-    fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.12em',
-    textTransform: 'uppercase', color: '#4a4a60', flexShrink: 0,
+
+  metricLabel: { fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#4a4a60' },
+  metricValue: { fontFamily: "'Instrument Serif', serif", fontSize: 21, lineHeight: 1.25, color: '#e0e0e8', fontVariantNumeric: 'tabular-nums' },
+  metricCondition: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 13.5, lineHeight: 1.5, color: '#8a8aa0' },
+
+  listRow: { display: 'flex', alignItems: 'baseline', gap: 20, padding: '16px 8px', borderBottom: '1px solid #1a1a2e' },
+  listNum: { fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.1em', flexShrink: 0 },
+  listMarker: { fontSize: 11, flexShrink: 0 },
+  listText: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 15, lineHeight: 1.55, color: '#c8c8d4' },
+
+  flowPanel: {
+    background: '#0c0c15', border: '1px solid #1a1a2e', borderLeft: '2px solid',
+    borderRadius: 4, padding: '18px 22px', marginBottom: 28, overflowX: 'auto',
   },
-  resultCard: {
-    padding: 24, background: '#0f0f1a', border: '1px solid #1a1a2e', borderRadius: 4,
-    display: 'flex', flexDirection: 'column', gap: 12, minHeight: 110, justifyContent: 'space-between',
+  flowNode: {
+    fontFamily: "'JetBrains Mono', monospace", fontSize: 12, lineHeight: 1.6, color: '#c8c8d4',
+    background: '#12121f', border: '1px solid #1a1a2e', borderRadius: 3, padding: '5px 10px',
+    display: 'inline-block',
   },
+
+  decisionCard: { background: '#0f0f1a', border: '1px solid #1a1a2e', borderLeft: '2px solid', borderRadius: 4, padding: '20px 24px' },
+  decisionChoice: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 16, fontWeight: 600, color: '#e0e0e8', marginBottom: 12, lineHeight: 1.45 },
+  decisionRow: { display: 'flex', gap: 14, alignItems: 'baseline', marginTop: 8, flexWrap: 'wrap' },
+  decisionKey: { fontFamily: "'JetBrains Mono', monospace", fontSize: 9, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#4a4a60', flexShrink: 0, minWidth: 68 },
+  decisionVal: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 14.5, lineHeight: 1.55, color: '#a8a8b8', flex: 1, minWidth: 200 },
+
+  provenancePanel: {
+    marginTop: 28, background: '#15120a', border: '1px solid rgba(245,179,1,0.27)', borderRadius: 4,
+    padding: '18px 22px', display: 'flex', flexDirection: 'column', gap: 8,
+  },
+  provenanceLabel: { fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#8a8aa0' },
+  provenanceText: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 14.5, lineHeight: 1.6, color: '#c8c8d4' },
+
+  subLabel: { fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#4a4a60' },
 };

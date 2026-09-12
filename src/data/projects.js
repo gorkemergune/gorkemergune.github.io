@@ -16,8 +16,8 @@ const PROJECTS = [
     title: 'MIHENK Benchmark',
     subtitle: 'Measures whether an LLM reasons or just recalls, in Turkish and English, across 800 original items nobody has trained on',
     subtitleTr: 'Bir LLM’in muhakeme mi yoksa ezber mi yaptığını ölçer; Türkçe ve İngilizce, üzerinde kimsenin eğitilmediği 800 özgün soruyla',
-    oneLiner: 'Wrote 800 original reasoning items in two languages, then put every model I could reach through them — my own fine-tunes included.',
-    oneLinerTr: 'İki dilde 800 özgün muhakeme sorusu yazdım, sonra erişebildiğim her modeli bunlardan geçirdim — kendi fine-tune’larım dahil.',
+    oneLiner: 'Designed and generated 800 original reasoning items in two languages, then put every model I could reach through them — my own fine-tunes included.',
+    oneLinerTr: 'İki dilde 800 özgün muhakeme sorusu tasarlayıp ürettim, sonra erişebildiğim her modeli bunlardan geçirdim — kendi fine-tune’larım dahil.',
     language: 'Python',
     color: '#f5b301',
     glow: 'rgba(245,179,1,0.5)',
@@ -25,15 +25,34 @@ const PROJECTS = [
     metric: '11 models · 97.6% top score',
     metricTr: '11 model · %97,6 en yüksek',
     github: gh('mihenk-benchmark'),
+    // Field Notes — migrated verbatim from caseStudies.js (12 Sep 2026).
+    challenges: [
+      'The hard part of a benchmark is proving it actually discriminates rather than being "too easy" or "broken". If everything scores 100% or everything scores 30%, it measures nothing.',
+      'The other trap is the short-answer format: reasoning models and chatty fine-tunes love to over-explain, and a verbose but correct answer that breaks the ≤7-word rule has to score 0 — that is a deliberate signal, not a bug, but it means the scorer has to be strict and predictable.',
+    ],
+    challengesTr: [
+      'Bir benchmark’ın zor kısmı, “çok kolay” ya da “bozuk” olmak yerine gerçekten ayırt ettiğini kanıtlamaktır. Her şey %100 ya da her şey %30 alıyorsa, hiçbir şey ölçmüyordur.',
+      'Diğer tuzak kısa-cevap formatıdır: muhakeme modelleri ve konuşkan fine-tune’lar aşırı açıklamayı sever ve ≤7 kelime kuralını bozan ayrıntılı ama doğru bir cevap 0 almak zorundadır — bu bir hata değil, bilinçli bir sinyaldir, ama puanlayıcının katı ve öngörülebilir olmasını gerektirir.',
+    ],
+    lessons: [
+      'A benchmark you author yourself forces you to be precise about what "reasoning" even means — every ambiguous item is one you have to resolve before a model ever sees it.',
+      'Automatic, strict scoring is worth more than a bigger dataset. Reproducibility comes from the scorer being boringly deterministic, not from volume.',
+      'Measuring my own models against their bases — and publishing the regressions — taught me more than a flattering number would have.',
+    ],
+    lessonsTr: [
+      'Kendi yazdığın bir benchmark, “muhakemenin” ne demek olduğu konusunda kesin olmaya zorlar — her belirsiz soru, model onu görmeden önce çözmen gereken bir sorudur.',
+      'Otomatik, katı puanlama daha büyük bir veri kümesinden daha değerlidir. Yeniden üretilebilirlik, puanlayıcının sıkıcı derecede deterministik olmasından gelir, hacimden değil.',
+      'Kendi modellerimi tabanlarına karşı ölçmek — ve gerilemeleri yayınlamak — bana gurur okşayan bir sayıdan çok daha fazlasını öğretti.',
+    ],
     images: [
       { src: '/projects/mihenk-benchmark/leaderboard.svg', caption: 'Full-set leaderboard (800 items): a 12B saturates at ~98%, a 3B lands at ~49% — a clean capability spread', captionTr: 'Tam set liderlik tablosu (800 soru): 12B ~%98’de doyar, 3B ~%49’da kalır — temiz bir yetenek yelpazesi' },
       { src: '/projects/mihenk-benchmark/finetune-vs-base.svg', caption: 'My own fine-tune, measured weight-matched against its base — the honest trade-off, visualized', captionTr: 'Kendi fine-tune’um, kendi base modeliyle eşleştirilerek ölçüldü — dürüst takas, görselleştirildi' },
       { src: '/projects/mihenk-benchmark/disciplines.svg', caption: '20 disciplines × 2 languages × 2 formats × 4 tiers — every item objectively scorable', captionTr: '20 disiplin × 2 dil × 2 format × 4 seviye — her soru nesnel olarak puanlanabilir' },
     ],
     overview:
-      'MIHENK (Multilingual Intelligence, High-level Evaluation and Neural Knowledge) is a benchmark I designed and wrote from scratch to measure reasoning rather than memorized recall. Every one of its 800 items is original, exists in both Turkish and English (authored independently per language), and is automatically and objectively scorable — so results are reproducible and comparable over time. Items deliberately include irrelevant premises, forcing a model to isolate what matters. I then ran 11 models through it, from a 3B up to a 12B, cloud and local — and included my own two fine-tunes, each measured against its own base.',
+      'MIHENK (Multilingual Intelligence, High-level Evaluation and Neural Knowledge) is a benchmark I designed from scratch to measure reasoning rather than memorized recall. Every one of its 800 items is original and generated rather than copied from any examination bank — each record declares its provenance — exists in both Turkish and English as its own item rather than a translation, and is automatically and objectively scorable — so results are reproducible and comparable over time. Items deliberately include irrelevant premises, forcing a model to isolate what matters. I then ran 11 models through it, from a 3B up to a 12B, cloud and local — and included my own two fine-tunes, each measured against its own base.',
     overviewTr:
-      'MIHENK (Multilingual Intelligence, High-level Evaluation and Neural Knowledge), ezberden hatırlamayı değil muhakemeyi ölçmek için sıfırdan tasarlayıp yazdığım bir benchmark. 800 sorunun her biri özgün, hem Türkçe hem İngilizce olarak (her dilde bağımsız yazılmış) mevcut ve otomatik ile nesnel biçimde puanlanabilir — böylece sonuçlar yeniden üretilebilir ve zaman içinde karşılaştırılabilir. Sorular bilinçli olarak alakasız öncüller içerir; model neyin önemli olduğunu ayıklamak zorunda kalır. Ardından 3B’den 12B’ye, bulut ve yerel, 11 modeli bu benchmark’tan geçirdim — kendi iki fine-tune’umu da her biri kendi base modeline karşı ölçerek dahil ettim.',
+      'MIHENK (Multilingual Intelligence, High-level Evaluation and Neural Knowledge), ezberden hatırlamayı değil muhakemeyi ölçmek için sıfırdan tasarladığım bir benchmark. 800 sorunun her biri özgün ve herhangi bir soru bankasından kopyalanmak yerine üretilmiş — her kayıt kendi kaynağını beyan eder — hem Türkçe hem İngilizce olarak çeviri değil kendi sorusu hâlinde mevcut ve otomatik ile nesnel biçimde puanlanabilir — böylece sonuçlar yeniden üretilebilir ve zaman içinde karşılaştırılabilir. Sorular bilinçli olarak alakasız öncüller içerir; model neyin önemli olduğunu ayıklamak zorunda kalır. Ardından 3B’den 12B’ye, bulut ve yerel, 11 modeli bu benchmark’tan geçirdim — kendi iki fine-tune’umu da her biri kendi base modeline karşı ölçerek dahil ettim.',
     highlights: [
       'Fully bilingual: each item authored independently in Turkish and English, so per-language performance and the gap between them can be reported',
       '800 original items across 20 disciplines (math, logic, programming, law, physics, chart & data analysis, …) and 4 calibrated difficulty tiers (L1–L4)',
@@ -78,6 +97,76 @@ const PROJECTS = [
       { label: 'Puanlama', value: 'Tamamen otomatik, tam/normalleştirilmiş — yeniden üretilebilir' },
       { label: 'Yayınlandı', value: 'Hugging Face Hub’da herkese açık bölüm' },
     ],
+    // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
+    role: 'Solo',
+    period: '2026',
+    status: 'research',
+    tier: 'featured',
+    problem:
+      'LLM benchmarks leak into training data, and nearly all of them are English-only. There was no clean way to ask whether a model reasons in Turkish or merely recalls — and no way to measure a fine-tune against its own base on identical ground.',
+    problemTr:
+      'LLM benchmark’ları eğitim verisine sızıyor ve neredeyse hepsi yalnızca İngilizce. Bir modelin Türkçede muhakeme mi yoksa ezber mi yaptığını sormanın temiz bir yolu yoktu — bir fine-tune’u kendi base modeliyle aynı zeminde ölçmenin de.',
+    flow: 'Item spec → 800 JSON records (TR + EN) → pluggable backend (Anthropic / OpenAI-compatible / local 4-bit HF) → reference scorer → per-discipline, per-language, per-difficulty breakdown + LCI',
+    flowTr: 'Soru şeması → 800 JSON kaydı (TR + EN) → takılabilir backend (Anthropic / OpenAI-uyumlu / yerel 4-bit HF) → referans puanlayıcı → disiplin, dil ve zorluk kırılımları + LCI',
+    metrics: [
+      { label: 'Items', value: '800 · 400 TR / 400 EN', condition: 'dataset scope — 20 disciplines, 4 tiers (L1–L4)' },
+      { label: 'Top score', value: '97.6%', condition: 'model performance — gemma4:12b, complete data set, all splits' },
+      { label: 'Capability spread', value: '49.0%', condition: 'model performance — llama3.2:3b on the same set' },
+      { label: 'Language consistency', value: 'LCI 2.2 vs 20.0', condition: 'model performance — 12B vs 3B, mean absolute TR/EN gap' },
+      { label: 'Models evaluated', value: '11', condition: 'evaluation scope — cloud + local, including both own fine-tunes' },
+      { label: 'Published', value: '80 of 800', condition: 'release scope — public split on the Hub, 720 held back privately' },
+    ],
+    metricsTr: [
+      { label: 'Soru', value: '800 · 400 TR / 400 EN', condition: 'veri kümesi kapsamı — 20 disiplin, 4 seviye (L1–L4)' },
+      { label: 'En yüksek skor', value: '%97,6', condition: 'model performansı — gemma4:12b, tam veri kümesi, tüm split’ler' },
+      { label: 'Yetenek yelpazesi', value: '%49,0', condition: 'model performansı — aynı kümede llama3.2:3b' },
+      { label: 'Dil tutarlılığı', value: 'LCI 2,2 — 20,0', condition: 'model performansı — 12B ve 3B, ortalama mutlak TR/EN farkı' },
+      { label: 'Değerlendirilen model', value: '11', condition: 'değerlendirme kapsamı — bulut + yerel, iki fine-tune dahil' },
+      { label: 'Yayınlanan', value: '800’ün 80’i', condition: 'yayın kapsamı — Hub’da herkese açık bölüm, 720 kayıt private' },
+    ],
+    useCases: [
+      'Turkish LLM evaluation, where most public benchmarks do not reach',
+      'Comparing a fine-tune against its own base on identical items',
+      'Surfacing cross-lingual weakness that an English-only benchmark hides',
+    ],
+    useCasesTr: [
+      'Türkçe LLM değerlendirmesi — çoğu açık benchmark’ın ulaşmadığı yer',
+      'Bir fine-tune’u kendi base modeliyle aynı sorular üzerinde karşılaştırmak',
+      'Yalnızca İngilizce bir benchmark’ın gizlediği diller arası zayıflığı görünür kılmak',
+    ],
+    decisions: [
+      { choice: 'Two auto-scorable formats only — multiple choice and short answer', why: 'Removes grader variance entirely, so a score means the same thing across runs and across months', tradeoff: 'Off-format answers score zero, which doubles as an instruction-following test but penalises verbose models' },
+    ],
+    decisionsTr: [
+      { choice: 'Yalnızca iki otomatik puanlanabilir format — çoktan seçmeli ve kısa cevap', why: 'Puanlayıcı değişkenliğini tamamen kaldırır; bir skor koşular ve aylar arasında aynı şeyi ifade eder', tradeoff: 'Format dışı cevaplar sıfır alır; bu talimat takibini de ölçer ama ayrıntılı cevap veren modelleri cezalandırır' },
+    ],
+    contribution: [
+      'The benchmark design: 20 disciplines × 2 languages × 2 auto-scorable formats × 4 calibrated difficulty tiers, with each language authored as its own item rather than translated.',
+      'The reference scorer in scoring/score.py — exact-letter matching for multiple choice, normalised canonical/alias matching with numeric tolerance for short answer.',
+      'The LCI metric, and the contamination policy: a 720/80 private/public split with provenance recorded on every record.',
+      'The evaluation harness across three backends and the eleven runs behind leaderboard.md. The models themselves are third-party.',
+    ],
+    contributionTr: [
+      'Benchmark tasarımı: 20 disiplin × 2 dil × 2 otomatik puanlanabilir format × 4 kalibre edilmiş zorluk seviyesi; her dil çeviri değil kendi sorusu olarak yazıldı.',
+      'scoring/score.py içindeki referans puanlayıcı — çoktan seçmeli için tam harf eşleştirme, kısa cevap için normalleştirilmiş kanonik/alias eşleştirme ve sayısal tolerans.',
+      'LCI metriği ve kontaminasyon politikası: her kayıtta kaynak bilgisiyle 720/80 private/public bölünmesi.',
+      'Üç backend üzerinde değerlendirme koşucusu ve leaderboard.md’nin arkasındaki on bir koşu. Modellerin kendisi üçüncü taraf.',
+    ],
+    limitations: [
+      'Items are model-generated, so they inherit the generator’s blind spots as well as its coverage.',
+      'A 12B saturating at 97.6% compresses the top of the scale — the benchmark separates weak from strong better than strong from stronger.',
+      'Two frontier Claude runs were interrupted by an OpenRouter credit shortfall and are still missing from the leaderboard.',
+    ],
+    limitationsTr: [
+      'Sorular model üretimi, dolayısıyla üreticinin kapsamını olduğu kadar kör noktalarını da devralıyor.',
+      '12B’nin %97,6’da doyması ölçeğin üst ucunu sıkıştırıyor — benchmark zayıfı güçlüden, güçlüyü daha güçlüden olduğundan daha iyi ayırıyor.',
+      'İki frontier Claude koşusu OpenRouter kredisi yetmediği için yarıda kaldı ve liderlik tablosunda hâlâ eksik.',
+    ],
+    provenance: 'generated',
+    provenanceNote:
+      'All 800 items were model-generated, not hand-written — every record declares source: orijinal-AI-üretim. The design, schema, scorer and evaluation protocol are the authored part.',
+    provenanceNoteTr:
+      '800 sorunun tamamı model tarafından üretildi, elle yazılmadı — her kayıt source: orijinal-AI-üretim beyanını taşır. Tasarım, şema, puanlayıcı ve değerlendirme protokolü kaleme alınan kısım.',
   },
   {
     slug: 'llm-lora-finetuning',
@@ -97,6 +186,25 @@ const PROJECTS = [
     metric: 'Tool-calling 17% → 92%',
     metricTr: 'Tool calling %17 → %92',
     github: gh('ayarlicazhocam-training'),
+    // Field Notes — migrated verbatim from caseStudies.js (12 Sep 2026).
+    challenges: [
+      'The result was bad, and the benchmark told me exactly how bad: 20.65% on Turkish MMLU — statistically identical to random guessing on 5-choice questions, 61st out of 67 models, and roughly half the score of the stock llama3.2:latest of the same size.',
+      'Digging in, two symptoms stood out. The model followed the multiple-choice format 0% of the time — it echoed the prompt instead of answering. And asked "Who is Gorkem?", it invented a completely different biography every single run (a model, a blockchain figure, an actor), even though the correct answer is right there in the training data.',
+    ],
+    challengesTr: [
+      'Sonuç kötüydü ve benchmark tam olarak ne kadar kötü olduğunu söyledi: Türkçe MMLU’da %20,65 — 5 şıklı sorularda rastgele tahminle istatistiksel olarak aynı, 67 model içinde 61., ve aynı boyuttaki stok llama3.2:latest’in yaklaşık yarısı.',
+      'Derine indikçe iki belirti öne çıktı. Model çoktan seçmeli formatı %0 oranında takip etti — cevap vermek yerine prompt’u tekrarladı. Ve “Görkem kimdir?” diye sorulduğunda, doğru cevap eğitim verisinde dururken her koşuda bambaşka bir biyografi uydurdu (model, blockchain figürü, oyuncu).',
+    ],
+    lessons: [
+      'The chat template is not a formatting detail — it is load-bearing. A template mismatch can quietly zero out an entire training run while every step still "succeeds".',
+      'A negative result you can explain is worth more than a positive one you can’t. Measuring the failure properly taught me more than a lucky success would have.',
+      'Fine-tuning shifts weight distributions; it does not memorize facts on command. Weak, malformed signal means the base model’s priors win — and you get confident hallucination.',
+    ],
+    lessonsTr: [
+      'Chat template bir biçimlendirme ayrıntısı değil — taşıyıcı bir öğedir. Bir template uyumsuzluğu, her adım “başarılı” görünürken tüm bir eğitim koşusunu sessizce sıfırlayabilir.',
+      'Açıklayabildiğin bir olumsuz sonuç, açıklayamadığın bir olumludan daha değerlidir. Başarısızlığı düzgün ölçmek bana şanslı bir başarıdan çok daha fazlasını öğretti.',
+      'İnce ayar ağırlık dağılımlarını kaydırır; komutla gerçek ezberlemez. Zayıf, bozuk sinyal, temel modelin önsel eğilimlerinin kazanması demektir — ve karşılığında kendinden emin halüsinasyon alırsın.',
+    ],
     images: [
       { src: '/projects/llm-lora-finetuning/v1-vs-v2.svg', caption: 'The headline: two fine-tunes measured side by side — v1 (Llama 3.2-3B) vs v2 (Gemma-4-E4B). Tool-calling 17% → 92%, identity and chat template both fixed', captionTr: 'Ana bulgu: yan yana ölçülen iki fine-tune — v1 (Llama 3.2-3B) vs v2 (Gemma-4-E4B). Tool calling %17 → %92; kimlik ve chat template düzeltildi' },
       { src: '/projects/llm-lora-finetuning/pipeline.svg', caption: 'Bilingual dataset from scraping, hand-authoring, and synthetic pairs — v2 adds ~20% thinking traces and tool-calling examples', captionTr: 'Kazıma, elle yazım ve sentetik çiftlerden iki dilli veri kümesi — v2, ~%20 düşünme izi ve tool calling örnekleri ekler' },
@@ -153,6 +261,68 @@ const PROJECTS = [
       { label: 'Eğitildiği donanım', value: 'Tek RTX 5070, 12 GB (tepe 9,8 GB)' },
       { label: 'Yayınlandı', value: 'Hub’da v1 + v2 modelleri ve veri kümeleri' },
     ],
+    // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
+    role: 'Solo',
+    period: '2026',
+    status: 'shipped',
+    tier: 'featured',
+    problem:
+      'Small open models carry no consistent identity and cannot call tools. Worse, a fine-tune can fail silently — training runs, loss falls, and the model learns almost nothing. That is exactly what happened to v1, and only the benchmark caught it.',
+    problemTr:
+      'Küçük açık modellerin tutarlı bir kimliği yok ve araç çağıramıyorlar. Daha kötüsü, bir fine-tune sessizce başarısız olabiliyor — eğitim koşuyor, kayıp düşüyor, model neredeyse hiçbir şey öğrenmiyor. v1’de tam olarak bu oldu ve yalnızca benchmark yakaladı.',
+    flow: 'Scraped + hand-written + synthetic pairs → merge → text-only 4-bit QLoRA on Gemma-4-E4B (multimodal towers offloaded to CPU) → held-out tool-calling set + MIHENK, weight-matched against the base',
+    flowTr: 'Kazınmış + elle yazılmış + sentetik çiftler → birleştirme → Gemma-4-E4B üzerinde metin-only 4-bit QLoRA (multimodal kuleler CPU’ya taşınır) → ayrılmış tool calling kümesi + MIHENK, base modelle eşleştirilerek',
+    metrics: [
+      { label: 'Tool-calling', value: '17% → 92%', condition: 'model performance — correct-tool rate, held-out 12-scenario set including one unseen tool' },
+      { label: 'MIHENK, v2 vs base', value: '73.4% vs 76.6%', condition: 'model performance — complete 800-item set, adapter merged, weight-matched' },
+      { label: 'Peak VRAM', value: '9.8 GB', condition: 'training footprint — one RTX 5070, 12 GB, text-only 4-bit QLoRA' },
+      { label: 'Synthetic batches', value: '70', condition: 'dataset scope — 34 EN + 36 TR, layered on scraped and hand-written pairs' },
+    ],
+    metricsTr: [
+      { label: 'Tool calling', value: '%17 → %92', condition: 'model performansı — ayrılmış 12 senaryoluk kümede doğru-araç oranı, biri görülmemiş araç' },
+      { label: 'MIHENK, v2 ve base', value: '%73,4 — %76,6', condition: 'model performansı — tam 800 soruluk küme, adaptör birleştirilmiş, ağırlık eşleşmeli' },
+      { label: 'Tepe VRAM', value: '9,8 GB', condition: 'eğitim ayak izi — tek RTX 5070, 12 GB, metin-only 4-bit QLoRA' },
+      { label: 'Sentetik grup', value: '70', condition: 'veri kümesi kapsamı — 34 EN + 36 TR, kazınmış ve elle yazılmış çiftlerin üstüne' },
+    ],
+    useCases: [
+      'Domain-specific assistant training on a single consumer GPU',
+      'Catching a silent fine-tune failure before it ships',
+    ],
+    useCasesTr: [
+      'Tek tüketici GPU’sunda alan-özel asistan eğitimi',
+      'Sessiz bir fine-tune başarısızlığını yayınlamadan önce yakalamak',
+    ],
+    decisions: [
+      { choice: 'The chat template is always read from the model’s own AutoProcessor, guarded by a mandatory round-trip test', why: 'A hand-copied template is what silently destroyed v1; reading it from the model makes that class of bug impossible', tradeoff: 'Adds a required test to every run — which is how Gemma-4 was caught dropping a "thinking" field, where the correct key is "reasoning"' },
+    ],
+    decisionsTr: [
+      { choice: 'Chat template her zaman modelin kendi AutoProcessor’ından okunur ve zorunlu bir gidiş-dönüş testiyle korunur', why: 'v1’i sessizce mahveden şey elle kopyalanmış bir template’ti; modelden okumak bu hata sınıfını imkânsız kılıyor', tradeoff: 'Her koşuya zorunlu bir test ekliyor — Gemma-4’ün bir "thinking" alanını düşürdüğü, doğru anahtarın "reasoning" olduğu böyle yakalandı' },
+    ],
+    contribution: [
+      'The dataset architecture: three sources combined, with roughly 20% thinking traces and explicit tool-calling turns layered in for v2.',
+      'The chat-template diagnosis — the root cause of v1’s failure — and the round-trip guard that now prevents it.',
+      'Fitting Gemma-4-E4B into 12 GB by offloading the multimodal towers and elastic per-layer embeddings to CPU.',
+      'The evaluation protocol: a held-out scenario set plus MIHENK, always weight-matched against the model’s own base. Unsloth, TRL and PEFT are off the shelf.',
+    ],
+    contributionTr: [
+      'Veri kümesi mimarisi: üç kaynağın birleştirilmesi, v2 için ~%20 düşünme izi ve açık tool calling turlarının katmanlanması.',
+      'Chat template teşhisi — v1’in başarısızlığının kök nedeni — ve bunu artık engelleyen gidiş-dönüş koruması.',
+      'Multimodal kuleleri ve esnek katman-başı embedding’leri CPU’ya taşıyarak Gemma-4-E4B’yi 12 GB’a sığdırmak.',
+      'Değerlendirme protokolü: ayrılmış senaryo kümesi artı MIHENK, her zaman modelin kendi base’iyle ağırlık eşleşmeli. Unsloth, TRL ve PEFT hazır.',
+    ],
+    limitations: [
+      'v2 trades a modest overall MIHENK dip for a large tool-calling gain — short-answer accuracy regresses because the model became more verbose.',
+      'The tool-calling gain is measured on 12 held-out scenarios, which shows the direction and does not bound the error.',
+    ],
+    limitationsTr: [
+      'v2, mütevazı bir genel MIHENK düşüşünü büyük bir tool calling kazancıyla takas ediyor — model daha ayrıntılı konuştuğu için kısa cevap geriliyor.',
+      'Tool calling kazancı 12 ayrılmış senaryoda ölçüldü; bu yönü gösterir, hatayı sınırlamaz.',
+    ],
+    provenance: 'mixed',
+    provenanceNote:
+      'The training corpus combines scraped public developer sources, hand-written persona conversations, and 70 programmatically generated batches. Declared in the repository README.',
+    provenanceNoteTr:
+      'Eğitim derlemi üç kaynağı birleştiriyor: kazınmış açık geliştirici kaynakları, elle yazılmış persona konuşmaları ve programatik üretilmiş 70 grup. Depo README’sinde beyan edilmiş.',
   },
   {
     slug: 'ayarlicazhocam-tool-agent',
@@ -222,9 +392,50 @@ const PROJECTS = [
       { label: 'Güvenlik', value: 'Argümanlar çalıştırmadan önce doğrulanır · kod-exec erişimi yok' },
       { label: 'Dağıtım', value: 'Hugging Face Spaces’te canlı Gradio uygulaması' },
     ],
+    // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
+    role: 'Solo',
+    period: '2026',
+    status: 'shipped',
+    tier: 'supporting',
+    problem:
+      'A small open model that can call real APIs is more useful than a bigger one that cannot. But when an agent answers, the user has no way to tell whether it called anything or made the answer up.',
+    problemTr:
+      'Gerçek API çağırabilen küçük bir açık model, çağıramayan büyük bir modelden daha kullanışlı. Ama ajan cevap verdiğinde kullanıcı, gerçekten bir şey çağırdığını mı yoksa cevabı uydurduğunu mu anlayamıyor.',
+    flow: 'User turn → model emits a typed function call → arguments validated in Python → real Open-Meteo request → function response → persona answer, with every call rendered as its own block',
+    flowTr: 'Kullanıcı turu → model tipli bir fonksiyon çağrısı üretir → argümanlar Python’da doğrulanır → gerçek Open-Meteo isteği → fonksiyon yanıtı → persona cevabı, her çağrı kendi bloğunda gösterilir',
+    metrics: null,
+    metricsTr: null,
+    useCases: [],
+    useCasesTr: [],
+    decisions: [
+      { choice: 'Python always makes the HTTP request, never the model', why: 'Keeps a hard boundary between deciding and doing — the model is never given code execution', tradeoff: 'Every new tool needs a hand-written executor' },
+      { choice: 'Tool schemas as typed google.genai FunctionDeclarations instead of hand-written JSON', why: 'A malformed schema fails at definition time rather than mid-conversation', tradeoff: 'Ties the project to the google-genai SDK' },
+    ],
+    decisionsTr: [
+      { choice: 'HTTP isteğini her zaman Python yapar, model asla', why: 'Karar vermekle iş yapmak arasında sert bir sınır kurar — modele hiç kod çalıştırma verilmez', tradeoff: 'Her yeni araç için elle yazılmış bir çalıştırıcı gerekir' },
+      { choice: 'Araç şemaları elle yazılmış JSON yerine tipli google.genai FunctionDeclaration’ları', why: 'Bozuk bir şema konuşmanın ortasında değil tanım anında hata verir', tradeoff: 'Projeyi google-genai SDK’sına bağlar' },
+    ],
+    contribution: [
+      'The transparency surface: every tool call, its arguments and its return rendered as an expandable block under the answer.',
+      'The validation boundary — arguments are type- and format-checked before execution — and resolving the model id from the live model list instead of hard-coding it. Gradio and the google-genai SDK are off the shelf.',
+    ],
+    contributionTr: [
+      'Şeffaflık yüzeyi: her tool çağrısı, argümanları ve dönüşü cevabın altında açılabilir bir blok olarak gösterilir.',
+      'Doğrulama sınırı — argümanlar çalıştırılmadan önce tip ve format açısından denetlenir — ve model kimliğinin sabit kodlanmak yerine canlı model listesinden çözülmesi. Gradio ve google-genai SDK hazır.',
+    ],
+    limitations: [
+      'Two tools and no evaluation set. This demonstrates the loop; it does not measure it.',
+    ],
+    limitationsTr: [
+      'İki araç ve değerlendirme kümesi yok. Bu, döngüyü gösteriyor; ölçmüyor.',
+    ],
   },
   {
     slug: 'ayarlicazhocam-agent',
+    unverified: [
+      'results.Groq latency — the \'0.8-1.1 s\' range is not stated in the repository; the README gives \'0.8-7 s locally\' and a single provider reading of ~1.1 s. Only the verified local figure was carried into metrics.',
+    ],
+
     category: 'AI Agents & Tooling',
     cover: '/projects/ayarlicazhocam-agent/cover.svg',
     mark: 'MARK IV',
@@ -296,6 +507,57 @@ const PROJECTS = [
       { label: 'Ollama gecikmesi', value: 'tur başına 0,8–7 sn (yerel)' },
       { label: 'Groq gecikmesi', value: 'tur başına 0,8–1,1 sn' },
       { label: 'Testler', value: '112 test geçiyor (2026-08-02 doğrulandı)' },
+    ],
+    // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
+    role: 'Solo',
+    period: '2026',
+    status: 'shipped',
+    tier: 'supporting',
+    problem:
+      'An LLM can talk about your tasks convincingly without touching them, and once it does change something you still cannot tell whether its confirmation matches what is in the database.',
+    problemTr:
+      'Bir LLM, görevlerine hiç dokunmadan onlar hakkında ikna edici biçimde konuşabilir; bir şeyi gerçekten değiştirdiğinde de verdiği onayın veritabanındakiyle örtüşüp örtüşmediğini anlayamazsın.',
+    flow: 'Gradio → orchestrator → tool registry → task tools → TaskService → repository → SQLite, with each result normalised into one envelope and fed back into the next turn',
+    flowTr: 'Gradio → orkestratör → tool registry → görev araçları → TaskService → repository → SQLite; her sonuç tek bir zarfa normalleştirilip sonraki tura geri beslenir',
+    metrics: [
+      { label: 'Tests', value: '112 passing', condition: 'validation scope — verified 2026-08-02' },
+      { label: 'Providers', value: '4', condition: 'system scope — Ollama qwen2.5:7b, Groq, Google Gemini, own fine-tuned Gemma' },
+      { label: 'Local latency', value: '0.8–7 s per turn', condition: 'runtime — local Ollama, varies with model size' },
+      { label: 'Storage', value: '5 tables', condition: 'system scope — projects, tasks, daily_plans, daily_plan_items, work_logs' },
+    ],
+    metricsTr: [
+      { label: 'Test', value: '112 geçiyor', condition: 'doğrulama kapsamı — 2026-08-02’de doğrulandı' },
+      { label: 'Sağlayıcı', value: '4', condition: 'sistem kapsamı — Ollama qwen2.5:7b, Groq, Google Gemini, kendi fine-tune’lu Gemma' },
+      { label: 'Yerel gecikme', value: 'tur başına 0,8–7 sn', condition: 'çalışma zamanı — yerel Ollama, model boyutuna göre değişir' },
+      { label: 'Depolama', value: '5 tablo', condition: 'sistem kapsamı — projects, tasks, daily_plans, daily_plan_items, work_logs' },
+    ],
+    useCases: [
+      'Database-backed conversational interfaces where every answer must be grounded',
+      'A provider-agnostic agent layer',
+    ],
+    useCasesTr: [
+      'Her cevabın veriye dayanması gereken veritabanı destekli konuşma arayüzleri',
+      'Sağlayıcıdan bağımsız bir ajan katmanı',
+    ],
+    decisions: [
+      { choice: 'One standard result envelope — success / data / message / error — for every tool', why: 'The model reads back what actually happened instead of assuming its call worked', tradeoff: 'Every tool has to be wrapped, even trivial ones' },
+    ],
+    decisionsTr: [
+      { choice: 'Her araç için tek bir standart sonuç zarfı — success / data / message / error', why: 'Model, çağrısının işe yaradığını varsaymak yerine gerçekte ne olduğunu geri okur', tradeoff: 'Önemsiz olanlar dahil her aracın sarmalanması gerekir' },
+    ],
+    contribution: [
+      'The result envelope and the bounded tool-calling loop that grounds every answer in what the database returned.',
+      'The provider abstraction — four backends behind one agent interface, including the project’s own fine-tune as a drop-in — and the execution-trace UI showing arguments, status and duration per call.',
+    ],
+    contributionTr: [
+      'Sonuç zarfı ve her cevabı veritabanının döndürdüğüne bağlayan sınırlı tool calling döngüsü.',
+      'Sağlayıcı soyutlaması — tek ajan arayüzü arkasında dört backend, projenin kendi fine-tune’u da takılabilir hâlde — ve çağrı başına argüman, durum ve süreyi gösteren yürütme izi arayüzü.',
+    ],
+    limitations: [
+      'The 112 tests cover the tools and the service layer. The agent loop itself was verified by hand across two providers, not by an automated evaluation set.',
+    ],
+    limitationsTr: [
+      '112 test araçları ve servis katmanını kapsıyor. Ajan döngüsünün kendisi otomatik bir değerlendirme kümesiyle değil, iki sağlayıcıda elle doğrulandı.',
     ],
   },
   {
@@ -372,6 +634,67 @@ const PROJECTS = [
       { label: 'Eşik', value: 'kosinüs 0,575 · ayrım boşluğu 0,0161' },
       { label: 'Testler', value: '107 test geçiyor, tamamen çevrimdışı' },
     ],
+    // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
+    role: 'Solo',
+    period: '2026',
+    status: 'shipped',
+    tier: 'featured',
+    problem:
+      'In medicine a confidently wrong answer is more dangerous than no answer. Standard RAG always returns something, even when the corpus does not cover the question, and refusal driven by a prompt depends on the model’s mood rather than a rule.',
+    problemTr:
+      'Tıpta kendinden emin yanlış bir cevap, cevapsızlıktan daha tehlikeli. Standart RAG, derlem soruyu kapsamasa bile her zaman bir şey döndürür; prompt’a bırakılmış ret ise kurala değil modelin o anki hâline bağlıdır.',
+    flow: 'Question → turkish-e5-large embed → ChromaDB HNSW top-5 → cosine gate at 0.575 → above: Claude with context only · below: fixed Turkish refusal, the model is never called',
+    flowTr: 'Soru → turkish-e5-large embed → ChromaDB HNSW top-5 → 0,575 kosinüs eşiği → üstünde: yalnızca context ile Claude · altında: sabit Türkçe ret, model hiç çağrılmaz',
+    metrics: [
+      { label: 'Corpus', value: '24,612 → 22,162 → 2,072 chunks', condition: 'dataset scope — de-duplicated, 300 documents sampled with seed 42, zero lost words' },
+      { label: 'Retrieval', value: '20/20 at rank 1', condition: 'retrieval performance — 30-question frozen benchmark, 20 positive queries' },
+      { label: 'Gate accuracy', value: 'P / R / F1 = 1.000', condition: 'classifier performance — same benchmark, 20 positive and 10 out-of-domain negative' },
+      { label: 'Threshold', value: 'cosine 0.575', condition: 'calibration — midpoint of a 0.0161 gap: positives bottom at 0.583, negatives top at 0.567' },
+      { label: 'Tests', value: '107 passing', condition: 'validation scope — fully offline' },
+    ],
+    metricsTr: [
+      { label: 'Derlem', value: '24.612 → 22.162 → 2.072 chunk', condition: 'veri kümesi kapsamı — tekilleştirildi, seed 42 ile 300 doküman örneklendi, sıfır kelime kaybı' },
+      { label: 'Retrieval', value: '20/20 rank-1', condition: 'retrieval performansı — 30 soruluk dondurulmuş benchmark, 20 olumlu sorgu' },
+      { label: 'Gate doğruluğu', value: 'P / R / F1 = 1,000', condition: 'sınıflandırma performansı — aynı benchmark, 20 olumlu ve 10 alan dışı olumsuz' },
+      { label: 'Eşik', value: 'kosinüs 0,575', condition: 'kalibrasyon — 0,0161’lik boşluğun orta noktası: olumlular 0,583’te diplerken olumsuzlar 0,567’de tavan yapıyor' },
+      { label: 'Test', value: '107 geçiyor', condition: 'doğrulama kapsamı — tamamen offline' },
+    ],
+    useCases: [
+      'Turkish medical question answering over a curated corpus',
+      'Any retrieval system where a wrong answer costs more than no answer',
+    ],
+    useCasesTr: [
+      'Seçilmiş bir derlem üzerinde Türkçe tıbbi soru-cevap',
+      'Yanlış cevabın cevapsızlıktan pahalıya mal olduğu her retrieval sistemi',
+    ],
+    decisions: [
+      { choice: 'A hard similarity gate in front of the model instead of a prompt instruction', why: 'Refusal becomes deterministic and auditable rather than a matter of prompt luck', tradeoff: 'Some answerable questions get refused when their phrasing drifts from the corpus vocabulary' },
+      { choice: 'The threshold derived from the separation gap rather than chosen as a round number', why: '0.575 is the midpoint of a measured 0.0161 gap, so it is defensible rather than arbitrary', tradeoff: 'The gap was measured on the evaluation set itself, which is the project’s main limitation' },
+    ],
+    decisionsTr: [
+      { choice: 'Prompt talimatı yerine modelin önünde sert bir benzerlik eşiği', why: 'Ret, prompt şansına değil deterministik ve denetlenebilir bir karara bağlanır', tradeoff: 'İfadesi derlem sözcük dağarcığından uzaklaşan bazı cevaplanabilir sorular reddediliyor' },
+      { choice: 'Eşiğin yuvarlak bir sayı yerine ayrışma boşluğundan türetilmesi', why: '0,575, ölçülmüş 0,0161’lik boşluğun orta noktası; keyfî değil savunulabilir', tradeoff: 'Boşluk değerlendirme kümesinin kendisinde ölçüldü, projenin başlıca sınırlaması bu' },
+    ],
+    contribution: [
+      'The gate-before-model architecture — the decision that refusal must be deterministic rather than prompted.',
+      'The threshold calibration method: deriving 0.575 from the measured separation gap.',
+      'The paragraph-then-token chunker on cl100k_base, verified to lose zero words across 2,072 chunks.',
+      'The 30-question frozen benchmark with expected chunk ids and evidence excerpts verified at build time. The embedding model and ChromaDB are off the shelf.',
+    ],
+    contributionTr: [
+      'Modelden-önce-eşik mimarisi — reddin prompt’a değil deterministik bir karara bağlanması.',
+      'Eşik kalibrasyon yöntemi: 0,575’in ölçülmüş ayrışma boşluğundan türetilmesi.',
+      'cl100k_base üzerinde paragraf-sonra-token chunker’ı; 2.072 chunk boyunca sıfır kelime kaybı doğrulandı.',
+      'Beklenen chunk kimlikleri ve kanıt alıntılarıyla, derleme anında doğrulanan 30 soruluk dondurulmuş benchmark. Embedding modeli ve ChromaDB hazır.',
+    ],
+    limitations: [
+      'The threshold is calibrated on the evaluation set itself, so the perfect gate scores reflect calibration, not generalisation. This is the most important thing to know about the project.',
+      '300 documents sampled from 22,162 — the corpus is a demonstration, not medical coverage.',
+    ],
+    limitationsTr: [
+      'Eşik, değerlendirme kümesinin kendisinde kalibre edildi; dolayısıyla kusursuz gate skorları genellemeyi değil kalibrasyonu yansıtıyor. Bu proje hakkında bilinmesi gereken en önemli şey.',
+      '22.162 dokümandan 300’ü örneklendi — derlem bir gösterim, tıbbi kapsama değil.',
+    ],
   },
   {
     slug: 'pose-invariant-face-id',
@@ -446,6 +769,67 @@ const PROJECTS = [
       { label: 'Asıl sinyal', value: 'Gerçek marj 0,867 → 0,702 cephe→profil (~%19 düşüş)' },
       { label: 'Gömme', value: 'Kimlik silhouette 0,777 vs poz −0,006' },
       { label: 'Çapraz-poz retrieval', value: '1. sırada 1,000 (profil → cephe galeri)' },
+    ],
+    // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
+    role: 'Solo',
+    period: '2026',
+    status: 'research',
+    tier: 'featured',
+    problem:
+      'Everyone asks how much head pose breaks face verification, but the answer is usually produced with identity leakage between the set used to pick the threshold and the set used to test — which makes the number meaningless.',
+    problemTr:
+      'Kafa pozunun yüz doğrulamayı ne kadar bozduğu sık sorulur, ama cevap genelde eşiğin seçildiği kümeyle test kümesi arasında kimlik sızıntısıyla üretilir — bu da sayıyı anlamsız kılar.',
+    flow: 'FEI images → RetinaFace detect + 5-point align → per-image yaw estimate and binning → pretrained ArcFace embedding → threshold frozen on validation identities → disjoint test identities',
+    flowTr: 'FEI görselleri → RetinaFace tespit + 5 nokta hizalama → görsel başına yaw kestirimi ve kutulama → önceden eğitilmiş ArcFace embedding → validation kimliklerinde dondurulmuş eşik → ayrık test kimlikleri',
+    metrics: [
+      { label: 'Protocol', value: '200 subjects, 160/20/20', condition: 'study scope — split by identity with seed 42, no subject overlap, no pair crossing a boundary' },
+      { label: 'Verification', value: 'AUC 1.000 · EER 0.000', condition: 'model performance — every pose bin, threshold frozen on validation only' },
+      { label: 'The real finding', value: '0.867 → 0.702', condition: 'model performance — genuine-pair cosine, frontal↔frontal vs frontal↔profile, a ~19% relative drop while impostor scores stay flat' },
+      { label: 'Embedding geometry', value: 'identity 0.777 vs pose −0.006', condition: 'analysis result — silhouette scores' },
+      { label: 'Cross-pose retrieval', value: '1.000 at rank 1', condition: 'model performance — profile probe against a frontal gallery' },
+      { label: 'Alignment', value: '2,782 of 2,800', condition: 'processing scope — the 18 failures are dark frontal frames, not a pose failure' },
+    ],
+    metricsTr: [
+      { label: 'Protokol', value: '200 denek, 160/20/20', condition: 'çalışma kapsamı — seed 42 ile kimliğe göre bölündü, denek örtüşmesi yok, sınırı geçen çift yok' },
+      { label: 'Doğrulama', value: 'AUC 1,000 · EER 0,000', condition: 'model performansı — her poz kutusunda, eşik yalnızca validation’da donduruldu' },
+      { label: 'Asıl bulgu', value: '0,867 → 0,702', condition: 'model performansı — genuine çift kosinüsü, ön↔ön ve ön↔profil; impostor skorları sabitken ~%19 göreli düşüş' },
+      { label: 'Embedding geometrisi', value: 'kimlik 0,777 — poz −0,006', condition: 'analiz sonucu — silhouette skorları' },
+      { label: 'Pozlar arası retrieval', value: 'rank-1’de 1,000', condition: 'model performansı — profil sorgusu, ön yüz galerisine karşı' },
+      { label: 'Hizalama', value: '2.800’ün 2.782’si', condition: 'işleme kapsamı — 18 başarısızlık karanlık ön kareler, poz kaynaklı değil' },
+    ],
+    useCases: [
+      'Honest robustness testing of a biometric system',
+      'Showing where a saturated accuracy hides a shrinking margin',
+    ],
+    useCasesTr: [
+      'Bir biyometrik sistemin dürüst dayanıklılık testi',
+      'Doymuş bir doğruluğun daralan marjı nerede gizlediğini göstermek',
+    ],
+    decisions: [
+      { choice: 'Report the margin once accuracy saturated, instead of reporting accuracy', why: 'AUC 1.000 in every bin says the task is too easy for this dataset, not that pose is harmless — the genuine-pair margin is where the effect actually lives', tradeoff: 'The headline result becomes harder to explain than a single accuracy number' },
+    ],
+    decisionsTr: [
+      { choice: 'Doğruluk doyunca doğruluğu değil marjı raporlamak', why: 'Her kutuda AUC 1,000, pozun zararsız olduğunu değil görevin bu veri kümesi için fazla kolay olduğunu söyler — etki asıl genuine çift marjında yaşıyor', tradeoff: 'Ana sonucu anlatmak tek bir doğruluk sayısından daha zor hale geliyor' },
+    ],
+    contribution: [
+      'The identity-disjoint protocol — the entire point of the study, and the part such measurements most often get wrong.',
+      'Per-image yaw estimation and binning, validated against the FEI capture index.',
+      'A 1000-resample bootstrap CI for the sparse profile–profile bin, and the ceiling-effect write-up. No model was trained: RetinaFace and ArcFace are used entirely off the shelf, and that is the design.',
+    ],
+    contributionTr: [
+      'Kimlik-ayrık protokol — çalışmanın bütün amacı ve bu tür ölçümlerin en sık yanlış yaptığı kısım.',
+      'Görsel başına yaw kestirimi ve kutulama; FEI çekim indeksine karşı doğrulandı.',
+      'Seyrek profil–profil kutusu için 1000 yeniden örneklemeli bootstrap güven aralığı ve tavan etkisi yazımı. Hiçbir model eğitilmedi: RetinaFace ve ArcFace tamamen hazır kullanıldı, tasarım da bu.',
+    ],
+    limitations: [
+      'A ceiling effect: accuracy is 1.000 everywhere, so the decision-level result says the task is too easy for this dataset rather than that pose is harmless.',
+      'FEI is a controlled studio database with uniform lighting and cooperative subjects. Nothing here transfers to surveillance conditions.',
+      'The profile–profile bin holds only 21 positive pairs.',
+    ],
+    limitationsTr: [
+      'Tavan etkisi: doğruluk her yerde 1,000, dolayısıyla karar seviyesindeki sonuç pozun zararsız olduğunu değil görevin bu veri kümesi için fazla kolay olduğunu söylüyor.',
+      'FEI, tek tip ışık ve iş birliği yapan deneklerle kontrollü bir stüdyo veri kümesi. Buradaki hiçbir şey gözetleme koşullarına taşınmaz.',
+      'Profil–profil kutusunda yalnızca 21 olumlu çift var.',
     ],
   },
   {
@@ -523,6 +907,61 @@ const PROJECTS = [
       { label: 'Karar eşiği', value: 'kosinüs 0,44 (yapılandırılabilir)' },
       { label: 'Kayıt süresi', value: 'tam kapsama için < 30 sn' },
     ],
+    // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
+    role: 'Solo',
+    period: '2026',
+    status: 'shipped',
+    tier: 'supporting',
+    problem:
+      'Face login enrolled from a single frontal frame fails the moment someone logs in at an angle, and the obvious fix — storing a reference photo — creates a biometric liability.',
+    problemTr:
+      'Tek bir ön kareyle kaydolan yüz girişi, kişi açılı giriş yaptığı anda çöker; bariz çözüm olan referans fotoğrafı saklamak ise biyometrik bir yükümlülük yaratır.',
+    flow: 'Camera → RetinaFace → 5-point align → solvePnP yaw → quality filter → ArcFace 512-d embedding → SQLite BLOB gallery indexed by pose bin → cosine match at 0.44',
+    flowTr: 'Kamera → RetinaFace → 5 nokta hizalama → solvePnP yaw → kalite filtresi → ArcFace 512-d embedding → poz kutusuna göre indekslenmiş SQLite BLOB galerisi → 0,44 kosinüs eşleşmesi',
+    metrics: [
+      { label: 'Recognition latency', value: '< 100 ms per frame', condition: 'runtime — CPU or CUDA via ONNX Runtime' },
+      { label: 'Enrollment range', value: '−90° to +90° yaw', condition: 'system scope — guided scan until every pose bin is filled' },
+      { label: 'Registration time', value: '< 30 s', condition: 'runtime — for full pose coverage' },
+      { label: 'Stored per user', value: '512-d embeddings only', condition: 'privacy design — L2-normalised, no image ever written to disk' },
+      { label: 'Decision threshold', value: 'cosine 0.44', condition: 'calibration — carried over from the identity-disjoint study, configurable' },
+    ],
+    metricsTr: [
+      { label: 'Tanıma gecikmesi', value: 'kare başına < 100 ms', condition: 'çalışma zamanı — ONNX Runtime üzerinden CPU ya da CUDA' },
+      { label: 'Kayıt aralığı', value: '−90° ile +90° yaw', condition: 'sistem kapsamı — her poz kutusu dolana kadar rehberli tarama' },
+      { label: 'Kayıt süresi', value: '< 30 sn', condition: 'çalışma zamanı — tam poz kapsaması için' },
+      { label: 'Kullanıcı başına saklanan', value: 'yalnızca 512-d embedding', condition: 'gizlilik tasarımı — L2-normalize, diske hiç görsel yazılmaz' },
+      { label: 'Karar eşiği', value: 'kosinüs 0,44', condition: 'kalibrasyon — kimlik-ayrık çalışmadan devralındı, yapılandırılabilir' },
+    ],
+    useCases: [
+      'Access control and device unlock',
+      'Biometric deployment where storing reference images is the liability',
+    ],
+    useCasesTr: [
+      'Erişim kontrolü ve cihaz kilidi',
+      'Referans görsel saklamanın yükümlülük olduğu biyometrik dağıtım',
+    ],
+    decisions: [
+      { choice: 'Treat enrollment as a coverage problem instead of a single capture', why: 'A profile probe still matches a gallery built from many angles, which is exactly where single-shot enrollment fails', tradeoff: 'Enrollment takes a guided scan rather than one photo' },
+    ],
+    decisionsTr: [
+      { choice: 'Kaydı tek bir çekim yerine bir kapsama problemi olarak ele almak', why: 'Profil sorgusu, çok açılı kurulmuş bir galeriyle hâlâ eşleşir — tek karelik kaydın çöktüğü yer tam burası', tradeoff: 'Kayıt, tek fotoğraf yerine rehberli bir tarama gerektirir' },
+    ],
+    contribution: [
+      'Framing enrollment as pose-bin coverage, and the privacy decision to store embeddings and metadata but never an image.',
+      'The four-layer architecture with the UI decoupled from the perception pipeline, over a repository-pattern SQLite store with cascade deletion. The threshold comes from the companion pose study rather than a default; InsightFace, ONNX Runtime and the buffalo_l pack are off the shelf.',
+    ],
+    contributionTr: [
+      'Kaydın poz kutusu kapsaması olarak kurgulanması ve embedding ile meta veriyi saklayıp görseli asla saklamama kararı.',
+      'Arayüzün algı pipeline’ından ayrıldığı dört katmanlı mimari; altında cascade silmeli, repository desenli SQLite deposu. Eşik varsayılan değil, eşlik eden poz çalışmasından geliyor; InsightFace, ONNX Runtime ve buffalo_l paketi hazır.',
+    ],
+    limitations: [
+      'Latency and registration time are measured in normal use, not against a standardised benchmark.',
+      'No false-accept rate is reported for this application — the 0.44 threshold was validated on a different and much cleaner dataset.',
+    ],
+    limitationsTr: [
+      'Gecikme ve kayıt süresi standart bir benchmark’a karşı değil, normal kullanımda ölçüldü.',
+      'Bu uygulama için yanlış kabul oranı raporlanmıyor — 0,44 eşiği farklı ve çok daha temiz bir veri kümesinde doğrulandı.',
+    ],
   },
   {
     slug: 'turkish-english-nmt',
@@ -542,6 +981,23 @@ const PROJECTS = [
     metric: 'BLEU 36 → 43',
     metricTr: 'BLEU 36 → 43',
     github: gh('turkish-english-nmt'),
+    // Field Notes — migrated verbatim from caseStudies.js (12 Sep 2026).
+    challenges: [
+      'Fitting a real training run into a free GPU’s memory and time budget meant fp16, gradient accumulation for an effective batch of 128, and early stopping.',
+      'Turkish morphology makes tokenization choices matter more than usual, which is why the pipeline studies them explicitly.',
+    ],
+    challengesTr: [
+      'Gerçek bir eğitimi ücretsiz bir GPU’nun bellek ve zaman bütçesine sığdırmak; fp16, 128’lik efektif batch için gradyan biriktirme ve erken durdurma demekti.',
+      'Türkçe biçimbilimi, tokenizasyon seçimlerini normalden daha önemli kılar; hattın bunları açıkça incelemesinin nedeni budur.',
+    ],
+    lessons: [
+      'A strong pretrained checkpoint plus careful fine-tuning beats training from scratch, especially with limited data and compute.',
+      'For morphologically rich languages, how you tokenize is a first-class design decision, not an afterthought.',
+    ],
+    lessonsTr: [
+      'Güçlü bir önceden eğitilmiş kontrol noktası artı özenli fine-tune, özellikle sınırlı veri ve işlem gücüyle, sıfırdan eğitmeyi yener.',
+      'Biçimbilimsel açıdan zengin diller için tokenizasyon, sonradan düşünülecek bir ayrıntı değil, birinci sınıf bir tasarım kararıdır.',
+    ],
     images: [
       { src: '/projects/turkish-english-nmt/training-curves.png', caption: 'Training loss and BLEU curves across 3 epochs', captionTr: '3 epoch boyunca eğitim kaybı ve BLEU eğrileri' },
       { src: '/projects/turkish-english-nmt/bleu.png', caption: 'Baseline vs fine-tuned BLEU comparison', captionTr: 'Taban model ile fine-tune’lu modelin BLEU karşılaştırması' },
@@ -593,9 +1049,56 @@ const PROJECTS = [
       { label: 'Model boyutu', value: '76,6 milyon parametre' },
       { label: 'Eğitim süresi', value: 'T4 üzerinde ~60–90 dk' },
     ],
+    // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
+    role: 'Solo',
+    period: '2026',
+    status: 'shipped',
+    tier: 'supporting',
+    problem:
+      'Stock Turkish–English translation models leave obvious quality on the table, and fine-tuning one is widely assumed to need paid hardware.',
+    problemTr:
+      'Hazır Türkçe–İngilizce çeviri modelleri gözle görülür bir kaliteyi masada bırakıyor ve bunları fine-tune etmenin ücretli donanım gerektirdiği yaygın biçimde varsayılıyor.',
+    flow: 'Tatoeba dump → clean and split 80/10/10 → tokenisation study → MarianMT fine-tune, fp16, effective batch 128 → SacreBLEU → charts',
+    flowTr: 'Tatoeba dökümü → temizleme ve 80/10/10 bölme → tokenizasyon çalışması → MarianMT fine-tune, fp16, efektif batch 128 → SacreBLEU → grafikler',
+    metrics: [
+      { label: 'BLEU', value: '~36 → ~43', condition: 'model performance — baseline vs fine-tuned, held-out test split' },
+      { label: 'Dataset', value: '522,975 pairs', condition: 'dataset scope — 418,380 used for training' },
+      { label: 'Model', value: '76.6M parameters', condition: 'system scope — Helsinki-NLP/opus-mt-tr-en, shared SentencePiece vocab of 62,389' },
+      { label: 'Training time', value: '~60–90 min', condition: 'runtime — single free Colab T4' },
+    ],
+    metricsTr: [
+      { label: 'BLEU', value: '~36 → ~43', condition: 'model performansı — baseline ve fine-tune’lu, ayrılmış test bölümü' },
+      { label: 'Veri kümesi', value: '522.975 çift', condition: 'veri kümesi kapsamı — eğitimde 418.380 kullanıldı' },
+      { label: 'Model', value: '76,6M parametre', condition: 'sistem kapsamı — Helsinki-NLP/opus-mt-tr-en, 62.389 token’lık ortak SentencePiece sözlüğü' },
+      { label: 'Eğitim süresi', value: '~60–90 dk', condition: 'çalışma zamanı — tek ücretsiz Colab T4' },
+    ],
+    useCases: [
+      'Model fine-tuning under a zero-hardware budget',
+    ],
+    useCasesTr: [
+      'Sıfır donanım bütçesiyle model fine-tune etmek',
+    ],
+    contribution: [
+      'Splitting the workflow into numbered, re-runnable scripts, plus a single-file Colab version that reproduces the whole experiment.',
+      'The tokenisation comparison across character, word, byte and BPE, and evaluating with SacreBLEU rather than a hand-rolled BLEU. The base model and the Trainer are off the shelf.',
+    ],
+    contributionTr: [
+      'İş akışının numaralı, yeniden koşulabilir betiklere bölünmesi ve deneyin tamamını yeniden üreten tek dosyalık Colab sürümü.',
+      'Karakter, kelime, byte ve BPE arasında tokenizasyon karşılaştırması ve elle yazılmış BLEU yerine SacreBLEU ile değerlendirme. Base model ve Trainer hazır.',
+    ],
+    limitations: [
+      'Tatoeba sentences are short and clean. A +7 BLEU gain on that distribution says little about domain prose or long-form text.',
+    ],
+    limitationsTr: [
+      'Tatoeba cümleleri kısa ve temiz. Bu dağılımda +7 BLEU kazancı, alan metni ya da uzun metin hakkında pek bir şey söylemiyor.',
+    ],
   },
   {
     slug: 'miniature-transformers-from-scratch',
+    unverified: [
+      'results.Built — \'Aug 14 → Oct 3, 2025\' predates the first commit (2025-11-20). Plausible if built locally and pushed later, but the repository cannot confirm it. Left unchanged pending your own work records.',
+    ],
+
     cover: '/projects/miniature-transformers-from-scratch/cover.svg',
     category: 'LLM & NLP',
     mark: 'MARK IX',
@@ -610,6 +1113,23 @@ const PROJECTS = [
     glow: 'rgba(167,139,250,0.5)',
     tags: ['PyTorch', 'Transformer', 'From Scratch'],
     github: gh('miniature-transformers-from-scratch'),
+    // Field Notes — migrated verbatim from caseStudies.js (12 Sep 2026).
+    challenges: [
+      'Getting causal masking and the attention shapes exactly right is unforgiving — an off-by-one in the mask silently lets the model peek at the future and quietly breaks training.',
+      'Keeping the prototype small enough to train on a free GPU while still learning anything meaningful meant deliberately limiting context and vocabulary.',
+    ],
+    challengesTr: [
+      'Nedensel maskelemeyi ve dikkat boyutlarını tam doğru yapmak affetmez — maskede bir kayma, modelin sessizce geleceğe bakmasına izin verip eğitimi usulca bozar.',
+      'Prototipi ücretsiz bir GPU’da eğitilecek kadar küçük tutarken anlamlı bir şey öğrenmesini sağlamak, bağlamı ve sözlüğü bilinçli olarak sınırlamayı gerektirdi.',
+    ],
+    lessons: [
+      'Building a transformer by hand turns the paper diagrams into something you actually understand — attention stops being magic.',
+      'The hardest bugs live in shapes and masks, not in the math itself.',
+    ],
+    lessonsTr: [
+      'Bir transformer’ı elle inşa etmek, kâğıttaki şemaları gerçekten anladığın bir şeye dönüştürüyor — dikkat artık sihir olmaktan çıkıyor.',
+      'En zor hatalar matematikte değil, boyutlarda ve maskelerde yaşıyor.',
+    ],
     images: [
       { src: '/projects/miniature-transformers-from-scratch/formula-1.png', caption: 'The attention math the model implements by hand', captionTr: 'Modelin elle uyguladığı dikkat matematiği' },
       { src: '/projects/miniature-transformers-from-scratch/formula-2.jpg', caption: 'Multi-head attention, worked out on paper first', captionTr: 'Önce kâğıtta çözülen çok başlı dikkat' },
@@ -663,6 +1183,39 @@ const PROJECTS = [
       { label: 'Yapım', value: '14 Ağu → 3 Eki 2025' },
       { label: 'Çalıştığı yer', value: 'Ücretsiz Colab GPU' },
     ],
+    // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
+    role: 'Solo',
+    period: '2025–2026',
+    status: 'archived',
+    tier: 'experimental',
+    problem:
+      'Calling a transformer from a library is not the same as understanding it. The only way to find out what a GPT is underneath is to write every layer yourself.',
+    problemTr:
+      'Bir transformer’ı kütüphaneden çağırmak onu anlamakla aynı şey değil. Bir GPT’nin altında ne olduğunu öğrenmenin tek yolu her katmanı kendin yazmak.',
+    flow: 'Custom tokenizer → embeddings → self-attention → multi-head attention with causal masking → layer norm and MLP → decoder blocks → vocabulary logits',
+    flowTr: 'Kendi tokenizer’ı → embedding’ler → self-attention → causal masking’li multi-head attention → layer norm ve MLP → decoder blokları → sözlük logit’leri',
+    metrics: null,
+    metricsTr: null,
+    useCases: [],
+    useCasesTr: [],
+    decisions: [
+      { choice: 'Build it as numbered notebooks that grow the model incrementally', why: 'Each module runs on its own, so a reader can see exactly where each piece enters', tradeoff: 'Not a reusable codebase — it is a teaching artifact and stops at a 64-token context' },
+    ],
+    decisionsTr: [
+      { choice: 'Modeli adım adım büyüten numaralı notebook’lar olarak kurmak', why: 'Her modül kendi başına çalışıyor, böylece okuyucu her parçanın tam olarak nerede devreye girdiğini görebiliyor', tradeoff: 'Yeniden kullanılabilir bir kod tabanı değil — bir öğretim çıktısı ve 64 token bağlamda duruyor' },
+    ],
+    contribution: [
+      'Every core component hand-written: embeddings, self- and multi-head attention, causal masking, layer norm, MLP, decoder block and tokenizer. Nothing above PyTorch primitives is imported.',
+    ],
+    contributionTr: [
+      'Her çekirdek bileşen elle yazıldı: embedding’ler, self- ve multi-head attention, causal masking, layer norm, MLP, decoder bloğu ve tokenizer. PyTorch primitiflerinin üstünde hiçbir şey içe aktarılmadı.',
+    ],
+    limitations: [
+      'A 64-token context prototype. It demonstrates the mechanism and has no capability worth measuring.',
+    ],
+    limitationsTr: [
+      '64 token bağlamlı bir prototip. Mekanizmayı gösteriyor ve ölçmeye değer bir yeteneği yok.',
+    ],
   },
   {
     slug: 'face-detection-pipeline',
@@ -682,6 +1235,23 @@ const PROJECTS = [
     metric: '140K images · ~11 ms/image',
     metricTr: '140K görüntü · ~11 ms/görüntü',
     github: gh('face-detection-pipeline'),
+    // Field Notes — migrated verbatim from caseStudies.js (12 Sep 2026).
+    challenges: [
+      'The core tension is recall vs precision: lowering the threshold finds small faces but invites false positives. The two-stage design resolves it by making the second pass do the filtering.',
+      'Running a 140,000-image benchmark reliably meant per-image CSV logging, safe resume after interruption, and never crashing on a corrupt file.',
+    ],
+    challengesTr: [
+      'Temel gerilim duyarlılık ve kesinlik arasındadır: eşiği düşürmek küçük yüzleri bulur ama hatalı tespit davet eder. İki aşamalı tasarım, filtrelemeyi ikinci geçişe yaptırarak bunu çözer.',
+      '140.000 görsellik testi güvenilir çalıştırmak; görsel başına CSV kaydı, kesinti sonrası güvenli devam ve bozuk dosyada asla çökmemek demekti.',
+    ],
+    lessons: [
+      'You can often beat a model’s limitations with a smarter pipeline around it, without touching the weights.',
+      'Designing for failure — resumable runs, corrupt-file handling, a review queue — is what makes a benchmark trustworthy.',
+    ],
+    lessonsTr: [
+      'Bir modelin sınırlarını, ağırlıklarına dokunmadan, etrafına kuracağın daha akıllı bir hatla çoğu zaman aşabilirsin.',
+      'Başarısızlığa göre tasarlamak — devam ettirilebilir çalışmalar, bozuk dosya yönetimi, inceleme kuyruğu — bir testi güvenilir kılan şeydir.',
+    ],
     images: [
       { src: '/projects/face-detection-pipeline/multi-face-detected.jpg', caption: 'Multiple faces detected and verified in a single pass', captionTr: 'Tek geçişte tespit edilip doğrulanan birden fazla yüz' },
       { src: '/projects/face-detection-pipeline/portrait-input.jpg', caption: 'Input image before detection', captionTr: 'Tespit öncesi girdi görseli' },
@@ -738,6 +1308,59 @@ const PROJECTS = [
       { label: 'İncelemeye ayrılan', value: '%0,26' },
       { label: 'Tespit edilen yüz', value: '140.836 (görsel başına ort. 1,006)' },
     ],
+    // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
+    role: 'Solo',
+    period: '2026',
+    status: 'shipped',
+    tier: 'supporting',
+    problem:
+      'Short-range face detectors miss small faces and hallucinate faces in blurred texture. No single confidence threshold fixes both — raising it loses the small faces, lowering it keeps the phantoms.',
+    problemTr:
+      'Kısa menzilli yüz dedektörleri küçük yüzleri kaçırır ve bulanık dokuda olmayan yüz uydurur. Tek bir güven eşiği ikisini birden çözmez — yükseltince küçük yüzler gider, düşürünce hayaletler kalır.',
+    flow: 'Full frame + top/bottom halves at threshold 0.30 → zoom into each candidate → re-detect at 0.65 with a centre check → IoU ≥ 0.4 deduplication → per-image CSV log, resumable',
+    flowTr: 'Tam kare + üst/alt yarılar, eşik 0,30 → her adaya yakınlaş → merkez kontrolüyle 0,65’te yeniden tespit → IoU ≥ 0,4 tekilleştirme → görsel başına CSV log, kaldığı yerden devam eder',
+    metrics: [
+      { label: 'Images processed', value: '140,000 · 0 failures', condition: 'processing scope — Kaggle benchmark, single-threaded Apple M3 CPU' },
+      { label: 'Speed', value: '~11 ms per image', condition: 'runtime — same run, total wall clock 25 m 17 s' },
+      { label: 'Faces detected', value: '140,836', condition: 'processing scope — 1.006 average per image' },
+      { label: 'Flagged for review', value: '0.26%', condition: 'processing scope — zero-face, low-confidence and many-face images routed to a review queue' },
+      { label: 'Model size', value: '230 KB', condition: 'system scope — BlazeFace short-range TFLite, bundled in the repo' },
+    ],
+    metricsTr: [
+      { label: 'İşlenen görsel', value: '140.000 · 0 hata', condition: 'işleme kapsamı — Kaggle benchmark’ı, tek çekirdek Apple M3 CPU' },
+      { label: 'Hız', value: 'görsel başına ~11 ms', condition: 'çalışma zamanı — aynı koşu, toplam 25 dk 17 sn' },
+      { label: 'Tespit edilen yüz', value: '140.836', condition: 'işleme kapsamı — görsel başına ortalama 1,006' },
+      { label: 'İncelemeye ayrılan', value: '%0,26', condition: 'işleme kapsamı — sıfır yüzlü, düşük güvenli ve çok yüzlü görseller inceleme kuyruğuna' },
+      { label: 'Model boyutu', value: '230 KB', condition: 'sistem kapsamı — BlazeFace short-range TFLite, depoda gömülü' },
+    ],
+    useCases: [
+      'Dataset preparation at scale',
+      'Batch vision work with no GPU budget',
+    ],
+    useCasesTr: [
+      'Ölçekli veri kümesi hazırlama',
+      'GPU bütçesi olmayan toplu görüntü işleme',
+    ],
+    decisions: [
+      { choice: 'Two-stage detect-then-verify instead of tuning one threshold', why: 'Real faces re-score above 0.90 when enlarged while false positives fail re-detection, so one model does the work of two', tradeoff: 'Roughly doubles the per-image cost' },
+    ],
+    decisionsTr: [
+      { choice: 'Tek eşiği ayarlamak yerine iki aşamalı tespit-sonra-doğrula', why: 'Gerçek yüzler büyütülünce 0,90’ın üstüne çıkarken yanlış pozitifler yeniden tespitte elenir; böylece tek model iki modelin işini yapar', tradeoff: 'Görsel başına maliyeti kabaca iki katına çıkarır' },
+    ],
+    contribution: [
+      'The two-stage detect-and-verify idea, and halving the frame so small faces become proportionally larger to the model.',
+      'Operational discipline at scale — per-image CSV logging, safe resume after interruption, and a human-review queue with full metadata. MediaPipe BlazeFace is off the shelf and unmodified.',
+    ],
+    contributionTr: [
+      'İki aşamalı tespit-ve-doğrula fikri ve küçük yüzlerin modele oransal olarak büyümesi için karenin ikiye bölünmesi.',
+      'Ölçekte operasyonel disiplin — görsel başına CSV log, kesintiden sonra güvenli devam ve tam meta veriyle insan inceleme kuyruğu. MediaPipe BlazeFace hazır ve değiştirilmemiş.',
+    ],
+    limitations: [
+      'There is no labelled ground truth on the 140k set, so "0 failures" means zero crashes and zero unreadable images, not verified detection accuracy.',
+    ],
+    limitationsTr: [
+      '140 binlik kümede etiketli gerçek referans yok; dolayısıyla “0 hata” doğrulanmış tespit doğruluğu değil, sıfır çökme ve sıfır okunamayan görsel demek.',
+    ],
   },
   {
     slug: 'yolo-custom-detector',
@@ -757,6 +1380,23 @@ const PROJECTS = [
     metric: '90.3% mAP@50',
     metricTr: '%90,3 mAP@50',
     github: gh('yolo-custom-detector'),
+    // Field Notes — migrated verbatim from caseStudies.js (12 Sep 2026).
+    challenges: [
+      'My first dataset was shot on one desk, in one light, from one angle — the model scored beautifully in validation and then failed on anything new. It had memorized the scene, not the object.',
+      'The fix was deliberate diversity: different lighting, distances, backgrounds, rotations, and partial occlusions, so the network was forced to isolate the object’s own features.',
+    ],
+    challengesTr: [
+      'İlk veri kümem tek bir masada, tek ışıkta, tek açıdan çekilmişti — model doğrulamada harika puan aldı, sonra yeni her şeyde çöktü. Nesneyi değil, sahneyi ezberlemişti.',
+      'Çözüm bilinçli çeşitlilikti: farklı ışık, mesafe, arka plan, dönüş ve kısmi kapanmalar; böylece ağ nesnenin kendi özelliklerini yalıtmaya zorlandı.',
+    ],
+    lessons: [
+      'When a model underperforms, the instinct is to reach for a bigger architecture. Far more often, the answer is hiding in the dataset.',
+      'Diversity in the data did more for accuracy than any hyperparameter I touched.',
+    ],
+    lessonsTr: [
+      'Bir model beklentiyi karşılamayınca ilk içgüdü daha büyük bir mimariye uzanmaktır. Oysa cevap çok daha sık veri kümesinde saklıdır.',
+      'Verideki çeşitlilik, doğruluğa dokunduğum her hiperparametreden daha fazlasını kattı.',
+    ],
     images: [
       { src: '/projects/yolo-custom-detector/desk-detected.jpg', caption: 'A cluttered desk — the one target pen localized inside a confidence box', captionTr: 'Karmaşık bir masa: hedef kalem güven kutusu içinde tam olarak bulunmuş' },
       { src: '/projects/yolo-custom-detector/occluded-input.jpg', caption: 'Before — the pen half-hidden between books', captionTr: 'Önce: kalem kitapların arasında yarı gizli' },
@@ -819,9 +1459,68 @@ const PROJECTS = [
       { label: 'Model', value: 'YOLO11n, ~2,6 milyon parametre, best.pt ~5 MB' },
       { label: 'Çıkarım', value: 'Dizüstü CPU’da görsel başına ~45 ms' },
     ],
+    // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
+    role: 'Solo',
+    period: '2026',
+    status: 'shipped',
+    tier: 'featured',
+    problem:
+      'Modern detectors only know the categories in public datasets. If the object you need exists in none of them, pretrained weights alone do not help — and it is not obvious how little data you can get away with.',
+    problemTr:
+      'Modern dedektörler yalnızca açık veri kümelerindeki kategorileri bilir. Aradığın nesne hiçbirinde yoksa önceden eğitilmiş ağırlıklar tek başına yetmez — üstelik ne kadar az veriyle idare edilebileceği de belli değildir.',
+    flow: '117 self-shot photos → hand-annotated boxes → deterministic 82/23/12 split → YOLO11n fine-tune at 640×640, 50 epochs, early stopping → inference',
+    flowTr: 'Kendi çekilen 117 fotoğraf → elle etiketlenmiş kutular → deterministik 82/23/12 bölme → 640×640’ta YOLO11n fine-tune, 50 epoch, erken durdurma → inference',
+    metrics: [
+      { label: 'mAP@50 / mAP@50-95', value: '0.903 / 0.740', condition: 'model performance — validation set, single class rotring_pen' },
+      { label: 'Precision / Recall', value: '0.90 / 0.83', condition: 'model performance — same validation set' },
+      { label: 'Held-out test', value: '11 of 12 detected', condition: 'model performance — 0.88–0.95 confidence, plus one photo taken after training finished' },
+      { label: 'Dataset', value: '117 photos', condition: 'dataset scope — self-collected across varied lighting, angle, distance, background and occlusion' },
+      { label: 'Inference', value: '~45 ms per image', condition: 'runtime — laptop CPU, no discrete GPU; best.pt is ~5 MB' },
+    ],
+    metricsTr: [
+      { label: 'mAP@50 / mAP@50-95', value: '0,903 / 0,740', condition: 'model performansı — doğrulama kümesi, tek sınıf rotring_pen' },
+      { label: 'Kesinlik / Duyarlılık', value: '0,90 / 0,83', condition: 'model performansı — aynı doğrulama kümesi' },
+      { label: 'Ayrılmış test', value: '12’nin 11’i', condition: 'model performansı — 0,88–0,95 güven, ayrıca eğitim bittikten sonra çekilen bir fotoğraf' },
+      { label: 'Veri kümesi', value: '117 fotoğraf', condition: 'veri kümesi kapsamı — farklı ışık, açı, mesafe, arka plan ve kapanmayla kendi çekilen' },
+      { label: 'Inference', value: 'görsel başına ~45 ms', condition: 'çalışma zamanı — dizüstü CPU, ayrık GPU yok; best.pt ~5 MB' },
+    ],
+    useCases: [
+      'Detecting a specific object that exists in no public dataset',
+    ],
+    useCasesTr: [
+      'Hiçbir açık veri kümesinde bulunmayan belirli bir nesneyi tespit etmek',
+    ],
+    decisions: [
+      { choice: 'Start from the pretrained yolo11n checkpoint rather than training from scratch', why: 'The backbone already knows generic visual features, so fine-tuning only has to teach the new object — which is why ~100 images is enough', tradeoff: 'The detector inherits whatever biases the pretrained backbone carries' },
+    ],
+    decisionsTr: [
+      { choice: 'Sıfırdan eğitmek yerine önceden eğitilmiş yolo11n kontrol noktasından başlamak', why: 'Omurga genel görsel özellikleri zaten biliyor, fine-tune yalnızca yeni nesneyi öğretiyor — ~100 görselin yetmesinin nedeni bu', tradeoff: 'Dedektör, önceden eğitilmiş omurganın taşıdığı önyargıları da devralıyor' },
+    ],
+    contribution: [
+      'Collecting and hand-annotating the entire dataset — 117 photos shot under deliberately varied conditions. This is the actual work in the project.',
+      'Deterministic splitting with corruption, duplicate and split-leak checks before training.',
+      'Ultralytics training is a single command and is off the shelf; what is authored here is the data and the evaluation around it.',
+    ],
+    contributionTr: [
+      'Veri kümesinin tamamını toplamak ve elle etiketlemek — bilinçli olarak değişken koşullarda çekilmiş 117 fotoğraf. Projedeki asıl iş bu.',
+      'Eğitimden önce bozulma, tekrar ve bölme sızıntısı kontrolleriyle deterministik bölme.',
+      'Ultralytics eğitimi tek komut ve hazır; burada kaleme alınan şey veri ve etrafındaki değerlendirme.',
+    ],
+    limitations: [
+      'One class, one physical object, 117 images. The number says the pipeline works; it says nothing about a general pen detector.',
+      'Twelve held-out test images is too few to bound the error.',
+    ],
+    limitationsTr: [
+      'Tek sınıf, tek fiziksel nesne, 117 görsel. Sayı pipeline’ın çalıştığını söylüyor; genel bir kalem dedektörü hakkında hiçbir şey söylemiyor.',
+      'On iki ayrılmış test görseli hatayı sınırlamak için fazla az.',
+    ],
   },
   {
     slug: 'facelock',
+    unverified: [
+      'results.Unknown-face tests — the 0.72 / 0.79 rejection distances are not stated anywhere in the repository. Deliberately NOT carried into metrics.',
+    ],
+
     category: 'Computer Vision',
     cover: '/projects/facelock/cover.svg',
     mark: 'MARK XII',
@@ -890,6 +1589,41 @@ const PROJECTS = [
       { label: 'Bilinmeyen yüz testleri', value: '0,72 / 0,79 mesafeyle reddedildi' },
       { label: 'Donanım', value: 'Yalnızca CPU, sıradan web kamerası' },
       { label: 'Eğitim kümesi', value: 'Kişi başına 20–30 fotoğraf' },
+    ],
+    // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
+    role: 'Solo',
+    period: '2026',
+    status: 'archived',
+    tier: 'experimental',
+    problem:
+      'Running a recognition model on every webcam frame drops the frame rate far enough that the feed becomes unusable on an ordinary laptop.',
+    problemTr:
+      'Tanıma modelini her webcam karesinde koşturmak, kare hızını sıradan bir dizüstünde akışı kullanılamaz hale getirecek kadar düşürüyor.',
+    flow: 'Webcam frame → BlazeFace detect every frame → every Nth frame the crop goes to a dlib 128-d encoding → nearest neighbour in encodings.pickle → accept below 0.50 distance',
+    flowTr: 'Webcam karesi → her karede BlazeFace tespiti → her N karede bir kırpım dlib 128-d encoding’ine gider → encodings.pickle içinde en yakın komşu → 0,50 mesafenin altında kabul',
+    metrics: [
+      { label: 'Match threshold', value: '0.50 face distance', condition: 'system scope — strict; unknown faces are rejected rather than guessed' },
+      { label: 'Training set', value: '20–30 photos per person', condition: 'dataset scope — all encodings kept, no averaging' },
+    ],
+    metricsTr: [
+      { label: 'Eşleşme eşiği', value: '0,50 yüz mesafesi', condition: 'sistem kapsamı — sıkı; bilinmeyen yüzler tahmin edilmek yerine reddedilir' },
+      { label: 'Eğitim kümesi', value: 'kişi başına 20–30 fotoğraf', condition: 'veri kümesi kapsamı — tüm encoding’ler saklanır, ortalama alınmaz' },
+    ],
+    useCases: [],
+    useCasesTr: [],
+    contribution: [
+      'The two-tier cadence — cheap detector every frame, expensive recogniser every Nth — which is what keeps the feed smooth.',
+      'Keeping every encoding per person instead of averaging them, so different angles and lighting all contribute to the nearest-neighbour match. MediaPipe and dlib face_recognition are off the shelf.',
+    ],
+    contributionTr: [
+      'İki kademeli tempo — her karede ucuz dedektör, her N karede pahalı tanıyıcı — akışı akıcı tutan şey bu.',
+      'Kişi başına encoding’lerin ortalaması alınmak yerine hepsinin saklanması; böylece farklı açı ve ışıklar en yakın komşu eşleşmesine katkı veriyor. MediaPipe ve dlib face_recognition hazır.',
+    ],
+    limitations: [
+      'No measured accuracy. Superseded by the face-detection pipeline on scale and by the pose-robust login on angle.',
+    ],
+    limitationsTr: [
+      'Ölçülmüş doğruluk yok. Ölçekte yüz tespiti pipeline’ı, açıda poz-dayanıklı giriş tarafından geride bırakıldı.',
     ],
   },
   {
@@ -965,6 +1699,61 @@ const PROJECTS = [
       { label: 'Minik LLM’ler', value: '4 mimari, 19–63 bin parametre, en iyi kayıp 0,514' },
       { label: 'Geçerli üretilen isim', value: '0,7 sıcaklıkta %100' },
     ],
+    // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
+    role: 'Solo',
+    period: '2026',
+    status: 'shipped',
+    tier: 'supporting',
+    problem:
+      'Production tokenizers carry 130K–260K token vocabularies and still split domain words like "Mbappé" into pieces. It is not obvious how small a domain-trained vocabulary can get before it loses to them.',
+    problemTr:
+      'Üretim tokenizer’ları 130B–260B token’lık sözlükler taşıyor ve yine de “Mbappé” gibi alan kelimelerini parçalara bölüyor. Alanda eğitilmiş bir sözlüğün, onlara yenilmeden ne kadar küçülebileceği belli değil.',
+    flow: 'MediaWiki API → clean corpus → byte-level BPE, vocab 1,024 → head-to-head token counts against Qwen2.5, Gemma-2 and DeepSeek-V3 · separately: 4 tiny architectures trained under identical conditions',
+    flowTr: 'MediaWiki API → derlem temizliği → byte-level BPE, sözlük 1.024 → Qwen2.5, Gemma-2 ve DeepSeek-V3 ile karşılıklı token sayımı · ayrıca: aynı koşullarda eğitilen 4 mini mimari',
+    metrics: [
+      { label: 'Vocabulary', value: '1,024 tokens', condition: 'system scope — 125–250× smaller than the production tokenizers compared against' },
+      { label: 'Compression', value: '~1.81 tokens per word', condition: 'tokenizer performance — ~9,149-word World Cup corpus, round-trips lossless' },
+      { label: 'Domain words', value: 'Mbappé: 1 token', condition: 'tokenizer performance — versus 2–3 in Qwen2.5, Gemma-2 and DeepSeek-V3' },
+      { label: 'Best training loss', value: '0.514', condition: 'model performance — Qwen3.5 hybrid, 41,992 parameters, identical data and seed across all four' },
+      { label: 'Generated names', value: '100% valid', condition: 'model performance — at temperature 0.7, Turkish first names' },
+    ],
+    metricsTr: [
+      { label: 'Sözlük', value: '1.024 token', condition: 'sistem kapsamı — karşılaştırılan üretim tokenizer’larından 125–250 kat küçük' },
+      { label: 'Sıkıştırma', value: 'kelime başına ~1,81 token', condition: 'tokenizer performansı — ~9.149 kelimelik Dünya Kupası derlemi, gidiş-dönüş kayıpsız' },
+      { label: 'Alan kelimeleri', value: 'Mbappé: 1 token', condition: 'tokenizer performansı — Qwen2.5, Gemma-2 ve DeepSeek-V3’te 2–3 token' },
+      { label: 'En iyi eğitim kaybı', value: '0,514', condition: 'model performansı — Qwen3.5 hibrit, 41.992 parametre, dördünde de aynı veri ve seed' },
+      { label: 'Üretilen isimler', value: '%100 geçerli', condition: 'model performansı — sıcaklık 0,7’de, Türkçe ilk isimler' },
+    ],
+    useCases: [
+      'Domain-specific model training',
+      'Tokenizer cost analysis before committing to a vocabulary',
+    ],
+    useCasesTr: [
+      'Alan-özel model eğitimi',
+      'Bir sözlüğe bağlanmadan önce tokenizer maliyeti analizi',
+    ],
+    decisions: [
+      { choice: 'Hold everything constant across the four architectures except the architecture itself', why: 'Any difference in loss can then be attributed to the mechanism rather than to data, batch size, steps, optimizer or seed', tradeoff: 'The models are tiny and trained on one narrow task, so the comparison is directional rather than conclusive' },
+    ],
+    decisionsTr: [
+      { choice: 'Dört mimari arasında mimarinin kendisi dışında her şeyi sabit tutmak', why: 'Kayıptaki fark böylece veriye, batch boyutuna, adım sayısına, optimizer’a ya da seed’e değil mekanizmaya atfedilebilir', tradeoff: 'Modeller çok küçük ve tek dar bir görevde eğitildi, dolayısıyla karşılaştırma kesin değil yön gösterici' },
+    ],
+    contribution: [
+      'Designing the comparison so the result means something: identical data, batch, steps, optimizer and seed across all four models.',
+      'Reimplementing each family’s signature mechanism — RMSNorm/QK-Norm/GQA/RoPE, Gated DeltaNet linear attention, sliding-window attention with dual RoPE, MLA compressed-KV with MoE — and the head-to-head measurement against real production tokenizers. Hugging Face tokenizers is off the shelf.',
+    ],
+    contributionTr: [
+      'Sonucun bir anlam taşıması için karşılaştırmanın tasarlanması: dört modelde de aynı veri, batch, adım, optimizer ve seed.',
+      'Her ailenin imza mekanizmasının yeniden yazılması — RMSNorm/QK-Norm/GQA/RoPE, Gated DeltaNet lineer attention, çift RoPE’lu sliding-window attention, MoE’li MLA sıkıştırılmış KV — ve gerçek üretim tokenizer’larına karşı karşılıklı ölçüm. Hugging Face tokenizers hazır.',
+    ],
+    limitations: [
+      'The tokenizer only wins on football text. That is the point, but it means the result is not a general claim.',
+      'The four models are 19K–63K parameters trained on Turkish first names. Their losses are comparable to each other and meaningless in absolute terms.',
+    ],
+    limitationsTr: [
+      'Tokenizer yalnızca futbol metninde kazanıyor. Amaç bu, ama sonucun genel bir iddia olmadığı anlamına da geliyor.',
+      'Dört model 19B–63B parametre ve Türkçe ilk isimlerde eğitildi. Kayıpları birbirine göre karşılaştırılabilir, mutlak olarak anlamsız.',
+    ],
   },
   {
     slug: 'wiki2bpe',
@@ -1031,6 +1820,45 @@ const PROJECTS = [
       { label: 'Pipeline', value: '2 betik, çek → eğit → yayınla' },
       { label: 'Kazıyıcı bağımlılığı', value: '0 — yalnızca standart kütüphane' },
       { label: 'Yayınlandı', value: 'Hub’da gorkemergune/my-tokenizer' },
+    ],
+    // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
+    role: 'Solo',
+    period: '2026',
+    status: 'shipped',
+    tier: 'experimental',
+    problem:
+      'Going from a topic to a working, publishable tokenizer is usually described as a pipeline. It is actually two scripts.',
+    problemTr:
+      'Bir konudan çalışan, yayınlanabilir bir tokenizer’a gitmek genelde bir pipeline olarak anlatılır. Aslında iki betik.',
+    flow: 'MediaWiki extracts API → text.txt → ByteLevel BPE with 4 special tokens → PreTrainedTokenizerFast → push_to_hub',
+    flowTr: 'MediaWiki extracts API → text.txt → 4 özel token’lı ByteLevel BPE → PreTrainedTokenizerFast → push_to_hub',
+    metrics: [
+      { label: 'Vocabulary', value: '2,048 tokens', condition: 'system scope — byte-level, so any UTF-8 text tokenizes with zero unknowns' },
+      { label: 'Scraper dependencies', value: '0', condition: 'system scope — Python standard library only, urllib and json' },
+      { label: 'Published', value: 'gorkemergune/my-tokenizer', condition: 'release scope — loads with one AutoTokenizer.from_pretrained call' },
+    ],
+    metricsTr: [
+      { label: 'Sözlük', value: '2.048 token', condition: 'sistem kapsamı — byte seviyesinde, dolayısıyla her UTF-8 metin sıfır bilinmeyenle tokenize olur' },
+      { label: 'Kazıyıcı bağımlılığı', value: '0', condition: 'sistem kapsamı — yalnızca Python standart kütüphanesi, urllib ve json' },
+      { label: 'Yayınlandı', value: 'gorkemergune/my-tokenizer', condition: 'yayın kapsamı — tek AutoTokenizer.from_pretrained çağrısıyla yüklenir' },
+    ],
+    useCases: [
+      'Rapid domain tokenizer prototyping',
+    ],
+    useCasesTr: [
+      'Hızlı alan tokenizer’ı prototipleme',
+    ],
+    contribution: [
+      'The standard-library-only scraper, so the data step needs no install, and publishing the result as a standard tokenizer any transformers model can consume.',
+    ],
+    contributionTr: [
+      'Yalnızca standart kütüphaneyle yazılmış kazıyıcı — böylece veri adımı hiçbir kurulum gerektirmiyor — ve sonucun her transformers modelinin kullanabileceği standart bir tokenizer olarak yayınlanması.',
+    ],
+    limitations: [
+      'Two scripts and no evaluation. This is groundwork for the WorldCup BPE experiment, and the repository says so.',
+    ],
+    limitationsTr: [
+      'İki betik ve değerlendirme yok. Bu, WorldCup BPE deneyinin hazırlık işi ve depo bunu söylüyor.',
     ],
   },
   {
@@ -1106,6 +1934,68 @@ const PROJECTS = [
       { label: 'Seviye ortalamaları', value: 'ilgisiz 0,148 · ilgili 0,406 · yeniden-ifade 0,844' },
       { label: 'Yayım', value: 'Hugging Face — gorkemergune/stsb-tr' },
     ],
+    // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
+    role: 'Solo',
+    period: '2026',
+    status: 'shipped',
+    tier: 'supporting',
+    problem:
+      'Turkish similarity data is paraphrase-heavy. That teaches a model to spot rewordings but never to judge how unrelated two sentences are, so there is no evidence base for choosing a retrieval threshold and people guess one.',
+    problemTr:
+      'Türkçe benzerlik verisi paraphrase ağırlıklı. Bu, modele yeniden ifadeyi tanımayı öğretir ama iki cümlenin ne kadar ilgisiz olduğunu yargılamayı hiç öğretmez; dolayısıyla retrieval eşiği seçmek için kanıt tabanı yoktur ve insanlar tahmin eder.',
+    flow: '38 hand-collected pairs + 999 template-generated pairs across 9 news domains and 3 relatedness tiers → SentenceTransformers cosine scoring → deduplicate → 933/104 split → Hub',
+    flowTr: 'Elle toplanmış 38 çift + 9 haber alanı ve 3 ilişkililik kademesinde 999 şablon üretimli çift → SentenceTransformers ile kosinüs skorlama → tekilleştirme → 933/104 bölme → Hub',
+    metrics: [
+      { label: 'Size', value: '1,037 pairs', condition: 'dataset scope — 933 train / 104 test' },
+      { label: 'Sources', value: '38 manual + 999 synthetic', condition: 'dataset scope — hand-collected pairs anchor the set in authentic phrasing' },
+      { label: 'Tier separation', value: '0.148 / 0.406 / 0.844', condition: 'measured property — mean cosine for unrelated / related / paraphrase' },
+      { label: 'Range', value: '−0.04 to 0.97', condition: 'measured property — deliberately weighted toward near-zero pairs' },
+      { label: 'Published', value: 'gorkemergune/stsb-tr', condition: 'release scope — on the Hugging Face Hub' },
+    ],
+    metricsTr: [
+      { label: 'Boyut', value: '1.037 çift', condition: 'veri kümesi kapsamı — 933 train / 104 test' },
+      { label: 'Kaynak', value: '38 elle + 999 sentetik', condition: 'veri kümesi kapsamı — elle toplanan çiftler kümeyi gerçek ifadelere bağlıyor' },
+      { label: 'Kademe ayrışması', value: '0,148 / 0,406 / 0,844', condition: 'ölçülmüş özellik — ilgisiz / ilgili / paraphrase ortalama kosinüsü' },
+      { label: 'Aralık', value: '−0,04 ile 0,97', condition: 'ölçülmüş özellik — bilinçli olarak sıfıra yakın çiftlere ağırlık verildi' },
+      { label: 'Yayınlandı', value: 'gorkemergune/stsb-tr', condition: 'yayın kapsamı — Hugging Face Hub’da' },
+    ],
+    useCases: [
+      'Calibrating a Turkish retrieval threshold from evidence instead of guessing',
+      'Embedding model evaluation',
+      'Tuning a RAG gate — which is the need that produced this dataset',
+    ],
+    useCasesTr: [
+      'Türkçe retrieval eşiğini tahminle değil kanıtla kalibre etmek',
+      'Embedding modeli değerlendirmesi',
+      'Bir RAG gate’ini ayarlamak — bu veri kümesini doğuran ihtiyaç da buydu',
+    ],
+    decisions: [
+      { choice: 'Over-weight the near-zero band instead of building a balanced set', why: 'A downstream system can only pick a threshold if the data actually contains the unrelated cases it will have to reject', tradeoff: 'The set is not a drop-in replacement for a balanced STS benchmark' },
+    ],
+    decisionsTr: [
+      { choice: 'Dengeli bir küme kurmak yerine sıfıra yakın bandı ağırlıklandırmak', why: 'Aşağı akıştaki bir sistem, ancak veri reddetmesi gereken ilgisiz durumları gerçekten içeriyorsa eşik seçebilir', tradeoff: 'Küme, dengeli bir STS benchmark’ının yerine doğrudan konulamaz' },
+    ],
+    contribution: [
+      'The tier design — deliberately over-weighting near-zero pairs so a downstream system can calibrate a threshold from data.',
+      'The nine-domain, three-tier generation scheme, the deduplication pipeline, and stating the scope limits in the README before anyone had to ask.',
+    ],
+    contributionTr: [
+      'Kademe tasarımı — aşağı akıştaki bir sistemin eşiği veriden kalibre edebilmesi için sıfıra yakın çiftlerin bilinçli ağırlıklandırılması.',
+      'Dokuz alan, üç kademeli üretim şeması, tekilleştirme pipeline’ı ve kapsam sınırlarının kimse sormadan README’de yazılması.',
+    ],
+    limitations: [
+      'Synthetic sentences are cleaner and more regular than natural text, so paraphrase scores are optimistic.',
+      'Scores are model outputs, not human annotations. This is not a human-annotated STS benchmark and should not be compared to one.',
+    ],
+    limitationsTr: [
+      'Sentetik cümleler doğal metinden daha temiz ve düzenli, dolayısıyla paraphrase skorları iyimser.',
+      'Skorlar insan etiketi değil model çıktısı. Bu, insan etiketli bir STS benchmark’ı değil ve öyle bir şeyle karşılaştırılmamalı.',
+    ],
+    provenance: 'mixed',
+    provenanceNote:
+      '999 of 1,037 pairs are template-generated rather than collected, and every similarity score is a model output rather than a human annotation. Both are declared in the repository README.',
+    provenanceNoteTr:
+      '1.037 çiftin 999’u toplanmış değil şablon üretimi ve her benzerlik skoru insan etiketi değil model çıktısı. İkisi de depo README’sinde beyan edilmiş.',
   },
   {
     slug: 'writing-analyzer',
@@ -1114,8 +2004,8 @@ const PROJECTS = [
     mark: 'MARK XVI',
     codename: 'The Auditor',
     title: 'Writing Analyzer',
-    subtitle: 'Scores how much a text reads like a person wrote it, in English and Turkish, and shows which signals drove the score',
-    subtitleTr: 'Bir metnin ne kadar insan elinden çıkmış göründüğünü İngilizce ve Türkçe puanlar; puanı hangi sinyallerin sürüklediğini gösterir',
+    subtitle: 'Extracts six stylometric signals from English and Turkish text and combines them into a weighted risk profile, showing which signal drove which part of it',
+    subtitleTr: 'İngilizce ve Türkçe metinden altı stilometrik sinyal çıkarır ve bunları ağırlıklı bir risk profilinde birleştirir; hangi sinyalin hangi kısmı sürüklediğini gösterir',
     oneLiner: 'Bilingual stylometric analyzer — six signals into a 0–100 academic-risk score.',
     oneLinerTr: 'İki dilli stilometrik analiz: altı sinyalden 0–100 arası bir akademik risk skoru.',
     language: 'Python',
@@ -1178,9 +2068,69 @@ const PROJECTS = [
       { label: 'Arayüzler', value: 'REST API + Streamlit arayüzü' },
       { label: 'Kalite kontrolleri', value: 'Birim + entegrasyon testleri, Ruff, pre-commit' },
     ],
+    // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
+    role: 'Solo',
+    period: '2026',
+    status: 'shipped',
+    tier: 'experimental',
+    problem:
+      'Academic integrity tools assert that a text was AI-written, which is a claim the evidence does not support. The defensible thing to surface is the stylometric signal itself, not a verdict about authorship.',
+    problemTr:
+      'Akademik bütünlük araçları bir metnin yapay zekâ tarafından yazıldığını iddia ediyor; oysa kanıt bunu desteklemiyor. Savunulabilir olan şey, yazarlık hakkında bir hüküm değil, stilometrik sinyalin kendisini göstermek.',
+    flow: 'Text → language detection → language-specific tokenisation → 6 independent analyzers → weighted scorer (0.25 / 0.20 / 0.15 / 0.15 / 0.15 / 0.10) → 4 risk tiers with per-component contributions',
+    flowTr: 'Metin → dil tespiti → dile özgü tokenizasyon → 6 bağımsız analizör → ağırlıklı puanlayıcı (0,25 / 0,20 / 0,15 / 0,15 / 0,15 / 0,10) → bileşen katkılarıyla 4 risk kademesi',
+    metrics: [
+      { label: 'Signals', value: '6 orthogonal dimensions', condition: 'system scope — repetition, transitions, burstiness, readability, cliché density, lexical poverty' },
+      { label: 'Test suite', value: '28 test files · 12,391 lines', condition: 'validation scope — counted in the repository, 12 September 2026' },
+      { label: 'Languages', value: 'English and Turkish', condition: 'system scope — Zeyrek morphology for Turkish, Porter stemming for English' },
+    ],
+    metricsTr: [
+      { label: 'Sinyal', value: '6 bağımsız boyut', condition: 'sistem kapsamı — tekrar, geçiş kelimeleri, burstiness, okunabilirlik, klişe yoğunluğu, sözcük yoksulluğu' },
+      { label: 'Test paketi', value: '28 test dosyası · 12.391 satır', condition: 'doğrulama kapsamı — 12 Eylül 2026’da depoda sayıldı' },
+      { label: 'Dil', value: 'İngilizce ve Türkçe', condition: 'sistem kapsamı — Türkçe için Zeyrek morfolojisi, İngilizce için Porter stemming' },
+    ],
+    useCases: [
+      'Stylometric research',
+      'Editorial tooling for surfacing repetition and low sentence-length variance',
+    ],
+    useCasesTr: [
+      'Stilometri araştırması',
+      'Tekrarı ve düşük cümle uzunluğu değişkenliğini görünür kılan editoryal araçlar',
+    ],
+    decisions: [
+      { choice: 'Refuse to assert authorship and report a probabilistic risk profile instead', why: 'The evidence supports a signal, not a verdict, and the repository README says so explicitly', tradeoff: 'The output is harder to act on than a yes/no answer, which is the honest trade' },
+    ],
+    decisionsTr: [
+      { choice: 'Yazarlık hükmü vermeyi reddedip yerine olasılıksal bir risk profili raporlamak', why: 'Kanıt bir sinyali destekliyor, bir hükmü değil; depo README’si de bunu açıkça söylüyor', tradeoff: 'Çıktıyı eyleme dökmek evet/hayır cevabından daha zor — dürüst takas bu' },
+    ],
+    contribution: [
+      'The six signals, their weighting, and building each analyzer to operate independently over a shared tokenisation.',
+      'The Turkish morphological pipeline, which is the part with no off-the-shelf equivalent.',
+      'Diagnosing the scoring ceiling and writing it up in docs/diagnostics.md rather than leaving it for someone else to find.',
+    ],
+    contributionTr: [
+      'Altı sinyal, ağırlıklandırmaları ve her analizörün ortak bir tokenizasyon üzerinde bağımsız çalışacak şekilde kurulması.',
+      'Türkçe morfoloji hattı — hazır karşılığı olmayan kısım burası.',
+      'Puanlama tavanının teşhis edilip başkasının bulmasına bırakılmak yerine docs/diagnostics.md içinde yazıya dökülmesi.',
+    ],
+    limitations: [
+      'There is no validation set. The benchmark folder holds four sample texts — two human, two LLM — and no measured result is committed.',
+      'docs/diagnostics.md works out that the weighted sum structurally cannot exceed roughly 24.5 on typical AI text against a MODERATE threshold of 30, so the composite score does not currently separate the classes it was built to separate.',
+      'The six weights are hand-set, not fitted to data.',
+    ],
+    limitationsTr: [
+      'Doğrulama kümesi yok. benchmark klasöründe dört örnek metin var — ikisi insan, ikisi LLM — ve commit edilmiş hiçbir ölçüm sonucu yok.',
+      'docs/diagnostics.md, ağırlıklı toplamın tipik yapay zekâ metninde yapısal olarak yaklaşık 24,5’i geçemediğini, MODERATE eşiğinin ise 30 olduğunu hesaplıyor; dolayısıyla bileşik skor şu an ayırmak için kurulduğu sınıfları ayırmıyor.',
+      'Altı ağırlık veriye uydurulmadı, elle belirlendi.',
+    ],
   },
   {
     slug: 'depression-phq9-analysis',
+    unverified: [
+      'metric — \'~100 live participants\' has no record in the repository: the README describes pilot scale as 10-50+ and the committed dashboard is from a run labelled \'Ornek Data\'. Deliberately NOT carried into metrics. The legacy metric field still renders on the card until the render migration.',
+      'Consent, ethics approval and anonymisation are absent from the repository; participant name is used as participant id (response_fetcher.py:86).',
+    ],
+
     category: 'Research & Benchmarks',
     cover: '/projects/depression-phq9-analysis/cover.svg',
     mark: 'MARK XVII',
@@ -1253,6 +2203,55 @@ const PROJECTS = [
       { label: 'Doğrulama', value: 'Katmanlı 5 katlı çapraz doğrulama' },
       { label: 'Çıktılar', value: 'HTML pano · özet PDF · katılımcı başına PDF · PNG grafikler' },
     ],
+    // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
+    role: 'Solo',
+    period: '2026',
+    status: 'archived',
+    tier: 'research',
+    problem:
+      'Clinical scoring and machine learning are usually discussed separately in screening. An end-to-end setup that runs both over the same responses, and reports what ML actually adds, is harder to find than it should be.',
+    problemTr:
+      'Taramada klinik puanlama ve makine öğrenmesi genelde ayrı ayrı konuşulur. İkisini aynı yanıtlar üzerinde koşturan ve makine öğrenmesinin gerçekte ne kattığını raporlayan uçtan uca bir kurulum, olması gerekenden zor bulunuyor.',
+    flow: 'Google Forms → API fetch → clinical PHQ-9 scoring with severity tiers → 6 ML models, stratified 5-fold → statistical tests → Plotly dashboard and per-participant PDFs',
+    flowTr: 'Google Forms → API ile çekme → şiddet kademeleriyle klinik PHQ-9 puanlaması → 6 makine öğrenmesi modeli, katmanlı 5 katlı → istatistik testleri → Plotly panosu ve katılımcı başına PDF',
+    metrics: [
+      { label: 'Scale', value: '15-question extended PHQ-9', condition: 'instrument scope — maximum score 45, 5 severity tiers' },
+      { label: 'Models', value: '6 + weighted ensemble', condition: 'analysis scope — K-Means, Random Forest, Logistic Regression, SVM, Decision Tree, Naive Bayes; 60% clinical / 40% ML' },
+      { label: 'Validation', value: 'stratified 5-fold', condition: 'analysis scope — the README states the system is tuned for pilot sizes of 10–50+ participants' },
+      { label: 'Statistical tests', value: '95% CI, Shapiro-Wilk, Pearson/Spearman, t-test / Mann-Whitney U', condition: 'analysis scope' },
+    ],
+    metricsTr: [
+      { label: 'Ölçek', value: '15 soruluk genişletilmiş PHQ-9', condition: 'araç kapsamı — en yüksek skor 45, 5 şiddet kademesi' },
+      { label: 'Model', value: '6 + ağırlıklı topluluk', condition: 'analiz kapsamı — K-Means, Random Forest, Logistic Regression, SVM, Decision Tree, Naive Bayes; %60 klinik / %40 makine öğrenmesi' },
+      { label: 'Doğrulama', value: 'katmanlı 5 katlı', condition: 'analiz kapsamı — README sistemin 10–50+ katılımcılık pilot ölçekler için ayarlandığını söylüyor' },
+      { label: 'İstatistik testleri', value: '%95 GA, Shapiro-Wilk, Pearson/Spearman, t-testi / Mann-Whitney U', condition: 'analiz kapsamı' },
+    ],
+    useCases: [
+      'Pilot screening studies',
+      'Research data collection pipelines',
+    ],
+    useCasesTr: [
+      'Pilot tarama çalışmaları',
+      'Araştırma veri toplama pipeline’ları',
+    ],
+    contribution: [
+      'The end-to-end study design: form construction, distribution, the clinical scoring rules, the 60/40 ensemble weighting and the choice of statistical tests.',
+      'Centralising the PHQ-9 constants, severity thresholds and ensemble weights in one settings module so the scoring rules are auditable in one place, plus a demo mode that runs the full pipeline on 30 synthetic participants with no Google credentials.',
+    ],
+    contributionTr: [
+      'Uçtan uca çalışma tasarımı: form kurulumu, dağıtım, klinik puanlama kuralları, %60/%40 topluluk ağırlıklandırması ve istatistik testlerinin seçimi.',
+      'PHQ-9 sabitlerinin, şiddet eşiklerinin ve topluluk ağırlıklarının tek bir ayar modülünde toplanması — böylece puanlama kuralları tek yerden denetlenebiliyor — ve Google kimlik bilgisi olmadan tüm pipeline’ı 30 sentetik katılımcıyla koşturan demo modu.',
+    ],
+    limitations: [
+      'Consent, ethics approval and anonymisation are not addressed in the repository, and participant name is used directly as the participant id.',
+      'This is a screening instrument, not a diagnostic tool, and nothing it produces should be read as a diagnosis.',
+      'No test suite.',
+    ],
+    limitationsTr: [
+      'Onam, etik kurul onayı ve anonimleştirme depoda ele alınmıyor ve katılımcı adı doğrudan katılımcı kimliği olarak kullanılıyor.',
+      'Bu bir tarama aracı, tanı aracı değil; ürettiği hiçbir şey tanı olarak okunmamalı.',
+      'Test paketi yok.',
+    ],
   },
   {
     slug: 'email-phishing-detection',
@@ -1269,9 +2268,26 @@ const PROJECTS = [
     color: '#7c5cff',
     glow: 'rgba(124,92,255,0.5)',
     tags: ['TF-IDF', 'Logistic Regression', 'Text Classification'],
-    metric: '0.99 F1',
-    metricTr: '0,99 F1',
+    metric: '0.99 vs 0.68 F1',
+    metricTr: '0,99 — 0,68 F1',
     github: gh('email-phishing-detection'),
+    // Field Notes — migrated verbatim from caseStudies.js (12 Sep 2026).
+    challenges: [
+      'The interesting tension was resisting the urge to reach for a heavyweight model. The honest experiment was to show that a simple model on the right features beats a fancier one on the wrong features.',
+      'Keeping the evaluation honest — stratified splits, a fixed seed, and being explicit that 0.99 F1 reflects this dataset, not live adversarial email — mattered as much as the accuracy.',
+    ],
+    challengesTr: [
+      'İlginç gerilim, ağır sıklet bir modele uzanma dürtüsüne direnmekti. Dürüst deney, doğru özellikler üzerindeki basit bir modelin yanlış özellikler üzerindeki gösterişli bir modeli yendiğini göstermekti.',
+      'Değerlendirmeyi dürüst tutmak — katmanlı bölme, sabit tohum ve 0,99 F1’in canlı düşmanca e-postayı değil bu veri kümesini yansıttığını açıkça belirtmek — en az doğruluk kadar önemliydi.',
+    ],
+    lessons: [
+      'Reach for the simplest model that could work, and spend your energy on the features.',
+      'The representation of your data often matters more than the sophistication of your model.',
+    ],
+    lessonsTr: [
+      'İşe yarayabilecek en basit modele uzan ve enerjini özelliklere harca.',
+      'Verinin temsili çoğu zaman modelin karmaşıklığından daha çok şey ifade eder.',
+    ],
     images: [
       { src: '/projects/email-phishing-detection/class-distribution.png', caption: 'Class balance in the CEAS_08 corpus — roughly 56% phishing', captionTr: 'CEAS_08 derlemindeki sınıf dengesi: yaklaşık %56 oltalama' },
       { src: '/projects/email-phishing-detection/signal-words.png', caption: 'Signal words — how often terms like “verify”, “account”, and “click” appear in phishing vs safe mail', captionTr: 'Sinyal kelimeler: “verify”, “account”, “click” gibi terimlerin oltalama ve güvenli postada görülme sıklığı' },
@@ -1326,6 +2342,51 @@ const PROJECTS = [
       { label: 'Sayısal özellik temeli', value: '0,68 F1; metin çok daha fazla sinyal taşır' },
       { label: 'Veri kümeleri', value: 'CEAS_08 (~39 bin) + 525 bin satırlık özellik kümesi' },
     ],
+    // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
+    role: 'Solo',
+    period: '2026',
+    status: 'shipped',
+    tier: 'supporting',
+    problem:
+      'Phishing leans on a recognisable vocabulary of urgency and impersonation. The interesting question is not which classifier wins, but how much the representation of the data decides the outcome before a model is even chosen.',
+    problemTr:
+      'Phishing, tanınabilir bir aciliyet ve taklit sözcük dağarcığına yaslanır. İlginç soru hangi sınıflandırıcının kazandığı değil, veri temsilinin daha model seçilmeden sonucu ne kadar belirlediğidir.',
+    flow: 'Raw CEAS_08 text → clean → TF-IDF over words and bigrams → stratified 80/20 → Logistic Regression → accuracy, precision, recall, F1, confusion matrix, ROC',
+    flowTr: 'Ham CEAS_08 metni → temizleme → kelime ve bigram üzerinde TF-IDF → katmanlı 80/20 → Logistic Regression → doğruluk, kesinlik, duyarlılık, F1, karışıklık matrisi, ROC',
+    metrics: [
+      { label: 'Representation comparison', value: '0.99 vs 0.68 F1', condition: 'model performance — raw-text TF-IDF versus 8 hand-crafted numerical features, same classifier family' },
+      { label: 'Text model', value: '0.99 F1', condition: 'model performance — held-out 20% of CEAS_08, ~39,000 emails, ~56% phishing' },
+      { label: 'Precision / Recall', value: '0.99 / 1.00', condition: 'model performance — same held-out split' },
+      { label: 'Datasets', value: '~39K + 525K rows', condition: 'dataset scope — CEAS_08 raw text, plus a feature-only set used purely for contrast' },
+    ],
+    metricsTr: [
+      { label: 'Temsil karşılaştırması', value: '0,99 — 0,68 F1', condition: 'model performansı — ham metin TF-IDF ve elle üretilmiş 8 sayısal özellik, aynı sınıflandırıcı ailesi' },
+      { label: 'Metin modeli', value: '0,99 F1', condition: 'model performansı — CEAS_08’in ayrılmış %20’si, ~39.000 e-posta, ~%56 phishing' },
+      { label: 'Kesinlik / Duyarlılık', value: '0,99 / 1,00', condition: 'model performansı — aynı ayrılmış bölüm' },
+      { label: 'Veri kümeleri', value: '~39B + 525B satır', condition: 'veri kümesi kapsamı — CEAS_08 ham metin, artı yalnızca karşıtlık için kullanılan özellik-only küme' },
+    ],
+    useCases: [
+      'Text classification where the model has to stay auditable',
+    ],
+    useCasesTr: [
+      'Modelin denetlenebilir kalması gereken metin sınıflandırması',
+    ],
+    contribution: [
+      'Making the representation comparison the centre of the experiment rather than reporting a single score.',
+      'Mirroring the whole notebook in English and Turkish, and being explicit that 0.99 reflects this dataset rather than live adversarial email. scikit-learn and both datasets are off the shelf.',
+    ],
+    contributionTr: [
+      'Tek bir skor raporlamak yerine temsil karşılaştırmasını deneyin merkezine koymak.',
+      'Notebook’un tamamının İngilizce ve Türkçe olarak aynalanması ve 0,99’un canlı düşmanca e-postayı değil bu veri kümesini yansıttığının açıkça yazılması. scikit-learn ve her iki veri kümesi hazır.',
+    ],
+    limitations: [
+      '0.99 F1 is on a static academic dataset. Live phishing is adversarial and drifts; this number will not survive contact with it.',
+      'The two datasets are not comparable like for like — the 525K set carries no raw text at all, which is the lesson but also a confound.',
+    ],
+    limitationsTr: [
+      '0,99 F1 statik bir akademik veri kümesinde. Canlı phishing düşmanca ve sürekli değişiyor; bu sayı onunla temasta ayakta kalmaz.',
+      'İki veri kümesi birebir karşılaştırılabilir değil — 525 binlik kümede hiç ham metin yok; ders de bu, karıştırıcı etken de bu.',
+    ],
   },
   {
     slug: 'gorkem-os',
@@ -1334,8 +2395,8 @@ const PROJECTS = [
     mark: 'MARK XIX',
     codename: 'Bare Metal',
     title: 'GorkemOS',
-    subtitle: 'Everything that has to happen before your first line of code even gets to run',
-    subtitleTr: 'İlk kod satırın çalışabilmesi için önce olması gereken her şey',
+    subtitle: 'A bootable x86 operating system written from the boot sector up to its own shell, in C and NASM assembly',
+    subtitleTr: 'Boot sektöründen kendi shell’ine kadar sıfırdan yazılmış, C ve NASM assembly ile önyüklenebilir bir x86 işletim sistemi',
     oneLiner: 'Boots on bare x86 and reaches its own shell — bootloader, paging, scheduler, and drivers all written from nothing.',
     oneLinerTr: 'Çıplak x86’da açılıp kendi kabuğuna ulaşır — bootloader, sayfalama, zamanlayıcı ve sürücüler sıfırdan yazıldı.',
     language: 'C',
@@ -1343,6 +2404,23 @@ const PROJECTS = [
     glow: 'rgba(255,107,53,0.5)',
     tags: ['x86', 'Bare Metal', 'QEMU'],
     github: gh('gorkem-os'),
+    // Field Notes — migrated verbatim from caseStudies.js (12 Sep 2026).
+    challenges: [
+      'At this level the machine does exactly what you say, even when it makes no sense — a wrong pointer or a mis-set descriptor triple-faults the whole system with no stack trace.',
+      'Getting interrupts, paging, and context switching to cooperate required reasoning about the hardware directly, with QEMU and GDB as the only windows in.',
+    ],
+    challengesTr: [
+      'Bu seviyede makine, anlamsız olsa bile tam olarak söylediğini yapar — yanlış bir işaretçi ya da hatalı kurulmuş bir tanımlayıcı, hiçbir yığın izi olmadan tüm sistemi triple-fault yapar.',
+      'Kesmeleri, sayfalamayı ve bağlam değiştirmeyi uyumlu çalıştırmak, tek pencerelerin QEMU ve GDB olduğu bir ortamda donanım hakkında doğrudan akıl yürütmeyi gerektirdi.',
+    ],
+    lessons: [
+      'Building the abstraction yourself is the fastest way to stop treating it as magic.',
+      'Low-level systems reward patience and precision — the feedback is brutal, but the mental model you build is permanent.',
+    ],
+    lessonsTr: [
+      'Soyutlamayı kendin inşa etmek, onu sihir gibi görmeyi bırakmanın en hızlı yoludur.',
+      'Düşük seviye sistemler sabrı ve titizliği ödüllendirir — geri bildirim acımasızdır ama kurduğun zihinsel model kalıcıdır.',
+    ],
     images: [
       { src: '/projects/gorkem-os/boot.png', caption: 'Kernel boot sequence in QEMU — subsystems initializing', captionTr: 'QEMU’da çekirdek açılış dizisi: alt sistemler başlatılıyor' },
       { src: '/projects/gorkem-os/shell-help.png', caption: 'Interactive shell — built-in command list', captionTr: 'Etkileşimli kabuk ve yerleşik komut listesi' },
@@ -1395,6 +2473,39 @@ const PROJECTS = [
       { label: 'Çekirdek alt sistemleri', value: 'GDT/IDT · sayfalama · PMM · yığın · zamanlayıcı' },
       { label: 'Sürücüler', value: 'VGA · klavye · zamanlayıcı · ATA' },
       { label: 'Ekstralar', value: 'Özel dosya sistemi · kabuk · Snake' },
+    ],
+    // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
+    role: 'Solo',
+    period: '2026',
+    status: 'shipped',
+    tier: 'supporting',
+    problem:
+      'Everything that has to happen before your first line of code runs — the boot sector, interrupt tables, paging, a scheduler — stays abstract until you write it yourself.',
+    problemTr:
+      'İlk satır kodun çalışmasından önce olması gereken her şey — boot sektörü, kesme tabloları, sayfalama, bir zamanlayıcı — sen yazana kadar soyut kalır.',
+    flow: 'NASM bootloader → assembly entry stub → C kernel → GDT/IDT + PIC remap → physical memory manager → paging → kernel heap → timer-driven scheduler → drivers → GorkemFS → shell',
+    flowTr: 'NASM bootloader → assembly giriş kodu → C kernel → GDT/IDT + PIC yeniden eşleme → fiziksel bellek yöneticisi → sayfalama → kernel heap → zamanlayıcı → sürücüler → GorkemFS → shell',
+    metrics: null,
+    metricsTr: null,
+    useCases: [],
+    useCasesTr: [],
+    decisions: [
+      { choice: 'Layered memory management — frame allocator, then paging, then heap', why: 'Each layer is testable against the one below and mirrors how real kernels are structured', tradeoff: 'A lot of code has to exist before anything visible runs' },
+    ],
+    decisionsTr: [
+      { choice: 'Katmanlı bellek yönetimi — önce çerçeve ayırıcı, sonra sayfalama, sonra heap', why: 'Her katman altındakine karşı test edilebilir ve gerçek çekirdeklerin yapısını yansıtır', tradeoff: 'Görünür hiçbir şey çalışmadan önce çok fazla kodun var olması gerekir' },
+    ],
+    contribution: [
+      'All of it: bootloader, interrupt infrastructure, physical memory manager, paging, kernel heap, scheduler with assembly context switching, VGA / keyboard / PIT / ATA drivers, a custom file system, a shell, and Snake on bare metal. The OSDev Wiki and the Intel manual are references, not code.',
+    ],
+    contributionTr: [
+      'Tamamı: bootloader, kesme altyapısı, fiziksel bellek yöneticisi, sayfalama, kernel heap, assembly bağlam değiştirmeli zamanlayıcı, VGA / klavye / PIT / ATA sürücüleri, kendi dosya sistemi, bir shell ve bare metal üzerinde Snake. OSDev Wiki ve Intel kılavuzu referans, kod değil.',
+    ],
+    limitations: [
+      'Runs under QEMU. No real-hardware validation is claimed.',
+    ],
+    limitationsTr: [
+      'QEMU altında çalışıyor. Gerçek donanımda doğrulama iddiası yok.',
     ],
   },
   {
@@ -1471,6 +2582,61 @@ const PROJECTS = [
       { label: 'Operasyon', value: 'Geri yükleme betikli otomatik günlük yedekler' },
       { label: 'Yerel ayarlar', value: 'Türkçe + İngilizce' },
     ],
+    // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
+    role: 'Solo',
+    period: '2026',
+    status: 'shipped',
+    tier: 'supporting',
+    problem:
+      'Body-transformation tracking is scattered across apps that each own one slice — weight here, macros there, photos somewhere else — and none of them answer the question that actually keeps someone going: when will I get there?',
+    problemTr:
+      'Vücut dönüşümü takibi, her biri tek bir dilime sahip uygulamalara dağılmış durumda — kilo burada, makrolar şurada, fotoğraflar başka yerde — ve hiçbiri insanı asıl ayakta tutan soruyu cevaplamıyor: oraya ne zaman varacağım?',
+    flow: 'Next.js PWA → FastAPI with JWT → PostgreSQL via Alembic → progress engine computes goal ETA and consistency → Gemini service reads full user context, isolated and optional',
+    flowTr: 'Next.js PWA → JWT’li FastAPI → Alembic üzerinden PostgreSQL → ilerleme motoru hedef ETA’sını ve tutarlılığı hesaplar → Gemini servisi kullanıcının tüm bağlamını okur, izole ve opsiyonel',
+    metrics: [
+      { label: 'Codebase', value: '243 source files · 37,210 lines', condition: 'project scope — counted in the repository, 12 September 2026' },
+      { label: 'Tracking domains', value: '6', condition: 'feature scope — weight, body fat, 8 measurements, nutrition, workouts, progress photos' },
+      { label: 'Goal modes', value: '4', condition: 'feature scope — weight loss, weight gain, recomposition, muscle gain' },
+      { label: 'Deployment', value: '3-service Docker Compose', condition: 'operations scope — separate dev and production configs, multiple Uvicorn workers, DB port internal' },
+      { label: 'Operations', value: 'daily backup + restore', condition: 'operations scope — cron-scheduled DB dump and uploads archive, /health reports DB, storage and Gemini' },
+    ],
+    metricsTr: [
+      { label: 'Kod tabanı', value: '243 kaynak dosya · 37.210 satır', condition: 'proje kapsamı — 12 Eylül 2026’da depoda sayıldı' },
+      { label: 'Takip alanı', value: '6', condition: 'özellik kapsamı — kilo, yağ oranı, 8 ölçü, beslenme, antrenman, ilerleme fotoğrafları' },
+      { label: 'Hedef modu', value: '4', condition: 'özellik kapsamı — kilo verme, kilo alma, rekompozisyon, kas kazanımı' },
+      { label: 'Dağıtım', value: '3 servisli Docker Compose', condition: 'operasyon kapsamı — ayrı dev ve üretim konfigleri, çoklu Uvicorn işçisi, DB portu içeride' },
+      { label: 'Operasyon', value: 'günlük yedek + geri yükleme', condition: 'operasyon kapsamı — cron ile DB dökümü ve yükleme arşivi, /health DB, depolama ve Gemini durumunu bildirir' },
+    ],
+    useCases: [
+      'LLM coaching over a user’s own longitudinal data',
+    ],
+    useCasesTr: [
+      'Kullanıcının kendi uzun dönemli verisi üzerinde LLM koçluğu',
+    ],
+    decisions: [
+      { choice: 'Isolate the Gemini service so the app degrades gracefully without an API key', why: 'Every AI feature is optional, and the core tracker works with no external dependency at all', tradeoff: 'Two code paths to keep working for anything that touches the coach' },
+    ],
+    decisionsTr: [
+      { choice: 'Gemini servisini izole etmek, böylece uygulama API anahtarı olmadan zarifçe küçülüyor', why: 'Her yapay zekâ özelliği opsiyonel ve çekirdek takipçi hiçbir dış bağımlılık olmadan çalışıyor', tradeoff: 'Koça dokunan her şey için iki kod yolunun çalışır tutulması gerekiyor' },
+    ],
+    contribution: [
+      'The product idea that carries it: a progress engine that turns logged data into an estimated completion date and a consistency score.',
+      'Full-stack architecture across three services with Alembic-managed schema and JWT auth.',
+      'The operations layer — backup, restore, health checks and separate production hardening — which is the part most personal projects skip. The repository carries a CLAUDE.md specification, so implementation was AI-assisted from a spec authored here.',
+    ],
+    contributionTr: [
+      'Projeyi taşıyan ürün fikri: kaydedilen veriyi tahmini tamamlanma tarihine ve tutarlılık skoruna çeviren ilerleme motoru.',
+      'Alembic yönetimli şema ve JWT kimlik doğrulamayla üç servis boyunca tam yığın mimari.',
+      'Operasyon katmanı — yedekleme, geri yükleme, sağlık kontrolleri ve ayrı üretim sertleştirmesi — çoğu kişisel projenin atladığı kısım. Depo bir CLAUDE.md spesifikasyonu taşıyor, yani uygulama burada yazılan bir spesifikasyondan yapay zekâ destekli geliştirildi.',
+    ],
+    limitations: [
+      'There is no measured accuracy for the ETA engine — it is a projection, not a validated model.',
+      'Two test files against 243 source files.',
+    ],
+    limitationsTr: [
+      'ETA motoru için ölçülmüş bir doğruluk yok — bu bir projeksiyon, doğrulanmış bir model değil.',
+      '243 kaynak dosyaya karşı iki test dosyası.',
+    ],
   },
   {
     slug: 'nexa-website',
@@ -1536,6 +2702,43 @@ const PROJECTS = [
       { label: 'Alanlar', value: 'ana sayfa · üyeler · başvuru · projeler' },
       { label: 'Yığın', value: 'Astro statik site' },
       { label: 'Canlı', value: 'nexa-tr.com' },
+    ],
+    // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
+    role: 'Contributor',
+    period: '2025–2026',
+    status: 'shipped',
+    tier: 'supporting',
+    problem:
+      'A community site is not a personal sandbox. It has to keep working for the people who depend on it while several contributors change it at once.',
+    problemTr:
+      'Bir topluluk sitesi kişisel bir deneme alanı değil. Birden fazla katkıcı aynı anda değiştirirken, ona bağımlı olan insanlar için çalışmaya devam etmesi gerekiyor.',
+    flow: 'Astro static site maintained by the NEXA team — my work sits in page layout, content and section structure',
+    flowTr: 'NEXA ekibinin sürdürdüğü statik Astro sitesi — benim işim sayfa düzeni, içerik ve bölüm yapısında',
+    metrics: [
+      { label: 'My commits', value: '41 of 51', condition: 'contribution scope — December 2025 to April 2026; another contributor holds the remaining 10' },
+      { label: 'Areas', value: '4', condition: 'contribution scope — homepage, members/team roster, recruitment pages, project listings' },
+      { label: 'Live', value: 'nexa-tr.com', condition: 'release scope — in production' },
+    ],
+    metricsTr: [
+      { label: 'Benim commit’lerim', value: '51’in 41’i', condition: 'katkı kapsamı — Aralık 2025 – Nisan 2026; kalan 10 commit başka bir katkıcıya ait' },
+      { label: 'Alan', value: '4', condition: 'katkı kapsamı — ana sayfa, üye/ekip listesi, işe alım sayfaları, proje listeleri' },
+      { label: 'Canlı', value: 'nexa-tr.com', condition: 'yayın kapsamı — üretimde' },
+    ],
+    useCases: [],
+    useCasesTr: [],
+    contribution: [
+      'Front-end and content: a new design and overall concept in April 2026, homepage layout and copy, the members/team roster, the February intake recruitment pages, and project listings.',
+      'Working inside someone else’s Astro codebase and review process rather than my own.',
+    ],
+    contributionTr: [
+      'Front-end ve içerik: Nisan 2026’da yeni bir tasarım ve genel konsept, ana sayfa düzeni ve metni, üye/ekip listesi, şubat alımı için işe alım sayfaları ve proje listeleri.',
+      'Kendi kod tabanımda değil, başkasının Astro kod tabanı ve inceleme sürecinin içinde çalışmak.',
+    ],
+    limitations: [
+      'A contributor role on a shared codebase. The site is not mine and the architecture was not my decision.',
+    ],
+    limitationsTr: [
+      'Ortak bir kod tabanında katkıcı rolü. Site benim değil ve mimari benim kararım değildi.',
     ],
   },
   {
@@ -1611,6 +2814,59 @@ const PROJECTS = [
       { label: 'Depolama', value: '4 SQLite tablosu' },
       { label: 'Analiz', value: 'Saat bazlı ayrıntıda 28 günlük odak geçmişi' },
     ],
+    // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
+    role: 'Solo',
+    period: '2026',
+    status: 'shipped',
+    tier: 'supporting',
+    problem:
+      'Focus apps want an account and a server for data that never needs to leave the machine. And on macOS the obvious implementation quietly breaks: WKWebView throttles JavaScript timers when the window is hidden, so the reminder you are relying on never fires.',
+    problemTr:
+      'Odak uygulamaları, makineden hiç çıkması gerekmeyen veri için hesap ve sunucu istiyor. Üstelik macOS’ta bariz uygulama sessizce bozuluyor: pencere gizliyken WKWebView JavaScript zamanlayıcılarını kısıyor, dolayısıyla güvendiğin hatırlatma hiç çalışmıyor.',
+    flow: 'Tauri v2 shell → React frontend → rusqlite → 4 SQLite tables · a Rust background thread emits a backend-tick every 30 s and the frontend compares Date.now() against an absolute stored timestamp',
+    flowTr: 'Tauri v2 kabuğu → React arayüz → rusqlite → 4 SQLite tablosu · Rust arka plan thread’i 30 saniyede bir backend-tick yayınlar ve arayüz Date.now()’ı saklanan mutlak zaman damgasıyla karşılaştırır',
+    metrics: [
+      { label: 'Focus history', value: '28 days', condition: 'feature scope — per-hour granularity, 14-day × 18-hour heatmap' },
+      { label: 'Storage', value: '4 SQLite tables', condition: 'system scope — tasks, break_stats, settings, focus_sessions, entirely local' },
+      { label: 'Codebase', value: '4,362 lines', condition: 'project scope — TypeScript 5.8 strict and Rust, counted 12 September 2026' },
+      { label: 'Session flush', value: 'every 60 s', condition: 'runtime — split across hour boundaries, which is what makes the heatmap possible' },
+    ],
+    metricsTr: [
+      { label: 'Odak geçmişi', value: '28 gün', condition: 'özellik kapsamı — saat bazında ayrım, 14 gün × 18 saatlik ısı haritası' },
+      { label: 'Depolama', value: '4 SQLite tablosu', condition: 'sistem kapsamı — tasks, break_stats, settings, focus_sessions, tamamen yerel' },
+      { label: 'Kod tabanı', value: '4.362 satır', condition: 'proje kapsamı — TypeScript 5.8 strict ve Rust, 12 Eylül 2026’da sayıldı' },
+      { label: 'Oturum yazımı', value: '60 saniyede bir', condition: 'çalışma zamanı — saat sınırlarına bölünür, ısı haritasını mümkün kılan da bu' },
+    ],
+    useCases: [
+      'Privacy-first desktop applications',
+      'Local-first data storage with no account and no sync',
+    ],
+    useCasesTr: [
+      'Gizlilik öncelikli masaüstü uygulamaları',
+      'Hesapsız ve senkronizasyonsuz, yerel-önce veri saklama',
+    ],
+    decisions: [
+      { choice: 'Store the next break as an absolute Unix timestamp and drive it from a Rust thread', why: 'WKWebView throttling cannot break a comparison against wall-clock time, whereas it silently breaks setInterval', tradeoff: 'State lives in two places and has to stay consistent across a reload' },
+    ],
+    decisionsTr: [
+      { choice: 'Sonraki molayı mutlak Unix zaman damgası olarak saklamak ve bir Rust thread’inden sürmek', why: 'WKWebView kısıtlaması duvar saatiyle yapılan bir karşılaştırmayı bozamaz, oysa setInterval’ı sessizce bozar', tradeoff: 'Durum iki yerde yaşıyor ve yeniden yüklemede tutarlı kalması gerekiyor' },
+    ],
+    contribution: [
+      'Diagnosing the WKWebView timer throttling and solving it with an absolute timestamp plus a Rust-side tick. This is the actual engineering in the project.',
+      'Notification deduplication keys that survive restarts so past-due tasks never re-notify, and a focus tracker on the Page Visibility API that flushes across hour boundaries. React, Zustand and the Tauri plugins are off the shelf.',
+    ],
+    contributionTr: [
+      'WKWebView zamanlayıcı kısıtlamasının teşhisi ve mutlak zaman damgası artı Rust tarafı tick ile çözülmesi. Projedeki asıl mühendislik bu.',
+      'Yeniden başlatmayı atlatan ve geçmiş görevlerin tekrar bildirim atmasını önleyen bildirim tekilleştirme anahtarları ve saat sınırlarına bölerek yazan, Page Visibility API üzerine kurulu odak takipçisi. React, Zustand ve Tauri eklentileri hazır.',
+    ],
+    limitations: [
+      'macOS only. No cross-platform validation is claimed.',
+      'No account and no sync is a deliberate choice, but it does mean no multi-device use.',
+    ],
+    limitationsTr: [
+      'Yalnızca macOS. Platformlar arası doğrulama iddiası yok.',
+      'Hesapsızlık ve senkronizasyonsuzluk bilinçli bir tercih, ama çoklu cihaz kullanımının olmadığı anlamına da geliyor.',
+    ],
   },
   {
     slug: 'synonym-master',
@@ -1677,6 +2933,39 @@ const PROJECTS = [
       { label: 'Oturum başına tur', value: '30' },
       { label: 'Harici bağımlılık', value: '0' },
       { label: 'Platformlar', value: 'Python + Tkinter çalışan her yerde' },
+    ],
+    // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
+    role: 'Solo',
+    period: '2026',
+    status: 'archived',
+    tier: 'archive',
+    problem:
+      'C1 vocabulary only sticks with repetition, and the words you get wrong are exactly the ones that disappear from practice.',
+    problemTr:
+      'C1 kelime dağarcığı ancak tekrarla yerleşir ve yanlış bildiğin kelimeler tam olarak pratikten kaybolanlardır.',
+    flow: 'DICTIONARY groups → generate_rounds() samples 30 questions → Tkinter quiz loop → wrong answers collected into a notebook → end-of-game summary',
+    flowTr: 'DICTIONARY grupları → generate_rounds() 30 soru örnekler → Tkinter quiz döngüsü → yanlışlar bir deftere toplanır → oyun sonu özeti',
+    metrics: [
+      { label: 'Word groups', value: '~80', condition: 'content scope — C1 level, each with multiple synonyms' },
+      { label: 'External dependencies', value: '0', condition: 'system scope — Tkinter is standard library' },
+    ],
+    metricsTr: [
+      { label: 'Kelime grubu', value: '~80', condition: 'içerik kapsamı — C1 seviyesi, her biri birden çok eş anlamlıyla' },
+      { label: 'Dış bağımlılık', value: '0', condition: 'sistem kapsamı — Tkinter standart kütüphanede' },
+    ],
+    useCases: [],
+    useCasesTr: [],
+    contribution: [
+      'All of it — a single file. Written in the second semester of first year, the same stretch in which I reached C1 myself.',
+    ],
+    contributionTr: [
+      'Tamamı — tek dosya. Birinci sınıfın ikinci döneminde, kendimin C1’e ulaştığı dönemde yazıldı.',
+    ],
+    limitations: [
+      'Low technical difficulty. Kept for the personal record rather than as a technical claim.',
+    ],
+    limitationsTr: [
+      'Teknik zorluğu düşük. Teknik bir iddia olarak değil, kişisel kayıt olarak duruyor.',
     ],
   },
   {
@@ -1748,6 +3037,47 @@ const PROJECTS = [
       { label: 'Gereken varlık dosyası', value: '0 — yalnızca şekiller' },
       { label: 'Platformlar', value: 'Linux · macOS · Windows' },
     ],
+    // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
+    role: 'Solo',
+    period: '2026',
+    status: 'shipped',
+    tier: 'experimental',
+    problem:
+      'Game codebases are unreadable to a beginner because asset loading and abstraction layers hide the loop that actually matters.',
+    problemTr:
+      'Oyun kod tabanları yeni başlayan biri için okunamaz, çünkü asset yükleme ve soyutlama katmanları asıl önemli olan döngüyü gizler.',
+    flow: 'Typed entities in fixed static arrays with active flags → GameState enum → UpdateGame() advances timers, spawning, movement and collisions → DrawGame() renders with shape primitives only',
+    flowTr: 'Aktif bayraklı sabit static dizilerde tipli varlıklar → GameState enum’u → UpdateGame() zamanlayıcıları, doğumu, hareketi ve çarpışmaları ilerletir → DrawGame() yalnızca şekil ilkelleriyle çizer',
+    metrics: [
+      { label: 'Codebase', value: '~840 lines', condition: 'project scope — single file, every system commented as a numbered lesson' },
+      { label: 'Asset files', value: '0', condition: 'project scope — player, enemies, particles and starfield all drawn from primitives' },
+      { label: 'Enemy types', value: '3', condition: 'system scope — different speed, HP and point values' },
+    ],
+    metricsTr: [
+      { label: 'Kod tabanı', value: '~840 satır', condition: 'proje kapsamı — tek dosya, her sistem numaralı bir ders olarak yorumlandı' },
+      { label: 'Asset dosyası', value: '0', condition: 'proje kapsamı — oyuncu, düşmanlar, parçacıklar ve yıldız alanı tamamen ilkellerden çizildi' },
+      { label: 'Düşman tipi', value: '3', condition: 'sistem kapsamı — farklı hız, can ve puan değerleri' },
+    ],
+    useCases: [],
+    useCasesTr: [],
+    decisions: [
+      { choice: 'No dynamic allocation anywhere — fixed-size static arrays with active flags and object-pool recycling', why: 'A beginner can follow the memory story end to end, and the frame loop has no allocator pauses', tradeoff: 'Hard entity caps are baked into the source' },
+    ],
+    decisionsTr: [
+      { choice: 'Hiçbir yerde dinamik bellek ayırma yok — aktif bayraklı sabit boyutlu static diziler ve nesne havuzu geri dönüşümü', why: 'Yeni başlayan biri bellek hikâyesini baştan sona takip edebiliyor ve kare döngüsünde ayırıcı duraklaması olmuyor', tradeoff: 'Sert varlık limitleri kaynağa gömülü' },
+    ],
+    contribution: [
+      'All of it, including the design constraint: fixed-size static arrays with active flags and object-pool recycling, so there is no dynamic allocation anywhere in the frame loop.',
+    ],
+    contributionTr: [
+      'Tamamı, tasarım kısıtı dahil: aktif bayraklı sabit boyutlu static diziler ve nesne havuzu geri dönüşümü; böylece kare döngüsünün hiçbir yerinde dinamik bellek ayırma yok.',
+    ],
+    limitations: [
+      'A teaching artifact. It is not a game anyone is meant to keep playing.',
+    ],
+    limitationsTr: [
+      'Bir öğretim çıktısı. Kimsenin oynamaya devam etmesi beklenen bir oyun değil.',
+    ],
   },
   {
     slug: 'pynput-macos-macro',
@@ -1810,6 +3140,41 @@ const PROJECTS = [
       { label: 'Kod tabanı', value: '51 satır' },
       { label: 'Bağımlılık', value: '1 (pynput)' },
       { label: 'Platform', value: 'macOS' },
+    ],
+    // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
+    role: 'Solo',
+    period: '2026',
+    status: 'archived',
+    tier: 'archive',
+    problem:
+      'Automating a repetitive key sequence on macOS runs into two obstacles: global input hooks need Accessibility permission, and pynput cannot see mouse side buttons at all.',
+    problemTr:
+      'macOS’ta tekrarlayan bir tuş dizisini otomatikleştirmek iki engele çarpıyor: global giriş kancaları Accessibility izni istiyor ve pynput fare yan tuşlarını hiç göremiyor.',
+    flow: 'pynput Listener on the main thread → toggle spawns a daemon thread → key sequence replays through Controller → threading.Event checked between every press',
+    flowTr: 'Ana thread’de pynput Listener → açma/kapama bir daemon thread başlatır → tuş dizisi Controller üzerinden tekrar oynatılır → her basış arasında threading.Event kontrol edilir',
+    metrics: [
+      { label: 'Codebase', value: '51 lines', condition: 'project scope — single script, two threads' },
+      { label: 'Dependencies', value: '1', condition: 'system scope — pynput; Karabiner-Elements is an optional remap, not a runtime dependency' },
+    ],
+    metricsTr: [
+      { label: 'Kod tabanı', value: '51 satır', condition: 'proje kapsamı — tek betik, iki thread' },
+      { label: 'Bağımlılık', value: '1', condition: 'sistem kapsamı — pynput; Karabiner-Elements opsiyonel bir eşleme, çalışma zamanı bağımlılığı değil' },
+    ],
+    useCases: [],
+    useCasesTr: [],
+    contribution: [
+      'The clean shutdown: a threading.Event checked between every key press, so toggling off stops immediately and never leaves a key half-pressed.',
+      'Documenting the two macOS obstacles and shipping a Karabiner-Elements rule as the workaround for the mouse-button limitation.',
+    ],
+    contributionTr: [
+      'Temiz kapanış: her tuş basışı arasında kontrol edilen bir threading.Event; böylece kapatınca anında duruyor ve hiçbir tuşu yarım basılı bırakmıyor.',
+      'İki macOS engelinin belgelenmesi ve fare tuşu kısıtı için çözüm olarak bir Karabiner-Elements kuralının paylaşılması.',
+    ],
+    limitations: [
+      '51 lines. Kept as a utility rather than offered as a portfolio project.',
+    ],
+    limitationsTr: [
+      '51 satır. Portföy projesi olarak sunulmuyor, bir yardımcı araç olarak duruyor.',
     ],
   },
   {
@@ -1881,6 +3246,53 @@ const PROJECTS = [
       { label: 'Bağımlılıklar', value: 'Yalnızca raylib' },
       { label: 'Platformlar', value: 'Linux · macOS · Windows' },
     ],
+    // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
+    role: 'Solo',
+    period: '2026',
+    status: 'shipped',
+    tier: 'experimental',
+    problem:
+      'A complexity table tells you O(n log n) beats O(n²) but gives no intuition for why. You have to watch them race at the same speed.',
+    problemTr:
+      'Bir karmaşıklık tablosu O(n log n)’in O(n²)’yi yendiğini söyler ama nedenine dair sezgi vermez. Aynı hızda yarıştıklarını görmen gerekir.',
+    flow: 'raylib loop → one algorithm step per animation tick → incremental state machines hold loop indices in statics → interpolated display array → sorted mask',
+    flowTr: 'raylib döngüsü → animasyon tik’i başına bir algoritma adımı → artımlı durum makineleri döngü indekslerini static’lerde tutar → enterpolasyonlu görüntü dizisi → sıralanmış maskesi',
+    metrics: [
+      { label: 'Algorithms', value: '6', condition: 'system scope — Bubble, Selection, Insertion, Merge, Quick and Heap, switchable at runtime' },
+      { label: 'Codebase', value: '~690 lines', condition: 'project scope — single C99 file' },
+      { label: 'Dependencies', value: 'raylib only', condition: 'system scope — no other third-party library' },
+    ],
+    metricsTr: [
+      { label: 'Algoritma', value: '6', condition: 'sistem kapsamı — Bubble, Selection, Insertion, Merge, Quick ve Heap, çalışma anında değiştirilebilir' },
+      { label: 'Kod tabanı', value: '~690 satır', condition: 'proje kapsamı — tek C99 dosyası' },
+      { label: 'Bağımlılık', value: 'yalnızca raylib', condition: 'sistem kapsamı — başka üçüncü taraf kütüphane yok' },
+    ],
+    useCases: [
+      'Teaching material for data structures courses',
+    ],
+    useCasesTr: [
+      'Veri yapıları dersleri için öğretim materyali',
+    ],
+    decisions: [
+      { choice: 'Rewrite each algorithm as an incremental state machine advancing one comparison or swap per call', why: 'A normally-blocking loop can then render frame by frame instead of running to completion in one pass', tradeoff: 'Merge sort needs its own explicit merge-state struct, because its control flow cannot live in simple loop counters' },
+    ],
+    decisionsTr: [
+      { choice: 'Her algoritmayı, çağrı başına bir karşılaştırma ya da takas ilerleten artımlı bir durum makinesi olarak yeniden yazmak', why: 'Normalde bloklayan bir döngü böylece tek seferde sonuna kadar koşmak yerine kare kare çizilebiliyor', tradeoff: 'Merge sort kendi açık merge durumu yapısını gerektiriyor, çünkü kontrol akışı basit döngü sayaçlarında yaşayamıyor' },
+    ],
+    contribution: [
+      'The incremental state-machine rewrite of all six algorithms, which is the real technical decision in the project.',
+      'Interpolating bar positions through a separate display array so swaps animate smoothly, and a sorted mask that keeps confirmed elements marked for the rest of the run.',
+    ],
+    contributionTr: [
+      'Altı algoritmanın tamamının artımlı durum makinesi olarak yeniden yazılması — projedeki asıl teknik karar bu.',
+      'Takasların akıcı canlanması için çubuk konumlarının ayrı bir görüntü dizisi üzerinden enterpole edilmesi ve onaylanan elemanları koşunun geri kalanında işaretli tutan sıralanmış maskesi.',
+    ],
+    limitations: [
+      'A teaching tool. The animation speed implies no performance claim.',
+    ],
+    limitationsTr: [
+      'Bir öğretim aracı. Animasyon hızı hiçbir performans iddiası taşımıyor.',
+    ],
   },
   {
     slug: 'automotive-racing-assistant',
@@ -1951,6 +3363,59 @@ const PROJECTS = [
       { label: 'Döngü', value: 'Sınırlı — en fazla 5 araç turu' },
       { label: 'Testler', value: '47 birim testi + 24 senaryoluk canlı değerlendirme' },
       { label: 'Lisans', value: 'Apache-2.0 · tamamen çevrimdışı çekirdek' },
+    ],
+    // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
+    role: 'Solo',
+    period: '2026',
+    status: 'shipped',
+    tier: 'supporting',
+    problem:
+      'Agent projects reach for heavy frameworks and assume a network connection. A workshop has neither, and a wrong answer about a part or a regulation is worse than no answer.',
+    problemTr:
+      'Ajan projeleri ağır framework’lere uzanıyor ve ağ bağlantısı olduğunu varsayıyor. Bir atölyede ikisi de yok, üstelik bir parça ya da kural hakkında yanlış cevap cevapsızlıktan kötü.',
+    flow: 'System prompt + 4 tool schemas → Qwen2.5 7B via Ollama decides which tools to call → Python executes them and appends the results → loop, capped at 5 rounds → grounded answer or refusal',
+    flowTr: 'Sistem promptu + 4 araç şeması → Ollama üzerinden Qwen2.5 7B hangi araçları çağıracağına karar verir → Python çalıştırır ve sonuçları ekler → döngü, en fazla 5 tur → veriye dayalı cevap ya da ret',
+    metrics: [
+      { label: 'Unit tests', value: '47 passing', condition: 'validation scope — deterministic, no network required' },
+      { label: 'Live evaluation', value: '24 scenarios', condition: 'validation scope — tool-selection check; the README calls it explicitly not a statistical benchmark' },
+      { label: 'Tool rounds', value: 'capped at 5', condition: 'system scope — bounded loop, no runaway calls' },
+      { label: 'Dependencies', value: 'requests only', condition: 'system scope — no LangChain, LangGraph or CrewAI' },
+    ],
+    metricsTr: [
+      { label: 'Birim test', value: '47 geçiyor', condition: 'doğrulama kapsamı — deterministik, ağ gerektirmez' },
+      { label: 'Canlı değerlendirme', value: '24 senaryo', condition: 'doğrulama kapsamı — araç seçimi kontrolü; README bunun istatistiksel bir benchmark olmadığını açıkça söylüyor' },
+      { label: 'Araç turu', value: 'en fazla 5', condition: 'sistem kapsamı — sınırlı döngü, kontrolsüz çağrı yok' },
+      { label: 'Bağımlılık', value: 'yalnızca requests', condition: 'sistem kapsamı — LangChain, LangGraph ya da CrewAI yok' },
+    ],
+    useCases: [
+      'Disconnected industrial environments',
+      'Deployments where data cannot leave the premises',
+    ],
+    useCasesTr: [
+      'Bağlantısız endüstriyel ortamlar',
+      'Verinin tesisten çıkamadığı dağıtımlar',
+    ],
+    decisions: [
+      { choice: 'Direct HTTP against Ollama instead of an agent framework', why: 'The whole loop stays readable in one file and there is no framework version to track', tradeoff: 'Anything a framework would give for free — retries, tracing, memory — has to be written by hand' },
+    ],
+    decisionsTr: [
+      { choice: 'Ajan framework’ü yerine Ollama’ya doğrudan HTTP', why: 'Döngünün tamamı tek dosyada okunabilir kalıyor ve takip edilecek bir framework sürümü olmuyor', tradeoff: 'Bir framework’ün bedavaya vereceği her şey — yeniden deneme, izleme, hafıza — elle yazılmak zorunda' },
+    ],
+    contribution: [
+      'The framework-free bounded loop — direct HTTP against Ollama — which is the whole argument of the project.',
+      'The rule that mock data is always labelled fictional in the system prompt and that unknown questions are refused rather than invented, plus the two-tier test strategy: deterministic offline unit tests and a live tool-selection evaluation.',
+    ],
+    contributionTr: [
+      'Framework’süz sınırlı döngü — Ollama’ya doğrudan HTTP — projenin bütün savı bu.',
+      'Sahte verinin sistem promptunda her zaman kurgusal olarak etiketlenmesi ve bilinmeyen soruların uydurulmak yerine reddedilmesi kuralı; ayrıca iki katmanlı test stratejisi: deterministik offline birim testler ve canlı araç seçimi değerlendirmesi.',
+    ],
+    limitations: [
+      'Two of the four tools return clearly-labelled demonstration data, not real systems. The agent scaffolding is real; the domain data is not.',
+      'The 24-scenario evaluation is a hand-run check, and the repository says plainly that it is not a statistical benchmark.',
+    ],
+    limitationsTr: [
+      'Dört aracın ikisi gerçek sistemler değil, açıkça etiketlenmiş gösterim verisi döndürüyor. Ajan iskeleti gerçek; alan verisi değil.',
+      '24 senaryoluk değerlendirme elle koşulan bir kontrol ve depo bunun istatistiksel bir benchmark olmadığını açıkça yazıyor.',
     ],
   },
   {
@@ -2024,6 +3489,71 @@ const PROJECTS = [
       { label: 'Metrik aileleri', value: 'BBox (IoU, 0,5/0,75 doğruluk) ve Nokta (kutu içinde doğruluk) — asla karıştırılmaz' },
       { label: 'Pipeline kanıtı', value: 'Fikstürler üzerinde 2 uçtan uca smoke koşusu (sonuç değil)' },
       { label: 'Sırada', value: 'Bölümleri indir, adaptörleri yaz, sonra E1’i koş' },
+    ],
+    // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
+    role: 'Solo',
+    period: '2026',
+    status: 'research',
+    tier: 'research',
+    problem:
+      'Benchmarks publish numbers first and write the methodology afterwards. That order leaves the protocol free to drift toward whichever result looks best, and nobody outside the project can tell that it happened.',
+    problemTr:
+      'Benchmark’lar önce sayı yayınlar, metodolojiyi sonra yazar. Bu sıra, protokolün en iyi görünen sonuca doğru kaymasına açık kapı bırakır ve projenin dışındaki hiç kimse bunun olduğunu anlayamaz.',
+    flow: 'Frozen protocol in docs/ → evaluator and metric families in evaluation/ → committed run configs in experiments/ → results/ keeps verbatim raw_outputs separate from derived metrics, enforced by a test',
+    flowTr: 'docs/ içinde dondurulmuş protokol → evaluation/ içinde değerlendirici ve metrik aileleri → experiments/ içinde commit edilmiş koşu konfigleri → results/ ham çıktıyı türetilmiş metrikten ayrı tutar, bir testle zorunlu kılınır',
+    metrics: [
+      { label: 'Model results', value: 'none yet — by design', condition: 'project status — design and specification phase, no datasets downloaded' },
+      { label: 'Model matrix', value: '5 models', condition: 'specification scope — each capability tagged with vendor-documented evidence' },
+      { label: 'Test modules', value: '13', condition: 'validation scope — metrics, parsers, manifests, raw/derived separation, locked decisions' },
+      { label: 'Documentation', value: '29 markdown files', condition: 'specification scope — close to the source-file count; the methodology is the artifact' },
+      { label: 'Pipeline proof', value: '2 end-to-end smoke runs', condition: 'plumbing check — on fixtures, explicitly not results' },
+    ],
+    metricsTr: [
+      { label: 'Model sonucu', value: 'henüz yok — bilerek', condition: 'proje durumu — tasarım ve spesifikasyon aşaması, hiçbir veri kümesi indirilmedi' },
+      { label: 'Model matrisi', value: '5 model', condition: 'spesifikasyon kapsamı — her yetenek, üretici belgesine dayalı kanıt etiketiyle' },
+      { label: 'Test modülü', value: '13', condition: 'doğrulama kapsamı — metrikler, parser’lar, manifest’ler, ham/türetilmiş ayrımı, kilitli kararlar' },
+      { label: 'Dokümantasyon', value: '29 markdown dosyası', condition: 'spesifikasyon kapsamı — kaynak dosya sayısına yakın; metodolojinin kendisi çıktı' },
+      { label: 'Pipeline kanıtı', value: '2 uçtan uca duman testi', condition: 'tesisat kontrolü — fixture üzerinde, açıkça sonuç değil' },
+    ],
+    useCases: [
+      'VLM selection when vendor claims and actual capability differ',
+      'Reproducible multi-model evaluation infrastructure',
+    ],
+    useCasesTr: [
+      'Üretici iddiasıyla gerçek yeteneğin ayrıştığı durumlarda VLM seçimi',
+      'Yeniden üretilebilir çok modelli değerlendirme altyapısı',
+    ],
+    decisions: [
+      { choice: 'Models are classified by what the vendor documents, not by what a prompt can coax out', why: 'A prompt-induced box is never reported as native grounding, so the comparison stays honest', tradeoff: 'Some models land in a weaker class than a demo would suggest' },
+      { choice: 'A point is never converted into a box and never scored with IoU', why: 'The two capability classes get separate metric families instead of a false head-to-head', tradeoff: 'There is no single leaderboard number across all five models' },
+    ],
+    decisionsTr: [
+      { choice: 'Modeller, bir prompt’un koparabildiğine göre değil üreticinin belgelediğine göre sınıflanır', why: 'Prompt kaynaklı bir kutu asla native grounding olarak raporlanmaz, böylece karşılaştırma dürüst kalır', tradeoff: 'Bazı modeller bir demonun ima edeceğinden daha zayıf bir sınıfa düşüyor' },
+      { choice: 'Bir nokta asla kutuya çevrilmez ve asla IoU ile puanlanmaz', why: 'İki yetenek sınıfı sahte bir karşılaştırma yerine ayrı metrik ailelerine sahip olur', tradeoff: 'Beş modelin tamamı için tek bir liderlik tablosu sayısı çıkmıyor' },
+    ],
+    contribution: [
+      'The capability taxonomy — native bbox, native point, prompt-induced — and the rule that keeps them apart.',
+      'Per-condition coordinate handling, which is the part most likely to fail silently: absolute-pixel xyxy converted to canonical xywh, points normalised to 0–1000 scaled with post-preprocessing dimensions.',
+      'Tests that enforce the rules rather than trusting them — one checks raw and derived outputs never mix, another that locked protocol decisions have not silently changed.',
+    ],
+    contributionTr: [
+      'Yetenek taksonomisi — native bbox, native point, prompt kaynaklı — ve bunları ayrı tutan kural.',
+      'Koşul başına koordinat işleme; sessizce bozulmaya en açık kısım: mutlak piksel xyxy kanonik xywh’ye çevrilir, 0–1000’e normalize noktalar ön işleme sonrası boyutlarla ölçeklenir.',
+      'Kuralları varsaymak yerine zorunlu kılan testler — biri ham ve türetilmiş çıktıların hiç karışmadığını, diğeri kilitli protokol kararlarının sessizce değişmediğini kontrol eder.',
+    ],
+    limitations: [
+      'There are no results. Datasets and model adapters are the remaining work, and the project deliberately stops at the line where results would begin.',
+      'A frozen protocol is only as good as the judgement that froze it, and that judgement stays untested until the first experiment runs.',
+    ],
+    limitationsTr: [
+      'Sonuç yok. Veri kümeleri ve model adaptörleri kalan iş; proje bilinçli olarak sonuçların başlayacağı çizgide duruyor.',
+      'Dondurulmuş bir protokol, onu donduran muhakeme kadar iyidir ve o muhakeme ilk deney koşana kadar sınanmamış kalır.',
+    ],
+    futureWork: [
+      'Download the splits, implement the model adapters, then run E1.',
+    ],
+    futureWorkTr: [
+      'Split’leri indir, model adaptörlerini yaz, sonra E1’i koş.',
     ],
   },
   {
@@ -2101,6 +3631,65 @@ const PROJECTS = [
       { label: 'Puanlama', value: 'Sunucu tarafı tablo + EMA hakimiyet — model puan uyduramaz' },
       { label: 'Güvenlik', value: 'Ayrı süreç, zaman ve kaynak limitleri, gizli test case’ler' },
       { label: 'Test', value: '535, uçtan uca bir MCP oturumu dahil' },
+    ],
+    // --- new schema (12 Sep 2026). Legacy fields below are kept until the render migration.
+    role: 'Solo',
+    period: '2026',
+    status: 'shipped',
+    tier: 'featured',
+    problem:
+      'Studying algorithms with an LLM has an obvious failure mode: you ask for help, you get the solution, you learn nothing, and no record exists of what you actually know. Letting the model grade you does not fix it, because it can simply award the score.',
+    problemTr:
+      'Algoritma çalışmanın LLM’le bariz bir kusuru var: yardım istersin, çözümü alırsın, hiçbir şey öğrenmezsin ve neyi bildiğine dair kayıt kalmaz. Puanlamayı modele bırakmak da çözmez, çünkü modeli puanı kendi verebilir.',
+    flow: 'Claude Desktop host → 9 MCP tools → domain layer → submitted code runs in a separate process under time and resource limits against hidden tests → server-side rubric → SQLite profile with EMA mastery',
+    flowTr: 'Claude Desktop host → 9 MCP tool → domain katmanı → gönderilen kod, gizli testlere karşı zaman ve kaynak sınırlı ayrı bir süreçte çalışır → sunucu tarafı rubrik → EMA ustalıklı SQLite profil',
+    metrics: [
+      { label: 'Tests', value: '535', condition: 'validation scope — including a real end-to-end MCP session' },
+      { label: 'Tools', value: '9', condition: 'system scope — assess, problem, submit, hint, explain, reference, review, update, next' },
+      { label: 'Content', value: '22 problems · 11 topics', condition: 'content scope — on a prerequisite graph, authored in Turkish and English' },
+      { label: 'Hint cost', value: '1.0 / 0.8 / 0.6 / 0.5', condition: 'scoring rule — no hint / one hint / two or more / approach explained without code' },
+      { label: 'Failure handling', value: '3 consecutive failures', condition: 'scoring rule — drops the learner back to a prerequisite instead of repeating the same wall' },
+    ],
+    metricsTr: [
+      { label: 'Test', value: '535', condition: 'doğrulama kapsamı — gerçek bir uçtan uca MCP oturumu dahil' },
+      { label: 'Tool', value: '9', condition: 'sistem kapsamı — değerlendir, problem, gönder, ipucu, açıkla, referans, incele, güncelle, sonraki' },
+      { label: 'İçerik', value: '22 problem · 11 konu', condition: 'içerik kapsamı — ön koşul grafiğinde, Türkçe ve İngilizce yazıldı' },
+      { label: 'İpucu maliyeti', value: '1,0 / 0,8 / 0,6 / 0,5', condition: 'puanlama kuralı — ipuçsuz / bir ipucu / iki ve üzeri / kod yazmadan yaklaşımı açıklamak' },
+      { label: 'Başarısızlık yönetimi', value: 'arka arkaya 3', condition: 'puanlama kuralı — aynı duvarı tekrarlamak yerine öğrenciyi bir ön koşula geri düşürür' },
+    ],
+    useCases: [
+      'Technical interview preparation with a record of what was actually learned',
+      'MCP-based developer tooling where the host must not be trusted with scoring',
+    ],
+    useCasesTr: [
+      'Gerçekten neyin öğrenildiğinin kaydını tutan teknik mülakat hazırlığı',
+      'Puanlama konusunda host’a güvenilmemesi gereken MCP tabanlı geliştirici araçları',
+    ],
+    decisions: [
+      { choice: 'Scoring lives on the server, and the model supplies only bounded facts', why: 'The model cannot inflate a profile by inventing a number — it reports whether tests passed and how many hints were spent, and the server derives the score from a fixed rubric', tradeoff: 'Every new scoring nuance needs a server change; the host cannot be extended by prompting' },
+      { choice: 'Code execution behind an ExecutionEngine interface with a subprocess runner underneath', why: 'Swapping in a Docker-based runner later does not leak into the callers', tradeoff: 'A subprocess with resource limits is not a real sandbox for untrusted input' },
+    ],
+    decisionsTr: [
+      { choice: 'Puanlama sunucuda yaşar, model yalnızca sınırlı olgular bildirir', why: 'Model uydurduğu bir sayıyla profili şişiremez — testlerin geçip geçmediğini ve kaç ipucu harcandığını bildirir, skoru sabit bir rubrikten sunucu türetir', tradeoff: 'Her yeni puanlama nüansı sunucu değişikliği gerektirir; host prompt’la genişletilemez' },
+      { choice: 'Kod çalıştırma, altında subprocess koşucusu olan bir ExecutionEngine arayüzünün arkasında', why: 'Sonradan Docker tabanlı bir koşucuya geçmek çağıranlara sızmıyor', tradeoff: 'Kaynak sınırlı bir subprocess, güvenilmeyen girdi için gerçek bir sandbox değil' },
+    ],
+    contribution: [
+      'The trust boundary, which is the actual idea: the host never computes a score, and update_profile validates the result before anything is written.',
+      'The EMA mastery model and the prerequisite graph that decides what comes next.',
+      'Specifying each tool in docs/TOOLS.md before writing it, and a schema test that fails the build on a missing language or edge case. The MCP Python SDK is off the shelf.',
+    ],
+    contributionTr: [
+      'Güven sınırı — asıl fikir bu: host hiçbir zaman skor hesaplamaz ve update_profile, hiçbir şey yazılmadan önce sonucu doğrular.',
+      'EMA ustalık modeli ve sıradakini belirleyen ön koşul grafiği.',
+      'Her tool’un yazılmadan önce docs/TOOLS.md içinde spesifikasyonunun çıkarılması ve eksik dil ya da uç durumda derlemeyi düşüren şema testi. MCP Python SDK hazır.',
+    ],
+    limitations: [
+      '22 problems across 11 topics is enough to demonstrate the mechanism, not enough for a full curriculum.',
+      'The sandbox is a subprocess with time and resource limits, not a container — adequate for a local single-user session, not for untrusted input.',
+    ],
+    limitationsTr: [
+      '11 konuda 22 problem mekanizmayı göstermeye yeter, tam bir müfredata yetmez.',
+      'Sandbox, konteyner değil zaman ve kaynak sınırlı bir subprocess — yerel tek kullanıcılı oturum için yeterli, güvenilmeyen girdi için değil.',
     ],
   },
 ];
