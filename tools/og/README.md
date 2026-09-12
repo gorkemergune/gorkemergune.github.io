@@ -14,8 +14,13 @@ Rules that matter more than the layout:
 
 - Every string on a card comes from `src/data/projects.js` or the project's own
   README. No score, accuracy, latency or dataset size is introduced here.
-- The MARK number is the project's real one. The older cards were generated from
-  a template with `MARK XIV` baked in and are stale — do not copy that.
+- The MARK number is the project's real one, read from `projects.js`. The older
+  cards carried marks from an earlier ordering of the list and were corrected in
+  place on 12 Sep 2026 by `markfix.mjs`, which repairs the background and
+  redraws only that line. Four OG generations exist in `public/og`: this Stark
+  card, a per-project grid card with no mark, the generic portfolio card (still
+  standing in for four projects), and one raw screenshot. Only the Stark cards
+  carry a mark.
 - The serif title auto-shrinks against `titleMax` until it clears the artwork,
   measured in the browser rather than guessed.
 
