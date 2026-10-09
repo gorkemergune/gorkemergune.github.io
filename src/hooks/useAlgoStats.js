@@ -4,10 +4,10 @@ import { useEffect, useState } from 'react';
 // on every push) so the Algorithm Journey stays current. Caches for 6h and
 // falls back to a recent real snapshot when offline / rate-limited.
 const README = 'https://raw.githubusercontent.com/gorkemergune/algorithms/main/readme.md';
-const CACHE_KEY = 'algo_stats_v1';
+const CACHE_KEY = 'algo_stats_v2';
 const TTL = 6 * 60 * 60 * 1000;
 
-const SNAPSHOT = { leetcode: 103, algoleague: 9, neetcode: 6, competitive: 36, total: 154 };
+const SNAPSHOT = { leetcode: 111, algoleague: 9, neetcode: 7, hackerrank: 3, competitive: 43, total: 173 };
 
 const readCache = () => {
   try { const v = JSON.parse(localStorage.getItem(CACHE_KEY)); return v && typeof v._ts === 'number' ? v : null; } catch { return null; }
@@ -28,6 +28,7 @@ function parse(md) {
     leetcode: lineTotal(md, '[LeetCode]') ?? lineTotal(md, 'LeetCode') ?? SNAPSHOT.leetcode,
     algoleague: lineTotal(md, 'AlgoLeague') ?? SNAPSHOT.algoleague,
     neetcode: lineTotal(md, 'NeetCode') ?? SNAPSHOT.neetcode,
+    hackerrank: lineTotal(md, 'HackerRank') ?? SNAPSHOT.hackerrank,
     competitive: lineTotal(md, 'Competitive') ?? SNAPSHOT.competitive,
     total: (badge ? parseInt(badge[1], 10) : null) ?? lineTotal(md, '| **Total**') ?? SNAPSHOT.total,
   };

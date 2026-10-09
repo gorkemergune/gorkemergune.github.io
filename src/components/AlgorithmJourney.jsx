@@ -12,6 +12,7 @@ export default function AlgorithmJourney() {
     { key: 'algoleague', label: 'AlgoLeague', value: a.algoleague, color: '#00d4ff' },
     { key: 'competitive', label: 'Competitive', value: a.competitive, color: '#00e5a0' },
     { key: 'neetcode', label: 'NeetCode', value: a.neetcode, color: '#7c5cff' },
+    { key: 'hackerrank', label: 'HackerRank', value: a.hackerrank, color: '#ffd166' },
   ];
   const max = Math.max(1, ...platforms.map((p) => p.value || 0));
 

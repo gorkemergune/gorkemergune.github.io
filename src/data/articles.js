@@ -135,6 +135,107 @@ const ARTICLES = {
         ],
       },
     },
+
+    {
+      slug: 'vsr-review-dl-to-llm',
+      accent: '#fb923c',
+      title: 'From Deep Learning to Large Language Models: A Review of Visual Speech Recognition',
+      authors: ['Xiang Wang', 'Xiangzhen He', 'Wenhao Jiang', 'Xue Ding', 'Xianghe Meng', 'Tingting Du', 'Yangxu Ou', 'Ruolei Shan', 'Shibiao Shi', 'Haotian Zhu', 'Jingbin Hao'],
+      affiliations: 'Intelligent Systems with Applications, vol. 32, 200704',
+      venue: 'ISWA 2026',
+      arxiv: 'DOI 10.1016/j.iswa.2026.200704',
+      url: 'https://doi.org/10.1016/j.iswa.2026.200704',
+      pdf: null,
+      date: 'Dec 2026',
+      readOn: 'October 2026',
+      readOnTr: 'Ekim 2026',
+      category: 'Computer Vision',
+      categoryTr: 'Bilgisayarlı Görü',
+      tags: ['Visual Speech Recognition', 'LLM', 'Survey'],
+      tagsTr: ['Görsel Konuşma Tanıma', 'LLM', 'Derleme'],
+      summary:
+        'A review of lip reading, from hand-crafted features through CNN-RNN, Conformer and self-supervised pretraining to LLM-based systems. Its sharpest point: an LLM bolted on as the decoder is not the win; the LLM earns its place as a corrector.',
+      summaryTr:
+        'Dudak okumanın el yapımı özelliklerden CNN-RNN’e, Conformer’a, self-supervised ön eğitime ve LLM’li sistemlere uzanan derlemesi. En keskin tespiti: LLM’i doğrudan decoder olarak takmak kazanç değil; LLM yerini düzeltici olarak hak ediyor.',
+
+      notes: [
+        {
+          heading: 'What stuck with me',
+          headingTr: 'Aklımda kalan',
+          points: [
+            'The hard part of VSR is not really visual. /p/ and /b/ look identical on the lips, so viseme ambiguity never fully goes away. It only shrinks with context and language knowledge, which makes lip reading half a language problem.',
+            'The real break was not LLMs, it was the Conformer. In-the-wild WER went from 50–63% on LRS2 with RNN back-ends to about 22.6 on LRS2 and 19.1 on LRS3.',
+          ],
+          pointsTr: [
+            'VSR’nin zor tarafı aslında görsel değil. /p/ ile /b/ dudakta birebir aynı görünüyor; viseme belirsizliği hiçbir zaman tamamen kalkmıyor, sadece bağlam ve dil bilgisiyle azalıyor. Yani dudak okuma yarı yarıya bir dil problemi.',
+            'Asıl kırılma LLM’lerle değil, Conformer’la gelmiş. Doğal ortamda RNN arka uçlarıyla LRS2’de %50–63 olan WER, LRS2’de ~22,6’ya, LRS3’te ~19,1’e inmiş.',
+          ],
+        },
+        {
+          heading: 'LLMs are not plug-and-play',
+          headingTr: 'LLM tak-çalıştır değil',
+          points: [
+            'Feeding visual features straight into an LLM lands at 30.8 WER on LRS3, worse than a good Conformer. The wins come when the LLM corrects: VALLR at 18.7, AVGER at 17.2 by giving the LLM N-best candidates plus a compressed “look again” at the video.',
+            'Lower WER does not mean the model saw more. An LLM can write a fluent sentence the lips never said. I want visual faithfulness measured next to WER, and I would not trust a gap under 1% without repeated runs.',
+          ],
+          pointsTr: [
+            'Görsel özellikleri doğrudan LLM’e vermek LRS3’te 30,8 WER’de kalıyor; iyi bir Conformer’dan kötü. Kazanç LLM düzeltici olunca geliyor: VALLR 18,7, AVGER ise LLM’e N-best adaylarla birlikte videoya sıkıştırılmış bir “bir kez daha bak” vererek 17,2.',
+            'Düşük WER, modelin daha çok gördüğü anlamına gelmiyor. LLM dudakların hiç söylemediği akıcı bir cümle kurabilir. WER’in yanında görsel sadakatin de ölçülmesini isterim; tekrarlı deney yoksa %1’in altındaki farka da güvenmem.',
+          ],
+        },
+        {
+          heading: 'Note to self',
+          headingTr: 'Kendi işim için not',
+          points: [
+            'The AV-HuBERT trick is reusable well beyond speech: pretrain with audio and video, randomly drop the audio, infer from video alone. The extra modality is privileged information during training only.',
+            'For anything real-time: a light encoder on-device, the LLM called only when confidence is low, and latency, RTF and memory reported next to WER.',
+          ],
+          pointsTr: [
+            'AV-HuBERT’in numarası konuşmanın çok ötesinde işe yarar: ses ve görüntüyle ön eğit, sesi rastgele düşür, çıkarımı sadece görüntüyle yap. Ek modalite yalnızca eğitimde ayrıcalıklı bilgi.',
+            'Gerçek zamanlı her şey için: cihazda hafif bir encoder, LLM sadece güven düşükken devreye girsin; WER’in yanında gecikme, RTF ve bellek de raporlansın.',
+          ],
+        },
+      ],
+
+      board: {
+        caption: 'LRS3 WER (%) as reported in the review’s results tables. Lower is better. The numbers come from different papers, and the review itself warns against comparing them one to one.',
+        captionTr: 'Derlemenin sonuç tablolarındaki LRS3 WER (%) değerleri. Düşük olan iyi. Sayılar farklı makalelerden geliyor ve derlemenin kendisi bunları birebir karşılaştırmamak gerektiğini söylüyor.',
+        columns: ['LRS3 WER'],
+        columnsTr: ['LRS3 WER'],
+        rows: [
+          {
+            name: 'Conformer (Ma 2023)',
+            scores: ['19.1'],
+            verdict: 'The baseline to beat. No LLM, and still ahead of naive LLM decoding.',
+            verdictTr: 'Geçilmesi gereken çizgi. LLM yok ve yine de düz LLM çözmenin önünde.',
+          },
+          {
+            name: 'Direct visual → LLM',
+            scores: ['30.8'],
+            verdict: 'The LLM as decoder with no real visual alignment. The worst of the set.',
+            verdictTr: 'Gerçek görsel hizalama olmadan decoder olarak LLM. Listenin en kötüsü.',
+          },
+          {
+            name: 'Prompt-based',
+            scores: ['28.5'],
+            verdict: 'Better prompting helps a little, not enough.',
+            verdictTr: 'İyi prompt biraz yardım ediyor, yetmiyor.',
+          },
+          {
+            name: 'VALLR',
+            scores: ['18.7'],
+            verdict: 'Two stages through phonemes. Edges past the Conformer.',
+            verdictTr: 'Fonem üzerinden iki aşama. Conformer’ı az farkla geçiyor.',
+          },
+          {
+            name: 'AVGER',
+            scores: ['17.2'],
+            verdict: 'Best in the review: the LLM corrects N-best candidates while looking at the video again.',
+            verdictTr: 'Derlemedeki en iyisi: LLM, videoya tekrar bakarak N-best adayları düzeltiyor.',
+          },
+        ],
+      },
+    },
   ],
 
   written: [

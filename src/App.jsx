@@ -34,6 +34,7 @@ const CompetitionsPage = lazy(() => import('./pages/CompetitionsPage'));
 const ResearchPage = lazy(() => import('./pages/ResearchPage'));
 const ArticlesPage = lazy(() => import('./pages/ArticlesPage'));
 const LearningPathPage = lazy(() => import('./pages/LearningPathPage'));
+const AppsPage = lazy(() => import('./pages/AppsPage'));
 const ResumePage = lazy(() => import('./pages/ResumePage'));
 
 export default function App() {
@@ -201,9 +202,9 @@ export default function App() {
         .geo-float-reverse { animation: geo-float-reverse 10s ease-in-out infinite; }
         .geo-float-slow { animation: geo-float 14s ease-in-out infinite; }
 
-        /* The nav carries nine links; in Turkish they need more room than
+        /* The nav carries ten links; in Turkish they need more room than
            the general tablet breakpoint gives, so the menu collapses earlier. */
-        @media (max-width: 1180px) {
+        @media (max-width: 1280px) {
           .nav-links { display: none !important; }
           .nav-right .clock-display { display: none !important; }
           .hamburger { display: block !important; }
@@ -266,6 +267,7 @@ export default function App() {
             <Link to="/research" className="link-hover" style={{ cursor: 'pointer' }}>{t('navResearch')}</Link>
             <Link to="/articles" className="link-hover" style={{ cursor: 'pointer' }}>{t('navArticles')}</Link>
             <Link to="/learning-path" className="link-hover" style={{ cursor: 'pointer' }}>{t('navLearning')}</Link>
+            <Link to="/apps" className="link-hover" style={{ cursor: 'pointer' }}>{t('navApps')}</Link>
             <Link to="/blog" className="link-hover" style={{ cursor: 'pointer' }}>{t('navBlog')}</Link>
             <Link to="/fun" className="link-hover" style={{ cursor: 'pointer' }}>{t('navFun')}</Link>
             <Link to="/contact" className="link-hover" style={{ cursor: 'pointer', color: '#e0e0e8', fontWeight: 500 }}>
@@ -304,6 +306,7 @@ export default function App() {
             <Link to="/research" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navResearch')}</Link>
             <Link to="/articles" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navArticles')}</Link>
             <Link to="/learning-path" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navLearning')}</Link>
+            <Link to="/apps" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navApps')}</Link>
             <Link to="/blog" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navBlog')}</Link>
             {FEATURES.resume && <Link to="/resume" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navResume')}</Link>}
             <Link to="/fun" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navFun')}</Link>
@@ -349,6 +352,7 @@ export default function App() {
           <Route path="/research" element={<ResearchPage />} />
           <Route path="/articles" element={<ArticlesPage />} />
           <Route path="/learning-path" element={<LearningPathPage />} />
+          <Route path="/apps" element={<AppsPage />} />
           <Route path="/resume" element={<ResumePage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

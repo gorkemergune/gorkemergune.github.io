@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Beaker, AlertCircle, FileText, Check, Loader } from 'lucide-react';
+import { ArrowLeft, Beaker, AlertCircle, FileText, Check, Loader, Github } from 'lucide-react';
 import { useLang } from '../i18n.jsx';
 import { useSeo } from '../hooks/useSeo';
 
@@ -14,7 +14,10 @@ export default function ResearchPage() {
         .rs-card { transition: border-color 0.4s, box-shadow 0.4s, transform 0.4s cubic-bezier(0.2,0.8,0.2,1); }
         .rs-card:hover { transform: translateY(-3px); }
         .rs-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-        @media (max-width: 720px) { .rs-cols { grid-template-columns: 1fr !important; } }
+        .rs-gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+        .rs-table-wrap { overflow-x: auto; }
+        @media (max-width: 720px) { .rs-cols { grid-template-columns: 1fr !important; } .rs-gallery { grid-template-columns: repeat(2, 1fr) !important; } }
+        @media (max-width: 600px) { .rs-card { padding: 24px 20px !important; } }
       `}</style>
 
       <Link to="/" className="link-hover" style={s.back}>
@@ -72,6 +75,53 @@ export default function ResearchPage() {
               </div>
             )}
 
+            {it.results && (
+              <div style={{ marginTop: 26 }}>
+                <div style={{ ...s.subLabel, color: it.accent }}>{t('researchResults')}</div>
+                <div className="rs-table-wrap">
+                  <table style={s.table}>
+                    <thead>
+                      <tr>{it.results.columns.map((c, j) => <th key={j} style={{ ...s.th, textAlign: j ? 'right' : 'left' }}>{c}</th>)}</tr>
+                    </thead>
+                    <tbody>
+                      {it.results.rows.map((r, j) => (
+                        <tr key={j}>{r.map((c, k) => <td key={k} style={{ ...s.td, textAlign: k ? 'right' : 'left', color: k ? '#e0e0e8' : '#a2a2b8' }}>{c}</td>)}</tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                {it.results.caption && <p style={s.caption}>{it.results.caption}</p>}
+              </div>
+            )}
+
+            {Array.isArray(it.findings) && it.findings.length > 0 && (
+              <div style={{ marginTop: 24 }}>
+                <div style={{ ...s.subLabel, color: it.accent }}>{t('researchFindings')}</div>
+                <ul style={s.ul}>
+                  {it.findings.map((m, j) => <li key={j} style={s.li}><span style={{ ...s.bullet, background: it.accent }} />{m}</li>)}
+                </ul>
+              </div>
+            )}
+
+            {Array.isArray(it.images) && it.images.length > 0 && (
+              <div style={{ marginTop: 26 }}>
+                <div className="rs-gallery">
+                  {it.images.map((im) => (
+                    <figure key={im.src} style={s.figure}>
+                      <img src={im.src} alt={im.caption} loading="lazy" style={s.img} />
+                      <figcaption style={s.figcap}>{im.caption}</figcaption>
+                    </figure>
+                  ))}
+                </div>
+                {it.imagesNote && <p style={s.caption}>{it.imagesNote}</p>}
+              </div>
+            )}
+
+            {it.repo && (
+              <a href={it.repo} target="_blank" rel="noopener noreferrer" className="link-hover" style={{ ...s.pdf, color: it.accent, marginRight: 22 }}>
+                <Github size={13} strokeWidth={1.5} /> {t('researchRepo')}
+              </a>
+            )}
             {it.pdf && (
               <a href={it.pdf} target="_blank" rel="noopener noreferrer" className="link-hover" style={{ ...s.pdf, color: it.accent }}>
                 <FileText size={13} strokeWidth={1.5} /> {t('researchPdf')}
@@ -104,5 +154,12 @@ const s = {
   li: { display: 'flex', alignItems: 'flex-start', gap: 10, fontFamily: "'Instrument Sans', sans-serif", fontSize: 14, lineHeight: 1.5, color: '#a2a2b8' },
   bullet: { width: 5, height: 5, borderRadius: '50%', marginTop: 7, flexShrink: 0 },
   expected: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 14, lineHeight: 1.6, color: '#a2a2b8' },
+  table: { width: '100%', borderCollapse: 'collapse', fontFamily: "'JetBrains Mono', monospace", fontSize: 12.5 },
+  th: { padding: '8px 10px', borderBottom: '1px solid #2a2a45', color: '#7a7a92', fontWeight: 400, fontSize: 10, letterSpacing: '0.1em', textTransform: 'uppercase', whiteSpace: 'nowrap' },
+  td: { padding: '10px 10px', borderBottom: '1px solid #1a1a2e', fontVariantNumeric: 'tabular-nums' },
+  caption: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 12.5, lineHeight: 1.55, color: '#6a6a82', marginTop: 10 },
+  figure: { margin: 0, border: '1px solid #1a1a2e', borderRadius: 10, overflow: 'hidden', background: '#0b0b13' },
+  img: { display: 'block', width: '100%', height: 'auto' },
+  figcap: { fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#7a7a92', padding: '8px 10px' },
   pdf: { display: 'inline-flex', alignItems: 'center', gap: 7, marginTop: 22, fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.08em' },
 };

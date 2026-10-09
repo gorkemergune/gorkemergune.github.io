@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, CornerDownLeft, Folder, BookOpen, Compass, FileText, Beaker, Trophy, GraduationCap } from 'lucide-react';
+import { Search, CornerDownLeft, Folder, BookOpen, Compass, FileText, Beaker, Trophy, GraduationCap, Smartphone } from 'lucide-react';
 import { useLang } from '../i18n.jsx';
 import { FEATURES } from '../config';
 import PROJECTS from '../data/projects';
@@ -47,6 +47,7 @@ export default function CommandPalette() {
       { label: t('researchLabel'), sub: '/research', to: '/research', icon: Beaker, kind: 'page' },
       { label: t('articlesLabel'), sub: '/articles', to: '/articles', icon: FileText, kind: 'page' },
       { label: t('learningLabel'), sub: '/learning-path', to: '/learning-path', icon: GraduationCap, kind: 'page' },
+      { label: t('appsLabel'), sub: '/apps', to: '/apps', icon: Smartphone, kind: 'page' },
       { label: t('blogLabel'), sub: '/blog', to: '/blog', icon: BookOpen, kind: 'page' },
       ...(FEATURES.resume ? [{ label: t('navResume'), sub: '/resume', to: '/resume', icon: FileText, kind: 'page' }] : []),
       { label: t('contactLabel'), sub: '/contact', to: '/contact', icon: FileText, kind: 'page' },

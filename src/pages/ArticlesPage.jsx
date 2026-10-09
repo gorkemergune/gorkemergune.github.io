@@ -31,7 +31,7 @@ export default function ArticlesPage() {
         .art-chev { transition: transform 0.35s cubic-bezier(0.2,0.8,0.2,1); }
         .art-chev.open { transform: rotate(180deg); }
 
-        .art-row { display: grid; grid-template-columns: 150px repeat(3, minmax(96px, 1fr)); gap: 14px; align-items: baseline; padding: 13px 0; border-top: 1px solid #15152a; }
+        .art-row { display: grid; grid-template-columns: 150px repeat(var(--art-cols, 3), minmax(96px, 1fr)); gap: 14px; align-items: baseline; padding: 13px 0; border-top: 1px solid #15152a; }
         .art-row-head { border-top: none; padding-bottom: 8px; }
         .art-cell-label { display: none; }
         @media (max-width: 760px) {
@@ -165,7 +165,7 @@ function ModelBoard({ board, accent, loc }) {
   return (
     <section>
       <h3 style={s.noteHeading}>{t('articlesBoardTitle')}</h3>
-      <div>
+      <div style={{ '--art-cols': columns.length }}>
         <div className="art-row art-row-head">
           <span style={{ ...s.colHead, color: accent }}>Model</span>
           {columns.map((c) => <span key={c} style={s.colHead}>{c}</span>)}
