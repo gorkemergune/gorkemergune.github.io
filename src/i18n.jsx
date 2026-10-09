@@ -596,6 +596,8 @@ const en = {
   researchExpected: 'Expected Outcomes',
   researchPdf: 'Read draft (PDF)',
   researchRepo: 'View repository',
+  researchShow: 'Show details',
+  researchHide: 'Hide details',
   researchResults: 'Results',
   researchFindings: 'Findings',
   researchItems: [
@@ -1445,6 +1447,8 @@ const tr = {
   researchExpected: 'Beklenen Sonuçlar',
   researchPdf: 'Taslağı oku (PDF)',
   researchRepo: 'Depoyu gör',
+  researchShow: 'Detayları göster',
+  researchHide: 'Detayları gizle',
   researchResults: 'Sonuçlar',
   researchFindings: 'Bulgular',
   researchItems: [

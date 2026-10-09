@@ -1,5 +1,6 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Beaker, AlertCircle, FileText, Check, Loader, Github } from 'lucide-react';
+import { ArrowLeft, Beaker, AlertCircle, FileText, Check, Loader, Github, ChevronDown } from 'lucide-react';
 import { useLang } from '../i18n.jsx';
 import { useSeo } from '../hooks/useSeo';
 
@@ -16,6 +17,15 @@ export default function ResearchPage() {
         .rs-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
         .rs-gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
         .rs-table-wrap { overflow-x: auto; }
+        .rs-head { display: block; width: 100%; padding: 0; margin: 0; border: none; background: none; text-align: left; color: inherit; font: inherit; cursor: pointer; }
+        .rs-head:focus-visible { outline: 1px solid #00d4ff; outline-offset: 6px; border-radius: 4px; }
+        .rs-clamp { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .rs-chev { transition: transform 0.35s cubic-bezier(0.2,0.8,0.2,1); }
+        .rs-chev.open { transform: rotate(180deg); }
+        .rs-body { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows 0.45s cubic-bezier(0.2,0.8,0.2,1), opacity 0.35s ease; }
+        .rs-body.open { grid-template-rows: 1fr; opacity: 1; }
+        .rs-body-inner { overflow: hidden; min-height: 0; }
+        @media (prefers-reduced-motion: reduce) { .rs-body, .rs-chev { transition: none; } }
         @media (max-width: 720px) { .rs-cols { grid-template-columns: 1fr !important; } .rs-gallery { grid-template-columns: repeat(2, 1fr) !important; } }
         @media (max-width: 600px) { .rs-card { padding: 24px 20px !important; } }
       `}</style>
@@ -36,101 +46,113 @@ export default function ResearchPage() {
       </div>
 
       <div style={s.list}>
-        {Array.isArray(items) && items.map((it, i) => (
-          <article
-            key={i}
-            className="rs-card reveal"
-            style={{ ...s.card, animationDelay: `${i * 0.08}s` }}
-            onMouseEnter={(e) => { e.currentTarget.style.borderColor = `${it.accent}66`; e.currentTarget.style.boxShadow = `0 0 30px ${it.accent}22`; }}
-            onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#1a1a2e'; e.currentTarget.style.boxShadow = 'none'; }}
-          >
-            <div style={s.cardTop}>
-              <span style={{ ...s.field, color: it.accent }}><Beaker size={12} strokeWidth={1.6} /> {it.field}</span>
-              {(() => {
-                const done = it.status === 'completed';
-                const c = done ? '#00e5a0' : '#ffb454';
-                return (
-                  <span style={{ ...s.status, color: c, borderColor: `${c}4d`, background: `${c}14` }}>
-                    {done ? <Check size={10} strokeWidth={2.6} /> : <Loader size={10} strokeWidth={2} />}
-                    {done ? t('researchCompleted') : t('researchStatus')}
-                  </span>
-                );
-              })()}
-            </div>
-            <h3 style={s.rtitle}>{it.title}</h3>
-            {it.abstract && <p style={s.abstract}>{it.abstract}</p>}
-
-            {Array.isArray(it.methods) && it.methods.length > 0 && (
-              <div className="rs-cols" style={{ marginTop: 22 }}>
-                <div>
-                  <div style={{ ...s.subLabel, color: it.accent }}>{t('researchMethods')}</div>
-                  <ul style={s.ul}>
-                    {it.methods.map((m, j) => <li key={j} style={s.li}><span style={{ ...s.bullet, background: it.accent }} />{m}</li>)}
-                  </ul>
-                </div>
-                <div>
-                  <div style={{ ...s.subLabel, color: it.accent }}>{it.status === 'completed' ? t('researchOutcomes') : t('researchExpected')}</div>
-                  <p style={s.expected}>{it.expected}</p>
-                </div>
-              </div>
-            )}
-
-            {it.results && (
-              <div style={{ marginTop: 26 }}>
-                <div style={{ ...s.subLabel, color: it.accent }}>{t('researchResults')}</div>
-                <div className="rs-table-wrap">
-                  <table style={s.table}>
-                    <thead>
-                      <tr>{it.results.columns.map((c, j) => <th key={j} style={{ ...s.th, textAlign: j ? 'right' : 'left' }}>{c}</th>)}</tr>
-                    </thead>
-                    <tbody>
-                      {it.results.rows.map((r, j) => (
-                        <tr key={j}>{r.map((c, k) => <td key={k} style={{ ...s.td, textAlign: k ? 'right' : 'left', color: k ? '#e0e0e8' : '#a2a2b8' }}>{c}</td>)}</tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-                {it.results.caption && <p style={s.caption}>{it.results.caption}</p>}
-              </div>
-            )}
-
-            {Array.isArray(it.findings) && it.findings.length > 0 && (
-              <div style={{ marginTop: 24 }}>
-                <div style={{ ...s.subLabel, color: it.accent }}>{t('researchFindings')}</div>
-                <ul style={s.ul}>
-                  {it.findings.map((m, j) => <li key={j} style={s.li}><span style={{ ...s.bullet, background: it.accent }} />{m}</li>)}
-                </ul>
-              </div>
-            )}
-
-            {Array.isArray(it.images) && it.images.length > 0 && (
-              <div style={{ marginTop: 26 }}>
-                <div className="rs-gallery">
-                  {it.images.map((im) => (
-                    <figure key={im.src} style={s.figure}>
-                      <img src={im.src} alt={im.caption} loading="lazy" style={s.img} />
-                      <figcaption style={s.figcap}>{im.caption}</figcaption>
-                    </figure>
-                  ))}
-                </div>
-                {it.imagesNote && <p style={s.caption}>{it.imagesNote}</p>}
-              </div>
-            )}
-
-            {it.repo && (
-              <a href={it.repo} target="_blank" rel="noopener noreferrer" className="link-hover" style={{ ...s.pdf, color: it.accent, marginRight: 22 }}>
-                <Github size={13} strokeWidth={1.5} /> {t('researchRepo')}
-              </a>
-            )}
-            {it.pdf && (
-              <a href={it.pdf} target="_blank" rel="noopener noreferrer" className="link-hover" style={{ ...s.pdf, color: it.accent }}>
-                <FileText size={13} strokeWidth={1.5} /> {t('researchPdf')}
-              </a>
-            )}
-          </article>
-        ))}
+        {Array.isArray(items) && items.map((it, i) => <ResearchCard key={it.title} it={it} index={i} />)}
       </div>
     </div>
+  );
+}
+
+function ResearchCard({ it, index }) {
+  const { t } = useLang();
+  const [open, setOpen] = useState(false);
+  const done = it.status === 'completed';
+  const c = done ? '#00e5a0' : '#ffb454';
+
+  return (
+    <article
+      className="rs-card reveal"
+      style={{ ...s.card, animationDelay: `${index * 0.08}s` }}
+      onMouseEnter={(e) => { e.currentTarget.style.borderColor = `${it.accent}66`; e.currentTarget.style.boxShadow = `0 0 30px ${it.accent}22`; }}
+      onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#1a1a2e'; e.currentTarget.style.boxShadow = 'none'; }}
+    >
+      <button type="button" className="rs-head" onClick={() => setOpen((o) => !o)} aria-expanded={open}>
+        <div style={s.cardTop}>
+          <span style={{ ...s.field, color: it.accent }}><Beaker size={12} strokeWidth={1.6} /> {it.field}</span>
+          <span style={{ ...s.status, color: c, borderColor: `${c}4d`, background: `${c}14` }}>
+            {done ? <Check size={10} strokeWidth={2.6} /> : <Loader size={10} strokeWidth={2} />}
+            {done ? t('researchCompleted') : t('researchStatus')}
+          </span>
+        </div>
+        <h3 style={s.rtitle}>{it.title}</h3>
+        {it.abstract && <p className={open ? undefined : 'rs-clamp'} style={s.abstract}>{it.abstract}</p>}
+        <span style={{ ...s.toggle, color: open ? '#e0e0e8' : '#9a9ab0' }}>
+          {open ? t('researchHide') : t('researchShow')}
+          <ChevronDown className={`rs-chev${open ? ' open' : ''}`} size={13} strokeWidth={1.8} />
+        </span>
+      </button>
+
+      <div className={`rs-body${open ? ' open' : ''}`} aria-hidden={!open}>
+        <div className="rs-body-inner">
+          {Array.isArray(it.methods) && it.methods.length > 0 && (
+            <div className="rs-cols" style={{ marginTop: 26 }}>
+              <div>
+                <div style={{ ...s.subLabel, color: it.accent }}>{t('researchMethods')}</div>
+                <ul style={s.ul}>
+                  {it.methods.map((m, j) => <li key={j} style={s.li}><span style={{ ...s.bullet, background: it.accent }} />{m}</li>)}
+                </ul>
+              </div>
+              <div>
+                <div style={{ ...s.subLabel, color: it.accent }}>{done ? t('researchOutcomes') : t('researchExpected')}</div>
+                <p style={s.expected}>{it.expected}</p>
+              </div>
+            </div>
+          )}
+
+          {it.results && (
+            <div style={{ marginTop: 26 }}>
+              <div style={{ ...s.subLabel, color: it.accent }}>{t('researchResults')}</div>
+              <div className="rs-table-wrap">
+                <table style={s.table}>
+                  <thead>
+                    <tr>{it.results.columns.map((col, j) => <th key={j} style={{ ...s.th, textAlign: j ? 'right' : 'left' }}>{col}</th>)}</tr>
+                  </thead>
+                  <tbody>
+                    {it.results.rows.map((r, j) => (
+                      <tr key={j}>{r.map((cell, k) => <td key={k} style={{ ...s.td, textAlign: k ? 'right' : 'left', color: k ? '#e0e0e8' : '#a2a2b8' }}>{cell}</td>)}</tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              {it.results.caption && <p style={s.caption}>{it.results.caption}</p>}
+            </div>
+          )}
+
+          {Array.isArray(it.findings) && it.findings.length > 0 && (
+            <div style={{ marginTop: 24 }}>
+              <div style={{ ...s.subLabel, color: it.accent }}>{t('researchFindings')}</div>
+              <ul style={s.ul}>
+                {it.findings.map((m, j) => <li key={j} style={s.li}><span style={{ ...s.bullet, background: it.accent }} />{m}</li>)}
+              </ul>
+            </div>
+          )}
+
+          {Array.isArray(it.images) && it.images.length > 0 && (
+            <div style={{ marginTop: 26 }}>
+              <div className="rs-gallery">
+                {it.images.map((im) => (
+                  <figure key={im.src} style={s.figure}>
+                    <img src={im.src} alt={im.caption} loading="lazy" style={s.img} />
+                    <figcaption style={s.figcap}>{im.caption}</figcaption>
+                  </figure>
+                ))}
+              </div>
+              {it.imagesNote && <p style={s.caption}>{it.imagesNote}</p>}
+            </div>
+          )}
+
+          {it.repo && (
+            <a href={it.repo} target="_blank" rel="noopener noreferrer" className="link-hover" style={{ ...s.pdf, color: it.accent, marginRight: 22 }} tabIndex={open ? 0 : -1}>
+              <Github size={13} strokeWidth={1.5} /> {t('researchRepo')}
+            </a>
+          )}
+          {it.pdf && (
+            <a href={it.pdf} target="_blank" rel="noopener noreferrer" className="link-hover" style={{ ...s.pdf, color: it.accent }} tabIndex={open ? 0 : -1}>
+              <FileText size={13} strokeWidth={1.5} /> {t('researchPdf')}
+            </a>
+          )}
+        </div>
+      </div>
+    </article>
   );
 }
 
@@ -142,12 +164,13 @@ const s = {
   desc: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 18, lineHeight: 1.6, color: '#9a9ab0', maxWidth: 600 },
   disclaimer: { display: 'flex', gap: 12, padding: '16px 20px', background: 'rgba(255,209,102,0.05)', border: '1px solid rgba(255,209,102,0.2)', borderRadius: 8, marginBottom: 44, fontFamily: "'Instrument Sans', sans-serif", fontSize: 14, lineHeight: 1.6, color: '#c8c0a0' },
   list: { display: 'flex', flexDirection: 'column', gap: 22 },
-  card: { padding: '30px 32px', border: '1px solid #1a1a2e', borderRadius: 12, background: 'linear-gradient(180deg,#0f0f1a,#0b0b13)' },
+  card: { padding: '26px 32px', border: '1px solid #1a1a2e', borderRadius: 12, background: 'linear-gradient(180deg,#0f0f1a,#0b0b13)' },
   cardTop: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12, marginBottom: 16, flexWrap: 'wrap' },
   field: { display: 'inline-flex', alignItems: 'center', gap: 6, fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.1em' },
   status: { display: 'inline-flex', alignItems: 'center', gap: 6, fontFamily: "'JetBrains Mono', monospace", fontSize: 9, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#00e5a0', padding: '4px 10px', border: '1px solid rgba(0,229,160,0.3)', borderRadius: 999, background: 'rgba(0,229,160,0.08)' },
   statusDot: { width: 5, height: 5, borderRadius: '50%', background: '#00e5a0' },
   rtitle: { fontFamily: "'Instrument Serif', serif", fontSize: 27, fontWeight: 400, lineHeight: 1.2, color: '#eef0f6', marginBottom: 14 },
+  toggle: { display: 'inline-flex', alignItems: 'center', gap: 8, marginTop: 16, fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.12em', textTransform: 'uppercase' },
   abstract: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 15.5, lineHeight: 1.65, color: '#b4b4c6' },
   subLabel: { fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 12 },
   ul: { listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 9, padding: 0, margin: 0 },
