@@ -31,9 +31,9 @@ export default function LoveMeterPage() {
 
 const s = {
   container: { maxWidth: 540, margin: '0 auto', padding: '60px 48px 120px', position: 'relative', zIndex: 2 },
-  back: { display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: "'JetBrains Mono', monospace", fontSize: 12, letterSpacing: '0.06em', color: '#5a5a70', marginBottom: 48, cursor: 'pointer', position: 'relative', zIndex: 2 },
+  back: { display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: "var(--font-mono)", fontSize: 12, letterSpacing: '0.06em', color: '#5c6370', marginBottom: 48, cursor: 'pointer', position: 'relative', zIndex: 2 },
   header: { marginBottom: 32, position: 'relative', zIndex: 2 },
-  title: { fontFamily: "'Instrument Serif', serif", fontSize: 60, fontWeight: 400, lineHeight: 0.95, letterSpacing: '-0.015em', color: '#e0e0e8', marginTop: 20, marginBottom: 16 },
-  desc: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 17, lineHeight: 1.6, color: '#8a8aa0', maxWidth: 460 },
-  disclaimer: { fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.04em', color: '#6a6a82', marginTop: 12 },
+  title: { fontFamily: "var(--font-display)", fontSize: 60, fontWeight: 400, lineHeight: 0.95, letterSpacing: '-0.015em', color: '#e0e0e8', marginTop: 20, marginBottom: 16 },
+  desc: { fontFamily: "var(--font-body)", fontSize: 17, lineHeight: 1.6, color: '#8b929e', maxWidth: 460 },
+  disclaimer: { fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: '0.04em', color: '#6b7280', marginTop: 12 },
 };

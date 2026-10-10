@@ -26,16 +26,16 @@ export default function FeaturedProject() {
   return (
     <section className="container" style={s.section} aria-label="Featured project">
       <style>{`
-        .fp-card { display: grid; grid-template-columns: 1fr 1.15fr; gap: 0; border: 1px solid #1a1a2e; border-radius: 14px; overflow: hidden; background: linear-gradient(180deg,#0f0f1a,#0b0b13); transition: border-color 0.4s, box-shadow 0.4s; }
+        .fp-card { display: grid; grid-template-columns: 1fr 1.15fr; gap: 0; border: 1px solid #1e222b; border-radius: 14px; overflow: hidden; background: linear-gradient(180deg,#111419,#0d0f14); transition: border-color 0.4s, box-shadow 0.4s; }
         .fp-card:hover { border-color: ${p.color}66; box-shadow: 0 0 40px ${p.glow}; }
-        .fp-media { position: relative; overflow: hidden; background: #080810; min-height: 300px; }
+        .fp-media { position: relative; overflow: hidden; background: #08090c; min-height: 300px; }
         .fp-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s cubic-bezier(0.2,0.8,0.2,1); }
         .fp-card:hover .fp-media img { transform: scale(1.04); }
         .fp-lb-row { transition: background 0.3s, border-color 0.3s; }
         .fp-lb-row:hover { background: ${p.color}12; }
-        .fp2-card { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 0; border: 1px solid #1a1a2e; border-radius: 14px; overflow: hidden; background: linear-gradient(180deg,#0f0f1a,#0b0b13); transition: border-color 0.4s, box-shadow 0.4s; }
-        .fp2-card:hover { border-color: ${p2 ? p2.color : '#1a1a2e'}66; box-shadow: 0 0 34px ${p2 ? p2.glow : 'transparent'}; }
-        .fp2-media { position: relative; overflow: hidden; background: #080810; min-height: 240px; }
+        .fp2-card { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 0; border: 1px solid #1e222b; border-radius: 14px; overflow: hidden; background: linear-gradient(180deg,#111419,#0d0f14); transition: border-color 0.4s, box-shadow 0.4s; }
+        .fp2-card:hover { border-color: ${p2 ? p2.color : '#1e222b'}66; box-shadow: 0 0 34px ${p2 ? p2.glow : 'transparent'}; }
+        .fp2-media { position: relative; overflow: hidden; background: #08090c; min-height: 240px; }
         .fp2-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s cubic-bezier(0.2,0.8,0.2,1); }
         .fp2-card:hover .fp2-media img { transform: scale(1.04); }
         @media (max-width: 820px) { .fp-card { grid-template-columns: 1fr !important; } .fp-media { min-height: 200px; } .fp2-card { grid-template-columns: 1fr !important; } .fp2-media { min-height: 180px; } }
@@ -50,7 +50,7 @@ export default function FeaturedProject() {
         <div style={s.body}>
           <div style={{ display: 'flex', gap: 10, alignItems: 'center', marginBottom: 14, flexWrap: 'wrap' }}>
             <span style={{ ...s.markChip, color: p.color, borderColor: `${p.color}55` }}>{p.mark}</span>
-            <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.16em', color: '#8a8aa0' }}>{p.codename.toUpperCase()}</span>
+            <span style={{ fontFamily: "var(--font-mono)", fontSize: 10, letterSpacing: '0.16em', color: '#8b929e' }}>{p.codename.toUpperCase()}</span>
           </div>
           <h3 style={s.title}>{p.title}</h3>
           <p style={s.desc}>{loc(p.oneLiner, p.oneLinerTr)}</p>
@@ -60,7 +60,7 @@ export default function FeaturedProject() {
             <div style={s.lbHead}>
               <Trophy size={11} strokeWidth={1.8} style={{ color: p.color }} />
               <span>{t('featuredLbTitle')}</span>
-              <span style={{ marginLeft: 'auto', color: '#5a5a70' }}>{t('featuredLbNote')}</span>
+              <span style={{ marginLeft: 'auto', color: '#5c6370' }}>{t('featuredLbNote')}</span>
             </div>
             <div style={s.lbTable}>
               {BOARD.map((r, i) => (
@@ -105,7 +105,7 @@ export default function FeaturedProject() {
             <div style={{ display: 'flex', gap: 10, alignItems: 'center', marginBottom: 12, flexWrap: 'wrap' }}>
               <span style={{ ...s.alsoTag, color: p2.color, borderColor: `${p2.color}55` }}>{t('featuredAlso')}</span>
               <span style={{ ...s.markChip, color: p2.color, borderColor: `${p2.color}55` }}>{p2.mark}</span>
-              <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.16em', color: '#8a8aa0' }}>{p2.codename.toUpperCase()}</span>
+              <span style={{ fontFamily: "var(--font-mono)", fontSize: 10, letterSpacing: '0.16em', color: '#8b929e' }}>{p2.codename.toUpperCase()}</span>
             </div>
             <h3 style={s.title2}>{p2.title}</h3>
             <p style={s.desc2}>{loc(p2.oneLiner, p2.oneLinerTr)}</p>
@@ -117,7 +117,7 @@ export default function FeaturedProject() {
                 {t('projectOpen')} <ArrowUpRight size={14} strokeWidth={1.5} />
               </Link>
               <a href={p2.github} target="_blank" rel="noreferrer" className="hero-btn">
-                <Github size={15} strokeWidth={1.5} style={{ color: '#8a8aa0' }} /> {t('pdViewGithub')}
+                <Github size={15} strokeWidth={1.5} style={{ color: '#8b929e' }} /> {t('pdViewGithub')}
               </a>
             </div>
           </div>
@@ -129,24 +129,24 @@ export default function FeaturedProject() {
 
 const s = {
   section: { maxWidth: 1400, margin: '0 auto', padding: '40px 48px 80px', position: 'relative', zIndex: 2 },
-  kicker: { display: 'inline-flex', alignItems: 'center', gap: 10, fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.18em', color: '#6a6a82' },
+  kicker: { display: 'inline-flex', alignItems: 'center', gap: 10, fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: '0.18em', color: '#6b7280' },
   kickerDot: { width: 7, height: 7, borderRadius: '50%' },
   body: { padding: '34px 34px', display: 'flex', flexDirection: 'column', justifyContent: 'center' },
-  markChip: { display: 'inline-block', padding: '3px 11px', border: '1px solid', borderRadius: 999, fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.14em' },
-  title: { fontFamily: "'Instrument Serif', serif", fontSize: 40, fontWeight: 400, lineHeight: 1.05, color: '#eef0f6', marginBottom: 14 },
-  desc: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 16, lineHeight: 1.6, color: '#a8a8be', marginBottom: 22 },
-  lbWrap: { border: '1px solid #1a1a2e', borderRadius: 10, padding: '12px 14px', marginBottom: 26, background: 'rgba(8,8,16,0.4)' },
-  lbHead: { display: 'flex', alignItems: 'center', gap: 7, fontFamily: "'JetBrains Mono', monospace", fontSize: 9, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#8a8aa0', marginBottom: 8 },
+  markChip: { display: 'inline-block', padding: '3px 11px', border: '1px solid', borderRadius: 999, fontFamily: "var(--font-mono)", fontSize: 10, letterSpacing: '0.14em' },
+  title: { fontFamily: "var(--font-display)", fontSize: 40, fontWeight: 400, lineHeight: 1.05, color: '#eef0f6', marginBottom: 14 },
+  desc: { fontFamily: "var(--font-body)", fontSize: 16, lineHeight: 1.6, color: '#a8a8be', marginBottom: 22 },
+  lbWrap: { border: '1px solid #1e222b', borderRadius: 10, padding: '12px 14px', marginBottom: 26, background: 'rgba(8,8,16,0.4)' },
+  lbHead: { display: 'flex', alignItems: 'center', gap: 7, fontFamily: "var(--font-mono)", fontSize: 9, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#8b929e', marginBottom: 8 },
   lbTable: { display: 'flex', flexDirection: 'column', gap: 2 },
   lbRow: { display: 'grid', gridTemplateColumns: '24px 1fr auto auto', alignItems: 'center', gap: 10, padding: '6px 8px', borderRadius: 6, border: '1px solid transparent' },
-  lbRank: { fontFamily: "'JetBrains Mono', monospace", fontSize: 12, color: '#8a8aa0', textAlign: 'center' },
-  lbModel: { fontFamily: "'JetBrains Mono', monospace", fontSize: 12.5, display: 'inline-flex', alignItems: 'center', gap: 8, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' },
-  lbMine: { fontFamily: "'JetBrains Mono', monospace", fontSize: 8, letterSpacing: '0.1em', textTransform: 'uppercase', padding: '1px 6px', borderRadius: 999, border: '1px solid currentColor', opacity: 0.85 },
-  lbNote: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 11, color: '#6a6a82', whiteSpace: 'nowrap' },
-  lbScore: { fontFamily: "'JetBrains Mono', monospace", fontSize: 13, fontWeight: 600, fontVariantNumeric: 'tabular-nums' },
+  lbRank: { fontFamily: "var(--font-mono)", fontSize: 12, color: '#8b929e', textAlign: 'center' },
+  lbModel: { fontFamily: "var(--font-mono)", fontSize: 12.5, display: 'inline-flex', alignItems: 'center', gap: 8, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' },
+  lbMine: { fontFamily: "var(--font-mono)", fontSize: 8, letterSpacing: '0.1em', textTransform: 'uppercase', padding: '1px 6px', borderRadius: 999, border: '1px solid currentColor', opacity: 0.85 },
+  lbNote: { fontFamily: "var(--font-body)", fontSize: 11, color: '#6b7280', whiteSpace: 'nowrap' },
+  lbScore: { fontFamily: "var(--font-mono)", fontSize: 13, fontWeight: 600, fontVariantNumeric: 'tabular-nums' },
   ctaRow: { display: 'flex', gap: 12, flexWrap: 'wrap' },
   body2: { padding: '30px 32px', display: 'flex', flexDirection: 'column', justifyContent: 'center' },
-  alsoTag: { display: 'inline-block', padding: '3px 11px', border: '1px solid', borderRadius: 999, fontFamily: "'JetBrains Mono', monospace", fontSize: 9, letterSpacing: '0.16em' },
-  title2: { fontFamily: "'Instrument Serif', serif", fontSize: 32, fontWeight: 400, lineHeight: 1.08, color: '#eef0f6', marginBottom: 12 },
-  desc2: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 15.5, lineHeight: 1.6, color: '#a8a8be', marginBottom: 18 },
+  alsoTag: { display: 'inline-block', padding: '3px 11px', border: '1px solid', borderRadius: 999, fontFamily: "var(--font-mono)", fontSize: 9, letterSpacing: '0.16em' },
+  title2: { fontFamily: "var(--font-display)", fontSize: 32, fontWeight: 400, lineHeight: 1.08, color: '#eef0f6', marginBottom: 12 },
+  desc2: { fontFamily: "var(--font-body)", fontSize: 15.5, lineHeight: 1.6, color: '#a8a8be', marginBottom: 18 },
 };

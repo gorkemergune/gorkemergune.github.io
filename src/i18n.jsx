@@ -5,7 +5,6 @@ const en = {
   navAbout: 'About',
   navJourney: 'Journey',
   navFocus: 'Focus',
-  navBlog: 'Blog',
   navContact: 'Contact',
 
   // Hero
@@ -42,10 +41,39 @@ const en = {
   introCtaContact: 'Start a conversation',
 
   // Home hero + sections
-  heroTagline: 'AI PRODUCT DEVELOPER',
-  heroSubtext: 'I build real products with AI — working on computer vision (CV), machine learning (ML), large language models (LLM), and full-stack development. What matters to me is shipping things people actually use.',
+  heroTagline: 'Product Developer & AI Researcher',
+  heroSubtext: 'I build digital products and explore applied AI — from machine learning, deep learning, and LLMs to computer vision and full-stack development.',
   ctaResume: 'Download Résumé',
   ctaViewWork: 'View Work',
+
+  // Cinematic home (October 2026 redesign)
+  heroDiscipline: 'Computer Engineering',
+  heroHello: 'Hi, I’m',
+  heroScroll: 'Scroll',
+  heroGithub: 'GitHub',
+  workKicker: 'Selected work',
+  workTitle: 'Built, measured |and shipped.',
+  workSub: 'Four featured armors, chosen deliberately. Each one carries a measured result and the condition it was measured on.',
+  workAll: 'Open the full armory',
+  workOpen: 'Open project',
+  shotScreenshot: 'App screenshot',
+  shotFigure: 'Figure from the repository',
+  shotOutput: 'Model output',
+  skillsKicker: 'Skills',
+  skillsTitle: 'Technologies |I work with',
+  expKicker: 'Experience',
+  expTitle: 'Current roles |and past work',
+  researchKicker: 'Research',
+  researchTitle: 'Current |studies',
+  researchAll: 'All research',
+  armoryKicker: 'The armory',
+  armoryTitle: 'Every build, |by MARK number',
+  armorySub: 'All projects in the order they joined the hall. Open any one for the problem, the measurement and the source.',
+  armoryAll: 'All',
+  numbersKicker: 'By the numbers',
+  numbersTitle: 'Counted from the data, |refreshed live.',
+  liveKicker: 'Live activity',
+  liveTitle: 'What is moving |right now.',
 
   metricsKicker: 'FEATURED METRICS // LIVE TELEMETRY',
   mProjects: 'Featured Projects',
@@ -125,8 +153,6 @@ const en = {
   ],
 
   // Blog
-  blogLabel: 'Blog',
-  blogSub: 'Notes on AI, engineering, and the student life behind them',
   blogItems: [
     { category: 'University', date: 'Jun 2026', readTime: '6 min', title: 'How I Got AA in Calculus I and Calculus II', excerpt: 'The habits — not the talent — that carried me through two semesters of calculus with a top grade.', slug: 'calculus-aa' },
     { category: 'Programming', date: 'May 2026', readTime: '6 min', title: 'Python from Scratch: How to Start From Zero', excerpt: 'A beginner-friendly path into Python: what to learn first, and what to happily ignore for now.', slug: 'python-from-scratch' },
@@ -174,7 +200,8 @@ const en = {
   contactLine2: 'Open to collaboration',
 
   // Nav Fun
-  navFun: 'Fun',
+  funSpark: 'Fun corner: small games and surprises',
+  funCorner: 'Fun corner',
 
   // Fun Hub
   funLabel: 'Fun',
@@ -372,7 +399,6 @@ const en = {
   puzzlePageBack: 'Fun',
 
   // Blog Hub
-  blogHubBack: 'Home',
 
   // Nav
   navProject: 'Project',
@@ -394,10 +420,22 @@ const en = {
   // Project Page
   projectBack: 'Home',
   projectDetailBack: 'Hall of Armor',
-  projectBadge: 'HALL OF ARMOR',
-  projectLabel: 'Armory',
-  projectSub: 'One armor per project. Open a capsule to inspect its specs, architecture, and results.',
+  projectBadge: 'Engineering works',
+  projectLabel: 'Hall of Armor',
+  projectSub: 'Every project is a numbered armor: an engineering creation with its own MARK, its problem, its measurement and its source.',
   projectOpen: 'Open Project',
+  hallKicker: 'Projects · Engineering works',
+  hallSub: 'Every bay holds one discipline. Choose a bay to see the armors built in it, or open the whole collection.',
+  hallHint: 'Hover, click or Tab through the bays',
+  hallMobileHint: 'Choose a bay',
+  hallAll: 'All projects',
+  hallExplore: 'Explore projects',
+  hallBack: 'Back to the Hall',
+  hallProjects: 'projects',
+  hallBay: 'Bay',
+  hallOther: 'Other bays',
+  hallAllSub: 'Every armor in the hall, grouped by its original category. Search by name, technology or language.',
+  hallSceneAlt: 'The Hall of Armor: a two-level engineering laboratory with a central armor display and project bays',
 
   // Project Detail
   sysOnline: 'SYSTEM ONLINE',
@@ -412,6 +450,11 @@ const en = {
   pdFieldNotes: 'Field Notes',
   pdScreenshots: 'Screenshots',
   pdStack: 'Technical Stack',
+  pdCoverAlt: 'project cover',
+  pdGroupProblem: 'Problem & solution',
+  pdGroupBuild: 'Technical implementation',
+  pdGroupResults: 'Results & limitations',
+  pdGroupSource: 'Source',
   pdSource: 'Source',
   pdWhy: 'Why',
   pdTradeoff: 'Trade-off',
@@ -459,13 +502,6 @@ const en = {
   stackLabels: {},
 
   // Blog detail
-  rdBack: 'Blog',
-  rdBadge: 'BLOG',
-  rdNotFoundTitle: 'Page not found',
-  rdNotFoundDesc: 'This blog post does not exist yet.',
-  rdBottomNote: 'Placeholder article — written to set the tone. Real content will replace it soon.',
-  rdBottomLink: 'Back to all Blog posts',
-  rdNextUp: 'Next up',
   blogSoon: 'COMING SOON',
 
   // Hall of Armor
@@ -495,10 +531,10 @@ const en = {
   expBack: 'Home',
   expBadge: 'EXPERIENCE',
   expLabel: 'Experience',
-  expSub: 'Hackathons, applied engineering, and ongoing research — framed as professional work.',
+  expSub: 'Product development, internships and research roles, current positions first. The full timeline, with education, is on the Experience page.',
   expItems: [
     {
-      org: 'Iceberg X R&D', role: 'AI Research Intern', period: '2026', type: 'Internship', accent: '#38bdf8',
+      org: 'Iceberg X R&D', group: 'internship', icon: 'lab', role: 'AI Research Intern', period: '2026', type: 'Internship', accent: '#38bdf8',
       summary: 'Applied-AI research internship: finished the Neuron AI feature study, now on a property-search frontend study.',
       points: [
         'Reviewed 21 live estate-agent sites with a team of four and turned the gaps into a platform-level AI proposal.',
@@ -507,7 +543,7 @@ const en = {
       tags: ['AI', 'Research'], link: '/research',
     },
     {
-      org: 'BTK Hackathon 2026', role: 'Full-Stack & AI Developer', period: 'May 2026', type: 'Hackathon', accent: '#ff9f1c',
+      org: 'BTK Hackathon 2026', group: 'hackathon', logo: '/orgs/btk-akademi.png', logoAlt: 'BTK Akademi', role: 'Full-Stack & AI Developer', period: 'May 2026', type: 'Hackathon', accent: '#ff9f1c',
       summary: 'Built “Find The Best”, a shopping-intelligence platform for the e-commerce track.',
       points: [
         'Designed a multi-store price-comparison engine across Turkish and international marketplaces.',
@@ -517,7 +553,7 @@ const en = {
       tags: ['Next.js', 'FastAPI', 'Gemini', 'PostgreSQL'], link: '/competitions',
     },
     {
-      org: 'Independent AI / ML Engineering', role: 'Builder & Open-Source Author', period: '2024 — Present', type: 'Applied', accent: '#00d4ff',
+      org: 'Independent AI / ML Engineering', group: 'independent', icon: 'code', role: 'Builder & Open-Source Author', period: '2024 — Present', type: 'Applied', accent: '#00f0ff',
       summary: 'Self-directed engineering across computer vision, NLP, ML, systems, and full-stack.',
       points: [
         'Shipped 16 documented projects — from a bare-metal x86 OS to production ML pipelines.',
@@ -528,7 +564,7 @@ const en = {
       tags: ['PyTorch', 'YOLO11', 'FastAPI', 'C'], link: '/project',
     },
     {
-      org: 'Independent Research', role: 'Undergraduate Researcher', period: '2025 — Present', type: 'Research', accent: '#7c5cff',
+      org: 'Independent Research', group: 'independent', icon: 'research', role: 'Undergraduate Researcher', period: '2025 — Present', type: 'Research', accent: '#7c5cff',
       summary: 'Ongoing, in-progress studies growing out of applied projects (no published papers yet).',
       points: [
         'Stylometric signals for detecting AI-generated text in English and Turkish.',
@@ -550,7 +586,7 @@ const en = {
     { category: 'Backend', accent: '#00e5a0', items: [
       { name: 'Node.js', level: 3 }, { name: 'FastAPI', level: 4 }, { name: 'Express', level: 3 },
     ]},
-    { category: 'AI / ML', accent: '#00d4ff', items: [
+    { category: 'AI / ML', accent: '#00f0ff', items: [
       { name: 'PyTorch', level: 4 }, { name: 'TensorFlow', level: 3 }, { name: 'OpenCV', level: 4 }, { name: 'Ultralytics YOLO', level: 4 }, { name: 'Hugging Face', level: 4 }, { name: 'Scikit-learn', level: 4 },
     ]},
     { category: 'Databases', accent: '#ff9f1c', items: [
@@ -569,6 +605,20 @@ const en = {
   articlesBack: 'Home',
   articlesBadge: 'ARTICLES',
   articlesLabel: 'Articles',
+  bkReadKicker: 'Read',
+  bkWriteKicker: 'Written',
+  bkReadTitle: 'My Reading Library',
+  bkWriteTitle: 'My Writing Library',
+  bkReadSub: 'Papers I have read, each with the notes I kept while reading.',
+  bkWriteSub: 'Essays I have written, kept here in full.',
+  bkReadEmpty: 'Readings will appear here.',
+  bkWriteEmpty: 'New writings will appear here.',
+  bkBooks: 'books',
+  bkOpen: 'Open book',
+  bkClose: 'Close book',
+  bkReadOriginal: 'Read original',
+  bkTheText: 'The text',
+  bkReadTime: 'read',
   articlesSub: 'Papers I read and keep notes on, plus the pieces I write myself.',
   articlesTabRead: 'What I Read',
   articlesTabWritten: 'What I Write',
@@ -587,6 +637,13 @@ const en = {
   researchBack: 'Home',
   researchBadge: 'RESEARCH',
   researchLabel: 'Research',
+  libKicker: 'Research library',
+  libOpen: 'Open dossier',
+  libClose: 'Close dossier',
+  libShelf: 'Shelf',
+  libReserved: 'Reserved for future research',
+  libHint: 'Choose a dossier from the shelves',
+  libFindings: 'Findings & limitations',
   researchSub: 'Independent and internship research, growing out of my applied work: some finished, some still running.',
   researchDisclaimer: 'These are self-directed and internship research projects, not published papers. Nothing here claims peer review or publication.',
   researchStatus: 'In Progress',
@@ -596,6 +653,7 @@ const en = {
   researchExpected: 'Expected Outcomes',
   researchPdf: 'Read draft (PDF)',
   researchRepo: 'View repository',
+  researchCoverKinds: { concept: 'Conceptual illustration, not an experimental result', 'concept-mock': 'Illustration of the proof of concept with mock listings, not a production screenshot', illustration: 'Illustration drawn by a script in the repository', screenshot: 'Screenshot of the working proof of concept (mock data)', diagram: 'Diagram drawn for this site from the study’s own findings', figure: 'Figure from the project repository' },
   researchShow: 'Show details',
   researchHide: 'Hide details',
   researchResults: 'Results',
@@ -603,7 +661,7 @@ const en = {
   researchItems: [
     {
       title: 'Face Recognition Under Filters, Bad Photos and AI Twins',
-      field: 'Computer Vision · Biometrics', accent: '#f472b6', status: 'completed',
+      field: 'Computer Vision · Biometrics', accent: '#f472b6', status: 'completed', cover: '/media/research/face-recognition.webp', coverKind: 'concept',
       abstract: 'A face-recognition system enrolls a person from clean photos. What happens when the same person shows up filtered, made up, badly shot, half out of frame, or as an AI-generated look-alike? This benchmark puts ArcFace (a face embedding model) and Qwen2.5-VL (a general vision-language model) on exactly the same photos and measures, in %, how often each still recognizes the person.',
       methods: [
         'Clean photos split 60/40 with seed 42: 21 build the person’s template, 14 are held out as a clean baseline',
@@ -642,7 +700,7 @@ const en = {
     },
     {
       title: 'Property Search With Map & Filters',
-      field: 'Frontend · Maps · Iceberg X R&D', accent: '#34d399', status: 'in-progress',
+      field: 'Frontend · Maps · Iceberg X R&D', accent: '#34d399', status: 'in-progress', cover: '/media/research/property-search.webp', coverKind: 'concept-mock',
       abstract: 'An internship research mission ahead of a frontend proof of concept: a property search page where filters drive a card list and an interactive map, and selecting a card highlights its marker and vice versa. Before writing any code, the team took apart how the big portals actually build this.',
       methods: [
         'Seven portals examined: Rightmove, Zoopla, OnTheMarket, Zillow, Airbnb, OpenRent, Sahibinden; my share was Airbnb, Sahibinden, Leaflet and react-leaflet',
@@ -655,7 +713,7 @@ const en = {
     },
     {
       title: 'Neuron AI Feature Research',
-      field: 'Applied AI · Iceberg X R&D', accent: '#38bdf8', status: 'completed',
+      field: 'Applied AI · Iceberg X R&D', accent: '#38bdf8', status: 'completed', cover: '/media/research/neuron-ai.webp', coverKind: 'concept',
       abstract: 'Neuron is a multi-tenant platform that runs UK estate-agent websites and calls itself an “AI Operating System for Estate Agents”. A team of four reviewed 21 of its live sites to find where AI would actually help, then turned the gaps into a product proposal.',
       methods: [
         '21 live sites reviewed across search, listing detail, valuation and contact, with the network tab open',
@@ -668,14 +726,14 @@ const en = {
     },
     {
       title: 'Email Phishing Detection',
-      field: 'NLP · Security', accent: '#7c5cff', status: 'completed',
+      field: 'NLP · Security', accent: '#7c5cff', status: 'completed', cover: '/media/research/email-phishing.webp', coverKind: 'concept', project: 'email-phishing-detection',
       abstract: 'Phishing emails cost people real money and lean on a recognizable vocabulary of urgency and impersonation. The motivation is to detect them from raw text with a simple, transparent model — and to show that how you represent the data matters as much as the model itself.',
       methods: ['Text cleaning, then TF-IDF vectorization over words and bigrams', 'Stratified 80/20 split with a fixed random seed', 'Logistic Regression classifier', 'Evaluation with accuracy, precision, recall, F1, a confusion matrix, and ROC'],
       expected: 'The transparent TF-IDF + Logistic Regression pipeline flags phishing from raw text with strong precision and recall, and confirmed the central point: how you represent the data matters as much as the model. The study is complete and documented in the project.',
     },
     {
       title: 'PHQ-9 Depression Analysis',
-      field: 'Data Analysis · Mental Health', accent: '#00e5a0', status: 'completed',
+      field: 'Data Analysis · Mental Health', accent: '#00e5a0', status: 'completed', cover: '/media/research/phq9-analysis.webp', coverKind: 'concept', project: 'depression-phq9-analysis',
       abstract: 'An analysis of PHQ-9 depression-screening responses using AI and data-analysis techniques. A live study with roughly 100 participants was conducted, and the findings were presented and discussed on stage. The live study has now concluded — this is exploratory research, not a clinical tool, and not a published study.',
       methods: ['Ran a live study with ~100 real PHQ-9 responses', 'Clinical scoring with severity classification', 'Statistical analysis and machine-learning exploration of the responses', 'Findings presented and discussed on stage'],
       expected: 'With the live study concluded, the work explored how AI and data analysis can support — never replace — mental-health assessment, always with appropriate caution.',
@@ -684,8 +742,31 @@ const en = {
 
   // Learning Path
   navLearning: 'Learning Path',
+  navExperience: 'Experience',
+  xpKicker: 'Experience',
+  xpTitle: 'My Journey |So Far',
+  xpSub: 'From Yeditepe University to product development, applied AI research and real-world prototypes: my education, the roles I hold and the work behind them.',
+  xpRole: 'Product Developer & AI Researcher',
+  xpStudent: 'Sophomore Computer Engineering Student',
+  xpEducation: 'Education',
+  xpWork: 'Work experience',
+  xpPresent: 'Present',
+  xpCurrent: 'Current',
+  xpCompleted: 'Completed',
+  xpInProgress: 'In progress',
+  xpExpected: 'expected',
+  xpConfidential: 'Confidential',
+  xpShowAll: 'All responsibilities',
+  xpShowLess: 'Show less',
+  xpExplore: 'Explore more',
+  xpWebsite: 'Website',
+  xpLinkedIn: 'LinkedIn profile',
+  xpViewAll: 'Full experience',
+  xpPhotoAlt: 'Görkem Ergüne',
   learningBack: 'Home',
-  learningBadge: 'LEARNING PATH',
+  learningBadge: 'Learning path',
+  learningNotesKicker: 'Trail notes',
+  learningNotesTitle: 'What each stretch |of the path covers',
   learningLabel: 'Learning Path',
   learningSub: 'The foundations I build on — languages and hardware I learn by working through, one repo at a time.',
   learningStatus: 'In Progress',
@@ -711,7 +792,7 @@ const en = {
       cta: 'View on the App Store',
     },
     {
-      name: 'Dayframe', platform: 'Web app', accent: '#a78bfa', icon: 'calendar',
+      name: 'Dayframe', platform: 'Web app', accent: '#a78bfa', icon: 'calendar', image: '/apps/dayframe.svg',
       tagline: 'Plan · Execute · Measure · Review',
       description: 'A personal planning system: lay out the week on a grid, work the day through tasks and routines, record metrics you define yourself, and read back what actually happened, without a score. Multi-user, in English and Turkish.',
       stack: ['React 19', 'TypeScript', 'FastAPI', 'PostgreSQL'],
@@ -753,7 +834,7 @@ const en = {
   resumeBack: 'Home',
   resumeBadge: 'RÉSUMÉ',
   resumeTitle: 'Görkem Ergüne',
-  resumeRole: 'Computer Engineering Student · AI Product Developer',
+  resumeRole: 'Computer Engineering Student · Product Developer & AI Researcher',
   resumePrint: 'Save as PDF',
   resumeSummary: 'Second-year Computer Engineering student and self-directed AI engineer building computer-vision systems, machine-learning pipelines, and full-stack software — with a research-driven mindset and a habit of shipping.',
   resumeSecEducation: 'Education',
@@ -851,7 +932,6 @@ const tr = {
   navAbout: 'Hakkımda',
   navJourney: 'Yolculuk',
   navFocus: 'Odak',
-  navBlog: 'Blog',
   navContact: 'İletişim',
 
   // Hero
@@ -888,10 +968,39 @@ const tr = {
   introCtaContact: 'Bir sohbet başlat',
 
   // Home hero + sections
-  heroTagline: 'YAPAY ZEKÂ ÜRÜN GELİŞTİRİCİSİ',
-  heroSubtext: 'Yapay zekâ ile gerçek ürünler geliştiriyorum; bilgisayarlı görü (CV), makine öğrenmesi (ML), büyük dil modelleri (LLM) ve full-stack üzerine çalışıyorum. Benim için önemli olan, insanların gerçekten kullandığı şeyler üretmek.',
+  heroTagline: 'Ürün Geliştirici & Yapay Zekâ Araştırmacısı',
+  heroSubtext: 'Makine öğrenmesi, derin öğrenme, büyük dil modelleri ve bilgisayarlı görüden full-stack geliştirmeye uzanan alanlarda dijital ürünler geliştiriyor ve uygulamalı yapay zekâ üzerine araştırmalar yapıyorum.',
   ctaResume: 'CV’yi İndir',
   ctaViewWork: 'Çalışmaları Gör',
+
+  // Sinematik ana sayfa (Ekim 2026 yeniden tasarımı)
+  heroDiscipline: 'Bilgisayar Mühendisliği',
+  heroHello: 'Merhaba, ben',
+  heroScroll: 'Kaydır',
+  heroGithub: 'GitHub',
+  workKicker: 'Seçili işler',
+  workTitle: 'İnşa edildi, ölçüldü |ve yayına alındı.',
+  workSub: 'Özenle seçilmiş dört zırh. Her biri ölçülmüş bir sonucu ve neyin üzerinde ölçüldüğünü taşıyor.',
+  workAll: 'Tüm cephaneliği aç',
+  workOpen: 'Projeyi aç',
+  shotScreenshot: 'Uygulama ekran görüntüsü',
+  shotFigure: 'Depodaki şekil',
+  shotOutput: 'Model çıktısı',
+  skillsKicker: 'Yetenekler',
+  skillsTitle: 'Kullandığım |teknolojiler',
+  expKicker: 'Deneyim',
+  expTitle: 'Güncel roller |ve geçmiş işler',
+  researchKicker: 'Araştırma',
+  researchTitle: 'Süren |çalışmalar',
+  researchAll: 'Tüm araştırmalar',
+  armoryKicker: 'Cephanelik',
+  armoryTitle: 'Tüm yapılar, |MARK numarasıyla',
+  armorySub: 'Bütün projeler, depoya katıldıkları sırayla. Problemi, ölçümü ve kaynak kodu görmek için herhangi birini aç.',
+  armoryAll: 'Tümü',
+  numbersKicker: 'Sayılarla',
+  numbersTitle: 'Veriden sayılır, |canlı güncellenir.',
+  liveKicker: 'Canlı etkinlik',
+  liveTitle: 'Şu anda |neler değişiyor.',
 
   metricsKicker: 'ÖNE ÇIKAN METRİKLER // CANLI TELEMETRİ',
   mProjects: 'Öne Çıkan Projeler',
@@ -970,8 +1079,6 @@ const tr = {
   ],
 
   // Blog
-  blogLabel: 'Blog',
-  blogSub: 'Yapay zekâ, mühendislik ve arkasındaki öğrencilik üzerine notlar',
   blogItems: [
     { category: 'Üniversite', date: 'Haz 2026', readTime: '6 dk', title: 'Calculus I ve Calculus II’den Nasıl AA Aldım?', excerpt: 'İki dönem calculus’ı yüksek notla bitirmemi sağlayan şey yetenek değil, alışkanlıklardı.', slug: 'calculus-aa' },
     { category: 'Programlama', date: 'May 2026', readTime: '6 dk', title: 'Python’a Sıfırdan Nasıl Başlanmalı?', excerpt: 'Yeni başlayanlar için Python’a giriş: önce ne öğrenmeli, şimdilik neyi gönül rahatlığıyla görmezden gelmeli.', slug: 'python-from-scratch' },
@@ -1019,7 +1126,8 @@ const tr = {
   contactLine2: 'İş birliğine açığım',
 
   // Nav Fun
-  navFun: 'Eğlence',
+  funSpark: 'Eğlence köşesi: küçük oyunlar ve sürprizler',
+  funCorner: 'Eğlence köşesi',
 
   // Fun Hub
   funLabel: 'Eğlence',
@@ -1217,7 +1325,6 @@ const tr = {
   puzzlePageBack: 'Eğlence',
 
   // Blog Hub
-  blogHubBack: 'Ana Sayfa',
 
   // Nav
   navProject: 'Proje',
@@ -1239,10 +1346,22 @@ const tr = {
   // Project Page
   projectBack: 'Ana Sayfa',
   projectDetailBack: 'Zırh Deposu',
-  projectBadge: 'ZIRH DEPOSU',
-  projectLabel: 'Cephanelik',
-  projectSub: 'Her proje bir zırh. Özellikleri, mimariyi ve sonuçları incelemek için bir kapsül aç.',
+  projectBadge: 'Mühendislik işleri',
+  projectLabel: 'Zırh Deposu',
+  projectSub: 'Her proje numaralı bir zırh: kendi MARK numarası, problemi, ölçümü ve kaynak koduyla bir mühendislik işi.',
   projectOpen: 'Projeyi Aç',
+  hallKicker: 'Projeler · Mühendislik işleri',
+  hallSub: 'Her bölme bir disiplini barındırıyor. İçinde yapılan zırhları görmek için bir bölme seç ya da tüm koleksiyonu aç.',
+  hallHint: 'Bölmelerin üzerine gel, tıkla ya da Tab ile gez',
+  hallMobileHint: 'Bir bölme seç',
+  hallAll: 'Tüm projeler',
+  hallExplore: 'Projeleri incele',
+  hallBack: 'Zırh Deposu’na dön',
+  hallProjects: 'proje',
+  hallBay: 'Bölme',
+  hallOther: 'Diğer bölmeler',
+  hallAllSub: 'Depodaki tüm zırhlar, özgün kategorilerine göre gruplanmış. İsim, teknoloji ya da dile göre ara.',
+  hallSceneAlt: 'Zırh Deposu: ortada bir zırh vitrini ve proje bölmeleri olan iki katlı bir mühendislik laboratuvarı',
 
   // Project Detail
   sysOnline: 'SİSTEM ÇEVRİMİÇİ',
@@ -1257,6 +1376,11 @@ const tr = {
   pdFieldNotes: 'Saha Notları',
   pdScreenshots: 'Ekran Görüntüleri',
   pdStack: 'Teknoloji Yığını',
+  pdCoverAlt: 'proje kapağı',
+  pdGroupProblem: 'Problem ve çözüm',
+  pdGroupBuild: 'Teknik uygulama',
+  pdGroupResults: 'Sonuçlar ve sınırlamalar',
+  pdGroupSource: 'Kaynak',
   pdSource: 'Kaynak Kodu',
   pdWhy: 'Neden',
   pdTradeoff: 'Takas',
@@ -1310,13 +1434,6 @@ const tr = {
   },
 
   // Blog detail
-  rdBack: 'Blog',
-  rdBadge: 'BLOG',
-  rdNotFoundTitle: 'Sayfa bulunamadı',
-  rdNotFoundDesc: 'Bu blog yazısı henüz mevcut değil.',
-  rdBottomNote: 'Tonu belirlemek için yazılmış yer tutucu bir yazı. Gerçek içerik yakında bunun yerini alacak.',
-  rdBottomLink: 'Tüm blog yazılarına dön',
-  rdNextUp: 'Sıradaki',
   blogSoon: 'YAKINDA',
 
   // Hall of Armor
@@ -1346,10 +1463,10 @@ const tr = {
   expBack: 'Ana Sayfa',
   expBadge: 'DENEYİM',
   expLabel: 'Deneyim',
-  expSub: 'Hackathonlar, uygulamalı mühendislik ve devam eden araştırmalar; profesyonel çalışma çerçevesinde sunuldu.',
+  expSub: 'Ürün geliştirme, staj ve araştırma rolleri; güncel pozisyonlar önce. Eğitimle birlikte tam zaman çizelgesi Deneyim sayfasında.',
   expItems: [
     {
-      org: 'Iceberg X R&D', role: 'Yapay Zekâ Araştırma Stajyeri', period: '2026', type: 'Staj', accent: '#38bdf8',
+      org: 'Iceberg X R&D', group: 'internship', icon: 'lab', role: 'Yapay Zekâ Araştırma Stajyeri', period: '2026', type: 'Staj', accent: '#38bdf8',
       summary: 'Uygulamalı yapay zekâ araştırma stajı: Neuron yapay zekâ özellik araştırması tamamlandı, şimdi emlak arama arayüzü üzerine çalışıyorum.',
       points: [
         'Dört kişilik ekiple 21 canlı emlak sitesini inceledik ve bulunan boşlukları platform seviyesinde bir yapay zekâ önerisine çevirdik.',
@@ -1358,7 +1475,7 @@ const tr = {
       tags: ['Yapay Zekâ', 'Araştırma'], link: '/research',
     },
     {
-      org: 'BTK Hackathon 2026', role: 'Full-Stack & Yapay Zekâ Geliştiricisi', period: 'Mayıs 2026', type: 'Hackathon', accent: '#ff9f1c',
+      org: 'BTK Hackathon 2026', group: 'hackathon', logo: '/orgs/btk-akademi.png', logoAlt: 'BTK Akademi', role: 'Full-Stack & Yapay Zekâ Geliştiricisi', period: 'Mayıs 2026', type: 'Hackathon', accent: '#ff9f1c',
       summary: 'E-ticaret kategorisi için “Find The Best” alışveriş zekâsı platformunu geliştirdim.',
       points: [
         'Türk ve uluslararası pazaryerlerinde çoklu mağaza fiyat karşılaştırma motoru tasarladım.',
@@ -1368,7 +1485,7 @@ const tr = {
       tags: ['Next.js', 'FastAPI', 'Gemini', 'PostgreSQL'], link: '/competitions',
     },
     {
-      org: 'Bağımsız Yapay Zekâ / ML Mühendisliği', role: 'Geliştirici & Açık Kaynak Yazarı', period: '2024 — Günümüz', type: 'Uygulamalı', accent: '#00d4ff',
+      org: 'Bağımsız Yapay Zekâ / ML Mühendisliği', group: 'independent', icon: 'code', role: 'Geliştirici & Açık Kaynak Yazarı', period: '2024 — Günümüz', type: 'Uygulamalı', accent: '#00f0ff',
       summary: 'Bilgisayarlı görü, NLP, ML, sistemler ve full-stack alanlarında kendi kendine yönlendirdiğim mühendislik.',
       points: [
         'Doğrudan donanımda çalışan x86 işletim sisteminden üretim ML pipeline’larına 16 belgeli proje yayınladım.',
@@ -1379,7 +1496,7 @@ const tr = {
       tags: ['PyTorch', 'YOLO11', 'FastAPI', 'C'], link: '/project',
     },
     {
-      org: 'Bağımsız Araştırma', role: 'Lisans Araştırmacısı', period: '2025 — Günümüz', type: 'Araştırma', accent: '#7c5cff',
+      org: 'Bağımsız Araştırma', group: 'independent', icon: 'research', role: 'Lisans Araştırmacısı', period: '2025 — Günümüz', type: 'Araştırma', accent: '#7c5cff',
       summary: 'Uygulamalı projelerden doğan, devam eden çalışmalar (henüz yayınlanmış makale yok).',
       points: [
         'İngilizce ve Türkçe metinlerde yapay zekâ üretimi metni tespit etmek için stilometrik sinyaller.',
@@ -1401,7 +1518,7 @@ const tr = {
     { category: 'Backend', accent: '#00e5a0', items: [
       { name: 'Node.js', level: 3 }, { name: 'FastAPI', level: 4 }, { name: 'Express', level: 3 },
     ]},
-    { category: 'Yapay Zekâ / ML', accent: '#00d4ff', items: [
+    { category: 'Yapay Zekâ / ML', accent: '#00f0ff', items: [
       { name: 'PyTorch', level: 4 }, { name: 'TensorFlow', level: 3 }, { name: 'OpenCV', level: 4 }, { name: 'Ultralytics YOLO', level: 4 }, { name: 'Hugging Face', level: 4 }, { name: 'Scikit-learn', level: 4 },
     ]},
     { category: 'Veritabanları', accent: '#ff9f1c', items: [
@@ -1420,6 +1537,20 @@ const tr = {
   articlesBack: 'Ana Sayfa',
   articlesBadge: 'MAKALELER',
   articlesLabel: 'Makaleler',
+  bkReadKicker: 'Okunan',
+  bkWriteKicker: 'Yazılan',
+  bkReadTitle: 'Okuduklarım',
+  bkWriteTitle: 'Yazdıklarım',
+  bkReadSub: 'Okuduğum makaleler; her biri okurken tuttuğum notlarla.',
+  bkWriteSub: 'Yazdığım yazılar, burada tam metinleriyle.',
+  bkReadEmpty: 'Okuduklarım burada yer alacak.',
+  bkWriteEmpty: 'Yeni yazılarım burada yer alacak.',
+  bkBooks: 'kitap',
+  bkOpen: 'Kitabı aç',
+  bkClose: 'Kitabı kapat',
+  bkReadOriginal: 'Orijinalini oku',
+  bkTheText: 'Metin',
+  bkReadTime: 'okuma',
   articlesSub: 'Okuyup not tuttuğum makaleler ve kendi yazdıklarım.',
   articlesTabRead: 'Okuduklarım',
   articlesTabWritten: 'Yazdıklarım',
@@ -1438,23 +1569,31 @@ const tr = {
   researchBack: 'Ana Sayfa',
   researchBadge: 'ARAŞTIRMA',
   researchLabel: 'Araştırma',
+  libKicker: 'Araştırma kütüphanesi',
+  libOpen: 'Dosyayı aç',
+  libClose: 'Dosyayı kapat',
+  libShelf: 'Raf',
+  libReserved: 'Gelecek araştırmalar için ayrıldı',
+  libHint: 'Raflardan bir dosya seç',
+  libFindings: 'Bulgular ve sınırlamalar',
   researchSub: 'Uygulamalı çalışmalarımdan doğan bağımsız ve staj araştırmaları: bir kısmı tamamlandı, bir kısmı sürüyor.',
   researchDisclaimer: 'Bunlar kendi yürüttüğüm ve staj kapsamındaki araştırma projeleridir; yayınlanmış makale değildir. Hiçbiri hakem denetimi ya da yayın iddiası taşımaz.',
   researchStatus: 'Devam Ediyor',
   researchCompleted: 'Tamamlandı',
-  researchOutcomes: 'Sonuçlar',
+  researchOutcomes: 'Çıkarımlar',
   researchMethods: 'Yöntemler',
-  researchExpected: 'Beklenen Sonuçlar',
+  researchExpected: 'Beklenen Çıkarımlar',
   researchPdf: 'Taslağı oku (PDF)',
   researchRepo: 'Depoyu gör',
+  researchCoverKinds: { concept: 'Kavramsal illüstrasyon, deney sonucu değildir', 'concept-mock': 'Örnek ilanlarla prototipin illüstrasyonu, gerçek ürün ekran görüntüsü değildir', illustration: 'Depodaki bir script’in çizdiği illüstrasyon', screenshot: 'Çalışan prototipin ekran görüntüsü (örnek veri)', diagram: 'Çalışmanın kendi bulgularından bu site için çizilen diyagram', figure: 'Proje deposundaki şekil' },
   researchShow: 'Detayları göster',
   researchHide: 'Detayları gizle',
-  researchResults: 'Sonuçlar',
+  researchResults: 'Ölçüm Sonuçları',
   researchFindings: 'Bulgular',
   researchItems: [
     {
       title: 'Filtreli, Kötü ve Yapay Zekâ İkizi Fotoğraflarda Yüz Tanıma',
-      field: 'Bilgisayarlı Görü · Biyometri', accent: '#f472b6', status: 'completed',
+      field: 'Bilgisayarlı Görü · Biyometri', accent: '#f472b6', status: 'completed', cover: '/media/research/face-recognition.webp', coverKind: 'concept',
       abstract: 'Bir yüz tanıma sistemi kişiyi temiz fotoğraflarıyla tanıyor. Peki aynı kişi filtreli, makyajlı, kötü çekilmiş, kadrajın yarısında ya da yapay zekâyla üretilmiş bir benzeri olarak gelirse ne oluyor? Bu benchmark, ArcFace’i (yüz embedding modeli) ve Qwen2.5-VL’i (genel amaçlı bir VLM) birebir aynı fotoğraflara sokuyor ve her birinin kişiyi yüzde kaç tanımaya devam ettiğini ölçüyor.',
       methods: [
         'Temiz fotoğraflar seed 42 ile %60/%40 bölündü: 21’i kişinin şablonunu oluşturdu, 14’ü temiz referans olarak ayrıldı',
@@ -1493,7 +1632,7 @@ const tr = {
     },
     {
       title: 'Harita ve Filtreli Emlak Arama',
-      field: 'Frontend · Harita · Iceberg X R&D', accent: '#34d399', status: 'in-progress',
+      field: 'Frontend · Harita · Iceberg X R&D', accent: '#34d399', status: 'in-progress', cover: '/media/research/property-search.webp', coverKind: 'concept-mock',
       abstract: 'Bir frontend prototipi öncesindeki staj araştırma görevi: filtrelerin hem ilan kartı listesini hem etkileşimli haritayı yönettiği, karta tıklayınca haritadaki işaretin, işarete tıklayınca da kartın vurgulandığı bir emlak arama sayfası. Tek satır kod yazmadan önce ekip olarak büyük portalların bunu gerçekte nasıl kurduğunu söktük.',
       methods: [
         'Yedi portal incelendi: Rightmove, Zoopla, OnTheMarket, Zillow, Airbnb, OpenRent, Sahibinden; bana düşenler Airbnb, Sahibinden, Leaflet ve react-leaflet',
@@ -1506,7 +1645,7 @@ const tr = {
     },
     {
       title: 'Neuron AI Özellik Araştırması',
-      field: 'Uygulamalı YZ · Iceberg X R&D', accent: '#38bdf8', status: 'completed',
+      field: 'Uygulamalı YZ · Iceberg X R&D', accent: '#38bdf8', status: 'completed', cover: '/media/research/neuron-ai.webp', coverKind: 'concept',
       abstract: 'Neuron, İngiltere’deki emlak ofislerinin sitelerini çalıştıran çok kiracılı bir platform ve kendini “AI Operating System for Estate Agents” diye tanıtıyor. Dört kişilik ekip olarak platformdaki 21 canlı siteyi inceledik, yapay zekânın gerçekten nerede işe yarayacağını aradık ve bulunan boşlukları bir ürün önerisine çevirdik.',
       methods: [
         '21 canlı site arama, ilan detayı, değerleme ve iletişim açısından, network sekmesi açık şekilde incelendi',
@@ -1519,14 +1658,14 @@ const tr = {
     },
     {
       title: 'E-posta Oltalama Tespiti',
-      field: 'NLP · Güvenlik', accent: '#7c5cff', status: 'completed',
+      field: 'NLP · Güvenlik', accent: '#7c5cff', status: 'completed', cover: '/media/research/email-phishing.webp', coverKind: 'concept', project: 'email-phishing-detection',
       abstract: 'Oltalama e-postaları insanlara gerçek para kaybettirir ve aciliyet ile taklide dayalı, tanıdık bir kelime dağarcığına yaslanır. Amaç, bunları ham metinden basit ve şeffaf bir modelle tespit etmek ve verinin nasıl temsil edildiğinin en az model kadar önemli olduğunu göstermek.',
       methods: ['Metin temizleme, ardından kelimeler ve ikili öbekler üzerinde TF-IDF vektörleştirme', 'Sabit tohumlu katmanlı %80/%20 bölme', 'Lojistik Regresyon sınıflandırıcı', 'Doğruluk, kesinlik, duyarlılık, F1, karışıklık matrisi ve ROC ile değerlendirme'],
       expected: 'Şeffaf TF-IDF + Lojistik Regresyon pipeline’ı, oltalamayı ham metinden yüksek kesinlik ve duyarlılıkla işaretliyor ve ana fikri doğruladı: verinin nasıl temsil edildiği en az model kadar önemli. Çalışma tamamlandı ve projede belgelendi.',
     },
     {
       title: 'PHQ-9 Depresyon Analizi',
-      field: 'Veri Analizi · Ruh Sağlığı', accent: '#00e5a0', status: 'completed',
+      field: 'Veri Analizi · Ruh Sağlığı', accent: '#00e5a0', status: 'completed', cover: '/media/research/phq9-analysis.webp', coverKind: 'concept', project: 'depression-phq9-analysis',
       abstract: 'PHQ-9 depresyon tarama yanıtlarının yapay zekâ ve veri analizi teknikleriyle incelenmesi. Yaklaşık 100 katılımcıyla canlı bir çalışma yürütüldü ve bulgular sahnede sunulup tartışıldı. Canlı çalışma artık tamamlandı. Bu keşifsel bir araştırmadır; klinik bir araç ya da yayınlanmış bir çalışma değildir.',
       methods: ['~100 gerçek PHQ-9 yanıtıyla canlı bir çalışma yürütüldü', 'Şiddet sınıflandırmalı klinik puanlama', 'Yanıtların istatistiksel analizi ve makine öğrenmesiyle keşfi', 'Bulgular sahnede sunulup tartışıldı'],
       expected: 'Tamamlanan bu çalışma; yapay zekâ ve veri analizinin ruh sağlığı değerlendirmesini, asla onun yerine geçmeden ve her zaman gerekli özenle, nasıl destekleyebileceğini inceledi.',
@@ -1535,8 +1674,31 @@ const tr = {
 
   // Learning Path
   navLearning: 'Öğrenme Yolu',
+  navExperience: 'Deneyim',
+  xpKicker: 'Deneyim',
+  xpTitle: 'Şimdiye Kadarki |Yolculuğum',
+  xpSub: 'Yeditepe Üniversitesi’nden ürün geliştirmeye, uygulamalı yapay zekâ araştırmalarından gerçek prototiplere: eğitimim, üstlendiğim roller ve arkalarındaki iş.',
+  xpRole: 'Ürün Geliştirici & Yapay Zekâ Araştırmacısı',
+  xpStudent: 'Bilgisayar Mühendisliği 2. Sınıf Öğrencisi',
+  xpEducation: 'Eğitim',
+  xpWork: 'İş deneyimi',
+  xpPresent: 'Günümüz',
+  xpCurrent: 'Devam ediyor',
+  xpCompleted: 'Tamamlandı',
+  xpInProgress: 'Devam ediyor',
+  xpExpected: 'beklenen',
+  xpConfidential: 'Gizli',
+  xpShowAll: 'Tüm sorumluluklar',
+  xpShowLess: 'Daha az göster',
+  xpExplore: 'Daha fazlasını keşfet',
+  xpWebsite: 'Web sitesi',
+  xpLinkedIn: 'LinkedIn profili',
+  xpViewAll: 'Tüm deneyim',
+  xpPhotoAlt: 'Görkem Ergüne',
   learningBack: 'Ana Sayfa',
-  learningBadge: 'ÖĞRENME YOLU',
+  learningBadge: 'Öğrenme yolu',
+  learningNotesKicker: 'Patika notları',
+  learningNotesTitle: 'Yolun her bölümü |neyi kapsıyor',
   learningLabel: 'Öğrenme Yolu',
   learningSub: 'Üzerine inşa ettiğim temeller — üzerinde çalışarak öğrendiğim diller ve donanım, her seferinde bir repo.',
   learningStatus: 'Devam Ediyor',
@@ -1562,7 +1724,7 @@ const tr = {
       cta: 'App Store’da gör',
     },
     {
-      name: 'Dayframe', platform: 'Web uygulaması', accent: '#a78bfa', icon: 'calendar',
+      name: 'Dayframe', platform: 'Web uygulaması', accent: '#a78bfa', icon: 'calendar', image: '/apps/dayframe.svg',
       tagline: 'Planla · Uygula · Ölç · Gözden geçir',
       description: 'Kişisel bir planlama sistemi: haftanı bir ızgaraya yerleştir, günü görevler ve rutinlerle yürüt, kendi tanımladığın metrikleri kaydet ve gerçekte ne olduğunu puan vermeden geriye dönük oku. Çok kullanıcılı, Türkçe ve İngilizce.',
       stack: ['React 19', 'TypeScript', 'FastAPI', 'PostgreSQL'],
@@ -1604,7 +1766,7 @@ const tr = {
   resumeBack: 'Ana Sayfa',
   resumeBadge: 'CV',
   resumeTitle: 'Görkem Ergüne',
-  resumeRole: 'Bilgisayar Mühendisliği Öğrencisi · Yapay Zekâ Ürün Geliştiricisi',
+  resumeRole: 'Bilgisayar Mühendisliği Öğrencisi · Ürün Geliştirici & Yapay Zekâ Araştırmacısı',
   resumePrint: 'PDF olarak kaydet',
   resumeSummary: 'İkinci sınıf Bilgisayar Mühendisliği öğrencisi ve kendi yolunu çizen bir yapay zekâ mühendisi adayıyım. Araştırma odaklı bir yaklaşımla bilgisayarlı görü sistemleri, makine öğrenmesi pipeline’ları ve full-stack yazılımlar geliştiriyorum; üretip yayınlamayı alışkanlık hâline getirdim.',
   resumeSecEducation: 'Eğitim',
@@ -1710,6 +1872,9 @@ export function LangProvider({ children }) {
   useEffect(() => {
     try { localStorage.setItem('lang', lang); }
     catch { /* noop */ }
+    // Keeps <html lang> in step so screen readers and CSS text-transform use
+    // the right language rules (Turkish "i" uppercases to "İ").
+    document.documentElement.lang = lang;
   }, [lang]);
 
   const t = useCallback((key) => translations[lang][key] ?? key, [lang]);

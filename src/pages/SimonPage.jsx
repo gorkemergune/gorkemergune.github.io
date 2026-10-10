@@ -82,7 +82,7 @@ export default function SimonPage() {
         <div style={s.stat}><span style={{ ...s.statVal, color: '#2ee6b6' }}>{best}</span><span style={s.statLabel}>{t('simonBest')}</span></div>
       </div>
 
-      <div style={{ ...s.status, color: phase === 'over' ? '#ff5c8a' : phase === 'input' ? '#2ee6b6' : '#8a8aa0' }}>{statusText}</div>
+      <div style={{ ...s.status, color: phase === 'over' ? '#ff5c8a' : phase === 'input' ? '#2ee6b6' : '#8b929e' }}>{statusText}</div>
 
       <div style={s.padGrid}>
         {PADS.map((p) => (
@@ -113,16 +113,16 @@ export default function SimonPage() {
 
 const s = {
   container: { maxWidth: 480, margin: '0 auto', padding: '60px 48px 120px', position: 'relative', zIndex: 2 },
-  back: { display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: "'JetBrains Mono', monospace", fontSize: 12, letterSpacing: '0.06em', color: '#5a5a70', marginBottom: 48, cursor: 'pointer' },
+  back: { display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: "var(--font-mono)", fontSize: 12, letterSpacing: '0.06em', color: '#5c6370', marginBottom: 48, cursor: 'pointer' },
   header: { marginBottom: 28 },
-  title: { fontFamily: "'Instrument Serif', serif", fontSize: 56, fontWeight: 400, lineHeight: 0.95, letterSpacing: '-0.015em', color: '#e0e0e8', marginTop: 20, marginBottom: 18 },
-  desc: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 17, lineHeight: 1.6, color: '#8a8aa0', maxWidth: 440 },
+  title: { fontFamily: "var(--font-display)", fontSize: 56, fontWeight: 400, lineHeight: 0.95, letterSpacing: '-0.015em', color: '#e0e0e8', marginTop: 20, marginBottom: 18 },
+  desc: { fontFamily: "var(--font-body)", fontSize: 17, lineHeight: 1.6, color: '#8b929e', maxWidth: 440 },
   statsRow: { display: 'flex', gap: 36, marginBottom: 14 },
   stat: { display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 },
-  statVal: { fontFamily: "'JetBrains Mono', monospace", fontSize: 26, color: '#e0e0e8', fontVariantNumeric: 'tabular-nums' },
-  statLabel: { fontFamily: "'JetBrains Mono', monospace", fontSize: 9, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#5a5a70' },
-  status: { fontFamily: "'Instrument Serif', serif", fontStyle: 'italic', fontSize: 20, marginBottom: 22, minHeight: 28 },
+  statVal: { fontFamily: "var(--font-mono)", fontSize: 26, color: '#e0e0e8', fontVariantNumeric: 'tabular-nums' },
+  statLabel: { fontFamily: "var(--font-mono)", fontSize: 9, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#5c6370' },
+  status: { fontFamily: "var(--font-display)", fontStyle: 'italic', fontSize: 20, marginBottom: 22, minHeight: 28 },
   padGrid: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 28 },
   pad: { aspectRatio: '1', border: 'none', borderRadius: 16, transition: 'background 0.12s, box-shadow 0.12s, opacity 0.12s' },
-  startBtn: { display: 'inline-flex', alignItems: 'center', gap: 8, padding: '12px 24px', border: '1px solid #1a1a2e', borderRadius: 6, background: '#0f0f1a', color: '#e0e0e8', fontFamily: "'Instrument Sans', sans-serif", fontSize: 15, cursor: 'pointer', transition: 'background 0.3s, border-color 0.3s' },
+  startBtn: { display: 'inline-flex', alignItems: 'center', gap: 8, padding: '12px 24px', border: '1px solid #1e222b', borderRadius: 6, background: '#111419', color: '#e0e0e8', fontFamily: "var(--font-body)", fontSize: 15, cursor: 'pointer', transition: 'background 0.3s, border-color 0.3s' },
 };

@@ -44,14 +44,14 @@ const css = `
 
   .wr-badge {
     display: inline-flex; align-items: center; gap: 8px;
-    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    font-family: var(--font-mono); font-size: 10px;
     letter-spacing: 0.16em; text-transform: uppercase; color: #a596c4;
     margin-bottom: 16px;
   }
-  .wr-num { color: #6a6a82; }
+  .wr-num { color: #6b7280; }
 
   .wr-text {
-    font-family: 'Instrument Serif', serif;
+    font-family: var(--font-display);
     font-size: 30px; line-height: 1.3; color: #f0f0f6;
     letter-spacing: -0.01em; max-width: 460px; margin: 0 auto;
   }
@@ -62,7 +62,7 @@ const css = `
     display: inline-flex; align-items: center; gap: 10px;
     padding: 13px 26px; border-radius: 999px; cursor: pointer;
     border: none; color: #fff;
-    font-family: 'Instrument Sans', sans-serif; font-size: 15px; font-weight: 600;
+    font-family: var(--font-body); font-size: 15px; font-weight: 600;
     background: linear-gradient(135deg, #9d6bff, #4d96ff);
     box-shadow: 0 10px 30px rgba(157,107,255,0.34);
     transition: transform 0.3s cubic-bezier(0.2,0.8,0.2,1), box-shadow 0.3s, filter 0.3s;

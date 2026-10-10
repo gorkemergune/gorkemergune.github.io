@@ -59,7 +59,7 @@ export default function SpinWheelPage() {
         .sw-spin {
           display: inline-flex; align-items: center; justify-content: center; gap: 10px;
           padding: 16px 40px; border: none; border-radius: 14px; cursor: pointer;
-          font-family: 'Instrument Sans', sans-serif; font-size: 17px; font-weight: 600; color: #fff;
+          font-family: var(--font-body); font-size: 17px; font-weight: 600; color: #fff;
           background: linear-gradient(135deg, #9d6bff, #4d96ff);
           box-shadow: 0 12px 34px rgba(157,107,255,0.36);
           transition: transform 0.3s cubic-bezier(0.2,0.8,0.2,1), box-shadow 0.3s, filter 0.3s;
@@ -74,10 +74,10 @@ export default function SpinWheelPage() {
 
 const s = {
   container: { maxWidth: 620, margin: '0 auto', padding: '60px 48px 120px', position: 'relative', zIndex: 2 },
-  back: { display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: "'JetBrains Mono', monospace", fontSize: 12, letterSpacing: '0.06em', color: '#5a5a70', marginBottom: 48, cursor: 'pointer' },
+  back: { display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: "var(--font-mono)", fontSize: 12, letterSpacing: '0.06em', color: '#5c6370', marginBottom: 48, cursor: 'pointer' },
   header: { marginBottom: 40, textAlign: 'center' },
-  title: { fontFamily: "'Instrument Serif', serif", fontSize: 60, fontWeight: 400, lineHeight: 0.95, letterSpacing: '-0.015em', color: '#e0e0e8', marginTop: 20, marginBottom: 16 },
-  desc: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 17, lineHeight: 1.6, color: '#8a8aa0', maxWidth: 460, margin: '0 auto' },
+  title: { fontFamily: "var(--font-display)", fontSize: 60, fontWeight: 400, lineHeight: 0.95, letterSpacing: '-0.015em', color: '#e0e0e8', marginTop: 20, marginBottom: 16 },
+  desc: { fontFamily: "var(--font-body)", fontSize: 17, lineHeight: 1.6, color: '#8b929e', maxWidth: 460, margin: '0 auto' },
   spinRow: { display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16, marginTop: 36 },
-  hint: { fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.06em', color: '#6a6a82' },
+  hint: { fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: '0.06em', color: '#6b7280' },
 };

@@ -8,7 +8,7 @@ import { useLang } from '../i18n.jsx';
 // carries an accent color.
 const GAMES = [
   { key: 'reaction', path: '/fun/reaction', icon: Zap, color: '#00e5a0' },
-  { key: 'memory', path: '/fun/memory', icon: Grid3x3, color: '#00d4ff' },
+  { key: 'memory', path: '/fun/memory', icon: Grid3x3, color: '#00f0ff' },
   { key: 'tictactoe', path: '/fun/tictactoe', icon: Hash, color: '#ff6b35' },
   { key: 'game2048', path: '/fun/2048', icon: Grid2x2, color: '#9d6bff' },
   { key: 'simon', path: '/fun/simon', icon: Radio, color: '#2ee6b6' },
@@ -25,7 +25,7 @@ const SURPRISES = [
   { key: 'sorry', path: '/fun/sorry', icon: Heart, color: '#ff4d6d' },
   { key: 'mothersday', path: '/fun/mothersday', icon: Flower2, color: '#f472b6' },
   { key: 'goout', path: '/fun/goout', icon: Sun, color: '#ffd166' },
-  { key: 'birthday', path: '/fun/birthday', icon: Cake, color: '#00d4ff' },
+  { key: 'birthday', path: '/fun/birthday', icon: Cake, color: '#00f0ff' },
 ];
 
 const TITLES = {
@@ -53,13 +53,13 @@ function Card({ c, t }) {
       style={s.card}
       className="fun-card"
       onMouseEnter={(e) => { e.currentTarget.style.borderColor = `${c.color}66`; e.currentTarget.style.boxShadow = `0 0 26px ${c.color}22`; e.currentTarget.style.transform = 'translateY(-3px)'; }}
-      onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#1a1a2e'; e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.transform = 'none'; }}
+      onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#1e222b'; e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.transform = 'none'; }}
     >
       <div style={s.cardTop}>
         <span style={{ ...s.iconWrap, borderColor: `${c.color}33`, background: `${c.color}12` }}>
           <Icon size={22} strokeWidth={1.4} style={{ color: c.color }} />
         </span>
-        <ArrowUpRight size={16} strokeWidth={1.2} style={{ color: '#4a4a60' }} />
+        <ArrowUpRight size={16} strokeWidth={1.2} style={{ color: '#4b515c' }} />
       </div>
       <h3 style={s.cardTitle}>{t(TITLES[c.key])}</h3>
       <p style={s.cardDesc}>{t(DESCS[c.key])}</p>
@@ -89,7 +89,7 @@ export default function FunHub() {
         <p style={s.desc}>{t('funSub')}</p>
       </div>
 
-      <div style={s.sectionLabel}><Gamepad2 size={13} strokeWidth={1.6} style={{ color: '#00d4ff' }} /> {t('funGamesLabel')}</div>
+      <div style={s.sectionLabel}><Gamepad2 size={13} strokeWidth={1.6} style={{ color: '#00f0ff' }} /> {t('funGamesLabel')}</div>
       <div className="fun-grid" style={s.grid}>
         {GAMES.map((c) => <Card key={c.key} c={c} t={t} />)}
       </div>
@@ -109,15 +109,15 @@ export default function FunHub() {
 
 const s = {
   container: { maxWidth: 960, margin: '0 auto', padding: '60px 48px 120px', position: 'relative', zIndex: 2 },
-  back: { display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: "'JetBrains Mono', monospace", fontSize: 12, letterSpacing: '0.06em', color: '#5a5a70', marginBottom: 60, cursor: 'pointer' },
+  back: { display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: "var(--font-mono)", fontSize: 12, letterSpacing: '0.06em', color: '#5c6370', marginBottom: 60, cursor: 'pointer' },
   header: { marginBottom: 56 },
-  title: { fontFamily: "'Instrument Serif', serif", fontSize: 72, fontWeight: 400, lineHeight: 0.95, letterSpacing: '-0.015em', color: '#e0e0e8', marginTop: 20, marginBottom: 20 },
-  desc: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 18, lineHeight: 1.6, color: '#8a8aa0', maxWidth: 560 },
-  sectionLabel: { display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#6a6a82', marginBottom: 22 },
+  title: { fontFamily: "var(--font-display)", fontSize: 72, fontWeight: 400, lineHeight: 0.95, letterSpacing: '-0.015em', color: '#e0e0e8', marginTop: 20, marginBottom: 20 },
+  desc: { fontFamily: "var(--font-body)", fontSize: 18, lineHeight: 1.6, color: '#8b929e', maxWidth: 560 },
+  sectionLabel: { display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: "var(--font-mono)", fontSize: 10, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#6b7280', marginBottom: 22 },
   grid: { display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 },
-  card: { padding: 24, background: '#0f0f1a', border: '1px solid #1a1a2e', borderRadius: 12, display: 'flex', flexDirection: 'column', gap: 10, cursor: 'pointer' },
+  card: { padding: 24, background: '#111419', border: '1px solid #1e222b', borderRadius: 12, display: 'flex', flexDirection: 'column', gap: 10, cursor: 'pointer' },
   cardTop: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 },
   iconWrap: { width: 42, height: 42, borderRadius: 10, border: '1px solid', display: 'flex', alignItems: 'center', justifyContent: 'center' },
-  cardTitle: { fontFamily: "'Instrument Serif', serif", fontSize: 23, fontWeight: 400, color: '#e0e0e8', lineHeight: 1.2 },
-  cardDesc: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 13.5, lineHeight: 1.55, color: '#7a7a92' },
+  cardTitle: { fontFamily: "var(--font-display)", fontSize: 23, fontWeight: 400, color: '#e0e0e8', lineHeight: 1.2 },
+  cardDesc: { fontFamily: "var(--font-body)", fontSize: 13.5, lineHeight: 1.55, color: '#7b8290' },
 };

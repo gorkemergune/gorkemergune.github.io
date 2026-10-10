@@ -52,7 +52,7 @@ function canMove(g) {
 }
 
 const COLORS = {
-  0: { bg: '#0f0f1a', fg: 'transparent' },
+  0: { bg: '#111419', fg: 'transparent' },
   2: { bg: '#16233a', fg: '#9fd0ff' },
   4: { bg: '#1b2f4d', fg: '#bfe0ff' },
   8: { bg: '#243b6b', fg: '#dcecff' },
@@ -63,7 +63,7 @@ const COLORS = {
   256: { bg: '#7a4a1f', fg: '#ffd6a8' },
   512: { bg: '#7a2f3a', fg: '#ffc2cf' },
   1024: { bg: '#5c1f6b', fg: '#f0c2ff' },
-  2048: { bg: '#00d4ff', fg: '#0a0a0f' },
+  2048: { bg: '#00f0ff', fg: '#0a0c10' },
 };
 
 export default function Game2048Page() {
@@ -123,14 +123,14 @@ export default function Game2048Page() {
 
       <div style={s.bar}>
         <div style={s.score}><span style={s.scoreLabel}>{t('g2048Score')}</span><span style={s.scoreVal}>{score}</span></div>
-        <div style={s.score}><span style={s.scoreLabel}>{t('g2048Best')}</span><span style={{ ...s.scoreVal, color: '#00d4ff' }}>{best}</span></div>
+        <div style={s.score}><span style={s.scoreLabel}>{t('g2048Best')}</span><span style={{ ...s.scoreVal, color: '#00f0ff' }}>{best}</span></div>
         <button onClick={reset} style={s.resetBtn} className="puzzle-btn"><RotateCcw size={13} strokeWidth={1.6} /> {t('g2048New')}</button>
       </div>
 
       <div style={s.boardWrap} onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
         <div style={s.board}>
           {grid.flatMap((row, r) => row.map((v, c) => {
-            const col = COLORS[v] || { bg: '#00d4ff', fg: '#0a0a0f' };
+            const col = COLORS[v] || { bg: '#00f0ff', fg: '#0a0c10' };
             return (
               <div key={`${r}-${c}`} style={{ ...s.tile, background: col.bg, color: col.fg, fontSize: v >= 1024 ? 22 : v >= 128 ? 26 : 30 }}>
                 {v || ''}
@@ -153,20 +153,20 @@ export default function Game2048Page() {
 
 const s = {
   container: { maxWidth: 480, margin: '0 auto', padding: '60px 48px 120px', position: 'relative', zIndex: 2 },
-  back: { display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: "'JetBrains Mono', monospace", fontSize: 12, letterSpacing: '0.06em', color: '#5a5a70', marginBottom: 48, cursor: 'pointer' },
+  back: { display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: "var(--font-mono)", fontSize: 12, letterSpacing: '0.06em', color: '#5c6370', marginBottom: 48, cursor: 'pointer' },
   header: { marginBottom: 28 },
-  title: { fontFamily: "'Instrument Serif', serif", fontSize: 56, fontWeight: 400, lineHeight: 0.95, letterSpacing: '-0.015em', color: '#e0e0e8', marginTop: 20, marginBottom: 18 },
-  desc: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 17, lineHeight: 1.6, color: '#8a8aa0', maxWidth: 440 },
+  title: { fontFamily: "var(--font-display)", fontSize: 56, fontWeight: 400, lineHeight: 0.95, letterSpacing: '-0.015em', color: '#e0e0e8', marginTop: 20, marginBottom: 18 },
+  desc: { fontFamily: "var(--font-body)", fontSize: 17, lineHeight: 1.6, color: '#8b929e', maxWidth: 440 },
   bar: { display: 'flex', alignItems: 'center', gap: 16, marginBottom: 18 },
-  score: { display: 'flex', flexDirection: 'column', gap: 2, padding: '8px 16px', border: '1px solid #1a1a2e', borderRadius: 8, background: '#0f0f1a', minWidth: 78 },
-  scoreLabel: { fontFamily: "'JetBrains Mono', monospace", fontSize: 9, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#5a5a70' },
-  scoreVal: { fontFamily: "'JetBrains Mono', monospace", fontSize: 22, color: '#e0e0e8', fontVariantNumeric: 'tabular-nums' },
-  resetBtn: { marginLeft: 'auto', display: 'inline-flex', alignItems: 'center', gap: 6, padding: '9px 14px', border: '1px solid #1a1a2e', borderRadius: 6, background: '#0f0f1a', color: '#c4c4d4', fontFamily: "'JetBrains Mono', monospace", fontSize: 11, cursor: 'pointer', transition: 'background 0.3s, border-color 0.3s' },
+  score: { display: 'flex', flexDirection: 'column', gap: 2, padding: '8px 16px', border: '1px solid #1e222b', borderRadius: 8, background: '#111419', minWidth: 78 },
+  scoreLabel: { fontFamily: "var(--font-mono)", fontSize: 9, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#5c6370' },
+  scoreVal: { fontFamily: "var(--font-mono)", fontSize: 22, color: '#e0e0e8', fontVariantNumeric: 'tabular-nums' },
+  resetBtn: { marginLeft: 'auto', display: 'inline-flex', alignItems: 'center', gap: 6, padding: '9px 14px', border: '1px solid #1e222b', borderRadius: 6, background: '#111419', color: '#c4c4d4', fontFamily: "var(--font-mono)", fontSize: 11, cursor: 'pointer', transition: 'background 0.3s, border-color 0.3s' },
   boardWrap: { position: 'relative' },
-  board: { display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 10, padding: 10, background: '#0b0b13', border: '1px solid #1a1a2e', borderRadius: 12, touchAction: 'none' },
-  tile: { aspectRatio: '1', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'JetBrains Mono', monospace", fontWeight: 600, fontVariantNumeric: 'tabular-nums', transition: 'background 0.15s' },
+  board: { display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 10, padding: 10, background: '#0d0f14', border: '1px solid #1e222b', borderRadius: 12, touchAction: 'none' },
+  tile: { aspectRatio: '1', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "var(--font-mono)", fontWeight: 600, fontVariantNumeric: 'tabular-nums', transition: 'background 0.15s' },
   overlay: { position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 16, background: 'rgba(10,10,15,0.82)', borderRadius: 12, backdropFilter: 'blur(2px)' },
-  overlayTitle: { fontFamily: "'Instrument Serif', serif", fontSize: 34, color: '#eef0f6' },
-  overlayBtn: { padding: '10px 22px', border: '1px solid #00d4ff66', borderRadius: 6, background: 'rgba(0,212,255,0.1)', color: '#e0e0e8', fontFamily: "'Instrument Sans', sans-serif", fontSize: 14, cursor: 'pointer' },
-  hint: { marginTop: 18, fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: '#5a5a70', textAlign: 'center' },
+  overlayTitle: { fontFamily: "var(--font-display)", fontSize: 34, color: '#eef0f6' },
+  overlayBtn: { padding: '10px 22px', border: '1px solid #00f0ff66', borderRadius: 6, background: 'rgba(0,240,255,0.1)', color: '#e0e0e8', fontFamily: "var(--font-body)", fontSize: 14, cursor: 'pointer' },
+  hint: { marginTop: 18, fontFamily: "var(--font-mono)", fontSize: 11, color: '#5c6370', textAlign: 'center' },
 };

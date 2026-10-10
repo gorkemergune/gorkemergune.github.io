@@ -6,7 +6,7 @@ import { compliments, CARD_COUNT } from '../data/compliments.js';
 
 // Accent palette reused from the portfolio — cycles across the 16 cards so each
 // revealed compliment carries a subtly different glow.
-const ACCENTS = ['#ff4d6d', '#f472b6', '#00d4ff', '#9d6bff', '#ffd166', '#00e5a0', '#4d96ff', '#ff9f1c'];
+const ACCENTS = ['#ff4d6d', '#f472b6', '#00f0ff', '#9d6bff', '#ffd166', '#00e5a0', '#4d96ff', '#ff9f1c'];
 
 // Fisher–Yates shuffle of [0..n-1]. We shuffle *indices*, not the strings, so
 // the reveal order is randomized while the visible text still follows the
@@ -141,7 +141,7 @@ export default function ComplimentCardsPage() {
       <div style={s.bar}>
         <span style={s.stat}>
           {t('complimentsProgress')}:{' '}
-          <b style={{ color: '#00d4ff' }}>{opened.size}</b> / {CARD_COUNT}
+          <b style={{ color: '#00f0ff' }}>{opened.size}</b> / {CARD_COUNT}
         </span>
         {allOpened && (
           <button onClick={reshuffle} className="cc-shuffle" type="button">
@@ -233,7 +233,7 @@ const css = `
   .cc-front {
     background:
       radial-gradient(120% 90% at 50% 0%, rgba(255,255,255,0.04), transparent 60%),
-      linear-gradient(160deg, #12121f 0%, #0c0c16 100%);
+      linear-gradient(160deg, #13161c 0%, #0c0c16 100%);
     border: 1px solid #1c1c30;
     transition: border-color 0.35s, box-shadow 0.35s;
   }
@@ -260,7 +260,7 @@ const css = `
   .cc-front-index {
     position: absolute;
     bottom: 12px;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 10px;
     letter-spacing: 0.12em;
     color: #3a3a52;
@@ -271,13 +271,13 @@ const css = `
     transform: rotateY(180deg);
     background:
       radial-gradient(130% 100% at 50% 0%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 62%),
-      linear-gradient(160deg, #14141f 0%, #0e0e18 100%);
-    border: 1px solid color-mix(in srgb, var(--accent) 42%, #1a1a2e);
+      linear-gradient(160deg, #14171d 0%, #0e0e18 100%);
+    border: 1px solid color-mix(in srgb, var(--accent) 42%, #1e222b);
     box-shadow: inset 0 0 30px color-mix(in srgb, var(--accent) 10%, transparent);
   }
   .cc-back-icon { color: color-mix(in srgb, var(--accent) 85%, #ffffff); flex-shrink: 0; }
   .cc-text {
-    font-family: 'Instrument Serif', serif;
+    font-family: var(--font-display);
     font-size: 16px;
     line-height: 1.32;
     color: #e6e6ee;
@@ -317,7 +317,7 @@ const css = `
     border-radius: 999px;
     background: linear-gradient(160deg, rgba(255,77,109,0.12), rgba(244,114,182,0.08));
     color: #f0dfe4;
-    font-family: 'Instrument Sans', sans-serif;
+    font-family: var(--font-body);
     font-size: 13px;
     font-weight: 500;
     cursor: pointer;
@@ -342,7 +342,7 @@ const css = `
     border: 1px solid #ff4d6d33;
     border-radius: 12px;
     background: rgba(255,77,109,0.06);
-    font-family: 'Instrument Sans', sans-serif;
+    font-family: var(--font-body);
     font-size: 15px;
     color: #d8d8e2;
     text-align: center;
@@ -356,10 +356,10 @@ const css = `
 
 const s = {
   container: { maxWidth: 760, margin: '0 auto', padding: '60px 48px 120px', position: 'relative', zIndex: 2 },
-  back: { display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: "'JetBrains Mono', monospace", fontSize: 12, letterSpacing: '0.06em', color: '#5a5a70', marginBottom: 48, cursor: 'pointer' },
+  back: { display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: "var(--font-mono)", fontSize: 12, letterSpacing: '0.06em', color: '#5c6370', marginBottom: 48, cursor: 'pointer' },
   header: { marginBottom: 32 },
-  title: { fontFamily: "'Instrument Serif', serif", fontSize: 60, fontWeight: 400, lineHeight: 0.95, letterSpacing: '-0.015em', color: '#e0e0e8', marginTop: 20, marginBottom: 18 },
-  desc: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 17, lineHeight: 1.6, color: '#8a8aa0', maxWidth: 520 },
+  title: { fontFamily: "var(--font-display)", fontSize: 60, fontWeight: 400, lineHeight: 0.95, letterSpacing: '-0.015em', color: '#e0e0e8', marginTop: 20, marginBottom: 18 },
+  desc: { fontFamily: "var(--font-body)", fontSize: 17, lineHeight: 1.6, color: '#8b929e', maxWidth: 520 },
   bar: { display: 'flex', alignItems: 'center', gap: 20, marginBottom: 22, minHeight: 40, flexWrap: 'wrap' },
-  stat: { fontFamily: "'JetBrains Mono', monospace", fontSize: 12, color: '#8a8aa0' },
+  stat: { fontFamily: "var(--font-mono)", fontSize: 12, color: '#8b929e' },
 };

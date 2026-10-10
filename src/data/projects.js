@@ -941,8 +941,8 @@ const PROJECTS = [
     oneLiner: 'Detect once, verify once more, and a messy photo dump becomes a dataset you can actually train on.',
     oneLinerTr: 'Bir kez tespit et, bir kez daha doğrula; dağınık bir fotoğraf yığını gerçekten eğitilebilir bir veri kümesine dönüşür.',
     language: 'Python',
-    color: '#00d4ff',
-    glow: 'rgba(0,212,255,0.5)',
+    color: '#00f0ff',
+    glow: 'rgba(0,240,255,0.5)',
     tags: ['BlazeFace', 'MediaPipe', 'Two-Stage'],
     github: gh('face-detection-pipeline'),
     // Field Notes — migrated verbatim from caseStudies.js (12 Sep 2026).
@@ -2788,3 +2788,15 @@ const PROJECTS = [
 
 export default PROJECTS;
 export const getProject = (slug) => PROJECTS.find((p) => p.slug === slug);
+
+// Turkish names for the categories in section 6 of the rules. Shared by the
+// project grid and the home page showcase.
+export const CATEGORY_TR = {
+  'Research & Benchmarks': 'Araştırma & Benchmark',
+  'LLM & NLP': 'Dil Modelleri & NLP',
+  'AI Agents & Tooling': 'Yapay Zekâ Ajanları',
+  'Computer Vision': 'Bilgisayarlı Görü',
+  'Machine Learning': 'Makine Öğrenmesi',
+  'Systems & Graphics': 'Sistem & Grafik',
+  'Apps & Tools': 'Uygulamalar & Araçlar',
+};

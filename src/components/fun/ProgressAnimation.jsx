@@ -65,7 +65,7 @@ const css = `
     padding: 20px 0;
   }
   .pa-msg {
-    font-family: 'Instrument Serif', serif;
+    font-family: var(--font-display);
     font-size: 26px; line-height: 1.3; color: #f0e0e6; text-align: center;
     min-height: 34px;
     animation: pa-msg-in 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -95,7 +95,7 @@ const css = `
     100% { transform: translateX(100%); }
   }
   .pa-pct {
-    font-family: 'JetBrains Mono', monospace; font-size: 12px;
-    letter-spacing: 0.12em; color: #8a8aa0; font-variant-numeric: tabular-nums;
+    font-family: var(--font-mono); font-size: 12px;
+    letter-spacing: 0.12em; color: #8b929e; font-variant-numeric: tabular-nums;
   }
 `;

@@ -61,7 +61,7 @@ export default function TicTacToePage() {
   const reset = () => setBoard(Array(9).fill(null));
 
   const msg = result === 'X' ? t('tttWin') : result === 'O' ? t('tttLose') : result === 'draw' ? t('tttDraw') : t('tttYourTurn');
-  const msgColor = result === 'X' ? '#00e5a0' : result === 'O' ? '#ff4d6d' : result === 'draw' ? '#ffd166' : '#8a8aa0';
+  const msgColor = result === 'X' ? '#00e5a0' : result === 'O' ? '#ff4d6d' : result === 'draw' ? '#ffd166' : '#8b929e';
 
   return (
     <div style={s.container}>
@@ -86,7 +86,7 @@ export default function TicTacToePage() {
       <div style={s.grid}>
         {board.map((cell, i) => (
           <button key={i} onClick={() => play(i)} style={{ ...s.cell, cursor: cell || result ? 'default' : 'pointer' }} className="puzzle-btn" aria-label={`cell ${i + 1}`}>
-            {cell === 'X' && <X size={44} strokeWidth={2} style={{ color: '#00d4ff' }} />}
+            {cell === 'X' && <X size={44} strokeWidth={2} style={{ color: '#00f0ff' }} />}
             {cell === 'O' && <Circle size={38} strokeWidth={2} style={{ color: '#ff6b35' }} />}
           </button>
         ))}
@@ -99,16 +99,16 @@ export default function TicTacToePage() {
 
 const s = {
   container: { maxWidth: 520, margin: '0 auto', padding: '60px 48px 120px', position: 'relative', zIndex: 2 },
-  back: { display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: "'JetBrains Mono', monospace", fontSize: 12, letterSpacing: '0.06em', color: '#5a5a70', marginBottom: 48, cursor: 'pointer' },
+  back: { display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: "var(--font-mono)", fontSize: 12, letterSpacing: '0.06em', color: '#5c6370', marginBottom: 48, cursor: 'pointer' },
   header: { marginBottom: 32 },
-  title: { fontFamily: "'Instrument Serif', serif", fontSize: 56, fontWeight: 400, lineHeight: 0.95, letterSpacing: '-0.015em', color: '#e0e0e8', marginTop: 20, marginBottom: 18 },
-  desc: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 17, lineHeight: 1.6, color: '#8a8aa0', maxWidth: 480 },
+  title: { fontFamily: "var(--font-display)", fontSize: 56, fontWeight: 400, lineHeight: 0.95, letterSpacing: '-0.015em', color: '#e0e0e8', marginTop: 20, marginBottom: 18 },
+  desc: { fontFamily: "var(--font-body)", fontSize: 17, lineHeight: 1.6, color: '#8b929e', maxWidth: 480 },
   scoreRow: { display: 'flex', gap: 28, marginBottom: 20 },
   score: { display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 },
-  scoreVal: { fontFamily: "'JetBrains Mono', monospace", fontSize: 24, fontVariantNumeric: 'tabular-nums' },
-  scoreLabel: { fontFamily: "'JetBrains Mono', monospace", fontSize: 9, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#5a5a70' },
-  status: { fontFamily: "'Instrument Serif', serif", fontStyle: 'italic', fontSize: 22, marginBottom: 20, minHeight: 30 },
+  scoreVal: { fontFamily: "var(--font-mono)", fontSize: 24, fontVariantNumeric: 'tabular-nums' },
+  scoreLabel: { fontFamily: "var(--font-mono)", fontSize: 9, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#5c6370' },
+  status: { fontFamily: "var(--font-display)", fontStyle: 'italic', fontSize: 22, marginBottom: 20, minHeight: 30 },
   grid: { display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 10, marginBottom: 24 },
-  cell: { aspectRatio: '1', border: '1px solid #1a1a2e', borderRadius: 12, background: '#0f0f1a', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'background 0.3s, border-color 0.3s' },
-  resetBtn: { display: 'inline-flex', alignItems: 'center', gap: 8, padding: '11px 20px', border: '1px solid #1a1a2e', borderRadius: 6, background: '#0f0f1a', color: '#e0e0e8', fontFamily: "'Instrument Sans', sans-serif", fontSize: 14, cursor: 'pointer', transition: 'background 0.3s, border-color 0.3s' },
+  cell: { aspectRatio: '1', border: '1px solid #1e222b', borderRadius: 12, background: '#111419', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'background 0.3s, border-color 0.3s' },
+  resetBtn: { display: 'inline-flex', alignItems: 'center', gap: 8, padding: '11px 20px', border: '1px solid #1e222b', borderRadius: 6, background: '#111419', color: '#e0e0e8', fontFamily: "var(--font-body)", fontSize: 14, cursor: 'pointer', transition: 'background 0.3s, border-color 0.3s' },
 };

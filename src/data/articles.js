@@ -146,6 +146,11 @@ const ARTICLES = {
       arxiv: 'DOI 10.1016/j.iswa.2026.200704',
       url: 'https://doi.org/10.1016/j.iswa.2026.200704',
       pdf: null,
+      // Journal issue date, not a guess: Crossref (checked 11 Oct 2026) lists
+      // Intelligent Systems with Applications vol. 32, article 200704,
+      // published-print / issued 2026-12; the DOI was registered 2026-07-11, so
+      // the article was out before its December issue. ScienceDirect's own
+      // "available online" date could not be fetched (bot wall), so it is not used.
       date: 'Dec 2026',
       readOn: 'October 2026',
       readOnTr: 'Ekim 2026',

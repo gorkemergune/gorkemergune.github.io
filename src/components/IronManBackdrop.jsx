@@ -35,7 +35,7 @@ export default function IronManBackdrop() {
       <svg className="im-helmet" viewBox="0 0 200 250" width="560" style={styles.helmet}>
         <defs>
           <linearGradient id="im-metal" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stopColor="#00d4ff" />
+            <stop offset="0" stopColor="#00f0ff" />
             <stop offset="1" stopColor="#ff6b35" />
           </linearGradient>
           <filter id="im-glow" x="-60%" y="-60%" width="220%" height="220%">
@@ -54,7 +54,7 @@ export default function IronManBackdrop() {
         />
 
         {/* Faceplate paneling */}
-        <g stroke="#00d4ff" strokeWidth="1" fill="none" opacity="0.32" strokeLinecap="round">
+        <g stroke="#00f0ff" strokeWidth="1" fill="none" opacity="0.32" strokeLinecap="round">
           <path d="M100 6 V244" />
           <path d="M62 70 H138" />
           <path d="M70 150 C85 160 115 160 130 150" />
@@ -67,7 +67,7 @@ export default function IronManBackdrop() {
 
         {/* Scan line sweeping the faceplate */}
         <g clipPath="url(#im-face)">
-          <rect className="im-scan" x="40" y="0" width="120" height="24" fill="#00d4ff" opacity="0.12" />
+          <rect className="im-scan" x="40" y="0" width="120" height="24" fill="#00f0ff" opacity="0.12" />
         </g>
 
         {/* Glowing eyes */}
@@ -87,6 +87,6 @@ const styles = {
   },
   helmet: {
     position: 'absolute', left: '50%', top: '50%',
-    filter: 'drop-shadow(0 0 30px rgba(0,212,255,0.25))',
+    filter: 'drop-shadow(0 0 30px rgba(0,240,255,0.25))',
   },
 };

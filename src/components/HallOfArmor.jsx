@@ -37,7 +37,7 @@ function ArmorFigure({ armor, uid }) {
         <radialGradient id={`reactor-${id}`} cx="50%" cy="50%" r="50%">
           <stop offset="0" stopColor="#ffffff" />
           <stop offset="0.5" stopColor="#7fe9ff" />
-          <stop offset="1" stopColor="#00d4ff" />
+          <stop offset="1" stopColor="#00f0ff" />
         </radialGradient>
       </defs>
       {/* legs */}
@@ -60,7 +60,7 @@ function ArmorFigure({ armor, uid }) {
       <rect x="33.5" y="14.5" width="4" height="2.3" rx="1" fill="#eafcff" opacity="0.92" />
       {/* arc reactor */}
       <circle cx="32" cy="45" r="6.4" fill="#06060c" opacity="0.85" />
-      <circle cx="32" cy="45" r="6.4" fill="none" stroke="#00d4ff" strokeWidth="0.8" opacity="0.55" />
+      <circle cx="32" cy="45" r="6.4" fill="none" stroke="#00f0ff" strokeWidth="0.8" opacity="0.55" />
       <circle cx="32" cy="45" r="3.4" fill={`url(#reactor-${id})`} />
     </svg>
   );
@@ -234,8 +234,8 @@ export default function HallOfArmor() {
         @keyframes platform-rotate { from{transform:rotate(0);} to{transform:rotate(360deg);} }
         @keyframes platform-rotate-reverse { from{transform:rotate(360deg);} to{transform:rotate(0);} }
         @keyframes platform-pulse {
-          0%,100%{ box-shadow:0 0 12px rgba(0,212,255,0.4),0 0 24px rgba(0,212,255,0.2); }
-          50%{ box-shadow:0 0 24px rgba(0,212,255,0.7),0 0 48px rgba(0,212,255,0.35); }
+          0%,100%{ box-shadow:0 0 12px rgba(0,240,255,0.4),0 0 24px rgba(0,240,255,0.2); }
+          50%{ box-shadow:0 0 24px rgba(0,240,255,0.7),0 0 48px rgba(0,240,255,0.35); }
         }
         @keyframes boot-blink { 0%,100%{opacity:1;} 50%{opacity:0;} }
         @keyframes scanline-move { 0%{transform:translateY(-100%);} 100%{transform:translateY(200vh);} }
@@ -248,8 +248,8 @@ export default function HallOfArmor() {
         .armory-grid {
           position: absolute; left: 0; right: 0; bottom: 0; height: 46%; z-index: 0; pointer-events: none;
           background-image:
-            linear-gradient(90deg, rgba(0,212,255,0.16) 1px, transparent 1px),
-            linear-gradient(0deg, rgba(0,212,255,0.12) 1px, transparent 1px);
+            linear-gradient(90deg, rgba(0,240,255,0.16) 1px, transparent 1px),
+            linear-gradient(0deg, rgba(0,240,255,0.12) 1px, transparent 1px);
           background-size: 46px 30px;
           transform: perspective(320px) rotateX(66deg); transform-origin: bottom center;
           -webkit-mask-image: radial-gradient(ellipse 60% 120% at 50% 100%, #000 0%, transparent 72%);
@@ -260,15 +260,15 @@ export default function HallOfArmor() {
         .armory-ceiling {
           position: absolute; left: 50%; top: -4%; width: 66%; height: 60%; transform: translateX(-50%);
           z-index: 0; pointer-events: none; filter: blur(24px);
-          background: radial-gradient(ellipse 50% 100% at 50% 0%, rgba(0,212,255,0.07) 0%, transparent 70%);
+          background: radial-gradient(ellipse 50% 100% at 50% 0%, rgba(0,240,255,0.07) 0%, transparent 70%);
         }
-        .frame-bracket { position: absolute; width: 16px; height: 16px; z-index: 6; pointer-events: none; border: 1px solid rgba(0,212,255,0.35); }
+        .frame-bracket { position: absolute; width: 16px; height: 16px; z-index: 6; pointer-events: none; border: 1px solid rgba(0,240,255,0.35); }
         .fb-tl { top: 6px; left: 8px; border-right: none; border-bottom: none; }
         .fb-tr { top: 6px; right: 8px; border-left: none; border-bottom: none; }
         .fb-bl { bottom: 6px; left: 8px; border-right: none; border-top: none; }
         .fb-br { bottom: 6px; right: 8px; border-left: none; border-top: none; }
         .bay-tick { position: absolute; left: 50%; transform: translateX(-50%); width: 1px; height: 14px; z-index: 5; pointer-events: none;
-          background: linear-gradient(180deg, rgba(0,212,255,0.55), transparent); }
+          background: linear-gradient(180deg, rgba(0,240,255,0.55), transparent); }
         .bay-tick.top { top: 4px; }
         .bay-tick.bottom { bottom: 4px; transform: translateX(-50%) rotate(180deg); }
 
@@ -299,7 +299,7 @@ export default function HallOfArmor() {
           filter: blur(15px); opacity: calc(0.14 + var(--f) * 0.62);
         }
         .pod-mark {
-          position: relative; z-index: 3; font-family: 'JetBrains Mono', monospace;
+          position: relative; z-index: 3; font-family: var(--font-mono);
           font-size: 8px; letter-spacing: 0.26em; margin-bottom: auto; padding-top: 6px;
           opacity: calc(0.4 + var(--f) * 0.6);
         }
@@ -315,41 +315,41 @@ export default function HallOfArmor() {
         .pod-puddle { position: absolute; left: 50%; bottom: 21%; width: 78%; height: 20px;
           transform: translateX(-50%); border-radius: 50%; z-index: 0; pointer-events: none;
           filter: blur(5px); opacity: calc(0.18 + var(--f) * 0.5); }
-        .pod-name { position: relative; z-index: 3; font-family: 'JetBrains Mono', monospace; font-size: 10px;
+        .pod-name { position: relative; z-index: 3; font-family: var(--font-mono); font-size: 10px;
           letter-spacing: 0.05em; color: #d2d2e0; text-align: center; line-height: 1.35; margin-top: 10px;
           opacity: calc(0.55 + var(--f) * 0.45); }
-        .pod-lang { position: relative; z-index: 3; font-family: 'JetBrains Mono', monospace; font-size: 8px;
+        .pod-lang { position: relative; z-index: 3; font-family: var(--font-mono); font-size: 8px;
           letter-spacing: 0.14em; margin-top: 5px; opacity: calc(0.5 + var(--f) * 0.45); }
 
         /* ---- Selected-suit engineering readout ---- */
         .armory-readout { max-width: 640px; margin: 30px auto 0; min-height: 150px; }
         .ro-panel { position: relative; padding: 20px 26px 18px; text-align: center;
-          border-top: 1px solid rgba(0,212,255,0.12); border-bottom: 1px solid rgba(0,212,255,0.12);
-          background: radial-gradient(ellipse 80% 120% at 50% 0%, rgba(0,212,255,0.03), transparent 70%); }
-        .ro-corner { position: absolute; width: 9px; height: 9px; border: 1px solid rgba(0,212,255,0.3); }
+          border-top: 1px solid rgba(0,240,255,0.12); border-bottom: 1px solid rgba(0,240,255,0.12);
+          background: radial-gradient(ellipse 80% 120% at 50% 0%, rgba(0,240,255,0.03), transparent 70%); }
+        .ro-corner { position: absolute; width: 9px; height: 9px; border: 1px solid rgba(0,240,255,0.3); }
         .ro-c-tl { top: -1px; left: -1px; border-right: none; border-bottom: none; }
         .ro-c-tr { top: -1px; right: -1px; border-left: none; border-bottom: none; }
         .ro-c-bl { bottom: -1px; left: -1px; border-right: none; border-top: none; }
         .ro-c-br { bottom: -1px; right: -1px; border-left: none; border-top: none; }
         .ro-head { display: flex; align-items: center; justify-content: center; gap: 12px;
-          font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.2em; margin-bottom: 12px; }
+          font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.2em; margin-bottom: 12px; }
         .ro-status { display: inline-flex; align-items: center; gap: 6px; }
-        .ro-idx { color: #4a4a60; }
-        .ro-name { font-family: 'JetBrains Mono', monospace; font-size: 18px; letter-spacing: 0.03em; color: #eef0f6; }
-        .ro-sub { font-family: 'Instrument Sans', sans-serif; font-size: 12px; color: #7a7a92; margin-top: 4px; }
-        .ro-desc { font-family: 'Instrument Sans', sans-serif; font-size: 14px; line-height: 1.55; color: #a6a6bc; margin: 12px auto 0; max-width: 560px; }
+        .ro-idx { color: #4b515c; }
+        .ro-name { font-family: var(--font-mono); font-size: 18px; letter-spacing: 0.03em; color: #eef0f6; }
+        .ro-sub { font-family: var(--font-body); font-size: 12px; color: #7b8290; margin-top: 4px; }
+        .ro-desc { font-family: var(--font-body); font-size: 14px; line-height: 1.55; color: #a6a6bc; margin: 12px auto 0; max-width: 560px; }
         .ro-bottom { display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 16px; flex-wrap: wrap; }
         .ro-tags { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
-        .ro-tag { font-family: 'JetBrains Mono', monospace; font-size: 8px; letter-spacing: 0.08em; padding: 3px 7px; border-radius: 3px; }
-        .ro-deploy { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; padding: 7px 16px; border-radius: 4px; border: 1px solid; text-decoration: none; transition: all 0.25s; }
+        .ro-tag { font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.08em; padding: 3px 7px; border-radius: 3px; }
+        .ro-deploy { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; padding: 7px 16px; border-radius: 4px; border: 1px solid; text-decoration: none; transition: all 0.25s; }
         .ro-deploy:hover { background: rgba(255,255,255,0.05); }
 
         .armory-head { text-align: center; margin-bottom: 6px; }
-        .armory-kicker { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.28em; color: #00d4ff; }
-        .armory-sub { font-family: 'Instrument Sans', sans-serif; font-size: 13px; color: #7a7a92; margin-top: 8px; }
+        .armory-kicker { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.28em; color: #00f0ff; }
+        .armory-sub { font-family: var(--font-body); font-size: 13px; color: #7b8290; margin-top: 8px; }
         .drag-hint {
           position: absolute; left: 50%; bottom: 5px; transform: translateX(-50%);
-          font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.3em; color: #46465c;
+          font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.3em; color: #46465c;
           pointer-events: none; transition: opacity 0.6s; z-index: 6; animation: hint-pulse 2.6s ease-in-out infinite;
         }
 
@@ -382,18 +382,18 @@ export default function HallOfArmor() {
         }}>
           <div style={{
             position: 'absolute', left: 0, right: 0, height: 2,
-            background: 'linear-gradient(90deg, transparent, rgba(0,212,255,0.2), transparent)',
+            background: 'linear-gradient(90deg, transparent, rgba(0,240,255,0.2), transparent)',
             animation: 'scanline-move 2s linear infinite',
             pointerEvents: 'none',
           }} />
-          <div style={{ fontFamily: "'JetBrains Mono', monospace", color: '#00d4ff', fontSize: 13, letterSpacing: '0.15em', textAlign: 'left', maxWidth: 440, width: '100%', padding: '0 24px' }}>
+          <div style={{ fontFamily: "var(--font-mono)", color: '#00f0ff', fontSize: 13, letterSpacing: '0.15em', textAlign: 'left', maxWidth: 440, width: '100%', padding: '0 24px' }}>
             {bootPhase === 0 && (
               <span style={{ animation: 'boot-blink 1s step-end infinite' }}>
                 {t('hallInit')}
               </span>
             )}
             {bootPhase >= 1 && BOOT_LINES.slice(0, visibleLines).map((key, i) => (
-              <div key={i} style={{ marginBottom: 10, color: i === visibleLines - 1 ? '#00d4ff' : '#3a3a50' }}>
+              <div key={i} style={{ marginBottom: 10, color: i === visibleLines - 1 ? '#00f0ff' : '#3a3a50' }}>
                 <span style={{ color: '#ff6b35', marginRight: 8 }}>&gt;</span>
                 {t(key)}
               </div>
@@ -411,9 +411,9 @@ export default function HallOfArmor() {
         <span style={s.statusCenter}>{t('hallStatusCenter')}</span>
         <span style={{
           display: 'inline-block', padding: '3px 10px',
-          border: '1px solid rgba(0,212,255,0.2)', borderRadius: 999,
-          fontFamily: "'JetBrains Mono', monospace", fontSize: 9, letterSpacing: '0.12em',
-          color: '#00d4ff', background: 'rgba(0,212,255,0.06)',
+          border: '1px solid rgba(0,240,255,0.2)', borderRadius: 999,
+          fontFamily: "var(--font-mono)", fontSize: 9, letterSpacing: '0.12em',
+          color: '#00f0ff', background: 'rgba(0,240,255,0.06)',
         }}>
           {t('sysOnline')}
         </span>
@@ -422,10 +422,10 @@ export default function HallOfArmor() {
       {/* NAME */}
       <div style={s.nameWrap}>
         <h1 className="hall-name" style={s.name}>
-          GORKEM <span style={{ color: '#00d4ff', textShadow: '0 0 30px rgba(0,212,255,0.4)' }}>ERGUNE</span>
+          GORKEM <span style={{ color: '#00f0ff', textShadow: '0 0 30px rgba(0,240,255,0.4)' }}>ERGUNE</span>
         </h1>
         <div className="hall-tagline" style={s.taglineChip}>
-          <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#00d4ff', boxShadow: '0 0 8px #00d4ff' }} />
+          <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#00f0ff', boxShadow: '0 0 8px #00f0ff' }} />
           {t('heroTagline')}
         </div>
         <p className="hall-subtext" style={s.heroSub}>{t('heroSubtext')}</p>
@@ -446,10 +446,10 @@ export default function HallOfArmor() {
         <div className="hall-platform" style={s.platform}>
           <div style={{
             position: 'absolute', inset: 0, borderRadius: '50%',
-            border: '1px solid rgba(0,212,255,0.18)',
+            border: '1px solid rgba(0,240,255,0.18)',
             animation: 'platform-rotate 20s linear infinite',
           }}>
-            <div style={{ position: 'absolute', top: -4, left: '50%', width: 8, height: 8, borderRadius: '50%', background: '#00d4ff', transform: 'translateX(-50%)', boxShadow: '0 0 10px #00d4ff' }} />
+            <div style={{ position: 'absolute', top: -4, left: '50%', width: 8, height: 8, borderRadius: '50%', background: '#00f0ff', transform: 'translateX(-50%)', boxShadow: '0 0 10px #00f0ff' }} />
           </div>
           <div style={{
             position: 'absolute', inset: 22, borderRadius: '50%',
@@ -460,18 +460,18 @@ export default function HallOfArmor() {
           </div>
           <div style={{
             position: 'absolute', inset: 48, borderRadius: '50%',
-            border: '1px solid rgba(0,212,255,0.10)',
+            border: '1px solid rgba(0,240,255,0.10)',
             animation: 'platform-rotate 8s linear infinite',
           }} />
           <div style={{
             position: 'absolute', inset: 72, borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(0,212,255,0.18) 0%, rgba(0,212,255,0.04) 60%, transparent 100%)',
+            background: 'radial-gradient(circle, rgba(0,240,255,0.18) 0%, rgba(0,240,255,0.04) 60%, transparent 100%)',
             animation: 'platform-pulse 3s ease-in-out infinite',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
           }}>
-            <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#00d4ff', boxShadow: '0 0 16px #00d4ff, 0 0 32px rgba(0,212,255,0.4)' }} />
+            <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#00f0ff', boxShadow: '0 0 16px #00f0ff, 0 0 32px rgba(0,240,255,0.4)' }} />
           </div>
-          <div style={{ position: 'absolute', bottom: -32, left: '50%', transform: 'translateX(-50%)', fontFamily: "'JetBrains Mono', monospace", fontSize: 8, letterSpacing: '0.22em', color: '#3a3a50', whiteSpace: 'nowrap' }}>
+          <div style={{ position: 'absolute', bottom: -32, left: '50%', transform: 'translateX(-50%)', fontFamily: "var(--font-mono)", fontSize: 8, letterSpacing: '0.22em', color: '#3a3a50', whiteSpace: 'nowrap' }}>
             {t('hallPlatformLabel')}
           </div>
         </div>
@@ -499,8 +499,8 @@ export default function HallOfArmor() {
         <div className="frame-bracket fb-bl" /><div className="frame-bracket fb-br" />
         <div className="bay-tick top" /><div className="bay-tick bottom" />
         {/* edge fades */}
-        <div style={{ position: 'absolute', top: 0, bottom: 0, left: 0, width: 60, zIndex: 4, pointerEvents: 'none', background: 'linear-gradient(90deg, #0a0a0f, transparent)' }} />
-        <div style={{ position: 'absolute', top: 0, bottom: 0, right: 0, width: 60, zIndex: 4, pointerEvents: 'none', background: 'linear-gradient(270deg, #0a0a0f, transparent)' }} />
+        <div style={{ position: 'absolute', top: 0, bottom: 0, left: 0, width: 60, zIndex: 4, pointerEvents: 'none', background: 'linear-gradient(90deg, #0a0c10, transparent)' }} />
+        <div style={{ position: 'absolute', top: 0, bottom: 0, right: 0, width: 60, zIndex: 4, pointerEvents: 'none', background: 'linear-gradient(270deg, #0a0c10, transparent)' }} />
 
         <div
           ref={viewportRef}
@@ -581,7 +581,7 @@ export default function HallOfArmor() {
         <div className="marquee-wrap">
           <div className="marquee">
             {[...Array(2)].map((_, k) => (
-              <div key={k} style={{ display: 'flex', gap: 48, fontFamily: "'Instrument Serif', serif", fontSize: 28, color: '#4a4a60' }}>
+              <div key={k} style={{ display: 'flex', gap: 48, fontFamily: "var(--font-display)", fontSize: 28, color: '#4b515c' }}>
                 {Array.isArray(marquee) && marquee.map((item, i) => (
                   <span key={i}>
                     <span style={i % 2 === 1 ? { fontStyle: 'italic' } : {}}>{item}</span>
@@ -606,27 +606,27 @@ const s = {
   },
   statusBar: {
     display: 'flex', alignItems: 'center', gap: 16,
-    fontFamily: "'JetBrains Mono', monospace", fontSize: 10,
-    letterSpacing: '0.14em', color: '#4a4a60',
+    fontFamily: "var(--font-mono)", fontSize: 10,
+    letterSpacing: '0.14em', color: '#4b515c',
     marginBottom: 48, flexWrap: 'wrap',
   },
   statusLeft: { color: '#6a6a80', letterSpacing: '0.12em' },
   statusCenter: { flex: 1, textAlign: 'center', color: '#3a3a50' },
   nameWrap: { textAlign: 'center', marginBottom: 40, display: 'flex', flexDirection: 'column', alignItems: 'center' },
   name: {
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: "var(--font-mono)",
     fontSize: 88, fontWeight: 500,
     letterSpacing: '0.08em', color: '#e0e0e8',
     lineHeight: 1, margin: 0,
   },
   taglineChip: {
     display: 'inline-flex', alignItems: 'center', gap: 9, marginTop: 24,
-    padding: '7px 16px', border: '1px solid rgba(0,212,255,0.25)', borderRadius: 999,
-    background: 'rgba(0,212,255,0.05)', fontFamily: "'JetBrains Mono', monospace",
+    padding: '7px 16px', border: '1px solid rgba(0,240,255,0.25)', borderRadius: 999,
+    background: 'rgba(0,240,255,0.05)', fontFamily: "var(--font-mono)",
     fontSize: 12, letterSpacing: '0.18em', color: '#bfe9ff',
   },
   heroSub: {
-    marginTop: 22, maxWidth: 620, fontFamily: "'Instrument Sans', sans-serif",
+    marginTop: 22, maxWidth: 620, fontFamily: "var(--font-body)",
     fontSize: 18, lineHeight: 1.6, color: '#a8a8be',
   },
   heroCtas: { marginTop: 30, display: 'flex', gap: 14, flexWrap: 'wrap', justifyContent: 'center' },

@@ -189,17 +189,17 @@ const css = `
   .lm-form { display: flex; flex-direction: column; gap: 18px; }
   .lm-field { display: flex; flex-direction: column; gap: 8px; }
   .lm-label {
-    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    font-family: var(--font-mono); font-size: 10px;
     letter-spacing: 0.16em; text-transform: uppercase; color: #8a7a86;
   }
   .lm-input {
     width: 100%; padding: 14px 16px;
     background: rgba(255,255,255,0.03);
     border: 1px solid #2a2238; border-radius: 12px;
-    font-family: 'Instrument Sans', sans-serif; font-size: 16px; color: #ececf4;
+    font-family: var(--font-body); font-size: 16px; color: #ececf4;
     transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
   }
-  .lm-input::placeholder { color: #5a5a70; }
+  .lm-input::placeholder { color: #5c6370; }
   .lm-input:focus {
     outline: none; border-color: #ff4d6d88;
     box-shadow: 0 0 0 3px rgba(255,77,109,0.14);
@@ -212,7 +212,7 @@ const css = `
     display: inline-flex; align-items: center; justify-content: center; gap: 10px;
     padding: 16px 24px; width: 100%;
     border: none; border-radius: 14px; cursor: pointer;
-    font-family: 'Instrument Sans', sans-serif; font-size: 17px; font-weight: 600;
+    font-family: var(--font-body); font-size: 17px; font-weight: 600;
     color: #fff;
     background: linear-gradient(135deg, #ff4d6d, #f472b6);
     box-shadow: 0 10px 30px rgba(255,77,109,0.32);
@@ -222,7 +222,7 @@ const css = `
   .lm-calc:active { transform: translateY(0); }
 
   .lm-error {
-    font-family: 'Instrument Sans', sans-serif; font-size: 13px;
+    font-family: var(--font-body); font-size: 13px;
     color: #ff8095; text-align: center; margin-top: 2px; min-height: 18px;
   }
 
@@ -235,11 +235,11 @@ const css = `
 
   .lm-result-badge {
     display: inline-flex; align-items: center; gap: 8px;
-    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    font-family: var(--font-mono); font-size: 11px;
     letter-spacing: 0.16em; text-transform: uppercase; color: #d8b8c2;
   }
   .lm-score {
-    font-family: 'Instrument Serif', serif; font-weight: 400;
+    font-family: var(--font-display); font-weight: 400;
     font-size: 104px; line-height: 1; letter-spacing: -0.02em;
     background: linear-gradient(135deg, #ff4d6d 0%, #f472b6 50%, #9d6bff 100%);
     -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
@@ -258,7 +258,7 @@ const css = `
   }
 
   .lm-message {
-    font-family: 'Instrument Serif', serif; font-size: 24px; line-height: 1.35;
+    font-family: var(--font-display); font-size: 24px; line-height: 1.35;
     color: #ececf4; max-width: 420px;
   }
   @media (max-width: 560px) { .lm-message { font-size: 20px; } }
@@ -269,7 +269,7 @@ const css = `
     padding: 11px 20px; border-radius: 999px; cursor: pointer;
     border: 1px solid #ff4d6d44;
     background: linear-gradient(160deg, rgba(255,77,109,0.12), rgba(157,107,255,0.08));
-    color: #f0dfe4; font-family: 'Instrument Sans', sans-serif; font-size: 14px; font-weight: 500;
+    color: #f0dfe4; font-family: var(--font-body); font-size: 14px; font-weight: 500;
     transition: transform 0.3s cubic-bezier(0.2,0.8,0.2,1), border-color 0.3s, box-shadow 0.3s;
   }
   .lm-again:hover { transform: translateY(-2px); border-color: #ff4d6daa; box-shadow: 0 0 26px rgba(255,77,109,0.22); }

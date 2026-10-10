@@ -7,7 +7,7 @@ import { prefersReducedMotion } from '../../utils/prefersReducedMotion.js';
 // rendering nothing.
 //
 // Reused by the Love Meter (soulmate scores) and the Spin the Wheel result.
-const PALETTE = ['#ff4d6d', '#f472b6', '#00d4ff', '#9d6bff', '#ffd166', '#00e5a0', '#4d96ff', '#ff9f1c'];
+const PALETTE = ['#ff4d6d', '#f472b6', '#00f0ff', '#9d6bff', '#ffd166', '#00e5a0', '#4d96ff', '#ff9f1c'];
 
 export default function Confetti({ count = 140, duration = 4200, onDone }) {
   const reduced = prefersReducedMotion();

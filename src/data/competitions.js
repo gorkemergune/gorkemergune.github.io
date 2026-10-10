@@ -1,8 +1,8 @@
 // Competitions, hackathons, and competitive-programming camps.
 // Rank / score are only shown when publicly verifiable — otherwise a "TBD"
-// chip is displayed rather than inventing values. `logo` can point to an
-// image dropped into public/competitions/<id>.svg later; until then the
-// styled initials emblem is used.
+// chip is displayed rather than inventing values. `logo` is the organiser's
+// official mark from public/orgs/ (see PORTFOLIO_RULES §9); `null` falls back
+// to the styled initials emblem — never a guessed logo.
 const COMPETITIONS = [
   {
     id: 'ieeextreme',
@@ -12,7 +12,7 @@ const COMPETITIONS = [
     duration: '24 hours',
     initials: 'IX',
     accent: '#00b3ff',
-    logo: null,
+    logo: '/orgs/ieee.svg',
     type: { en: 'Algorithm Contest', tr: 'Algoritma Yarışması' },
     score: '887 pts',
     rank: 'Türkiye #48',
@@ -37,7 +37,7 @@ const COMPETITIONS = [
     duration: null,
     initials: 'AW',
     accent: '#4d96ff',
-    logo: null,
+    logo: '/orgs/algoleague-mark.svg',
     type: { en: 'Competitive Camp', tr: 'Yarışma Kampı' },
     score: '6 / 10 solved',
     rank: '23 / 92',
@@ -58,7 +58,7 @@ const COMPETITIONS = [
     duration: null,
     initials: 'AS',
     accent: '#00e5a0',
-    logo: null,
+    logo: '/orgs/algoleague-mark.svg',
     type: { en: 'Competitive Camp', tr: 'Yarışma Kampı' },
     score: '5 / 10 solved',
     rank: '11 / 90',
@@ -79,7 +79,7 @@ const COMPETITIONS = [
     duration: null,
     initials: 'AU',
     accent: '#ffd166',
-    logo: null,
+    logo: '/orgs/algoleague-mark.svg',
     type: { en: 'Competitive Camp', tr: 'Yarışma Kampı' },
     score: '8 / 12 solved',
     rank: '11 / 102',
@@ -100,7 +100,7 @@ const COMPETITIONS = [
     duration: null,
     initials: 'BTK',
     accent: '#ff9f1c',
-    logo: null,
+    logo: '/orgs/btk-akademi.png',
     type: { en: 'Hackathon', tr: 'Hackathon' },
     score: null,
     rank: null,
@@ -123,7 +123,7 @@ const COMPETITIONS = [
     duration: null,
     initials: 'TG',
     accent: '#f472b6',
-    logo: null,
+    logo: '/orgs/tikla-gelsin.png',
     type: { en: 'Hackathon', tr: 'Hackathon' },
     score: null,
     rank: null,
@@ -138,12 +138,12 @@ const COMPETITIONS = [
   {
     id: 'med-health',
     name: 'Med-Health Early Warning',
-    org: 'Hackathon',
+    org: 'AI4Purpose',
     date: 'Feb 2026',
     duration: null,
     initials: 'MH',
-    accent: '#00d4ff',
-    logo: null,
+    accent: '#00f0ff',
+    logo: '/orgs/ai4purpose.png',
     type: { en: 'Hackathon', tr: 'Hackathon' },
     score: null,
     rank: 'Top 10',

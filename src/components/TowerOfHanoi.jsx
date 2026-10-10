@@ -231,20 +231,20 @@ export default function TowerOfHanoi() {
 }
 
 const s = {
-  intro: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 16, color: '#4a4a48', marginBottom: 28 },
+  intro: { fontFamily: "var(--font-body)", fontSize: 16, color: '#4a4a48', marginBottom: 28 },
   selectRow: { display: 'flex', gap: 10, flexWrap: 'wrap', marginBottom: 20 },
   selectBtn: {
-    fontFamily: "'JetBrains Mono', monospace", fontSize: 14, width: 44, height: 44,
+    fontFamily: "var(--font-mono)", fontSize: 14, width: 44, height: 44,
     border: '1px solid #d6d4cd', borderRadius: 4, cursor: 'pointer', transition: 'all 0.2s',
     display: 'flex', alignItems: 'center', justifyContent: 'center',
   },
   selectInfo: {
     display: 'flex', gap: 24, marginBottom: 28,
-    fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.1em', color: '#8a8a86',
+    fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: '0.1em', color: '#8a8a86',
   },
   selectInfoLabel: {},
   startBtn: {
-    fontFamily: "'JetBrains Mono', monospace", fontSize: 12, letterSpacing: '0.06em',
+    fontFamily: "var(--font-mono)", fontSize: 12, letterSpacing: '0.06em',
     padding: '10px 28px', border: '1px solid #1a1a1a', borderRadius: 4,
     background: '#1a1a1a', color: '#f4f3ef', cursor: 'pointer', transition: 'all 0.2s',
   },
@@ -253,10 +253,10 @@ const s = {
     borderBottom: '1px solid #e2e0da',
   },
   stat: { display: 'flex', flexDirection: 'column', gap: 4 },
-  statLabel: { fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.12em', color: '#8a8a86' },
-  statValue: { fontFamily: "'JetBrains Mono', monospace", fontSize: 22, fontWeight: 500, color: '#1a1a1a' },
+  statLabel: { fontFamily: "var(--font-mono)", fontSize: 10, letterSpacing: '0.12em', color: '#8a8a86' },
+  statValue: { fontFamily: "var(--font-mono)", fontSize: 22, fontWeight: 500, color: '#1a1a1a' },
   message: {
-    fontFamily: "'Instrument Sans', sans-serif", fontSize: 14, padding: '12px 0', minHeight: 40,
+    fontFamily: "var(--font-body)", fontSize: 14, padding: '12px 0', minHeight: 40,
     transition: 'color 0.2s',
   },
   board: {
@@ -268,7 +268,7 @@ const s = {
     transition: 'background 0.2s, border-color 0.2s',
   },
   pegLabel: {
-    fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.1em',
+    fontFamily: "var(--font-mono)", fontSize: 10, letterSpacing: '0.1em',
     color: '#8a8a86', marginBottom: 12,
   },
   pegVisual: { position: 'relative', width: '100%', display: 'flex', justifyContent: 'center' },
@@ -286,23 +286,23 @@ const s = {
     transition: 'all 0.15s ease-out',
   },
   diskLabel: {
-    fontFamily: "'JetBrains Mono', monospace", fontSize: 11, fontWeight: 600,
+    fontFamily: "var(--font-mono)", fontSize: 11, fontWeight: 600,
     color: '#fff', textShadow: '0 1px 2px rgba(0,0,0,0.3)',
   },
   endCard: {
     padding: 32, background: '#fafaf6', border: '1px solid #e2e0da', borderRadius: 4,
     textAlign: 'center', marginBottom: 32,
   },
-  endTitle: { fontFamily: "'Instrument Serif', serif", fontSize: 32, fontWeight: 400, marginBottom: 12 },
-  endDesc: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 15, color: '#4a4a48', marginBottom: 24 },
+  endTitle: { fontFamily: "var(--font-display)", fontSize: 32, fontWeight: 400, marginBottom: 12 },
+  endDesc: { fontFamily: "var(--font-body)", fontSize: 15, color: '#4a4a48', marginBottom: 24 },
   endStats: {
     display: 'flex', justifyContent: 'center', gap: 32, marginBottom: 24,
-    fontFamily: "'JetBrains Mono', monospace", fontSize: 12, color: '#6b6a66', letterSpacing: '0.06em',
+    fontFamily: "var(--font-mono)", fontSize: 12, color: '#6b6a66', letterSpacing: '0.06em',
   },
   endStatItem: {},
   actions: { display: 'flex', gap: 12, marginBottom: 32 },
   actionBtn: {
-    fontFamily: "'JetBrains Mono', monospace", fontSize: 12, letterSpacing: '0.06em',
+    fontFamily: "var(--font-mono)", fontSize: 12, letterSpacing: '0.06em',
     padding: '8px 20px', border: '1px solid #d6d4cd', borderRadius: 4,
     background: 'transparent', color: '#6b6a66', cursor: 'pointer', transition: 'all 0.2s',
   },
@@ -311,7 +311,7 @@ const s = {
     marginTop: 16, padding: 28, background: '#fafaf6', border: '1px solid #e2e0da', borderRadius: 4,
   },
   exTitle: {
-    fontFamily: "'Instrument Serif', serif", fontSize: 22, fontWeight: 400, color: '#1a1a1a', marginBottom: 16,
+    fontFamily: "var(--font-display)", fontSize: 22, fontWeight: 400, color: '#1a1a1a', marginBottom: 16,
   },
-  exP: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 14, lineHeight: 1.7, color: '#4a4a48', marginBottom: 10 },
+  exP: { fontFamily: "var(--font-body)", fontSize: 14, lineHeight: 1.7, color: '#4a4a48', marginBottom: 10 },
 };
