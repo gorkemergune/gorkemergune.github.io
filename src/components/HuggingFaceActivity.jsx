@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowUpRight, Box, Database, Download } from 'lucide-react';
+import { ArrowUpRight, Box, Database } from 'lucide-react';
 import { useLang } from '../i18n.jsx';
 import HF_ARTIFACTS, { HF_PROFILE } from '../data/huggingface';
-
-const HF = '#ffd21e';
 
 // Live download counts from the Hub API, seeded with the last-known values in
 // huggingface.js so the section still renders if the network/API is unavailable.
@@ -37,55 +35,35 @@ function useLiveDownloads() {
   return dls;
 }
 
-function HFCard({ a, downloads, lang, t, loc }) {
+function HFCell({ a, downloads, lang, t, loc }) {
   const isDataset = a.kind === 'dataset';
   const Icon = isDataset ? Database : Box;
   const dl = downloads[a.id] ?? a.downloads ?? 0;
   return (
-    <div className="hf-card">
-      <div style={s.cardTop}>
-        <span style={s.typeBadge}>
-          <Icon size={12} strokeWidth={1.7} style={{ color: HF }} />
-          {isDataset ? t('hfDataset') : t('hfModel')}
-        </span>
-        <span style={s.task}>{a.task}</span>
-        <span style={s.dlBadge} title={loc('Downloads (live from the Hub)', 'İndirme (Hub’dan canlı)')}>
-          <Download size={11} strokeWidth={1.7} style={{ color: HF }} />
-          {dl.toLocaleString(lang === 'tr' ? 'tr-TR' : 'en-US')}
-        </span>
-        <a href={a.url} target="_blank" rel="noopener noreferrer" style={{ lineHeight: 0 }} aria-label={a.name}>
-          <ArrowUpRight className="hf-arrow" size={16} strokeWidth={1.5} style={{ color: '#6a6a58' }} />
-        </a>
+    <div className="ds-cell">
+      <div className="hf-top ds-meta">
+        <span className="hf-type"><Icon size={12} strokeWidth={1.6} />{isDataset ? t('hfDataset') : t('hfModel')}</span>
+        <span>{a.task}</span>
       </div>
-
-      <a href={a.url} target="_blank" rel="noopener noreferrer" style={s.name}>
-        <span style={{ color: '#6a6a58' }}>gorkemergune/</span>{a.name}
+      <a href={a.url} target="_blank" rel="noopener noreferrer" className="hf-name">
+        <span><span style={{ color: 'var(--ds-meta)' }}>gorkemergune/</span>{a.name}</span>
+        <ArrowUpRight size={14} strokeWidth={1.5} />
       </a>
-
-      <p style={s.desc}>{loc(a.descEn, a.descTr)}</p>
-
-      <div style={s.statRow}>
-        <span style={s.stat}>
-          <span style={s.statLabel}>{loc('Downloads', 'İndirme')}</span>
-          <span style={s.statVal}>{dl.toLocaleString(lang === 'tr' ? 'tr-TR' : 'en-US')}</span>
-        </span>
-        {a.stats.map((st) => (
-          <span key={st.label} style={s.stat}>
-            <span style={s.statLabel}>{st.label}</span>
-            <span style={s.statVal}>{st.value}</span>
-          </span>
-        ))}
-      </div>
-
-      <div style={s.footer}>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
-          {a.tags.map((tg) => (
-            <span key={tg} style={s.tag}>{tg}</span>
-          ))}
+      <p className="hf-desc">{loc(a.descEn, a.descTr)}</p>
+      <dl className="hf-stats">
+        <div>
+          <dt className="ds-meta">{loc('Downloads', 'İndirme')}</dt>
+          <dd>{dl.toLocaleString(lang === 'tr' ? 'tr-TR' : 'en-US')}</dd>
         </div>
+        {a.stats.map((st) => (
+          <div key={st.label}><dt className="ds-meta">{st.label}</dt><dd>{st.value}</dd></div>
+        ))}
+      </dl>
+      <div className="hf-foot">
+        <span className="ds-meta">{a.tags.join(' · ')}</span>
         {a.project && (
-          <Link to={`/project/${a.project}`} className="link-hover" style={s.projectLink}>
-            {t('hfViewProject')} <ArrowUpRight size={12} strokeWidth={1.5} />
+          <Link to={`/project/${a.project}`} className="hf-proj ds-meta">
+            {t('hfViewProject')} <ArrowUpRight size={11} strokeWidth={1.5} />
           </Link>
         )}
       </div>
@@ -93,77 +71,46 @@ function HFCard({ a, downloads, lang, t, loc }) {
   );
 }
 
+// Models and datasets on the Hub, one hairline grid. Download counts refresh
+// live from the Hub API and fall back to the values in huggingface.js.
 export default function HuggingFaceActivity() {
   const { lang, t } = useLang();
   const loc = (en, tr) => (lang === 'tr' && tr ? tr : en);
   const downloads = useLiveDownloads();
-
-  const models = HF_ARTIFACTS.filter((a) => a.kind !== 'dataset');
-  const datasets = HF_ARTIFACTS.filter((a) => a.kind === 'dataset');
-
-  const groups = [
-    { key: 'models', Icon: Box, label: t('hfGroupModels'), items: models },
-    { key: 'datasets', Icon: Database, label: t('hfGroupDatasets'), items: datasets },
+  const ordered = [
+    ...HF_ARTIFACTS.filter((a) => a.kind !== 'dataset'),
+    ...HF_ARTIFACTS.filter((a) => a.kind === 'dataset'),
   ];
 
   return (
-    <section className="container" style={s.section} aria-label="Hugging Face activity">
+    <div className="ds-block" aria-label={t('hfKicker')}>
       <style>{`
-        .hf-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-        .hf-card { display: flex; flex-direction: column; gap: 12px; padding: 22px; border: 1px solid #24240f; border-radius: 12px; background: linear-gradient(180deg,#12120a,#0b0b06); transition: transform 0.4s cubic-bezier(0.2,0.8,0.2,1), border-color 0.4s, box-shadow 0.4s; }
-        .hf-card:hover { transform: translateY(-4px); border-color: ${HF}55; box-shadow: 0 0 26px rgba(255,210,30,0.10); }
-        .hf-card:hover .hf-arrow { transform: translate(3px,-3px); color: ${HF}; }
-        .hf-arrow { transition: transform 0.4s, color 0.4s; }
-        @media (max-width: 720px) { .hf-grid { grid-template-columns: 1fr !important; } }
+        .hf-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        .hf-top { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+        .hf-type { display: inline-flex; align-items: center; gap: 7px; color: #c6cdd8; }
+        .hf-name { display: flex; justify-content: space-between; gap: 10px; margin-top: 8px; font-family: var(--font-mono); font-size: 13px; line-height: 1.45; color: var(--ds-ink); word-break: break-word; }
+        .hf-name svg { flex: none; color: var(--ds-meta); transition: transform 0.35s, color 0.35s; }
+        .hf-name:hover svg { color: var(--ds-accent); transform: translate(3px,-3px); }
+        .hf-desc { flex: 1; font-family: var(--font-body); font-size: 13.5px; line-height: 1.6; color: var(--ds-body); }
+        .hf-stats { display: flex; flex-wrap: wrap; gap: 10px 24px; }
+        .hf-stats dd { margin-top: 4px; font-family: var(--font-body); font-size: 15px; color: var(--ds-ink); }
+        .hf-foot { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; padding-top: 12px; border-top: 1px solid var(--ds-line-soft); }
+        .hf-proj { display: inline-flex; align-items: center; gap: 5px; color: #c6cdd8; transition: color 0.3s; }
+        .hf-proj:hover { color: var(--ds-accent); }
+        @media (max-width: 1000px) { .hf-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+        @media (max-width: 680px) { .hf-grid { grid-template-columns: 1fr; } }
       `}</style>
-
-      <div style={s.head}>
-        <div style={s.kicker}><span style={s.dot} />{t('hfKicker')}</div>
-        <p style={s.sub}>{t('hfSub')}</p>
+      <div className="ds-subhead">
+        <span className="ds-meta">{t('hfKicker')}</span>
+        <a href={HF_PROFILE} target="_blank" rel="noopener noreferrer" className="ds-link">
+          {t('hfCta')} <ArrowUpRight size={13} strokeWidth={1.5} />
+        </a>
       </div>
-
-      {groups.map((g) => g.items.length > 0 && (
-        <div key={g.key} style={{ marginTop: 30 }}>
-          <div style={s.groupHead}>
-            <g.Icon size={13} strokeWidth={1.8} style={{ color: HF }} />
-            <span>{g.label}</span>
-            <span style={s.groupCount}>{g.items.length}</span>
-          </div>
-          <div className="hf-grid" style={{ marginTop: 16 }}>
-            {g.items.map((a) => (
-              <HFCard key={a.id} a={a} downloads={downloads} lang={lang} t={t} loc={loc} />
-            ))}
-          </div>
-        </div>
-      ))}
-
-      <a href={HF_PROFILE} target="_blank" rel="noopener noreferrer" className="link-hover" style={s.cta}>
-        {t('hfCta')} <ArrowUpRight size={14} strokeWidth={1.5} />
-      </a>
-    </section>
+      <ul className="ds-cells hf-grid">
+        {ordered.map((a) => (
+          <li key={a.id}><HFCell a={a} downloads={downloads} lang={lang} t={t} loc={loc} /></li>
+        ))}
+      </ul>
+    </div>
   );
 }
-
-const s = {
-  section: { maxWidth: 1400, margin: '0 auto', padding: '10px 48px 96px', position: 'relative', zIndex: 2 },
-  head: { marginBottom: 6 },
-  kicker: { display: 'inline-flex', alignItems: 'center', gap: 10, fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.18em', color: '#8a8258' },
-  dot: { width: 7, height: 7, borderRadius: '50%', background: HF, boxShadow: `0 0 8px ${HF}` },
-  groupHead: { display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#c8c8a8' },
-  groupCount: { fontFamily: "'JetBrains Mono', monospace", fontSize: 10, color: '#8a8258', padding: '1px 7px', border: `1px solid ${HF}33`, borderRadius: 999, background: 'rgba(255,210,30,0.05)' },
-  sub: { fontFamily: "'Instrument Serif', serif", fontStyle: 'italic', fontSize: 16, color: '#8a8aa0', marginTop: 10 },
-  cardTop: { display: 'flex', alignItems: 'center', gap: 10 },
-  typeBadge: { display: 'inline-flex', alignItems: 'center', gap: 5, fontFamily: "'JetBrains Mono', monospace", fontSize: 9, letterSpacing: '0.12em', color: HF, padding: '3px 8px', border: `1px solid ${HF}44`, borderRadius: 999, background: 'rgba(255,210,30,0.06)' },
-  task: { fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.06em', color: '#7a7a68' },
-  dlBadge: { display: 'inline-flex', alignItems: 'center', gap: 5, marginLeft: 'auto', fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.04em', color: '#d8d0a0', padding: '3px 8px', border: `1px solid ${HF}33`, borderRadius: 999, background: 'rgba(255,210,30,0.05)' },
-  name: { fontFamily: "'JetBrains Mono', monospace", fontSize: 14, color: '#ededdf', fontWeight: 500, wordBreak: 'break-word', textDecoration: 'none', lineHeight: 1.4 },
-  desc: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 13, lineHeight: 1.6, color: '#9a9a86', flex: 1 },
-  statRow: { display: 'flex', gap: 22, flexWrap: 'wrap' },
-  stat: { display: 'flex', flexDirection: 'column', gap: 3 },
-  statLabel: { fontFamily: "'JetBrains Mono', monospace", fontSize: 8, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#6a6a58' },
-  statVal: { fontFamily: "'Instrument Serif', serif", fontSize: 17, color: '#e8e8d8', lineHeight: 1 },
-  footer: { display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap', marginTop: 2, paddingTop: 12, borderTop: '1px solid #24240f' },
-  tag: { fontFamily: "'JetBrains Mono', monospace", fontSize: 8, padding: '2px 6px', border: `1px solid ${HF}33`, borderRadius: 3, color: '#b6b085', background: 'rgba(255,210,30,0.05)', letterSpacing: '0.04em' },
-  projectLink: { display: 'inline-flex', alignItems: 'center', gap: 4, fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.06em', color: '#c0c0a8', whiteSpace: 'nowrap' },
-  cta: { display: 'inline-flex', alignItems: 'center', gap: 8, marginTop: 32, fontFamily: "'JetBrains Mono', monospace", fontSize: 12, letterSpacing: '0.08em', color: '#c8c8b0' },
-};

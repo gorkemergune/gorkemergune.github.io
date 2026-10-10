@@ -42,64 +42,49 @@ export default function LiveStatus() {
   ];
 
   return (
-    <section className="container" style={s.section} aria-label="Live status">
+    <div className="ds-block" aria-label={t('lifeKicker')}>
       <style>{`
-        .ls-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 20px; }
-        .ls-card { position: relative; overflow: hidden; border: 1px solid #1a1a2e; border-radius: 14px; background: linear-gradient(180deg,#0f0f1a,#0b0b13); padding: 26px 28px; }
-        @keyframes ls-sweep { 0% { transform: translateX(-120%); } 100% { transform: translateX(360%); } }
-        .ls-card::after { content:''; position:absolute; top:0; left:0; width:30%; height:2px; background: linear-gradient(90deg, transparent, var(--acc), transparent); animation: ls-sweep 5s linear infinite; }
-        @keyframes ls-blink { 0%,100% { opacity: 0.35; } 50% { opacity: 1; } }
-        .ls-live { animation: ls-blink 1.6s ease-in-out infinite; }
-        .ls-units { display: flex; flex-wrap: wrap; gap: 10px; }
-        .ls-seg { flex: 1; min-width: 62px; text-align: center; padding: 14px 6px; background: rgba(0,0,0,0.25); border: 1px solid #17172400; border-radius: 10px; }
-        @media (max-width: 820px) { .ls-grid { grid-template-columns: 1fr !important; } }
+        .ls-grid { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); }
+        .ls-head { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+        .ls-head span:first-child { display: inline-flex; align-items: center; gap: 8px; color: #c6cdd8; }
+        .ls-age { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-top: 18px; }
+        .ls-age-n { font-family: var(--font-mono); font-size: 40px; line-height: 1; color: var(--ds-ink); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+        .ls-units { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: 18px; }
+        .ls-units div + div { border-left: 1px solid var(--ds-line-soft); }
+        .ls-units div { padding: 0 10px; }
+        .ls-units div:first-child { padding-left: 0; }
+        .ls-num { font-family: var(--font-mono); font-size: 28px; line-height: 1; color: var(--ds-ink); font-variant-numeric: tabular-nums; }
+        .ls-units .ds-meta { display: block; margin-top: 8px; font-size: 9px; }
+        @media (max-width: 820px) { .ls-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 400px) { .ls-age-n { font-size: 32px; } .ls-num { font-size: 22px; } }
       `}</style>
-
-      <div style={s.kicker}><span className="ls-live" style={s.kickerDot} />{t('lifeKicker')}</div>
-
-      <div className="ls-grid" style={{ marginTop: 24 }}>
-        {/* AGE */}
-        <div className="ls-card" style={{ '--acc': '#00d4ff' }}>
-          <div style={s.head}>
-            <span style={{ ...s.headLabel, color: '#00d4ff' }}><Activity size={13} strokeWidth={1.8} /> {t('ageLabel')}</span>
-            <span style={s.caption}>{t('ageCaption')}</span>
+      <div className="ds-subhead"><span className="ds-meta">{t('lifeKicker')}</span></div>
+      <div className="ds-cells ls-grid">
+        <div className="ds-cell">
+          <div className="ls-head ds-meta">
+            <span><Activity size={12} strokeWidth={1.6} /> {t('ageLabel')}</span>
+            <span>{t('ageCaption')}</span>
           </div>
-          <div style={s.ageWrap}>
-            <span style={s.ageNum}>{age}</span>
-            <span style={s.ageUnitLabel}>{t('unitYears')}</span>
+          <div className="ls-age">
+            <span className="ls-age-n">{age}</span>
+            <span className="ds-meta">{t('unitYears')}</span>
           </div>
         </div>
-
-        {/* COUNTDOWN */}
-        <div className="ls-card" style={{ '--acc': '#ff6b35' }}>
-          <div style={s.head}>
-            <span style={{ ...s.headLabel, color: '#ff6b35' }}><Cake size={13} strokeWidth={1.8} /> {t('countdownLabel')}</span>
-            <span style={s.caption}>{t('countdownCaption')}</span>
+        <div className="ds-cell">
+          <div className="ls-head ds-meta">
+            <span><Cake size={12} strokeWidth={1.6} /> {t('countdownLabel')}</span>
+            <span>{t('countdownCaption')}</span>
           </div>
           <div className="ls-units">
-            {cdUnits.map((u, i) => (
-              <div key={i} className="ls-seg">
-                <div style={{ ...s.num, color: '#ffd9c7' }}>{u.v}</div>
-                <div style={s.unit}>{u.label}</div>
+            {cdUnits.map((u) => (
+              <div key={u.label}>
+                <span className="ls-num">{u.v}</span>
+                <span className="ds-meta">{u.label}</span>
               </div>
             ))}
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }
-
-const s = {
-  section: { maxWidth: 1400, margin: '0 auto', padding: '20px 48px 80px', position: 'relative', zIndex: 2 },
-  kicker: { display: 'inline-flex', alignItems: 'center', gap: 10, fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.18em', color: '#6a6a82' },
-  kickerDot: { width: 7, height: 7, borderRadius: '50%', background: '#00d4ff', boxShadow: '0 0 8px #00d4ff' },
-  head: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12, marginBottom: 18, flexWrap: 'wrap' },
-  headLabel: { display: 'inline-flex', alignItems: 'center', gap: 7, fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.14em' },
-  caption: { fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.06em', color: '#6a6a82' },
-  num: { fontFamily: "'JetBrains Mono', monospace", fontSize: 30, fontWeight: 500, lineHeight: 1, fontVariantNumeric: 'tabular-nums' },
-  unit: { fontFamily: "'JetBrains Mono', monospace", fontSize: 8.5, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#7a7a92', marginTop: 8 },
-  ageWrap: { display: 'flex', alignItems: 'baseline', gap: 12, padding: '8px 0 4px', flexWrap: 'wrap' },
-  ageNum: { fontFamily: "'JetBrains Mono', monospace", fontSize: 46, fontWeight: 600, lineHeight: 1, color: '#eaf6ff', fontVariantNumeric: 'tabular-nums', letterSpacing: '-0.01em' },
-  ageUnitLabel: { fontFamily: "'JetBrains Mono', monospace", fontSize: 12, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#7a7a92' },
-};

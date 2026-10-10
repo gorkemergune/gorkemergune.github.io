@@ -1,81 +1,66 @@
-import { Terminal, ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import { useLang } from '../i18n.jsx';
 import { useAlgoStats } from '../hooks/useAlgoStats';
 import AnimatedCounter from './AnimatedCounter';
+import { PLATFORM_LOGOS } from '../data/techLogos';
 
+// Solved-problem counts per platform, live from the algorithms repo. Thin
+// neutral bars; each platform carries its own logo (a dot where none exists).
+// A platform with no recorded count is not shown at all.
 export default function AlgorithmJourney() {
   const { t } = useLang();
   const a = useAlgoStats();
 
   const platforms = [
     { key: 'leetcode', label: 'LeetCode', value: a.leetcode, color: '#ffa116' },
-    { key: 'algoleague', label: 'AlgoLeague', value: a.algoleague, color: '#00d4ff' },
+    { key: 'algoleague', label: 'AlgoLeague', value: a.algoleague, color: '#00f0ff' },
     { key: 'competitive', label: 'Competitive', value: a.competitive, color: '#00e5a0' },
     { key: 'neetcode', label: 'NeetCode', value: a.neetcode, color: '#7c5cff' },
     { key: 'hackerrank', label: 'HackerRank', value: a.hackerrank, color: '#ffd166' },
   ];
-  const max = Math.max(1, ...platforms.map((p) => p.value || 0));
+  const shown = platforms.filter((p) => p.value > 0);
+  const max = Math.max(1, ...shown.map((p) => p.value || 0));
 
   return (
-    <section className="container" style={s.section} aria-label="Algorithm journey">
+    <div className="aj" aria-label={t('algoKicker')}>
       <style>{`
-        .aj-panel { display: grid; grid-template-columns: 0.7fr 1.3fr; gap: 1px; background: #1a1a2e; border: 1px solid #1a1a2e; border-radius: 14px; overflow: hidden; }
-        .aj-cell { background: linear-gradient(180deg,#0f0f1a,#0b0b13); }
-        .aj-bar-fill { height: 100%; border-radius: 4px; transform-origin: left; animation: aj-grow 1.1s cubic-bezier(0.2,0.8,0.2,1) both; }
+        .aj { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 64px; margin-top: 64px; align-items: start; }
+        .aj-total { font-family: var(--font-display); font-weight: 400; font-size: 88px; line-height: 0.95; letter-spacing: -0.04em; color: var(--ds-ink); font-variant-numeric: tabular-nums; margin-top: 20px; }
+        .aj-sub { margin-top: 16px; max-width: 380px; }
+        .aj .ds-link { margin-top: 28px; }
+        .aj-bars { list-style: none; border-top: 1px solid var(--ds-line); }
+        .aj-bars li { display: grid; grid-template-columns: 140px minmax(0, 1fr) 56px; gap: 24px; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--ds-line); }
+        .aj-name { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-body); font-size: 14px; color: #c6cdd8; }
+        .aj-name i { width: 6px; height: 6px; border-radius: 50%; margin: 0 6px; }
+        .aj-name img { width: 18px; height: 18px; object-fit: contain; flex: none; }
+        .aj-fill { animation: aj-grow 1.1s cubic-bezier(0.2,0.8,0.2,1) both; }
         @keyframes aj-grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-        @keyframes aj-blink { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
-        .aj-live { animation: aj-blink 1.6s ease-in-out infinite; }
-        @media (max-width: 820px) { .aj-panel { grid-template-columns: 1fr !important; } }
+        .aj-val { text-align: right; font-family: var(--font-mono); font-size: 14px; color: var(--ds-ink); font-variant-numeric: tabular-nums; }
+        @media (max-width: 1000px) { .aj { grid-template-columns: 1fr; gap: 32px; } }
+        @media (max-width: 600px) { .aj { margin-top: 48px; } .aj-total { font-size: 64px; } .aj-bars li { grid-template-columns: 110px minmax(0, 1fr) 44px; gap: 14px; } }
       `}</style>
-
-      <div style={s.kicker}><Terminal size={13} strokeWidth={1.8} style={{ color: '#00d4ff' }} /> {t('algoKicker')}</div>
-      <p style={s.sub}>{t('algoSub')}</p>
-
-      <div className="aj-panel" style={{ marginTop: 26 }}>
-        {/* Total */}
-        <div className="aj-cell" style={s.totalCell}>
-          <span style={s.liveTag}><span className="aj-live" style={s.liveDot} />{t('algoLive')}</span>
-          <div style={s.totalNum}><AnimatedCounter target={a.total} /></div>
-          <div style={s.totalLabel}>{t('algoTotalLabel')}</div>
-          <a href="https://github.com/gorkemergune/algorithms" target="_blank" rel="noopener noreferrer" className="link-hover" style={s.repoLink}>
-            /algorithms <ArrowUpRight size={12} strokeWidth={1.6} />
-          </a>
-        </div>
-
-        {/* Platform bars */}
-        <div className="aj-cell" style={s.barsCell}>
-          {platforms.map((p, i) => (
-            <div key={p.key} style={{ ...s.barRow, marginBottom: i < platforms.length - 1 ? 20 : 0 }}>
-              <div style={s.barHead}>
-                <span style={s.barLabel}><span style={{ ...s.barDot, background: p.color, boxShadow: `0 0 6px ${p.color}` }} />{p.label}</span>
-                <span style={{ ...s.barValue, color: p.color }}><AnimatedCounter target={p.value} /></span>
-              </div>
-              <div style={s.barTrack}>
-                <div className="aj-bar-fill" style={{ width: `${((p.value || 0) / max) * 100}%`, background: `linear-gradient(90deg, ${p.color}88, ${p.color})`, boxShadow: `0 0 12px ${p.color}66`, animationDelay: `${i * 0.1}s` }} />
-              </div>
-            </div>
-          ))}
-        </div>
+      <div>
+        <div className="ds-meta">{t('algoTotalLabel')}</div>
+        <div className="aj-total"><AnimatedCounter target={a.total} /></div>
+        <p className="ds-body aj-sub">{t('algoSub')}</p>
+        <a href="https://github.com/gorkemergune/algorithms" target="_blank" rel="noopener noreferrer" className="ds-link">
+          /algorithms <ArrowUpRight size={13} strokeWidth={1.5} />
+        </a>
       </div>
-    </section>
+      <ul className="aj-bars">
+        {shown.map((p, i) => (
+          <li key={p.key}>
+            <span className="aj-name">
+              {PLATFORM_LOGOS[p.key]
+                ? <img src={PLATFORM_LOGOS[p.key].src} alt="" width="18" height="18" />
+                : <i style={{ background: p.color }} />}
+              {p.label}
+            </span>
+            <span className="aj-track progress"><span className="aj-fill" style={{ width: `${((p.value || 0) / max) * 100}%`, animationDelay: `${i * 0.08}s` }} /></span>
+            <span className="aj-val"><AnimatedCounter target={p.value} /></span>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
-
-const s = {
-  section: { maxWidth: 1400, margin: '0 auto', padding: '40px 48px 80px', position: 'relative', zIndex: 2 },
-  kicker: { display: 'inline-flex', alignItems: 'center', gap: 9, fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.16em', color: '#6a6a82' },
-  sub: { fontFamily: "'Instrument Serif', serif", fontStyle: 'italic', fontSize: 16, color: '#8a8aa0', marginTop: 12, maxWidth: 620 },
-  totalCell: { position: 'relative', padding: '34px 30px', display: 'flex', flexDirection: 'column', justifyContent: 'center' },
-  liveTag: { display: 'inline-flex', alignItems: 'center', gap: 6, fontFamily: "'JetBrains Mono', monospace", fontSize: 9, letterSpacing: '0.14em', color: '#00d4ff', marginBottom: 14 },
-  liveDot: { width: 5, height: 5, borderRadius: '50%', background: '#00d4ff' },
-  totalNum: { fontFamily: "'Instrument Serif', serif", fontSize: 76, lineHeight: 0.95, color: '#eef0f6', fontVariantNumeric: 'tabular-nums' },
-  totalLabel: { fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#7a7a92', marginTop: 12 },
-  repoLink: { display: 'inline-flex', alignItems: 'center', gap: 5, marginTop: 20, fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: '#00d4ff' },
-  barsCell: { padding: '34px 34px', display: 'flex', flexDirection: 'column', justifyContent: 'center' },
-  barRow: {},
-  barHead: { display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 9 },
-  barLabel: { display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: "'Instrument Sans', sans-serif", fontSize: 14, color: '#c4c4d4' },
-  barDot: { width: 7, height: 7, borderRadius: '50%' },
-  barValue: { fontFamily: "'JetBrains Mono', monospace", fontSize: 16, fontWeight: 600, fontVariantNumeric: 'tabular-nums' },
-  barTrack: { height: 8, background: '#14141f', borderRadius: 4, overflow: 'hidden' },
-};
