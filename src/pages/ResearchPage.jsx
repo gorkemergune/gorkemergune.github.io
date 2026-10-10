@@ -1,188 +1,64 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowLeft, Beaker, AlertCircle, FileText, Check, Loader, Github, ChevronDown } from 'lucide-react';
+import { useCallback, useEffect, useRef } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
+import { AlertCircle, ArrowLeft } from 'lucide-react';
 import { useLang } from '../i18n.jsx';
 import { useSeo } from '../hooks/useSeo';
+import TwoTone from '../components/TwoTone';
+import ResearchShelves from '../components/library/ResearchShelves';
+import ResearchDossier from '../components/library/ResearchDossier';
 
+// /research — the research library. The bookcase (ResearchShelves) holds one
+// dossier per entry of i18n `researchItems`, in their order: shelf 1 = items
+// 1–3, shelf 2 = items 4–5 + a reserved compartment. ?r=<n> (1-based) opens a
+// dossier, so it can be shared, survives refresh, and closes with Back.
 export default function ResearchPage() {
   const { t } = useLang();
-  const items = t('researchItems');
+  const raw = t('researchItems');
+  const items = Array.isArray(raw) ? raw : [];
+  const [params, setParams] = useSearchParams();
+  const r = Number(params.get('r'));
+  const openIndex = Number.isInteger(r) && r >= 1 && r <= items.length ? r - 1 : -1;
+  const lastTrigger = useRef(null);
   useSeo({ title: t('researchLabel'), description: t('researchSub'), path: '/research' });
 
+  const open = (i) => { lastTrigger.current = document.activeElement; setParams({ r: String(i + 1) }); };
+  const close = useCallback(() => {
+    setParams({}, { replace: false });
+    // Return focus to the dossier that opened it.
+    requestAnimationFrame(() => lastTrigger.current?.focus?.());
+  }, [setParams]);
+
+  useEffect(() => { if (params.get('r') && openIndex === -1) setParams({}, { replace: true }); }, [params, openIndex, setParams]);
+
   return (
-    <div style={s.container}>
+    <div className="rl">
       <style>{`
-        .rs-card { transition: border-color 0.4s, box-shadow 0.4s, transform 0.4s cubic-bezier(0.2,0.8,0.2,1); }
-        .rs-card:hover { transform: translateY(-3px); }
-        .rs-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-        .rs-gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
-        .rs-table-wrap { overflow-x: auto; }
-        .rs-head { display: block; width: 100%; padding: 0; margin: 0; border: none; background: none; text-align: left; color: inherit; font: inherit; cursor: pointer; }
-        .rs-head:focus-visible { outline: 1px solid #00d4ff; outline-offset: 6px; border-radius: 4px; }
-        .rs-clamp { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-        .rs-chev { transition: transform 0.35s cubic-bezier(0.2,0.8,0.2,1); }
-        .rs-chev.open { transform: rotate(180deg); }
-        .rs-body { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows 0.45s cubic-bezier(0.2,0.8,0.2,1), opacity 0.35s ease; }
-        .rs-body.open { grid-template-rows: 1fr; opacity: 1; }
-        .rs-body-inner { overflow: hidden; min-height: 0; }
-        @media (prefers-reduced-motion: reduce) { .rs-body, .rs-chev { transition: none; } }
-        @media (max-width: 720px) { .rs-cols { grid-template-columns: 1fr !important; } .rs-gallery { grid-template-columns: repeat(2, 1fr) !important; } }
-        @media (max-width: 600px) { .rs-card { padding: 24px 20px !important; } }
+        .rl-wrap { padding-top: 48px; padding-bottom: 120px; }
+        .rl-back { display: flex; width: fit-content; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; color: #aab2bf; }
+        .rl-head { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: 24px 56px; align-items: end; margin: 32px 0 40px; }
+        .rl-head h1 { font-family: var(--font-display); font-weight: 500; font-size: clamp(42px, 5vw, 76px); line-height: 1; letter-spacing: -0.03em; color: var(--c-ink); margin-top: 18px; }
+        .rl-head p { font-family: var(--font-body); font-size: 16px; line-height: 1.65; color: #c3c9d4; }
+        .rl-note { display: flex; gap: 10px; margin-top: 16px; padding: 12px 14px; border-left: 2px solid var(--c-tertiary); background: rgba(245,158,11,0.06); font-family: var(--font-body); font-size: 13px; line-height: 1.55; color: #d8c9a8; }
+        @media (max-width: 900px) { .rl-head { grid-template-columns: 1fr; } }
       `}</style>
 
-      <Link to="/" className="link-hover" style={s.back}>
-        <ArrowLeft size={16} strokeWidth={1.5} /> {t('researchBack')}
-      </Link>
+      <div className="ds-wrap rl-wrap">
+        <Link to="/" className="link-hover rl-back"><ArrowLeft size={16} strokeWidth={1.5} /> {t('researchBack')}</Link>
+        <header className="rl-head">
+          <div>
+            <div className="ds-kicker">{t('libKicker')} · {String(items.length).padStart(2, '0')}</div>
+            <h1><TwoTone text={t('researchLabel')} /></h1>
+          </div>
+          <div>
+            <p>{t('researchSub')}</p>
+            <div className="rl-note"><AlertCircle size={15} strokeWidth={1.6} style={{ color: 'var(--c-tertiary)', flexShrink: 0, marginTop: 2 }} /><span>{t('researchDisclaimer')}</span></div>
+          </div>
+        </header>
 
-      <div style={s.header}>
-        <span className="chip">{t('researchBadge')}</span>
-        <h1 className="section-title" style={s.title}>{t('researchLabel')}</h1>
-        <p style={s.desc}>{t('researchSub')}</p>
+        <ResearchShelves items={items} onOpen={open} />
       </div>
 
-      <div style={s.disclaimer}>
-        <AlertCircle size={16} strokeWidth={1.6} style={{ color: '#ffd166', flexShrink: 0, marginTop: 2 }} />
-        <span>{t('researchDisclaimer')}</span>
-      </div>
-
-      <div style={s.list}>
-        {Array.isArray(items) && items.map((it, i) => <ResearchCard key={it.title} it={it} index={i} />)}
-      </div>
+      {openIndex >= 0 && <ResearchDossier it={items[openIndex]} onClose={close} />}
     </div>
   );
 }
-
-function ResearchCard({ it, index }) {
-  const { t } = useLang();
-  const [open, setOpen] = useState(false);
-  const done = it.status === 'completed';
-  const c = done ? '#00e5a0' : '#ffb454';
-
-  return (
-    <article
-      className="rs-card reveal"
-      style={{ ...s.card, animationDelay: `${index * 0.08}s` }}
-      onMouseEnter={(e) => { e.currentTarget.style.borderColor = `${it.accent}66`; e.currentTarget.style.boxShadow = `0 0 30px ${it.accent}22`; }}
-      onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#1a1a2e'; e.currentTarget.style.boxShadow = 'none'; }}
-    >
-      <button type="button" className="rs-head" onClick={() => setOpen((o) => !o)} aria-expanded={open}>
-        <div style={s.cardTop}>
-          <span style={{ ...s.field, color: it.accent }}><Beaker size={12} strokeWidth={1.6} /> {it.field}</span>
-          <span style={{ ...s.status, color: c, borderColor: `${c}4d`, background: `${c}14` }}>
-            {done ? <Check size={10} strokeWidth={2.6} /> : <Loader size={10} strokeWidth={2} />}
-            {done ? t('researchCompleted') : t('researchStatus')}
-          </span>
-        </div>
-        <h3 style={s.rtitle}>{it.title}</h3>
-        {it.abstract && <p className={open ? undefined : 'rs-clamp'} style={s.abstract}>{it.abstract}</p>}
-        <span style={{ ...s.toggle, color: open ? '#e0e0e8' : '#9a9ab0' }}>
-          {open ? t('researchHide') : t('researchShow')}
-          <ChevronDown className={`rs-chev${open ? ' open' : ''}`} size={13} strokeWidth={1.8} />
-        </span>
-      </button>
-
-      <div className={`rs-body${open ? ' open' : ''}`} aria-hidden={!open}>
-        <div className="rs-body-inner">
-          {Array.isArray(it.methods) && it.methods.length > 0 && (
-            <div className="rs-cols" style={{ marginTop: 26 }}>
-              <div>
-                <div style={{ ...s.subLabel, color: it.accent }}>{t('researchMethods')}</div>
-                <ul style={s.ul}>
-                  {it.methods.map((m, j) => <li key={j} style={s.li}><span style={{ ...s.bullet, background: it.accent }} />{m}</li>)}
-                </ul>
-              </div>
-              <div>
-                <div style={{ ...s.subLabel, color: it.accent }}>{done ? t('researchOutcomes') : t('researchExpected')}</div>
-                <p style={s.expected}>{it.expected}</p>
-              </div>
-            </div>
-          )}
-
-          {it.results && (
-            <div style={{ marginTop: 26 }}>
-              <div style={{ ...s.subLabel, color: it.accent }}>{t('researchResults')}</div>
-              <div className="rs-table-wrap">
-                <table style={s.table}>
-                  <thead>
-                    <tr>{it.results.columns.map((col, j) => <th key={j} style={{ ...s.th, textAlign: j ? 'right' : 'left' }}>{col}</th>)}</tr>
-                  </thead>
-                  <tbody>
-                    {it.results.rows.map((r, j) => (
-                      <tr key={j}>{r.map((cell, k) => <td key={k} style={{ ...s.td, textAlign: k ? 'right' : 'left', color: k ? '#e0e0e8' : '#a2a2b8' }}>{cell}</td>)}</tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-              {it.results.caption && <p style={s.caption}>{it.results.caption}</p>}
-            </div>
-          )}
-
-          {Array.isArray(it.findings) && it.findings.length > 0 && (
-            <div style={{ marginTop: 24 }}>
-              <div style={{ ...s.subLabel, color: it.accent }}>{t('researchFindings')}</div>
-              <ul style={s.ul}>
-                {it.findings.map((m, j) => <li key={j} style={s.li}><span style={{ ...s.bullet, background: it.accent }} />{m}</li>)}
-              </ul>
-            </div>
-          )}
-
-          {Array.isArray(it.images) && it.images.length > 0 && (
-            <div style={{ marginTop: 26 }}>
-              <div className="rs-gallery">
-                {it.images.map((im) => (
-                  <figure key={im.src} style={s.figure}>
-                    <img src={im.src} alt={im.caption} loading="lazy" style={s.img} />
-                    <figcaption style={s.figcap}>{im.caption}</figcaption>
-                  </figure>
-                ))}
-              </div>
-              {it.imagesNote && <p style={s.caption}>{it.imagesNote}</p>}
-            </div>
-          )}
-
-          {it.repo && (
-            <a href={it.repo} target="_blank" rel="noopener noreferrer" className="link-hover" style={{ ...s.pdf, color: it.accent, marginRight: 22 }} tabIndex={open ? 0 : -1}>
-              <Github size={13} strokeWidth={1.5} /> {t('researchRepo')}
-            </a>
-          )}
-          {it.pdf && (
-            <a href={it.pdf} target="_blank" rel="noopener noreferrer" className="link-hover" style={{ ...s.pdf, color: it.accent }} tabIndex={open ? 0 : -1}>
-              <FileText size={13} strokeWidth={1.5} /> {t('researchPdf')}
-            </a>
-          )}
-        </div>
-      </div>
-    </article>
-  );
-}
-
-const s = {
-  container: { maxWidth: 900, margin: '0 auto', padding: '60px 48px 120px', position: 'relative', zIndex: 2 },
-  back: { display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: "'JetBrains Mono', monospace", fontSize: 12, letterSpacing: '0.06em', color: '#6a6a82', marginBottom: 56, cursor: 'pointer' },
-  header: { marginBottom: 28 },
-  title: { fontFamily: "'Instrument Serif', serif", fontSize: 72, fontWeight: 400, lineHeight: 0.95, letterSpacing: '-0.015em', color: '#eef0f6', marginTop: 20, marginBottom: 20 },
-  desc: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 18, lineHeight: 1.6, color: '#9a9ab0', maxWidth: 600 },
-  disclaimer: { display: 'flex', gap: 12, padding: '16px 20px', background: 'rgba(255,209,102,0.05)', border: '1px solid rgba(255,209,102,0.2)', borderRadius: 8, marginBottom: 44, fontFamily: "'Instrument Sans', sans-serif", fontSize: 14, lineHeight: 1.6, color: '#c8c0a0' },
-  list: { display: 'flex', flexDirection: 'column', gap: 22 },
-  card: { padding: '26px 32px', border: '1px solid #1a1a2e', borderRadius: 12, background: 'linear-gradient(180deg,#0f0f1a,#0b0b13)' },
-  cardTop: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12, marginBottom: 16, flexWrap: 'wrap' },
-  field: { display: 'inline-flex', alignItems: 'center', gap: 6, fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.1em' },
-  status: { display: 'inline-flex', alignItems: 'center', gap: 6, fontFamily: "'JetBrains Mono', monospace", fontSize: 9, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#00e5a0', padding: '4px 10px', border: '1px solid rgba(0,229,160,0.3)', borderRadius: 999, background: 'rgba(0,229,160,0.08)' },
-  statusDot: { width: 5, height: 5, borderRadius: '50%', background: '#00e5a0' },
-  rtitle: { fontFamily: "'Instrument Serif', serif", fontSize: 27, fontWeight: 400, lineHeight: 1.2, color: '#eef0f6', marginBottom: 14 },
-  toggle: { display: 'inline-flex', alignItems: 'center', gap: 8, marginTop: 16, fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.12em', textTransform: 'uppercase' },
-  abstract: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 15.5, lineHeight: 1.65, color: '#b4b4c6' },
-  subLabel: { fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 12 },
-  ul: { listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 9, padding: 0, margin: 0 },
-  li: { display: 'flex', alignItems: 'flex-start', gap: 10, fontFamily: "'Instrument Sans', sans-serif", fontSize: 14, lineHeight: 1.5, color: '#a2a2b8' },
-  bullet: { width: 5, height: 5, borderRadius: '50%', marginTop: 7, flexShrink: 0 },
-  expected: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 14, lineHeight: 1.6, color: '#a2a2b8' },
-  table: { width: '100%', borderCollapse: 'collapse', fontFamily: "'JetBrains Mono', monospace", fontSize: 12.5 },
-  th: { padding: '8px 10px', borderBottom: '1px solid #2a2a45', color: '#7a7a92', fontWeight: 400, fontSize: 10, letterSpacing: '0.1em', textTransform: 'uppercase', whiteSpace: 'nowrap' },
-  td: { padding: '10px 10px', borderBottom: '1px solid #1a1a2e', fontVariantNumeric: 'tabular-nums' },
-  caption: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 12.5, lineHeight: 1.55, color: '#6a6a82', marginTop: 10 },
-  figure: { margin: 0, border: '1px solid #1a1a2e', borderRadius: 10, overflow: 'hidden', background: '#0b0b13' },
-  img: { display: 'block', width: '100%', height: 'auto' },
-  figcap: { fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#7a7a92', padding: '8px 10px' },
-  pdf: { display: 'inline-flex', alignItems: 'center', gap: 7, marginTop: 22, fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.08em' },
-};
