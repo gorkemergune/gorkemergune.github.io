@@ -20,7 +20,7 @@
 
   <g>
     <rect x="60" y="60" width="12" height="12" fill="#a06bff"/>
-    <text x="84" y="71" font-family="'JetBrains Mono', monospace" font-size="14" fill="#a06bff" letter-spacing="4">MARK XIX · TWO FINE-TUNES</text>
+    <text x="84" y="71" font-family="'JetBrains Mono', monospace" font-size="14" fill="#a06bff" letter-spacing="4">MARK II · TWO FINE-TUNES</text>
     <text x="58" y="126" font-family="Georgia, 'Times New Roman', serif" font-size="44" fill="#eef0f6" letter-spacing="-1">ayarlicazhocam-training</text>
     <text x="61" y="160" font-family="'Inter', system-ui, sans-serif" font-size="17" fill="#8a8aa0">A broken v1 on Llama, fixed into a thinking, tool-calling v2 on Gemma-4</text>
   </g>

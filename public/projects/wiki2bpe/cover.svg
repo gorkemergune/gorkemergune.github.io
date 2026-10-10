@@ -41,7 +41,7 @@
 
   <g>
     <rect x="60" y="70" width="12" height="12" fill="#2ec4b6"/>
-    <text x="84" y="81" font-family="'JetBrains Mono', monospace" font-size="15" fill="#2ec4b6" letter-spacing="4">MARK XVIII</text>
+    <text x="84" y="81" font-family="'JetBrains Mono', monospace" font-size="15" fill="#2ec4b6" letter-spacing="4">MARK XIV</text>
     <text x="60" y="128" font-family="'JetBrains Mono', monospace" font-size="14" fill="rgba(46,196,182,0.85)" letter-spacing="6">WIKI FORGE</text>
     <text x="58" y="206" font-family="Georgia, 'Times New Roman', serif" font-size="52" fill="#eef0f6" letter-spacing="-1">wiki2bpe</text>
     <text x="61" y="250" font-family="'Inter', system-ui, sans-serif" font-size="20" fill="#8a8aa0" letter-spacing="1">Wikipedia → byte-level BPE → Hugging Face Hub</text>

@@ -42,7 +42,7 @@
 
   <g>
     <rect x="60" y="70" width="12" height="12" fill="#00d4ff"/>
-    <text x="84" y="81" font-family="'JetBrains Mono', monospace" font-size="15" fill="#00d4ff" letter-spacing="4">MARK VII</text>
+    <text x="84" y="81" font-family="'JetBrains Mono', monospace" font-size="15" fill="#00d4ff" letter-spacing="4">MARK X</text>
     <text x="60" y="128" font-family="'JetBrains Mono', monospace" font-size="14" fill="rgba(0,212,255,0.85)" letter-spacing="6">THE SENTRY</text>
     <text x="58" y="206" font-family="Georgia, 'Times New Roman', serif" font-size="52" fill="#eef0f6" letter-spacing="-1">Face Detection</text>
     <text x="61" y="250" font-family="'Inter', system-ui, sans-serif" font-size="20" fill="#8a8aa0" letter-spacing="1">Two-Stage Detect &amp; Verify</text>

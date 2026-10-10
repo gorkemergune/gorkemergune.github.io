@@ -41,7 +41,7 @@
 
   <g>
     <rect x="60" y="70" width="12" height="12" fill="#c0c8d4"/>
-    <text x="84" y="81" font-family="'JetBrains Mono', monospace" font-size="15" fill="#c0c8d4" letter-spacing="4">MARK II</text>
+    <text x="84" y="81" font-family="'JetBrains Mono', monospace" font-size="15" fill="#c0c8d4" letter-spacing="4">MARK XXIV</text>
     <text x="60" y="128" font-family="'JetBrains Mono', monospace" font-size="14" fill="rgba(192,200,212,0.85)" letter-spacing="6">STAR FIGHTER</text>
     <text x="58" y="206" font-family="Georgia, 'Times New Roman', serif" font-size="60" fill="#eef0f6" letter-spacing="-1">Space Shooter</text>
     <text x="61" y="250" font-family="'Inter', system-ui, sans-serif" font-size="20" fill="#8a8aa0" letter-spacing="1">Wave-Based 2D Shooter in C</text>
