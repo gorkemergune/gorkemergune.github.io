@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo, useRef, useEffect } from 'react';
 import { useLang } from '../i18n.jsx';
 
 const BALL_COLORS = [
@@ -53,12 +53,16 @@ export default function AlgorithmPuzzle() {
     return min;
   }, [remainingBalls]);
 
+  const animTimer = useRef(null);
+  useEffect(() => () => clearTimeout(animTimer.current), []);
+
   const handleBallClick = useCallback((ball) => {
     if (gameOver) return;
     if (!remaining.has(ball.id)) return;
 
     setAnimId(ball.id);
-    setTimeout(() => setAnimId(null), 300);
+    clearTimeout(animTimer.current);
+    animTimer.current = setTimeout(() => setAnimId(null), 300);
 
     if (mode === 'compare') {
       if (selected === null) {
@@ -300,7 +304,7 @@ export default function AlgorithmPuzzle() {
 const p = {
   wrap: { marginTop: 8 },
   intro: {
-    fontFamily: "'Instrument Sans', sans-serif",
+    fontFamily: "var(--font-body)",
     fontSize: 16, lineHeight: 1.7, color: '#4a4a48',
     maxWidth: 600, marginBottom: 40,
   },
@@ -311,18 +315,18 @@ const p = {
     display: 'flex', flexDirection: 'column', gap: 6,
   },
   statLabel: {
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: "var(--font-mono)",
     fontSize: 10, letterSpacing: '0.12em', color: '#8a8a86',
   },
   statValue: {
-    fontFamily: "'Instrument Serif', serif",
+    fontFamily: "var(--font-display)",
     fontSize: 28, fontWeight: 400, lineHeight: 1, color: '#1a1a1a',
   },
   modeRow: {
     display: 'flex', gap: 8, marginBottom: 32,
   },
   modeBtn: {
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: "var(--font-mono)",
     fontSize: 12, letterSpacing: '0.06em',
     padding: '8px 18px',
     border: '1px solid #d6d4cd', borderRadius: 4,
@@ -334,7 +338,7 @@ const p = {
     borderColor: '#1a1a1a',
   },
   sectionLabel: {
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: "var(--font-mono)",
     fontSize: 10, letterSpacing: '0.12em', color: '#8a8a86',
     textTransform: 'uppercase', display: 'block', marginBottom: 12,
   },
@@ -348,7 +352,7 @@ const p = {
     transition: 'transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s',
   },
   ballLabel: {
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: "var(--font-mono)",
     fontSize: 15, fontWeight: 600, color: '#fff',
     textShadow: '0 1px 2px rgba(0,0,0,0.3)',
   },
@@ -359,7 +363,7 @@ const p = {
     display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4,
   },
   sortedNum: {
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: "var(--font-mono)",
     fontSize: 9, color: '#8a8a86', letterSpacing: '0.08em',
   },
   sortedBall: {
@@ -367,7 +371,7 @@ const p = {
     display: 'flex', alignItems: 'center', justifyContent: 'center',
   },
   sortedVal: {
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: "var(--font-mono)",
     fontSize: 11, color: '#4a4a48', fontWeight: 600,
   },
   message: {
@@ -375,7 +379,7 @@ const p = {
     background: '#fafaf6', marginBottom: 28,
   },
   messageText: {
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: "var(--font-mono)",
     fontSize: 14, fontWeight: 500,
   },
   compLogRow: {
@@ -383,7 +387,7 @@ const p = {
   },
   compChip: {
     display: 'inline-flex', alignItems: 'center', gap: 5,
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: "var(--font-mono)",
     fontSize: 12, padding: '4px 10px',
     background: '#fafaf6', border: '1px solid #e2e0da',
     borderRadius: 4, color: '#4a4a48',
@@ -395,7 +399,7 @@ const p = {
     display: 'flex', gap: 12, marginTop: 8,
   },
   actionBtn: {
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: "var(--font-mono)",
     fontSize: 12, letterSpacing: '0.06em',
     padding: '10px 20px',
     border: '1px solid #d6d4cd', borderRadius: 4,
@@ -407,11 +411,11 @@ const p = {
     background: '#fafaf6', border: '1px solid #e2e0da', borderRadius: 4,
   },
   explainTitle: {
-    fontFamily: "'Instrument Serif', serif",
+    fontFamily: "var(--font-display)",
     fontSize: 20, color: '#1a1a1a', marginBottom: 16,
   },
   explainText: {
-    fontFamily: "'Instrument Sans', sans-serif",
+    fontFamily: "var(--font-body)",
     fontSize: 14, lineHeight: 1.7, color: '#4a4a48', marginBottom: 8,
   },
 };

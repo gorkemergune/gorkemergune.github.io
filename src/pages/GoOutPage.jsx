@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { useLang } from '../i18n.jsx';
@@ -38,6 +38,10 @@ export default function GoOutPage() {
   const [noGone, setNoGone] = useState(false);
   const [noPos, setNoPos] = useState({ x: 0, y: 0 });
 
+  // Cleared on unmount so leaving mid-animation does not update a dead page.
+  const goneTimer = useRef(null);
+  useEffect(() => () => clearTimeout(goneTimer.current), []);
+
   const handleNo = () => {
     const next = noCount + 1;
     setNoCount(next);
@@ -45,7 +49,8 @@ export default function GoOutPage() {
 
     if (next >= 5) {
       setNoFlying(true);
-      setTimeout(() => setNoGone(true), 1500);
+      clearTimeout(goneTimer.current);
+      goneTimer.current = setTimeout(() => setNoGone(true), 1500);
     } else {
       setNoPos({
         x: (Math.random() - 0.5) * 200,
@@ -161,35 +166,35 @@ export default function GoOutPage() {
 
 const s = {
   container: { maxWidth: 900, margin: '0 auto', padding: '60px 48px 120px', position: 'relative', zIndex: 2 },
-  back: { display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: "'JetBrains Mono', monospace", fontSize: 12, letterSpacing: '0.06em', color: '#6b6a66', marginBottom: 60, cursor: 'pointer' },
+  back: { display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: "var(--font-mono)", fontSize: 12, letterSpacing: '0.06em', color: '#6b6a66', marginBottom: 60, cursor: 'pointer' },
   center: { display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', marginTop: 20 },
   sceneCard: {
     width: 240, height: 200, borderRadius: 12, border: '1px solid #e2e0da',
     display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
     gap: 12, marginBottom: 32, transition: 'background 0.4s',
   },
-  sadText: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 15, color: '#4a4a48', fontStyle: 'italic', padding: '0 16px' },
-  title: { fontFamily: "'Instrument Serif', serif", fontSize: 56, fontWeight: 400, lineHeight: 1, letterSpacing: '-0.015em', color: '#1a1a1a', marginBottom: 12 },
-  sub: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 22, color: '#4a4a48', marginBottom: 40 },
+  sadText: { fontFamily: "var(--font-body)", fontSize: 15, color: '#4a4a48', fontStyle: 'italic', padding: '0 16px' },
+  title: { fontFamily: "var(--font-display)", fontSize: 56, fontWeight: 400, lineHeight: 1, letterSpacing: '-0.015em', color: '#1a1a1a', marginBottom: 12 },
+  sub: { fontFamily: "var(--font-body)", fontSize: 22, color: '#4a4a48', marginBottom: 40 },
   btnRow: { display: 'flex', alignItems: 'center', gap: 20, flexWrap: 'wrap', justifyContent: 'center', minHeight: 80 },
   yesBtn: {
-    fontFamily: "'Instrument Sans', sans-serif", fontWeight: 600,
+    fontFamily: "var(--font-body)", fontWeight: 600,
     background: '#1a1a1a', color: '#f4f3ef', border: 'none', borderRadius: 6,
     cursor: 'pointer', transition: 'all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1)',
     whiteSpace: 'nowrap',
   },
   noBtn: {
-    fontFamily: "'Instrument Sans', sans-serif", fontWeight: 500,
+    fontFamily: "var(--font-body)", fontWeight: 500,
     background: 'transparent', color: '#6b6a66',
     border: '1px solid #d6d4cd', borderRadius: 6, cursor: 'pointer',
     transition: 'all 0.3s ease', whiteSpace: 'nowrap',
   },
   noGoneText: {
-    marginTop: 20, fontFamily: "'Instrument Sans', sans-serif",
+    marginTop: 20, fontFamily: "var(--font-body)",
     fontSize: 15, color: '#6b6a66', fontStyle: 'italic',
   },
   yayWrap: { display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', marginTop: 60 },
   confetti: { fontSize: 32, marginBottom: 24, letterSpacing: 8 },
-  yayTitle: { fontFamily: "'Instrument Serif', serif", fontSize: 72, fontWeight: 400, color: '#1a1a1a', marginBottom: 16 },
-  yayText: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 22, color: '#4a4a48', lineHeight: 1.6 },
+  yayTitle: { fontFamily: "var(--font-display)", fontSize: 72, fontWeight: 400, color: '#1a1a1a', marginBottom: 16 },
+  yayText: { fontFamily: "var(--font-body)", fontSize: 22, color: '#4a4a48', lineHeight: 1.6 },
 };

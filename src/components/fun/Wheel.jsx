@@ -1,4 +1,4 @@
-import { forwardRef, useImperativeHandle, useRef, useState, useMemo, useCallback } from 'react';
+import { forwardRef, useImperativeHandle, useRef, useState, useMemo, useCallback, useEffect } from 'react';
 import { WHEEL_SLICES } from '../../data/wheelChallenges.js';
 import { prefersReducedMotion } from '../../utils/prefersReducedMotion.js';
 import Confetti from './Confetti.jsx';
@@ -15,7 +15,7 @@ const C = SIZE / 2;
 const R = 192;
 const LABEL_R = 148;
 const SLICE_DEG = 360 / WHEEL_SLICES; // 12°
-const PALETTE = ['#ff4d6d', '#f472b6', '#00d4ff', '#9d6bff', '#ffd166', '#00e5a0', '#4d96ff', '#ff9f1c'];
+const PALETTE = ['#ff4d6d', '#f472b6', '#00f0ff', '#9d6bff', '#ffd166', '#00e5a0', '#4d96ff', '#ff9f1c'];
 
 // Point on the rim at `deg` measured clockwise from the top (12 o'clock).
 function rim(deg, r = R) {
@@ -38,6 +38,8 @@ const Wheel = forwardRef(function Wheel({ onSpinStart, onLanded }, ref) {
 
   const rotationRef = useRef(0);
   const spinningRef = useRef(false);
+  const settleTimer = useRef(null);
+  useEffect(() => () => clearTimeout(settleTimer.current), []);
 
   const slices = useMemo(
     () =>
@@ -75,7 +77,7 @@ const Wheel = forwardRef(function Wheel({ onSpinStart, onLanded }, ref) {
 
     if (reduced) {
       // No transitionend reliably fires for ~instant changes; settle manually.
-      window.setTimeout(() => finish(target), 380);
+      settleTimer.current = window.setTimeout(() => finish(target), 380);
     }
   }, [onSpinStart]);
 
@@ -145,7 +147,7 @@ const Wheel = forwardRef(function Wheel({ onSpinStart, onLanded }, ref) {
                   y={s.label[1]}
                   fill={isLanded ? '#0b0b14' : '#e8e8f0'}
                   fontSize="13"
-                  fontFamily="'JetBrains Mono', monospace"
+                  style={{ fontFamily: 'var(--font-mono)' }}
                   fontWeight={isLanded ? 700 : 500}
                   textAnchor="middle"
                   dominantBaseline="central"
@@ -156,7 +158,7 @@ const Wheel = forwardRef(function Wheel({ onSpinStart, onLanded }, ref) {
               </g>
             );
           })}
-          <circle cx={C} cy={C} r={26} fill="#12121f" stroke="#2a2238" strokeWidth="2" />
+          <circle cx={C} cy={C} r={26} fill="#13161c" stroke="#2a2238" strokeWidth="2" />
           <circle cx={C} cy={C} r={7} fill="#ff4d6d" />
         </svg>
       </div>
