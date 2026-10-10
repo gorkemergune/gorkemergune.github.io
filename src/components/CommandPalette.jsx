@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, CornerDownLeft, Folder, BookOpen, Compass, FileText, Beaker, Trophy, GraduationCap, Smartphone } from 'lucide-react';
+import { Search, CornerDownLeft, Folder, BookOpen, Compass, FileText, Beaker, Trophy, GraduationCap, Smartphone, Briefcase } from 'lucide-react';
 import { useLang } from '../i18n.jsx';
 import { FEATURES } from '../config';
 import PROJECTS from '../data/projects';
@@ -47,8 +47,8 @@ export default function CommandPalette() {
       { label: t('researchLabel'), sub: '/research', to: '/research', icon: Beaker, kind: 'page' },
       { label: t('articlesLabel'), sub: '/articles', to: '/articles', icon: FileText, kind: 'page' },
       { label: t('learningLabel'), sub: '/learning-path', to: '/learning-path', icon: GraduationCap, kind: 'page' },
+      { label: t('navExperience'), sub: '/experience', to: '/experience', icon: Briefcase, kind: 'page' },
       { label: t('appsLabel'), sub: '/apps', to: '/apps', icon: Smartphone, kind: 'page' },
-      { label: t('blogLabel'), sub: '/blog', to: '/blog', icon: BookOpen, kind: 'page' },
       ...(FEATURES.resume ? [{ label: t('navResume'), sub: '/resume', to: '/resume', icon: FileText, kind: 'page' }] : []),
       { label: t('contactLabel'), sub: '/contact', to: '/contact', icon: FileText, kind: 'page' },
       { label: t('funLabel'), sub: '/fun', to: '/fun', icon: Compass, kind: 'page' },
@@ -57,7 +57,7 @@ export default function CommandPalette() {
       label: p.title, sub: `${p.mark} · ${p.codename}`, to: `/project/${p.slug}`, icon: Folder, kind: 'project',
     }));
     const blog = Array.isArray(blogItems) ? blogItems.map((b) => ({
-      label: b.title, sub: b.category, to: `/blog/${b.slug}`, icon: BookOpen, kind: 'blog',
+      label: b.title, sub: `${t('bkWriteTitle')} · ${b.category}`, to: `/articles?book=write-${b.slug}`, icon: BookOpen, kind: 'blog',
     })) : [];
     return [...pages, ...projects, ...blog];
   }, [t, blogItems]);
@@ -89,7 +89,7 @@ export default function CommandPalette() {
     <div style={s.overlay} onClick={() => setOpen(false)} role="dialog" aria-modal="true" aria-label="Command palette">
       <div style={s.panel} onClick={(e) => e.stopPropagation()}>
         <div style={s.inputRow}>
-          <Search size={18} strokeWidth={1.6} style={{ color: '#00d4ff', flexShrink: 0 }} />
+          <Search size={18} strokeWidth={1.6} style={{ color: '#00f0ff', flexShrink: 0 }} />
           <input
             ref={inputRef}
             value={q}
@@ -114,10 +114,10 @@ export default function CommandPalette() {
                 onClick={() => go(it)}
                 style={{ ...s.item, ...(on ? s.itemActive : null) }}
               >
-                <Icon size={15} strokeWidth={1.6} style={{ color: on ? '#00d4ff' : '#6a6a82', flexShrink: 0 }} />
+                <Icon size={15} strokeWidth={1.6} style={{ color: on ? '#00f0ff' : '#6b7280', flexShrink: 0 }} />
                 <span style={s.itemLabel}>{it.label}</span>
                 <span style={s.itemSub}>{it.sub}</span>
-                {on && <CornerDownLeft size={13} strokeWidth={1.6} style={{ color: '#00d4ff', marginLeft: 8 }} />}
+                {on && <CornerDownLeft size={13} strokeWidth={1.6} style={{ color: '#00f0ff', marginLeft: 8 }} />}
               </button>
             );
           })}
@@ -134,16 +134,16 @@ export default function CommandPalette() {
 
 const s = {
   overlay: { position: 'fixed', inset: 0, zIndex: 300, background: 'rgba(6,6,12,0.7)', backdropFilter: 'blur(6px)', WebkitBackdropFilter: 'blur(6px)', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', paddingTop: '12vh' },
-  panel: { width: 'min(600px, calc(100vw - 32px))', background: '#0d0d16', border: '1px solid #26263a', borderRadius: 14, overflow: 'hidden', boxShadow: '0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(0,212,255,0.05)' },
-  inputRow: { display: 'flex', alignItems: 'center', gap: 12, padding: '18px 20px', borderBottom: '1px solid #1a1a2e' },
-  input: { flex: 1, background: 'transparent', border: 'none', outline: 'none', color: '#eef0f6', fontFamily: "'Instrument Sans', sans-serif", fontSize: 17 },
-  kbd: { fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.1em', color: '#6a6a82', border: '1px solid #26263a', borderRadius: 5, padding: '3px 7px' },
+  panel: { width: 'min(600px, calc(100vw - 32px))', background: '#0e1015', border: '1px solid #26263a', borderRadius: 14, overflow: 'hidden', boxShadow: '0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(0,240,255,0.05)' },
+  inputRow: { display: 'flex', alignItems: 'center', gap: 12, padding: '18px 20px', borderBottom: '1px solid #1e222b' },
+  input: { flex: 1, background: 'transparent', border: 'none', outline: 'none', color: '#eef0f6', fontFamily: "var(--font-body)", fontSize: 17 },
+  kbd: { fontFamily: "var(--font-mono)", fontSize: 10, letterSpacing: '0.1em', color: '#6b7280', border: '1px solid #26263a', borderRadius: 5, padding: '3px 7px' },
   list: { maxHeight: '48vh', overflowY: 'auto', padding: 8 },
-  empty: { padding: '24px', textAlign: 'center', fontFamily: "'Instrument Sans', sans-serif", fontSize: 14, color: '#6a6a82' },
+  empty: { padding: '24px', textAlign: 'center', fontFamily: "var(--font-body)", fontSize: 14, color: '#6b7280' },
   item: { display: 'flex', alignItems: 'center', gap: 12, width: '100%', padding: '11px 12px', background: 'transparent', border: 'none', borderRadius: 8, cursor: 'pointer', textAlign: 'left' },
-  itemActive: { background: 'rgba(0,212,255,0.08)' },
-  itemLabel: { fontFamily: "'Instrument Sans', sans-serif", fontSize: 14.5, color: '#e6e6f0' },
-  itemSub: { fontFamily: "'JetBrains Mono', monospace", fontSize: 10.5, color: '#6a6a82', marginLeft: 'auto', whiteSpace: 'nowrap' },
-  footer: { display: 'flex', alignItems: 'center', gap: 18, padding: '12px 18px', borderTop: '1px solid #1a1a2e', fontFamily: "'JetBrains Mono', monospace", fontSize: 10, color: '#6a6a82' },
-  kbdSm: { display: 'inline-block', border: '1px solid #26263a', borderRadius: 4, padding: '1px 5px', marginRight: 3, color: '#8a8aa0' },
+  itemActive: { background: 'rgba(0,240,255,0.08)' },
+  itemLabel: { fontFamily: "var(--font-body)", fontSize: 14.5, color: '#e6e6f0' },
+  itemSub: { fontFamily: "var(--font-mono)", fontSize: 10.5, color: '#6b7280', marginLeft: 'auto', whiteSpace: 'nowrap' },
+  footer: { display: 'flex', alignItems: 'center', gap: 18, padding: '12px 18px', borderTop: '1px solid #1e222b', fontFamily: "var(--font-mono)", fontSize: 10, color: '#6b7280' },
+  kbdSm: { display: 'inline-block', border: '1px solid #26263a', borderRadius: 4, padding: '1px 5px', marginRight: 3, color: '#8b929e' },
 };
