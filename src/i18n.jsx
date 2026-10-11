@@ -59,6 +59,20 @@ const en = {
   exArticles: 'Articles', exPath: 'Path', exApps: 'Apps', exContact: 'Contact',
   exUProjects: 'MARKs in the Hall', exURoles: 'roles · current first', exUComps: 'hackathons & contests', exUResearch: 'studies on the shelves',
   exUBooks: 'books · read & written', exUStages: 'stages on the trail', exUApps: 'shipped apps', exUContact: 'Email · LinkedIn · GitHub',
+  alKicker: 'Problem solving',
+  alTitle: 'Algorithms & |Problem Solving',
+  alSub: 'Every problem I solve is committed to my algorithms repository; the counts here are read from that repository’s README.',
+  alTotal: 'problems solved',
+  alPlatforms: 'platforms',
+  alContests: '+ contest practice',
+  alLanguages: 'languages',
+  alByPlatform: 'By platform',
+  alByLang: 'By language',
+  alCompetitive: 'Contest practice',
+  alSrcLive: 'Live · read from the repository just now',
+  alSrcCache: 'From the repository · cached in this browser',
+  alSrcSnap: 'Snapshot · verified against the repository on 11 Oct 2026',
+  alRepo: 'Open the algorithms repository',
   showKicker: 'Selected projects',
   showTitle: 'From the Hall |of Armor',
   showAll: 'Open the Full Armory',
@@ -588,7 +602,7 @@ const en = {
   expSub: 'Product development, internships and research roles, current positions first. The full timeline, with education, is on the Experience page.',
   expItems: [
     {
-      org: 'Iceberg X R&D', group: 'internship', icon: 'lab', role: 'AI Research Intern', period: '2026', type: 'Internship', accent: '#38bdf8',
+      org: 'Iceberg Digital — R&D', group: 'internship', icon: 'lab', role: 'AI Research Intern', period: '2026', type: 'Internship', accent: '#38bdf8',
       summary: 'Applied-AI research internship: finished the Neuron AI feature study, now on a property-search frontend study.',
       points: [
         'Reviewed 21 live estate-agent sites with a team of four and turned the gaps into a platform-level AI proposal.',
@@ -754,7 +768,7 @@ const en = {
     },
     {
       title: 'Property Search With Map & Filters',
-      field: 'Frontend · Maps · Iceberg X R&D', accent: '#34d399', status: 'in-progress', cover: '/media/research/property-search.webp', coverKind: 'concept-mock',
+      field: 'Frontend · Maps · Iceberg Digital — R&D', accent: '#34d399', status: 'in-progress', cover: '/media/research/property-search.webp', coverKind: 'concept-mock',
       abstract: 'An internship research mission ahead of a frontend proof of concept: a property search page where filters drive a card list and an interactive map, and selecting a card highlights its marker and vice versa. Before writing any code, the team took apart how the big portals actually build this.',
       methods: [
         'Seven portals examined: Rightmove, Zoopla, OnTheMarket, Zillow, Airbnb, OpenRent, Sahibinden; my share was Airbnb, Sahibinden, Leaflet and react-leaflet',
@@ -767,7 +781,7 @@ const en = {
     },
     {
       title: 'Neuron AI Feature Research',
-      field: 'Applied AI · Iceberg X R&D', accent: '#38bdf8', status: 'completed', cover: '/media/research/neuron-ai.webp', coverKind: 'concept',
+      field: 'Applied AI · Iceberg Digital — R&D', accent: '#38bdf8', status: 'completed', cover: '/media/research/neuron-ai.webp', coverKind: 'concept',
       abstract: 'Neuron is a multi-tenant platform that runs UK estate-agent websites and calls itself an “AI Operating System for Estate Agents”. A team of four reviewed 21 of its live sites to find where AI would actually help, then turned the gaps into a product proposal.',
       methods: [
         '21 live sites reviewed across search, listing detail, valuation and contact, with the network tab open',
@@ -819,14 +833,11 @@ const en = {
   xpPhotoAlt: 'Görkem Ergüne',
   learningBack: 'Home',
   learningBadge: 'Learning path',
-  learningNotesKicker: 'Trail notes',
-  learningNotesTitle: 'What each stretch |of the path covers',
   learningLabel: 'Learning Path',
   learningSub: 'The foundations I build on — languages and hardware I learn by working through, one repo at a time.',
   learningStatus: 'In Progress',
   learningCompleted: 'Completed',
   learningUpcoming: 'Upcoming',
-  learningTopics: 'What it covers',
   learningRepo: 'View repository',
 
   // Apps page
@@ -858,29 +869,21 @@ const en = {
     {
       title: 'C Foundations',
       field: 'Systems · C', accent: '#f5b301', status: 'completed',
-      abstract: 'My C course from the ground up — lecture notes, code, labs, and exam solutions from CSE 114 at Yeditepe. Where I first learned to think algorithmically, decompose problems, and debug real programs.',
-      topics: ['C11', 'Algorithmic thinking', 'Pointers & memory', 'Labs & homework', 'GCC / Clang'],
       repo: 'https://github.com/gorkemergune/c-foundations',
     },
     {
       title: 'C++ Foundations',
       field: 'Systems · C++', accent: '#a06bff', status: 'in-progress',
-      abstract: 'The C++ leg of the journey, picking up where C left off — lecture notes, worked examples, labs, and projects. Moving from procedural C into objects, templates, and the standard library.',
-      topics: ['C++11+', 'OOP', 'Templates & STL', 'Worked examples', 'g++ / clang++'],
       repo: 'https://github.com/gorkemergune/cpp-foundations',
     },
     {
       title: 'Arduino Sandbox',
       field: 'Embedded · Electronics', accent: '#34d399', status: 'in-progress',
-      abstract: 'Hands-on embedded experiments on an Arduino Uno R3 — progressing from blinking LEDs and buttons through sensors, displays, and motors up to integrated systems. Foundational electronics plus embedded C++.',
-      topics: ['Arduino Uno R3', 'Embedded C++', 'Sensors & displays', 'Motors', 'Arduino IDE 2.x'],
       repo: 'https://github.com/gorkemergune/ardunio-sandbox',
     },
     {
       title: 'Java Foundations',
       field: 'JVM · Java', accent: '#ff6b35', status: 'upcoming',
-      abstract: 'Next on the path. Java is coming — a dedicated foundations repo will follow the same shape as the C and C++ ones once I start the course.',
-      topics: ['Java', 'OOP', 'JVM', 'Coming soon'],
     },
   ],
 
@@ -919,6 +922,16 @@ const en = {
   compTBD: 'TBD',
   compVisit: 'Visit',
   compLeaderboard: 'Leaderboard',
+  compRecord: 'Competition record',
+  compEntries: 'entries',
+  compContests: 'contests & camps',
+  compHackathons: 'hackathons',
+  compSeasons: 'years active',
+  compGroupContests: 'Algorithm contests & camps',
+  compGroupHack: 'Hackathons',
+  compRound: 'Round',
+  compTop: 'Top',
+  compBuilt: 'What I built',
 
   // Life Flow (semester roadmap)
   // Blog detail content
@@ -1040,6 +1053,20 @@ const tr = {
   exArticles: 'Makaleler', exPath: 'Yol', exApps: 'Uygulamalar', exContact: 'İletişim',
   exUProjects: 'MARK, Zırh Deposu’nda', exURoles: 'rol · güncel olanlar önce', exUComps: 'hackathon ve yarışma', exUResearch: 'raflarda çalışma',
   exUBooks: 'kitap · okunan ve yazılan', exUStages: 'patikada aşama', exUApps: 'yayında uygulama', exUContact: 'E-posta · LinkedIn · GitHub',
+  alKicker: 'Problem çözme',
+  alTitle: 'Algoritmalar ve |Problem Çözme',
+  alSub: 'Çözdüğüm her problemi algoritma depoma commit’liyorum; buradaki sayılar o deponun README’sinden okunuyor.',
+  alTotal: 'çözülen problem',
+  alPlatforms: 'platform',
+  alContests: '+ yarışma pratiği',
+  alLanguages: 'dil',
+  alByPlatform: 'Platforma göre',
+  alByLang: 'Dile göre',
+  alCompetitive: 'Yarışma pratiği',
+  alSrcLive: 'Canlı · depodan az önce okundu',
+  alSrcCache: 'Depodan · bu tarayıcıda önbellekte',
+  alSrcSnap: 'Anlık görüntü · 11 Eki 2026’da depoyla doğrulandı',
+  alRepo: 'Algoritma deposunu aç',
   showKicker: 'Seçili projeler',
   showTitle: 'Zırh Deposu’ndan |seçmeler',
   showAll: 'Tüm Cephaneliği Aç',
@@ -1574,7 +1601,7 @@ const tr = {
   expSub: 'Ürün geliştirme, staj ve araştırma rolleri; güncel pozisyonlar önce. Eğitimle birlikte tam zaman çizelgesi Deneyim sayfasında.',
   expItems: [
     {
-      org: 'Iceberg X R&D', group: 'internship', icon: 'lab', role: 'Yapay Zekâ Araştırma Stajyeri', period: '2026', type: 'Staj', accent: '#38bdf8',
+      org: 'Iceberg Digital — Ar-Ge', group: 'internship', icon: 'lab', role: 'Yapay Zekâ Araştırma Stajyeri', period: '2026', type: 'Staj', accent: '#38bdf8',
       summary: 'Uygulamalı yapay zekâ araştırma stajı: Neuron yapay zekâ özellik araştırması tamamlandı, şimdi emlak arama arayüzü üzerine çalışıyorum.',
       points: [
         'Dört kişilik ekiple 21 canlı emlak sitesini inceledik ve bulunan boşlukları platform seviyesinde bir yapay zekâ önerisine çevirdik.',
@@ -1740,7 +1767,7 @@ const tr = {
     },
     {
       title: 'Harita ve Filtreli Emlak Arama',
-      field: 'Frontend · Harita · Iceberg X R&D', accent: '#34d399', status: 'in-progress', cover: '/media/research/property-search.webp', coverKind: 'concept-mock',
+      field: 'Frontend · Harita · Iceberg Digital — Ar-Ge', accent: '#34d399', status: 'in-progress', cover: '/media/research/property-search.webp', coverKind: 'concept-mock',
       abstract: 'Bir frontend prototipi öncesindeki staj araştırma görevi: filtrelerin hem ilan kartı listesini hem etkileşimli haritayı yönettiği, karta tıklayınca haritadaki işaretin, işarete tıklayınca da kartın vurgulandığı bir emlak arama sayfası. Tek satır kod yazmadan önce ekip olarak büyük portalların bunu gerçekte nasıl kurduğunu söktük.',
       methods: [
         'Yedi portal incelendi: Rightmove, Zoopla, OnTheMarket, Zillow, Airbnb, OpenRent, Sahibinden; bana düşenler Airbnb, Sahibinden, Leaflet ve react-leaflet',
@@ -1753,7 +1780,7 @@ const tr = {
     },
     {
       title: 'Neuron AI Özellik Araştırması',
-      field: 'Uygulamalı YZ · Iceberg X R&D', accent: '#38bdf8', status: 'completed', cover: '/media/research/neuron-ai.webp', coverKind: 'concept',
+      field: 'Uygulamalı YZ · Iceberg Digital — Ar-Ge', accent: '#38bdf8', status: 'completed', cover: '/media/research/neuron-ai.webp', coverKind: 'concept',
       abstract: 'Neuron, İngiltere’deki emlak ofislerinin sitelerini çalıştıran çok kiracılı bir platform ve kendini “AI Operating System for Estate Agents” diye tanıtıyor. Dört kişilik ekip olarak platformdaki 21 canlı siteyi inceledik, yapay zekânın gerçekten nerede işe yarayacağını aradık ve bulunan boşlukları bir ürün önerisine çevirdik.',
       methods: [
         '21 canlı site arama, ilan detayı, değerleme ve iletişim açısından, network sekmesi açık şekilde incelendi',
@@ -1805,14 +1832,11 @@ const tr = {
   xpPhotoAlt: 'Görkem Ergüne',
   learningBack: 'Ana Sayfa',
   learningBadge: 'Öğrenme yolu',
-  learningNotesKicker: 'Patika notları',
-  learningNotesTitle: 'Yolun her bölümü |neyi kapsıyor',
   learningLabel: 'Öğrenme Yolu',
   learningSub: 'Üzerine inşa ettiğim temeller — üzerinde çalışarak öğrendiğim diller ve donanım, her seferinde bir repo.',
   learningStatus: 'Devam Ediyor',
   learningCompleted: 'Tamamlandı',
   learningUpcoming: 'Yakında',
-  learningTopics: 'Neleri kapsıyor',
   learningRepo: 'Depoyu gör',
 
   // Apps page
@@ -1844,29 +1868,21 @@ const tr = {
     {
       title: 'C Temelleri',
       field: 'Sistem · C', accent: '#f5b301', status: 'completed',
-      abstract: 'C dersim sıfırdan — Yeditepe CSE 114’ten ders notları, kod, laboratuvarlar ve sınav çözümleri. Algoritmik düşünmeyi, problemleri parçalamayı ve gerçek programları hata ayıklamayı ilk burada öğrendim.',
-      topics: ['C11', 'Algoritmik düşünme', 'İşaretçiler & bellek', 'Lab & ödev', 'GCC / Clang'],
       repo: 'https://github.com/gorkemergune/c-foundations',
     },
     {
       title: 'C++ Temelleri',
       field: 'Sistem · C++', accent: '#a06bff', status: 'in-progress',
-      abstract: 'Yolculuğun C++ ayağı; C’nin bıraktığı yerden devam ediyor — ders notları, işlenmiş örnekler, laboratuvarlar ve projeler. Prosedürel C’den nesnelere, şablonlara ve standart kütüphaneye geçiş.',
-      topics: ['C++11+', 'OOP', 'Şablonlar & STL', 'İşlenmiş örnekler', 'g++ / clang++'],
       repo: 'https://github.com/gorkemergune/cpp-foundations',
     },
     {
       title: 'Arduino Sandbox',
       field: 'Gömülü · Elektronik', accent: '#34d399', status: 'in-progress',
-      abstract: 'Arduino Uno R3 üzerinde uygulamalı gömülü denemeler — yanıp sönen LED’ler ve butonlardan sensörlere, ekranlara, motorlara ve entegre sistemlere doğru ilerliyor. Temel elektronik artı gömülü C++.',
-      topics: ['Arduino Uno R3', 'Gömülü C++', 'Sensör & ekran', 'Motorlar', 'Arduino IDE 2.x'],
       repo: 'https://github.com/gorkemergune/ardunio-sandbox',
     },
     {
       title: 'Java Temelleri',
       field: 'JVM · Java', accent: '#ff6b35', status: 'upcoming',
-      abstract: 'Yolun bir sonraki durağı. Java geliyor — dersi almaya başlayınca, C ve C++ repolarıyla aynı biçimi izleyen özel bir temeller reposu gelecek.',
-      topics: ['Java', 'OOP', 'JVM', 'Yakında'],
     },
   ],
 
@@ -1904,7 +1920,17 @@ const tr = {
   compProject: 'Proje',
   compTBD: 'Yakında',
   compVisit: 'Git',
-  compLeaderboard: 'Sıralama',
+  compLeaderboard: 'Sıralama tablosu',
+  compRecord: 'Yarışma kaydı',
+  compEntries: 'kayıt',
+  compContests: 'yarışma ve kamp',
+  compHackathons: 'hackathon',
+  compSeasons: 'aktif yıllar',
+  compGroupContests: 'Algoritma yarışmaları ve kampları',
+  compGroupHack: 'Hackathonlar',
+  compRound: 'Tur',
+  compTop: 'İlk',
+  compBuilt: 'Geliştirdiğim',
 
   // Life Flow (semester roadmap)
   // Blog detail content

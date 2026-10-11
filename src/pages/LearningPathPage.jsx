@@ -1,8 +1,9 @@
-import { Link } from 'react-router-dom';
-import { ArrowLeft, Github, ArrowUpRight } from 'lucide-react';
+import { useEffect } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
+import { ArrowLeft, Github } from 'lucide-react';
 import { useLang } from '../i18n.jsx';
 import { useSeo } from '../hooks/useSeo';
-import TwoTone from '../components/TwoTone';
+import AlgorithmsSection from '../components/algorithms/AlgorithmsSection';
 
 // The learning path as a walk into a forest: a CC0 photograph of a road into
 // sunlit trees, with a drawn trail climbing from the foreground (where the
@@ -23,6 +24,14 @@ export default function LearningPathPage() {
   const items = t('learningItems');
   useSeo({ title: t('learningLabel'), description: t('learningSub'), path: '/learning-path' });
   const list = Array.isArray(items) ? items : [];
+  // ?focus=algorithms (the home teaser's link) brings the section into view.
+  const [params] = useSearchParams();
+  useEffect(() => {
+    if (params.get('focus') !== 'algorithms') return;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const id = requestAnimationFrame(() => document.getElementById('algorithms')?.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }));
+    return () => cancelAnimationFrame(id);
+  }, [params]);
 
   const statusOf = (it) => (it.status === 'completed' ? t('learningCompleted') : it.status === 'upcoming' ? t('learningUpcoming') : t('learningStatus'));
 
@@ -54,12 +63,6 @@ export default function LearningPathPage() {
         .lp-card .row { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 12px; }
         .upcoming > .lp-card { opacity: 0.85; }
 
-        .lp-notes { padding-top: 88px; padding-bottom: 120px; }
-        .lp-notes-grid { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid var(--c-line); border-left: 1px solid var(--c-line); margin-top: 40px; }
-        .lp-notes-grid > li { border-right: 1px solid var(--c-line); border-bottom: 1px solid var(--c-line); padding: 28px; }
-        .lp-notes-grid h3 { font-family: var(--font-display); font-weight: 500; font-size: 20px; color: var(--c-ink); margin-top: 10px; }
-        .lp-notes-grid p { font-family: var(--font-body); font-size: 14.5px; line-height: 1.65; color: var(--c-body); margin-top: 10px; }
-        .lp-topics { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
 
         .lp-mobile { display: none; }
         @media (max-width: 900px) {
@@ -73,9 +76,8 @@ export default function LearningPathPage() {
           .lp-mobile li:last-child { padding-bottom: 0; }
           .lp-mobile .lp-dot { position: absolute; left: -28px; top: 18px; }
           .lp-mobile .lp-card { position: static; transform: none; width: auto; }
-          .lp-notes-grid { grid-template-columns: 1fr; }
         }
-        @media (max-width: 600px) { .lp-notes-grid > li { padding: 22px 18px; } .lp-mobile { margin-top: 200px; } }
+        @media (max-width: 600px) { .lp-mobile { margin-top: 200px; } }
       `}</style>
 
       <section className="lp-forest" aria-labelledby="lp-title">
@@ -121,29 +123,9 @@ export default function LearningPathPage() {
         </ol>
       </section>
 
-      <section className="ds-wrap lp-notes" aria-labelledby="lp-notes">
-        <div className="ds-kicker">{t('learningNotesKicker')}</div>
-        <h2 id="lp-notes" className="ds-h2"><TwoTone text={t('learningNotesTitle')} /></h2>
-        <ol className="lp-notes-grid">
-          {list.map((it, i) => (
-            <li key={it.title}>
-              <div className="ds-meta">{String(i + 1).padStart(2, '0')} · {it.field} · {statusOf(it)}</div>
-              <h3>{it.title}</h3>
-              {it.abstract && <p>{it.abstract}</p>}
-              {Array.isArray(it.topics) && it.topics.length > 0 && (
-                <div className="lp-topics" aria-label={t('learningTopics')}>
-                  {it.topics.map((tp) => <span key={tp} className="label">{tp}</span>)}
-                </div>
-              )}
-              {it.repo && (
-                <a href={it.repo} target="_blank" rel="noopener noreferrer" className="ds-link" style={{ marginTop: 20 }}>
-                  <Github size={13} strokeWidth={1.5} /> {t('learningRepo')} <ArrowUpRight size={12} strokeWidth={1.5} />
-                </a>
-              )}
-            </li>
-          ))}
-        </ol>
-      </section>
+      {/* The page ends with the algorithm record (trail notes removed at release). */}
+      <AlgorithmsSection />
+
     </div>
   );
 }

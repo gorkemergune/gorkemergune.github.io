@@ -1,103 +1,102 @@
 // Competitions, hackathons, and competitive-programming camps.
-// Rank / score are only shown when publicly verifiable — otherwise a "TBD"
-// chip is displayed rather than inventing values. `logo` is the organiser's
-// official mark from public/orgs/ (see PORTFOLIO_RULES §9); `null` falls back
-// to the styled initials emblem — never a guessed logo.
+// Rank / score are only shown when publicly verifiable; when an entry has
+// neither, the page shows what was built instead — never a placeholder.
+// `logo` is the organiser's official mark from public/orgs/ (see
+// PORTFOLIO_RULES §9); `null` falls back to the styled initials emblem.
+//
+// Phase 8 cleanup: `summary` only says what the title, type, score, rank and
+// team do not already say (removed: "Scored 887 points — ranked 48th", "Solved
+// 6/10 — ranked 23rd of 92", "Finished in the top 10", "built during a
+// hackathon", camp blurbs that restated the type). `round` comes from the
+// public leaderboard each rank links to (the AlgoLeague results are the
+// camps' qualification rounds).
+//
+// score: { value, unit:{en,tr} } · rank: { value, of?, scope?:{en,tr} }
+// tags: string[] (technology names, untranslated) or { en: [], tr: [] }
+// Algorithm contests and camps carry exactly these two topics (release
+// decision); hackathons keep their own technology tags.
+const ALGO_TAGS = { en: ['Algorithms', 'Data Structures'], tr: ['Algoritmalar', 'Veri Yapıları'] };
+
 const COMPETITIONS = [
   {
     id: 'ieeextreme',
     name: 'IEEEXtreme 19.0',
     org: 'IEEE',
     date: 'Oct 25, 2025',
-    duration: '24 hours',
+    dateTr: '25 Eki 2025',
+    duration: { en: '24 hours', tr: '24 saat' },
     initials: 'IX',
     accent: '#00b3ff',
     logo: '/orgs/ieee.svg',
     type: { en: 'Algorithm Contest', tr: 'Algoritma Yarışması' },
-    score: '887 pts',
-    rank: 'Türkiye #48',
+    score: { value: '887', unit: { en: 'points', tr: 'puan' } },
+    rank: { value: '48', scope: { en: 'in Türkiye', tr: 'Türkiye’de' } },
     team: 'ayarlicazhocam',
-    tags: ['Algorithms', 'C++', '24h'],
+    tags: ALGO_TAGS,
     summary: {
-      en: 'The 19th edition of IEEE’s global 24-hour competitive-programming contest — teams worldwide solving algorithmic problems against the clock.',
-      tr: 'IEEE’nin küresel 24 saatlik competitive-programming yarışmasının 19. baskısı — dünya çapındaki takımlar zamana karşı algoritma problemleri çözer.',
-    },
-    achievements: {
-      en: ['Scored 887 points — ranked 48th in Turkey', '24-hour non-stop algorithm marathon as team ayarlicazhocam'],
-      tr: ['887 puan — Türkiye 48.’si', 'ayarlicazhocam takımıyla 24 saat kesintisiz algoritma maratonu'],
+      en: 'IEEE’s worldwide competitive-programming contest for student teams.',
+      tr: 'IEEE’nin öğrenci takımlarına yönelik dünya çapındaki competitive-programming yarışması.',
     },
     website: 'https://ieeextreme.org',
     leaderboard: 'https://ieeextreme.org/ieeextreme-19-0-ranking/',
-  },
-  {
-    id: 'algoleague-winter',
-    name: 'AlgoLeague Winter Camp',
-    org: 'AlgoLeague',
-    date: 'Jan 2026',
-    duration: null,
-    initials: 'AW',
-    accent: '#4d96ff',
-    logo: '/orgs/algoleague-mark.svg',
-    type: { en: 'Competitive Camp', tr: 'Yarışma Kampı' },
-    score: '6 / 10 solved',
-    rank: '23 / 92',
-    tags: ['Algorithms', 'Data Structures'],
-    summary: {
-      en: 'Intensive competitive-programming training camp — advanced algorithms and contest-style problem solving.',
-      tr: 'Yoğun competitive-programming eğitim kampı — ileri algoritmalar ve yarışma tarzı problem çözme.',
-    },
-    achievements: { en: ['Solved 6/10 problems — ranked 23rd of 92'], tr: ['10 sorudan 6’sını çözdüm — 92 kişi içinde 23.'] },
-    website: 'https://algoleague.com',
-    leaderboard: 'https://algoleague.com/contest/algorithm-competition-winter-camp-2026-qualification-round/leaderboard',
-  },
-  {
-    id: 'algoleague-spring',
-    name: 'AlgoLeague Spring Camp',
-    org: 'AlgoLeague',
-    date: 'Mar 2026',
-    duration: null,
-    initials: 'AS',
-    accent: '#00e5a0',
-    logo: '/orgs/algoleague-mark.svg',
-    type: { en: 'Competitive Camp', tr: 'Yarışma Kampı' },
-    score: '5 / 10 solved',
-    rank: '11 / 90',
-    tags: ['Algorithms', 'Contests'],
-    summary: {
-      en: 'Competitive-programming camp focused on contest-style problem solving and speed.',
-      tr: 'Yarışma tarzı problem çözme ve hıza odaklı competitive-programming kampı.',
-    },
-    achievements: { en: ['Solved 5/10 problems — ranked 11th of 90'], tr: ['10 sorudan 5’ini çözdüm — 90 kişi içinde 11.'] },
-    website: 'https://algoleague.com',
-    leaderboard: 'https://algoleague.com/contest/algorithm-program-2025-2026-spring-qualification-round/leaderboard',
   },
   {
     id: 'algoleague-summer',
     name: 'AlgoLeague Summer Camp',
     org: 'AlgoLeague',
     date: 'May 2026',
-    duration: null,
+    dateTr: 'May 2026',
     initials: 'AU',
     accent: '#ffd166',
     logo: '/orgs/algoleague-mark.svg',
     type: { en: 'Competitive Camp', tr: 'Yarışma Kampı' },
-    score: '8 / 12 solved',
-    rank: '11 / 102',
-    tags: ['Algorithms', 'Optimization'],
-    summary: {
-      en: 'Competitive-programming camp — sharpening algorithms and optimization under contest pressure.',
-      tr: 'Yarışma baskısı altında algoritmaları ve optimizasyonu keskinleştiren competitive-programming kampı.',
-    },
-    achievements: { en: ['Solved 8/12 problems — ranked 11th of 102'], tr: ['12 sorudan 8’ini çözdüm — 102 kişi içinde 11.'] },
+    round: { en: 'Qualification round', tr: 'Eleme turu' },
+    score: { value: '8/12', unit: { en: 'solved', tr: 'çözüldü' } },
+    rank: { value: '11', of: '102' },
+    tags: ALGO_TAGS,
     website: 'https://algoleague.com',
     leaderboard: 'https://algoleague.com/contest/algorithm-competition-summer-camp-2026-qualification-round/leaderboard',
+  },
+  {
+    id: 'algoleague-spring',
+    name: 'AlgoLeague Spring Camp',
+    org: 'AlgoLeague',
+    date: 'Mar 2026',
+    dateTr: 'Mar 2026',
+    initials: 'AS',
+    accent: '#00e5a0',
+    logo: '/orgs/algoleague-mark.svg',
+    type: { en: 'Competitive Camp', tr: 'Yarışma Kampı' },
+    round: { en: 'Qualification round', tr: 'Eleme turu' },
+    score: { value: '5/10', unit: { en: 'solved', tr: 'çözüldü' } },
+    rank: { value: '11', of: '90' },
+    tags: ALGO_TAGS,
+    website: 'https://algoleague.com',
+    leaderboard: 'https://algoleague.com/contest/algorithm-program-2025-2026-spring-qualification-round/leaderboard',
+  },
+  {
+    id: 'algoleague-winter',
+    name: 'AlgoLeague Winter Camp',
+    org: 'AlgoLeague',
+    date: 'Jan 2026',
+    dateTr: 'Oca 2026',
+    initials: 'AW',
+    accent: '#4d96ff',
+    logo: '/orgs/algoleague-mark.svg',
+    type: { en: 'Competitive Camp', tr: 'Yarışma Kampı' },
+    round: { en: 'Qualification round', tr: 'Eleme turu' },
+    score: { value: '6/10', unit: { en: 'solved', tr: 'çözüldü' } },
+    rank: { value: '23', of: '92' },
+    tags: ALGO_TAGS,
+    website: 'https://algoleague.com',
+    leaderboard: 'https://algoleague.com/contest/algorithm-competition-winter-camp-2026-qualification-round/leaderboard',
   },
   {
     id: 'btk-hackathon',
     name: 'BTK E-Commerce Hackathon',
     org: 'BTK',
     date: 'May 2026',
-    duration: null,
+    dateTr: 'May 2026',
     initials: 'BTK',
     accent: '#ff9f1c',
     logo: '/orgs/btk-akademi.png',
@@ -106,12 +105,8 @@ const COMPETITIONS = [
     rank: null,
     tags: ['Next.js', 'FastAPI', 'Gemini'],
     summary: {
-      en: 'Built “Find The Best”, a Gemini-powered price-comparison and fake-review platform across 21 marketplaces.',
-      tr: '21 pazaryerinde Gemini destekli fiyat karşılaştırma ve sahte yorum tespiti platformu “Find The Best”i geliştirdim.',
-    },
-    achievements: {
-      en: ['Full-stack build in the e-commerce track', 'Multi-store scraping + AI analysis'],
-      tr: ['E-ticaret kategorisinde full-stack ürün', 'Çoklu mağaza kazıma + yapay zekâ analizi'],
+      en: 'Built “Find The Best”: Gemini-powered price comparison and fake-review detection across 21 marketplaces.',
+      tr: '“Find The Best”i geliştirdim: 21 pazaryerinde Gemini destekli fiyat karşılaştırma ve sahte yorum tespiti.',
     },
     repo: 'https://github.com/gorkemergune/find-the-best',
   },
@@ -120,7 +115,7 @@ const COMPETITIONS = [
     name: 'Tıkla Gelsin Foodathon',
     org: 'Tıkla Gelsin',
     date: 'Mar 2026',
-    duration: null,
+    dateTr: 'Mar 2026',
     initials: 'TG',
     accent: '#f472b6',
     logo: '/orgs/tikla-gelsin.png',
@@ -129,10 +124,9 @@ const COMPETITIONS = [
     rank: null,
     tags: ['AI', 'Personalization'],
     summary: {
-      en: 'An AI-powered personalization engine for Tıkla Gelsin’s “Gel Al” pickup experience.',
+      en: 'An AI personalization engine for Tıkla Gelsin’s “Gel Al” pickup experience.',
       tr: 'Tıkla Gelsin’in “Gel Al” deneyimi için yapay zekâ destekli bir kişiselleştirme motoru.',
     },
-    achievements: { en: ['AI personalization engine'], tr: ['Yapay zekâ kişiselleştirme motoru'] },
     repo: 'https://github.com/gorkemergune/tikla-gelsin-foodathon',
   },
   {
@@ -140,19 +134,18 @@ const COMPETITIONS = [
     name: 'Med-Health Early Warning',
     org: 'AI4Purpose',
     date: 'Feb 2026',
-    duration: null,
+    dateTr: 'Şub 2026',
     initials: 'MH',
     accent: '#00f0ff',
     logo: '/orgs/ai4purpose.png',
     type: { en: 'Hackathon', tr: 'Hackathon' },
     score: null,
-    rank: 'Top 10',
+    rank: { value: '10', top: true },
     tags: ['Python', 'Health AI'],
     summary: {
-      en: 'An early-warning system for Mediterranean health risks, built during a hackathon.',
-      tr: 'Bir hackathonda geliştirilen, Akdeniz sağlık riskleri için erken uyarı sistemi.',
+      en: 'An early-warning system for Mediterranean health risks.',
+      tr: 'Akdeniz sağlık riskleri için bir erken uyarı sistemi.',
     },
-    achievements: { en: ['Finished in the top 10', 'Health-risk early-warning system'], tr: ['İlk 10’a girdim', 'Sağlık riski erken uyarı sistemi'] },
     repo: 'https://github.com/gorkemergune/med-health-early-warning',
   },
 ];
