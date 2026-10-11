@@ -86,6 +86,10 @@ const BOOKCASE_CSS = `
   .bk-crown::after { content: ''; position: absolute; left: 8%; right: 8%; bottom: -3px; height: 2px; background: linear-gradient(90deg, transparent, rgba(245,158,11,0.7), transparent); }
 
   .bk-shelf + .bk-shelf { margin-top: 22px; }
+  /* The two cases end level: the last shelf absorbs any height difference. */
+  .bk-frame { flex: 1; display: flex; flex-direction: column; }
+  .bk-shelf:last-child { flex: 1; display: flex; flex-direction: column; }
+  .bk-shelf:last-child > .bk-row { flex: 1; }
   .bk-row { position: relative; min-height: 236px; display: flex; flex-wrap: wrap; align-items: flex-end; gap: 14px 22px; padding: 18px 14px 0; background: radial-gradient(80% 70% at 50% 0%, rgba(245,158,11,0.09), transparent 75%); box-shadow: inset 0 16px 24px rgba(0,0,0,0.55); }
   .bk-plank { position: relative; height: 14px; margin: 0 -26px; background: linear-gradient(180deg, #4a3f33 0%, #2b241c 45%, #18140f 100%); border-top: 1px solid #5c4e3e; box-shadow: 0 12px 22px rgba(245,158,11,0.10), 0 6px 10px rgba(0,0,0,0.6); }
   .bk-case.left .bk-plank { background: linear-gradient(180deg, #3d434d 0%, #23272e 45%, #14171b 100%); border-top-color: #4d535e; }
@@ -97,19 +101,20 @@ const BOOKCASE_CSS = `
   .bk-stack > li:hover, .bk-stack > li:focus-within { z-index: 4; }
   .bk-deco { pointer-events: none; opacity: 0.6; align-items: flex-start; }
   .bk-deco.side { flex: 0 0 22%; }
+  @media (max-width: 1240px) { .bk-deco.side { flex-basis: 12%; } }
   .bk-deco span { display: block; border-radius: 2px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.05), 0 2px 3px rgba(0,0,0,0.5); }
   .bk-deco span:nth-child(even) { margin-left: 8px; }
 
-  .bk-book { position: relative; width: var(--bk-len); max-width: calc(100% - var(--bk-off)); min-height: var(--bk-th); height: auto; padding-top: 8px !important; padding-bottom: 8px !important; margin-left: var(--bk-off); display: grid; grid-template-columns: 16px minmax(0, 1fr) auto; align-items: center; gap: 12px; padding: 0 14px 0 0; cursor: pointer; text-align: left; color: #f1ece2; font: inherit; border: none; border-radius: 3px 2px 2px 3px;
+  .bk-book { position: relative; width: var(--bk-len); max-width: calc(100% - var(--bk-off)); min-height: var(--bk-th); height: auto; padding-top: 8px !important; padding-bottom: 8px !important; margin-left: var(--bk-off); display: grid; grid-template-columns: 16px minmax(0, 1fr); grid-template-rows: auto auto; align-content: center; column-gap: 12px; row-gap: 3px; padding: 0 18px 0 0; cursor: pointer; text-align: left; color: #f1ece2; font: inherit; border: none; border-radius: 3px 2px 2px 3px;
     background:
       linear-gradient(180deg, rgba(255,255,255,0.13) 0, rgba(255,255,255,0.03) 18%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.38) 100%),
       linear-gradient(90deg, transparent 0 calc(100% - 26px), rgba(231,194,122,0.28) calc(100% - 26px) calc(100% - 24px), transparent calc(100% - 24px) calc(100% - 20px), rgba(231,194,122,0.18) calc(100% - 20px) calc(100% - 19px), transparent calc(100% - 19px)),
       var(--bk-tone);
     box-shadow: inset 0 1px 0 rgba(255,255,255,0.16), inset 0 -2px 0 rgba(0,0,0,0.45), 0 3px 5px rgba(0,0,0,0.55);
     transition: transform 0.35s cubic-bezier(0.2,0.8,0.2,1), box-shadow 0.35s; }
-  .bk-edge { align-self: stretch; border-radius: 3px 0 0 3px; background: linear-gradient(180deg, color-mix(in srgb, var(--bk-acc) 75%, #fff 5%), color-mix(in srgb, var(--bk-acc) 40%, #000)); box-shadow: inset -1px 0 0 rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.25); }
-  .bk-title { font-family: var(--font-display); font-weight: 500; font-size: 14.5px; line-height: 1.25; color: #f1ece2; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-  .bk-year { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.06em; color: #d8b877; white-space: nowrap; padding-right: 22px; }
+  .bk-edge { grid-row: 1 / span 2; align-self: stretch; border-radius: 3px 0 0 3px; background: linear-gradient(180deg, color-mix(in srgb, var(--bk-acc) 75%, #fff 5%), color-mix(in srgb, var(--bk-acc) 40%, #000)); box-shadow: inset -1px 0 0 rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.25); }
+  .bk-title { grid-column: 2; font-family: var(--font-display); font-weight: 500; font-size: 14.5px; line-height: 1.28; color: #f1ece2; overflow-wrap: break-word; hyphens: manual; }
+  .bk-year { grid-column: 2; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.06em; color: #d8b877; white-space: nowrap; }
   .bk-book:hover, .bk-book:focus-visible { transform: translateX(14px); box-shadow: inset 0 1px 0 rgba(255,255,255,0.2), 0 0 0 1px color-mix(in srgb, var(--bk-acc) 75%, transparent), 0 6px 14px rgba(0,0,0,0.6), 0 0 18px color-mix(in srgb, var(--bk-acc) 30%, transparent); }
   .bk-book:focus-visible { outline: 2px solid var(--c-primary); outline-offset: 3px; }
   .bk-tip { position: absolute; left: 16px; bottom: calc(100% + 8px); z-index: 6; width: min(320px, 92%); padding: 10px 12px; text-align: left; background: #0b0d11; border: 1px solid rgba(245,158,11,0.45); box-shadow: 0 10px 24px rgba(0,0,0,0.55); opacity: 0; transform: translateY(4px); pointer-events: none; transition: opacity 0.2s, transform 0.2s; display: flex; flex-direction: column; gap: 4px; }
@@ -135,6 +140,6 @@ const BOOKCASE_CSS = `
     .bk-book { width: calc(var(--bk-len) + 6%); max-width: 100%; margin-left: calc(var(--bk-off) / 2); min-height: 56px; height: auto; padding-top: 8px; padding-bottom: 8px; }
     .bk-book:hover, .bk-book:focus-visible { transform: translateX(6px); }
     .bk-tip { display: none; }
-    .bk-title { -webkit-line-clamp: 3; font-size: 15px; }
+    .bk-title { font-size: 15px; }
   }
 `;

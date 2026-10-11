@@ -23,10 +23,14 @@ const WRITE_TONES = ['#3a2a1d', '#33251c', '#2f2a1f', '#3b2420', '#2b2c22'];
 
 const hash = (s) => [...s].reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 7);
 
-// thickness = the flat book's height in px; length = its width in % of the stack.
-function spine(slug, tones) {
+// thickness = the flat book's minimum height in px (a long title wraps and the
+// book grows thicker); length = its width in % of the stack. Longer titles get
+// longer books so they need fewer lines; short ones keep the varied look.
+function spine(slug, tones, title = '') {
   const h = hash(slug);
-  return { thickness: 54 + (h % 4) * 6, length: 86 + (h % 5) * 3, tone: tones[h % tones.length] };
+  const base = 86 + (h % 5) * 3;
+  const length = Math.min(100, base + Math.max(0, title.length - 36) * 0.5);
+  return { thickness: 54 + (h % 4) * 6, length, tone: tones[h % tones.length] };
 }
 
 const MONTHS = {
@@ -83,7 +87,7 @@ export function buildLibrary(t, lang) {
     url: p.url,
     pdf: p.pdf,
     accent: p.accent,
-    spine: spine(p.slug, READ_TONES),
+    spine: spine(p.slug, READ_TONES, p.title),
   })));
 
   const items = t('blogItems');
@@ -105,7 +109,7 @@ export function buildLibrary(t, lang) {
       summary: post.description || b.excerpt,
       body: Array.isArray(post.body) ? post.body : [],
       accent: '#F59E0B',
-      spine: spine(b.slug, WRITE_TONES),
+      spine: spine(b.slug, WRITE_TONES, post.title || b.title),
     };
   }));
 

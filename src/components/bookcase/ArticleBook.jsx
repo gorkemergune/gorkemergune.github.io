@@ -1,9 +1,9 @@
 import { useLang } from '../../i18n.jsx';
 
 // One real article as a hardcover lying flat in a stack, spine to the
-// visitor: a coloured cover edge, head and tail bands, the title written
-// horizontally (two lines at most, full title in the hover/focus panel and
-// the reader) and the year. It is a <button>; hover/focus slides it out of
+// visitor: a coloured cover edge, head and tail bands, the full title written
+// horizontally (it wraps as needed and the book grows thicker — never clipped)
+// with the year beneath it. It is a <button>; hover/focus slides it out of
 // the stack and lights its edge.
 export default function ArticleBook({ book, onOpen, offset = 0 }) {
   const { t } = useLang();

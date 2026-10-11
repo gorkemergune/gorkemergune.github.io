@@ -7,8 +7,8 @@ import EmptyCollection from './EmptyCollection';
 // next stack. Stacks fill shelves left to right; more books add stacks and
 // shelves, never overflow. Empty stack slots and spare shelves hold dim,
 // untitled, aria-hidden volumes so they never read as entries.
-// One wide stack per shelf keeps every title on at most two horizontal lines
-// in a ~600px case; a small dim stack fills the rest of the shelf.
+// One wide stack per shelf gives titles room; long titles wrap and their books
+// grow longer/thicker (data/library.js spine). A small dim stack fills the rest.
 const STACK_SIZE = 5;
 const STACKS_PER_SHELF = 1;
 const MIN_SHELVES = 3;
