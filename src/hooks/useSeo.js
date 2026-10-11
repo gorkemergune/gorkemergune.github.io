@@ -22,7 +22,7 @@ export function useSeo({ title, description, image, path, type = 'website', json
 
     const hashPath = window.location.hash ? '/#' + window.location.hash.replace(/^#/, '') : '/';
     const url = SITE + (path ? '/#' + path : hashPath);
-    const img = image ? (image.startsWith('http') ? image : SITE + image) : `${SITE}/og/default.png`;
+    const img = image ? (image.startsWith('http') ? image : SITE + image) : `${SITE}/og-portfolio.jpg`;
 
     upsert('name', 'description', desc);
     upsert('property', 'og:site_name', 'Görkem Ergüne');
