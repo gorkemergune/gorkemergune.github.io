@@ -801,7 +801,7 @@ const en = {
     },
     {
       title: 'PHQ-9 Depression Analysis',
-      field: 'Data Analysis · Mental Health', accent: '#00e5a0', status: 'completed', cover: '/media/research/phq9-analysis.webp', coverKind: 'concept', project: 'depression-phq9-analysis',
+      field: 'Data Analysis · Mental Health', accent: '#00e5a0', status: 'completed', cover: '/media/research/phq9.webp', coverKind: 'concept', project: 'depression-phq9-analysis',
       abstract: 'An analysis of PHQ-9 depression-screening responses using AI and data-analysis techniques. A live study with roughly 100 participants was conducted, and the findings were presented and discussed on stage. The live study has now concluded — this is exploratory research, not a clinical tool, and not a published study.',
       methods: ['Ran a live study with ~100 real PHQ-9 responses', 'Clinical scoring with severity classification', 'Statistical analysis and machine-learning exploration of the responses', 'Findings presented and discussed on stage'],
       expected: 'With the live study concluded, the work explored how AI and data analysis can support — never replace — mental-health assessment, always with appropriate caution.',
@@ -1800,7 +1800,7 @@ const tr = {
     },
     {
       title: 'PHQ-9 Depresyon Analizi',
-      field: 'Veri Analizi · Ruh Sağlığı', accent: '#00e5a0', status: 'completed', cover: '/media/research/phq9-analysis.webp', coverKind: 'concept', project: 'depression-phq9-analysis',
+      field: 'Veri Analizi · Ruh Sağlığı', accent: '#00e5a0', status: 'completed', cover: '/media/research/phq9.webp', coverKind: 'concept', project: 'depression-phq9-analysis',
       abstract: 'PHQ-9 depresyon tarama yanıtlarının yapay zekâ ve veri analizi teknikleriyle incelenmesi. Yaklaşık 100 katılımcıyla canlı bir çalışma yürütüldü ve bulgular sahnede sunulup tartışıldı. Canlı çalışma artık tamamlandı. Bu keşifsel bir araştırmadır; klinik bir araç ya da yayınlanmış bir çalışma değildir.',
       methods: ['~100 gerçek PHQ-9 yanıtıyla canlı bir çalışma yürütüldü', 'Şiddet sınıflandırmalı klinik puanlama', 'Yanıtların istatistiksel analizi ve makine öğrenmesiyle keşfi', 'Bulgular sahnede sunulup tartışıldı'],
       expected: 'Tamamlanan bu çalışma; yapay zekâ ve veri analizinin ruh sağlığı değerlendirmesini, asla onun yerine geçmeden ve her zaman gerekli özenle, nasıl destekleyebileceğini inceledi.',
