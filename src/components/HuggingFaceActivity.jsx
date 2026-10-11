@@ -6,7 +6,10 @@ import HF_ARTIFACTS, { HF_PROFILE } from '../data/huggingface';
 
 // Live download counts from the Hub API, seeded with the last-known values in
 // huggingface.js so the section still renders if the network/API is unavailable.
-function useLiveDownloads() {
+// Returns per-id download counts plus `liveIds`: the ids whose count came
+// from the Hub just now (the rest show the last-known value from the data).
+export function useLiveDownloads() {
+  const [liveIds, setLiveIds] = useState(() => new Set());
   const [dls, setDls] = useState(() =>
     Object.fromEntries(HF_ARTIFACTS.map((a) => [a.id, a.downloads ?? 0])),
   );
@@ -28,11 +31,12 @@ function useLiveDownloads() {
         for (const r of results) if (r.status === 'fulfilled') next[r.value[0]] = r.value[1];
         return next;
       });
+      setLiveIds(new Set(results.filter((r) => r.status === 'fulfilled').map((r) => r.value[0])));
     });
     return () => { alive = false; };
   }, []);
 
-  return dls;
+  return { dls, liveIds };
 }
 
 function HFCell({ a, downloads, lang, t, loc }) {
@@ -76,7 +80,7 @@ function HFCell({ a, downloads, lang, t, loc }) {
 export default function HuggingFaceActivity() {
   const { lang, t } = useLang();
   const loc = (en, tr) => (lang === 'tr' && tr ? tr : en);
-  const downloads = useLiveDownloads();
+  const { dls: downloads } = useLiveDownloads();
   const ordered = [
     ...HF_ARTIFACTS.filter((a) => a.kind !== 'dataset'),
     ...HF_ARTIFACTS.filter((a) => a.kind === 'dataset'),

@@ -1,59 +1,42 @@
+import { useEffect } from 'react';
 import { useLang } from '../i18n.jsx';
 import { useSeo } from '../hooks/useSeo';
 import CinematicHero from '../components/CinematicHero';
-import SelectedWork from '../components/SelectedWork';
-import { ExperienceSection, ResearchSection } from '../components/ProfileSections';
-import ArmoryIndex from '../components/ArmoryIndex';
-import FeaturedMetrics from '../components/FeaturedMetrics';
-import AlgorithmJourney from '../components/AlgorithmJourney';
-import CurrentlyBuilding from '../components/CurrentlyBuilding';
-import GitHubActivity from '../components/GitHubActivity';
-import HuggingFaceActivity from '../components/HuggingFaceActivity';
-import LiveStatus from '../components/LiveStatus';
-import TwoTone from '../components/TwoTone';
+import ProfileSummary from '../components/home/ProfileSummary';
+import ExploreConsole from '../components/home/ExploreConsole';
+import ProjectShowcase from '../components/home/ProjectShowcase';
+import RepoShowcase from '../components/home/RepoShowcase';
+import ClosingContact from '../components/home/ClosingContact';
 
-// Page order: the workspace and the name, the selected work, who is behind it
-// (experience, research), every build, the numbers, live activity.
-// Every section is a .ds-section on the .ds-wrap grid defined in App.jsx.
+// Phase 7: the home page is an introduction, not a directory. A short,
+// cinematic sequence — hero → who I am (profile summary) → the eight doors →
+// selected projects → code and models → contact — and
+// every detail lives on its own page.
+// Sections marked [data-reveal] fade in once as they enter the viewport;
+// without IntersectionObserver or with reduced motion they are simply shown.
 export default function Home() {
   const { t } = useLang();
   useSeo({ description: t('heroSubtext'), path: '/' });
 
+  useEffect(() => {
+    const els = [...document.querySelectorAll('[data-reveal]')];
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce || !('IntersectionObserver' in window)) { els.forEach((e) => e.classList.add('in')); return undefined; }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((en) => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.08 });
+    els.forEach((e) => io.observe(e));
+    return () => io.disconnect();
+  }, []);
+
   return (
     <>
       <CinematicHero />
-      <SelectedWork />
-      <ExperienceSection />
-      <ResearchSection />
-      <ArmoryIndex />
-
-      <section className="ds-section" aria-labelledby="home-numbers">
-        <div className="ds-wrap">
-          <div className="ds-head">
-            <div>
-              <div className="ds-kicker">{t('numbersKicker')}</div>
-              <h2 id="home-numbers" className="ds-h2"><TwoTone text={t('numbersTitle')} /></h2>
-            </div>
-          </div>
-          <FeaturedMetrics />
-          <AlgorithmJourney />
-        </div>
-      </section>
-
-      <section className="ds-section" aria-labelledby="home-live">
-        <div className="ds-wrap">
-          <div className="ds-head">
-            <div>
-              <div className="ds-kicker">{t('liveKicker')}</div>
-              <h2 id="home-live" className="ds-h2"><TwoTone text={t('liveTitle')} /></h2>
-            </div>
-          </div>
-          <CurrentlyBuilding />
-          <GitHubActivity />
-          <HuggingFaceActivity />
-          <LiveStatus />
-        </div>
-      </section>
+      <ProfileSummary />
+      <ExploreConsole />
+      <ProjectShowcase />
+      <RepoShowcase />
+      <ClosingContact />
     </>
   );
 }

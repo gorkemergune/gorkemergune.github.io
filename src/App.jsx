@@ -204,7 +204,13 @@ export default function App() {
         }
         @media (max-width: 520px) { .cmdk-label { display: none; } }
 
-        .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; color: #e0e0e8; }
+        .hamburger { display: none; align-items: center; justify-content: center; width: 40px; height: 40px; padding: 0; cursor: pointer; color: #f2f4f8; background: rgba(10,12,16,0.55); border: 1px solid rgba(255,255,255,0.2); border-radius: var(--radius); transition: border-color 0.3s, background 0.3s; }
+        .hamburger:hover, .hamburger[aria-expanded="true"] { border-color: var(--c-primary); background: rgba(10,12,16,0.85); }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+        /* Home sections fade in once (Home.jsx adds .in via IntersectionObserver). */
+        [data-reveal] { opacity: 0; transform: translateY(18px); transition: opacity 0.7s cubic-bezier(0.2,0.8,0.2,1), transform 0.7s cubic-bezier(0.2,0.8,0.2,1); }
+        [data-reveal].in { opacity: 1; transform: none; }
+        @media (prefers-reduced-motion: reduce) { [data-reveal] { opacity: 1; transform: none; transition: none; } }
 
         :root { --nav-h: 67px; }
         @media (max-width: 600px) { :root { --nav-h: 59px; } }
@@ -339,7 +345,9 @@ export default function App() {
         @media (max-width: 1280px) {
           .nav-links { display: none !important; }
           .nav-right .clock-display { display: none !important; }
-          .hamburger { display: block !important; }
+          .hamburger { display: inline-flex !important; }
+          /* Hamburger mode: the bar always has a surface, even over the hero photo. */
+          .site-nav.over-photo { background: rgba(10,12,16,0.72); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom-color: rgba(255,255,255,0.06); }
           .mobile-menu { display: flex !important; }
         }
 
@@ -350,7 +358,9 @@ export default function App() {
           .four-col { grid-template-columns: 1fr 1fr !important; }
           .nav-links { display: none !important; }
           .nav-right .clock-display { display: none !important; }
-          .hamburger { display: block !important; }
+          .hamburger { display: inline-flex !important; }
+          /* Hamburger mode: the bar always has a surface, even over the hero photo. */
+          .site-nav.over-photo { background: rgba(10,12,16,0.72); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom-color: rgba(255,255,255,0.06); }
           .mobile-menu { display: flex !important; }
           .roadmap-row { flex-wrap: wrap !important; gap: 12px !important; }
           .roadmap-row .roadmap-title { width: auto !important; flex: 1 1 100% !important; }
@@ -420,7 +430,7 @@ export default function App() {
               <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#00f0ff', display: 'inline-block' }} />
               <span>{time} IST</span>
             </div>
-            <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu">
+            <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu" aria-expanded={menuOpen} aria-controls="mobile-menu">
               {menuOpen ? <X size={22} strokeWidth={1.5} /> : <Menu size={22} strokeWidth={1.5} />}
             </button>
           </div>
@@ -428,7 +438,7 @@ export default function App() {
 
         {/* MOBILE MENU */}
         {menuOpen && (
-          <div className="mobile-menu" style={styles.mobileMenu}>
+          <div id="mobile-menu" className="mobile-menu" style={styles.mobileMenu}>
             <Link to="/project" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navProject')}</Link>
             <Link to="/experience" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navExperience')}</Link>
             <Link to="/competitions" onClick={() => setMenuOpen(false)} style={styles.mobileMenuItem}>{t('navCompetitions')}</Link>

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, FileText, Github } from 'lucide-react';
+import { ArrowDown, FileText, Github, Linkedin } from 'lucide-react';
+import { guidedScrollTo } from '../hooks/guidedScroll';
 import { useLang } from '../i18n.jsx';
 import { FEATURES } from '../config';
 
@@ -24,6 +25,14 @@ function MottoLines({ text }) {
 
 export default function CinematicHero() {
   const { t } = useLang();
+  // HashRouter owns the URL hash, so the anchor's default jump is replaced by
+  // the guided glide; focus then lands on the profile heading for keyboards.
+  const viewWork = (e) => {
+    e.preventDefault();
+    const el = document.getElementById('profile');
+    el?.classList.add('in'); // reveal it now so it is in place when the glide arrives
+    guidedScrollTo(el, { onDone: () => el?.querySelector('h2')?.focus({ preventScroll: true }) });
+  };
 
   return (
     <section className="ch-hero" aria-label={t('heroTagline')}>
@@ -44,7 +53,8 @@ export default function CinematicHero() {
         .ch-name { display: block; font-size: clamp(56px, 6.4vw, 96px); line-height: 1; }
         .ch-name .dim { color: #8f98a8; }
         .ch-intro { font-family: var(--font-body); font-size: 17px; line-height: 1.65; color: #c3c9d4; max-width: 480px; margin-top: 28px; }
-        .ch-ctas { display: flex; gap: 32px; align-items: center; flex-wrap: wrap; margin-top: 36px; }
+        .ch-ctas { display: flex; gap: 20px 32px; align-items: center; flex-wrap: wrap; margin-top: 36px; }
+        .ch-socials { display: inline-flex; gap: 24px; flex-wrap: wrap; }
         .ch-aside { justify-self: end; display: flex; flex-direction: column; align-items: flex-end; gap: 12px; text-align: right; padding: 16px 20px; background: rgba(10,12,16,0.62); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.06); }
         .ch-motto { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.18em; line-height: 1.8; text-transform: uppercase; color: #cfd6e0; padding-bottom: 12px; border-bottom: 1px solid rgba(0,240,255,0.45); }
         .ch-motto .ln { display: block; white-space: nowrap; }
@@ -88,14 +98,19 @@ export default function CinematicHero() {
             </h1>
             <p className="ch-intro reveal reveal-3">{t('heroSubtext')}</p>
             <div className="ch-ctas reveal reveal-4">
-              <Link to="/project" className="btn btn-outline">{t('ctaViewWork')} <ArrowRight size={16} strokeWidth={1.5} /></Link>
-              {FEATURES.resume ? (
-                <Link to="/resume" className="ds-link"><FileText size={13} strokeWidth={1.5} /> {t('ctaResume')}</Link>
-              ) : (
+              {/* "View Work" starts the presentation: a gentle glide to the
+                  profile summary (#profile), interruptible at any time; the
+                  eight doors follow directly below it. */}
+              <a href="#profile" className="btn btn-outline" onClick={viewWork}>{t('ctaViewWork')} <ArrowDown size={16} strokeWidth={1.5} /></a>
+              <span className="ch-socials">
                 <a href="https://github.com/gorkemergune" target="_blank" rel="noopener noreferrer" className="ds-link">
                   <Github size={13} strokeWidth={1.5} /> {t('heroGithub')}
                 </a>
-              )}
+                <a href="https://www.linkedin.com/in/gorkemergune/" target="_blank" rel="noopener noreferrer" className="ds-link">
+                  <Linkedin size={13} strokeWidth={1.5} /> {t('heroLinkedIn')}
+                </a>
+                {FEATURES.resume && <Link to="/resume" className="ds-link"><FileText size={13} strokeWidth={1.5} /> {t('ctaResume')}</Link>}
+              </span>
             </div>
           </div>
           <div className="ch-aside reveal reveal-5">
