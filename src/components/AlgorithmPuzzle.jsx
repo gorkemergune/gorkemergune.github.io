@@ -159,7 +159,7 @@ export default function AlgorithmPuzzle() {
             {[0, 1, 2].map(i => (
               <span key={i} style={{
                 width: 12, height: 12, borderRadius: 2,
-                background: i < lives ? '#ef4444' : '#e2e0da',
+                background: i < lives ? '#ef4444' : '#1e222b',
                 transition: 'background 0.3s',
               }} />
             ))}
@@ -203,7 +203,7 @@ export default function AlgorithmPuzzle() {
                   background: `radial-gradient(circle at 30% 30%, ${ball.color}aa, ${ball.color})`,
                   transform: animId === ball.id ? 'scale(0.8)' : 'scale(1)',
                   boxShadow: selected === ball.id
-                    ? `0 0 0 3px #f4f3ef, 0 0 0 5px ${ball.color}, 0 6px 20px ${ball.color}40`
+                    ? `0 0 0 3px #14171d, 0 0 0 5px ${ball.color}, 0 6px 20px ${ball.color}40`
                     : `0 3px 12px ${ball.color}30`,
                   opacity: gameOver ? 0.5 : 1,
                   cursor: gameOver ? 'default' : 'pointer',
@@ -244,14 +244,14 @@ export default function AlgorithmPuzzle() {
           borderLeftColor:
             message.type === 'correct' || message.type === 'won' ? '#22c55e' :
             message.type === 'wrong' || message.type === 'lost' ? '#ef4444' :
-            message.type === 'compare' ? '#3b82f6' : '#8a8a86',
+            message.type === 'compare' ? '#3b82f6' : '#7b8290',
         }}>
           <span style={{
             ...p.messageText,
             color:
               message.type === 'correct' || message.type === 'won' ? '#16a34a' :
               message.type === 'wrong' || message.type === 'lost' ? '#dc2626' :
-              message.type === 'compare' ? '#2563eb' : '#4a4a48',
+              message.type === 'compare' ? '#2563eb' : '#b4bac5',
           }}>{message.text}</span>
         </div>
       )}
@@ -292,7 +292,7 @@ export default function AlgorithmPuzzle() {
           <p style={p.explainTitle}>{t('puzzleExTitle')}</p>
           <p style={p.explainText}>{t('puzzleExP1')}</p>
           <p style={p.explainText}>{t('puzzleExP2')}</p>
-          <p style={{ ...p.explainText, fontStyle: 'italic', color: '#8a8a86', marginTop: 12 }}>
+          <p style={{ ...p.explainText, fontStyle: 'italic', color: '#7b8290', marginTop: 12 }}>
             {t('puzzleExP3')}
           </p>
         </div>
@@ -305,7 +305,7 @@ const p = {
   wrap: { marginTop: 8 },
   intro: {
     fontFamily: "var(--font-body)",
-    fontSize: 16, lineHeight: 1.7, color: '#4a4a48',
+    fontSize: 16, lineHeight: 1.7, color: '#b4bac5',
     maxWidth: 600, marginBottom: 40,
   },
   stats: {
@@ -316,11 +316,11 @@ const p = {
   },
   statLabel: {
     fontFamily: "var(--font-mono)",
-    fontSize: 10, letterSpacing: '0.12em', color: '#8a8a86',
+    fontSize: 10, letterSpacing: '0.12em', color: '#7b8290',
   },
   statValue: {
     fontFamily: "var(--font-display)",
-    fontSize: 28, fontWeight: 400, lineHeight: 1, color: '#1a1a1a',
+    fontSize: 28, fontWeight: 400, lineHeight: 1, color: '#eef0f4',
   },
   modeRow: {
     display: 'flex', gap: 8, marginBottom: 32,
@@ -329,17 +329,17 @@ const p = {
     fontFamily: "var(--font-mono)",
     fontSize: 12, letterSpacing: '0.06em',
     padding: '8px 18px',
-    border: '1px solid #d6d4cd', borderRadius: 4,
-    background: '#fafaf6', color: '#4a4a48',
+    border: '1px solid #2c313c', borderRadius: 4,
+    background: '#111419', color: '#b4bac5',
     cursor: 'pointer', transition: 'all 0.2s',
   },
   modeBtnActive: {
-    background: '#1a1a1a', color: '#f4f3ef',
-    borderColor: '#1a1a1a',
+    background: '#eef0f4', color: '#14171d',
+    borderColor: '#eef0f4',
   },
   sectionLabel: {
     fontFamily: "var(--font-mono)",
-    fontSize: 10, letterSpacing: '0.12em', color: '#8a8a86',
+    fontSize: 10, letterSpacing: '0.12em', color: '#7b8290',
     textTransform: 'uppercase', display: 'block', marginBottom: 12,
   },
   ballRow: {
@@ -364,7 +364,7 @@ const p = {
   },
   sortedNum: {
     fontFamily: "var(--font-mono)",
-    fontSize: 9, color: '#8a8a86', letterSpacing: '0.08em',
+    fontSize: 9, color: '#7b8290', letterSpacing: '0.08em',
   },
   sortedBall: {
     width: 40, height: 40, borderRadius: '50%',
@@ -372,11 +372,11 @@ const p = {
   },
   sortedVal: {
     fontFamily: "var(--font-mono)",
-    fontSize: 11, color: '#4a4a48', fontWeight: 600,
+    fontSize: 11, color: '#b4bac5', fontWeight: 600,
   },
   message: {
     padding: '14px 18px', borderLeft: '3px solid',
-    background: '#fafaf6', marginBottom: 28,
+    background: '#111419', marginBottom: 28,
   },
   messageText: {
     fontFamily: "var(--font-mono)",
@@ -389,8 +389,8 @@ const p = {
     display: 'inline-flex', alignItems: 'center', gap: 5,
     fontFamily: "var(--font-mono)",
     fontSize: 12, padding: '4px 10px',
-    background: '#fafaf6', border: '1px solid #e2e0da',
-    borderRadius: 4, color: '#4a4a48',
+    background: '#111419', border: '1px solid #1e222b',
+    borderRadius: 4, color: '#b4bac5',
   },
   compDot: {
     width: 10, height: 10, borderRadius: '50%', display: 'inline-block',
@@ -402,20 +402,20 @@ const p = {
     fontFamily: "var(--font-mono)",
     fontSize: 12, letterSpacing: '0.06em',
     padding: '10px 20px',
-    border: '1px solid #d6d4cd', borderRadius: 4,
-    background: '#fafaf6', color: '#4a4a48',
+    border: '1px solid #2c313c', borderRadius: 4,
+    background: '#111419', color: '#b4bac5',
     cursor: 'pointer', transition: 'background 0.2s, border-color 0.2s',
   },
   explain: {
     marginTop: 32, padding: 28,
-    background: '#fafaf6', border: '1px solid #e2e0da', borderRadius: 4,
+    background: '#111419', border: '1px solid #1e222b', borderRadius: 4,
   },
   explainTitle: {
     fontFamily: "var(--font-display)",
-    fontSize: 20, color: '#1a1a1a', marginBottom: 16,
+    fontSize: 20, color: '#eef0f4', marginBottom: 16,
   },
   explainText: {
     fontFamily: "var(--font-body)",
-    fontSize: 14, lineHeight: 1.7, color: '#4a4a48', marginBottom: 8,
+    fontSize: 14, lineHeight: 1.7, color: '#b4bac5', marginBottom: 8,
   },
 };

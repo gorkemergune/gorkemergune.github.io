@@ -21,7 +21,12 @@ class ErrorBoundary extends React.Component {
   }
 }
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+// One React root per container. Vite's HMR can re-run this module; a second
+// createRoot() over the same DOM leaves two roots fighting for it, which is
+// what produced the "Failed to execute 'removeChild' on 'Node'" seen in dev.
+const container = document.getElementById('root');
+const root = container.__reactRoot || (container.__reactRoot = ReactDOM.createRoot(container));
+root.render(
   <React.StrictMode>
     <ErrorBoundary>
       <HashRouter>

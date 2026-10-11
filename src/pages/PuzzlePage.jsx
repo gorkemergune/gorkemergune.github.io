@@ -1,22 +1,14 @@
-import { Link } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
 import { useLang } from '../i18n.jsx';
+import { FunHeader, FUN_CSS } from '../components/fun/FunFrame';
 import AlgorithmPuzzle from '../components/AlgorithmPuzzle';
 
 export default function PuzzlePage() {
   const { t } = useLang();
 
   return (
-    <div style={s.container}>
-      <Link to="/fun" className="link-hover" style={s.back}>
-        <ArrowLeft size={16} strokeWidth={1.5} /> {t('puzzlePageBack')}
-      </Link>
-
-      <div style={s.header}>
-        <span className="chip">{t('funBadge')}</span>
-        <h1 className="section-title" style={s.title}>{t('puzzleLabel')}</h1>
-        <p style={s.desc}>{t('puzzleSub')}</p>
-      </div>
+    <div className="fun-page" style={{ maxWidth: s.container.maxWidth, '--fun-acc': '#4d96ff' }}>
+      <style>{FUN_CSS}</style>
+      <FunHeader kind="game" accent="#4d96ff" title={t('puzzleLabel')} sub={t('puzzleSub')}></FunHeader>
 
       <AlgorithmPuzzle />
     </div>
@@ -25,8 +17,8 @@ export default function PuzzlePage() {
 
 const s = {
   container: { maxWidth: 900, margin: '0 auto', padding: '60px 48px 120px', position: 'relative', zIndex: 2 },
-  back: { display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: "var(--font-mono)", fontSize: 12, letterSpacing: '0.06em', color: '#6b6a66', marginBottom: 60, cursor: 'pointer' },
+  back: { display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: "var(--font-mono)", fontSize: 12, letterSpacing: '0.06em', color: '#8a919d', marginBottom: 60, cursor: 'pointer' },
   header: { marginBottom: 80 },
-  title: { fontFamily: "var(--font-display)", fontSize: 72, fontWeight: 400, lineHeight: 0.95, letterSpacing: '-0.015em', color: '#1a1a1a', marginTop: 20, marginBottom: 20 },
-  desc: { fontFamily: "var(--font-body)", fontSize: 18, lineHeight: 1.6, color: '#4a4a48', maxWidth: 560 },
+  title: { fontFamily: "var(--font-display)", fontSize: 72, fontWeight: 400, lineHeight: 0.95, letterSpacing: '-0.015em', color: '#eef0f4', marginTop: 20, marginBottom: 20 },
+  desc: { fontFamily: "var(--font-body)", fontSize: 18, lineHeight: 1.6, color: '#b4bac5', maxWidth: 560 },
 };

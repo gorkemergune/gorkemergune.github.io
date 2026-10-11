@@ -1,15 +1,14 @@
 import { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
 import { useLang } from '../i18n.jsx';
+import { FunBack, FUN_CSS } from '../components/fun/FunFrame';
 
 const sadScenes = [
-  { emoji: '😢', bg: '#fef3f2' },
-  { emoji: '😿', bg: '#fef9ee' },
-  { emoji: '🥺', bg: '#f0f4ff' },
-  { emoji: '😞', bg: '#fdf2f8' },
-  { emoji: '💔', bg: '#fef2f2' },
-  { emoji: '😭', bg: '#f5f3ff' },
+  { emoji: '😢', bg: '#24161a' },
+  { emoji: '😿', bg: '#231d13' },
+  { emoji: '🥺', bg: '#151b2a' },
+  { emoji: '😞', bg: '#25151f' },
+  { emoji: '💔', bg: '#261517' },
+  { emoji: '😭', bg: '#1b172a' },
 ];
 
 const sadTexts = {
@@ -68,9 +67,8 @@ export default function SorryPage() {
   if (accepted) {
     return (
       <div style={s.container}>
-        <Link to="/fun" className="link-hover" style={s.back}>
-          <ArrowLeft size={16} strokeWidth={1.5} /> {t('funBack')}
-        </Link>
+        <style>{FUN_CSS}</style>
+        <div style={{ position: 'relative', zIndex: 10, marginBottom: 40 }}><FunBack /></div>
         <div style={s.yayWrap}>
           <div style={s.confetti}>🎉🎊✨🥳🎉🎊✨🥳</div>
           <h1 style={s.yayTitle}>{t('sorryYayTitle')}</h1>
@@ -103,9 +101,8 @@ export default function SorryPage() {
         }
       `}</style>
 
-      <Link to="/fun" className="link-hover" style={s.back}>
-        <ArrowLeft size={16} strokeWidth={1.5} /> {t('funBack')}
-      </Link>
+      <style>{FUN_CSS}</style>
+      <div style={{ position: 'relative', zIndex: 10, marginBottom: 40 }}><FunBack /></div>
 
       <div style={s.center}>
         {/* Sad scene card */}
@@ -175,35 +172,35 @@ export default function SorryPage() {
 
 const s = {
   container: { maxWidth: 900, margin: '0 auto', padding: '60px 48px 120px', position: 'relative', zIndex: 2 },
-  back: { display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: "var(--font-mono)", fontSize: 12, letterSpacing: '0.06em', color: '#6b6a66', marginBottom: 60, cursor: 'pointer' },
+  back: { display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: "var(--font-mono)", fontSize: 12, letterSpacing: '0.06em', color: '#8a919d', marginBottom: 60, cursor: 'pointer' },
   center: { display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', marginTop: 20 },
   sceneCard: {
-    width: 240, height: 200, borderRadius: 12, border: '1px solid #e2e0da',
+    width: 240, height: 200, borderRadius: 12, border: '1px solid #1e222b',
     display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
     gap: 12, marginBottom: 32, transition: 'background 0.4s',
   },
-  sadText: { fontFamily: "var(--font-body)", fontSize: 15, color: '#4a4a48', fontStyle: 'italic', padding: '0 16px' },
-  title: { fontFamily: "var(--font-display)", fontSize: 56, fontWeight: 400, lineHeight: 1, letterSpacing: '-0.015em', color: '#1a1a1a', marginBottom: 12 },
-  sub: { fontFamily: "var(--font-body)", fontSize: 22, color: '#4a4a48', marginBottom: 40 },
+  sadText: { fontFamily: "var(--font-body)", fontSize: 15, color: '#b4bac5', fontStyle: 'italic', padding: '0 16px' },
+  title: { fontFamily: "var(--font-display)", fontSize: 56, fontWeight: 400, lineHeight: 1, letterSpacing: '-0.015em', color: '#eef0f4', marginBottom: 12 },
+  sub: { fontFamily: "var(--font-body)", fontSize: 22, color: '#b4bac5', marginBottom: 40 },
   btnRow: { display: 'flex', alignItems: 'center', gap: 20, flexWrap: 'wrap', justifyContent: 'center', minHeight: 80 },
   yesBtn: {
     fontFamily: "var(--font-body)", fontWeight: 600,
-    background: '#1a1a1a', color: '#f4f3ef', border: 'none', borderRadius: 6,
+    background: '#eef0f4', color: '#14171d', border: 'none', borderRadius: 6,
     cursor: 'pointer', transition: 'all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1)',
     whiteSpace: 'nowrap',
   },
   noBtn: {
     fontFamily: "var(--font-body)", fontWeight: 500,
-    background: 'transparent', color: '#6b6a66',
-    border: '1px solid #d6d4cd', borderRadius: 6, cursor: 'pointer',
+    background: 'transparent', color: '#8a919d',
+    border: '1px solid #2c313c', borderRadius: 6, cursor: 'pointer',
     transition: 'all 0.3s ease', whiteSpace: 'nowrap',
   },
   noGoneText: {
     marginTop: 20, fontFamily: "var(--font-body)",
-    fontSize: 15, color: '#6b6a66', fontStyle: 'italic',
+    fontSize: 15, color: '#8a919d', fontStyle: 'italic',
   },
   yayWrap: { display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', marginTop: 60 },
   confetti: { fontSize: 32, marginBottom: 24, letterSpacing: 8 },
-  yayTitle: { fontFamily: "var(--font-display)", fontSize: 72, fontWeight: 400, color: '#1a1a1a', marginBottom: 16 },
-  yayText: { fontFamily: "var(--font-body)", fontSize: 22, color: '#4a4a48', lineHeight: 1.6 },
+  yayTitle: { fontFamily: "var(--font-display)", fontSize: 72, fontWeight: 400, color: '#eef0f4', marginBottom: 16 },
+  yayText: { fontFamily: "var(--font-body)", fontSize: 22, color: '#b4bac5', lineHeight: 1.6 },
 };

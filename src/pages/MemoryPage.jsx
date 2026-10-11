@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowLeft, RotateCcw } from 'lucide-react';
+import { RotateCcw } from 'lucide-react';
 import { useLang } from '../i18n.jsx';
+import { FunHeader, FUN_CSS } from '../components/fun/FunFrame';
 
 const SYMBOLS = ['🧠', '⚡', '🚀', '🤖', '🔬', '🎯', '💾', '🛰️'];
 
@@ -52,16 +52,9 @@ export default function MemoryPage() {
   const won = matched.length === deck.length;
 
   return (
-    <div style={s.container}>
-      <Link to="/fun" className="link-hover" style={s.back}>
-        <ArrowLeft size={16} strokeWidth={1.5} /> {t('funBack')}
-      </Link>
-
-      <div style={s.header}>
-        <span className="chip">{t('funBadge')}</span>
-        <h1 className="section-title" style={s.title}>{t('funMemoryTitle')}</h1>
-        <p style={s.desc}>{t('memorySub')}</p>
-      </div>
+    <div className="fun-page" style={{ maxWidth: s.container.maxWidth, '--fun-acc': '#00f0ff' }}>
+      <style>{FUN_CSS}</style>
+      <FunHeader kind="game" accent="#00f0ff" title={t('funMemoryTitle')} sub={t('memorySub')}></FunHeader>
 
       <div style={s.bar}>
         <span style={s.stat}>{t('memoryMoves')}: <b style={{ color: '#e0e0e8' }}>{moves}</b></span>

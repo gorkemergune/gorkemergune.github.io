@@ -23,7 +23,7 @@ export default function TowerOfHanoi() {
     setMoves(0);
     setMaxMoves(Math.pow(2, diskCount) - 1);
     setSelectedPeg(null);
-    setMessage({ text: t('hanoiSelectSource'), color: '#6b6a66' });
+    setMessage({ text: t('hanoiSelectSource'), color: '#8a919d' });
     setPhase('playing');
   }, [diskCount, t]);
 
@@ -45,11 +45,11 @@ export default function TowerOfHanoi() {
         return;
       }
       setSelectedPeg(pegIndex);
-      setMessage({ text: t('hanoiSelectTarget'), color: '#6b6a66' });
+      setMessage({ text: t('hanoiSelectTarget'), color: '#8a919d' });
     } else {
       if (pegIndex === selectedPeg) {
         setSelectedPeg(null);
-        setMessage({ text: t('hanoiSelectSource'), color: '#6b6a66' });
+        setMessage({ text: t('hanoiSelectSource'), color: '#8a919d' });
         return;
       }
 
@@ -84,7 +84,7 @@ export default function TowerOfHanoi() {
         return;
       }
 
-      setMessage({ text: t('hanoiSelectSource'), color: '#6b6a66' });
+      setMessage({ text: t('hanoiSelectSource'), color: '#8a919d' });
     }
   }, [phase, selectedPeg, pegs, moves, maxMoves, diskCount, t]);
 
@@ -102,9 +102,9 @@ export default function TowerOfHanoi() {
               className="puzzle-btn"
               style={{
                 ...s.selectBtn,
-                background: diskCount === n ? '#1a1a1a' : 'transparent',
-                color: diskCount === n ? '#f4f3ef' : '#4a4a48',
-                borderColor: diskCount === n ? '#1a1a1a' : '#d6d4cd',
+                background: diskCount === n ? '#eef0f4' : 'transparent',
+                color: diskCount === n ? '#14171d' : '#b4bac5',
+                borderColor: diskCount === n ? '#eef0f4' : '#2c313c',
               }}
             >
               {n}
@@ -134,7 +134,7 @@ export default function TowerOfHanoi() {
         </div>
         <div style={s.stat}>
           <span style={s.statLabel}>{t('hanoiMoves')}</span>
-          <span style={{ ...s.statValue, color: moves >= maxMoves ? '#e74c3c' : '#1a1a1a' }}>{moves}</span>
+          <span style={{ ...s.statValue, color: moves >= maxMoves ? '#e74c3c' : '#eef0f4' }}>{moves}</span>
         </div>
         <div style={s.stat}>
           <span style={s.statLabel}>{t('hanoiMaxMoves')}</span>
@@ -155,7 +155,7 @@ export default function TowerOfHanoi() {
               ...s.pegArea,
               cursor: isFinished ? 'default' : 'pointer',
               background: selectedPeg === pegIdx ? '#ecebe6' : 'transparent',
-              borderColor: selectedPeg === pegIdx ? '#c9c7c0' : '#e2e0da',
+              borderColor: selectedPeg === pegIdx ? '#3a404c' : '#1e222b',
             }}
           >
             <span style={s.pegLabel}>{t('hanoiPeg')} {pegIdx + 1}</span>
@@ -231,30 +231,30 @@ export default function TowerOfHanoi() {
 }
 
 const s = {
-  intro: { fontFamily: "var(--font-body)", fontSize: 16, color: '#4a4a48', marginBottom: 28 },
+  intro: { fontFamily: "var(--font-body)", fontSize: 16, color: '#b4bac5', marginBottom: 28 },
   selectRow: { display: 'flex', gap: 10, flexWrap: 'wrap', marginBottom: 20 },
   selectBtn: {
     fontFamily: "var(--font-mono)", fontSize: 14, width: 44, height: 44,
-    border: '1px solid #d6d4cd', borderRadius: 4, cursor: 'pointer', transition: 'all 0.2s',
+    border: '1px solid #2c313c', borderRadius: 4, cursor: 'pointer', transition: 'all 0.2s',
     display: 'flex', alignItems: 'center', justifyContent: 'center',
   },
   selectInfo: {
     display: 'flex', gap: 24, marginBottom: 28,
-    fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: '0.1em', color: '#8a8a86',
+    fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: '0.1em', color: '#7b8290',
   },
   selectInfoLabel: {},
   startBtn: {
     fontFamily: "var(--font-mono)", fontSize: 12, letterSpacing: '0.06em',
-    padding: '10px 28px', border: '1px solid #1a1a1a', borderRadius: 4,
-    background: '#1a1a1a', color: '#f4f3ef', cursor: 'pointer', transition: 'all 0.2s',
+    padding: '10px 28px', border: '1px solid #eef0f4', borderRadius: 4,
+    background: '#eef0f4', color: '#14171d', cursor: 'pointer', transition: 'all 0.2s',
   },
   statsBar: {
     display: 'flex', gap: 32, padding: '16px 0', marginBottom: 8,
-    borderBottom: '1px solid #e2e0da',
+    borderBottom: '1px solid #1e222b',
   },
   stat: { display: 'flex', flexDirection: 'column', gap: 4 },
-  statLabel: { fontFamily: "var(--font-mono)", fontSize: 10, letterSpacing: '0.12em', color: '#8a8a86' },
-  statValue: { fontFamily: "var(--font-mono)", fontSize: 22, fontWeight: 500, color: '#1a1a1a' },
+  statLabel: { fontFamily: "var(--font-mono)", fontSize: 10, letterSpacing: '0.12em', color: '#7b8290' },
+  statValue: { fontFamily: "var(--font-mono)", fontSize: 22, fontWeight: 500, color: '#eef0f4' },
   message: {
     fontFamily: "var(--font-body)", fontSize: 14, padding: '12px 0', minHeight: 40,
     transition: 'color 0.2s',
@@ -263,22 +263,22 @@ const s = {
     display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16, marginBottom: 32,
   },
   pegArea: {
-    border: '1px solid #e2e0da', borderRadius: 4, padding: '16px 12px 12px',
+    border: '1px solid #1e222b', borderRadius: 4, padding: '16px 12px 12px',
     display: 'flex', flexDirection: 'column', alignItems: 'center',
     transition: 'background 0.2s, border-color 0.2s',
   },
   pegLabel: {
     fontFamily: "var(--font-mono)", fontSize: 10, letterSpacing: '0.1em',
-    color: '#8a8a86', marginBottom: 12,
+    color: '#7b8290', marginBottom: 12,
   },
   pegVisual: { position: 'relative', width: '100%', display: 'flex', justifyContent: 'center' },
   rod: {
     position: 'absolute', bottom: 0, left: '50%', transform: 'translateX(-50%)',
-    width: 4, height: '100%', background: '#d6d4cd', borderRadius: 2,
+    width: 4, height: '100%', background: '#2c313c', borderRadius: 2,
   },
   base: {
     position: 'absolute', bottom: 0, left: '10%', right: '10%',
-    height: 4, background: '#c9c7c0', borderRadius: 2,
+    height: 4, background: '#3a404c', borderRadius: 2,
   },
   disk: {
     position: 'absolute', left: '50%', transform: 'translateX(-50%)',
@@ -290,28 +290,28 @@ const s = {
     color: '#fff', textShadow: '0 1px 2px rgba(0,0,0,0.3)',
   },
   endCard: {
-    padding: 32, background: '#fafaf6', border: '1px solid #e2e0da', borderRadius: 4,
+    padding: 32, background: '#111419', border: '1px solid #1e222b', borderRadius: 4,
     textAlign: 'center', marginBottom: 32,
   },
   endTitle: { fontFamily: "var(--font-display)", fontSize: 32, fontWeight: 400, marginBottom: 12 },
-  endDesc: { fontFamily: "var(--font-body)", fontSize: 15, color: '#4a4a48', marginBottom: 24 },
+  endDesc: { fontFamily: "var(--font-body)", fontSize: 15, color: '#b4bac5', marginBottom: 24 },
   endStats: {
     display: 'flex', justifyContent: 'center', gap: 32, marginBottom: 24,
-    fontFamily: "var(--font-mono)", fontSize: 12, color: '#6b6a66', letterSpacing: '0.06em',
+    fontFamily: "var(--font-mono)", fontSize: 12, color: '#8a919d', letterSpacing: '0.06em',
   },
   endStatItem: {},
   actions: { display: 'flex', gap: 12, marginBottom: 32 },
   actionBtn: {
     fontFamily: "var(--font-mono)", fontSize: 12, letterSpacing: '0.06em',
-    padding: '8px 20px', border: '1px solid #d6d4cd', borderRadius: 4,
-    background: 'transparent', color: '#6b6a66', cursor: 'pointer', transition: 'all 0.2s',
+    padding: '8px 20px', border: '1px solid #2c313c', borderRadius: 4,
+    background: 'transparent', color: '#8a919d', cursor: 'pointer', transition: 'all 0.2s',
   },
   exSection: { marginTop: 20 },
   exCard: {
-    marginTop: 16, padding: 28, background: '#fafaf6', border: '1px solid #e2e0da', borderRadius: 4,
+    marginTop: 16, padding: 28, background: '#111419', border: '1px solid #1e222b', borderRadius: 4,
   },
   exTitle: {
-    fontFamily: "var(--font-display)", fontSize: 22, fontWeight: 400, color: '#1a1a1a', marginBottom: 16,
+    fontFamily: "var(--font-display)", fontSize: 22, fontWeight: 400, color: '#eef0f4', marginBottom: 16,
   },
-  exP: { fontFamily: "var(--font-body)", fontSize: 14, lineHeight: 1.7, color: '#4a4a48', marginBottom: 10 },
+  exP: { fontFamily: "var(--font-body)", fontSize: 14, lineHeight: 1.7, color: '#b4bac5', marginBottom: 10 },
 };

@@ -1,7 +1,6 @@
 import { useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
 import { useLang } from '../i18n.jsx';
+import { FunBack, FUN_CSS } from '../components/fun/FunFrame';
 
 const cakeColors = ['#ff6b6b', '#ffa94d', '#ffd43b', '#69db7c', '#74c0fc', '#b197fc', '#f783ac'];
 
@@ -55,9 +54,8 @@ export default function BirthdayPage() {
   if (created) {
     return (
       <div style={s.container}>
-        <Link to="/fun" className="link-hover" style={s.back}>
-          <ArrowLeft size={16} strokeWidth={1.5} /> {t('funBack')}
-        </Link>
+        <style>{FUN_CSS}</style>
+        <div style={{ position: 'relative', zIndex: 10, marginBottom: 40 }}><FunBack /></div>
         <div style={s.center} ref={cakeRef}>
           <p style={s.sparkle}>✨🎉🥳🎊✨</p>
           <h1 style={s.celebTitle}>{t('bdayHappy')},</h1>
@@ -107,9 +105,8 @@ export default function BirthdayPage() {
 
   return (
     <div style={s.container}>
-      <Link to="/fun" className="link-hover" style={s.back}>
-        <ArrowLeft size={16} strokeWidth={1.5} /> {t('funBack')}
-      </Link>
+      <style>{FUN_CSS}</style>
+      <div style={{ position: 'relative', zIndex: 10, marginBottom: 40 }}><FunBack /></div>
       <div style={s.center}>
         <div style={{ fontSize: 56, marginBottom: 16 }}>🎂</div>
         <h1 style={s.title}>{t('bdayPageTitle')}</h1>
@@ -148,26 +145,26 @@ export default function BirthdayPage() {
 
 const s = {
   container: { maxWidth: 900, margin: '0 auto', padding: '60px 48px 120px', position: 'relative', zIndex: 2 },
-  back: { display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: "var(--font-mono)", fontSize: 12, letterSpacing: '0.06em', color: '#6b6a66', marginBottom: 60, cursor: 'pointer' },
+  back: { display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: "var(--font-mono)", fontSize: 12, letterSpacing: '0.06em', color: '#8a919d', marginBottom: 60, cursor: 'pointer' },
   center: { display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' },
-  title: { fontFamily: "var(--font-display)", fontSize: 56, fontWeight: 400, lineHeight: 1, letterSpacing: '-0.015em', color: '#1a1a1a', marginBottom: 40 },
+  title: { fontFamily: "var(--font-display)", fontSize: 56, fontWeight: 400, lineHeight: 1, letterSpacing: '-0.015em', color: '#eef0f4', marginBottom: 40 },
   form: { display: 'flex', flexDirection: 'column', gap: 20, width: '100%', maxWidth: 360 },
   field: { display: 'flex', flexDirection: 'column', gap: 6, textAlign: 'left' },
-  label: { fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#8a8a86' },
+  label: { fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#7b8290' },
   input: {
     fontFamily: "var(--font-body)", fontSize: 16, padding: '12px 16px',
-    border: '1px solid #d6d4cd', borderRadius: 4, background: '#fafaf6', color: '#1a1a1a',
+    border: '1px solid #2c313c', borderRadius: 4, background: '#111419', color: '#eef0f4',
     outline: 'none',
   },
   createBtn: {
     fontFamily: "var(--font-body)", fontSize: 16, fontWeight: 600,
-    padding: '14px 32px', background: '#1a1a1a', color: '#f4f3ef',
+    padding: '14px 32px', background: '#eef0f4', color: '#14171d',
     border: 'none', borderRadius: 6, cursor: 'pointer', marginTop: 8,
     transition: 'opacity 0.3s',
   },
   sparkle: { fontSize: 28, letterSpacing: 8, marginBottom: 12 },
-  celebTitle: { fontFamily: "var(--font-display)", fontSize: 48, fontWeight: 400, color: '#1a1a1a', lineHeight: 1.1 },
-  celebName: { fontFamily: "var(--font-display)", fontStyle: 'italic', fontSize: 64, fontWeight: 400, color: '#1a1a1a', marginBottom: 32, lineHeight: 1.1 },
+  celebTitle: { fontFamily: "var(--font-display)", fontSize: 48, fontWeight: 400, color: '#eef0f4', lineHeight: 1.1 },
+  celebName: { fontFamily: "var(--font-display)", fontStyle: 'italic', fontSize: 64, fontWeight: 400, color: '#eef0f4', marginBottom: 32, lineHeight: 1.1 },
   cake: { display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: 24 },
   candleArea: { display: 'flex', flexDirection: 'column', gap: 2, marginBottom: 4 },
   candleWrap: { display: 'flex', flexDirection: 'column', alignItems: 'center' },
@@ -177,18 +174,18 @@ const s = {
   icingDrip: { position: 'absolute', bottom: 0, left: 0, right: 0, height: 8, background: 'rgba(255,255,255,0.35)', borderRadius: '0 0 4px 4px' },
   cakeMiddle: { width: 240, height: 50, background: '#ffa94d', borderLeft: '2px solid #e09040', borderRight: '2px solid #e09040' },
   cakeBottom: { width: 260, height: 50, background: '#ff6b6b', borderRadius: '0 0 12px 12px', borderLeft: '2px solid #e05555', borderRight: '2px solid #e05555', borderBottom: '2px solid #e05555' },
-  plate: { width: 300, height: 12, background: '#e2e0da', borderRadius: '0 0 50% 50%', marginTop: 2 },
-  ageLabel: { fontFamily: "var(--font-mono)", fontSize: 14, color: '#6b6a66', letterSpacing: '0.06em', marginBottom: 8 },
-  wish: { fontFamily: "var(--font-body)", fontSize: 20, color: '#4a4a48', marginBottom: 32 },
+  plate: { width: 300, height: 12, background: '#1e222b', borderRadius: '0 0 50% 50%', marginTop: 2 },
+  ageLabel: { fontFamily: "var(--font-mono)", fontSize: 14, color: '#8a919d', letterSpacing: '0.06em', marginBottom: 8 },
+  wish: { fontFamily: "var(--font-body)", fontSize: 20, color: '#b4bac5', marginBottom: 32 },
   btnRow: { display: 'flex', gap: 16, flexWrap: 'wrap', justifyContent: 'center' },
   shareBtn: {
     fontFamily: "var(--font-body)", fontSize: 15, fontWeight: 600,
-    padding: '12px 32px', background: '#1a1a1a', color: '#f4f3ef',
+    padding: '12px 32px', background: '#eef0f4', color: '#14171d',
     border: 'none', borderRadius: 6, cursor: 'pointer',
   },
   resetBtn: {
     fontFamily: "var(--font-body)", fontSize: 14, fontWeight: 500,
-    padding: '12px 28px', background: 'transparent', color: '#4a4a48',
-    border: '1px solid #d6d4cd', borderRadius: 6, cursor: 'pointer',
+    padding: '12px 28px', background: 'transparent', color: '#b4bac5',
+    border: '1px solid #2c313c', borderRadius: 6, cursor: 'pointer',
   },
 };

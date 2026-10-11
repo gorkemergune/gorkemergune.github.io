@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowLeft, RotateCcw, X, Circle } from 'lucide-react';
+import { RotateCcw, X, Circle } from 'lucide-react';
 import { useLang } from '../i18n.jsx';
+import { FunHeader, FUN_CSS } from '../components/fun/FunFrame';
 
 const LINES = [
   [0, 1, 2], [3, 4, 5], [6, 7, 8],
@@ -64,16 +64,9 @@ export default function TicTacToePage() {
   const msgColor = result === 'X' ? '#00e5a0' : result === 'O' ? '#ff4d6d' : result === 'draw' ? '#ffd166' : '#8b929e';
 
   return (
-    <div style={s.container}>
-      <Link to="/fun" className="link-hover" style={s.back}>
-        <ArrowLeft size={16} strokeWidth={1.5} /> {t('funBack')}
-      </Link>
-
-      <div style={s.header}>
-        <span className="chip">{t('funBadge')}</span>
-        <h1 className="section-title" style={s.title}>{t('funTttTitle')}</h1>
-        <p style={s.desc}>{t('tttSub')}</p>
-      </div>
+    <div className="fun-page" style={{ maxWidth: s.container.maxWidth, '--fun-acc': '#ff6b35' }}>
+      <style>{FUN_CSS}</style>
+      <FunHeader kind="game" accent="#ff6b35" title={t('funTttTitle')} sub={t('tttSub')}></FunHeader>
 
       <div style={s.scoreRow}>
         <div style={s.score}><span style={{ ...s.scoreVal, color: '#00e5a0' }}>{tally.w}</span><span style={s.scoreLabel}>{t('tttW')}</span></div>

@@ -1,6 +1,5 @@
-import { Link } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
 import { useLang } from '../i18n.jsx';
+import { FunHeader, FUN_CSS } from '../components/fun/FunFrame';
 import LoveMeter from '../components/fun/LoveMeter.jsx';
 import FloatingHearts from '../components/fun/FloatingHearts.jsx';
 
@@ -10,19 +9,13 @@ export default function LoveMeterPage() {
   const { t } = useLang();
 
   return (
-    <div style={s.container}>
+    <div className="fun-page" style={{ maxWidth: s.container.maxWidth, '--fun-acc': '#ff4d6d' }}>
       <FloatingHearts />
 
-      <Link to="/fun" className="link-hover" style={s.back}>
-        <ArrowLeft size={16} strokeWidth={1.5} /> {t('funBack')}
-      </Link>
-
-      <div style={s.header}>
-        <span className="chip">{t('funBadge')}</span>
-        <h1 className="section-title" style={s.title}>{t('funLoveTitle')}</h1>
-        <p style={s.desc}>{t('loveSub')}</p>
+      <style>{FUN_CSS}</style>
+      <FunHeader kind="me" accent="#ff4d6d" title={t('funLoveTitle')} sub={t('loveSub')}>
         <p style={s.disclaimer}>{t('loveDisclaimer')}</p>
-      </div>
+      </FunHeader>
 
       <LoveMeter />
     </div>

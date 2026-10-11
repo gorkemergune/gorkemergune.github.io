@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowLeft, RotateCcw } from 'lucide-react';
+import { RotateCcw } from 'lucide-react';
 import { useLang } from '../i18n.jsx';
+import { FunHeader, FUN_CSS } from '../components/fun/FunFrame';
 
 const N = 4;
 const empty = () => Array.from({ length: N }, () => Array(N).fill(0));
@@ -110,16 +110,9 @@ export default function Game2048Page() {
   };
 
   return (
-    <div style={s.container}>
-      <Link to="/fun" className="link-hover" style={s.back}>
-        <ArrowLeft size={16} strokeWidth={1.5} /> {t('funBack')}
-      </Link>
-
-      <div style={s.header}>
-        <span className="chip">{t('funBadge')}</span>
-        <h1 className="section-title" style={s.title}>{t('funGame2048Title')}</h1>
-        <p style={s.desc}>{t('g2048Sub')}</p>
-      </div>
+    <div className="fun-page" style={{ maxWidth: s.container.maxWidth, '--fun-acc': '#9d6bff' }}>
+      <style>{FUN_CSS}</style>
+      <FunHeader kind="game" accent="#9d6bff" title={t('funGame2048Title')} sub={t('g2048Sub')}></FunHeader>
 
       <div style={s.bar}>
         <div style={s.score}><span style={s.scoreLabel}>{t('g2048Score')}</span><span style={s.scoreVal}>{score}</span></div>

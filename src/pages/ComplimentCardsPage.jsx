@@ -1,7 +1,7 @@
 import { useState, useCallback, useMemo } from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowLeft, Heart, Sparkles, Shuffle } from 'lucide-react';
+import { Heart, Sparkles, Shuffle } from 'lucide-react';
 import { useLang } from '../i18n.jsx';
+import { FunHeader, FUN_CSS } from '../components/fun/FunFrame';
 import { compliments, CARD_COUNT } from '../data/compliments.js';
 
 // Accent palette reused from the portfolio — cycles across the 16 cards so each
@@ -125,18 +125,11 @@ export default function ComplimentCardsPage() {
   }, []);
 
   return (
-    <div style={s.container}>
+    <div className="fun-page" style={{ maxWidth: s.container.maxWidth, '--fun-acc': '#ffd166' }}>
       <style>{css}</style>
 
-      <Link to="/fun" className="link-hover" style={s.back}>
-        <ArrowLeft size={16} strokeWidth={1.5} /> {t('funBack')}
-      </Link>
-
-      <div style={s.header}>
-        <span className="chip">{t('funBadge')}</span>
-        <h1 className="section-title" style={s.title}>{t('funComplimentsTitle')}</h1>
-        <p style={s.desc}>{t('complimentsSub')}</p>
-      </div>
+      <style>{FUN_CSS}</style>
+      <FunHeader kind="me" accent="#ffd166" title={t('funComplimentsTitle')} sub={t('complimentsSub')}></FunHeader>
 
       <div style={s.bar}>
         <span style={s.stat}>

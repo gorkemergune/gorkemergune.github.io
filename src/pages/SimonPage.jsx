@@ -1,7 +1,7 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowLeft, Play } from 'lucide-react';
+import { Play } from 'lucide-react';
 import { useLang } from '../i18n.jsx';
+import { FunHeader, FUN_CSS } from '../components/fun/FunFrame';
 
 const PADS = [
   { id: 0, base: '#0e5c4a', lit: '#2ee6b6' },
@@ -66,16 +66,9 @@ export default function SimonPage() {
   }[phase];
 
   return (
-    <div style={s.container}>
-      <Link to="/fun" className="link-hover" style={s.back}>
-        <ArrowLeft size={16} strokeWidth={1.5} /> {t('funBack')}
-      </Link>
-
-      <div style={s.header}>
-        <span className="chip">{t('funBadge')}</span>
-        <h1 className="section-title" style={s.title}>{t('funSimonTitle')}</h1>
-        <p style={s.desc}>{t('simonSub')}</p>
-      </div>
+    <div className="fun-page" style={{ maxWidth: s.container.maxWidth, '--fun-acc': '#2ee6b6' }}>
+      <style>{FUN_CSS}</style>
+      <FunHeader kind="game" accent="#2ee6b6" title={t('funSimonTitle')} sub={t('simonSub')}></FunHeader>
 
       <div style={s.statsRow}>
         <div style={s.stat}><span style={s.statVal}>{phase === 'over' || phase === 'idle' ? 0 : seq.length}</span><span style={s.statLabel}>{t('simonLevel')}</span></div>

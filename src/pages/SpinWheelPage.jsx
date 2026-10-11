@@ -1,7 +1,7 @@
 import { useRef, useState, useCallback } from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowLeft, Sparkles } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 import { useLang } from '../i18n.jsx';
+import { FunHeader, FUN_CSS } from '../components/fun/FunFrame';
 import Wheel from '../components/fun/Wheel.jsx';
 import WheelResultCard from '../components/fun/WheelResultCard.jsx';
 import { wheelChallenges } from '../data/wheelChallenges.js';
@@ -25,16 +25,9 @@ export default function SpinWheelPage() {
   const doSpin = useCallback(() => wheelRef.current?.spin(), []);
 
   return (
-    <div style={s.container}>
-      <Link to="/fun" className="link-hover" style={s.back}>
-        <ArrowLeft size={16} strokeWidth={1.5} /> {t('funBack')}
-      </Link>
-
-      <div style={s.header}>
-        <span className="chip">{t('funBadge')}</span>
-        <h1 className="section-title" style={s.title}>{t('funWheelTitle')}</h1>
-        <p style={s.desc}>{t('wheelSub')}</p>
-      </div>
+    <div className="fun-page" style={{ maxWidth: s.container.maxWidth, '--fun-acc': '#9d6bff' }}>
+      <style>{FUN_CSS}</style>
+      <FunHeader kind="me" accent="#9d6bff" title={t('funWheelTitle')} sub={t('wheelSub')}></FunHeader>
 
       <Wheel ref={wheelRef} onSpinStart={handleSpinStart} onLanded={handleLanded} />
 

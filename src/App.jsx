@@ -8,6 +8,13 @@ import Home from './pages/Home';
 
 // Route-level code-splitting keeps the landing bundle small (better LCP/TBT).
 const FunHub = lazy(() => import('./pages/FunHub'));
+const GiftBoxPage = lazy(() => import('./pages/GiftBoxPage'));
+const ScratchCardPage = lazy(() => import('./pages/ScratchCardPage'));
+const ConstellationPage = lazy(() => import('./pages/ConstellationPage'));
+const LightsOutPage = lazy(() => import('./pages/LightsOutPage'));
+const StopClockPage = lazy(() => import('./pages/StopClockPage'));
+const FortuneCookiePage = lazy(() => import('./pages/FortuneCookiePage'));
+const OddOneOutPage = lazy(() => import('./pages/OddOneOutPage'));
 const SorryPage = lazy(() => import('./pages/SorryPage'));
 const BirthdayPage = lazy(() => import('./pages/BirthdayPage'));
 const HangmanPage = lazy(() => import('./pages/HangmanPage'));
@@ -481,6 +488,13 @@ export default function App() {
           <Route path="/fun/compliments" element={<ComplimentCardsPage />} />
           <Route path="/fun/lovemeter" element={<LoveMeterPage />} />
           <Route path="/fun/wheel" element={<SpinWheelPage />} />
+          <Route path="/fun/gift" element={<GiftBoxPage />} />
+          <Route path="/fun/scratch" element={<ScratchCardPage />} />
+          <Route path="/fun/stars" element={<ConstellationPage />} />
+          <Route path="/fun/lights" element={<LightsOutPage />} />
+          <Route path="/fun/stopclock" element={<StopClockPage />} />
+          <Route path="/fun/fortune" element={<FortuneCookiePage />} />
+          <Route path="/fun/odd" element={<OddOneOutPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/project" element={<ProjectPage />} />
           <Route path="/project/:slug" element={<ProjectDetail />} />

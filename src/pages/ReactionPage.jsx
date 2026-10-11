@@ -1,7 +1,7 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowLeft, Zap } from 'lucide-react';
+import { Zap } from 'lucide-react';
 import { useLang } from '../i18n.jsx';
+import { FunHeader, FUN_CSS } from '../components/fun/FunFrame';
 
 // States: idle -> waiting (red, don't click) -> go (green, click!) -> result
 export default function ReactionPage() {
@@ -50,16 +50,9 @@ export default function ReactionPage() {
   }[state];
 
   return (
-    <div style={s.container}>
-      <Link to="/fun" className="link-hover" style={s.back}>
-        <ArrowLeft size={16} strokeWidth={1.5} /> {t('funBack')}
-      </Link>
-
-      <div style={s.header}>
-        <span className="chip">{t('funBadge')}</span>
-        <h1 className="section-title" style={s.title}>{t('funReactionTitle')}</h1>
-        <p style={s.desc}>{t('reactionSub')}</p>
-      </div>
+    <div className="fun-page" style={{ maxWidth: s.container.maxWidth, '--fun-acc': '#00e5a0' }}>
+      <style>{FUN_CSS}</style>
+      <FunHeader kind="game" accent="#00e5a0" title={t('funReactionTitle')} sub={t('reactionSub')}></FunHeader>
 
       <button
         onClick={onClick}

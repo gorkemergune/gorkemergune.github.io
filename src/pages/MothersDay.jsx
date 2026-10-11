@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
 import { useLang } from '../i18n.jsx';
+import { FunBack, FUN_CSS } from '../components/fun/FunFrame';
 
 const flowers = ['🌸', '🌺', '🌷', '💐', '🌹', '🌻', '💮', '🪻', '🌼'];
 
@@ -123,9 +122,8 @@ export default function MothersDay() {
         }}>✨</div>
       ))}
 
-      <Link to="/fun" className="link-hover" style={s.back}>
-        <ArrowLeft size={16} strokeWidth={1.5} /> {t('funBack')}
-      </Link>
+      <style>{FUN_CSS}</style>
+      <div style={{ position: 'relative', zIndex: 10, marginBottom: 40 }}><FunBack /></div>
 
       <div style={s.center}>
         <div style={s.heartWrap}>
@@ -155,14 +153,14 @@ export default function MothersDay() {
 
 const s = {
   container: { maxWidth: 900, margin: '0 auto', padding: '60px 48px 120px', position: 'relative', zIndex: 2, overflow: 'hidden' },
-  back: { display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: "var(--font-mono)", fontSize: 12, letterSpacing: '0.06em', color: '#6b6a66', marginBottom: 60, cursor: 'pointer', position: 'relative', zIndex: 10 },
+  back: { display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: "var(--font-mono)", fontSize: 12, letterSpacing: '0.06em', color: '#8a919d', marginBottom: 60, cursor: 'pointer', position: 'relative', zIndex: 10 },
   center: { display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', marginTop: 20, position: 'relative', zIndex: 5 },
   heartWrap: { marginBottom: 24 },
   bigHeart: { fontSize: 80, display: 'inline-block', animation: 'heartPulse 1.5s ease-in-out infinite' },
   bouquet: { fontSize: 32, letterSpacing: 8, marginBottom: 32 },
   title: {
     fontFamily: "var(--font-display)", fontSize: 52, fontWeight: 400,
-    lineHeight: 1.1, letterSpacing: '-0.015em', color: '#1a1a1a',
+    lineHeight: 1.1, letterSpacing: '-0.015em', color: '#eef0f4',
     marginBottom: 12, animation: 'textGlow 3s ease-in-out infinite',
   },
   subtitle: {
@@ -172,13 +170,13 @@ const s = {
   flowerRow: { display: 'flex', gap: 16, marginBottom: 40 },
   flowerItem: { fontSize: 36, display: 'inline-block', animation: 'heartPulse 2s ease-in-out infinite' },
   messageCard: {
-    background: 'linear-gradient(135deg, #fdf2f8, #fce7f3)',
+    background: 'linear-gradient(135deg, #25151f, #2a1622)',
     border: '1px solid #f9a8d4', borderRadius: 16, padding: '32px 40px',
     maxWidth: 500, boxShadow: '0 8px 32px rgba(236, 72, 153, 0.1)',
   },
   message: {
     fontFamily: "var(--font-body)", fontSize: 18,
-    lineHeight: 1.7, color: '#831843', fontWeight: 400,
+    lineHeight: 1.7, color: '#f9a8d4', fontWeight: 400,
   },
   bottomHeart: { fontSize: 48, marginTop: 40 },
 };
