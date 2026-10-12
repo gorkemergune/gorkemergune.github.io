@@ -1,1 +1,1 @@
-# open --> [gorkemergune.github.io](https://gorkemergune.github.io/)
+# open --> [gorkemergune.c](https://gorkemergune.github.io/)om
