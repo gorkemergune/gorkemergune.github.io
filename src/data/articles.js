@@ -241,6 +241,76 @@ const ARTICLES = {
         ],
       },
     },
+
+    {
+      slug: 'turkish-lip-reading-errors',
+      accent: '#a78bfa',
+      title: 'Challenges and Enhancements in Turkish Automatic Lip Reading Using Deep Learning Models',
+      authors: ['Furkan Sabaz', 'Ümit Atila', 'Murat Dörterler', 'Alaettin Uçan'],
+      affiliations: 'Signal, Image and Video Processing, vol. 20, 237',
+      venue: 'SIVP 2026',
+      arxiv: 'DOI 10.1007/s11760-026-05252-2',
+      url: 'https://doi.org/10.1007/s11760-026-05252-2',
+      // Springer, standard TDM licence (Crossref, checked 20 Oct 2026): no
+      // redistribution of the annotated copy.
+      pdf: null,
+      date: 'Mar 2026',
+      readOn: 'October 2026',
+      readOnTr: 'Ekim 2026',
+      category: 'Computer Vision',
+      categoryTr: 'Bilgisayarlı Görü',
+      tags: ['Lip Reading', 'Turkish', 'Error Analysis'],
+      tagsTr: ['Dudak Okuma', 'Türkçe', 'Hata Analizi'],
+      summary:
+        'No new model: the team takes its own 2022 Turkish lip reader (ResNet-18 + BiLSTM) and asks where it goes wrong. The answers are b/p/m, look-alike words and short words.',
+      summaryTr:
+        'Yeni model yok: ekip 2022’deki kendi Türkçe dudak okuma modelini (ResNet-18 + BiLSTM) alıp nerede yanıldığını soruyor. Cevaplar b/p/m, birbirine benzeyen kelimeler ve kısa kelimeler.',
+
+      notes: [
+        {
+          heading: 'What stuck with me',
+          headingTr: 'Aklımda kalan',
+          points: [
+            'b, p and m cut both ways. Words that contain one reach 0.8823 WRR against 0.7562 for words without, and all of the best 15 words have one. Yet the top confusions are exactly those letters: Meyve was read as Perde 35 times, because on the lips p, b and m look the same.',
+            'Short, similar words are where it breaks. The worst 15 words average 6.46 letters against 9.66 for the best 15, and confused pairs sit at a Levenshtein distance of 6.01 against 7.42 for the whole set.',
+          ],
+          pointsTr: [
+            'b, p ve m iki yönlü kesiyor. Bu harflerden birini içeren kelimeler 0,8823 WRR’ye çıkarken içermeyenler 0,7562’de kalıyor ve en iyi 15 kelimenin hepsinde biri var. Ama en çok karışanlar da tam bu harfler: Meyve 35 kez Perde diye okunmuş, çünkü dudakta p, b ve m aynı görünüyor.',
+            'Model kısa ve birbirine benzeyen kelimelerde kırılıyor. En kötü 15 kelime ortalama 6,46 harf, en iyi 15 ise 9,66; karışan çiftlerin Levenshtein mesafesi 6,01, tüm sette 7,42.',
+          ],
+        },
+        {
+          heading: 'Recall alone lies',
+          headingTr: 'Recall tek başına yanıltıyor',
+          points: [
+            '“Ama” scores 100% WRR, but its precision is 0.70. Köpek, Kaplan and Baba keep getting predicted as “Ama”. A short word turns into a sink class, and per-class recall hides it completely.',
+          ],
+          pointsTr: [
+            '“Ama” %100 WRR alıyor ama precision’ı 0,70. Köpek, Kaplan ve Baba sürekli “Ama” diye tahmin ediliyor. Kısa bir kelime çöp sınıfına dönüşüyor ve sınıf bazında recall bunu tamamen gizliyor.',
+          ],
+        },
+        {
+          heading: 'What I’m not convinced by',
+          headingTr: 'İkna olmadığım yerler',
+          points: [
+            'The suffixed-word set (SDW) is the most Turkish part of the paper, and it has no number. The abstract talks about a clear drop, but no table shows SDW accuracy. The paper also does not say whether the 75/25 split is speaker-independent, and it does not separate word length from the b/p/m effect.',
+          ],
+          pointsTr: [
+            'Ekli kelime seti (SDW) makalenin en Türkçe’ye özgü kısmı ve hiç sayısı yok. Özet belirgin bir düşüşten bahsediyor ama SDW doğruluğunu gösteren tablo yok. 75/25 bölmenin konuşmacıdan bağımsız olup olmadığı da yazmıyor; kelime uzunluğu ile b/p/m etkisi de birbirinden ayrılmamış.',
+          ],
+        },
+        {
+          heading: 'Note to self',
+          headingTr: 'Kendi işim için not',
+          points: [
+            'If I build something like this: split by speaker, report precision and F1 per class, treat p/b/m as one viseme, and measure word similarity on visemes instead of letters. Levenshtein on letters misses the similarity the model actually sees.',
+          ],
+          pointsTr: [
+            'Böyle bir şey kurarsam: konuşmacıya göre böleceğim, sınıf bazında precision ve F1 raporlayacağım, p/b/m’yi tek viseme sayacağım ve kelime benzerliğini harf yerine viseme üzerinden ölçeceğim. Harf düzeyinde Levenshtein, modelin gerçekte gördüğü benzerliği kaçırıyor.',
+          ],
+        },
+      ],
+    },
   ],
 
   written: [
