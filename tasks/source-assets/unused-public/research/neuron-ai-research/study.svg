@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 800" role="img" aria-label="Neuron AI study: 21 live sites, 4 reviewers over 4 rounds, 0 LLM calls observed, 5 recurring gap patterns, 1 platform-level proposal">
+  <rect width="1280" height="800" fill="#0f1218"/>
+  <g stroke="#1e222b"><path d="M0 200H1280M0 400H1280M0 600H1280M320 0V800M640 0V800M960 0V800"/></g>
+  <text x="80" y="110" font-family="JetBrains Mono, monospace" font-size="22" letter-spacing="5" fill="#6b7280">NEURON AI · FEATURE STUDY</text>
+  <g font-family="Space Grotesk, Helvetica, Arial, sans-serif" fill="#eef0f4">
+    <g transform="translate(80 250)"><text font-size="120" font-weight="500">21</text><text y="60" font-size="28" fill="#9aa1ad">live sites reviewed</text></g>
+    <g transform="translate(420 250)"><text font-size="120" font-weight="500">4×4</text><text y="60" font-size="28" fill="#9aa1ad">reviewers × rounds</text></g>
+    <g transform="translate(840 250)"><text font-size="120" font-weight="500" fill="#38BDF8">0</text><text y="60" font-size="28" fill="#9aa1ad">LLM calls in network traffic</text></g>
+  </g>
+  <g font-family="Space Grotesk, Helvetica, Arial, sans-serif">
+    <g transform="translate(80 520)">
+      <rect width="500" height="150" fill="none" stroke="#2c313c"/>
+      <text x="32" y="78" font-size="64" fill="#eef0f4" font-weight="500">5</text>
+      <text x="100" y="62" font-size="26" fill="#eef0f4">recurring gap patterns</text>
+      <text x="100" y="98" font-size="20" fill="#6b7280">across every site, not 21 separate problems</text>
+    </g>
+    <path d="M600 595H690" stroke="#00F0FF" stroke-width="2"/><path d="M680 585L692 595L680 605" fill="none" stroke="#00F0FF" stroke-width="2"/>
+    <g transform="translate(710 520)">
+      <rect width="490" height="150" fill="none" stroke="#00F0FF" stroke-opacity="0.6"/>
+      <text x="32" y="78" font-size="64" fill="#eef0f4" font-weight="500">1</text>
+      <text x="100" y="62" font-size="26" fill="#eef0f4">platform-level proposal</text>
+      <text x="100" y="98" font-size="20" fill="#6b7280">“Neuron Kernel”: tool calling + retrieval</text>
+    </g>
+  </g>
+  <text x="80" y="740" font-family="JetBrains Mono, monospace" font-size="16" letter-spacing="2" fill="#4b515c">DIAGRAM DRAWN FOR THIS SITE FROM THE STUDY’S OWN FINDINGS</text>
+</svg>
