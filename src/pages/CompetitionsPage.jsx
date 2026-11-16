@@ -5,7 +5,7 @@ import { useSeo } from '../hooks/useSeo';
 import COMPETITIONS from '../data/competitions';
 
 // The competition record (Phase 8): a quiet scoreboard, not a trophy cabinet.
-// Algorithm contests and camps first (IEEEXtreme as the flagship plate), then
+// Algorithm contests and camps first (IEEEXtreme editions as flagship plates), then
 // hackathons. Each plate reads: name → score & rank → team → round / summary
 // → links. Only verified values are printed; an entry without a public score
 // or rank shows what was built instead of a placeholder.
@@ -20,7 +20,10 @@ export default function CompetitionsPage() {
   const hacks = COMPETITIONS.filter(isHack);
   const years = COMPETITIONS.map((c) => Number((c.date.match(/\d{4}/) || [])[0])).filter(Boolean);
   const span = years.length ? `${Math.min(...years)}–${Math.max(...years)}` : '';
-  const [flagship, ...camps] = contests;
+  // IEEEXtreme editions lead as flagship plates; the AlgoLeague camps follow
+  // in a 3-up grid (owner layout decision, 16 Nov 2026).
+  const flagships = contests.filter((c) => c.org === 'IEEE');
+  const camps = contests.filter((c) => c.org !== 'IEEE');
 
   return (
     <div className="cp ds-wrap">
@@ -41,6 +44,7 @@ export default function CompetitionsPage() {
         .cp-glabel { display: flex; align-items: center; gap: 14px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #aab2bf; margin-bottom: 20px; }
         .cp-glabel::before { content: ''; width: 18px; height: 2px; background: var(--c-tertiary); }
         .cp-glabel::after { content: ''; flex: 1; height: 1px; background: var(--c-line); }
+        .cp-flags { display: grid; gap: 16px; }
         .cp-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
 
         .cp-plate { position: relative; display: flex; flex-direction: column; min-width: 0; padding: 22px 22px 18px; background: linear-gradient(180deg, #12151b, #0c0e12); border: 1px solid var(--c-line); transition: border-color 0.3s; }
@@ -119,7 +123,9 @@ export default function CompetitionsPage() {
 
       <section className="cp-group" aria-labelledby="cp-g1">
         <h2 id="cp-g1" className="cp-glabel">{t('compGroupContests')}</h2>
-        {flagship && <Plate c={flagship} loc={loc} t={t} lang={lang} flagship />}
+        <div className="cp-flags">
+          {flagships.map((c) => <Plate key={c.id} c={c} loc={loc} t={t} lang={lang} flagship />)}
+        </div>
         <div className="cp-grid" style={{ marginTop: 16 }}>
           {camps.map((c) => <Plate key={c.id} c={c} loc={loc} t={t} lang={lang} />)}
         </div>

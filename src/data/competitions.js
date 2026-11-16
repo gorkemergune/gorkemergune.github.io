@@ -119,7 +119,9 @@ const COMPETITIONS = [
     dateTr: 'Kas 2026',
     initials: 'SA',
     accent: '#e08a56',
-    logo: null,
+    // Official Space Apps motif logo (2-colour, white) from Wikimedia Commons,
+    // public domain — NASA Space Apps Global Organizing Team.
+    logo: '/orgs/nasa-space-apps.svg',
     type: { en: 'Hackathon', tr: 'Hackathon' },
     score: null,
     rank: { value: '10', top: true },
