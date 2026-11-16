@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowLeft, ArrowUpRight, Github, ListOrdered } from 'lucide-react';
+import { ArrowLeft, ArrowUpRight, Gamepad2, Github, ListOrdered, PlayCircle } from 'lucide-react';
 import { useLang } from '../i18n.jsx';
 import { useSeo } from '../hooks/useSeo';
 import COMPETITIONS from '../data/competitions';
@@ -183,6 +183,8 @@ function Plate({ c, loc, t, lang, flagship = false }) {
       <div className="cp-tags">{(Array.isArray(c.tags) ? c.tags : loc(c.tags)).map((tag) => <span key={tag} className="label">{tag}</span>)}</div>
       <div className="cp-links">
         {c.leaderboard && <a href={c.leaderboard} target="_blank" rel="noopener noreferrer"><ListOrdered size={12} strokeWidth={1.5} /> {t('compLeaderboard')}</a>}
+        {c.play && <a href={c.play} target="_blank" rel="noopener noreferrer"><Gamepad2 size={12} strokeWidth={1.5} /> {t('compPlay')}</a>}
+        {c.trailer && <a href={c.trailer} target="_blank" rel="noopener noreferrer"><PlayCircle size={12} strokeWidth={1.5} /> {t('compTrailer')}</a>}
         {c.repo && <a href={c.repo} target="_blank" rel="noopener noreferrer"><Github size={12} strokeWidth={1.5} /> GitHub</a>}
         {c.website && <a href={c.website} target="_blank" rel="noopener noreferrer">{t('compVisit')} <ArrowUpRight size={12} strokeWidth={1.5} /></a>}
       </div>

@@ -46,6 +46,24 @@ export const EDUCATION = [
 
 export const WORK = [
   {
+    // Owner-supplied (16 Nov 2026): founded the startup, mentors and leads the
+    // team. Kept deliberately brief — the fellowship's internal material is
+    // confidential (private repo), so no member, client or product details.
+    id: 'nexa-startup',
+    org: 'NEXA',
+    role: 'Founder · Mentor & Team Lead',
+    roleTr: 'Kurucu · Mentor & Ekip Lideri',
+    type: 'Startup',
+    typeTr: 'Girişim',
+    start: '2026-11',
+    end: null,
+    summary: 'Founded a startup and run its fellowship programme: I mentor the cohort and lead the team through weekly deliverables toward its first product.',
+    summaryTr: 'Bir girişim kurdum ve fellowship programını yürütüyorum: ekibe mentorluk yapıyor, haftalık teslimlerle ilk ürüne giden süreçte ekibe liderlik ediyorum.',
+    logo: '/orgs/nexa.jpg',
+    tags: ['Mentorship', 'Team leadership', 'Startup'],
+    tagsTr: ['Mentorluk', 'Ekip liderliği', 'Girişim'],
+  },
+  {
     id: 'spotbox',
     org: 'Spotbox',
     role: 'Product Developer',

@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowUpRight, FileText, Github, X } from 'lucide-react';
+import { ArrowUpRight, FileText, Github, Globe, X } from 'lucide-react';
 import { useLang } from '../../i18n.jsx';
 
 // One research entry opened from the shelf: a modal dossier with the image,
@@ -147,11 +147,16 @@ export default function ResearchDossier({ it, onClose }) {
             </div>
           )}
 
-          {(it.repo || it.project || it.pdf) && (
+          {(it.repo || it.live || it.project || it.pdf) && (
             <div className="dz-links">
               {it.repo && (
                 <a href={it.repo} target="_blank" rel="noopener noreferrer" className="ds-link">
                   <Github size={13} strokeWidth={1.5} /> {t('researchRepo')} <ArrowUpRight size={12} strokeWidth={1.5} />
+                </a>
+              )}
+              {it.live && (
+                <a href={it.live} target="_blank" rel="noopener noreferrer" className="ds-link">
+                  <Globe size={13} strokeWidth={1.5} /> {t('researchLive')} <ArrowUpRight size={12} strokeWidth={1.5} />
                 </a>
               )}
               {it.project && (

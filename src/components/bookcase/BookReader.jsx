@@ -2,12 +2,12 @@ import { useEffect, useRef } from 'react';
 import { ArrowUpRight, FileText, X } from 'lucide-react';
 import { useLang } from '../../i18n.jsx';
 
-// A book opened from the shelf: a two-page spread on desktop (left: title,
-// authors, metadata, summary, links; right: the reading notes or the full
-// essay), one column on mobile. Modal dialog: Esc, backdrop and the close
+// A book opened from the shelf. Written books: a two-page spread on desktop
+// (left: title, metadata, summary, links; right: the full essay), one column
+// on mobile. Modal dialog: Esc, backdrop and the close
 // button dismiss it; focus moves in and is trapped while open.
-// Read books show Görkem's own notes and the paper's link — never the paper's
-// text. Written books show the essay's full text from i18n `blogPosts`.
+// Read books are a single page since 16 Nov 2026: title, authors, venue and
+// the paper's link only — reading notes are no longer published.
 export default function BookReader({ book, onClose }) {
   const { t } = useLang();
   const panel = useRef(null);
@@ -70,15 +70,9 @@ export default function BookReader({ book, onClose }) {
         .br-note li::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--c-tertiary); margin-top: 10px; flex: none; }
         .br-body p { font-family: var(--font-body); font-size: 16px; line-height: 1.8; color: #e0d8c8; }
         .br-body p + p { margin-top: 16px; }
-        .br-board { margin-top: 30px; }
-        .br-board .art-row { display: grid; grid-template-columns: 130px repeat(var(--art-cols, 3), minmax(80px, 1fr)); gap: 12px; align-items: baseline; padding: 12px 0; border-top: 1px solid #2a251b; }
-        .br-board .art-row-head { border-top: none; padding-bottom: 6px; }
-        .br-board .art-cell-label { display: none; }
-        .br-board .ch { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: #8a7d64; line-height: 1.4; }
-        .br-board .mn { font-family: var(--font-mono); font-size: 12px; color: #e7c27a; }
-        .br-board .sc { font-family: var(--font-mono); font-size: 12.5px; color: #e3dccd; font-variant-numeric: tabular-nums; }
-        .br-board .vd { grid-column: 1 / -1; font-family: var(--font-body); font-size: 13.5px; line-height: 1.6; color: #b8ad98; }
-        .br-board .cap { font-family: var(--font-body); font-size: 12.5px; line-height: 1.6; color: #8a7d64; margin-top: 12px; font-style: italic; }
+        .br-book.br-single { max-width: 620px; height: auto; max-height: 86vh; grid-template-columns: 1fr; }
+        .br-book.br-single::after { display: none; }
+        .br-book.br-single .br-left { border-radius: 6px; border-right: 1px solid #2c271c; box-shadow: none; }
         @media (prefers-reduced-motion: reduce) { .br-back, .br-book, .br-right { animation: none; } }
         @media (max-width: 860px) {
           .br-back { padding: 0; align-items: stretch; }
@@ -88,13 +82,9 @@ export default function BookReader({ book, onClose }) {
           .br-left { padding-top: 64px; }
           .br-right { animation: none; border-top: none; }
           .br-close { position: fixed; right: 12px; top: 12px; }
-          .br-board .art-row-head { display: none; }
-          .br-board .art-row { grid-template-columns: 1fr; gap: 6px; }
-          .br-board .art-cell { display: flex; justify-content: space-between; gap: 12px; }
-          .br-board .art-cell-label { display: inline; font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: #8a7d64; }
         }
       `}</style>
-      <div ref={panel} className="br-book" role="dialog" aria-modal="true" aria-labelledby="br-title">
+      <div ref={panel} className={`br-book${read ? ' br-single' : ''}`} role="dialog" aria-modal="true" aria-labelledby="br-title">
         <button ref={closeBtn} type="button" className="icon-btn br-close" onClick={onClose} aria-label={t('bkClose')}>
           <X size={16} strokeWidth={1.6} />
         </button>
@@ -121,59 +111,13 @@ export default function BookReader({ book, onClose }) {
           </div>
         </article>
 
-        <article className="br-page br-right" tabIndex={0} aria-label={read ? t('articlesNotesKicker') : t('bkTheText')}>
-          {read ? (
-            <>
-              <div className="br-h">{t('articlesNotesKicker')}</div>
-              {book.notes.map((n) => <NoteSection key={n.heading} note={n} />)}
-              {book.board && <Board board={book.board} />}
-            </>
-          ) : (
-            <>
-              <div className="br-h">{t('bkTheText')}</div>
-              <div className="br-body">{book.body.map((para, i) => <p key={i}>{para}</p>)}</div>
-            </>
-          )}
-        </article>
+        {!read && (
+          <article className="br-page br-right" tabIndex={0} aria-label={t('bkTheText')}>
+            <div className="br-h">{t('bkTheText')}</div>
+            <div className="br-body">{book.body.map((para, i) => <p key={i}>{para}</p>)}</div>
+          </article>
+        )}
       </div>
     </div>
-  );
-}
-
-function NoteSection({ note }) {
-  const { lang } = useLang();
-  const loc = (en, tr) => (lang === 'tr' && tr ? tr : en);
-  return (
-    <section className="br-note">
-      <h3>{loc(note.heading, note.headingTr)}</h3>
-      <ul>{loc(note.points, note.pointsTr).map((p) => <li key={p}>{p}</li>)}</ul>
-    </section>
-  );
-}
-
-// The paper's "which model was good at what" comparison, carried over from
-// the previous Articles page.
-function Board({ board }) {
-  const { lang, t } = useLang();
-  const loc = (en, tr) => (lang === 'tr' && tr ? tr : en);
-  const columns = loc(board.columns, board.columnsTr);
-  return (
-    <section className="br-note br-board" style={{ '--art-cols': columns.length }}>
-      <h3>{t('articlesBoardTitle')}</h3>
-      <div className="art-row art-row-head">
-        <span className="ch">Model</span>
-        {columns.map((c) => <span key={c} className="ch">{c}</span>)}
-      </div>
-      {board.rows.map((r) => (
-        <div key={r.name} className="art-row">
-          <span className="mn">{r.name}</span>
-          {r.scores.map((sc, i) => (
-            <span key={i} className="art-cell"><span className="art-cell-label">{columns[i]}</span><span className="sc">{sc}</span></span>
-          ))}
-          <p className="vd">{loc(r.verdict, r.verdictTr)}</p>
-        </div>
-      ))}
-      <p className="cap">{loc(board.caption, board.captionTr)}</p>
-    </section>
   );
 }

@@ -138,7 +138,7 @@ function Inspector({ it, n, t, onClose }) {
         <div className="in-view">
           <div className="in-screen">
             {shots.length
-              ? <div className="in-shots">{shots.map((src) => <img key={src} src={src} alt={`${it.name} screenshot`} />)}</div>
+              ? <div className={`in-shots${it.screensWide ? ' wide' : ''}`}>{shots.map((src) => <img key={src} src={src} alt={`${it.name} screenshot`} />)}</div>
               : <Artwork it={it} size={168} />}
           </div>
           {!shots.length && <p className="in-note">{t('appsNoShots')}</p>}
@@ -230,6 +230,8 @@ const LAB_CSS = `
   .in-screen { display: flex; align-items: center; justify-content: center; aspect-ratio: 1; background: radial-gradient(60% 60% at 50% 45%, color-mix(in srgb, var(--acc) 22%, transparent), transparent 70%), repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0 1px, transparent 1px 3px), #080a0e; border: 1px solid rgba(0,240,255,0.18); }
   .in-shots { display: flex; gap: 10px; overflow-x: auto; padding: 12px; max-height: 100%; }
   .in-shots img { height: 100%; max-height: 420px; width: auto; border: 1px solid #22262e; }
+  .in-shots.wide { flex-direction: column; width: 100%; height: 100%; overflow-x: hidden; overflow-y: auto; }
+  .in-shots.wide img { width: 100%; height: auto; max-height: none; flex: none; }
   .in-note { margin-top: 12px; font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.08em; line-height: 1.6; color: var(--c-meta); }
   .in-body { padding: 36px 36px 32px; }
   .in-k { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--c-tertiary); }

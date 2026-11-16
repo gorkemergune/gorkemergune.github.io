@@ -1,7 +1,7 @@
 // The Articles page as two bookcases (Phase 6). Nothing new is authored here:
 // this only normalises the two real sources into "books".
 //
-//   READ    ← data/articles.js `read` (papers Görkem read, with his notes)
+//   READ    ← data/articles.js `read` (papers Görkem read — title, authors, venue, link)
 //   WRITTEN ← i18n `blogItems` + `blogPosts` (essays Görkem wrote, full text
 //             stored locally in EN and TR). Since Phase 6.1 this is their only
 //             home: the standalone /blog pages were removed and /blog/<slug>
@@ -81,9 +81,6 @@ export function buildLibrary(t, lang) {
     topic: loc(p.category, p.categoryTr),
     tags: loc(p.tags, p.tagsTr) || [],
     readOn: loc(p.readOn, p.readOnTr),
-    summary: loc(p.summary, p.summaryTr),
-    notes: p.notes || [],
-    board: p.board || null,
     url: p.url,
     pdf: p.pdf,
     accent: p.accent,

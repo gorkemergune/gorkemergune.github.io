@@ -4,7 +4,7 @@ Private, gitignored. This file exists so that adding a project or an article
 never requires re-reading the whole codebase. Keep it accurate; if you change
 the architecture, update this file in the same session.
 
-Last verified: 11 October 2026 (final release, deployed: commits 55da5f0…1d82766, gh-pages 1fd4aad) · 29 projects · 2 read articles · 2 apps · 5 research items · 7 competitions · 22 Fun experiences · GitHub 41 owned public repos (+3 forks, excluded) · Hugging Face 8 repos.
+Last verified: 16 November 2026 (content update: 2 MCP projects, Agent Stack research, Solbound app + NASA Space Apps, IEEEXtreme 20.0, NEXA startup role, reading notes removed) · 31 projects · 5 read articles · 3 apps · 6 research items · 9 competitions · 22 Fun experiences · GitHub 41 owned public repos (+3 forks, excluded) · Hugging Face 8 repos.
 There is no Life Flow / Journey page any more; do not re-add one.
 
 **Rules revision — 12 September 2026.** Sections 5 and 7 were rewritten around
@@ -106,7 +106,9 @@ src/
                           focus trap + return). A dimmed "bench reserved" station = appsMore.
                           Screens show ONLY real artwork: the app icon, or `screens`
                           (real product captures in public/apps/) when supplied. No mock UI.
-                          Today neither app has a real screenshot in the repo.
+                          Solbound (16 Nov 2026) has real game captures in public/apps/solbound/;
+                          `screensWide: true` stacks landscape captures full-width instead of
+                          the phone-style horizontal strip. SpotBox/Dayframe still icon only.
     ResearchPage.jsx      /research — the research library (Phase 5/5.1): a CSS bookcase
                           (components/library/ResearchShelves.jsx), shelves of TWO
                           compartments generated from `researchItems` (odd count →
@@ -116,7 +118,8 @@ src/
                           backdrop, focus trap, focus returns). Data in i18n
                           `researchItems`. Optional
                           fields: results {columns, rows, caption}, findings,
-                          images [{src, caption}], imagesNote, repo.
+                          images [{src, caption}], imagesNote, repo, live (live-demo URL →
+                          "Open live demo" link, i18n researchLive).
     LearningPathPage.jsx  /learning-path — forest trail (public/media/forest-trail-*,
                           CC0). Milestones follow `learningItems` order; the data has
                           no dates, so none are shown — never invent them.
@@ -346,7 +349,7 @@ always derived from PROJECT_CATEGORY:
 | Heart, upper 4 | Medical AI | 2 | V, XVII |
 | Planet, upper 5 | Systems & Graphics | 3 | XIX, XXIV, XXVI |
 | Trophy, upper 6 | Benchmarks & Evaluation | 3 | I, VI, XXVIII |
-| Robot arm, lower 2 | AI Agents & Tools | 5 | III, IV, XXV, XXVII, XXIX |
+| Robot arm, lower 2 | AI Agents & Tools | 7 | III, IV, XXV, XXVII, XXIX, XXX, XXXI |
 | Network, lower 3 | Hugging Face | 2 | XIV, XV |
 | Globe, lower 5 | Applications | 4 | XX, XXI, XXII, XXIII |
 | Book, lower 6 | LLMs & NLP | 5 | II, VIII, IX, XIII, XVI |
@@ -830,6 +833,14 @@ A `board` block is for answering "which model is good at what", not for listing
 every model the paper touched. One short line per model.
 
 Adding a paper is a data edit only — `ArticlesPage.jsx` needs no change.
+
+**16 Nov 2026 — reading notes removed (owner decision).** The owner keeps
+paper summaries privately; the portfolio lists only the paper itself. A `read`
+entry is now: slug, accent, title, authors, affiliations, venue, arxiv (ref),
+url, pdf, date, optional readOn/readOnTr, category(+Tr), tags(+Tr). No
+`summary`, `notes` or `board` — BookReader opens read books as a single page
+(`.br-single`) with title, authors, meta, tags and the link. Do not add notes
+back unless the owner asks. ADD_ARTICLE.md variant A is outdated on this point.
 
 ---
 

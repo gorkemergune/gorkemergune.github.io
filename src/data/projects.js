@@ -2784,6 +2784,152 @@ const PROJECTS = [
       'Sandbox, konteyner değil zaman ve kaynak sınırlı bir subprocess — yerel tek kullanıcılı oturum için yeterli, güvenilmeyen girdi için değil.',
     ],
   },
+  {
+    slug: 'earthquake-mcp',
+    category: 'AI Agents & Tooling',
+    cover: '/projects/earthquake-mcp/cover.svg',
+    mark: 'MARK XXX',
+    codename: 'The Seismograph',
+    title: 'AFAD Earthquake MCP',
+    subtitle: 'Ask Claude about Türkiye’s earthquakes in plain language; the answer comes from AFAD’s live data and says when it may be incomplete',
+    subtitleTr: 'Claude’a Türkiye’deki depremleri günlük dille sor; cevap AFAD’ın canlı verisinden gelir ve eksik olabileceği durumu açıkça söyler',
+    oneLiner: 'Lists the last 24 hours, or one province over a time range, and flags when AFAD’s 1,000-event cap may have cut the answer short.',
+    oneLinerTr: 'Son 24 saati ya da bir ilin belirli bir aralığını listeler; AFAD’ın 1.000 olay sınırı cevabı kısaltmış olabilirse bunu işaretler.',
+    language: 'TypeScript',
+    color: '#f97316',
+    glow: 'rgba(249,115,22,0.5)',
+    tags: ['MCP', 'AFAD', 'Live Data'],
+    github: gh('earthquake-mcp'),
+    images: [
+      { src: '/projects/earthquake-mcp/cover.svg', caption: 'One tool call: validated input, AFAD request, then a coverage verdict on the raw snapshot', captionTr: 'Tek bir tool çağrısı: doğrulanmış girdi, AFAD isteği, ardından ham veri üzerinde kapsam kararı' },
+    ],
+    role: 'Solo',
+    period: '2026',
+    status: 'shipped',
+    tier: 'supporting',
+    problem:
+      'AFAD publishes live earthquake data, but its event service returns only the latest 1,000 events. An LLM asked “any quakes in İzmir today?” will answer from memory, or turn a failed request or a truncated list into “there were no earthquakes”.',
+    problemTr:
+      'AFAD canlı deprem verisi yayınlıyor, ama olay servisi yalnızca son 1.000 olayı döndürüyor. “Bugün İzmir’de deprem oldu mu?” diye sorulan bir LLM ya ezberden cevap veriyor ya da başarısız bir isteği veya kırpılmış bir listeyi “deprem olmadı”ya çeviriyor.',
+    overview:
+      'A local stdio MCP server for Claude Desktop with two tools: the last 24 hours, and one of Türkiye’s 81 provinces over a time range, both with an optional minimum magnitude. Every answer carries its source, when it was fetched, how many records matched, and a coverage verdict (covered, possibly incomplete or unknown) decided on the raw snapshot before any filter runs. An empty match is reported as “no matching record in AFAD’s available data”, never as “no earthquakes happened”, and an AFAD failure comes back as a tool error, never as zero results. Times are shown in Türkiye time (UTC+3).',
+    overviewTr:
+      'Claude Desktop için iki tool’lu yerel bir stdio MCP sunucusu: son 24 saat ve Türkiye’nin 81 ilinden biri için belirli bir zaman aralığı; ikisinde de isteğe bağlı minimum büyüklük var. Her cevap kaynağını, ne zaman çekildiğini, kaç kaydın eşleştiğini ve herhangi bir filtre çalışmadan önce ham veri üzerinde verilen bir kapsam kararını (covered, possibly incomplete ya da unknown) taşıyor. Boş bir eşleşme “AFAD’ın erişilebilen kayıtlarında eşleşme yok” diye bildiriliyor, asla “deprem olmadı” diye değil; AFAD hatası da sıfır sonuç olarak değil, tool hatası olarak dönüyor. Saatler Türkiye saatiyle (UTC+3) gösteriliyor.',
+    flow: 'Question → Claude Desktop → MCP tool (zod-validated input) → AFAD event service with timeout and retries → normalise, dedupe, filter by province and magnitude → coverage verdict → structured result in Türkiye time',
+    flowTr: 'Soru → Claude Desktop → MCP tool (zod ile doğrulanmış girdi) → zaman aşımı ve tekrar denemeli AFAD olay servisi → normalize et, tekilleştir, il ve büyüklüğe göre filtrele → kapsam kararı → Türkiye saatiyle yapılandırılmış sonuç',
+    metrics: [
+      { label: 'Tests', value: '98 passing', condition: 'vitest run on 16 Nov 2026: unit tests plus a stdio integration test against a local fixture server; 1 test skipped' },
+      { label: 'Provinces', value: '81', condition: 'scope: exact match on the canonical list after Turkish-casing and ASCII normalisation, no fuzzy matching' },
+    ],
+    metricsTr: [
+      { label: 'Test', value: '98 geçti', condition: '16 Kasım 2026’daki vitest koşusu: birim testleri ve yerel bir fixture sunucusuna karşı stdio entegrasyon testi; 1 test atlandı' },
+      { label: 'İl', value: '81', condition: 'kapsam: Türkçe büyük/küçük harf ve ASCII normalizasyonundan sonra kanonik listeyle tam eşleşme, bulanık eşleşme yok' },
+    ],
+    decisions: [
+      { choice: 'Coverage is decided on the raw snapshot, before the user’s filters and limit', why: 'With a 1,000-event cap, a filtered empty list would otherwise read as a quiet day', tradeoff: 'Without a verified catalogue behaviour, short responses return “unknown” instead of “covered”: conservative and sometimes less helpful' },
+      { choice: 'Exact match on the 81 canonical provinces, no fuzzy matching', why: 'A guessed province is a wrong answer about earthquakes', tradeoff: 'A spelling outside the normalised forms is rejected instead of corrected' },
+    ],
+    decisionsTr: [
+      { choice: 'Kapsam kararı, kullanıcının filtre ve limitinden önce ham veri üzerinde veriliyor', why: '1.000 olay sınırı varken filtrelenmiş boş bir liste aksi halde sakin bir gün gibi okunur', tradeoff: 'Doğrulanmış bir katalog davranışı olmadan kısa yanıtlar “covered” yerine “unknown” döner: temkinli, bazen daha az işe yarar' },
+      { choice: '81 kanonik ille tam eşleşme, bulanık eşleşme yok', why: 'Tahmin edilmiş bir il, depremler hakkında yanlış bir cevaptır', tradeoff: 'Normalize edilen biçimlerin dışındaki bir yazım düzeltilmez, reddedilir' },
+    ],
+    contribution: [
+      'The MCP TypeScript SDK and zod are off the shelf. What the project adds is the tool contract in docs/TOOLS.md: coverage states, warning texts and stable error codes (AFAD_TIMEOUT, AFAD_RATE_LIMITED, AFAD_UNAVAILABLE, AFAD_INVALID_RESPONSE).',
+      'An AFAD client with a timeout, retries, a total time budget, Retry-After handling and a response-size limit.',
+      'Province normalisation (Unicode NFC, Turkish casing, ASCII spellings) and the test suite around it.',
+    ],
+    contributionTr: [
+      'MCP TypeScript SDK ve zod hazır. Projenin eklediği, docs/TOOLS.md’deki tool sözleşmesi: kapsam durumları, uyarı metinleri ve kararlı hata kodları (AFAD_TIMEOUT, AFAD_RATE_LIMITED, AFAD_UNAVAILABLE, AFAD_INVALID_RESPONSE).',
+      'Zaman aşımı, tekrar deneme, toplam süre bütçesi, Retry-After desteği ve yanıt boyutu sınırı olan bir AFAD istemcisi.',
+      'İl normalizasyonu (Unicode NFC, Türkçe büyük/küçük harf, ASCII yazımlar) ve etrafındaki test seti.',
+    ],
+    limitations: [
+      'Only as deep as AFAD’s service: the latest 1,000 events. Older ranges can be queried, but nothing is guaranteed about them, and “covered” never means every real earthquake was detected.',
+      'A local, single-user stdio server for Claude Desktop that needs Node.js 24; it is not published to a package registry.',
+    ],
+    limitationsTr: [
+      'AFAD servisinin derinliği kadar: son 1.000 olay. Daha eski aralıklar sorgulanabilir ama onlar için bir garanti yok; “covered” da gerçekteki her depremin tespit edildiği anlamına gelmez.',
+      'Claude Desktop için yerel, tek kullanıcılı bir stdio sunucusu; Node.js 24 gerektiriyor ve bir paket deposunda yayınlanmadı.',
+    ],
+    provenance: null,
+    stack: [
+      { label: 'Languages', items: ['TypeScript'] },
+      { label: 'Frameworks', items: ['MCP TypeScript SDK'] },
+      { label: 'Libraries', items: ['zod'] },
+      { label: 'Testing', items: ['vitest: 98 tests, incl. a stdio integration test'] },
+      { label: 'Tools', items: ['Claude Desktop (host)', 'Node.js 24'] },
+    ],
+  },
+  {
+    slug: 'gib-mcp',
+    category: 'AI Agents & Tooling',
+    cover: '/projects/gib-mcp/cover.svg',
+    mark: 'MARK XXXI',
+    codename: 'The Archivist',
+    title: 'GİB Özelge MCP',
+    subtitle: 'Brings the Turkish Revenue Administration’s tax rulings (özelge) to Claude, once the source has been verified',
+    subtitleTr: 'Gelir İdaresi’nin özelgelerini Claude’a getirir; ama önce kaynağı doğrulayarak',
+    oneLiner: 'A scaffold that refuses to guess: the search tools fail loudly until the real GİB request has been observed and written down.',
+    oneLinerTr: 'Tahmin etmeyi reddeden bir iskelet: gerçek GİB isteği gözlenip yazıya dökülene kadar arama tool’ları açıkça hata veriyor.',
+    language: 'Python',
+    color: '#eab308',
+    glow: 'rgba(234,179,8,0.5)',
+    tags: ['MCP', 'Playwright', 'Tax Rulings'],
+    github: gh('gib-mcp'),
+    images: [
+      { src: '/projects/gib-mcp/cover.svg', caption: 'Three tool contracts; search and detail stay switched off until discovery is complete', captionTr: 'Üç tool sözleşmesi; keşif tamamlanana kadar arama ve detay kapalı kalıyor' },
+    ],
+    role: 'Solo',
+    period: '2026',
+    status: 'research',
+    tier: 'experimental',
+    problem:
+      'GİB’s özelge archive is a JavaScript-rendered search page with no documented API. A tool built on assumptions about it would return confident, wrong or empty answers about tax law, which is worse than having no tool.',
+    problemTr:
+      'GİB’in özelge arşivi, belgelenmiş bir API’si olmayan ve JavaScript ile oluşturulan bir arama sayfası. Varsayımlarla yazılmış bir tool vergi mevzuatı hakkında kendinden emin ama yanlış ya da boş cevaplar döndürür; bu, hiç tool olmamasından daha kötü.',
+    overview:
+      'A Python MCP server with three tools (gib_status, search_ozelge, get_ozelge) and a Playwright discovery script that records the page’s HTML, form controls and network requests. The search and detail tools validate their input and then raise DISCOVERY_REQUIRED on purpose: no live adapter is wired in until the request it depends on has been observed and documented. The discovery passes so far found the search field and a law-list request, not yet the ruling search itself.',
+    overviewTr:
+      'Üç tool’lu (gib_status, search_ozelge, get_ozelge) bir Python MCP sunucusu ve sayfanın HTML’ini, form kontrollerini ve ağ isteklerini kaydeden bir Playwright keşif betiği. Arama ve detay tool’ları girdiyi doğrulayıp bilerek DISCOVERY_REQUIRED hatası veriyor: dayandığı istek gözlenip belgelenmeden hiçbir canlı adaptör bağlanmıyor. Şimdiye kadarki keşif turları arama alanını ve kanun listesini yükleyen isteği buldu, özelge aramasının kendisini henüz bulmadı.',
+    flow: 'GİB search page → Playwright discovery (HTML, form controls, fetch/XHR log) → docs/DISCOVERY.md → verified adapter (not built yet) → MCP tools → Claude',
+    flowTr: 'GİB arama sayfası → Playwright keşfi (HTML, form kontrolleri, fetch/XHR kaydı) → docs/DISCOVERY.md → doğrulanmış adaptör (henüz yok) → MCP tool’ları → Claude',
+    decisions: [
+      { choice: 'The tools fail explicitly instead of returning an empty list', why: 'An empty list about tax rulings reads as “no ruling exists”', tradeoff: 'Until discovery is finished the server is of no use to an end user' },
+      { choice: 'Discovery before an adapter, with the evidence written to docs/DISCOVERY.md', why: 'The page loads its data through internal requests that have to be observed, not assumed', tradeoff: 'A slower start: the first browser pass came back empty and had to be changed to wait for the content' },
+    ],
+    decisionsTr: [
+      { choice: 'Tool’lar boş liste döndürmek yerine açıkça hata veriyor', why: 'Özelgeler hakkında boş bir liste “böyle bir özelge yok” diye okunur', tradeoff: 'Keşif bitene kadar sunucu son kullanıcının işine yaramıyor' },
+      { choice: 'Önce keşif, sonra adaptör; kanıtlar docs/DISCOVERY.md’ye yazılıyor', why: 'Sayfa verisini varsayılamayan, gözlenmesi gereken iç isteklerle yüklüyor', tradeoff: 'Daha yavaş bir başlangıç: ilk tarayıcı turu boş döndü ve içeriği bekleyecek şekilde düzeltilmesi gerekti' },
+    ],
+    contribution: [
+      'The MCP Python SDK (FastMCP) and Playwright are off the shelf. The project adds the tool contracts and input limits, and the discovery script.',
+      'The roadmap the adapter has to meet: a GİB host allowlist, 2 s between requests, a 10-minute cache, Retry-After on 429, and errors that are never shown as empty results.',
+    ],
+    contributionTr: [
+      'MCP Python SDK (FastMCP) ve Playwright hazır. Projenin eklediği: tool sözleşmeleri ve girdi sınırları, keşif betiği.',
+      'Adaptörün uyması gereken yol haritası: GİB host izin listesi, istekler arasında 2 sn, 10 dakikalık önbellek, 429’da Retry-After ve hiçbir zaman boş sonuç gibi gösterilmeyen hatalar.',
+    ],
+    limitations: [
+      'Live search and detail retrieval are not implemented yet; today the server only reports its own status.',
+      'The planned first version covers search and detail only: no full-site indexing, OCR or legal interpretation.',
+    ],
+    limitationsTr: [
+      'Canlı arama ve detay getirme henüz yok; sunucu bugün yalnızca kendi durumunu bildiriyor.',
+      'Planlanan ilk sürüm yalnızca arama ve detayı kapsıyor: tüm sitenin indekslenmesi, OCR ya da hukuki yorum yok.',
+    ],
+    futureWork: [
+      'Submit a real query during discovery and record the search request, then build the adapter with fixture tests and a limited live test (docs/ROADMAP.md, steps 2–7).',
+    ],
+    futureWorkTr: [
+      'Keşifte gerçek bir sorgu gönderip arama isteğini kaydetmek, ardından adaptörü fixture testleri ve sınırlı bir canlı testle yazmak (docs/ROADMAP.md, 2–7. adımlar).',
+    ],
+    provenance: null,
+    stack: [
+      { label: 'Languages', items: ['Python 3.11+'] },
+      { label: 'Frameworks', items: ['MCP Python SDK (FastMCP)'] },
+      { label: 'Tools', items: ['Playwright (Chromium)', 'Claude Code / Claude Desktop (host)'] },
+    ],
+  },
 ];
 
 export default PROJECTS;

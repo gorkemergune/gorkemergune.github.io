@@ -53,6 +53,8 @@ export const PROJECT_CATEGORY = {
   'automotive-racing-assistant': 'agents-tools',
   'vlm-groundbench': 'benchmarks',
   'algorithm-mentor-mcp': 'agents-tools',
+  'earthquake-mcp': 'agents-tools',
+  'gib-mcp': 'agents-tools',
 };
 
 export const HALL_CATEGORIES = [
@@ -97,8 +99,8 @@ export const HALL_CATEGORIES = [
     id: 'agents-tools', icon: 'Bot', tone: 'cyan', floor: 'lower',
     bay: rect(278, 450, 458, 648),
     label: 'AI Agents & Tools', labelTr: 'Yapay Zekâ Ajanları & Araçlar',
-    desc: 'Models that act through real tools — function-calling agents, an offline workshop assistant, an MCP mentoring server — plus a macOS automation utility.',
-    descTr: 'Gerçek araçlar üzerinden iş yapan modeller — tool calling ajanları, çevrimdışı bir atölye asistanı, bir MCP mentorluk sunucusu — ve bir macOS otomasyon aracı.',
+    desc: 'Models that act through real tools — function-calling agents, an offline workshop assistant, MCP servers for mentoring, earthquake data and tax rulings — plus a macOS automation utility.',
+    descTr: 'Gerçek araçlar üzerinden iş yapan modeller — tool calling ajanları, çevrimdışı bir atölye asistanı, mentorluk, deprem verisi ve özelgeler için MCP sunucuları — ve bir macOS otomasyon aracı.',
   },
   {
     id: 'hugging-face', icon: 'Package', tone: 'amber', floor: 'lower',
