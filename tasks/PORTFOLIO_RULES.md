@@ -840,7 +840,7 @@ entry is now: slug, accent, title, authors, affiliations, venue, arxiv (ref),
 url, pdf, date, optional readOn/readOnTr, category(+Tr), tags(+Tr). No
 `summary`, `notes` or `board` — BookReader opens read books as a single page
 (`.br-single`) with title, authors, meta, tags and the link. Do not add notes
-back unless the owner asks. ADD_ARTICLE.md variant A is outdated on this point.
+back unless the owner asks. ADD_ARTICLE.md variant A was updated to match.
 
 ---
 

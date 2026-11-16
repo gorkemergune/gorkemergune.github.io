@@ -126,8 +126,8 @@ const COMPETITIONS = [
     team: 'LoversGG',
     tags: ['React', 'TypeScript', 'NASA DONKI'],
     summary: {
-      en: 'Top 10 of 255 teams at the METU, Ankara event. Built “Solbound”: a Moon and Mars survival game where real NASA DONKI solar storms hit your crew.',
-      tr: 'ODTÜ, Ankara etkinliğinde 255 takım arasında ilk 10. “Solbound”u geliştirdik: gerçek NASA DONKI güneş fırtınalarının ekibini vurduğu bir Ay ve Mars hayatta kalma oyunu.',
+      en: 'Top 10 of 455 teams at the METU, Ankara event. Built “Solbound”: a Moon and Mars survival game where real NASA DONKI solar storms hit your crew.',
+      tr: 'ODTÜ, Ankara etkinliğinde 455 takım arasında ilk 10. “Solbound”u geliştirdik: gerçek NASA DONKI güneş fırtınalarının ekibini vurduğu bir Ay ve Mars hayatta kalma oyunu.',
     },
     play: 'https://solbound.vercel.app',
     trailer: 'https://www.youtube.com/watch?v=k4y-1OFfU08',
