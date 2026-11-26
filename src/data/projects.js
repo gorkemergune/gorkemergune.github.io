@@ -338,10 +338,6 @@ const PROJECTS = [
   },
   {
     slug: 'ayarlicazhocam-agent',
-    unverified: [
-      'results.Groq latency — the \'0.8-1.1 s\' range is not stated in the repository; the README gives \'0.8-7 s locally\' and a single provider reading of ~1.1 s. Only the verified local figure was carried into metrics.',
-    ],
-
     category: 'AI Agents & Tooling',
     cover: '/projects/ayarlicazhocam-agent/cover.svg',
     mark: 'MARK IV',
@@ -837,10 +833,6 @@ const PROJECTS = [
   },
   {
     slug: 'miniature-transformers-from-scratch',
-    unverified: [
-      'results.Built — \'Aug 14 → Oct 3, 2025\' predates the first commit (2025-11-20). Plausible if built locally and pushed later, but the repository cannot confirm it. Left unchanged pending your own work records.',
-    ],
-
     cover: '/projects/miniature-transformers-from-scratch/cover.svg',
     category: 'LLM & NLP',
     mark: 'MARK IX',
@@ -1165,10 +1157,6 @@ const PROJECTS = [
   },
   {
     slug: 'facelock',
-    unverified: [
-      'results.Unknown-face tests — the 0.72 / 0.79 rejection distances are not stated anywhere in the repository. Deliberately NOT carried into metrics.',
-    ],
-
     category: 'Computer Vision',
     cover: '/projects/facelock/cover.svg',
     mark: 'MARK XII',
@@ -1620,11 +1608,6 @@ const PROJECTS = [
   },
   {
     slug: 'depression-phq9-analysis',
-    unverified: [
-      'metric — \'~100 live participants\' has no record in the repository: the README describes pilot scale as 10-50+ and the committed dashboard is from a run labelled \'Ornek Data\'. Deliberately NOT carried into metrics. The legacy metric field still renders on the card until the render migration.',
-      'Consent, ethics approval and anonymisation are absent from the repository; participant name is used as participant id (response_fetcher.py:86).',
-    ],
-
     category: 'Research & Benchmarks',
     cover: '/projects/depression-phq9-analysis/cover.svg',
     mark: 'MARK XVII',

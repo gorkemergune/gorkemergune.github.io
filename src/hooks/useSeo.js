@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-const SITE = 'https://gorkemergune.github.io';
+const SITE = 'https://gorkemergune.com';
 const DEFAULT_DESC = 'Görkem Ergüne — Product developer and AI researcher: digital products and applied AI across machine learning, deep learning, LLMs, computer vision and full-stack development.';
 
 const upsert = (attr, key, content) => {
@@ -31,6 +31,7 @@ export function useSeo({ title, description, image, path, type = 'website', json
     upsert('property', 'og:type', type);
     upsert('property', 'og:url', url);
     upsert('property', 'og:image', img);
+    upsert('property', 'og:image:secure_url', img);
     upsert('name', 'twitter:card', 'summary_large_image');
     upsert('name', 'twitter:title', full);
     upsert('name', 'twitter:description', desc);

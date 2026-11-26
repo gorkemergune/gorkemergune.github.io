@@ -32,6 +32,7 @@ yarn-error.log*
 my_notes.txt
 TASKS.md
 tasks.md
+/tasks/
 
 # Local paper copies (annotated PDFs stay off the repo)
 /*.pdf
